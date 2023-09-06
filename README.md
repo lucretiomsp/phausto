@@ -1,5 +1,5 @@
 # phaust
-Use the Faust (Functional Audio Stream) is a functional programming language for sound synthesis inside Pharo
+Use the [Faust](https://faust.grame.fr/) (Functional Audio Stream) functional programming language for sound synthesis inside [Pharo] (https://pharo.org/)
 
 ## Requirements
 ### Only working for Mac at the moment!
