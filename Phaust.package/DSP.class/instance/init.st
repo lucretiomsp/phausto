@@ -9,5 +9,7 @@ init
      * @param bsize Buffer size in samples. Not used when kJackRenderer is used, since bs will be imposed by the JACK server - !!! we test it with 512 samples buffer size.
      * @return True if initialization is successful, false otherwise.
  "
-^ FaustDynamicEngine uniqueInstance ffiCall: #(  bool #init(DSP* self, RendererType 0 , int 44100, int 512))
+
+self isNull ifTrue: [ ^ Error new signal: 'This DSP is not valid - check its creation' ]
+ifFalse: [^ FaustDynamicEngine uniqueInstance ffiCall: #(  bool #init(DSP* self, RendererType 0 , int 44100, int 512))]
     
