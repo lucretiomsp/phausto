@@ -1,4 +1,5 @@
 as yet unclassified
 start
 " Start processing audio."
-^ FaustDynamicEngine uniqueInstance ffiCall: #(bool startDsp (DSP* self))
+self isNull ifTrue: [^ self class invalidException] ifFalse: [  
+^ FaustDynamicEngine uniqueInstance ffiCall: #(bool startDsp (DSP* self))]

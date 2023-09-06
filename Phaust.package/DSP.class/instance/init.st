@@ -10,6 +10,6 @@ init
      * @return True if initialization is successful, false otherwise.
  "
 
-self isNull ifTrue: [ ^ Error new signal: 'This DSP is not valid - check its creation' ]
-ifFalse: [^ FaustDynamicEngine uniqueInstance ffiCall: #(  bool #init(DSP* self, RendererType 0 , int 44100, int 512))]
+self isNull ifTrue: [^ self class invalidException] 
+ifFalse: [^ FaustDynamicEngine uniqueInstance ffiCall: #(  bool #initDsp(DSP* self, RendererType 0 , int 44100, int 512))]
     

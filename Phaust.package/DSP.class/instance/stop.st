@@ -1,4 +1,5 @@
 as yet unclassified
 stop
 " Stop processing audio."
-^ self ffiCall: #(void stopDsp (DSP* self))
+self isNull ifTrue: [^ self class invalidException] ifFalse: [  
+^ FaustDynamicEngine uniqueInstance  ffiCall: #(void stopDsp (DSP* self))]
