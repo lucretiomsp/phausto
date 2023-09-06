@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "",
+	"super" : "FFIEnumeration",
+	"category" : "Phaust",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"kAlsaRenderer",
+		"kAndroidRenderer",
+		"kCoreAudioRenderer",
+		"kJackRenderer",
+		"kPortAudioRenderer",
+		"kRtAudioRenderer",
+		"kiOSRenderer"
+	],
+	"instvars" : [ ],
+	"name" : "RendererType",
+	"type" : "normal"
+}
