@@ -1,0 +1,20 @@
+{
+	"commentStamp" : "DomenicoCipriani 9/20/2023 19:46",
+	"super" : "Morph",
+	"category" : "Phaust-GUI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"address",
+		"faderCanMove",
+		"cursor",
+		"minValue",
+		"maxValue",
+		"cursorColor",
+		"index",
+		"dsp"
+	],
+	"name" : "SliderPhaust",
+	"type" : "normal"
+}
