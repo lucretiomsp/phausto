@@ -3,5 +3,5 @@ Use the [Faust](https://faust.grame.fr/) (Functional Audio Stream) functional pr
 
 ## Requirements
 ### Only working for Mac at the moment!
-#### A copy of libdynamic-engine.dylibmust be included in your documents/Pharo/images/yourPhaustimage
+#### A copy of libdynamic-engine.dylib must be included in your documents/Pharo/images/yourPhaustimage
  
