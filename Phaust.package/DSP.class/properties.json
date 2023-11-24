@@ -1,11 +1,13 @@
 {
 	"commentStamp" : "DomenicoCipriani 9/6/2023 14:49",
 	"super" : "FFIOpaqueObject",
-	"category" : "Phaust",
+	"category" : "Phaust-DSP",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"name"
+	],
 	"name" : "DSP",
 	"type" : "normal"
 }

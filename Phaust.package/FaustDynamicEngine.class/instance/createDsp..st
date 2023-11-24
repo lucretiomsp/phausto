@@ -1,9 +1,7 @@
 as yet unclassified
-createDsp: aFaustCode 
+createDsp: aFaustCode
+| myArgv |
 
-  | func |
-
-func := func := #(DSP* createDsp (const char* 'App',  const char* aFaustCode,  int 0, NULL , const char* '', int -1)).
-
-^ self ffiCall: func asArray .
-"func := #(DSP* createDsp (const char* 'App',  const char* aFaustCode,  int 1, const char* '-I/librariesBundle/faustLibraries' , const char* '', int -1))."
+myArgv := ExternalAddress arrayOfStringsFrom: #('-I' 'librariesBundle/faustLibs') .
+^ [ self createDsp: aFaustCode arguments: myArgv ]
+  ensure: [ myArgv freeArrayOfStrings ]
