@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Phaust-Uncategorized",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"phaustString"
+	],
+	"name" : "PhaustUnit",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "PhaustUnit",
+	"category" : "Phaust-Uncategorized",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "Square",
+	"type" : "normal"
+}
