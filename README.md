@@ -6,9 +6,9 @@ Use the [Faust](https://faust.grame.fr/) (Functional Audio Stream) functional pr
 ### Clone tis repo in Pharo with ICeberg and load the Phaust package
 #### A copy of the librariesBundle must be copied in your documents/Pharo/images/yourPhaustimage
 
-## Example code
+## Code example
 
-```Smalltalk
+```Smalltak
 
 “ This content is Faust code inside a string”
 content := 'import("stdfaust.lib"); 
@@ -23,7 +23,7 @@ x1 init.
 “Start the DSP”
 x1 start.
 
-"if you want to change the parmeters, create faders and open them”
+“if you want to change the parmeters, create faders and open them”
 s := x1 sliderFor: 'tempo'.
 s openInWindow.
 
@@ -33,6 +33,7 @@ s2 openInWindow
 s3 := x1 sliderFor: 'Freeverb/0x00/RoomSize'.
 s3 openInWindow .
 
-" and when you want to stop the sound"
+" and when you want to stop the sound" 
 x1 stop.
+```
  
