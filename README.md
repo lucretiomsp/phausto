@@ -8,7 +8,7 @@ Use the [Faust](https://faust.grame.fr/) (Functional Audio Stream) functional pr
 
 ## Code example
 
-```Smalltak
+```Smalltalk
 
 “ This content is Faust code inside a string”
 content := 'import("stdfaust.lib"); 
