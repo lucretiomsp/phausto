@@ -3,8 +3,8 @@ Use the [Faust](https://faust.grame.fr/) (Functional Audio Stream) functional pr
 
 ## Requirements
 ### Only working for Mac Silicon at the moment!
-### Clone tis repo in Pharo with ICeberg and load the Phaust package
-#### A copy of the librariesBundle must be copied in your documents/Pharo/images/yourPhaustimage
+### Clone tis repo in Pharo with Iceberg and load the Phaust package
+#### Open the fuastLibraries.dmg and copy of the librariesBundle folder in your documents/Pharo/images/yourPhaustimage
 
 ## Code example
 
