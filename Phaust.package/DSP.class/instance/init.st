@@ -10,9 +10,6 @@ init
      * @return True if initialization is successful, false otherwise.
  "
 
-"firts initialize the Rendere Type"
-RendererType initialize.
-"if the DSP is not anull pointer"
 self isNull ifTrue: [^ self class invalidException] 
 ifFalse: [^ FaustDynamicEngine uniqueInstance ffiCall: #(  bool initDsp(DSP* self, RendererType 0 , int 44100, int 512))]
     
