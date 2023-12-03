@@ -3,7 +3,8 @@
 	"super" : "FFILibrary",
 	"category" : "Phaust-DynamicEngine",
 	"classinstvars" : [
-		"dsp"
+		"dsp",
+		"dspPlaying"
 	],
 	"pools" : [ ],
 	"classvars" : [ ],
