@@ -3,27 +3,26 @@ Use the [Faust](https://faust.grame.fr/) (Functional Audio Stream) functional pr
 
 ## Requirements
 ### Only working for Mac Silicon at the moment!
-### Clone tis repo in Pharo with ICeberg and load the Phaust package
-#### A copy of the librariesBundle must be copied in your documents/Pharo/images/yourPhaustimage
+### Clone tis repo in Pharo with Iceberg and load the Phaust package
+#### Open the fuastLibraries.dmg and copy of the librariesBundle folder in your documents/Pharo/images/yourPhaustimage
 
 ## Code example
 
 ```Smalltalk
-
-“ This content is Faust code inside a string”
+"This content is Faust code inside a string"
 content := 'import("stdfaust.lib"); 
 tempo = hslider("tempo", 10000, 300, 20000, 100);
 freq = hslider("freq", 300, 200, 900, 100);
 process = ba.pulsen(1, tempo) : pm.djembe(freq, 0.3, 0.4, 1) <: dm.freeverb_demo;'.
 
-“Create the DSP”
+"Create the DSP"
 x1 := DSP create: content.
-“Initialise the DSP”
+"Initialise the DSP"
 x1 init.
-“Start the DSP”
+"Start the DSP"
 x1 start.
 
-“if you want to change the parmeters, create faders and open them”
+"If you want to change the parmeters, create faders and open them"
 s := x1 sliderFor: 'tempo'.
 s openInWindow.
 
