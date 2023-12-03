@@ -15,7 +15,7 @@ mouseMove: anEvent
 			mappedY := (((cursorY min: faderBottom) - faderBottom) abs min:
 				            self extent y) / self extent y * range + minValue.
 				
-			dsp setValue: mappedY  parameter: index.
+			dsp setValue: mappedY  parameterIndex: index.
 				]
 				
 			ifFalse: [ ] 
