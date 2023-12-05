@@ -1,3 +1,0 @@
-accessing
-ffiLibrary
-	^ self class
