@@ -1,6 +1,7 @@
 as yet unclassified
 init
- "
+
+	"
      * @brief Initialize the DSP object.
      *
      * @param dsp Pointer to the DSP object.
@@ -9,7 +10,11 @@ init
      * @param bsize Buffer size in samples. Not used when kJackRenderer is used, since bs will be imposed by the JACK server - !!! we test it with 512 samples buffer size.
      * @return True if initialization is successful, false otherwise.
  "
-
-self isNull ifTrue: [^ self class invalidException] 
-ifFalse: [^ FaustDynamicEngine uniqueInstance ffiCall: #(  bool initDsp(DSP* self, RendererType 0 , int 44100, int 512))]
-    
+" if the Faust code was compiled without errors, we can initialize the DSP"
+   FaustDynamicEngine uniqueInstance getLastError = '' ifFalse: [ ^ Error new signal: FaustDynamicEngine uniqueInstance getLastError ] ifTrue: [  
+	self isNull
+		ifTrue: [ ^ self class invalidException ]
+		ifFalse: [ 
+			^ FaustDynamicEngine uniqueInstance ffiCall:
+				  #( bool initDsp #( DSP * self , RendererType 0 , int 44100 , int
+				        512 ) ) ]]
