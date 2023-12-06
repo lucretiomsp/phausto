@@ -1,10 +1,10 @@
-# phaust
+# phausto
 Use the [Faust](https://faust.grame.fr/) (Functional Audio Stream) functional programming language for sound synthesis inside [Pharo](https://pharo.org/)
 
 ## Requirements
 ### Only working for Mac Silicon at the moment!
 ### Clone tis repo in Pharo with Iceberg and load the Phaust package
-#### Open the fuastLibraries.dmg and copy of the librariesBundle folder in your documents/Pharo/images/yourPhaustimage
+#### Open the fuastLibraries.dmg and copy of the librariesBundleM1 folder in your documents/Pharo/images/yourPhaustimage
 
 ## Code example
 
