@@ -20,7 +20,7 @@ Class {
 	#instVars : [
 		'name'
 	],
-	#category : 'Phaust-DSP'
+	#category : #'Phaust-DSP'
 }
 
 { #category : #'as yet unclassified' }
@@ -123,6 +123,8 @@ DSP >> init [
      * @return True if initialization is successful, false otherwise.
  "
 " if the Faust code was compiled without errors, we can initialize the DSP"
+
+RendererType initialize .
    FaustDynamicEngine uniqueInstance getLastError = '' ifFalse: [ ^ Error new signal: FaustDynamicEngine uniqueInstance getLastError ] ifTrue: [  
 	self isNull
 		ifTrue: [ ^ self class invalidException ]
