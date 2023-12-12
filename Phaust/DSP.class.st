@@ -110,7 +110,7 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 ^ FaustDynamicEngine uniqueInstance  ffiCall:  #(float getParamMinDsp(DSP* self, int anIndex))]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialize }
 DSP >> init [
 
 	"
@@ -206,5 +206,5 @@ DSP >> traceAllParams [
 DSP >> trig: aString [
 "send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
 
-[  self setValue: 1 parameter: aString. 10 milliSeconds wait. self setValue: 1 parameter: aString.  ] fork.
+[  self setValue: 1 parameter: aString. 10 milliSeconds wait. self setValue: 0 parameter: aString.  ] fork.
 ]
