@@ -146,7 +146,7 @@ DSP >> name: aString [
 	name := aString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'API - changes' }
 DSP >> setValue: aFloat parameter: aParamAsString [
 "  set the value of the parameter named aParamAsString"
 
@@ -154,7 +154,7 @@ DSP >> setValue: aFloat parameter: aParamAsString [
 self isNull ifTrue: [^ self class invalidException] ifFalse: [ indexInteger := self getParamIndex: aParamAsString . self setValue: aFloat parameterIndex: indexInteger]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'API - changes' }
 DSP >> setValue: aFloat parameterIndex: anInteger [
 "  set the value of the parameter with index anInteger"
 .
@@ -202,7 +202,7 @@ DSP >> traceAllParams [
 1 to: self getParamCount do: [ :i | (self getParamAddress: i) traceCr.]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'API - changes' }
 DSP >> trig: aString [
 "send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
 
