@@ -67,3 +67,18 @@ oscillator = os.osc(freq);
 kick =   (((oscillator * ampEnvelope) * volume) : ef.softclipQuadratic )<: _ , _;
 process = kick;'
 ]
+
+{ #category : #'as yet unclassified' }
+DSPCode class >> drumMachine7 [
+
+^
+'
+import ("stdfaust.lib");
+import("phaustoStandard.lib");
+
+numChannels  = 7;
+mixer8 = par (i, numChannels, _ ) :> _ <: _, _;
+drum = (psynth.basicKick , psynth.elementaryClap , psynth.clave , psynth.hiHatFM, psynth.basicSnare, psynth.basicDjembe , psynth.dubdub) : mixer8;
+
+process = drum;'
+]
