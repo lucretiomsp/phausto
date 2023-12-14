@@ -39,6 +39,12 @@ DSP class >> invalidException [
 ]
 
 { #category : #'as yet unclassified' }
+DSP class >> paramException [
+
+^ Error new signal: ('This parameter does not exist, check the DSP code'  , FaustDynamicEngine uniqueInstance getLastError )
+]
+
+{ #category : #'as yet unclassified' }
 DSP >> destroy [
 "Destory the DSP object"
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
@@ -67,7 +73,8 @@ DSP >> getNumOutput [
 { #category : #accessing }
 DSP >> getParamAddress: anIntegerAddress [ 
 
-^ FaustDynamicEngine  uniqueInstance ffiCall: #( char* getParamAddressDsp(DSP* self, int anIntegerAddress ))
+self isNull ifTrue: [  self class invalidException  ] ifFalse: [  
+^ FaustDynamicEngine  uniqueInstance ffiCall: #( char* getParamAddressDsp(DSP* self, int anIntegerAddress ))]
 ]
 
 { #category : #'as yet unclassified' }
@@ -81,7 +88,8 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 DSP >> getParamIndex: aString [.
 " get the index of the parameter with aString name"
 
-^ self getParamIndexWithName: self name, aString.
+
+self isNull ifTrue: [  self class invalidException  ] ifFalse: [  ^ self getParamIndexWithName: self name, aString.]
 "self isNull ifTrue: [^ self class invalidException] ifFalse: [  
 ^ FaustDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]"
 ]
@@ -206,5 +214,8 @@ DSP >> traceAllParams [
 DSP >> trig: aString [
 "send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
 
-[  self setValue: 1 parameter: aString. 10 milliSeconds wait. self setValue: 0 parameter: aString.  ] fork.
+" parameter must exist"
+(self getParamIndex: aString) = -1 ifTrue: [  ^ self class paramException ] 
+ifFalse: [   
+[  self setValue: 1 parameter: aString. 10 milliSeconds wait. self setValue: 0 parameter: aString.  ] fork.]
 ]
