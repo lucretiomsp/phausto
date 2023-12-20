@@ -82,3 +82,18 @@ drum = (psynth.basicKick , psynth.elementaryClap , psynth.clave , psynth.hiHatFM
 
 process = drum;'
 ]
+
+{ #category : #'as yet unclassified' }
+DSPCode class >> drumMachine8 [
+	" essential drum machine with extra basic sawtoot synth named dubdub and dirty 303 cassline clone"
+
+	^ '
+import ("stdfaust.lib");
+import("phaustoStandard.lib");
+
+numChannels  = 8;
+mixer8 = par (i, numChannels, _ ) :> _ <: _, _;
+drum = (psynth.basicKick , psynth.elementaryClap , psynth.clave , psynth.hiHatFM, psynth.basicSnare, psynth.basicDjembe , psynth.dubdub, psynth.acidBasic) : mixer8;
+
+process = drum;'
+]
