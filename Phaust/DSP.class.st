@@ -219,3 +219,18 @@ DSP >> trig: aString [
 ifFalse: [   
 [  self setValue: 1 parameter: aString. 10 milliSeconds wait. self setValue: 0 parameter: aString.  ] forkAt: 70.]
 ]
+
+{ #category : #'API - changes' }
+DSP >> trig: aString for: aDurationInSeconds [
+	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
+
+	" parameter must exist"
+
+	(self getParamIndex: aString) = -1
+		ifTrue: [ ^ self class paramException ]
+		ifFalse: [
+			[
+			self setValue: 1 parameter: aString.
+			aDurationInSeconds  wait.
+			self setValue: 0 parameter: aString ] forkAt: 70 ]
+]
