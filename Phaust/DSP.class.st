@@ -168,7 +168,7 @@ DSP >> setValue: aFloat parameterIndex: anInteger [
 .
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
 
-^ FaustDynamicEngine uniqueInstance  ffiCall:  #(void setParamValueDsp(DSP* self, int anInteger, float aFloat))]
+FaustDynamicEngine uniqueInstance  ffiCall:  #(void setParamValueDsp(DSP* self, int anInteger, float aFloat))]
 ]
 
 { #category : #'as yet unclassified' }
@@ -217,5 +217,5 @@ DSP >> trig: aString [
 " parameter must exist"
 (self getParamIndex: aString) = -1 ifTrue: [  ^ self class paramException ] 
 ifFalse: [   
-[  self setValue: 1 parameter: aString. 10 milliSeconds wait. self setValue: 0 parameter: aString.  ] fork.]
+[  self setValue: 1 parameter: aString. 10 milliSeconds wait. self setValue: 0 parameter: aString.  ] forkAt: 70.]
 ]
