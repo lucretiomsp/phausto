@@ -7,6 +7,7 @@ Class {
 	#name : #BoxAPI,
 	#superclass : #FFILibrary,
 	#classVars : [
+		'INT_PTR',
 		'boxAlias'
 	],
 	#category : #'Phaust-BoxAPI'
@@ -20,7 +21,9 @@ BoxAPI class >> ffiLibrary [
 { #category : #'class initialization' }
 BoxAPI class >> initialize [
 
-	boxAlias := #CTree
+	boxAlias := #CTree.
+	INT_PTR := FFIExternalValueHolder type: 'int'.
+
 ]
 
 { #category : #'as yet unclassified' }
@@ -33,6 +36,66 @@ BoxAPI >> createLibContext [
 BoxAPI >> destroyLibContext [
 
 	self ffiCall: #( void destroyLibContext #(  ) )
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> dummyCheckBox [
+
+	| oscBox |
+	self createLibContext.
+
+	oscBox := self ffiCall:
+		          #( void * CboxInt #( int 8 ) ).
+
+	self destroyLibContext.
+
+	^ oscBox
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> dummySineBoxWithInputs: inputs andOutputs: outputs [
+
+	^ self ffiCall:
+		  #( void * CDSPToBoxes #( const char * 'MyApp' , const char * 'import("stdfaust.lib"); process = os.osc(440);'
+		        , int 0 , NULL , IntegerValue inputs , IntegerValue outputs , char * 'quali errori?' ) )
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> dummySineBoxWithInputs: inputs andOutputs: outputs buffer: buffer [
+
+| myArgv |
+	myArgv := ExternalAddress arrayOfStringsFrom:
+		          #( '-I' 'librariesBundle/faustLibs' ).
+	^ [ self dummySineBoxWithInputs: inputs andOutputs: outputs buffer: buffer arguments: myArgv ] ensure: [
+		  myArgv freeArrayOfStrings ]
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> dummySineBoxWithInputs: inputs andOutputs: outputs buffer: buffer arguments: argv [
+
+
+
+    ^ self ffiCall:
+          #( void * CDSPToBoxes #( const char * 'MyApp' , const char * 'import("stdfaust.lib"); process = os.osc(440);'
+                , int 2 , void *argv , void * inputs , void * outputs , ByteArray buffer ) )
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> dummyToString: aBox [
+
+	^ self ffiCall: #( const char* Ctree2str (Box aBox))
+]
+
+{ #category : #testing }
+BoxAPI >> isNil [
+
+	^ self ffiCall: #( bool CisNil #( NULL ) )
+]
+
+{ #category : #testing }
+BoxAPI >> isNil: aBox [
+
+	^ self ffiCall: #( bool CisNil #( void * aBox ) )
 ]
 
 { #category : #'accessing - platform' }
