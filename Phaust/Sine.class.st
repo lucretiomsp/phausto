@@ -10,7 +10,11 @@ Class {
 { #category : #initialization }
 Sine >> initialize [
 
-	| box code|
-	
-box := BoxAPI uniqueInstance boxFromString:  code inputs: self inputs  outputs: self outputs buffer: self errorBuffer   arguments: 'ciao'
+	| box code |
+	code := 'import("stdfaust.lib"); process = os.osc(440);'.
+	box := BoxAPI uniqueInstance
+		       boxFromString: code
+		       inputs: self inputs
+		       outputs: self outputs
+		       buffer: self errorBuffer
 ]

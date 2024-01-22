@@ -42,10 +42,12 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 ]
 
 { #category : #'as yet unclassified' }
-BoxAPI >> boxFromString: aFaustCOde inputs: inputs outputs: outputs buffer: buffer arguments: argv [
+BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer arguments: argv [
+
+self createLibContext .
 
 	^ self ffiCall:
-		  #( CTree * CDSPToBoxes #( const char * 'MyApp' , const char * inputs
+		  #( CTree * CDSPToBoxes #( const char * 'MyApp' , const char * aFaustCode
 		        , int 2 , void * argv , void * inputs , void * outputs
 		        , ByteArray buffer ) )
 ]
