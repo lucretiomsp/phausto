@@ -2,13 +2,13 @@
 Default Sine wave oscillator, corresponding to Faust osc standard function
 "
 Class {
-	#name : #Sine,
+	#name : #SineOsc,
 	#superclass : #Oscillators,
 	#category : #'Phaust-BoxAPI'
 }
 
 { #category : #initialization }
-Sine >> initialize [
+SineOsc >> initialize [
 
 	| box code |
 	code := 'import("stdfaust.lib"); process = os.osc(440);'.
