@@ -27,6 +27,30 @@ BoxAPI class >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer [
+
+	| myArgv |
+	myArgv := ExternalAddress arrayOfStringsFrom:
+		          #( '-I' 'librariesBundle/faustLibs' ).
+	^ [
+	  self
+		  boxFromString: aFaustCode
+		  inputs: inputs
+		  outputs: outputs
+		  buffer: buffer
+		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> boxFromString: aFaustCOde inputs: inputs outputs: outputs buffer: buffer arguments: argv [
+
+	^ self ffiCall:
+		  #( CTree * CDSPToBoxes #( const char * 'MyApp' , const char * inputs
+		        , int 2 , void * argv , void * inputs , void * outputs
+		        , ByteArray buffer ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> createLibContext [
 
 	self ffiCall: #( void createLibContext #(  ) )

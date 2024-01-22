@@ -4,9 +4,11 @@ This class contains a collection of sound generators taken from the Faust oscill
 Class {
 	#name : #Oscillators,
 	#superclass : #CTree,
-	#instVars : [
-		'inputs',
-		'outputs'
-	],
 	#category : #'Phaust-BoxAPI'
 }
+
+{ #category : #initialization }
+Oscillators >> initialize [
+
+	self inputs: 878
+]
