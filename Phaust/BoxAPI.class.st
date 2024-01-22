@@ -73,17 +73,16 @@ BoxAPI >> dummySineBoxWithInputs: inputs andOutputs: outputs buffer: buffer [
 { #category : #'as yet unclassified' }
 BoxAPI >> dummySineBoxWithInputs: inputs andOutputs: outputs buffer: buffer arguments: argv [
 
-
-
-    ^ self ffiCall:
-          #( void * CDSPToBoxes #( const char * 'MyApp' , const char * 'import("stdfaust.lib"); process = os.osc(440);'
-                , int 2 , void *argv , void * inputs , void * outputs , ByteArray buffer ) )
+	^ self ffiCall:
+		  #( CTree * CDSPToBoxes #( const char * 'MyApp' , const char * 'import("stdfaust.lib"); process = os.osc(440);'
+		        , int 2 , void * argv , void * inputs , void * outputs
+		        , ByteArray buffer ) )
 ]
 
 { #category : #'as yet unclassified' }
 BoxAPI >> dummyToString: aBox [
 
-	^ self ffiCall: #( const char* Ctree2str (Box aBox))
+	^ self ffiCall: #( const char * Ctree2str #( void * aBox ) )
 ]
 
 { #category : #testing }
