@@ -53,6 +53,16 @@ self createLibContext .
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxSeqFrom: aBox to: anotherBox [
+	" The sequential composition of two blocks (e.g., A:B) expects: outputs(A)=inputs(B)
+     return the seq box.
+     "
+
+	^ self ffiCall:
+		  #( CTree * CboxSeq #( CTree * aBox , CTree * anotherBox ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> createLibContext [
 
 	self ffiCall: #( void createLibContext #(  ) )
@@ -62,20 +72,6 @@ BoxAPI >> createLibContext [
 BoxAPI >> destroyLibContext [
 
 	self ffiCall: #( void destroyLibContext #(  ) )
-]
-
-{ #category : #'as yet unclassified' }
-BoxAPI >> dummyCheckBox [
-
-	| oscBox |
-	self createLibContext.
-
-	oscBox := self ffiCall:
-		          #( void * CboxInt #( int 8 ) ).
-
-	self destroyLibContext.
-
-	^ oscBox
 ]
 
 { #category : #'as yet unclassified' }
@@ -103,18 +99,6 @@ BoxAPI >> dummySineBoxWithInputs: inputs andOutputs: outputs buffer: buffer argu
 		  #( CTree * CDSPToBoxes #( const char * 'MyApp' , const char * 'import("stdfaust.lib"); process = os.osc(440);'
 		        , int 2 , void * argv , void * inputs , void * outputs
 		        , ByteArray buffer ) )
-]
-
-{ #category : #'as yet unclassified' }
-BoxAPI >> dummyToString: aBox [
-
-	^ self ffiCall: #( const char * Ctree2str #( void * aBox ) )
-]
-
-{ #category : #testing }
-BoxAPI >> isNil [
-
-	^ self ffiCall: #( bool CisNil #( NULL ) )
 ]
 
 { #category : #testing }

@@ -1,5 +1,5 @@
 "
-This class contains a collection of sound generators taken from the Faust oscillators.lib
+This class contains a collection of reverb taken from the Faust reverbs.lib
 "
 Class {
 	#name : #Oscillators,

@@ -15,8 +15,17 @@ Class {
 
 { #category : #converting }
 CTree >> asDsp [
+	" creates a DSP from the Box"
 
-self shouldBeImplemented 
+	self ifNotNil:  [
+		^ FaustDynamicEngine uniqueInstance createDspFromBoxes: self ]
+		ifNil: [ Error new signal: 'Invalid Box please check its creation' ]
+]
+
+{ #category : #'public - line' }
+CTree >> connectTo: aBox [
+" correspond to Faust sequential opeartor : "
+	^ BoxAPI uniqueInstance boxSeqFrom: self to: aBox
 ]
 
 { #category : #accessing }
