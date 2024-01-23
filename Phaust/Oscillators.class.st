@@ -6,9 +6,3 @@ Class {
 	#superclass : #CTree,
 	#category : #'Phaust-BoxAPI'
 }
-
-{ #category : #initialization }
-Oscillators >> initialize [
-
-	self inputs: 878
-]

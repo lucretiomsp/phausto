@@ -7,22 +7,16 @@ Class {
 	#category : #'Phaust-BoxAPI'
 }
 
-{ #category : #initialization }
-SquareOsc >> initialize [
+{ #category : #converting }
+SquareOsc >> asBox [
 
-	| box code input output buffer intPtr |
-	intPtr := FFIExternalValueHolder ofType: 'int'.
-	input := intPtr new value: 0.
-	output := intPtr new value: 0.
-	buffer := ByteArray new: 4096.
-
+	| box code |
 	code := 'import("stdfaust.lib"); process = os.square(440);'.
-
 	box := BoxAPI uniqueInstance
 		       boxFromString: code
-		       inputs: input
-		       outputs: output
-		       buffer: buffer.
-		
+		       inputs: self inputs
+		       outputs: self outputs
+		       buffer: self errorBuffer.
+
 	^ box
 ]

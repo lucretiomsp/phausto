@@ -1,5 +1,6 @@
 "
-CTree class, used as a container for Boxes
+CTree class, used as a container for Boxes.
+In the first development stage of Phausto, we will consider all the Faust elements will be subclasses of CTree
 "
 Class {
 	#name : #CTree,
@@ -11,6 +12,12 @@ Class {
 	],
 	#category : #'Phaust-BoxAPI'
 }
+
+{ #category : #converting }
+CTree >> asDsp [
+
+self shouldBeImplemented 
+]
 
 { #category : #accessing }
 CTree >> errorBuffer [
@@ -30,8 +37,11 @@ CTree >> initialize [
 	| intPtr |
 	intPtr := FFIExternalValueHolder ofType: 'int'.
 
-	self inputs: (intPtr new value: 0).
-	self outputs: intPtr new value: 0
+
+
+	inputs := (intPtr new value: 0).
+	outputs := (intPtr new value: 0).
+	errorBuffer := (ByteArray new: 4096)
 ]
 
 { #category : #accessing }
