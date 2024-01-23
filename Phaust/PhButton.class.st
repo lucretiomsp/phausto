@@ -6,3 +6,17 @@ Class {
 	#superclass : #UIGenerators,
 	#category : #'Phaust-BoxAPI'
 }
+
+{ #category : #converting }
+PhButton >> asBox [
+
+	| box code |
+	code := 'import("stdfaust.lib"); process = button("justGate");'.
+	box := BoxAPI uniqueInstance
+		       boxFromString: code
+		       inputs: self inputs
+		       outputs: self outputs
+		       buffer: self errorBuffer.
+
+	^ box
+]

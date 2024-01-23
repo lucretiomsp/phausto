@@ -210,10 +210,10 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 
 { #category : #'as yet unclassified' }
 DSP >> traceAllParams [
+	"show in transcript alla vailable parameters for this DSP"
 
-"show in transcript alla vailable parameters for this DSP"
-
-1 to: self getParamCount do: [ :i | (self getParamAddress: i) traceCr.]
+	0 to: self getParamCount do: [ :i |
+	(self getParamAddress: i) traceCr ]
 ]
 
 { #category : #'API - changes' }

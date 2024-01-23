@@ -13,6 +13,14 @@ Class {
 	#category : #'Phaust-BoxAPI'
 }
 
+{ #category : #arithmetic }
+CTree >> * aBox [
+	"multiply boxes"
+
+	^ BoxAPI uniqueInstance ffiCall:
+		  #( CTree * CboxMulAux #( CTree * self , CTree * aBox ) )
+]
+
 { #category : #converting }
 CTree >> asDsp [
 	" creates a DSP from the Box"

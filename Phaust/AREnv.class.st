@@ -14,3 +14,17 @@ Class {
 	#superclass : #Envelopes,
 	#category : #'Phaust-BoxAPI'
 }
+
+{ #category : #converting }
+AREnv >> asBox [
+
+	| box code |
+	code := 'import("stdfaust.lib"); process = en.ar(0.001 , 0.3);'.
+	box := BoxAPI uniqueInstance
+		       boxFromString: code
+		       inputs: self inputs
+		       outputs: self outputs
+		       buffer: self errorBuffer.
+
+	^ box
+]
