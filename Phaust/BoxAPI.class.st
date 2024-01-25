@@ -53,6 +53,30 @@ self createLibContext .
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxHslider: aLabel init: initBox min: minBox max: maxBox step: stepBox [
+
+self createLibContext.
+
+	self ffiCall:
+		#( CTree * CboxHSlider #( const char * aLabel , CTree * initBox
+		      , CTree * minBox , CTree * maxBox , CTree * stepBox ) )
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> boxInt: anInteger [
+	"return the float/double box"
+
+	^ self ffiCall: #( CTree * CboxInt #( int anInteger) )
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> boxReal: aDouble [
+	"return the float/double box"
+
+	^ self ffiCall: #( CTree * CboxReal #( double aDouble ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxSeqFrom: aBox to: anotherBox [
 	" The sequential composition of two blocks (e.g., A:B) expects: outputs(A)=inputs(B)
      return the seq box.
@@ -72,33 +96,6 @@ BoxAPI >> createLibContext [
 BoxAPI >> destroyLibContext [
 
 	self ffiCall: #( void destroyLibContext #(  ) )
-]
-
-{ #category : #'as yet unclassified' }
-BoxAPI >> dummySineBoxWithInputs: inputs andOutputs: outputs [
-
-	^ self ffiCall:
-		  #( void * CDSPToBoxes #( const char * 'MyApp' , const char * 'import("stdfaust.lib"); process = os.osc(440);'
-		        , int 0 , NULL , IntegerValue inputs , IntegerValue outputs , char * 'quali errori?' ) )
-]
-
-{ #category : #'as yet unclassified' }
-BoxAPI >> dummySineBoxWithInputs: inputs andOutputs: outputs buffer: buffer [
-
-| myArgv |
-	myArgv := ExternalAddress arrayOfStringsFrom:
-		          #( '-I' 'librariesBundle/faustLibs' ).
-	^ [ self dummySineBoxWithInputs: inputs andOutputs: outputs buffer: buffer arguments: myArgv ] ensure: [
-		  myArgv freeArrayOfStrings ]
-]
-
-{ #category : #'as yet unclassified' }
-BoxAPI >> dummySineBoxWithInputs: inputs andOutputs: outputs buffer: buffer arguments: argv [
-
-	^ self ffiCall:
-		  #( CTree * CDSPToBoxes #( const char * 'MyApp' , const char * 'import("stdfaust.lib"); process = os.osc(440);'
-		        , int 2 , void * argv , void * inputs , void * outputs
-		        , ByteArray buffer ) )
 ]
 
 { #category : #testing }
