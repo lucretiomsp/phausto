@@ -31,14 +31,21 @@ CTree >> , aBox [
 ]
 
 { #category : #converting }
+CTree >> asBox [ 
+
+^ self
+]
+
+{ #category : #converting }
 CTree >> asDsp [
 	" creates a DSP from the Box"
 
-	self
-		ifNotNil: [ | dsp |
-		dsp := FaustDynamicEngine uniqueInstance createDspFromBoxes: self.
-		dsp name: FaustDynamicEngine uniqueInstance defaultName.
-		^ dsp ]
+	self asBox
+		ifNotNil: [
+			| dsp |
+			dsp := FaustDynamicEngine uniqueInstance createDspFromBoxes: self asBox.
+			dsp name: FaustDynamicEngine uniqueInstance defaultName.
+			^ dsp ]
 		ifNil: [ Error new signal: 'Invalid Box please check its creation' ]
 ]
 
