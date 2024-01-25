@@ -85,6 +85,14 @@ CTree >> inputs: anObject [
 	inputs := anObject
 ]
 
+{ #category : #arithmetic }
+CTree >> mergeWith: aBox [
+	"merge Composition of boxes"
+
+
+	^ BoxAPI uniqueInstance boxMerge:  self with: aBox 
+]
+
 { #category : #accessing }
 CTree >> outputs [
 

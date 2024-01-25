@@ -77,6 +77,31 @@ self createLibContext.
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxMerge [
+	"   
+    The merge composition (e.g., A:>B) is the dual of the split composition.
+    The number of outputs of A must be a multiple of the number of inputs of B: outputs(A)=k.inputs(B)
+    return the merge box.
+     "
+
+	
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> boxMerge: aBox with: anotherBox [
+	"   
+    The merge composition (e.g., A:>B) is the dual of the split composition.
+    The number of outputs of A must be a multiple of the number of inputs of B: outputs(A)=k.inputs(B)
+    return the merge box.
+     "
+
+self createLibContext .
+
+self ffiCall: #(CTree * cBoxMerge #( CTree * aBox , CTree * anotherBox ))
+	
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxPar: aBox and: anotherBox [
 	" The parallel composition of two blocks (e.g., A,B).
      It places the two block-diagrams one on top of the other, without connections.
