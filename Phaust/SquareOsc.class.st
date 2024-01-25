@@ -11,7 +11,8 @@ Class {
 SquareOsc >> asBox [
 
 	| box code |
-	code := 'import("stdfaust.lib"); process = os.square(440);'.
+	code := 'import("stdfaust.lib"); process = os.square('
+	        , self freq asString , ');'.
 	box := BoxAPI uniqueInstance
 		       boxFromString: code
 		       inputs: self inputs

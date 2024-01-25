@@ -11,12 +11,13 @@ Class {
 SineOsc >> asBox [
 
 	| box code |
-	code := 'import("stdfaust.lib"); process = os.osc(440);'.
+	code := 'import("stdfaust.lib"); process = os.osc('
+	        , self freq asString , ');'.
 	box := BoxAPI uniqueInstance
 		       boxFromString: code
 		       inputs: self inputs
 		       outputs: self outputs
 		       buffer: self errorBuffer.
-		
+
 	^ box
 ]

@@ -18,7 +18,7 @@ SawOsc >> asBox [
 		       inputs: self inputs
 		       outputs: self outputs
 		       buffer: self errorBuffer.
-		code traceCr.
+	
 
 	^ box
 ]

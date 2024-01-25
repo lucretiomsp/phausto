@@ -11,7 +11,8 @@ Class {
 TriOsc >> asBox [
 
 	| box code |
-	code := 'import("stdfaust.lib"); process = os.triangle(440);'.
+	code := 'import("stdfaust.lib"); process = os.sawtooth('
+	        , self freq asString , ');'.
 	box := BoxAPI uniqueInstance
 		       boxFromString: code
 		       inputs: self inputs
