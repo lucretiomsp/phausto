@@ -11,15 +11,53 @@ Class {
 	#superclass : #CTree,
 	#instVars : [
 		'attack',
-		'release'
+		'release',
+		'trigger'
 	],
 	#category : #'Phaust-BoxAPI'
 }
 
+{ #category : #accessing }
+Envelopes >> attack [
+
+	^ attack
+]
+
+{ #category : #accessing }
+Envelopes >> attack: anObject [
+
+	attack := anObject
+]
+
 { #category : #initialization }
 Envelopes >> initialize [
 
-	attack := 0.001.
-	release := 0.2.
-	
+	super initialize.
+	attack := 0.001 .
+	release := 0.2 .
+	trigger := 0 
+]
+
+{ #category : #accessing }
+Envelopes >> release [
+
+	^ release
+]
+
+{ #category : #accessing }
+Envelopes >> release: anObject [
+
+	release := anObject
+]
+
+{ #category : #accessing }
+Envelopes >> trigger [
+
+	^ trigger
+]
+
+{ #category : #accessing }
+Envelopes >> trigger: anObject [
+
+	trigger := anObject
 ]

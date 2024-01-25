@@ -10,13 +10,8 @@ Class {
 { #category : #converting }
 PhButton >> asBox [
 
-	| box code |
-	code := 'import("stdfaust.lib"); process = button("justGate");'.
-	box := BoxAPI uniqueInstance
-		       boxFromString: code
-		       inputs: self inputs
-		       outputs: self outputs
-		       buffer: self errorBuffer.
-
+	| box |
+	box := BoxAPI uniqueInstance boxButton: self label.
+   
 	^ box
 ]

@@ -18,14 +18,15 @@ Class {
 { #category : #converting }
 AREnv >> asBox [
 
-	| box code |
-	code := 'import("stdfaust.lib"); process = en.ar(' , attack asString
-	        , ' , ' , release asString , ' , ' , ');'.
-	box := BoxAPI uniqueInstance
-		       boxFromString: code
-		       inputs: self inputs
-		       outputs: self outputs
-		       buffer: self errorBuffer.
+	| intermediateBox finalBox code |
+	code := 'import("stdfaust.lib"); process = en.ar;'.
+	intermediateBox := BoxAPI uniqueInstance
+		                   boxFromString: code
+		                   inputs: self inputs
+		                   outputs: self outputs
+		                   buffer: self errorBuffer.
 
-	^ box
+	finalBox := self attack asBox , self release asBox , self trigger asBox  connectTo:
+		            intermediateBox.
+	^ finalBox
 ]

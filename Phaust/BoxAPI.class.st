@@ -27,6 +27,13 @@ BoxAPI class >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxButton: aLabel [
+	"return a Button boxxeqFrom:  to: "
+self  createLibContext.
+	^ self ffiCall: #( CTree * CboxButton #( const char * aLabel ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer [
 
 	| myArgv |
@@ -65,14 +72,24 @@ self createLibContext.
 { #category : #'as yet unclassified' }
 BoxAPI >> boxInt: anInteger [
 	"return the float/double box"
+self createLibContext.
+	^ self ffiCall: #( CTree * CboxInt #( int anInteger ) )
+]
 
-	^ self ffiCall: #( CTree * CboxInt #( int anInteger) )
+{ #category : #'as yet unclassified' }
+BoxAPI >> boxPar: aBox and: anotherBox [
+	" The parallel composition of two blocks (e.g., A,B).
+     It places the two block-diagrams one on top of the other, without connections.
+     return the par box."
+self createLibContext .
+	^ self ffiCall:
+		  #( CTree * CboxPar #( CTree * aBox , CTree * anotherBox ) )
 ]
 
 { #category : #'as yet unclassified' }
 BoxAPI >> boxReal: aDouble [
 	"return the float/double box"
-
+self createLibContext.
 	^ self ffiCall: #( CTree * CboxReal #( double aDouble ) )
 ]
 

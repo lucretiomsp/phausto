@@ -21,6 +21,15 @@ CTree >> * aBox [
 		  #( CTree * CboxMulAux #( CTree * self , CTree * aBox ) )
 ]
 
+{ #category : #arithmetic }
+CTree >> , aBox [
+	"parallelComposition of boxes"
+
+	BoxAPI uniqueInstance  createLibContext.
+	^ BoxAPI uniqueInstance ffiCall:
+		  #( CTree * CboxPar #( CTree * self , CTree * aBox ) )
+]
+
 { #category : #converting }
 CTree >> asDsp [
 	" creates a DSP from the Box"
