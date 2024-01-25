@@ -11,12 +11,14 @@ Class {
 SawOsc >> asBox [
 
 	| box code |
-	code := 'import("stdfaust.lib"); process = os.sawtooth(', self freq asString , ');'.
+	code := 'import("stdfaust.lib"); process = os.sawtooth('
+	        , self freq asString , ');'.
 	box := BoxAPI uniqueInstance
 		       boxFromString: code
 		       inputs: self inputs
 		       outputs: self outputs
 		       buffer: self errorBuffer.
+		code traceCr.
 
 	^ box
 ]

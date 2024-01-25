@@ -25,8 +25,10 @@ CTree >> * aBox [
 CTree >> asDsp [
 	" creates a DSP from the Box"
 
-	self ifNotNil:  [
-		^ FaustDynamicEngine uniqueInstance createDspFromBoxes: self ]
+	self
+		ifNotNil: [
+			^ FaustDynamicEngine uniqueInstance createDspFromBoxes: self.
+			 ]
 		ifNil: [ Error new signal: 'Invalid Box please check its creation' ]
 ]
 

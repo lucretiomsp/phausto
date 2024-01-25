@@ -184,7 +184,7 @@ DSP >> sliderFor: aString [
 
 index := self getParamIndex: aString.
 "the parameter must exist!!"
-(index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , self, ' does not exist!!' ] ifFalse: [^ PhSlider newWithIndex: index forDSP: self ]
+(index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , aString , ' does not exist!!' ] ifFalse: [^ PhSlider newWithIndex: index forDSP: self ]
 
 
 ]
