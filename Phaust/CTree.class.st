@@ -46,10 +46,26 @@ CTree >> asDsp [
 		ifNil: [ Error new signal: 'Invalid Box please check its creation' ]
 ]
 
+{ #category : #arithmetic }
+CTree >> boxMerge: aBox with: anotherBox [
+	"merge Composition of boxes"
+
+	^ BoxAPI uniqueInstance boxMerge: aBox with: anotherBox
+]
+
+{ #category : #arithmetic }
+CTree >> boxSplit: aBox To: anotherBox [
+	"split omposition of boxes"
+
+	BoxAPI uniqueInstance createLibContext.
+	^ BoxAPI uniqueInstance boxSplit: aBox with: anotherBox
+]
+
 { #category : #'public - line' }
-CTree >> connectTo: aBox [
-" correspond to Faust sequential opeartor : "
-	^ BoxAPI uniqueInstance boxSeqFrom: self to: aBox
+CTree >> connectTo: aUnitGenerator [
+	" correspond to Faust sequential opeartor : "
+
+	^ BoxAPI uniqueInstance boxSeqFrom: self to: aUnitGenerator asBox
 ]
 
 { #category : #accessing }
@@ -90,11 +106,10 @@ CTree >> inputs: anObject [
 ]
 
 { #category : #arithmetic }
-CTree >> mergeWith: aBox [
-	"merge Composition of boxes"
+CTree >> mergeWith: aUnitGenerator [
+	"merge Composition of UnitGenerators"
 
-
-	^ BoxAPI uniqueInstance boxMerge:  self with: aBox 
+	^ self boxMerge:  self asBox with: aUnitGenerator asBox 
 ]
 
 { #category : #arithmetic }
@@ -127,8 +142,8 @@ CTree >> par: aBox with: anotherBox [
 ]
 
 { #category : #arithmetic }
-CTree >> splitTo: aBox [
+CTree >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
 
-	^ BoxAPI uniqueInstance boxSplit: self with: aBox
+	^ self boxSplit: self asBox to: aUnitGenerator 
 ]
