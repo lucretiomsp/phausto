@@ -9,7 +9,7 @@ Class {
 		'dsp',
 		'dspPlaying'
 	],
-	#category : 'Phaust-DynamicEngine'
+	#category : #'Phaust-DynamicEngine'
 }
 
 { #category : #accessing }
@@ -60,6 +60,14 @@ FaustDynamicEngine >> createDsp: aFaustCode arguments: argv [
 { #category : #'as yet unclassified' }
 FaustDynamicEngine >> createDsp: anAppName content: aFaustCode [ 
 ^ self ffiCall: #(DSP* createDsp (const char* anAppName,  const char* aFaustCode,  int 0, NULL, const char* '', int -1))
+]
+
+{ #category : #'as yet unclassified' }
+FaustDynamicEngine >> createDspFromBoxes: aFaustBox [
+
+	^ self ffiCall:
+		  #( DSP * createDspFromBoxes #( const char * 'MyApp' , CTree * aFaustBox
+		        , int 0 , NULL , const char * '' , int -1 ) )
 ]
 
 { #category : #'accessing - defaults' }

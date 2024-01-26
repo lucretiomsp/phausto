@@ -184,7 +184,7 @@ DSP >> sliderFor: aString [
 
 index := self getParamIndex: aString.
 "the parameter must exist!!"
-(index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , self, ' does not exist!!' ] ifFalse: [^ PhSlider newWithIndex: index forDSP: self ]
+(index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , aString , ' does not exist!!' ] ifFalse: [^ PhSlider newWithIndex: index forDSP: self ]
 
 
 ]
@@ -210,10 +210,10 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 
 { #category : #'as yet unclassified' }
 DSP >> traceAllParams [
+	"show in transcript alla vailable parameters for this DSP"
 
-"show in transcript alla vailable parameters for this DSP"
-
-1 to: self getParamCount do: [ :i | (self getParamAddress: i) traceCr.]
+	0 to: self getParamCount do: [ :i |
+	(self getParamAddress: i) traceCr ]
 ]
 
 { #category : #'API - changes' }

@@ -1,6 +1,6 @@
 Class {
 	#name : #BoxCombinator,
-	#superclass : #Box,
+	#superclass : #BoxOld,
 	#instVars : [
 		'left',
 		'right'
