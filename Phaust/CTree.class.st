@@ -145,5 +145,5 @@ CTree >> par: aBox with: anotherBox [
 CTree >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
 
-	^ self boxSplit: self asBox to: aUnitGenerator
+	^ self boxSplit: self asBox to: aUnitGenerator asBox
 ]
