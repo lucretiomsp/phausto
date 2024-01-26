@@ -115,7 +115,7 @@ CTree >> mergeWith: aUnitGenerator [
 { #category : #arithmetic }
 CTree >> multiply: aBox with: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and multiply them"
-BoxAPI uniqueInstance createLibContext.
+
 	^ BoxAPI uniqueInstance ffiCall:
 		  #( CTree * CboxMulAux #( CTree * aBox , CTree * anotherBox ) )
 ]

@@ -140,6 +140,14 @@ For the operation to be valid, the number of inputs of B must be a multiple of t
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxWire [
+	"return the wire / idntity box"
+
+	self createLibContext.
+	^ self ffiCall: #( CTree * CboxWire #(  ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> createLibContext [
 
 	self ffiCall: #( void createLibContext #(  ) )
