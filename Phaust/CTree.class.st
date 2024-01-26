@@ -54,7 +54,7 @@ CTree >> boxMerge: aBox with: anotherBox [
 ]
 
 { #category : #arithmetic }
-CTree >> boxSplit: aBox To: anotherBox [
+CTree >> boxSplit: aBox to: anotherBox [
 	"split omposition of boxes"
 
 	BoxAPI uniqueInstance createLibContext.
@@ -145,5 +145,5 @@ CTree >> par: aBox with: anotherBox [
 CTree >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
 
-	^ self boxSplit: self asBox to: aUnitGenerator 
+	^ self boxSplit: self asBox to: aUnitGenerator
 ]
