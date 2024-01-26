@@ -14,20 +14,17 @@ Class {
 }
 
 { #category : #arithmetic }
-CTree >> * aBox [
-	"multiply boxes"
+CTree >> * aUnitGenerator [
+	"multiply UnitGenerators"
 
-	^ BoxAPI uniqueInstance ffiCall:
-		  #( CTree * CboxMulAux #( CTree * self , CTree * aBox ) )
+	^ self multiply: self asBox with: aUnitGenerator asBox
 ]
 
 { #category : #arithmetic }
-CTree >> , aBox [
-	"parallelComposition of boxes"
+CTree >> , aUnitGenerator [
+	"parallelComposition of UnitGenerators"
 
-	BoxAPI uniqueInstance  createLibContext.
-	^ BoxAPI uniqueInstance ffiCall:
-		  #( CTree * CboxPar #( CTree * self , CTree * aBox ) )
+^ self par: self asBox with: aUnitGenerator asBox
 ]
 
 { #category : #converting }
@@ -100,6 +97,14 @@ CTree >> mergeWith: aBox [
 	^ BoxAPI uniqueInstance boxMerge:  self with: aBox 
 ]
 
+{ #category : #arithmetic }
+CTree >> multiply: aBox with: anotherBox [
+	"convenience method to auto convert UnitGenerators into boxes and multiply them"
+BoxAPI uniqueInstance createLibContext.
+	^ BoxAPI uniqueInstance ffiCall:
+		  #( CTree * CboxMulAux #( CTree * aBox , CTree * anotherBox ) )
+]
+
 { #category : #accessing }
 CTree >> outputs [
 
@@ -110,4 +115,20 @@ CTree >> outputs [
 CTree >> outputs: anObject [
 
 	outputs := anObject
+]
+
+{ #category : #arithmetic }
+CTree >> par: aBox with: anotherBox [
+	"convenience method to auto convert UnitGenerators into boxes and compose them in parallel"
+
+	BoxAPI uniqueInstance createLibContext.
+	^ BoxAPI uniqueInstance ffiCall:
+		  #( CTree * CboxPar #( CTree * aBox , CTree * anotherBox ) )
+]
+
+{ #category : #arithmetic }
+CTree >> splitTo: aBox [
+	"split omposition of boxes"
+
+	^ BoxAPI uniqueInstance boxSplit: self with: aBox
 ]

@@ -12,11 +12,15 @@ Class {
 
 { #category : #converting }
 UnitGenerators >> asBox [
-^ (BoxAPI uniqueInstance
-		       boxFromString: code
+	"generates white noise"
+
+	| box |
+	box := BoxAPI uniqueInstance
+		       boxFromString: self code
 		       inputs: self inputs
 		       outputs: self outputs
-		       buffer: self errorBuffer)
+		       buffer: self errorBuffer.
+	^ box
 ]
 
 { #category : #accessing }
@@ -33,6 +37,7 @@ UnitGenerators >> code: aStringWithFaustCode [
 
 { #category : #initialization }
 UnitGenerators >> initialize [
-super initialize.
-	code := 'import(stdfaust.lib);'
+
+	super initialize.
+	code := 'import("stdfaust.lib");'
 ]

@@ -94,10 +94,8 @@ BoxAPI >> boxMerge: aBox with: anotherBox [
     The number of outputs of A must be a multiple of the number of inputs of B: outputs(A)=k.inputs(B)
     return the merge box.
      "
+^ self ffiCall: #(CTree *  CboxMerge #(CTree * aBox , CTree * anotherBox))
 
-self createLibContext .
-
-self ffiCall: #(CTree * cBoxMerge #( CTree * aBox , CTree * anotherBox ))
 	
 ]
 
@@ -126,6 +124,19 @@ BoxAPI >> boxSeqFrom: aBox to: anotherBox [
 
 	^ self ffiCall:
 		  #( CTree * CboxSeq #( CTree * aBox , CTree * anotherBox ) )
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> boxSplit: aBox with: anotherBox [
+	"   
+The split composition (e.g., A<:B) operator is used to distribute the outputs of A to the inputs of B.
+For the operation to be valid, the number of inputs of B must be a multiple of the number of outputs of A: outputs(A).k=inputs(B).
+ Return the split box.
+  
+"
+
+	^ self ffiCall:
+		  #( CTree * CboxSplit #( CTree * aBox , CTree * anotherBox ) )
 ]
 
 { #category : #'as yet unclassified' }
