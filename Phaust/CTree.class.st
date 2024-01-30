@@ -149,3 +149,10 @@ CTree >> splitTo: aUnitGenerator [
 
 	^ self boxSplit: self asBox to: aUnitGenerator asBox
 ]
+
+{ #category : #arithmetic }
+CTree >> ~ aUnitGenerator [
+	"recursive composition of UnitGenerators"
+
+	^ self par: self asBox with: aUnitGenerator asBox
+]

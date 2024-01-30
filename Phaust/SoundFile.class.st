@@ -24,7 +24,11 @@ Class {
 { #category : #converting }
 SoundFile >> asBox [
 
-	^ BoxAPI uniqueInstance boxSoundFile: self label numChannels: self channels .
+	^ BoxAPI uniqueInstance
+		  boxSoundFile: self label
+		  numChannels: self channels asBox
+		  part: 0 asBox
+		  readIndex: 0 asBox
 ]
 
 { #category : #accessing }
@@ -44,7 +48,8 @@ SoundFile >> initialize [
 
 	super initialize.
 	"just an epty path at the moment, replace it with something real"
-	label := ' "sound[url:{''/mimmo.wav''}]"'
+	label := ' "sound[url:{''/mimmo.wav''}]"'.
+	channels := 1. "Suoundfile is mono by default"
 ]
 
 { #category : #accessing }

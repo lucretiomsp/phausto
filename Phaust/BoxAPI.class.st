@@ -117,6 +117,18 @@ self createLibContext.
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxRecursive: aBox with: anotherBox [
+"   
+The recursive composition (e.g., A~B) is used to create cycles in the block-diagram in order to express recursive computations.
+It is the most complex operation in terms of connections: outputs(A)≥inputs(B) and inputs(A)≥outputs(B)
+Return the rec box.
+"
+
+	^ self ffiCall:
+		  #( CTree * CboxMRec #( CTree * aBox , CTree * anotherBox ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxSeqFrom: aBox to: anotherBox [
 	" The sequential composition of two blocks (e.g., A:B) expects: outputs(A)=inputs(B)
      return the seq box.
@@ -132,7 +144,16 @@ BoxAPI >> boxSoundFile: aLabel numChannels: chan [
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( CTree * CboxSoundFile #( const char * label , CTree chan ) )
+		  #( CTree * CboxSoundfile #( const char * aLabel , CTree * chan ) )
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> boxSoundFile: aLabel numChannels: chan part: anInt8 readIndex: anInteger [
+	"return a soundfile block"
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( CTree * CoxSoundfileAux #( const char * aLabel , CTree * chan, CTree * anInt8 , CTree * anInteger ) )
 ]
 
 { #category : #'as yet unclassified' }
