@@ -16,6 +16,13 @@ Class {
 }
 
 { #category : #arithmetic }
+CTree >> % aUnitGenerator [
+	"modulo operator for  UnitGenerators"
+
+	^ self boxModulo:  self asBox with: aUnitGenerator asBox
+]
+
+{ #category : #arithmetic }
 CTree >> * aUnitGenerator [
 	"multiply UnitGenerators"
 
@@ -53,6 +60,22 @@ CTree >> boxMerge: aBox with: anotherBox [
 	"merge Composition of boxes"
 
 	^ BoxAPI uniqueInstance boxMerge: aBox with: anotherBox
+]
+
+{ #category : #arithmetic }
+CTree >> boxModulo: aBox with: anotherBox [
+	"modulo operator of boxes"
+
+	BoxAPI uniqueInstance createLibContext.
+	^ BoxAPI uniqueInstance boxRem: aBox with: anotherBox
+]
+
+{ #category : #arithmetic }
+CTree >> boxRecursive: aBox with: anotherBox [
+	"recursive omposition of boxes"
+
+	BoxAPI uniqueInstance createLibContext.
+	^ BoxAPI uniqueInstance boxRecursive: aBox with: anotherBox
 ]
 
 { #category : #arithmetic }
@@ -154,5 +177,5 @@ CTree >> splitTo: aUnitGenerator [
 CTree >> ~ aUnitGenerator [
 	"recursive composition of UnitGenerators"
 
-	^ self par: self asBox with: aUnitGenerator asBox
+	^ self boxRecursive: self asBox with: aUnitGenerator asBox
 ]

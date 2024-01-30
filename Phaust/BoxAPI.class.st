@@ -129,6 +129,17 @@ Return the rec box.
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxRem: aBox with: anotherBox [
+	"   
+rem operator
+  
+"
+
+	^ self ffiCall:
+		  #( CTree * CboxRemAux #( CTree * aBox , CTree * anotherBox ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxSeqFrom: aBox to: anotherBox [
 	" The sequential composition of two blocks (e.g., A:B) expects: outputs(A)=inputs(B)
      return the seq box.

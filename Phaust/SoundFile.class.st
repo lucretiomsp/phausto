@@ -16,7 +16,9 @@ Class {
 		'labelPrefix',
 		'labelSuffix',
 		'path',
-		'channels'
+		'channels',
+		'part',
+		'readIndex'
 	],
 	#category : #'Phaust-BoxAPI'
 }
@@ -59,6 +61,18 @@ SoundFile >> label [
 ]
 
 { #category : #accessing }
+SoundFile >> part [
+
+	^ part
+]
+
+{ #category : #accessing }
+SoundFile >> part: anInt8 [
+
+	part := anInt8
+]
+
+{ #category : #accessing }
 SoundFile >> path [
 
 	^ path
@@ -69,4 +83,16 @@ SoundFile >> path: aPathToAnAudioFile [
 
 	label := ' "sound[url:{' , aPathToAnAudioFile surroundedBySingleQuotes  , '}]"'.
 	path := aPathToAnAudioFile
+]
+
+{ #category : #accessing }
+SoundFile >> readIndex [
+
+	^ readIndex
+]
+
+{ #category : #accessing }
+SoundFile >> readIndex: anInteger [
+
+	readIndex := anInteger
 ]
