@@ -127,6 +127,15 @@ BoxAPI >> boxSeqFrom: aBox to: anotherBox [
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxSoundFile: aLabel numChannels: chan [
+	"return a soundfile block"
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( CTree * CboxSoundFile #( const char * label , CTree chan ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxSplit: aBox with: anotherBox [
 	"   
 The split composition (e.g., A<:B) operator is used to distribute the outputs of A to the inputs of B.

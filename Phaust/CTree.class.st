@@ -1,6 +1,8 @@
 "
 CTree class, used as a container for Boxes.
-In the first development stage of Phausto, we will consider all the Faust elements will be subclasses of CTree
+In the first development stage of Phausto, we will consider all the Faust elements will be subclasses of CTree.
+All the UnitGenerators inherits from CTree, as they need inputs, outputs, errorMessage variables.
+Also all the operations between boxes are defined in the CTree class
 "
 Class {
 	#name : #CTree,
