@@ -27,6 +27,17 @@ BoxAPI class >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxAdd: aBox with: anotherBox [
+	"   
+Sum operator
+  
+"
+
+	^ self ffiCall:
+		  #( CTree * CboxAddAux #( CTree * aBox , CTree * anotherBox ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxButton: aLabel [
 	"return a Button boxxeqFrom:  to: "
 self  createLibContext.

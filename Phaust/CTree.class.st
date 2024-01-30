@@ -30,10 +30,25 @@ CTree >> * aUnitGenerator [
 ]
 
 { #category : #arithmetic }
+CTree >> + aUnitGenerator [
+	"sumUnitGenerators"
+
+	^ self add: self asBox to: aUnitGenerator asBox
+]
+
+{ #category : #arithmetic }
 CTree >> , aUnitGenerator [
 	"parallelComposition of UnitGenerators"
 
 ^ self par: self asBox with: aUnitGenerator asBox
+]
+
+{ #category : #arithmetic }
+CTree >> add: aBox to: anotherBox [
+	"convenience method to auto convert UnitGenerators into boxes and sumy them"
+
+	^ BoxAPI uniqueInstance ffiCall:
+		  #( CTree * CboxAddAux #( CTree * aBox , CTree * anotherBox ) )
 ]
 
 { #category : #converting }
