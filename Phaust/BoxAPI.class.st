@@ -27,10 +27,19 @@ BoxAPI class >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-BoxAPI >> boxAdd: aBox with: anotherBox [
+BoxAPI >> boxAdd [
 	"   
-Sum operator
-  
+Sum operator, from CbobAddA Function
+"
+
+	^ self ffiCall:
+		  #( CTree * CboxAdd #( CTree * aBox , CTree * anotherBox ) )
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> boxAdd: aBox with: anotherBox [
+"   
+Sum binary operator, from CbobAddAuxFunxtion
 "
 
 	^ self ffiCall:
@@ -136,7 +145,7 @@ Return the rec box.
 "
 
 	^ self ffiCall:
-		  #( CTree * CboxMRec #( CTree * aBox , CTree * anotherBox ) )
+		  #( CTree * CboxRec #( CTree * aBox , CTree * anotherBox ) )
 ]
 
 { #category : #'as yet unclassified' }
