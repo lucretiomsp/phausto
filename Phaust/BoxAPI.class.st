@@ -29,19 +29,18 @@ BoxAPI class >> initialize [
 { #category : #'as yet unclassified' }
 BoxAPI >> boxAdd [
 	"   
-Sum operator, from CbobAddA Function
+Sum unary operator, from CbobAddA Function
 "
-
-	^ self ffiCall:
-		  #( CTree * CboxAdd #( CTree * aBox , CTree * anotherBox ) )
+self createLibContext.
+	^ self ffiCall: #( CTree * CboxAdd #(  ) )
 ]
 
 { #category : #'as yet unclassified' }
 BoxAPI >> boxAdd: aBox with: anotherBox [
-"   
+	"   
 Sum binary operator, from CbobAddAuxFunxtion
 "
-
+self createLibContext.
 	^ self ffiCall:
 		  #( CTree * CboxAddAux #( CTree * aBox , CTree * anotherBox ) )
 ]
@@ -138,12 +137,12 @@ self createLibContext.
 
 { #category : #'as yet unclassified' }
 BoxAPI >> boxRecursive: aBox with: anotherBox [
-"   
+	"   
 The recursive composition (e.g., A~B) is used to create cycles in the block-diagram in order to express recursive computations.
 It is the most complex operation in terms of connections: outputs(A)≥inputs(B) and inputs(A)≥outputs(B)
 Return the rec box.
 "
-
+self createLibContext.
 	^ self ffiCall:
 		  #( CTree * CboxRec #( CTree * aBox , CTree * anotherBox ) )
 ]

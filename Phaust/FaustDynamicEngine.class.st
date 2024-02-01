@@ -71,9 +71,10 @@ FaustDynamicEngine >> createDspFromBoxes: aFaustBox [
 ]
 
 { #category : #'accessing - defaults' }
-FaustDynamicEngine >> defaultName [ 
-"if the name of the DSP is not explicitly declared, a default name is used"
-^ '/app/'
+FaustDynamicEngine >> defaultName [
+	"if the name of the DSP is not explicitly declared, a default name is used"
+
+	^ '/MyApp/'
 ]
 
 { #category : #'as yet unclassified' }
