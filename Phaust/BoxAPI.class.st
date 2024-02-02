@@ -53,6 +53,17 @@ self  createLibContext.
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxCut [
+"   
+The cut box, to stop/terminate a signal. 
+Return the cut box
+"
+
+	self createLibContext.
+	^ self ffiCall: #( CTree * CboxCut #(  ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer [
 
 	| myArgv |

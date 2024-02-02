@@ -29,8 +29,8 @@ SoundFile >> asBox [
 	^ BoxAPI uniqueInstance
 		  boxSoundFile: self label
 		  numChannels: self channels asBox
-		  part: 0 asBox
-		  readIndex: 0 asBox
+		  part: self part asBox 
+		readIndex: self readIndex asBox
 ]
 
 { #category : #accessing }
@@ -52,6 +52,7 @@ SoundFile >> initialize [
 	"just an epty path at the moment, replace it with something real"
 	label := ' "sound[url:{''/mimmo.wav''}]"'.
 	channels := 1. "Suoundfile is mono by default"
+	part := 0 . "play the first file in the list, by default"
 ]
 
 { #category : #accessing }

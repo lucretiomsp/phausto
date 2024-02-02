@@ -19,7 +19,9 @@ Class {
 CTree >> % aUnitGenerator [
 	"modulo operator for  UnitGenerators"
 
-	^ self boxModulo:  self asBox with: aUnitGenerator asBox
+	"^ self boxModulo: self asBox with: aUnitGenerator asBox"
+	
+	^ BoxAPI uniqueInstance boxRem: self with: aUnitGenerator asBox
 ]
 
 { #category : #arithmetic }
