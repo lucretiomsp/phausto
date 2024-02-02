@@ -81,7 +81,7 @@ CTree >> boxMerge: aBox with: anotherBox [
 CTree >> boxModulo: aBox with: anotherBox [
 	"modulo operator of boxes"
 
-	BoxAPI uniqueInstance createLibContext.
+	
 	^ BoxAPI uniqueInstance boxRem: aBox with: anotherBox
 ]
 
@@ -89,7 +89,7 @@ CTree >> boxModulo: aBox with: anotherBox [
 CTree >> boxRecursive: aBox with: anotherBox [
 	"recursive omposition of boxes"
 
-	BoxAPI uniqueInstance createLibContext.
+	
 	^ BoxAPI uniqueInstance boxRecursive: aBox with: anotherBox
 ]
 
@@ -192,5 +192,6 @@ CTree >> splitTo: aUnitGenerator [
 CTree >> ~ aUnitGenerator [
 	"recursive composition of UnitGenerators"
 
-	^ self boxRecursive: self asBox with: aUnitGenerator asBox
+	"^ self boxRecursive: self with: aUnitGenerator"
+	^ BoxAPI uniqueInstance boxRecursive: self with: aUnitGenerator asBox
 ]
