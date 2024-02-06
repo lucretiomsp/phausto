@@ -10,7 +10,8 @@ Class {
 	#instVars : [
 		'errorBuffer',
 		'inputs',
-		'outputs'
+		'outputs',
+		'attachedDSP'
 	],
 	#category : #'Phaust-BoxAPI'
 }
@@ -66,10 +67,24 @@ CTree >> asDsp [
 	self asBox
 		ifNotNil: [
 			| dsp |
-			dsp := FaustDynamicEngine uniqueInstance createDspFromBoxes: self asBox.
+			dsp := FaustDynamicEngine uniqueInstance createDspFromBoxes:
+				       self asBox.
+			attachedDSP := dsp.
 			dsp name: FaustDynamicEngine uniqueInstance defaultName.
 			^ dsp ]
 		ifNil: [ Error new signal: 'Invalid Box please check its creation' ]
+]
+
+{ #category : #accessing }
+CTree >> attachedDSP [
+
+	^ attachedDSP
+]
+
+{ #category : #accessing }
+CTree >> attachedDSP: anObject [
+
+	attachedDSP := anObject
 ]
 
 { #category : #arithmetic }

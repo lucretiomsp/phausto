@@ -29,7 +29,8 @@ Class {
 		'part',
 		'readIndex',
 		'name',
-		'debugPath'
+		'debugPath',
+		'attachedBox'
 	],
 	#category : #'Phaust-ToolKit'
 }
@@ -40,8 +41,9 @@ SamplePlayer >> asBox [
 	| code intermediateBox |
 	code := 'import("stdfaust.lib");
 rst = button("' , self name , 'Gate' , '");
+tuneSlider = vslider("' , self name , 'Tune' , '" , 1, -4, 4, 0.01);
 resetter = _ , 0 : select2(rst);
-reader = resetter~+(1) ;
+reader = resetter~+(tuneSlider) ;
 process = 0,reader:soundfile("son[url:{''' , self pathToFile
 	        , '''}]",2): ! , ! , _ ,_ ;'.
 
@@ -52,8 +54,32 @@ process = 0,reader:soundfile("son[url:{''' , self pathToFile
 		                   inputs: self inputs
 		                   outputs: self outputs
 		                   buffer: self errorBuffer.
-
+	attachedBox := intermediateBox.
 	^ intermediateBox
+]
+
+{ #category : #accessing }
+SamplePlayer >> attachedBox [
+
+	^ attachedBox
+]
+
+{ #category : #accessing }
+SamplePlayer >> attachedBox: aBox [
+
+	attachedBox := aBox 
+]
+
+{ #category : #accessing }
+SamplePlayer >> debugPath [
+
+	^ debugPath
+]
+
+{ #category : #accessing }
+SamplePlayer >> debugPath: anObject [
+
+	debugPath := anObject
 ]
 
 { #category : #initialization }
@@ -74,9 +100,9 @@ SamplePlayer >> name [
 ]
 
 { #category : #accessing }
-SamplePlayer >> name: anObject [
+SamplePlayer >> name: aString [
 
-	name := anObject
+	name := aString
 ]
 
 { #category : #accessing }
@@ -86,9 +112,9 @@ SamplePlayer >> numChannels [
 ]
 
 { #category : #accessing }
-SamplePlayer >> numChannels: anObject [
+SamplePlayer >> numChannels: anIntegerNumOfChannels [
 
-	numChannels := anObject
+	numChannels := anIntegerNumOfChannels
 ]
 
 { #category : #accessing }
@@ -98,9 +124,9 @@ SamplePlayer >> part [
 ]
 
 { #category : #accessing }
-SamplePlayer >> part: anObject [
+SamplePlayer >> part: anInt8 [
 
-	part := anObject
+	part := anInt8
 ]
 
 { #category : #accessing }
@@ -110,9 +136,9 @@ SamplePlayer >> pathToFile [
 ]
 
 { #category : #accessing }
-SamplePlayer >> pathToFile: anObject [
+SamplePlayer >> pathToFile: aStringWithAPathToAvalidAudioFile [
 
-	pathToFile := anObject
+	pathToFile := aStringWithAPathToAvalidAudioFile
 ]
 
 { #category : #accessing }
@@ -122,7 +148,13 @@ SamplePlayer >> readIndex [
 ]
 
 { #category : #accessing }
-SamplePlayer >> readIndex: anObject [
+SamplePlayer >> readIndex: anIntegerOrAReder [
 
-	readIndex := anObject
+	readIndex := anIntegerOrAReder
+]
+
+{ #category : #'as yet unclassified' }
+SamplePlayer >> trig [
+
+	self attachedBox attachedDSP trig: self name, 'Gate'
 ]
