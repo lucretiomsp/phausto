@@ -13,8 +13,23 @@ Class {
 		'outputs',
 		'attachedDSP'
 	],
+	#classVars : [
+		'libContext'
+	],
 	#category : #'Phaust-BoxAPI'
 }
+
+{ #category : #'as yet unclassified' }
+CTree class >> libContext [
+
+^ libContext 
+]
+
+{ #category : #'as yet unclassified' }
+CTree class >> libContext: trueOrNil [
+
+libContext := trueOrNil 
+]
 
 { #category : #arithmetic }
 CTree >> % aUnitGenerator [
