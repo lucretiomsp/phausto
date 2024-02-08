@@ -20,5 +20,5 @@ SineOsc >> asBox [
 { #category : #initialization }
 SineOsc >> initialize [ 
 super initialize .
-code := 'process = os.osc;'
+code := self importStatement , 'process = os.osc;'
 ]

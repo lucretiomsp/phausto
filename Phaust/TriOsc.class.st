@@ -21,5 +21,5 @@ TriOsc >> asBox [
 TriOsc >> initialize [
 
 	super initialize.
-	code := self code , 'process = os.sawtooth'
+	code := self importStatement  , 'process = os.sawtooth;'
 ]

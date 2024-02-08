@@ -21,5 +21,5 @@ SimpleDelay >> asBox [
 SimpleDelay >> initialize [
 
 	super initialize.
-	code := self code , 'process = de.delay;'
+	code := self importStatement  , 'process = de.delay;'
 ]

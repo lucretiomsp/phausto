@@ -221,9 +221,9 @@ BoxAPI >> boxWire [
 { #category : #'as yet unclassified' }
 BoxAPI >> createLibContext [
 "libContext is called only if the libContext does not exist already"
-CTree libContext isNil ifTrue: [  
+CTree libContext ifNil: [  
 CTree libContext: true .
-	self ffiCall: #( void createLibContext #(  ) )] ifFalse: [ 'LibContext already exists' traceCr] 
+	self ffiCall: #( void createLibContext #(  ) )] ifNotNil: [ 'LibContext already exists' traceCr] 
 	
 	
 ]

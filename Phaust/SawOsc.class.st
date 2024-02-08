@@ -20,5 +20,5 @@ SawOsc >> asBox [
 { #category : #initialization }
 SawOsc >> initialize [ 
 super initialize .
-code := 'process = os.saw;'
+code := self importStatement , 'process = os.saw;'
 ]

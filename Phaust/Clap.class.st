@@ -64,7 +64,7 @@ Clap >> initialize [
 
 	
 	super initialize.
-	code := self code , 'process = sy.clap;'.
+	code := self importStatement  , 'process = sy.clap;'.
 	tone := 1200.
 	attack := 0.
 	decay := 3.

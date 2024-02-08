@@ -5,6 +5,7 @@ Class {
 	#name : #UnitGenerators,
 	#superclass : #CTree,
 	#instVars : [
+		'importStatement',
 		'code'
 	],
 	#category : #'Phaust-BoxAPI'
@@ -30,14 +31,26 @@ UnitGenerators >> code [
 ]
 
 { #category : #accessing }
-UnitGenerators >> code: aStringWithFaustCode [
+UnitGenerators >> code: anObject [
 
-	code := aStringWithFaustCode
+	code := anObject
+]
+
+{ #category : #accessing }
+UnitGenerators >> importStatement [
+
+	^ importStatement
+]
+
+{ #category : #accessing }
+UnitGenerators >> importStatement: anObject [
+
+	importStatement := anObject
 ]
 
 { #category : #initialization }
 UnitGenerators >> initialize [
 
 	super initialize.
-	code := 'import("stdfaust.lib");'
+	importStatement  := 'import("stdfaust.lib");'
 ]
