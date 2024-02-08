@@ -10,14 +10,16 @@ Class {
 { #category : #converting }
 TriOsc >> asBox [
 
-	| box code |
-	code := 'import("stdfaust.lib"); process = os.sawtooth('
-	        , self freq asString , ');'.
-	box := BoxAPI uniqueInstance
-		       boxFromString: code
-		       inputs: self inputs
-		       outputs: self outputs
-		       buffer: self errorBuffer.
+	| intermediateBox finalBox |
+	
+	intermediateBox := super asBox .
+	finalBox := freq asBox connectTo: intermediateBox .
+^ finalBox
+]
 
-	^ box
+{ #category : #initialization }
+TriOsc >> initialize [
+
+	super initialize.
+	code := self code , 'process = os.sawtooth'
 ]

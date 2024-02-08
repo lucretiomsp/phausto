@@ -10,14 +10,15 @@ Class {
 { #category : #converting }
 SquareOsc >> asBox [
 
-	| box code |
-	code := 'import("stdfaust.lib"); process = os.square('
-	        , self freq asString , ');'.
-	box := BoxAPI uniqueInstance
-		       boxFromString: code
-		       inputs: self inputs
-		       outputs: self outputs
-		       buffer: self errorBuffer.
+	| intermediateBox finalBox |
+	
+	intermediateBox := super asBox .
+	finalBox := freq asBox connectTo: intermediateBox .
+^ finalBox
+]
 
-	^ box
+{ #category : #initialization }
+SquareOsc >> initialize [ 
+super initialize .
+code := 'process = os.square'
 ]
