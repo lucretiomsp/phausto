@@ -1,6 +1,6 @@
 Class {
 	#name : #BoxWire,
-	#superclass : #BoxOld,
+	#superclass : #Object,
 	#category : #'Phaust-Boxes'
 }
 

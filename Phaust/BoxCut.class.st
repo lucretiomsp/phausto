@@ -1,6 +1,6 @@
 Class {
 	#name : #BoxCut,
-	#superclass : #BoxOld,
+	#superclass : #Object,
 	#category : #'Phaust-Boxes'
 }
 

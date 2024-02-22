@@ -1,6 +1,6 @@
 Class {
 	#name : #BoxNumber,
-	#superclass : #BoxOld,
+	#superclass : #Object,
 	#instVars : [
 		'value'
 	],

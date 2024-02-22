@@ -1,6 +1,6 @@
 Class {
 	#name : #BoxTwoInputsOneOutput,
-	#superclass : #BoxOld,
+	#superclass : #Object,
 	#category : #'Phaust-Boxes'
 }
 
