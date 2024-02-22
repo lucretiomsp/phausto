@@ -31,6 +31,14 @@ CTree class >> libContext: trueOrNil [
 libContext := trueOrNil 
 ]
 
+{ #category : #'system startup' }
+CTree class >> startUp [
+
+	
+	
+	libContext := 999
+]
+
 { #category : #arithmetic }
 CTree >> % aUnitGenerator [
 	"modulo operator for  UnitGenerators"
@@ -218,6 +226,11 @@ CTree >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
 
 	^ self boxSplit: self asBox to: aUnitGenerator asBox
+]
+
+{ #category : #'system startup' }
+CTree >> startUp [
+	^ self class startUp
 ]
 
 { #category : #arithmetic }
