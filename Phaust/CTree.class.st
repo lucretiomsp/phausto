@@ -19,6 +19,12 @@ Class {
 	#category : #'Phaust-BoxAPI'
 }
 
+{ #category : #'class initialization' }
+CTree class >> initialize [ 
+
+SessionManager default register: (ClassSessionHandler forClassNamed: self name)
+]
+
 { #category : #'as yet unclassified' }
 CTree class >> libContext [
 
@@ -32,11 +38,9 @@ libContext := trueOrNil
 ]
 
 { #category : #'system startup' }
-CTree class >> startUp [
+CTree class >> startUp: aBoolean [
 
-	
-	
-	libContext := 999
+aBoolean ifTrue: [ libContext := nil ] ifFalse: [ BoxAPI uniqueInstance destroyLibContext  ] 
 ]
 
 { #category : #arithmetic }
@@ -226,11 +230,6 @@ CTree >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
 
 	^ self boxSplit: self asBox to: aUnitGenerator asBox
-]
-
-{ #category : #'system startup' }
-CTree >> startUp [
-	^ self class startUp
 ]
 
 { #category : #arithmetic }
