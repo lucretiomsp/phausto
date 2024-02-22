@@ -1,6 +1,6 @@
 Class {
 	#name : #Cut,
-	#superclass : #CTree,
+	#superclass : #Box,
 	#category : #'Phaust-BoxAPI'
 }
 

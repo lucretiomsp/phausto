@@ -10,7 +10,7 @@ several more outputs for the sound channels themselves, as a constant numerical 
 "
 Class {
 	#name : #SoundFile,
-	#superclass : #CTree,
+	#superclass : #Box,
 	#instVars : [
 		'label',
 		'labelPrefix',

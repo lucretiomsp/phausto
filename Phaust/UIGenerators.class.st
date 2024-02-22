@@ -5,7 +5,7 @@ Discrete and continuous elements are signal generators. For example, a button pr
 "
 Class {
 	#name : #UIGenerators,
-	#superclass : #CTree,
+	#superclass : #Box,
 	#instVars : [
 		'label'
 	],

@@ -8,7 +8,7 @@ for example:
 "
 Class {
 	#name : #Envelopes,
-	#superclass : #CTree,
+	#superclass : #Box,
 	#instVars : [
 		'attack',
 		'release',

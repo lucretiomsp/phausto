@@ -4,7 +4,7 @@ Creating an instance of this class generates a white noise.
 "
 Class {
 	#name : #Noise,
-	#superclass : #CTree,
+	#superclass : #Box,
 	#category : #'Phaust-BoxAPI'
 }
 

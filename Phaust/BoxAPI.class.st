@@ -1,5 +1,5 @@
 "
-I am the Phaust Box API, I call C functiond from the Faust Box API
+I am the Phaust Box API, I call C functions from the Faust Box API
 The box_signal_api.cpp  is compiled in libfaust.
 More about the Faust box API: https://faustdoc.grame.fr/tutorials/box-api/
 "
@@ -21,7 +21,7 @@ BoxAPI class >> ffiLibrary [
 { #category : #'class initialization' }
 BoxAPI class >> initialize [
 
-	boxAlias := #CTree.
+	boxAlias := #Box.
 	INT_PTR := FFIExternalValueHolder type: 'int'.
 
 ]
@@ -32,7 +32,7 @@ BoxAPI >> boxAdd [
 Sum unary operator, from CbobAddA Function
 "
 self createLibContext.
-	^ self ffiCall: #( CTree * CboxAdd #(  ) )
+	^ self ffiCall: #( #Box * CboxAdd #(  ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -42,14 +42,14 @@ Sum binary operator, from CbobAddAuxFunxtion
 "
 self createLibContext.
 	^ self ffiCall:
-		  #( CTree * CboxAddAux #( CTree * aBox , CTree * anotherBox ) )
+		  #( #Box * CboxAddAux #( #Box * aBox , #Box * anotherBox ) )
 ]
 
 { #category : #'as yet unclassified' }
 BoxAPI >> boxButton: aLabel [
 	"return a Button boxxeqFrom:  to: "
 self  createLibContext.
-	^ self ffiCall: #( CTree * CboxButton #( const char * aLabel ) )
+	^ self ffiCall: #( #Box * CboxButton #( const char * aLabel ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -60,7 +60,7 @@ Return the cut box
 "
 
 	self createLibContext.
-	^ self ffiCall: #( CTree * CboxCut #(  ) )
+	^ self ffiCall: #( #Box * CboxCut #(  ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -84,7 +84,7 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 self createLibContext .
 
 	^ self ffiCall:
-		  #( CTree * CDSPToBoxes #( const char * 'MyApp' , const char * aFaustCode
+		  #( #Box * CDSPToBoxes #( const char * 'MyApp' , const char * aFaustCode
 		        , int 2 , void * argv , void * inputs , void * outputs
 		        , ByteArray buffer ) )
 ]
@@ -95,15 +95,15 @@ BoxAPI >> boxHslider: aLabel init: initBox min: minBox max: maxBox step: stepBox
 self createLibContext.
 
 	self ffiCall:
-		#( CTree * CboxHSlider #( const char * aLabel , CTree * initBox
-		      , CTree * minBox , CTree * maxBox , CTree * stepBox ) )
+		#( #Box * CboxHSlider #( const char * aLabel , #Box * initBox
+		      , #Box * minBox , #Box * maxBox , #Box * stepBox ) )
 ]
 
 { #category : #'as yet unclassified' }
 BoxAPI >> boxInt: anInteger [
 	"return the float/double box"
 self createLibContext.
-	^ self ffiCall: #( CTree * CboxInt #( int anInteger ) )
+	^ self ffiCall: #( #Box * CboxInt #( int anInteger ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -124,7 +124,7 @@ BoxAPI >> boxMerge: aBox with: anotherBox [
     The number of outputs of A must be a multiple of the number of inputs of B: outputs(A)=k.inputs(B)
     return the merge box.
      "
-^ self ffiCall: #(CTree *  CboxMerge #(CTree * aBox , CTree * anotherBox))
+^ self ffiCall: #(#Box *  CboxMerge #(#Box * aBox , #Box * anotherBox))
 
 	
 ]
@@ -136,14 +136,14 @@ BoxAPI >> boxPar: aBox and: anotherBox [
      return the par box."
 self createLibContext .
 	^ self ffiCall:
-		  #( CTree * CboxPar #( CTree * aBox , CTree * anotherBox ) )
+		  #( #Box * CboxPar #( #Box * aBox , #Box * anotherBox ) )
 ]
 
 { #category : #'as yet unclassified' }
 BoxAPI >> boxReal: aDouble [
 	"return the float/double box"
 self createLibContext.
-	^ self ffiCall: #( CTree * CboxReal #( double aDouble ) )
+	^ self ffiCall: #( #Box * CboxReal #( double aDouble ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -155,7 +155,7 @@ Return the rec box.
 "
 self createLibContext.
 	^ self ffiCall:
-		  #( CTree * CboxRec #( CTree * aBox , CTree * anotherBox ) )
+		  #( #Box * CboxRec #( #Box * aBox , #Box * anotherBox ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -166,7 +166,7 @@ rem operator
 "
 
 	^ self ffiCall:
-		  #( CTree * CboxRemAux #( CTree * aBox , CTree * anotherBox ) )
+		  #( #Box * CboxRemAux #( #Box * aBox , #Box * anotherBox ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -176,7 +176,7 @@ BoxAPI >> boxSeqFrom: aBox to: anotherBox [
      "
 
 	^ self ffiCall:
-		  #( CTree * CboxSeq #( CTree * aBox , CTree * anotherBox ) )
+		  #( #Box * CboxSeq #( #Box * aBox , #Box * anotherBox ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -185,7 +185,7 @@ BoxAPI >> boxSoundFile: aLabel numChannels: chan [
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( CTree * CboxSoundfile #( const char * aLabel , CTree * chan ) )
+		  #( #Box * CboxSoundfile #( const char * aLabel , #Box * chan ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -194,7 +194,7 @@ BoxAPI >> boxSoundFile: aLabel numChannels: chan part: anInt8 readIndex: anInteg
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( CTree * CoxSoundfileAux #( const char * aLabel , CTree * chan, CTree * anInt8 , CTree * anInteger ) )
+		  #( #Box * CoxSoundfileAux #( const char * aLabel , #Box * chan, #Box * anInt8 , #Box * anInteger ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -207,7 +207,7 @@ For the operation to be valid, the number of inputs of B must be a multiple of t
 "
 
 	^ self ffiCall:
-		  #( CTree * CboxSplit #( CTree * aBox , CTree * anotherBox ) )
+		  #( #Box * CboxSplit #( #Box * aBox , #Box * anotherBox ) )
 ]
 
 { #category : #'as yet unclassified' }
@@ -215,14 +215,14 @@ BoxAPI >> boxWire [
 	"return the wire / idntity box"
 
 	self createLibContext.
-	^ self ffiCall: #( CTree * CboxWire #(  ) )
+	^ self ffiCall: #( #Box * CboxWire #(  ) )
 ]
 
 { #category : #'as yet unclassified' }
 BoxAPI >> createLibContext [
 "libContext is called only if the libContext does not exist already"
-CTree libContext ifNil: [  
-CTree libContext: true .
+Box libContext ifNil: [  
+Box libContext: true .
 	self ffiCall: #( void createLibContext #(  ) )] ifNotNil: [ 'LibContext already exists' traceCr] 
 	
 	
@@ -230,7 +230,7 @@ CTree libContext: true .
 
 { #category : #'as yet unclassified' }
 BoxAPI >> destroyLibContext [
-CTree libContext: nil. 
+Box libContext: nil. 
 	self ffiCall: #( void destroyLibContext #(  ) )
 ]
 

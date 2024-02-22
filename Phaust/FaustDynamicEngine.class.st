@@ -66,7 +66,7 @@ FaustDynamicEngine >> createDsp: anAppName content: aFaustCode [
 FaustDynamicEngine >> createDspFromBoxes: aFaustBox [
 
 	^ self ffiCall:
-		  #( DSP * createDspFromBoxes #( const char * 'MyApp' , CTree * aFaustBox
+		  #( DSP * createDspFromBoxes #( const char * 'MyApp' , #Box * aFaustBox
 		        , int 0 , NULL , const char * '' , int -1 ) )
 ]
 

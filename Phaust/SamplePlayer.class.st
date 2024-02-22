@@ -22,7 +22,7 @@ myDsp trig: 'drumGate'.
 "
 Class {
 	#name : #SamplePlayer,
-	#superclass : #CTree,
+	#superclass : #Box,
 	#instVars : [
 		'pathToFile',
 		'numChannels',

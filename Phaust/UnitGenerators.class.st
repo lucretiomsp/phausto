@@ -3,7 +3,7 @@ Super class of all Unit Generators
 "
 Class {
 	#name : #UnitGenerators,
-	#superclass : #CTree,
+	#superclass : #Box,
 	#instVars : [
 		'importStatement',
 		'code'

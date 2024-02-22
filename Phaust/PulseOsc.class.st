@@ -15,14 +15,10 @@ Class {
 { #category : #converting }
 PulseOsc >> asBox [
 
-	| box code |
-	code := 'import("stdfaust.lib"); process = os.pulsetrain;'.
-	box := BoxAPI uniqueInstance
-		       boxFromString: code
-		       inputs: self inputs
-		       outputs: self outputs
-		       buffer: self errorBuffer.
-	^ self freq asBox , self duty asBox connectTo: box
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	finalBox := freq asBox , duty asBox connectTo: intermediateBox.
+	^ finalBox
 ]
 
 { #category : #accessing }

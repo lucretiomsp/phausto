@@ -11,7 +11,7 @@ incrementer = (_~(_+1))
 "
 Class {
 	#name : #Incrementer,
-	#superclass : #CTree,
+	#superclass : #Box,
 	#instVars : [
 		'incrValue'
 	],
