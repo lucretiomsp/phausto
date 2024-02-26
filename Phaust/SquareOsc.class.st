@@ -11,10 +11,9 @@ Class {
 SquareOsc >> asBox [
 
 	| intermediateBox finalBox |
-	
-	intermediateBox := super asBox .
-	finalBox := freq asBox connectTo: intermediateBox .
-^ finalBox
+	intermediateBox := super asBox.
+	finalBox := freq connectTo: intermediateBox.
+	^ finalBox
 ]
 
 { #category : #initialization }

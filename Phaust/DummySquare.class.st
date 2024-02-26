@@ -11,5 +11,5 @@ Class {
 DummySquare >> initialize [
 
 	super initialize.
-	code := self importStatement , 'process = os.square;'
+	code := self importStatement , 'process = os.square(330);'
 ]

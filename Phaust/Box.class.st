@@ -40,9 +40,7 @@ libContext := trueOrNil
 { #category : #'system startup' }
 Box class >> startUp: aBoolean [
 
-	aBoolean
-		ifTrue: [ libContext := nil ]
-		
+	aBoolean ifTrue: [ libContext := false ]
 ]
 
 { #category : #arithmetic }

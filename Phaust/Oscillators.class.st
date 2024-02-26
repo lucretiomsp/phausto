@@ -19,7 +19,7 @@ Oscillators >> freq [
 { #category : #accessing }
 Oscillators >> freq: aFloat [
 
-	freq := aFloat
+	freq := aFloat asBox 
 ]
 
 { #category : #initialization }

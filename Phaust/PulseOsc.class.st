@@ -17,7 +17,7 @@ PulseOsc >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := freq asBox , duty asBox connectTo: intermediateBox.
+	finalBox := freq , duty connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -39,5 +39,5 @@ PulseOsc >> initialize [
 
 	super initialize.
 	code := self importStatement , 'process = os.pulsetrain;'.
-	duty := 0.5 
+	duty := 0.5 asBox
 ]

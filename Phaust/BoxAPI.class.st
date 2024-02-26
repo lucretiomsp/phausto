@@ -27,6 +27,12 @@ BoxAPI class >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI class >> int_ptr [
+
+^ INT_PTR 
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxAdd [
 	"   
 Sum unary operator, from CbobAddA Function
@@ -69,6 +75,7 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 	| myArgv |
 	myArgv := ExternalAddress arrayOfStringsFrom:
 		          #( '-I' 'librariesBundle/faustLibs' ).
+		('Inputs value is : ' , inputs value asString) traceCr.
 	^ [
 	  self
 		  boxFromString: aFaustCode
@@ -81,8 +88,8 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 { #category : #'as yet unclassified' }
 BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer arguments: argv [
 
-self createLibContext .
-
+	self createLibContext.
+	
 	^ self ffiCall:
 		  #( #Box * CDSPToBoxes #( const char * 'MyApp' , const char * aFaustCode
 		        , int 2 , void * argv , void * inputs , void * outputs
@@ -218,20 +225,45 @@ BoxAPI >> boxWire [
 	^ self ffiCall: #( #Box * CboxWire #(  ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #context }
 BoxAPI >> createLibContext [
-"libContext is called only if the libContext does not exist already"
-Box libContext ifNil: [  
-Box libContext: true .
-	self ffiCall: #( void createLibContext #(  ) )] ifNotNil: [ 'LibContext already exists' traceCr] 
-	
-	
+
+	| sessionLibContext |
+	sessionLibContext := Box libContext.
+	sessionLibContext
+		ifFalse: [
+			('Created libContext at: ' , DateAndTime now asString) traceCr.
+			self createLibContextFFI.
+
+			Box libContext: true ]
+		ifTrue: [ 'LibContext already exists' traceCr ].
+
+
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #context }
+BoxAPI >> createLibContextFFI [
+self ffiCall: #( void createLibContext #(  ) )
+]
+
+{ #category : #context }
 BoxAPI >> destroyLibContext [
 
-	Box libContext ifNotNil: [self ffiCall: #( void destroyLibContext #(  ) )] ifNil: [ ]  .
+	| sessionLibContext |
+	sessionLibContext := Box libContext.
+	sessionLibContext
+		ifTrue: [
+			('Destroyed libContext at: ' , DateAndTime now asString) traceCr.
+			self destroyLibContextFFI.
+			Box libContext: false ]
+		ifFalse: [ 'No active libContext at the moment' traceCr]
+]
+
+{ #category : #context }
+BoxAPI >> destroyLibContextFFI [
+
+	
+			self ffiCall: #( void destroyLibContext #(  ) ).
 	
 ]
 
