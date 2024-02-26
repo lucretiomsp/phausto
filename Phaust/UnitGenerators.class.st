@@ -13,9 +13,9 @@ Class {
 
 { #category : #converting }
 UnitGenerators >> asBox [
-	
 
 	| box |
+	BoxAPI uniqueInstance createLibContext .
 	box := BoxAPI uniqueInstance
 		       boxFromString: self code
 		       inputs: self inputs

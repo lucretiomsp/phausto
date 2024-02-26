@@ -4,7 +4,7 @@ Creating an instance of this class generates a white noise.
 "
 Class {
 	#name : #Noise,
-	#superclass : #Box,
+	#superclass : #UnitGenerators,
 	#category : #'Phaust-BoxAPI'
 }
 
@@ -13,6 +13,7 @@ Noise >> asBox [
 	"generates white noise"
 
 	| box code |
+	BoxAPI uniqueInstance createLibContext.
 	code := 'import("stdfaust.lib"); process = no.noise;'.
 	box := BoxAPI uniqueInstance
 		       boxFromString: code
@@ -20,4 +21,11 @@ Noise >> asBox [
 		       outputs: self outputs
 		       buffer: self errorBuffer.
 	^ box
+]
+
+{ #category : #initialization }
+Noise >> initialize [
+
+	super initialize.
+	code := self importStatement , 'process = no.noise;'
 ]
