@@ -18,15 +18,16 @@ Class {
 { #category : #converting }
 AREnv >> asBox [
 
-	| intermediateBox finalBox code |
-	code := 'import("stdfaust.lib"); process = en.ar;'.
-	intermediateBox := BoxAPI uniqueInstance
-		                   boxFromString: code
-		                   inputs: self inputs
-		                   outputs: self outputs
-		                   buffer: self errorBuffer.
-
-	finalBox := self attack asBox , self release asBox , self trigger asBox  connectTo:
-		            intermediateBox.
+	| intermediateBox finalBox  |
+	intermediateBox := super asBox .
+	finalBox := self attack asBox , self release asBox
+	            , self trigger asBox connectTo: intermediateBox.
 	^ finalBox
+]
+
+{ #category : #initialization }
+AREnv >> initialize [
+
+	super initialize.
+	code := self importStatement ,  'process = en.ar;'
 ]

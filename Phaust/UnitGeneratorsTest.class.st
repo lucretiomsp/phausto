@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #tests }
+UnitGeneratorsTest >> testAREnvAsDsp [
+
+	self assert: AREnv new asDsp isNull equals: false
+]
+
+{ #category : #tests }
 UnitGeneratorsTest >> testNoiseAsDsp [
 
 	self assert: Noise new asDsp isNull equals: false
