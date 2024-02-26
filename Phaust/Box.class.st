@@ -25,13 +25,13 @@ Box class >> initialize [
 SessionManager default register: (ClassSessionHandler forClassNamed: self name)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Box class >> libContext [
 
 ^ libContext 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Box class >> libContext: trueOrNil [
 
 libContext := trueOrNil 
@@ -40,7 +40,9 @@ libContext := trueOrNil
 { #category : #'system startup' }
 Box class >> startUp: aBoolean [
 
-aBoolean ifTrue: [ libContext := nil ] ifFalse: [ BoxAPI uniqueInstance destroyLibContext  ] 
+	aBoolean
+		ifTrue: [ libContext := nil ]
+		
 ]
 
 { #category : #arithmetic }
@@ -55,8 +57,10 @@ Box >> % aUnitGenerator [
 { #category : #arithmetic }
 Box >> * aUnitGeneratorOrANumber [
 	"multiply UnitGenerators"
-
-	^ self multiply: self asBox with: aUnitGeneratorOrANumber asBox
+   | box1 box2|
+box1 := self asBox .
+box2 := aUnitGeneratorOrANumber asBox.
+	^ self multiply: box1 with: box2
 ]
 
 { #category : #arithmetic }
@@ -91,15 +95,23 @@ Box >> asBox [
 Box >> asDsp [
 	" creates a DSP from the Box"
 
-	self asBox
+	| dsp interBox|
+	dsp := 99.
+	interBox := self asBox.
+	interBox
 		ifNotNil: [
-			| dsp |
 			dsp := FaustDynamicEngine uniqueInstance createDspFromBoxes:
 				       self asBox.
-			attachedDSP := dsp.
-			dsp name: FaustDynamicEngine uniqueInstance defaultName.
-			^ dsp ]
-		ifNil: [ Error new signal: 'Invalid Box please check its creation' ]
+			dsp isNull
+				ifTrue: [
+					dsp := FaustDynamicEngine uniqueInstance createDspFromBoxes:
+						       self asBox ]
+				ifFalse: [
+					attachedDSP := dsp.
+					dsp name: DSP defaultName ] ]
+		ifNil: [ Error new signal: 'Invalid Box please check its creation' ].
+
+	^ dsp
 ]
 
 { #category : #accessing }

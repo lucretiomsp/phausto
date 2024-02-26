@@ -174,7 +174,7 @@ BoxAPI >> boxSeqFrom: aBox to: anotherBox [
 	" The sequential composition of two blocks (e.g., A:B) expects: outputs(A)=inputs(B)
      return the seq box.
      "
-
+self createLibContext .
 	^ self ffiCall:
 		  #( #Box * CboxSeq #( #Box * aBox , #Box * anotherBox ) )
 ]
@@ -230,8 +230,9 @@ Box libContext: true .
 
 { #category : #'as yet unclassified' }
 BoxAPI >> destroyLibContext [
-Box libContext: nil. 
-	self ffiCall: #( void destroyLibContext #(  ) )
+
+	Box libContext ifNotNil: [self ffiCall: #( void destroyLibContext #(  ) )] ifNil: [ ]  .
+	
 ]
 
 { #category : #testing }

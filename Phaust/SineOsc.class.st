@@ -10,11 +10,11 @@ Class {
 { #category : #initialization }
 SineOsc >> asBox [
 
-	| intermediateBox finalBox |
-	
-	intermediateBox := super asBox .
-	finalBox := freq asBox connectTo: intermediateBox .
-^ finalBox
+	| intermediateBox finalBox freqBox |
+	intermediateBox := super asBox.
+	freqBox := freq asBox.
+	finalBox := freqBox  connectTo: intermediateBox.
+	^ finalBox
 ]
 
 { #category : #initialization }

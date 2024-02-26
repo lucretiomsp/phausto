@@ -13,7 +13,7 @@ Class {
 
 { #category : #converting }
 UnitGenerators >> asBox [
-	"generates white noise"
+	
 
 	| box |
 	box := BoxAPI uniqueInstance

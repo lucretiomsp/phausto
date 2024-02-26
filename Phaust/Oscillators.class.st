@@ -13,7 +13,7 @@ Class {
 { #category : #accessing }
 Oscillators >> freq [
 
-	^ freq
+	^ freq 
 ]
 
 { #category : #accessing }
@@ -27,5 +27,5 @@ Oscillators >> initialize [
 
 	super initialize.
 	"default frequency for all Oscilators is A4 at picth standard"
-	self freq: 440
+	self freq: 440 asBox
 ]

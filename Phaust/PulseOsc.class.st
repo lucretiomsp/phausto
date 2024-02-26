@@ -29,8 +29,9 @@ PulseOsc >> duty [
 
 { #category : #accessing }
 PulseOsc >> duty: aFloat [
-" duty cycle range 0 - 1"
-	duty := aFloat
+	" duty cycle range 0 - 1"
+
+	duty := aFloat asBox
 ]
 
 { #category : #initialization }

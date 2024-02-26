@@ -20,22 +20,36 @@ Class {
 	#instVars : [
 		'name'
 	],
+	#classVars : [
+		'defaultName'
+	],
 	#category : #'Phaust-DSP'
 }
 
 { #category : #'as yet unclassified' }
 DSP class >> create: aStringWithFaustCode [
-
 	"create a new dsp from a string with valid Faust code"
 
 	| currentDsp |
 	currentDsp := FaustDynamicEngine uniqueInstance createDsp:
 		              aStringWithFaustCode.
-	currentDsp isNull ifTrue: [ 
+	currentDsp isNull ifTrue: [
 		self error: FaustDynamicEngine uniqueInstance getLastError ].
-	currentDsp name: FaustDynamicEngine uniqueInstance defaultName.
+	currentDsp name: self defaultName .
 
 	^ currentDsp
+]
+
+{ #category : #'accessing - defaults' }
+DSP class >> defaultName [
+
+^ defaultName 
+]
+
+{ #category : #'class initialization' }
+DSP class >> initialize [ 
+
+defaultName := '/app/'
 ]
 
 { #category : #'as yet unclassified' }
