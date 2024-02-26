@@ -22,7 +22,7 @@ self assert: dsp isNull equals: false.
 ]
 
 { #category : #tests }
-BoxTest >> testLibContextIsNilAtStartup [
+BoxTest >> testLibContextIsFalseAtStartup [
 
-self assert: Box libContext equals: nil
+	self assert: Box libContext equals: false
 ]
