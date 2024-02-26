@@ -12,5 +12,5 @@ Class {
 Noise >> initialize [
 
 	super initialize.
-	code := self importStatement , 'process = no.noise;'
+	processExpression :=  'process = no.noise;'
 ]

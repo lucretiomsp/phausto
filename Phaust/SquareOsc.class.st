@@ -20,5 +20,5 @@ SquareOsc >> asBox [
 SquareOsc >> initialize [
 
 	super initialize.
-	code := self importStatement , 'process = os.square;'
+	processExpression :=  'process = os.square;'
 ]

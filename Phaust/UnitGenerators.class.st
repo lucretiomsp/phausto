@@ -1,11 +1,14 @@
 "
-Super class of all Unit Generators
+Super class of all Unit Generators.
+The import statement imports all the functions of Faust Standard Libraries.
+The process expression must be declared for all the different subclasses.
 "
 Class {
 	#name : #UnitGenerators,
 	#superclass : #Box,
 	#instVars : [
 		'importStatement',
+		'processExpression',
 		'code'
 	],
 	#category : #'Phaust-BoxAPI'
@@ -27,7 +30,7 @@ UnitGenerators >> asBox [
 { #category : #accessing }
 UnitGenerators >> code [
 
-	^ code
+	^ self importStatement , self processExpression 
 ]
 
 { #category : #accessing }
@@ -52,5 +55,18 @@ UnitGenerators >> importStatement: anObject [
 UnitGenerators >> initialize [
 
 	super initialize.
-	importStatement  := 'import("stdfaust.lib");'
+	importStatement := 'import("stdfaust.lib");'.
+	processExpression := 'process = 0;' "an empty UnitGenerator simply out zeros"
+]
+
+{ #category : #accessing }
+UnitGenerators >> processExpression [
+
+	^ processExpression
+]
+
+{ #category : #accessing }
+UnitGenerators >> processExpression: anObject [
+
+	processExpression := anObject
 ]

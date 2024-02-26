@@ -29,5 +29,5 @@ AREnv >> asBox [
 AREnv >> initialize [
 
 	super initialize.
-	code := self importStatement ,  'process = en.ar;'
+	processExpression :=  'process = en.ar;'
 ]

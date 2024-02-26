@@ -38,6 +38,6 @@ PulseOsc >> duty: aFloat [
 PulseOsc >> initialize [
 
 	super initialize.
-	code := self importStatement , 'process = os.pulsetrain;'.
+	processExpression := 'process = os.pulsetrain;'.
 	duty := 0.5 asBox
 ]

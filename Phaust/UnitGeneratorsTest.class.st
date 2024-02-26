@@ -11,6 +11,18 @@ UnitGeneratorsTest >> testAREnvAsDsp [
 ]
 
 { #category : #tests }
+UnitGeneratorsTest >> testEmptyUnitGeneratorAsDsp [
+
+	self assert: UnitGenerators  new asDsp isNull equals: false
+]
+
+{ #category : #tests }
+UnitGeneratorsTest >> testLFOTriAsDsp [
+
+	self assert: LFOTri  new asDsp isNull equals: false
+]
+
+{ #category : #tests }
 UnitGeneratorsTest >> testNoiseAsDsp [
 
 	self assert: Noise new asDsp isNull equals: false
@@ -37,5 +49,5 @@ UnitGeneratorsTest >> testSquareOscAsDsp [
 { #category : #tests }
 UnitGeneratorsTest >> testTriOscAsDsp [
 
-	self assert: TriOsc  new asDsp isNull equals: false
+	self assert: TriOsc new asDsp isNull equals: false
 ]

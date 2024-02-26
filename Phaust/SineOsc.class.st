@@ -18,7 +18,8 @@ SineOsc >> asBox [
 ]
 
 { #category : #initialization }
-SineOsc >> initialize [ 
-super initialize .
-code := self importStatement , 'process = os.osc;'
+SineOsc >> initialize [
+
+	super initialize.
+	processExpression :=  'process = os.osc;'
 ]
