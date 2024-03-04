@@ -105,13 +105,14 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 ]
 
 { #category : #accessing }
-DSP >> getParamIndex: aString [.
-" get the index of the parameter with aString name"
+DSP >> getParamIndex: aString [
 
-
-self isNull ifTrue: [  self class invalidException  ] ifFalse: [  ^ self getParamIndexWithName: self name, aString.]
-"self isNull ifTrue: [^ self class invalidException] ifFalse: [  
+	self isNull
+		ifTrue: [ self class invalidException ]
+		ifFalse: [ "self isNull ifTrue: [^ self class invalidException] ifFalse: [  
 ^ FaustDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]"
+			^ self getParamIndexWithName: '/' , self name , '/' , aString ]
+	" get the index of the parameter with aString name"
 ]
 
 { #category : #accessing }

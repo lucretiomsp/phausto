@@ -17,8 +17,8 @@ Class {
 { #category : #converting }
 UnitGenerators >> asBox [
 
-	| box |
-	BoxAPI uniqueInstance createLibContext .
+	| box  |
+	BoxAPI uniqueInstance createLibContext.
 	box := BoxAPI uniqueInstance
 		       boxFromString: self code
 		       inputs: self inputs
@@ -30,7 +30,8 @@ UnitGenerators >> asBox [
 { #category : #accessing }
 UnitGenerators >> code [
 
-	^ self importStatement , self processExpression 
+"code returns the import statement joined with the process expression"
+	^ self importStatement , self processExpression
 ]
 
 { #category : #accessing }

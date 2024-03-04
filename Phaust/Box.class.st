@@ -94,7 +94,6 @@ Box >> asDsp [
 	" creates a DSP from the Box"
 
 	| dsp interBox |
-
 	interBox := self asBox.
 
 	interBox
@@ -103,7 +102,7 @@ Box >> asDsp [
 				       self asBox.
 
 			attachedDSP := dsp.
-			dsp name: DSP defaultName.
+			dsp name: 'MyApp'.
 			BoxAPI uniqueInstance destroyLibContext ]
 		ifNil: [ Error new signal: 'Invalid Box please check its creation' ].
 

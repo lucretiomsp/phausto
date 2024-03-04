@@ -8,12 +8,13 @@ Class {
 PhHSlider >> asBox [
 
 	| sliderBox |
+	BoxAPI uniqueInstance createLibContext .
 	sliderBox := BoxAPI uniqueInstance
 		             boxHslider: self label
 		             init: self init
 		             min: self min
-		             max: self max 
-		             step: self step .
+		             max: self max
+		             step: self step.
 
 	^ sliderBox
 ]
