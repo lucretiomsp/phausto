@@ -57,7 +57,8 @@ UnitGenerators >> initialize [
 
 	super initialize.
 	importStatement := 'import("stdfaust.lib");'.
-	processExpression := 'process = 0;' "an empty UnitGenerator simply out zeros"
+	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
+	
 ]
 
 { #category : #accessing }

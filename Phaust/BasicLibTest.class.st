@@ -11,8 +11,7 @@ BasicLibTest >> testPulsenAsDsp [
 ]
 
 { #category : #tests }
-BasicLibTest >> testSamp2Sec [
+BasicLibTest >> testSec2Samples [
 
-
-self assert: Samp2Sec new asDsp isNull equals: false
+	self assert: Sec2Samples  new asDsp isNull equals: false
 ]

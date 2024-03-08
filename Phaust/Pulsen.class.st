@@ -14,9 +14,12 @@ Class {
 { #category : #converting }
 Pulsen >> asBox [
 
-	| intermediateBox finalBox |
+	| intermediateBox lengthInSamples periodInSamples finalBox |
 	intermediateBox := super asBox.
-	finalBox := length , period connectTo: intermediateBox .
+	lengthInSamples := (Sec2Samples new value: length) asBox.
+	periodInSamples := (Sec2Samples new value: period) asBox.
+	finalBox := lengthInSamples , periodInSamples connectTo:
+		            intermediateBox.
 	^ finalBox
 ]
 
@@ -25,8 +28,8 @@ Pulsen >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.pulsen;'.
-	self length: 441.
-	self period: 44100
+	self length: 0.01.
+	self period: 1
 ]
 
 { #category : #accessing }
