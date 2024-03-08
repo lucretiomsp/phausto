@@ -72,3 +72,15 @@ UnitGenerators >> processExpression: anObject [
 
 	processExpression := anObject
 ]
+
+{ #category : #'as yet unclassified' }
+UnitGenerators >> stereo [
+
+"return a stereo version of the box (connect to Left and Right outputs)"
+
+| mono stereo |
+
+mono := self asBox.
+stereo := mono splitTo: Wire new asBox , Wire new asBox .
+^ stereo 
+]

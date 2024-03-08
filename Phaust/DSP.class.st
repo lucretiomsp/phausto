@@ -192,7 +192,7 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 FaustDynamicEngine uniqueInstance  ffiCall:  #(void setParamValueDsp(DSP* self, int anInteger, float aFloat))]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'ui-building' }
 DSP >> sliderFor: aString [
 " creates a new slider for the parameter named aString"
 | index |
