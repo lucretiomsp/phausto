@@ -13,7 +13,7 @@ Class {
 		'gain',
 		'trigger'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-PhysicalModels'
 }
 
 { #category : #converting }
