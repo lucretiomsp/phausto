@@ -6,13 +6,6 @@ This model also implements a virtual ""exciter"".
 Class {
 	#name : #Djembe,
 	#superclass : #ModalPercussion,
-	#instVars : [
-		'freq',
-		'strikePosition',
-		'strikeSharpness',
-		'gain',
-		'trigger'
-	],
 	#category : #'Phaust-BoxAPI-PhysicalModels'
 }
 
