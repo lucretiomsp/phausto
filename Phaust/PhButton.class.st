@@ -1,17 +1,41 @@
 "
-A Faust Button, value is 1 when clicked, otherwise value is 0
+A very simple button corresponding to Faust button primitive
 "
 Class {
 	#name : #PhButton,
-	#superclass : #UIGenerators,
-	#category : #'Phaust-BoxAPI'
+	#superclass : #SimpleButtonMorph,
+	#instVars : [
+		'dsp'
+	],
+	#category : #'Phaust-GUI'
 }
 
-{ #category : #converting }
-PhButton >> asBox [
+{ #category : #accessing }
+PhButton >> dsp [
 
-	| box |
-	box := BoxAPI uniqueInstance boxButton: self label.
-   
-	^ box
+	^ dsp
+]
+
+{ #category : #accessing }
+PhButton >> dsp: aDsp [
+
+"Assign a DSP to the button"
+	dsp := aDsp
+]
+
+{ #category : #'event handling' }
+PhButton >> mouseDown: evt [
+
+super mouseDown: evt.
+self dsp setValue: 1 parameter: self label
+
+]
+
+{ #category : #'event handling' }
+PhButton >> mouseUp: evt [
+
+super mouseUp: evt.
+
+self dsp setValue: 0 parameter: self label
+
 ]

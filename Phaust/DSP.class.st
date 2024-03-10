@@ -64,6 +64,18 @@ DSP class >> paramException [
 ^ Error new signal: ('This parameter does not exist, check the DSP code'  , FaustDynamicEngine uniqueInstance getLastError )
 ]
 
+{ #category : #'ui-building' }
+DSP >> buttonrFor: aString [
+" creates a new slider for the parameter named aString"
+| index |
+
+index := self getParamIndex: aString.
+"the parameter must exist!!"
+(index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , aString , ' does not exist!!' ] ifFalse: [^ PhButton  new  label: aString; dsp: self ]
+
+
+]
+
 { #category : #'as yet unclassified' }
 DSP >> destroy [
 "Destory the DSP object"
@@ -199,7 +211,7 @@ DSP >> sliderFor: aString [
 
 index := self getParamIndex: aString.
 "the parameter must exist!!"
-(index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , aString , ' does not exist!!' ] ifFalse: [^ PhGUISlider newWithIndex: index forDSP: self ]
+(index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , aString , ' does not exist!!' ] ifFalse: [^ PhGUISlider   newWithIndex: index forDSP: self  ]
 
 
 ]
