@@ -57,10 +57,10 @@ Marimba >> initialize [
 	super initialize.
 	processExpression := 'process = pm.marimba;'.
 	self freq: 440.
-	self strikePosition: 0.5.
+	self strikePosition: 4.
 	self strikeCutoff: 7000.
-	self strikeSharpness: 0.8.
-	self gain: 1.
+	self strikeSharpness: 0.26.
+	self gain: 0.8.
 	self trigger: 0.0
 ]
 

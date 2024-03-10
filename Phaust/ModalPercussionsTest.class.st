@@ -7,7 +7,13 @@ Class {
 { #category : #tests }
 ModalPercussionsTest >> testDjembeAsDsp [
 
-self assert: Djembe new asDsp isNull equals: false
+self assert: Djembe  new asDsp isNull equals: false
+]
+
+{ #category : #tests }
+ModalPercussionsTest >> testFrenchBellAsDsp [
+
+self assert: FrenchBell  new asDsp isNull equals: false
 ]
 
 { #category : #tests }
