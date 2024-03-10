@@ -51,7 +51,7 @@ KeyboardToPhausto >> dsp: anObject [
 	dsp := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 KeyboardToPhausto >> fillNoteListDictionary [
 
 
@@ -117,14 +117,13 @@ noteArray at: $] asciiValue put: 67.
 
 { #category : #'event handling' }
 KeyboardToPhausto >> handlesKeyDown: anEvent [
-| debug kv |
+| kv |
 "keyboard up arrow = 30, keyboard down arrow = 31"
-debug := self keyAsMIDINoteNumber: anEvent.
-key := self keyAsMIDINoteNumber: anEvent.
- .
-kv :=  anEvent keyValue.
+
+kv := anEvent keyCharacter asciiValue .
+
 (kv = 30) ifTrue: [  octave := octave + 1] ifFalse: [(kv = 31) ifTrue: [octave := octave -1] ifFalse: [ nil]].
- Transcript show: (key + (octave * 12)) asString, ' '.
+ Transcript show: (self keyAsMIDINoteNumber: anEvent  "+ (octave * 12)") asString, ' '.
 ^ true
 ]
 
@@ -189,7 +188,7 @@ keyPressed := anEvent keyCharacter asciiValue .
 KeyboardToPhausto >> keyDown: anEvent [
 
 
-key := self keyAsMIDINoteNumber: anEvent.
+key := (self keyAsMIDINoteNumber: anEvent) .
 "key = 60 ifTrue: [ self color: Color yellow ]."
 " if the key pressed corresponds to a MIDI note"
 ((key ~= -1) & isHandlingKeyDown) ifTrue: [  self dsp setValue:  key + (octave * 12) midiNoteToFreq  parameter: noteDestination . 
@@ -249,7 +248,7 @@ KeyboardToPhausto >> openInWindow [
 	positionLeft := 627.
 	positionTop := 354.
 
-	^ ((self openInWindowLabeled: self sound) position:
+	^ ((self openInWindowLabeled: self synthName ) position:
 		   positionLeft @ positionTop) extent: buttonWidth @ buttonHeight
 ]
 
