@@ -1,29 +1,35 @@
 Class {
-	#name : #ModalPercussionsTest,
+	#name : #PhysicalModelTest,
 	#superclass : #TestCase,
 	#category : #'Phaust-Tests'
 }
 
 { #category : #tests }
-ModalPercussionsTest >> testDjembeAsDsp [
+PhysicalModelTest >> testDjembeAsDsp [
 
 self assert: Djembe  new asDsp isNull equals: false
 ]
 
 { #category : #tests }
-ModalPercussionsTest >> testFrenchBellAsDsp [
+PhysicalModelTest >> testFrenchBellAsDsp [
 
 self assert: FrenchBell  new asDsp isNull equals: false
 ]
 
 { #category : #tests }
-ModalPercussionsTest >> testMarimbaAsDsp [
+PhysicalModelTest >> testMarimbaAsDsp [
 
 	self assert: Marimba new asDsp isNull equals: false
 ]
 
 { #category : #tests }
-ModalPercussionsTest >> testStrikeModelAsDsp [
+PhysicalModelTest >> testStrikeModelAsDsp [
 
 	self assert: StrikeModel new asDsp isNull equals: false
+]
+
+{ #category : #tests }
+PhysicalModelTest >> testViolinModelAsDsp [
+
+self assert: ViolinModel  new asDsp isNull equals: false
 ]
