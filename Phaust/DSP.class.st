@@ -175,6 +175,18 @@ RendererType initialize .
 				        512 ) ) ]]
 ]
 
+{ #category : #'ui-building' }
+DSP >> keBoardFor: aSynthName [
+
+| gate note |
+
+gate := (self getParamIndexWithName: aSynthName , 'Gate') ~= -1.
+note := (self getParamIndexWithName: aSynthName , 'Note') ~= -1.
+
+(gate & note) ifTrue: [ ^ KeyboardToPhausto new label: aSynthName; dsp: self ] ifFalse: [ Error new signal: 'Parameters do not exist' ]
+
+]
+
 { #category : #accessing }
 DSP >> name [
 

@@ -26,7 +26,7 @@ Envelopes >> attack [
 { #category : #accessing }
 Envelopes >> attack: anObject [
 
-	attack := anObject
+	attack := anObject asBox
 ]
 
 { #category : #initialization }
@@ -59,5 +59,5 @@ Envelopes >> trigger [
 { #category : #accessing }
 Envelopes >> trigger: anObject [
 
-	trigger := anObject
+	trigger := anObject asBox
 ]
