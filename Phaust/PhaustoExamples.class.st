@@ -25,6 +25,8 @@ process = oscillator : re.jcrev;'.
 	         0.00001 wait.
 	         tone := DSP create: dspCode.
 	         0.00001 wait.
+	         tone name: 'MyApp'.
+	         0.00001 wait.
 	         tone init.
 	         0.00001 wait.
 	         tone start.

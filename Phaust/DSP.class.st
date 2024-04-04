@@ -35,7 +35,7 @@ DSP class >> create: aStringWithFaustCode [
 		              aStringWithFaustCode.
 	currentDsp isNull ifTrue: [
 		self error: FaustDynamicEngine uniqueInstance getLastError ].
-	currentDsp name: self defaultName .
+	currentDsp name: 'MyApp' .
 
 	^ currentDsp
 ]
@@ -49,7 +49,7 @@ DSP class >> defaultName [
 { #category : #'class initialization' }
 DSP class >> initialize [ 
 
-defaultName := '/app/'
+defaultName := '/MyApp/'
 ]
 
 { #category : #'as yet unclassified' }

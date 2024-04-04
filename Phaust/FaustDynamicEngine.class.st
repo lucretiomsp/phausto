@@ -54,7 +54,9 @@ myArgv := ExternalAddress arrayOfStringsFrom: #('-I' 'librariesBundle/faustLibs'
 { #category : #'as yet unclassified' }
 FaustDynamicEngine >> createDsp: aFaustCode arguments: argv [
 
-  ^ self ffiCall: #(DSP* createDsp (const char* 'app',  const char* aFaustCode,  int 2, void * argv  , const char* '', int -1))
+  ^ self ffiCall: #(DSP* createDsp (const char* 'MyApp',  const char* aFaustCode,  int 2, void * argv  , const char* '', int -1))
+
+
 ]
 
 { #category : #'as yet unclassified' }
