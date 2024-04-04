@@ -176,7 +176,7 @@ RendererType initialize .
 ]
 
 { #category : #'ui-building' }
-DSP >> keBoardFor: aSynthName [
+DSP >> keyBoardFor: aSynthName [
 
 | gate note |
 
