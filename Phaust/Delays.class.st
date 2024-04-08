@@ -9,7 +9,7 @@ Class {
 		'delayLength',
 		'input'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #accessing }

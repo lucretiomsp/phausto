@@ -1,7 +1,7 @@
 Class {
 	#name : #Cut,
 	#superclass : #Box,
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #converting }

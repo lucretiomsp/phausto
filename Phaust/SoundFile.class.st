@@ -20,7 +20,7 @@ Class {
 		'part',
 		'readIndex'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #converting }

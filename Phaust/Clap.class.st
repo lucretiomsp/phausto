@@ -10,7 +10,7 @@ Class {
 		'decay',
 		'gate'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #converting }

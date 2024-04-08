@@ -7,7 +7,7 @@ Class {
 		'max',
 		'step'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-UIPrimitives'
 }
 
 { #category : #converting }

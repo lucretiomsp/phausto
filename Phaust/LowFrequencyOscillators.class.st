@@ -1,5 +1,5 @@
 Class {
 	#name : #LowFrequencyOscillators,
 	#superclass : #Oscillators,
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }

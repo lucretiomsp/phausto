@@ -4,5 +4,5 @@ Pink noise (1/f noise) generator (third-order approximation covering the audio b
 Class {
 	#name : #PinkNoise,
 	#superclass : #Noise,
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }

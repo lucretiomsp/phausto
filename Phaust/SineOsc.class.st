@@ -4,7 +4,7 @@ Default Sine wave oscillator, corresponding to Faust osc standard function
 Class {
 	#name : #SineOsc,
 	#superclass : #Oscillators,
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #initialization }

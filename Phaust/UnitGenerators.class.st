@@ -11,7 +11,7 @@ Class {
 		'processExpression',
 		'code'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #converting }

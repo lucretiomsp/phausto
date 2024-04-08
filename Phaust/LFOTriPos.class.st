@@ -4,7 +4,7 @@ Positive unit-amplitude LF triangle wave from the Faust Standard Library
 Class {
 	#name : #LFOTriPos,
 	#superclass : #LowFrequencyOscillators,
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #converting }

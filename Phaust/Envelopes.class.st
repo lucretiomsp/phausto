@@ -14,7 +14,7 @@ Class {
 		'release',
 		'trigger'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #accessing }

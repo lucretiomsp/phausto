@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'freq'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #accessing }

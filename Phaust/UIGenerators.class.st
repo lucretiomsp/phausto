@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'label'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-UIPrimitives'
 }
 
 { #category : #accessing }

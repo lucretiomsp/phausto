@@ -35,7 +35,7 @@ BoxAPI class >> int_ptr [
 { #category : #'as yet unclassified' }
 BoxAPI >> boxAdd [
 	"   
-Sum unary operator, from CbobAddA Function
+Sum unary operator, from CboxAdd Function
 "
 self createLibContext.
 	^ self ffiCall: #( #Box * CboxAdd #(  ) )
@@ -174,6 +174,15 @@ rem operator
 
 	^ self ffiCall:
 		  #( #Box * CboxRemAux #( #Box * aBox , #Box * anotherBox ) )
+]
+
+{ #category : #'as yet unclassified' }
+BoxAPI >> boxSelect2Aux: aSelector input1: anInput input2: anotherInput [
+	"   
+Sum unary operator, from CbobAddA Function
+"
+self createLibContext.
+	^ self ffiCall: #( #Box * CboxSelect2Aux #( #Box * aSelector , #Box * anInput , * #Box anotherInput  ) )
 ]
 
 { #category : #'as yet unclassified' }

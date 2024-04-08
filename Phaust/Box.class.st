@@ -16,7 +16,7 @@ Class {
 	#classVars : [
 		'libContext'
 	],
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #'class initialization' }

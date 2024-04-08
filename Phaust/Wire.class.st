@@ -5,7 +5,7 @@ it does nothing else but transmit the data stream
 Class {
 	#name : #Wire,
 	#superclass : #Box,
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #converting }

@@ -1,7 +1,7 @@
 Class {
 	#name : #PhHSlider,
 	#superclass : #PhSliders,
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-UIPrimitives'
 }
 
 { #category : #converting }

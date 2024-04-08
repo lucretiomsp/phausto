@@ -4,7 +4,7 @@ Alias-suppressed square wave oscillator. Based on the Square Faust standard func
 Class {
 	#name : #SquareOsc,
 	#superclass : #Oscillators,
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #converting }
