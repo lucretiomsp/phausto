@@ -203,6 +203,21 @@ Box >> mergeWith: aUnitGenerator [
 	^ self boxMerge:  self asBox with: aUnitGenerator asBox 
 ]
 
+{ #category : #converting }
+Box >> midikey2hz [
+" Converts a MIDI key number to a frequency in Hz (MIDI key 69 = A440). midikey2hz is a standard Faust function"
+
+| converter |
+
+BoxAPI uniqueInstance createLibContext.
+converter := BoxAPI uniqueInstance
+		       boxFromString: 'import("stdfaust.lib"); process = ba.midikey2hz;'
+		       inputs: self inputs
+		       outputs: self outputs
+		       buffer: self errorBuffer.
+^ self asBox connectTo: converter.
+]
+
 { #category : #arithmetic }
 Box >> multiply: aBox with: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and multiply them"
