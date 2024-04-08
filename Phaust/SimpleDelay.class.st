@@ -4,7 +4,7 @@ Simple d samples delay where n is the maximum delay length as a number of sample
 Class {
 	#name : #SimpleDelay,
 	#superclass : #Delays,
-	#category : #'Phaust-BoxAPI'
+	#category : #'Phaust-BoxAPI-Boxes'
 }
 
 { #category : #converting }

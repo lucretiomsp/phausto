@@ -177,12 +177,12 @@ rem operator
 ]
 
 { #category : #'as yet unclassified' }
-BoxAPI >> boxSelect2Aux: aSelector input1: anInput input2: anotherInput [
+BoxAPI >> boxSelect2Aux: aSelector input0: anInput input1: anotherInput [
 	"   
 Sum unary operator, from CbobAddA Function
 "
 self createLibContext.
-	^ self ffiCall: #( #Box * CboxSelect2Aux #( #Box * aSelector , #Box * anInput , * #Box anotherInput  ) )
+	^ self ffiCall: #( #Box * CboxSelect2Aux #( #Box * aSelector , #Box * anInput , #Box * anotherInput  ) )
 ]
 
 { #category : #'as yet unclassified' }

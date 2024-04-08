@@ -20,7 +20,7 @@ Class {
 Select2 >> asBox [
 
 BoxAPI uniqueInstance createLibContext .
-^ BoxAPI uniqueInstance boxSelect2Aux: self selector input1: input0   input2: input1 
+^ BoxAPI uniqueInstance boxSelect2Aux: self selector input0: self input0   input1: self input1 
 
 ]
 
@@ -39,6 +39,7 @@ Select2 >> code: aString [
 { #category : #initialization }
 Select2 >> initialize [ 
 
+super initialize.
 self input0: 0.
 self input1: 0.
 self selector: 0.
