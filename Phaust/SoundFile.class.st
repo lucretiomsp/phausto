@@ -49,7 +49,7 @@ SoundFile >> channels: anInteger [
 SoundFile >> initialize [
 
 	super initialize.
-	"just an epty path at the moment, replace it with something real"
+	"just an empty path at the moment, replace it with something real"
 	label := ' "sound[url:{''/mimmo.wav''}]"'.
 	channels := 1. "Suoundfile is mono by default"
 	part := 0 . "play the first file in the list, by default"

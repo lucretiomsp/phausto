@@ -6,11 +6,13 @@
 ""Create an instance""
 sp := SamplePlayer new.
 ""Specify a path to an audio files""
-sp path: 'mySamples/exampleDrumSample.wav'.
+sp pathToFile: 'mySamples/exampleDrumSample.wav'.
 ""Give it a unique name if you want to use more than one""
 sp name: 'drum'.
 ""Compile it  as a DSP, initialize it and start it""
 myDsp := sp asDsp.
+myDsp init.
+myDsp start.
 ""Now it can be triggered with:""
 myDsp trig: 'drumGate'.
 ```
@@ -39,6 +41,9 @@ Class {
 SamplePlayer >> asBox [
 
 	| code intermediateBox |
+	
+	BoxAPI uniqueInstance createLibContext.
+	
 	code := 'import("stdfaust.lib");
 rst = button("' , self name , 'Gate' , '");
 tuneSlider = vslider("' , self name , 'Tune' , '" , 1, -4, 4, 0.01);
