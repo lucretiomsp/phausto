@@ -4,6 +4,14 @@ Class {
 	#category : #'Phaust-BoxAPI-Boxes'
 }
 
+{ #category : #arithmetic }
+Cut >> , anotherCutOrUG [
+
+self asBox , anotherCutOrUG asBox
+
+"parallelComposition of Cuts with other Objects"
+]
+
 { #category : #converting }
 Cut >> asBox [
 

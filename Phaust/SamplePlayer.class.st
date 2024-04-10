@@ -37,6 +37,14 @@ Class {
 	#category : #'Phaust-ToolKit'
 }
 
+{ #category : #arithmetic }
+SamplePlayer >> , anotherSampleOrUG [
+
+"parallelComposition of SamplePlayers with other Objects"
+^ self asBox , anotherSampleOrUG asBox
+
+]
+
 { #category : #converting }
 SamplePlayer >> asBox [
 
@@ -49,7 +57,7 @@ rst = button("' , self name , 'Gate' , '");
 tuneSlider = vslider("' , self name , 'Tune' , '" , 1, -4, 4, 0.01);
 resetter = _ , 0 : select2(rst);
 reader = resetter~+(tuneSlider) ;
-process = 0,reader:soundfile("son[url:{''' , self pathToFile
+process = 0,reader:soundfile("son' , self name , ', [url:{''' , self pathToFile
 	        , '''}]",2): ! , ! , _ ,_ ;'.
 
 	debugPath := 'process = 0,reader:soundfile("son[url:{'' '
