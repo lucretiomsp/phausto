@@ -22,6 +22,8 @@ Class {
 { #category : #'class initialization' }
 Box class >> initialize [ 
 
+libContext := false.
+
 SessionManager default register: (ClassSessionHandler forClassNamed: self name)
 ]
 
@@ -32,14 +34,20 @@ Box class >> libContext [
 ]
 
 { #category : #accessing }
-Box class >> libContext: trueOrNil [
+Box class >> libContext: trueOrFalse [
 
-libContext := trueOrNil 
+libContext := trueOrFalse 
+]
+
+{ #category : #'system startup' }
+Box class >> startUp [
+
+	libContext := false
 ]
 
 { #category : #'system startup' }
 Box class >> startUp: aBoolean [
-
+	super startUp: aBoolean.
 	aBoolean ifTrue: [ libContext := false ]
 ]
 

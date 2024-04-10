@@ -40,6 +40,20 @@ DSP class >> create: aStringWithFaustCode [
 	^ currentDsp
 ]
 
+{ #category : #'as yet unclassified' }
+DSP class >> create: aStringWithFaustCode withName: aName [
+	"create a new dsp from a string with valid Faust code"
+
+	| currentDsp |
+	currentDsp := FaustDynamicEngine uniqueInstance createDsp:
+		              aStringWithFaustCode withName: aName.
+	currentDsp isNull ifTrue: [
+		self error: FaustDynamicEngine uniqueInstance getLastError ].
+	currentDsp name: aName .
+
+	^ currentDsp
+]
+
 { #category : #'accessing - defaults' }
 DSP class >> defaultName [
 
