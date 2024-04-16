@@ -200,7 +200,8 @@ DSP >> init [
 			self isNull
 				ifTrue: [ ^ self class invalidException ]
 				ifFalse: [
-					isInitialized := true.
+					'DSP initialized' traceCr.
+					self isInitialized: true.
 					^ FaustDynamicEngine uniqueInstance ffiCall:
 						  #( bool initDsp #( DSP * self , RendererType 0 , int 44100
 						        , int 512 ) ) ] ]
@@ -283,12 +284,12 @@ index := self getParamIndex: aString.
 
 { #category : #'as yet unclassified' }
 DSP >> start [
-
 	" Start processing audio. It also adds the current dsp to the dspPlaying ordered collection of the FaustDynamicEngine class"
 
-	self isNull
-		ifTrue: [ ^ self class invalidException ]
-		ifFalse: [ FaustDynamicEngine dspPlaying: self. 
+	self isInitialized isNil
+		ifTrue: [ ^ self class uninitializedException  ]
+		ifFalse: [
+			FaustDynamicEngine dspPlaying: self.
 			^ FaustDynamicEngine uniqueInstance ffiCall:
 				  #( bool startDsp #( DSP * self ) ) ]
 ]
