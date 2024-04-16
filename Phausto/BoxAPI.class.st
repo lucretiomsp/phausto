@@ -75,7 +75,7 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 	| myArgv |
 	myArgv := ExternalAddress arrayOfStringsFrom:
 		          #( '-I' 'librariesBundle/faustLibs' ).
-		('Inputs value is : ' , inputs value asString) traceCr.
+	
 	^ [
 	  self
 		  boxFromString: aFaustCode
@@ -228,10 +228,10 @@ For the operation to be valid, the number of inputs of B must be a multiple of t
 
 { #category : #'as yet unclassified' }
 BoxAPI >> boxWire [
-	"return the wire / idntity box"
+	"return the wire / identity box"
 
 	self createLibContext.
-	^ self ffiCall: #( #Box * CboxWire #(  ) )
+	^ self ffiCall: #( #Box * CboxWire (  ) )
 ]
 
 { #category : #context }

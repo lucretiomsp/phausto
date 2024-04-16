@@ -18,7 +18,8 @@ Class {
 	#name : #DSP,
 	#superclass : #FFIOpaqueObject,
 	#instVars : [
-		'name'
+		'name',
+		'isInitialized'
 	],
 	#classVars : [
 		'defaultName'
@@ -78,6 +79,14 @@ DSP class >> paramException [
 ^ Error new signal: ('This parameter does not exist, check the DSP code'  , FaustDynamicEngine uniqueInstance getLastError )
 ]
 
+{ #category : #'as yet unclassified' }
+DSP class >> uninitializedException [
+
+	^ Error new signal:
+		  'This DSP is not initialzed, so it cannot be destroyed'
+		  , FaustDynamicEngine uniqueInstance getLastError
+]
+
 { #category : #'ui-building' }
 DSP >> buttonrFor: aString [
 " creates a new slider for the parameter named aString"
@@ -92,9 +101,13 @@ index := self getParamIndex: aString.
 
 { #category : #'as yet unclassified' }
 DSP >> destroy [
-"Destory the DSP object"
-self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall: #(void destroyDsp (DSP* self))]
+	"Destory the DSP object"
+
+	self isInitialized isNil
+		ifTrue: [ ^ self class invalidException ]
+		ifFalse: [
+			^ FaustDynamicEngine uniqueInstance ffiCall:
+				  #( void destroyDsp #( DSP * self ) ) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -167,7 +180,6 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 
 { #category : #initialize }
 DSP >> init [
-
 	"
      * @brief Initialize the DSP object.
      *
@@ -177,16 +189,33 @@ DSP >> init [
      * @param bsize Buffer size in samples. Not used when kJackRenderer is used, since bs will be imposed by the JACK server - !!! we test it with 512 samples buffer size.
      * @return True if initialization is successful, false otherwise.
  "
-" if the Faust code was compiled without errors, we can initialize the DSP"
 
-RendererType initialize .
-   FaustDynamicEngine uniqueInstance getLastError = '' ifFalse: [ ^ Error new signal: FaustDynamicEngine uniqueInstance getLastError ] ifTrue: [  
-	self isNull
-		ifTrue: [ ^ self class invalidException ]
-		ifFalse: [ 
-			^ FaustDynamicEngine uniqueInstance ffiCall:
-				  #( bool initDsp #( DSP * self , RendererType 0 , int 44100 , int
-				        512 ) ) ]]
+	" if the Faust code was compiled without errors, we can initialize the DSP"
+
+	RendererType initialize.
+	FaustDynamicEngine uniqueInstance getLastError = ''
+		ifFalse: [
+		^ Error new signal: FaustDynamicEngine uniqueInstance getLastError ]
+		ifTrue: [
+			self isNull
+				ifTrue: [ ^ self class invalidException ]
+				ifFalse: [
+					isInitialized := true.
+					^ FaustDynamicEngine uniqueInstance ffiCall:
+						  #( bool initDsp #( DSP * self , RendererType 0 , int 44100
+						        , int 512 ) ) ] ]
+]
+
+{ #category : #accessing }
+DSP >> isInitialized [
+
+	^ isInitialized
+]
+
+{ #category : #accessing }
+DSP >> isInitialized: anObject [
+
+	isInitialized := anObject
 ]
 
 { #category : #'ui-building' }
@@ -211,6 +240,16 @@ DSP >> name [
 DSP >> name: aString [
 
 	name := aString
+]
+
+{ #category : #playing }
+DSP >> play [
+	"if only a DSP is meant to be used, this method do both initialization and start. in addition, it stop and destroy any dspPlaying to avoid crashes"
+ | activeDsp |
+	activeDsp := FaustDynamicEngine  dspPlaying.
+	activeDsp ifNil: [self init. self play. 'play' traceCr  ] ifNotNil: [ activeDsp stop. activeDsp destroy. self init. self play ]
+
+	
 ]
 
 { #category : #'API - changes' }

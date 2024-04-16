@@ -16,13 +16,17 @@ self asBox , anotherWireOrUG asBox
 ]
 
 { #category : #converting }
-Wire >> asBox [ 
- ^ BoxAPI uniqueInstance boxWire
-]
+Wire >> asBox [
+	"^ BoxAPI uniqueInstance boxWire "
 
-{ #category : #initialization }
-Wire >> initialize [
+	| box code |
+	code := 'import("stdfaust.lib"); process = _ ;'.
 
-	super initialize.
-	
+	box := BoxAPI uniqueInstance
+		       boxFromString: code
+		       inputs: self inputs
+		       outputs: self outputs
+		       buffer: self errorBuffer.
+
+	^ box
 ]
