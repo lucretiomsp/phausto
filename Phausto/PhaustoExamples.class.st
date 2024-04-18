@@ -8,10 +8,41 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-PhaustoExamples class >> ringTone [
+PhaustoExamples >> helloSine [
+
+	<script: ' self new helloSine'>
+	| content |
+	content := '
+"###########################################################################"
+BE SURE YOU HAVE COPIED THE LIBRARIESBUNDLE FOLDER CLOSE TO YOUR PHARO IMAGE
+
+"we create a Sine wave oscillator (https://en.wikipedia.org/wiki/Pure_tone)"
+" by default our SneOSc has a frequency of 440 Hz (or Stuttgart pitch), the musical note A above the middle C"
+s := SineOsc new .	
+"we create a dsp from our sine oscillator, multiplied by 0.3 to scale down its volume"
+dsp := (s * 0.3) asDsp.
+"we initialize the dsp"
+dsp init.
+"we start the dsp"
+dsp start.
+
+"IF YOU HEAR THE TONE, PHAUSTO IS INSTALLED CORRECTLY"
+
+"we stop the dsp, to stop the dsp"
+dsp stop.
+"we destroy the dsp"
+dsp destroy .
+
+'.
+
+	^ StPlayground openContents: content
+]
+
+{ #category : #'as yet unclassified' }
+PhaustoExamples >> ringTone [
 	" this example plays the first few notes of Gran Vals by Francisco Tarrega into a JCReverb"
 
-	<script: 'self ringTone'>
+	<script: 'self new ringTone'>
 	| dspCode tone p durs pitches block |
 	" this example plays the first few notes of Gran Vals by Francisco Tarrega into a JCReverb"
 	block := [
@@ -30,7 +61,7 @@ process = oscillator : re.jcrev;'.
 	         tone init.
 	         0.00001 wait.
 	         tone start.
-	         0.00001wait.
+	         0.00001 wait.
 	         p := Performance uniqueInstance.
 	         0.00001 wait.
 	         p performer: PerformerPhaust new.

@@ -200,7 +200,7 @@ DSP >> init [
 			self isNull
 				ifTrue: [ ^ self class invalidException ]
 				ifFalse: [
-					'DSP initialized' traceCr.
+					'Sono inizializzato' traceCr .
 					self isInitialized: true.
 					^ FaustDynamicEngine uniqueInstance ffiCall:
 						  #( bool initDsp #( DSP * self , RendererType 0 , int 44100
