@@ -20,6 +20,7 @@ Wire >> asBox [
 	"^ BoxAPI uniqueInstance boxWire "
 
 	| box code |
+	
 	code := 'import("stdfaust.lib"); process = _ ;'.
 
 	box := BoxAPI uniqueInstance

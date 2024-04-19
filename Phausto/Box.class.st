@@ -183,13 +183,17 @@ Box >> errorBuffer: anObject [
 Box >> initialize [
 
 	| intPtr |
+	"just in case the libCOntext was not created - to avoid crashes"
+	BoxAPI uniqueInstance createLibContext .
+	
 	intPtr := FFIExternalValueHolder ofType: 'int'.
+	
 
 
 
-	inputs := (intPtr new value: 0).
-	outputs := (intPtr new value: 0).
-	errorBuffer := (ByteArray new: 4096)
+	inputs := intPtr new value: 0.
+	outputs := intPtr new value: 0.
+	errorBuffer := ByteArray new: 4096
 ]
 
 { #category : #accessing }
