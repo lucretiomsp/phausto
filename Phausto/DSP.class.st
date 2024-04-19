@@ -246,11 +246,18 @@ DSP >> name: aString [
 { #category : #playing }
 DSP >> play [
 	"if only a DSP is meant to be used, this method do both initialization and start. in addition, it stop and destroy any dspPlaying to avoid crashes"
- | activeDsp |
-	activeDsp := FaustDynamicEngine  dspPlaying.
-	activeDsp ifNil: [self init. self play. 'play' traceCr  ] ifNotNil: [ activeDsp stop. activeDsp destroy. self init. self play ]
 
-	
+	| activeDsp |
+	activeDsp := FaustDynamicEngine dspPlaying.
+	activeDsp isInitialized 
+		ifNil: [
+			self init.
+			self start.
+			'play' traceCr ]
+		ifNotNil: [
+			activeDsp stop.
+			activeDsp destroy.
+			]
 ]
 
 { #category : #'API - changes' }
