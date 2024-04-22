@@ -8,6 +8,77 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+PhaustoExamples >> grooveBox101 [
+
+	<script: ' self new grooveBox101'>
+	| content |
+	content := '
+"###########################################################################"
+"TO FOLLOW THIS EXAMPLE YOU NEED TO HAVE COYPU INSTALLED - https://github.com/lucretiomsp/Coypu"
+
+"create a DSP  from a string of Faust-ready code for an 8 instruments drum machine"
+grooveBox := DSP create: DSPCode drumMachine8.
+
+"we initialize the grooveBox"
+grooveBox init.
+grooveBox start.
+
+"we can see all the avilable parameters on a Transcript"
+Transcript show: grooveBox traceAllParams; open 
+
+"we create a new Performance"
+p := Performance uniqueInstance .
+
+"we assign it to  a PerformerPhaust"
+p := p performer: PerformerPhaust new.
+
+" we assign a DSP to the Performance"
+p activeDSP: grooveBox .
+
+"we spped up the Performance"
+p freq: 136 bpm.
+
+"we start with a BassDrum a.k.a. a Kick"
+16 downbeats to: #kick.
+
+"some funky claps"
+''0808'' hexBeat to: #clap.
+
+"lets play the performance"
+p playFor: 128 bars.
+
+"upbeats hats"
+16 upbeats to: #hatFM.
+
+" a clave with a rumba pattern"
+16 rumba to: #clave
+
+"now an acid bass line"
+16 semiquavers notes: #(45 56 88) to: #acid.
+
+"lets solo the bassline"
+p solo: #acid.
+
+"snare drum"
+#(7 16) euclidean to: #snare.
+
+"now back to the beat"
+p unsolo: #acid.
+
+"you can stop the perfrormance"
+p stop.
+
+"stop the DSP"
+grooveBox stop.
+" and sdestroy it"
+p destroy.
+
+'.
+
+	^ StPlayground openContents: content
+]
+
+{ #category : #'as yet unclassified' }
 PhaustoExamples >> helloSine [
 
 	<script: ' self new helloSine'>
