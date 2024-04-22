@@ -24,7 +24,7 @@ Class {
 		'kRtAudioRenderer',
 		'kiOSRenderer'
 	],
-	#category : #Phausto
+	#category : #'Phausto-RendererType'
 }
 
 { #category : #'enum declaration' }

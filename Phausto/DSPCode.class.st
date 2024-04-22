@@ -4,7 +4,7 @@ Convenience class to store useful Faust DSP as string. DSP code as string can be
 Class {
 	#name : #DSPCode,
 	#superclass : #Object,
-	#category : #Phausto
+	#category : #'Phausto-DSPCode'
 }
 
 { #category : #'as yet unclassified' }
