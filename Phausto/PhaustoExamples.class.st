@@ -53,11 +53,18 @@ p playFor: 128 bars.
 " a clave with a rumba pattern"
 16 rumba to: #clave
 
+" and a djembe"
+16 rests, 16 banda to: #djembe.
+
 "now an acid bass line"
 16 semiquavers notes: #(45 56 88) to: #acid.
 
 "lets solo the bassline"
 p solo: #acid.
+
+"we create fader to controll the basslinecutoff"
+cutoff := grooveBox sliderFor: ''acidCutoff''. 
+cutoff openInWindow .
 
 "snare drum"
 #(7 16) euclidean to: #snare.
