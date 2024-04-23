@@ -106,11 +106,13 @@ Box >> asDsp [
 
 	interBox
 		ifNotNil: [
+			
 			finalDsp := FaustDynamicEngine uniqueInstance createDspFromBoxes:
 				            self asBox.
-         FaustDynamicEngine dspPlaying: finalDsp .
+			FaustDynamicEngine dspPlaying: finalDsp.
+			finalDsp name: 'MyApp'.
 			attachedDSP := finalDsp.
-			dsp name: 'MyApp'.
+			
 			BoxAPI uniqueInstance destroyLibContext ]
 		ifNil: [ Error new signal: 'Invalid Box please check its creation' ].
 
