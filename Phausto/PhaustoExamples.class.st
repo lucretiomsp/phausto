@@ -78,7 +78,7 @@ p stop.
 "stop the DSP"
 grooveBox stop.
 " and sdestroy it"
-p destroy.
+grooveBox destroy.
 
 '.
 

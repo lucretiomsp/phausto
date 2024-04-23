@@ -110,7 +110,7 @@ GreyHole >> feedback: aFloatOrABoxBetweenZeroAndOne [
 GreyHole >> initialize [
 
 	super initialize.
-	self dt: 2.
+	self dt: 0.8.
 	self damp: 0.1.
 	self size: 2.
 	self earlyDiff: 0.4.
