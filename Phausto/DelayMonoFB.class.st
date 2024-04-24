@@ -12,7 +12,7 @@ Class {
 		'input',
 		'feedBack'
 	],
-	#category : #'Phausto-Toolkit'
+	#category : #'Phausto-ToolKit'
 }
 
 { #category : #accessing }
@@ -23,10 +23,12 @@ DelayMonoFB >> delayTime [
 
 { #category : #accessing }
 DelayMonoFB >> delayTime: aDelayTimeInSeconds [
+	"delay time must never be greater than max delayTime"
 
-"delay time must never be greater than max delayTime"
-   
-	delayTime := aDelayTimeInSeconds asBox
+	aDelayTimeInSeconds > self maxDelayTime ifTrue: [
+		Error new signal:
+			'elay time cannot be be greater than max delayTime' ] ifFalse: 
+	[delayTime := aDelayTimeInSeconds asBox]
 ]
 
 { #category : #accessing }
@@ -36,9 +38,10 @@ DelayMonoFB >> dryWet [
 ]
 
 { #category : #accessing }
-DelayMonoFB >> dryWet: anObject [
+DelayMonoFB >> dryWet: aFloatOrABox [
 
-	dryWet := anObject
+   "a value of 0 for a dry signal , a value of 1 for a wet signal , in between for a mix"
+	dryWet := aFloatOrABox asBox
 ]
 
 { #category : #accessing }
@@ -48,9 +51,9 @@ DelayMonoFB >> feedBack [
 ]
 
 { #category : #accessing }
-DelayMonoFB >> feedBack: anObject [
-
-	feedBack := anObject
+DelayMonoFB >> feedBack: aFloatOrAbox [
+"be careful, values greater of equals to 1 yield infinite resonant feedbCK"
+	feedBack := aFloatOrAbox
 ]
 
 { #category : #initialization }
@@ -67,9 +70,9 @@ DelayMonoFB >> input [
 ]
 
 { #category : #accessing }
-DelayMonoFB >> input: anObject [
+DelayMonoFB >> input: anInput [
 
-	input := anObject
+	input := anInput asBox
 ]
 
 { #category : #accessing }
@@ -79,7 +82,8 @@ DelayMonoFB >> maxDelayTime [
 ]
 
 { #category : #accessing }
-DelayMonoFB >> maxDelayTime: anObject [
+DelayMonoFB >> maxDelayTime: aMaxDelayTimeInSeconds [
 
-	maxDelayTime := anObject
+
+	maxDelayTime := aMaxDelayTimeInSeconds asBox
 ]

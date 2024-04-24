@@ -20,8 +20,8 @@ Delays >> delayLength [
 
 { #category : #accessing }
 Delays >> delayLength: anObject [
-
-	delayLength := anObject
+" the max delay length in samples"
+	delayLength := anObject asBox
 ]
 
 { #category : #initialization }
@@ -54,5 +54,5 @@ Delays >> maxDelayLength [
 { #category : #accessing }
 Delays >> maxDelayLength: anObject [
 
-	maxDelayLength := anObject
+	maxDelayLength := anObject asBox
 ]
