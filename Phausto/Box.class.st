@@ -261,6 +261,23 @@ Box >> par: aBox with: anotherBox [
 		  #( #Box * CboxPar #( #Box * aBox , #Box * anotherBox ) )
 ]
 
+{ #category : #converting }
+Box >> smoo [
+	"Smoothing function based on smooth ideal to smooth UI signals (sliders, etc.) down. Approximately, this is a 7 Hz one-pole low-pass considering the coefficient calculation: exp(-2pi*CF/SR).
+
+smoo is a standard Faust function."
+
+	| smoother |
+	BoxAPI uniqueInstance createLibContext.
+	smoother := BoxAPI uniqueInstance
+		             boxFromString:
+		             'import("stdfaust.lib"); process = si.smoo;'
+		             inputs: self inputs
+		             outputs: self outputs
+		             buffer: self errorBuffer.
+	^ self asBox connectTo: smoother
+]
+
 { #category : #arithmetic }
 Box >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
