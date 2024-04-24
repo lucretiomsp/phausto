@@ -15,6 +15,21 @@ Class {
 	#category : #'Phausto-ToolKit'
 }
 
+{ #category : #converting }
+DelayMonoFB >> asBox [
+
+	| delayPath drySignal finalBox smoothedDelayTime delayBox |
+	smoothedDelayTime := self delayTime smoo.
+	drySignal := self input * (1 - self dryWet).
+	delayBox := (FractionalDelay new
+		             maxDelayLength: self maxDelayTime;
+		             delayTime: self delayTime;
+		             input: self input) asBox.
+"must rewrite recursion"
+	delayPath := (self feedBack * delayBox).
+	^ finalBox
+]
+
 { #category : #accessing }
 DelayMonoFB >> delayTime [
 
@@ -57,10 +72,14 @@ DelayMonoFB >> feedBack: aFloatOrAbox [
 ]
 
 { #category : #initialization }
-DelayMonoFB >> initialize [ 
-super initialize .
+DelayMonoFB >> initialize [
 
-
+	super initialize.
+	self maxDelayTime: PhSampleRate new asBox * 4.
+	self input: Wire new.
+	self delayTime: 1.
+	self feedBack: 0.4.
+	self dryWet: 0.5.
 ]
 
 { #category : #accessing }

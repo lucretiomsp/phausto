@@ -7,6 +7,16 @@ Class {
 	#category : #'Phausto-BoxAPI-Boxes'
 }
 
+{ #category : #converting }
+FractionalDelay >> asBox [
+
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	finalBox := self maxDelayLength asBox , self delayLength asBox
+	            , self input asBox connectTo: intermediateBox.
+	^ finalBox
+]
+
 { #category : #initialization }
 FractionalDelay >> initialize [
 
