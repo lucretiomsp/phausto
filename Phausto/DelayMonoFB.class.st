@@ -18,15 +18,16 @@ Class {
 { #category : #converting }
 DelayMonoFB >> asBox [
 
-	| delayPath drySignal finalBox smoothedDelayTime delayBox |
+	| delayPath drySignal finalBox smoothedDelayTime delayBox delaySum |
 	smoothedDelayTime := self delayTime smoo.
 	drySignal := self input * (1 - self dryWet).
 	delayBox := (FractionalDelay new
 		             maxDelayLength: self maxDelayTime;
 		             delayTime: self delayTime;
 		             input: self input) asBox.
-"must rewrite recursion"
-	delayPath := (self feedBack * delayBox).
+	delaySum := (self feedBack * delayBox ) + self input.
+	delayPath := (self feedBack * delayBox ) ~ delaySum .
+	finalBox := (delayPath * self dryWet ) + self input.
 	^ finalBox
 ]
 
