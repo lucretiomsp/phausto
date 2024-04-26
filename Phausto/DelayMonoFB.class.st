@@ -4,7 +4,7 @@ It has a maximum delay time of 4 seconds, and a smoothed delay time in seconds c
 "
 Class {
 	#name : #DelayMonoFB,
-	#superclass : #Object,
+	#superclass : #Box,
 	#instVars : [
 		'maxDelayTime',
 		'dryWet',
@@ -41,9 +41,6 @@ DelayMonoFB >> delayTime [
 DelayMonoFB >> delayTime: aDelayTimeInSeconds [
 	"delay time must never be greater than max delayTime"
 
-	aDelayTimeInSeconds > self maxDelayTime ifTrue: [
-		Error new signal:
-			'elay time cannot be be greater than max delayTime' ] ifFalse: 
 	[delayTime := aDelayTimeInSeconds asBox]
 ]
 

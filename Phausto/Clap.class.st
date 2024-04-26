@@ -10,7 +10,7 @@ Class {
 		'decay',
 		'gate'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-BoxAPI-Synths'
 }
 
 { #category : #converting }
@@ -30,9 +30,9 @@ Clap >> attack [
 ]
 
 { #category : #accessing }
-Clap >> attack: anObject [
+Clap >> attack: aBoxorAFloat [
 
-	attack := anObject
+	attack := aBoxorAFloat asBox
 ]
 
 { #category : #accessing }
@@ -42,9 +42,9 @@ Clap >> decay [
 ]
 
 { #category : #accessing }
-Clap >> decay: anObject [
+Clap >> decay: aBoxorAFloat [
 
-	decay := anObject
+	decay := aBoxorAFloat asBox
 ]
 
 { #category : #accessing }
@@ -54,17 +54,16 @@ Clap >> gate [
 ]
 
 { #category : #accessing }
-Clap >> gate: anObject [
+Clap >> gate: aBoxorAFloat [
 
-	gate := anObject
+	gate := aBoxorAFloat asBox
 ]
 
 { #category : #initialization }
 Clap >> initialize [
 
-	
 	super initialize.
-	code := self importStatement  , 'process = sy.clap;'.
+	processExpression  := 'process = sy.clap;'.
 	tone := 1200.
 	attack := 0.
 	decay := 3.
@@ -78,7 +77,7 @@ Clap >> tone [
 ]
 
 { #category : #accessing }
-Clap >> tone: anObject [
+Clap >> tone: aBoxorAFloat [
 
-	tone := anObject
+	tone := aBoxorAFloat asBox
 ]
