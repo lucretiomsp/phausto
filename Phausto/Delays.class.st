@@ -9,7 +9,7 @@ Class {
 		'delayLength',
 		'input'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-BoxAPI-Effects'
 }
 
 { #category : #accessing }
@@ -19,9 +19,10 @@ Delays >> delayLength [
 ]
 
 { #category : #accessing }
-Delays >> delayLength: anObject [
-" the max delay length in samples"
-	delayLength := anObject asBox
+Delays >> delayLength: aFloatOrABox [
+	" the max delay length in samples"
+
+	delayLength := aFloatOrABox asBox
 ]
 
 { #category : #initialization }
@@ -40,9 +41,9 @@ Delays >> input [
 ]
 
 { #category : #accessing }
-Delays >> input: anObject [
+Delays >> input: aFloatOrABox [
 
-	input := anObject
+	input := aFloatOrABox
 ]
 
 { #category : #accessing }
@@ -52,7 +53,7 @@ Delays >> maxDelayLength [
 ]
 
 { #category : #accessing }
-Delays >> maxDelayLength: anObject [
+Delays >> maxDelayLength: aFloatOrABox [
 
-	maxDelayLength := anObject asBox
+	maxDelayLength := aFloatOrABox asBox
 ]

@@ -4,7 +4,7 @@ Simple d samples delay where n is the maximum delay length as a number of sample
 Class {
 	#name : #SimpleDelay,
 	#superclass : #Delays,
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-BoxAPI-Effects'
 }
 
 { #category : #converting }
@@ -21,5 +21,5 @@ SimpleDelay >> asBox [
 SimpleDelay >> initialize [
 
 	super initialize.
-	code := self importStatement  , 'process = de.delay;'
+	processExpression :='process = de.delay;'
 ]

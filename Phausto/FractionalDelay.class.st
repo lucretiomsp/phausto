@@ -4,7 +4,7 @@ Simple d samples fractional delay based on 2 interpolated delay lines where n is
 Class {
 	#name : #FractionalDelay,
 	#superclass : #Delays,
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-BoxAPI-Effects'
 }
 
 { #category : #converting }
@@ -21,5 +21,5 @@ FractionalDelay >> asBox [
 FractionalDelay >> initialize [
 
 	super initialize.
-	code := self importStatement , 'process = de.delay;'
+	processExpression := 'process = de.delay;'
 ]

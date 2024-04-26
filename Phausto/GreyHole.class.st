@@ -33,7 +33,7 @@ Class {
 		'modDepth',
 		'modFreq'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-BoxAPI-Effects'
 }
 
 { #category : #converting }
