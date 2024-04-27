@@ -18,16 +18,20 @@ Class {
 { #category : #converting }
 DelayMonoFB >> asBox [
 
-	| delayPath drySignal finalBox smoothedDelayTime delayBox delaySum |
-	smoothedDelayTime := self delayTime smoo.
-	drySignal := self input * (1 - self dryWet).
+	| delayLen sampleRate delayPath drySignal finalBox smoothedDelayTime delayBox delaySum |
+	smoothedDelayTime := self delayTime.
+	delayLen := self delayTime * PhSampleRate new asBox.
+	sampleRate := PhSampleRate new asBox.
+	drySignal := self input * (1 asBox - self dryWet).
 	delayBox := (FractionalDelay new
-		             maxDelayLength: self maxDelayTime;
-		             delayTime: self delayTime;
-		             input: self input) asBox.
-	delaySum := (self feedBack * delayBox ) + self input.
-	delayPath := (self feedBack * delayBox ) ~ delaySum .
-	finalBox := (delayPath * self dryWet ) + self input.
+		             input: self input;
+		             delayLength: self delayTime * PhSampleRate new asBox) asBox. "self maxDelayTime * sampleRate" "self delayTime * sampleRate"
+
+	delaySum := delayBox + self input.
+
+	delayPath := delaySum asBox ~ Wire new asBox.
+
+	finalBox := delayBox. "+ self input. * self dryWet"
 	^ finalBox
 ]
 
@@ -41,7 +45,7 @@ DelayMonoFB >> delayTime [
 DelayMonoFB >> delayTime: aDelayTimeInSeconds [
 	"delay time must never be greater than max delayTime"
 
-	[delayTime := aDelayTimeInSeconds asBox]
+	 delayTime := aDelayTimeInSeconds asBox 
 ]
 
 { #category : #accessing }
@@ -65,8 +69,9 @@ DelayMonoFB >> feedBack [
 
 { #category : #accessing }
 DelayMonoFB >> feedBack: aFloatOrAbox [
-"be careful, values greater of equals to 1 yield infinite resonant feedbCK"
-	feedBack := aFloatOrAbox
+	"be careful, values greater of equals to 1 yield infinite resonant feedbCK"
+
+	feedBack := aFloatOrAbox asBox
 ]
 
 { #category : #initialization }
@@ -78,6 +83,7 @@ DelayMonoFB >> initialize [
 	self delayTime: 1.
 	self feedBack: 0.4.
 	self dryWet: 0.5.
+	
 ]
 
 { #category : #accessing }

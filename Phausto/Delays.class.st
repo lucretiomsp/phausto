@@ -29,9 +29,9 @@ Delays >> delayLength: aFloatOrABox [
 Delays >> initialize [
 
 	super initialize.
-	maxDelayLength := 44100. "by default, maximum delay length is 1 second at 44100 Hz sample rate"
-	delayLength := 4410.
-	input := Wire new.
+	self maxDelayLength: 44100. "by default, maximum delay length is 1 second at 44100 Hz sample rate"
+	self delayLength: 4410.
+	input := Wire new
 ]
 
 { #category : #accessing }

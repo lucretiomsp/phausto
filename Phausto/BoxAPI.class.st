@@ -227,6 +227,17 @@ For the operation to be valid, the number of inputs of B must be a multiple of t
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxSubtract: aBox from: anotherBox [
+	"   
+Sum binary operator, from CbobAddAuxFunxtion
+"
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( #Box * CboxSubAux #( #Box * aBox , #Box * anotherBox ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxWire [
 	"return the wire / identity box"
 

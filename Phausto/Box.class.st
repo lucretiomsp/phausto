@@ -84,11 +84,17 @@ Box >> , aUnitGenerator [
 ]
 
 { #category : #arithmetic }
+Box >> - aUnitGenerator [
+	"sumUnitGenerators"
+
+	^ self subtract: self asBox from: aUnitGenerator asBox
+]
+
+{ #category : #arithmetic }
 Box >> add: aBox to: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and sumy them"
 
-	^ BoxAPI uniqueInstance ffiCall:
-		  #( #Box * CboxAddAux #( #Box * aBox , #Box * anotherBox ) )
+	^ BoxAPI uniqueInstance boxAdd: aBox with: anotherBox
 ]
 
 { #category : #converting }
@@ -261,20 +267,22 @@ Box >> par: aBox with: anotherBox [
 		  #( #Box * CboxPar #( #Box * aBox , #Box * anotherBox ) )
 ]
 
-{ #category : #converting }
+{ #category : #smoothing }
 Box >> smoo [
 	"Smoothing function based on smooth ideal to smooth UI signals (sliders, etc.) down. Approximately, this is a 7 Hz one-pole low-pass considering the coefficient calculation: exp(-2pi*CF/SR).
 
 smoo is a standard Faust function."
 
-	| smoother |
+	| smoother smootherBox |
 	BoxAPI uniqueInstance createLibContext.
+
+	smootherBox := Box new.
 	smoother := BoxAPI uniqueInstance
-		             boxFromString:
-		             'import("stdfaust.lib"); process = si.smoo;'
-		             inputs: self inputs
-		             outputs: self outputs
-		             buffer: self errorBuffer.
+		            boxFromString:
+		            'import("stdfaust.lib"); process = si.smoo;'
+		            inputs: smootherBox  inputs
+		            outputs: smootherBox  outputs
+		            buffer: smootherBox  errorBuffer.
 	^ self asBox connectTo: smoother
 ]
 
@@ -283,6 +291,13 @@ Box >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
 
 	^ self boxSplit: self asBox to: aUnitGenerator asBox
+]
+
+{ #category : #arithmetic }
+Box >> subtract: aBox from: anotherBox [
+	"convenience method to auto convert UnitGenerators into boxes and sumy them"
+
+	^ BoxAPI uniqueInstance boxSubtract:  aBox from: anotherBox  
 ]
 
 { #category : #arithmetic }

@@ -21,5 +21,5 @@ FractionalDelay >> asBox [
 FractionalDelay >> initialize [
 
 	super initialize.
-	processExpression := 'process = de.delay;'
+	processExpression := 'process = de.fdelay;'
 ]
