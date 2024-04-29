@@ -24,14 +24,15 @@ DelayMonoFB >> asBox [
 	sampleRate := PhSampleRate new asBox.
 	drySignal := self input * (1 asBox - self dryWet).
 	delayBox := (FractionalDelay new
-		             input: self input;
-		             delayLength: self delayTime * PhSampleRate new asBox) asBox. "self maxDelayTime * sampleRate" "self delayTime * sampleRate"
+		             input: Wire new asBox;
+		             delayLength: self delayTime * PhSampleRate new asBox)
+		            asBox.
 
-	delaySum := delayBox + self input.
+	delaySum := delayBox * self feedBack + self input.
 
 	delayPath := delaySum asBox ~ Wire new asBox.
 
-	finalBox := delayBox. "+ self input. * self dryWet"
+	finalBox := delaySum .
 	^ finalBox
 ]
 
@@ -80,10 +81,9 @@ DelayMonoFB >> initialize [
 	super initialize.
 	self maxDelayTime: PhSampleRate new asBox * 4.
 	self input: Wire new.
-	self delayTime: 1.
-	self feedBack: 0.4.
-	self dryWet: 0.5.
-	
+	self delayTime: 2.
+	self feedBack: 0.9.
+	self dryWet: 0.5
 ]
 
 { #category : #accessing }
