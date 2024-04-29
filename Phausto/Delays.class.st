@@ -1,5 +1,7 @@
 "
-A collection of delays from Faust delays.lib
+A collection of delays from Faust delays.lib.
+[More](https://ccrma.stanford.edu/realsimple/Delay/Delay_lines.html) about delays and their use for audio effets ans synthesis algorithms
+
 "
 Class {
 	#name : #Delays,

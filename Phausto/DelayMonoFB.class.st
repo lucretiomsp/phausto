@@ -1,6 +1,7 @@
 "
-A mono delay with feedback and smoothed delay time based on de.fdelay from the Faust standard library.
+A mono delay with feedback and smoothed delay time based on de.sdelay from the Faust standard library.
 It has a maximum delay time of 4 seconds, and a smoothed delay time in seconds control that can be changed in real time.
+Also, smoothing time expressed in seconds - can be changed in real time
 "
 Class {
 	#name : #DelayMonoFB,
@@ -18,21 +19,23 @@ Class {
 { #category : #converting }
 DelayMonoFB >> asBox [
 
-	| delayLen sampleRate delayPath drySignal finalBox smoothedDelayTime delayBox delaySum |
+	| delayLen mixer delayWithFB finalBox smoothedDelayTime delayBox  |
 	smoothedDelayTime := self delayTime.
+
 	delayLen := self delayTime * PhSampleRate new asBox.
-	sampleRate := PhSampleRate new asBox.
-	drySignal := self input * (1 asBox - self dryWet).
-	delayBox := (FractionalDelay new
+	delayBox := (SmoothDelay new
 		             input: Wire new asBox;
 		             delayLength: self delayTime * PhSampleRate new asBox)
 		            asBox.
 
-	delaySum := delayBox * self feedBack + self input.
+	mixer := self input + (delayBox * self feedBack).
 
-	delayPath := delaySum asBox ~ Wire new asBox.
 
-	finalBox := delaySum .
+
+
+	delayWithFB:= mixer asBox ~ delayBox .
+
+	finalBox := delayWithFB + self input .
 	^ finalBox
 ]
 
