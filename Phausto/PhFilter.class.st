@@ -1,5 +1,5 @@
 Class {
 	#name : #PhFilter,
-	#superclass : #Box,
+	#superclass : #UnitGenerators,
 	#category : #'Phausto-BoxAPI-Filters'
 }

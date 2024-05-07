@@ -15,15 +15,15 @@ Class {
 { #category : #converting }
 Lowpass >> asBox [
 
-	| intermdiateBox finalBox code |
-	code := 'import("stdfaust.lib"); process = fi.lowpass(4);'.
+	| intermdiateBox finalBox |
+	
 
 	intermdiateBox := BoxAPI uniqueInstance
 		                  boxFromString: code
 		                  inputs: self inputs
 		                  outputs: self outputs
 		                  buffer: self errorBuffer.
-		
+
 	finalBox := self cutoff , self input connectTo: intermdiateBox.
 
 	^ finalBox
@@ -33,6 +33,7 @@ Lowpass >> asBox [
 Lowpass >> initialize [
 
 	super initialize.
+	self processExpression: 'process = fi.lowpass(4);'.
 	self input: 0.
 	self poles: 4.
 	self cutoff: 2000
