@@ -5,7 +5,7 @@ Creating an instance of this class generates a white noise.
 Class {
 	#name : #Noise,
 	#superclass : #UnitGenerators,
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-UnitGenerators'
 }
 
 { #category : #initialization }

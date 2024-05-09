@@ -11,7 +11,7 @@ Class {
 		'processExpression',
 		'code'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-UnitGenerators'
 }
 
 { #category : #converting }

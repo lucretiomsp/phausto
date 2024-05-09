@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'freq'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-UnitGenerators'
 }
 
 { #category : #accessing }

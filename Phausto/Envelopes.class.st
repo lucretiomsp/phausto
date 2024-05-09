@@ -14,7 +14,7 @@ Class {
 		'release',
 		'trigger'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-UnitGenerators'
 }
 
 { #category : #accessing }
