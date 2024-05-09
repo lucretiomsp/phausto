@@ -238,12 +238,13 @@ Sum binary operator, from CbobAddAuxFunxtion
 ]
 
 { #category : #'as yet unclassified' }
-BoxAPI >> boxVBarGraph: aLabel min: aMin max: aaMax [
+BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
 	"Create a horizontal bargraph box."
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( #Box * CboxVBargraph #( char * anInteger , Box * min , Box * max ) )
+		  #( #Box * CboxVBargraph #( char * aLabel , Box * aMin , Box * aMax
+		        , Box * anInput ) )
 ]
 
 { #category : #'as yet unclassified' }

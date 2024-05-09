@@ -4,15 +4,46 @@ The vbargraph primitive implements a vertical bar-graph (typically a meter displ
 Class {
 	#name : #PhVBarGraph,
 	#superclass : #UIGenerators,
+	#instVars : [
+		'input'
+	],
 	#category : #'Phausto-BoxAPI-UIPrimitives'
 }
 
 { #category : #converting }
 PhVBarGraph >> asBox [
 
-	| sliderBox |
+	| intermediateBox finalBox intcode |
 	BoxAPI uniqueInstance createLibContext.
-	sliderBox := BoxAPI uniqueInstance
-		             boxVBarGraph: self label  min: self min  max: self max. 
-	^ sliderBox
+	"sliderBox := BoxAPI uniqueInstance
+		             boxVBarGraphAux: self label
+		             min: self min
+		             max: self max
+		             input: self input asBox."
+	intcode := 'import("stdfaust.lib"); process = vbargraph("Output", -1 , 1);'.
+	intermediateBox  := BoxAPI uniqueInstance
+		             boxFromString: intcode
+		             inputs: self inputs
+		             outputs: self outputs
+		             buffer: self errorBuffer.
+	finalBox := self input connectTo: intermediateBox . 
+	^ finalBox
+]
+
+{ #category : #initialization }
+PhVBarGraph >> initialize [ 
+super initialize .
+self input: 1
+]
+
+{ #category : #accessing }
+PhVBarGraph >> input [
+
+	^ input
+]
+
+{ #category : #accessing }
+PhVBarGraph >> input: anInput [ 
+
+	input := anInput asBox
 ]
