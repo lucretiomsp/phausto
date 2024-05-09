@@ -7,10 +7,22 @@ Class {
 	#name : #UIGenerators,
 	#superclass : #Box,
 	#instVars : [
-		'label'
+		'label',
+		'min',
+		'max'
 	],
 	#category : #'Phausto-BoxAPI-UIPrimitives'
 }
+
+{ #category : #initialization }
+UIGenerators >> initialize [ 
+super initialize.
+	label := 'label'.
+	
+	min := 0.
+	max := 1.
+	
+]
 
 { #category : #accessing }
 UIGenerators >> label [
@@ -22,4 +34,27 @@ UIGenerators >> label [
 UIGenerators >> label: aString [
 
 	label := aString
+]
+
+{ #category : #accessing }
+UIGenerators >> max [
+
+	^ max
+]
+
+{ #category : #accessing }
+UIGenerators >> max: aNumber [
+
+	max := aNumber asBox
+]
+
+{ #category : #accessing }
+UIGenerators >> min [ 
+^ min
+]
+
+{ #category : #accessing }
+UIGenerators >> min: aNumber [
+
+	min := aNumber asBox
 ]

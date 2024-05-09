@@ -238,6 +238,15 @@ Sum binary operator, from CbobAddAuxFunxtion
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxVBarGraph: aLabel min: aMin max: aaMax [
+	"Create a horizontal bargraph box."
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( #Box * CboxVBargraph #( char * anInteger , Box * min , Box * max ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxWire [
 	"return the wire / identity box"
 

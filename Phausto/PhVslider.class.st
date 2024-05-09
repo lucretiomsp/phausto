@@ -3,8 +3,6 @@ Class {
 	#superclass : #UIGenerators,
 	#instVars : [
 		'init',
-		'min',
-		'max',
 		'step'
 	],
 	#category : #'Phausto-BoxAPI-UIPrimitives'

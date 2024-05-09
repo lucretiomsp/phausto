@@ -4,7 +4,7 @@ Alias-suppressed sawtooth oscillator, sawtooth is a standard Faust function.
 Class {
 	#name : #SawOsc,
 	#superclass : #Oscillators,
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-UnitGenerators'
 }
 
 { #category : #converting }

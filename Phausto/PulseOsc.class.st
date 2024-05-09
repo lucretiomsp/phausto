@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'duty'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-UnitGenerators'
 }
 
 { #category : #converting }

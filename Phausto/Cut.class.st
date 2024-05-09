@@ -1,7 +1,7 @@
 Class {
 	#name : #Cut,
 	#superclass : #Box,
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-UnitGenerators'
 }
 
 { #category : #arithmetic }

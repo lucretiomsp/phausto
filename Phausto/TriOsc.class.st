@@ -4,7 +4,7 @@ Alias-suppressed triangle wave oscillator. Based on os.triangle Faust standard f
 Class {
 	#name : #TriOsc,
 	#superclass : #Oscillators,
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-UnitGenerators'
 }
 
 { #category : #converting }

@@ -12,7 +12,7 @@ t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 Class {
 	#name : #AREnv,
 	#superclass : #Envelopes,
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-UnitGenerators'
 }
 
 { #category : #converting }
