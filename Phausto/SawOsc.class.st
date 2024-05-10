@@ -1,5 +1,9 @@
 "
 Alias-suppressed sawtooth oscillator, sawtooth is a standard Faust function.
+
+## Parameters:
+
+freq: frequency in Hz
 "
 Class {
 	#name : #SawOsc,

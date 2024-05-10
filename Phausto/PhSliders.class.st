@@ -17,7 +17,7 @@ PhSliders >> init [
 { #category : #accessing }
 PhSliders >> init: aNumber [
 
-	init := aNumber
+	init := aNumber asBox
 ]
 
 { #category : #initialization }
@@ -49,5 +49,5 @@ PhSliders >> step [
 { #category : #accessing }
 PhSliders >> step: aNumber [
 
-	step := aNumber
+	step := aNumber asBox
 ]

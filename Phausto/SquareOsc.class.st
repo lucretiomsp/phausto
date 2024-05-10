@@ -1,5 +1,8 @@
 "
 Alias-suppressed square wave oscillator. Based on the Square Faust standard function.
+## Parameters:
+
+freq: frequency in Hz
 "
 Class {
 	#name : #SquareOsc,

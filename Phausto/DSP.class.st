@@ -178,6 +178,24 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 ^ FaustDynamicEngine uniqueInstance  ffiCall:  #(float getParamMinDsp(DSP* self, int anIndex))]
 ]
 
+{ #category : #'as yet unclassified' }
+DSP >> getParamValue: aParamAsString [
+
+	| indexInteger |
+	indexInteger := self getParamIndex: aParamAsString.
+	self isNull
+		ifTrue: [ ^ self class invalidException ]
+		ifFalse: [ "ask the value for the parameter with the indexInteger"
+			^ self getParamValueIndex: indexInteger ]
+]
+
+{ #category : #'as yet unclassified' }
+DSP >> getParamValueIndex: anInteger [
+
+	^  FaustDynamicEngine uniqueInstance ffiCall:
+				  #( float getParamValueDsp #( DSP * self , int anInteger ) )
+]
+
 { #category : #initialize }
 DSP >> init [
 	"

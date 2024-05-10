@@ -20,13 +20,13 @@ PhVBarGraph >> asBox [
 		             min: self min
 		             max: self max
 		             input: self input asBox."
-	intcode := 'import("stdfaust.lib"); process = vbargraph("Output", -1 , 1);'.
-	intermediateBox  := BoxAPI uniqueInstance
-		             boxFromString: intcode
-		             inputs: self inputs
-		             outputs: self outputs
-		             buffer: self errorBuffer.
-	finalBox := self input connectTo: intermediateBox . 
+	intcode := 'import("stdfaust.lib"); process = vbargraph("' , self label , '", -1 , 1);'.
+	intermediateBox := BoxAPI uniqueInstance
+		                   boxFromString: intcode
+		                   inputs: self inputs
+		                   outputs: self outputs
+		                   buffer: self errorBuffer.
+	finalBox := self input connectTo: intermediateBox.
 	^ finalBox
 ]
 

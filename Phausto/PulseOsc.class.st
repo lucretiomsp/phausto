@@ -1,6 +1,10 @@
 "
 Alias-suppressed pulse train oscillator with a duty-cycle control. Based on pulsetrainN(2). Pulse comes from the Faust standard library.
 
+## Parameters:
+
+freq: frequency in Hz
+duty: duty cycle between 0 and 1
 
 "
 Class {

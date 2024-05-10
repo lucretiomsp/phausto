@@ -33,7 +33,7 @@ UIGenerators >> label [
 { #category : #accessing }
 UIGenerators >> label: aString [
 
-	label := aString
+	label := aString 
 ]
 
 { #category : #accessing }
