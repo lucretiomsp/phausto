@@ -24,5 +24,5 @@ self assert: dsp isNull equals: false.
 { #category : #tests }
 BoxTest >> testLibContextIsFalseAtStartup [
 
-	self assert: Box libContext equals: false
+	self assert: PhBox libContext equals: false
 ]

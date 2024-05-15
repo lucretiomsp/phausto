@@ -6,7 +6,7 @@ At each instant the value of the selector signal selector(t) is used to dynamica
 "
 Class {
 	#name : #Select2,
-	#superclass : #Box,
+	#superclass : #PhBox,
 	#instVars : [
 		'code',
 		'selector',

@@ -3,7 +3,7 @@ The vbargraph primitive implements a vertical bar-graph (typically a meter displ
 "
 Class {
 	#name : #PhVBarGraph,
-	#superclass : #UIGenerators,
+	#superclass : #UIPrimitive,
 	#instVars : [
 		'input'
 	],

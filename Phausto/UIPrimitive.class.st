@@ -4,8 +4,8 @@ Faust user interface widgets/primitives allow for an abstract description of a u
 Discrete and continuous elements are signal generators. For example, a button produces a signal which is 1 when the button is pressed and 0 otherwise:
 "
 Class {
-	#name : #UIGenerators,
-	#superclass : #Box,
+	#name : #UIPrimitive,
+	#superclass : #PhBox,
 	#instVars : [
 		'label',
 		'min',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : #initialization }
-UIGenerators >> initialize [ 
+UIPrimitive >> initialize [ 
 super initialize.
 	label := 'label'.
 	
@@ -25,36 +25,36 @@ super initialize.
 ]
 
 { #category : #accessing }
-UIGenerators >> label [
+UIPrimitive >> label [
 
 	^ label
 ]
 
 { #category : #accessing }
-UIGenerators >> label: aString [
+UIPrimitive >> label: aString [
 
 	label := aString 
 ]
 
 { #category : #accessing }
-UIGenerators >> max [
+UIPrimitive >> max [
 
 	^ max
 ]
 
 { #category : #accessing }
-UIGenerators >> max: aNumber [
+UIPrimitive >> max: aNumber [
 
 	max := aNumber asBox
 ]
 
 { #category : #accessing }
-UIGenerators >> min [ 
+UIPrimitive >> min [ 
 ^ min
 ]
 
 { #category : #accessing }
-UIGenerators >> min: aNumber [
+UIPrimitive >> min: aNumber [
 
 	min := aNumber asBox
 ]

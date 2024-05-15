@@ -3,7 +3,7 @@ Faust-Dynamic-Engine
 This Dynamic Engine uses Portaudio for audio and LibSndFile for wavefiles utilitities
 "
 Class {
-	#name : #FaustDynamicEngine,
+	#name : #PhaustoyDynamicEngine,
 	#superclass : #FFILibrary,
 	#classInstVars : [
 		'dsp',
@@ -13,36 +13,36 @@ Class {
 }
 
 { #category : #accessing }
-FaustDynamicEngine class >> dsp [
+PhaustoyDynamicEngine class >> dsp [
 
 	^ dsp
 ]
 
 { #category : #accessing }
-FaustDynamicEngine class >> dsp: anObject [
+PhaustoyDynamicEngine class >> dsp: anObject [
 
 	dsp := anObject
 ]
 
 { #category : #accessing }
-FaustDynamicEngine class >> dspPlaying [
+PhaustoyDynamicEngine class >> dspPlaying [
 
 	^ dspPlaying
 ]
 
 { #category : #accessing }
-FaustDynamicEngine class >> dspPlaying: aDSP [
+PhaustoyDynamicEngine class >> dspPlaying: aDSP [
 
 	dspPlaying := aDSP.
 ]
 
 { #category : #accessing }
-FaustDynamicEngine class >> ffiLibrary [
+PhaustoyDynamicEngine class >> ffiLibrary [
 	^ self class
 ]
 
 { #category : #'as yet unclassified' }
-FaustDynamicEngine >> createDsp: aFaustCode [
+PhaustoyDynamicEngine >> createDsp: aFaustCode [
 | myArgv |
 
 myArgv := ExternalAddress arrayOfStringsFrom: #('-I' 'librariesBundle/faustLibs') .
@@ -52,7 +52,7 @@ myArgv := ExternalAddress arrayOfStringsFrom: #('-I' 'librariesBundle/faustLibs'
 ]
 
 { #category : #'as yet unclassified' }
-FaustDynamicEngine >> createDsp: aFaustCode arguments: argv [
+PhaustoyDynamicEngine >> createDsp: aFaustCode arguments: argv [
 
   ^ self ffiCall: #(DSP* createDsp (const char* 'MyApp',  const char* aFaustCode,  int 2, void * argv  , const char* '', int -1))
 
@@ -60,7 +60,7 @@ FaustDynamicEngine >> createDsp: aFaustCode arguments: argv [
 ]
 
 { #category : #'as yet unclassified' }
-FaustDynamicEngine >> createDsp: aFaustCode arguments: argv customName: anAppName [
+PhaustoyDynamicEngine >> createDsp: aFaustCode arguments: argv customName: anAppName [
 
 	^ self ffiCall:
 		  #( DSP * createDsp #( const char * anAppName , const char * aFaustCode
@@ -68,7 +68,7 @@ FaustDynamicEngine >> createDsp: aFaustCode arguments: argv customName: anAppNam
 ]
 
 { #category : #'as yet unclassified' }
-FaustDynamicEngine >> createDsp: aFaustCode arguments: argv name: anAppName [
+PhaustoyDynamicEngine >> createDsp: aFaustCode arguments: argv name: anAppName [
 
 	^ self ffiCall:
 		  #( DSP * createDsp #( const char * anAppName , const char * aFaustCode
@@ -76,12 +76,12 @@ FaustDynamicEngine >> createDsp: aFaustCode arguments: argv name: anAppName [
 ]
 
 { #category : #'as yet unclassified' }
-FaustDynamicEngine >> createDsp: anAppName content: aFaustCode [ 
+PhaustoyDynamicEngine >> createDsp: anAppName content: aFaustCode [ 
 ^ self ffiCall: #(DSP* createDsp (const char* anAppName,  const char* aFaustCode,  int 0, NULL, const char* '', int -1))
 ]
 
 { #category : #'as yet unclassified' }
-FaustDynamicEngine >> createDsp: aFaustCode withName: aName [
+PhaustoyDynamicEngine >> createDsp: aFaustCode withName: aName [
 | myArgv |
 
 myArgv := ExternalAddress arrayOfStringsFrom: #('-I' 'librariesBundle/faustLibs') .
@@ -91,27 +91,27 @@ myArgv := ExternalAddress arrayOfStringsFrom: #('-I' 'librariesBundle/faustLibs'
 ]
 
 { #category : #'as yet unclassified' }
-FaustDynamicEngine >> createDspFromBoxes: aFaustBox [
+PhaustoyDynamicEngine >> createDspFromBoxes: aFaustBox [
 
 	^ self ffiCall:
-		  #( DSP * createDspFromBoxes #( const char * 'MyApp' , #Box * aFaustBox
+		  #( DSP * createDspFromBoxes #( const char * 'MyApp' , #PhBox * aFaustBox
 		        , int 0 , NULL , const char * '' , int -1 ) )
 ]
 
 { #category : #'accessing - defaults' }
-FaustDynamicEngine >> defaultName [
+PhaustoyDynamicEngine >> defaultName [
 	"if the name of the DSP is not explicitly declared, a default name is used"
 
 	^ '/MyApp/'
 ]
 
 { #category : #'as yet unclassified' }
-FaustDynamicEngine >> getLastError [
+PhaustoyDynamicEngine >> getLastError [
 ^ self ffiCall: #(String getLastError()) 
 ]
 
 { #category : #'as yet unclassified' }
-FaustDynamicEngine >> getNumInputsDsp: aDsp [
+PhaustoyDynamicEngine >> getNumInputsDsp: aDsp [
 "* @brief Get the number of input ports.
      *
      * @param dsp Pointer to the DSP object.
@@ -121,7 +121,7 @@ FaustDynamicEngine >> getNumInputsDsp: aDsp [
 ]
 
 { #category : #'accessing - platform' }
-FaustDynamicEngine >> macModuleName [
+PhaustoyDynamicEngine >> macModuleName [
 	"Returns the name of the Dynamic Engine library for Mac."
 	^ 'librariesBundle/libdynamic-engine.dylib'
 ]

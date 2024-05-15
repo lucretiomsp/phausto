@@ -1,6 +1,6 @@
 Class {
 	#name : #PhVslider,
-	#superclass : #UIGenerators,
+	#superclass : #UIPrimitive,
 	#instVars : [
 		'init',
 		'step'

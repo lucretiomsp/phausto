@@ -24,7 +24,7 @@ myDsp trig: 'drumGate'.
 "
 Class {
 	#name : #SamplePlayer,
-	#superclass : #Box,
+	#superclass : #PhBox,
 	#instVars : [
 		'pathToFile',
 		'numChannels',

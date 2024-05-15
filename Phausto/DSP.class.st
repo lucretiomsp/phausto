@@ -32,10 +32,10 @@ DSP class >> create: aStringWithFaustCode [
 	"create a new dsp from a string with valid Faust code"
 
 	| currentDsp |
-	currentDsp := FaustDynamicEngine uniqueInstance createDsp:
+	currentDsp := PhaustoyDynamicEngine uniqueInstance createDsp:
 		              aStringWithFaustCode.
 	currentDsp isNull ifTrue: [
-		self error: FaustDynamicEngine uniqueInstance getLastError ].
+		self error: PhaustoyDynamicEngine uniqueInstance getLastError ].
 	currentDsp name: 'MyApp' .
 
 	^ currentDsp
@@ -46,10 +46,10 @@ DSP class >> create: aStringWithFaustCode withName: aName [
 	"create a new dsp from a string with valid Faust code"
 
 	| currentDsp |
-	currentDsp := FaustDynamicEngine uniqueInstance createDsp:
+	currentDsp := PhaustoyDynamicEngine uniqueInstance createDsp:
 		              aStringWithFaustCode withName: aName.
 	currentDsp isNull ifTrue: [
-		self error: FaustDynamicEngine uniqueInstance getLastError ].
+		self error: PhaustoyDynamicEngine uniqueInstance getLastError ].
 	currentDsp name: aName .
 
 	^ currentDsp
@@ -70,13 +70,13 @@ defaultName := '/MyApp/'
 { #category : #'as yet unclassified' }
 DSP class >> invalidException [
 
-^ Error new signal: ('This DSP is not valid - check its creation'  , FaustDynamicEngine uniqueInstance getLastError )
+^ Error new signal: ('This DSP is not valid - check its creation'  , PhaustoyDynamicEngine uniqueInstance getLastError )
 ]
 
 { #category : #'as yet unclassified' }
 DSP class >> paramException [
 
-^ Error new signal: ('This parameter does not exist, check the DSP code'  , FaustDynamicEngine uniqueInstance getLastError )
+^ Error new signal: ('This parameter does not exist, check the DSP code'  , PhaustoyDynamicEngine uniqueInstance getLastError )
 ]
 
 { #category : #'as yet unclassified' }
@@ -84,7 +84,7 @@ DSP class >> uninitializedException [
 
 	^ Error new signal:
 		  'This DSP is not initialzed, so it cannot be destroyed'
-		  , FaustDynamicEngine uniqueInstance getLastError
+		  , PhaustoyDynamicEngine uniqueInstance getLastError
 ]
 
 { #category : #'ui-building' }
@@ -106,7 +106,7 @@ DSP >> destroy [
 	self isInitialized isNil
 		ifTrue: [ ^ self class invalidException ]
 		ifFalse: [
-			^ FaustDynamicEngine uniqueInstance ffiCall:
+			^ PhaustoyDynamicEngine uniqueInstance ffiCall:
 				  #( void destroyDsp #( DSP * self ) ) ]
 ]
 
@@ -114,33 +114,33 @@ DSP >> destroy [
 DSP >> getJSON [
 " Retrieve JSON description of the UI"
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall: #(const char* getJSONDsp (DSP* self))]
+^ PhaustoyDynamicEngine uniqueInstance  ffiCall: #(const char* getJSONDsp (DSP* self))]
 ]
 
 { #category : #'as yet unclassified' }
 DSP >> getNumInput [
 " Get the number of input ports."
-^ FaustDynamicEngine uniqueInstance ffiCall: #( int getNumInputsDsp(DSP* self))
+^ PhaustoyDynamicEngine uniqueInstance ffiCall: #( int getNumInputsDsp(DSP* self))
 ]
 
 { #category : #'as yet unclassified' }
 DSP >> getNumOutput [
 " Get the number of output ports."
-^ FaustDynamicEngine uniqueInstance ffiCall: #( int #getNumOutput(DSP* self))
+^ PhaustoyDynamicEngine uniqueInstance ffiCall: #( int #getNumOutput(DSP* self))
 ]
 
 { #category : #accessing }
 DSP >> getParamAddress: anIntegerAddress [ 
 
 self isNull ifTrue: [  self class invalidException  ] ifFalse: [  
-^ FaustDynamicEngine  uniqueInstance ffiCall: #( char* getParamAddressDsp(DSP* self, int anIntegerAddress ))]
+^ PhaustoyDynamicEngine  uniqueInstance ffiCall: #( char* getParamAddressDsp(DSP* self, int anIntegerAddress ))]
 ]
 
 { #category : #'as yet unclassified' }
 DSP >> getParamCount [
 "  Get the count of parameters in the DSP object"
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall: #(int getParamsCountDsp (DSP* self))]
+^ PhaustoyDynamicEngine uniqueInstance  ffiCall: #(int getParamsCountDsp (DSP* self))]
 ]
 
 { #category : #accessing }
@@ -159,7 +159,7 @@ DSP >> getParamIndexWithName: aString [.
 " get the index of the parameter with aString name"
 
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]
+^ PhaustoyDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]
 ]
 
 { #category : #'as yet unclassified' }
@@ -167,7 +167,7 @@ DSP >> getParamMax: anIndex [.
 " get the maximum of the parameter at anIndex"
 
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall:  #(float getParamMaxDsp(DSP* self, int anIndex))]
+^ PhaustoyDynamicEngine uniqueInstance  ffiCall:  #(float getParamMaxDsp(DSP* self, int anIndex))]
 ]
 
 { #category : #'as yet unclassified' }
@@ -175,7 +175,7 @@ DSP >> getParamMin: anIndex [.
 " get the minimum of the parameter at anIndex"
 
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall:  #(float getParamMinDsp(DSP* self, int anIndex))]
+^ PhaustoyDynamicEngine uniqueInstance  ffiCall:  #(float getParamMinDsp(DSP* self, int anIndex))]
 ]
 
 { #category : #'as yet unclassified' }
@@ -192,7 +192,7 @@ DSP >> getParamValue: aParamAsString [
 { #category : #'as yet unclassified' }
 DSP >> getParamValueIndex: anInteger [
 
-	^  FaustDynamicEngine uniqueInstance ffiCall:
+	^  PhaustoyDynamicEngine uniqueInstance ffiCall:
 				  #( float getParamValueDsp #( DSP * self , int anInteger ) )
 ]
 
@@ -211,16 +211,16 @@ DSP >> init [
 	" if the Faust code was compiled without errors, we can initialize the DSP"
 
 	RendererType initialize.
-	FaustDynamicEngine uniqueInstance getLastError = ''
+	PhaustoyDynamicEngine uniqueInstance getLastError = ''
 		ifFalse: [
-		^ Error new signal: FaustDynamicEngine uniqueInstance getLastError ]
+		^ Error new signal: PhaustoyDynamicEngine uniqueInstance getLastError ]
 		ifTrue: [
 			self isNull
 				ifTrue: [ ^ self class invalidException ]
 				ifFalse: [
 					'Sono inizializzato' traceCr .
 					self isInitialized: true.
-					^ FaustDynamicEngine uniqueInstance ffiCall:
+					^ PhaustoyDynamicEngine uniqueInstance ffiCall:
 						  #( bool initDsp #( DSP * self , RendererType 0 , int 44100
 						        , int 512 ) ) ] ]
 ]
@@ -266,7 +266,7 @@ DSP >> play [
 	"if only a DSP is meant to be used, this method do both initialization and start. in addition, it stop and destroy any dspPlaying to avoid crashes"
 
 	| activeDsp |
-	activeDsp := FaustDynamicEngine dspPlaying.
+	activeDsp := PhaustoyDynamicEngine dspPlaying.
 	activeDsp isInitialized 
 		ifNil: [
 			self init.
@@ -292,7 +292,7 @@ DSP >> setValue: aFloat parameterIndex: anInteger [
 .
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
 
-FaustDynamicEngine uniqueInstance  ffiCall:  #(void setParamValueDsp(DSP* self, int anInteger, float aFloat))]
+PhaustoyDynamicEngine uniqueInstance  ffiCall:  #(void setParamValueDsp(DSP* self, int anInteger, float aFloat))]
 ]
 
 { #category : #'ui-building' }
@@ -314,8 +314,8 @@ DSP >> start [
 	self isInitialized isNil
 		ifTrue: [ ^ self class uninitializedException  ]
 		ifFalse: [
-			FaustDynamicEngine dspPlaying: self.
-			^ FaustDynamicEngine uniqueInstance ffiCall:
+			PhaustoyDynamicEngine dspPlaying: self.
+			^ PhaustoyDynamicEngine uniqueInstance ffiCall:
 				  #( bool startDsp #( DSP * self ) ) ]
 ]
 
@@ -323,7 +323,7 @@ DSP >> start [
 DSP >> stop [
 " Stop processing audio."
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall: #(void stopDsp (DSP* self))]
+^ PhaustoyDynamicEngine uniqueInstance  ffiCall: #(void stopDsp (DSP* self))]
 ]
 
 { #category : #'as yet unclassified' }

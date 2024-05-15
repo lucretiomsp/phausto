@@ -1,6 +1,6 @@
 Class {
 	#name : #Cut,
-	#superclass : #Box,
+	#superclass : #PhBox,
 	#category : #'Phausto-UnitGenerators'
 }
 

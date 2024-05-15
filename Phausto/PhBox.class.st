@@ -5,7 +5,7 @@ All the UnitGenerators inherits from Box, as they need inputs, outputs, errorMes
 Phausto methods for combining and creating Boxes interface with calls to to methds of the BoxAPI, which in turns are FFI calls to Faust dynamic engine
 "
 Class {
-	#name : #Box,
+	#name : #PhBox,
 	#superclass : #FFIOpaqueObject,
 	#instVars : [
 		'errorBuffer',
@@ -20,7 +20,7 @@ Class {
 }
 
 { #category : #'class initialization' }
-Box class >> initialize [ 
+PhBox class >> initialize [ 
 
 libContext := false.
 
@@ -28,31 +28,31 @@ SessionManager default register: (ClassSessionHandler forClassNamed: self name)
 ]
 
 { #category : #accessing }
-Box class >> libContext [
+PhBox class >> libContext [
 
 ^ libContext 
 ]
 
 { #category : #accessing }
-Box class >> libContext: trueOrFalse [
+PhBox class >> libContext: trueOrFalse [
 
 libContext := trueOrFalse 
 ]
 
 { #category : #'system startup' }
-Box class >> startUp [
+PhBox class >> startUp [
 
 	libContext := false
 ]
 
 { #category : #'system startup' }
-Box class >> startUp: aBoolean [
+PhBox class >> startUp: aBoolean [
 	super startUp: aBoolean.
 	aBoolean ifTrue: [ libContext := false ]
 ]
 
 { #category : #arithmetic }
-Box >> % aUnitGenerator [
+PhBox >> % aUnitGenerator [
 	"modulo operator for  UnitGenerators"
 
 	"^ self boxModulo: self asBox with: aUnitGenerator asBox"
@@ -61,7 +61,7 @@ Box >> % aUnitGenerator [
 ]
 
 { #category : #arithmetic }
-Box >> * aUnitGeneratorOrANumber [
+PhBox >> * aUnitGeneratorOrANumber [
 	"multiply UnitGenerators"
    | box1 box2|
 box1 := self asBox .
@@ -70,41 +70,41 @@ box2 := aUnitGeneratorOrANumber asBox.
 ]
 
 { #category : #arithmetic }
-Box >> + aUnitGenerator [
+PhBox >> + aUnitGenerator [
 	"sumUnitGenerators"
 
 	^ self add: self asBox to: aUnitGenerator asBox
 ]
 
 { #category : #arithmetic }
-Box >> , aUnitGenerator [
+PhBox >> , aUnitGenerator [
 	"parallelComposition of UnitGenerators"
 
 ^ self par: self asBox with: aUnitGenerator asBox
 ]
 
 { #category : #arithmetic }
-Box >> - aUnitGenerator [
+PhBox >> - aUnitGenerator [
 	"sumUnitGenerators"
 
 	^ self subtract: self asBox from: aUnitGenerator asBox
 ]
 
 { #category : #arithmetic }
-Box >> add: aBox to: anotherBox [
+PhBox >> add: aBox to: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and sumy them"
 
 	^ BoxAPI uniqueInstance boxAdd: aBox with: anotherBox
 ]
 
 { #category : #converting }
-Box >> asBox [ 
+PhBox >> asBox [ 
 
 ^ self
 ]
 
 { #category : #converting }
-Box >> asDsp [
+PhBox >> asDsp [
 	" creates a DSP from the Box"
 
 	| finalDsp interBox |
@@ -113,9 +113,9 @@ Box >> asDsp [
 	interBox
 		ifNotNil: [
 			
-			finalDsp := FaustDynamicEngine uniqueInstance createDspFromBoxes:
+			finalDsp := PhaustoyDynamicEngine uniqueInstance createDspFromBoxes:
 				            self asBox.
-			FaustDynamicEngine dspPlaying: finalDsp.
+			PhaustoyDynamicEngine dspPlaying: finalDsp.
 			finalDsp name: 'MyApp'.
 			attachedDSP := finalDsp.
 			
@@ -126,26 +126,26 @@ Box >> asDsp [
 ]
 
 { #category : #accessing }
-Box >> attachedDSP [
+PhBox >> attachedDSP [
 
 	^ attachedDSP
 ]
 
 { #category : #accessing }
-Box >> attachedDSP: anObject [
+PhBox >> attachedDSP: anObject [
 
 	attachedDSP := anObject
 ]
 
 { #category : #arithmetic }
-Box >> boxMerge: aBox with: anotherBox [
+PhBox >> boxMerge: aBox with: anotherBox [
 	"merge Composition of boxes"
 
 	^ BoxAPI uniqueInstance boxMerge: aBox with: anotherBox
 ]
 
 { #category : #arithmetic }
-Box >> boxModulo: aBox with: anotherBox [
+PhBox >> boxModulo: aBox with: anotherBox [
 	"modulo operator of boxes"
 
 	
@@ -153,7 +153,7 @@ Box >> boxModulo: aBox with: anotherBox [
 ]
 
 { #category : #arithmetic }
-Box >> boxRecursive: aBox with: anotherBox [
+PhBox >> boxRecursive: aBox with: anotherBox [
 	"recursive omposition of boxes"
 
 	
@@ -161,7 +161,7 @@ Box >> boxRecursive: aBox with: anotherBox [
 ]
 
 { #category : #arithmetic }
-Box >> boxSplit: aBox to: anotherBox [
+PhBox >> boxSplit: aBox to: anotherBox [
 	"split omposition of boxes"
 
 	BoxAPI uniqueInstance createLibContext.
@@ -169,26 +169,26 @@ Box >> boxSplit: aBox to: anotherBox [
 ]
 
 { #category : #'public - line' }
-Box >> connectTo: aUnitGenerator [
+PhBox >> connectTo: aUnitGenerator [
 	" correspond to Faust sequential opeartor : "
 
 	^ BoxAPI uniqueInstance boxSeqFrom: self to: aUnitGenerator asBox
 ]
 
 { #category : #accessing }
-Box >> errorBuffer [
+PhBox >> errorBuffer [
 
 	^ errorBuffer
 ]
 
 { #category : #accessing }
-Box >> errorBuffer: anObject [
+PhBox >> errorBuffer: anObject [
 
 	errorBuffer := anObject
 ]
 
 { #category : #initialization }
-Box >> initialize [
+PhBox >> initialize [
 
 	| intPtr |
 	"just in case the libCOntext was not created - to avoid crashes"
@@ -205,26 +205,26 @@ Box >> initialize [
 ]
 
 { #category : #accessing }
-Box >> inputs [
+PhBox >> inputs [
 
 	^ inputs
 ]
 
 { #category : #accessing }
-Box >> inputs: anObject [
+PhBox >> inputs: anObject [
 
 	inputs := anObject
 ]
 
 { #category : #arithmetic }
-Box >> mergeWith: aUnitGenerator [
+PhBox >> mergeWith: aUnitGenerator [
 	"merge Composition of UnitGenerators"
 
 	^ self boxMerge:  self asBox with: aUnitGenerator asBox 
 ]
 
 { #category : #converting }
-Box >> midikey2hz [
+PhBox >> midikey2hz [
 " Converts a MIDI key number to a frequency in Hz (MIDI key 69 = A440). midikey2hz is a standard Faust function"
 
 | converter |
@@ -239,36 +239,36 @@ converter := BoxAPI uniqueInstance
 ]
 
 { #category : #arithmetic }
-Box >> multiply: aBox with: anotherBox [
+PhBox >> multiply: aBox with: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and multiply them"
 
 	^ BoxAPI uniqueInstance ffiCall:
-		  #( #Box * CboxMulAux #( #Box * aBox , #Box * anotherBox ) )
+		  #( #PhBox * CboxMulAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
 { #category : #accessing }
-Box >> outputs [
+PhBox >> outputs [
 
 	^ outputs
 ]
 
 { #category : #accessing }
-Box >> outputs: anObject [
+PhBox >> outputs: anObject [
 
 	outputs := anObject
 ]
 
 { #category : #arithmetic }
-Box >> par: aBox with: anotherBox [
+PhBox >> par: aBox with: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and compose them in parallel"
 
 	BoxAPI uniqueInstance createLibContext.
 	^ BoxAPI uniqueInstance ffiCall:
-		  #( #Box * CboxPar #( #Box * aBox , #Box * anotherBox ) )
+		  #( #PhBox * CboxPar #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
 { #category : #smoothing }
-Box >> smoo [
+PhBox >> smoo [
 	"Smoothing function based on smooth ideal to smooth UI signals (sliders, etc.) down. Approximately, this is a 7 Hz one-pole low-pass considering the coefficient calculation: exp(-2pi*CF/SR).
 
 smoo is a standard Faust function."
@@ -276,7 +276,7 @@ smoo is a standard Faust function."
 	| smoother smootherBox |
 	BoxAPI uniqueInstance createLibContext.
 
-	smootherBox := Box new.
+	smootherBox := PhBox new.
 	smoother := BoxAPI uniqueInstance
 		            boxFromString:
 		            'import("stdfaust.lib"); process = si.smoo;'
@@ -287,21 +287,21 @@ smoo is a standard Faust function."
 ]
 
 { #category : #arithmetic }
-Box >> splitTo: aUnitGenerator [
+PhBox >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
 
 	^ self boxSplit: self asBox to: aUnitGenerator asBox
 ]
 
 { #category : #arithmetic }
-Box >> subtract: aBox from: anotherBox [
+PhBox >> subtract: aBox from: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and sumy them"
 
 	^ BoxAPI uniqueInstance boxSubtract:  aBox from: anotherBox  
 ]
 
 { #category : #arithmetic }
-Box >> ~ aUnitGenerator [
+PhBox >> ~ aUnitGenerator [
 	"recursive composition of UnitGenerators"
 
 	"^ self boxRecursive: self with: aUnitGenerator"

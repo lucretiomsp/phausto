@@ -1,6 +1,6 @@
 Class {
 	#name : #PhHSlider,
-	#superclass : #PhSliders,
+	#superclass : #PhSlider,
 	#category : #'Phausto-BoxAPI-UIPrimitives'
 }
 

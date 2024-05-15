@@ -5,7 +5,7 @@ Also, smoothing time expressed in seconds - can be changed in real time
 "
 Class {
 	#name : #DelayMonoFB,
-	#superclass : #Box,
+	#superclass : #PhBox,
 	#instVars : [
 		'maxDelayTime',
 		'dryWet',

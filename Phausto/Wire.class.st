@@ -4,7 +4,7 @@ it does nothing else but transmit the data stream
 "
 Class {
 	#name : #Wire,
-	#superclass : #Box,
+	#superclass : #PhBox,
 	#category : #'Phausto-BoxAPI-Boxes'
 }
 

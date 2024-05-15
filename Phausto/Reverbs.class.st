@@ -3,6 +3,6 @@ A collection of Envelopes from the Faust envelopes.lib
 "
 Class {
 	#name : #Reverbs,
-	#superclass : #Box,
+	#superclass : #PhBox,
 	#category : #'Phausto-BoxAPI-Effects'
 }

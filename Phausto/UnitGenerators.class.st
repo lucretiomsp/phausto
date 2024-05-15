@@ -5,7 +5,7 @@ The process expression must be declared for all the different subclasses.
 "
 Class {
 	#name : #UnitGenerators,
-	#superclass : #Box,
+	#superclass : #PhBox,
 	#instVars : [
 		'importStatement',
 		'processExpression',

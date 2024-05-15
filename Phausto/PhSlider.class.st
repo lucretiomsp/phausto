@@ -1,6 +1,6 @@
 Class {
-	#name : #PhSliders,
-	#superclass : #UIGenerators,
+	#name : #PhSlider,
+	#superclass : #UIPrimitive,
 	#instVars : [
 		'init',
 		'step'
@@ -9,19 +9,19 @@ Class {
 }
 
 { #category : #accessing }
-PhSliders >> init [
+PhSlider >> init [
 
 	^ init
 ]
 
 { #category : #accessing }
-PhSliders >> init: aNumber [
+PhSlider >> init: aNumber [
 
 	init := aNumber asBox
 ]
 
 { #category : #initialization }
-PhSliders >> initialize [
+PhSlider >> initialize [
 
 	super initialize.
 
@@ -31,7 +31,7 @@ PhSliders >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-PhSliders >> label: aLabel init: initValue min: minValue max: maxValue step: stepValue [
+PhSlider >> label: aLabel init: initValue min: minValue max: maxValue step: stepValue [
 
 	label := aLabel.
 	init := initValue asBox.
@@ -41,13 +41,13 @@ PhSliders >> label: aLabel init: initValue min: minValue max: maxValue step: ste
 ]
 
 { #category : #accessing }
-PhSliders >> step [
+PhSlider >> step [
 
 	^ step
 ]
 
 { #category : #accessing }
-PhSliders >> step: aNumber [
+PhSlider >> step: aNumber [
 
 	step := aNumber asBox
 ]
