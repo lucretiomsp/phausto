@@ -278,6 +278,14 @@ DSP >> play [
 			]
 ]
 
+{ #category : #'as yet unclassified' }
+DSP >> playNote: aMidiNN prefix: aString for: aDuration [
+	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
+	
+dsp setValue:  aMidiNN midiNoteToFreq   parameter: aString , 'Note'.
+dsp trig: aString , 'Gate' for: aDuration  
+]
+
 { #category : #'API - changes' }
 DSP >> setValue: aFloat parameter: aParamAsString [
 "  set the value of the parameter named aParamAsString"
