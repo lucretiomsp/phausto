@@ -293,6 +293,16 @@ PhBox >> splitTo: aUnitGenerator [
 	^ self boxSplit: self asBox to: aUnitGenerator asBox
 ]
 
+{ #category : #'as yet unclassified' }
+PhBox >> stereo [
+	"return a stereo version of the box (connect to Left and Right outputs)"
+
+	| mono stereo |
+	mono := self asBox.
+	stereo := mono splitTo: Wire new asBox , Wire new asBox.
+	^ stereo
+]
+
 { #category : #arithmetic }
 PhBox >> subtract: aBox from: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and sumy them"
