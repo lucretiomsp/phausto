@@ -1,3 +1,6 @@
+"
+Two operator FM synthesiser with ADSR envelope. Index values in the range 0-100 .
+"
 Class {
 	#name : #Fm2Op,
 	#superclass : #PhBox,
@@ -9,7 +12,8 @@ Class {
 		'attack',
 		'decay',
 		'sustain',
-		'release'
+		'release',
+		'level'
 	],
 	#category : #'Phausto-ToolKit'
 }
@@ -24,9 +28,10 @@ Fm2Op >> asBox [
 		         sustain: self sustain;
 		         release: self release;
 		         trigger: self gate) asBox.
-	modulator := (SineOsc new freq: self modulatorPitch) * self index.
+	modulator := (SineOsc new freq: self modulatorPitch) * self index
+	             * 80 asBox.
 	carrier := SineOsc new freq: self pitch + modulator asBox.
-	^ carrier asBox * adsr asBox.
+	^ carrier asBox * adsr asBox * self level
 ]
 
 { #category : #accessing }
@@ -80,16 +85,30 @@ Fm2Op >> index: aNumber [
 ]
 
 { #category : #initialization }
-Fm2Op >> initialize [ 
-super initialize .
-self attack: 0.001.
-self decay: 0.2.
-self sustain: 0.5.
-self release: 0.1.
-self index: 1.
-self modulatorPitch: 220.
-self pitch: 440.
-self gate: 0.
+Fm2Op >> initialize [
+
+	super initialize.
+	self attack: 0.001.
+	self decay: 0.2.
+	self sustain: 0.5.
+	self release: 0.1.
+	self index: 1.
+	self modulatorPitch: 220.
+	self pitch: 440.
+	self gate: 0.
+	self level: 0.5
+]
+
+{ #category : #accessing }
+Fm2Op >> level [
+
+	^ level
+]
+
+{ #category : #accessing }
+Fm2Op >> level: aNumber [
+
+	level := aNumber asBox 
 ]
 
 { #category : #accessing }

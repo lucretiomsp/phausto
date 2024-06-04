@@ -25,5 +25,5 @@ SawOsc >> asBox [
 SawOsc >> initialize [
 
 	super initialize.
-	processExpression :=  'process = os.saw;'
+	processExpression := 'process = os.sawtooth;'
 ]
