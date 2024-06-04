@@ -20,7 +20,8 @@ Class {
 		'attack',
 		'decay',
 		'drive',
-		'gate'
+		'gate',
+		'note'
 	],
 	#category : #'Phausto-BoxAPI-Synths'
 }
@@ -30,8 +31,8 @@ Kick >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := pitch asBox , click asBox,  attack asBox , decay asBox , drive asBox, gate asBox
-		            connectTo: intermediateBox.
+	finalBox := pitch asBox , click asBox , attack asBox , decay asBox
+	            , drive asBox , gate asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -97,15 +98,27 @@ Kick >> gate: aTrigger [
 
 { #category : #initialization }
 Kick >> initialize [
-   
-   super initialize .
-self processExpression: 'process = sy.kick'.
-	self pitch: 50.
+
+	super initialize.
+	self processExpression: 'process = sy.kick;'.
+	self note: 50.
 	self click: 0.005s.
 	self attack: 0.005.
 	self decay: 0.315s.
 	self drive: 3.
 	self gate: 0
+]
+
+{ #category : #accessing }
+Kick >> note [
+
+	^ note
+]
+
+{ #category : #accessing }
+Kick >> note: aNoteNumber [
+
+	note := aNoteNumber asBox.
 ]
 
 { #category : #accessing }
