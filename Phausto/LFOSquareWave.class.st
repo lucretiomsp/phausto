@@ -7,6 +7,15 @@ Class {
 	#category : #'Phausto-UnitGenerators'
 }
 
+{ #category : #converting }
+LFOSquareWave >> asBox [
+
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	finalBox := freq asBox connectTo: intermediateBox.
+	^ finalBox * self amount asBox + self offset asBox
+]
+
 { #category : #initialization }
 LFOSquareWave >> initialize [
 

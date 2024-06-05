@@ -13,7 +13,7 @@ LFOTri >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 	finalBox := freq asBox connectTo: intermediateBox.
-	^ finalBox
+	^ finalBox * self amount asBox + self offset asBox
 ]
 
 { #category : #initialization }
