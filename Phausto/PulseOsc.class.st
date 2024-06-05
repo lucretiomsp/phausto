@@ -22,7 +22,7 @@ PulseOsc >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 	finalBox := freq , duty connectTo: intermediateBox.
-	^ finalBox
+	^ finalBox * self uLevel 
 ]
 
 { #category : #accessing }
@@ -43,5 +43,6 @@ PulseOsc >> initialize [
 
 	super initialize.
 	processExpression := 'process = os.pulsetrain;'.
-	duty := 0.5 asBox
+	duty := 0.5 asBox.
+	self uLevel: 0.5.
 ]
