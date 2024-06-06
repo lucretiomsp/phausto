@@ -7,17 +7,76 @@ lfoAMount controls the amount of LFO on Pitch.
 "
 Class {
 	#name : #PsgPlus,
-	#superclass : #PhBox,
+	#superclass : #TpSynth,
 	#instVars : [
-		'pitch',
-		'modulatorPitch',
-		'index',
-		'gate',
-		'attack',
-		'decay',
-		'sustain',
-		'release',
-		'level'
+		'lfoAmount',
+		'index'
 	],
 	#category : #'Phausto-ToolKit'
 }
+
+{ #category : #converting }
+PsgPlus >> asBox [
+
+	| adsr sqr saw tri noise pitchLfo selectorInputs synth ringModulator|
+	"lfo for Pitch"
+	pitchLfo := self pitch asBox
+	            +
+		            ((LFOSquareWavePos new freq:
+			              self pitch asBox * (1 / 48) asBox)
+		             * (self lfoAmount asBox * self pitch asBox)).
+		"ring modulator"
+		ringModulator := 1 asBox - ( SineOsc new freq: 242; uLevel: 0.3).
+
+	"Oscillators"
+	sqr := SquareOsc new freq: pitchLfo.
+	tri := TriOsc new freq: pitchLfo.
+	saw := SawOsc new freq: pitchLfo.
+	noise := ResonBp new
+		         input: (DownSampler new input: Noise new);
+		         frequency: pitchLfo;
+		         q: 4.
+
+	"Envelope"
+	adsr := (ADSREnv new
+		         attack: 0.01;
+		         decay: 0.2;
+		         sustain: 0.3;
+		         release: 0.2;
+		         trigger: self gate) asBox.
+	selectorInputs := self index asBox , sqr , saw , tri , noise.
+	synth := (selectorInputs connectTo: PhSelect4 new) * adsr asBox
+	         * self level * ringModulator .
+	^ synth
+]
+
+{ #category : #accessing }
+PsgPlus >> index [
+
+	^ index
+]
+
+{ #category : #accessing }
+PsgPlus >> index: anIndex [
+
+	index := anIndex asBox.
+]
+
+{ #category : #initialization }
+PsgPlus >> initialize [ 
+super initialize.
+self index: 0.
+self lfoAmount: 1
+]
+
+{ #category : #accessing }
+PsgPlus >> lfoAmount [
+
+	^ lfoAmount
+]
+
+{ #category : #accessing }
+PsgPlus >> lfoAmount: aNumber [
+
+	lfoAmount := aNumber asBox
+]
