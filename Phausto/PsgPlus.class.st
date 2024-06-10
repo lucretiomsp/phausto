@@ -18,15 +18,17 @@ Class {
 { #category : #converting }
 PsgPlus >> asBox [
 
-	| adsr sqr saw tri noise pitchLfo selectorInputs synth ringModulator|
+	| adsr sqr saw tri noise pitchLfo selectorInputs synth ringModulator |
 	"lfo for Pitch"
 	pitchLfo := self pitch asBox
 	            +
 		            ((LFOSquareWavePos new freq:
 			              self pitch asBox * (1 / 48) asBox)
 		             * (self lfoAmount asBox * self pitch asBox)).
-		"ring modulator"
-		ringModulator := 1 asBox - ( SineOsc new freq: 242; uLevel: 0.3).
+	"ring modulator"
+	ringModulator := 1 asBox - (SineOsc new
+		                  freq: 242;
+		                  uLevel: 0.3).
 
 	"Oscillators"
 	sqr := SquareOsc new freq: pitchLfo.
@@ -34,7 +36,7 @@ PsgPlus >> asBox [
 	saw := SawOsc new freq: pitchLfo.
 	noise := ResonBp new
 		         input: (DownSampler new input: Noise new);
-		         frequency: pitchLfo;
+		         frequency: pitchLfo asBox * 3 asBox;
 		         q: 4.
 
 	"Envelope"
@@ -46,7 +48,7 @@ PsgPlus >> asBox [
 		         trigger: self gate) asBox.
 	selectorInputs := self index asBox , sqr , saw , tri , noise.
 	synth := (selectorInputs connectTo: PhSelect4 new) * adsr asBox
-	         * self level * ringModulator .
+	         * self level * ringModulator.
 	^ synth
 ]
 

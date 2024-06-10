@@ -65,7 +65,7 @@ TpSynth >> initialize [
 		release: 0.1;
 		gate: 0.
 	self level: 0.5.
-	
+	self pitch: 440
 ]
 
 { #category : #accessing }
