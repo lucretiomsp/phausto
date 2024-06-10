@@ -14,9 +14,18 @@ Class {
 { #category : #converting }
 PhReaderWithSpeed >> asBox [
 
-	| sum |
-	sum := Wire new asBox + speed.
-	^ (Resetter new trigger: self trigger) ~ sum .
+	| sum resetter |
+	resetter := (Resetter new trigger: self trigger) asBox.
+	sum := Wire new asBox + self speed.
+	^ resetter ~ sum
+]
+
+{ #category : #initialization }
+PhReaderWithSpeed >> initialize [
+
+	super initialize.
+	self trigger: 0.
+	self speed: 1
 ]
 
 { #category : #accessing }
