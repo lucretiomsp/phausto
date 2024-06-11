@@ -11,7 +11,8 @@ Class {
 		'attack',
 		'decay',
 		'sustain',
-		'release'
+		'release',
+		'name'
 	],
 	#category : #'Phausto-ToolKit'
 }
@@ -58,6 +59,8 @@ TpSynth >> gate: aGate [
 TpSynth >> initialize [
 
 	super initialize.
+	"by default the name of the TpSynth is the name of the class"
+	self name: (self class asString withoutSuffix: ' class').
 	self
 		attack: 0.001;
 		decay: 0.2;
@@ -65,7 +68,7 @@ TpSynth >> initialize [
 		release: 0.1;
 		gate: 0.
 	self level: 0.5.
-	self pitch: 440
+	self pitch: (PhHSlider new label: self name , 'Note' init: 60 min: 0 max: 127 step: 0.1).
 ]
 
 { #category : #accessing }
@@ -78,6 +81,17 @@ TpSynth >> level [
 TpSynth >> level: aNumber [
 
 	level := aNumber asBox 
+]
+
+{ #category : #accessing }
+TpSynth >> name [ 
+^ name
+]
+
+{ #category : #accessing }
+TpSynth >> name: aName [
+
+	name := aName
 ]
 
 { #category : #accessing }

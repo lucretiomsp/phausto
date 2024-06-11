@@ -8,8 +8,8 @@ PhVslider new label:  self init: 0.5  min: 0.0  max: 1.0  step: 0.001
 ]
 
 { #category : #'*Phausto' }
-String >> betweenQuotes [
+String >> surroundedByQuotes [
+	" return the string surrounde by quotes, to use a path for soundfile based DSP"
 
-" return the string surrounde by quotes, to use a path for soundfile based DSP"
-	^ '''' , self , ''''
+	^ self surroundedBy: ''''
 ]
