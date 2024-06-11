@@ -104,9 +104,30 @@ Kick >> initialize [
 	self note: 50.
 	self click: 0.005s.
 	self attack: 0.005.
-	self decay: 0.315s.
-	self drive: 3.
-	self gate: 0
+	self decay: (PhHSlider new
+			 label: self name , 'Decay'
+			 init: 0
+			 min: 0
+			 max: 1
+			 step: 1).
+	self drive: (PhHSlider new
+			 label: self name , 'Gate'
+			 init: 0.314
+			 min: 0.001
+			 max: 2
+			 step: 0.001).
+	self gate: (PhHSlider new
+			 label: self name , 'Gate'
+			 init: 0
+			 min: 0
+			 max: 1
+			 step: 1).
+	self note: (PhHSlider new
+			 label: self name , 'Note'
+			 init: 60
+			 min: 0
+			 max: 128
+			 step: 0.1)
 ]
 
 { #category : #accessing }
