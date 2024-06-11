@@ -6,7 +6,6 @@ Class {
 		'numChannels',
 		'part',
 		'readIndex',
-		'name',
 		'debugPath',
 		'attachedBox'
 	],
