@@ -63,11 +63,16 @@ Clap >> gate: aBoxorAFloat [
 Clap >> initialize [
 
 	super initialize.
-	processExpression  := 'process = sy.clap;'.
+	processExpression := 'process = sy.clap;'.
 	tone := 1200.
 	attack := 0.
 	decay := 3.
-	gate := 0
+	gate := (PhHSlider new
+			 label: self name , 'Gate'
+			 init: 0
+			 min: 0
+			 max: 1
+			 step: 1)
 ]
 
 { #category : #accessing }

@@ -31,9 +31,9 @@ Fm2Op >> asBox [
 Fm2Op >> initialize [
 
 	super initialize.
-		self index: 1.
+	self index: 1.
 	self modulatorPitch: 220.
-	self pitch: 440.
+
 ]
 
 { #category : #accessing }

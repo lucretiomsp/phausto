@@ -1,5 +1,6 @@
 "
 Kick drum synthesis via a pitched sine sweep.
+Incoming MIDI NoteNumber are lowered by two octaves, so 60 plays a low kick.
 
 Where:
 
@@ -31,8 +32,9 @@ Kick >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := pitch asBox , click asBox , attack asBox , decay asBox
-	            , drive asBox , gate asBox connectTo: intermediateBox.
+	finalBox := self pitch asBox * 0.25 asBox , self click asBox , self attack asBox
+	            , self decay asBox , self drive asBox , self gate asBox
+		            connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -111,7 +113,7 @@ Kick >> initialize [
 			 max: 1
 			 step: 1).
 	self drive: (PhHSlider new
-			 label: self name , 'Gate'
+			 label: self name , 'Drive'
 			 init: 0.314
 			 min: 0.001
 			 max: 2
@@ -122,7 +124,7 @@ Kick >> initialize [
 			 min: 0
 			 max: 1
 			 step: 1).
-	self note: (PhHSlider new
+	self pitch: (PhHSlider new
 			 label: self name , 'Note'
 			 init: 60
 			 min: 0

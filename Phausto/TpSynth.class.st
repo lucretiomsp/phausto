@@ -66,9 +66,19 @@ TpSynth >> initialize [
 		decay: 0.2;
 		sustain: 0.5;
 		release: 0.1;
-		gate: 0.
+		gate: (PhHSlider new
+				 label: self name , 'Gate'
+				 init: 0
+				 min: 0
+				 max: 1
+				 step: 1).
 	self level: 0.5.
-	self pitch: (PhHSlider new label: self name , 'Note' init: 60 min: 0 max: 127 step: 0.1).
+	self pitch: (PhHSlider new
+			 label: self name , 'Note'
+			 init: 440
+			 min: 10
+			 max: 4000
+			 step: 0.1)
 ]
 
 { #category : #accessing }

@@ -53,11 +53,22 @@ Chordy >> cutoff: aFrequency [
 ]
 
 { #category : #initialization }
-Chordy >> initialize [ 
-super initialize.
+Chordy >> initialize [
 
-self mode: 0.
-self cutoff: 10
+	super initialize.
+
+	self mode: (PhHSlider new
+			 label: self name , 'Mode'
+			 init: 0
+			 min: 0
+			 max: 3
+			 step: 1).
+	self cutoff: (PhHSlider new
+			 label: self name , 'Cutoff'
+			 init: 10
+			 min: 10
+			 max: 100
+			 step: 1)
 ]
 
 { #category : #accessing }
