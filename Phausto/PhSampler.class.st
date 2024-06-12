@@ -38,12 +38,11 @@ PhSampler >> asBox [
 	filesURL := filePathPrefix , allFilesPathsWithoutLastColumn
 	            , filePathSuffix.
 
-	allFilesPathsWithoutLastColumn traceCr.
-	filesURL traceCr.
+
 
 	reader := PhReaderWithSpeed new
 		          trigger: self gate;
-		          speed: 1 asBox. "self pitch / 261.625 asBox"
+		          speed: self pitch / 261.625 asBox.
 	sp := BoxAPI uniqueInstance
 		      boxSoundFile: filesURL
 		      numChannels: 2 asBox
@@ -103,7 +102,13 @@ PhSampler >> initialize [
 			 init: 0
 			 min: 0
 			 max: 16
-			 step: 1)
+			 step: 1).
+	self pitch: (PhHSlider new
+			 label: self name , 'Note'
+			 init: 261.625
+			 min: 10
+			 max: 4000
+			 step: 0.1)
 ]
 
 { #category : #accessing }
