@@ -1,5 +1,7 @@
 "
-I am a (Multi) Sample Player. Load a folder containing only .wav files with pathToFolder. Select the file number with the index: parameter (an Integer bewteen 0 and 255)
+I am a (Multi) Sample Player. Load a folder containing only .wav files with pathToFolder. Select the file number with the index: parameter (an Integer bewteen 0 and 255).
+
+I can be chromatically played using MIDI NOte Numbers, where 60 plays at my defualt speed 
 "
 Class {
 	#name : #PhSampler,
@@ -19,7 +21,7 @@ Class {
 { #category : #converting }
 PhSampler >> asBox [
 
-	| allFiles allFilePaths fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler |
+	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler |
 	allFiles := pathToFolder asFileReference allChildren.
 
 	fileNames := (2 to: allFiles size) collect: [ :i |
@@ -27,11 +29,21 @@ PhSampler >> asBox [
 			             surroundedByQuotes ].
 
 	allFilePaths := ''.
-	filePathPrefix := '"' , self name , ', [url:{'''.
+	fileNames do: [ :i | allFilePaths := allFilePaths , i , ';' ].
+	filePathPrefix := '"son[url:{'.
 	filePathSuffix := '}]"'.
-	fileNames do: [ :i | allFilePaths := allFilePaths , i , ' ; ' ].
-	filesURL := filePathPrefix , allFilePaths , filePathSuffix.
-	reader := PhReaderWithSpeed new trigger: self gate; speed: self pitch / 261.625 asBox .
+	allFilesPathsWithoutLastColumn := allFilePaths
+		                                  copyFrom: 1
+		                                  to: allFilePaths size - 1.
+	filesURL := filePathPrefix , allFilesPathsWithoutLastColumn
+	            , filePathSuffix.
+
+	allFilesPathsWithoutLastColumn traceCr.
+	filesURL traceCr.
+
+	reader := PhReaderWithSpeed new
+		          trigger: self gate;
+		          speed: 1 asBox. "self pitch / 261.625 asBox"
 	sp := BoxAPI uniqueInstance
 		      boxSoundFile: filesURL
 		      numChannels: 2 asBox
