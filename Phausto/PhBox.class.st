@@ -63,10 +63,11 @@ PhBox >> % aUnitGenerator [
 { #category : #arithmetic }
 PhBox >> * aUnitGeneratorOrANumber [
 	"multiply UnitGenerators"
-   | box1 box2|
-box1 := self asBox .
-box2 := aUnitGeneratorOrANumber asBox.
-	^ self multiply: box1 with: box2
+
+	| box1 box2 |
+	box1 := self asBox.
+	box2 := aUnitGeneratorOrANumber asBox.
+	^ BoxAPI uniqueInstance  multiply: box1 with: box2
 ]
 
 { #category : #arithmetic }
@@ -88,6 +89,16 @@ PhBox >> - aUnitGenerator [
 	"sumUnitGenerators"
 
 	^ self subtract: self asBox from: aUnitGenerator asBox
+]
+
+{ #category : #arithmetic }
+PhBox >> / aUnitGeneratorOrANumber [
+	"multiply UnitGenerators"
+
+	| box1 box2 |
+	box1 := self asBox.
+	box2 := aUnitGeneratorOrANumber asBox.
+	^ BoxAPI uniqueInstance divide: box1 by: box2
 ]
 
 { #category : #arithmetic }
@@ -236,14 +247,6 @@ converter := BoxAPI uniqueInstance
 		       outputs: self outputs
 		       buffer: self errorBuffer.
 ^ self asBox connectTo: converter.
-]
-
-{ #category : #arithmetic }
-PhBox >> multiply: aBox with: anotherBox [
-	"convenience method to auto convert UnitGenerators into boxes and multiply them"
-
-	^ BoxAPI uniqueInstance ffiCall:
-		  #( #PhBox * CboxMulAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
 { #category : #accessing }

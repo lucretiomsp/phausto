@@ -297,6 +297,14 @@ BoxAPI >> destroyLibContextFFI [
 	
 ]
 
+{ #category : #arithmetic }
+BoxAPI >> divide: aBox by: anotherBox [
+	"convenience method to auto convert UnitGenerators into boxes and multiply them"
+
+	^ BoxAPI uniqueInstance ffiCall:
+		  #( #PhBox * CboxDivAux #( #PhBox * aBox , #PhBox * anotherBox ) )
+]
+
 { #category : #testing }
 BoxAPI >> isNil: aBox [
 
@@ -308,4 +316,12 @@ BoxAPI >> macModuleName [
 	"Returns the name of the dynamic libFaust for Mac."
 
 	^ 'librariesBundle/libfaust.2.dylib'
+]
+
+{ #category : #arithmetic }
+BoxAPI >> multiply: aBox with: anotherBox [
+	"convenience method to auto convert UnitGenerators into boxes and multiply them"
+
+	^ BoxAPI uniqueInstance ffiCall:
+		  #( #PhBox * CboxMulAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]

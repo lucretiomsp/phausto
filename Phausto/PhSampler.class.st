@@ -1,10 +1,14 @@
+"
+I am a (Multi) Sample Player. Load a folder containing only .wav files with pathToFolder. Select the file number with the index: parameter (an Integer bewteen 0 and 255)
+"
 Class {
 	#name : #PhSampler,
 	#superclass : #TpSynth,
 	#instVars : [
 		'pathToFile',
+		'pathToFolder',
 		'numChannels',
-		'part',
+		'index',
 		'readIndex',
 		'debugPath',
 		'attachedBox'
@@ -15,17 +19,23 @@ Class {
 { #category : #converting }
 PhSampler >> asBox [
 
-	| fileLocation fileNames filesURL filePathPrefix filePathSuffix filePath reader sp output sampler |
-	"please "
-	fileLocation := '/Users/domenicocipriani/Documents/MoofLodSamples'.
-	filePathPrefix := '"son[url:{'.
-	filePathSuffix := ' }]"'.
-	filePath := filePathPrefix , filePathSuffix.
-	reader := PhReaderWithSpeed new trigger: self gate.
+	| allFiles allFilePaths fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler |
+	allFiles := pathToFolder asFileReference allChildren.
+
+	fileNames := (2 to: allFiles size) collect: [ :i |
+		             (allFiles at: i) asAbsolute pathString
+			             surroundedByQuotes ].
+
+	allFilePaths := ''.
+	filePathPrefix := '"' , self name , ', [url:{'''.
+	filePathSuffix := '}]"'.
+	fileNames do: [ :i | allFilePaths := allFilePaths , i , ' ; ' ].
+	filesURL := filePathPrefix , allFilePaths , filePathSuffix.
+	reader := PhReaderWithSpeed new trigger: self gate; speed: self pitch / 261.625 asBox .
 	sp := BoxAPI uniqueInstance
-		      boxSoundFile: filePath
+		      boxSoundFile: filesURL
 		      numChannels: 2 asBox
-		      part: self part asBox
+		      part: self index asBox
 		      readIndex: reader asBox.
 
 	output := Cut new asBox , Cut new asBox , Wire new asBox
@@ -58,12 +68,26 @@ PhSampler >> debugPath: anObject [
 	debugPath := anObject
 ]
 
+{ #category : #accessing }
+PhSampler >> index [
+
+	^ index
+]
+
+{ #category : #accessing }
+PhSampler >> index: aSampleIndex [
+
+	index := aSampleIndex asBox
+]
+
 { #category : #initialization }
 PhSampler >> initialize [
 
 	super initialize.
-	self part: (PhHSlider new
-			 label: self name , 'Gate'
+	self pathToFolder:
+		FileLocator documents asAbsolute pathString , '/MoofLodSamples'.
+	self index: (PhHSlider new
+			 label: self name , 'Index'
 			 init: 0
 			 min: 0
 			 max: 16
@@ -95,18 +119,6 @@ PhSampler >> numChannels: aNumOfChannels [
 ]
 
 { #category : #accessing }
-PhSampler >> part [
-
-	^ part
-]
-
-{ #category : #accessing }
-PhSampler >> part: aPartNumber [
-
-	part := aPartNumber asBox
-]
-
-{ #category : #accessing }
 PhSampler >> pathToFile [
 
 	^ pathToFile
@@ -116,6 +128,18 @@ PhSampler >> pathToFile [
 PhSampler >> pathToFile: aString [
 
 	pathToFile := aString 
+]
+
+{ #category : #accessing }
+PhSampler >> pathToFolder [
+
+	^ pathToFolder 
+]
+
+{ #category : #accessing }
+PhSampler >> pathToFolder: aString [
+
+	pathToFolder := aString
 ]
 
 { #category : #accessing }

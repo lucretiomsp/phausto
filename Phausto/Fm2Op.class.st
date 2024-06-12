@@ -21,7 +21,7 @@ Fm2Op >> asBox [
 		         sustain: self sustain;
 		         release: self release;
 		         trigger: self gate) asBox.
-	modulator := (SineOsc new freq: self modulatorPitch) * self index
+	modulator := (SineOsc new freq: self modulatorPitch) * self modIndex
 	             * 80 asBox.
 	carrier := SineOsc new freq: self pitch + modulator asBox.
 	^ carrier asBox * adsr asBox * self level
@@ -31,9 +31,18 @@ Fm2Op >> asBox [
 Fm2Op >> initialize [
 
 	super initialize.
-	self index: 1.
-	self modulatorPitch: 220.
-
+	self modIndex: (PhHSlider new
+			 label: self name , 'ModIndex'
+			 init: 1
+			 min: 0
+			 max: 1
+			 step: 0.1).
+	self modulatorPitch: (PhHSlider new
+			 label: self name , 'ModPitch'
+			 init: 220
+			 min: 1
+			 max: 999
+			 step: 1)
 ]
 
 { #category : #accessing }
