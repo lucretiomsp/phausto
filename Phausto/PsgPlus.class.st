@@ -67,7 +67,8 @@ PsgPlus >> initialize [
 			 init: 0
 			 min: 0
 			 max: 10
-			 step: 0.001)
+			 step: 0.001).
+			self level: 0.3 "level is sofwtare than TpSynth default"
 ]
 
 { #category : #accessing }

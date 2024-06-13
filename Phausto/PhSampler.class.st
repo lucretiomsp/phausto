@@ -1,7 +1,10 @@
 "
 I am a (Multi) Sample Player. Load a folder containing only .wav files with pathToFolder. Select the file number with the index: parameter (an Integer bewteen 0 and 255).
+All sample files int he folder must have the same number of channels (i.e. all must be moro or stereo).
 
-I can be chromatically played using MIDI NOte Numbers, where 60 plays at my defualt speed 
+I can be chromatically played using MIDI NOte Numbers, where 60 plays at my defualt speed.
+
+PhSampler (at the moment) is always mono even if files are stereo. You need to send it the stereo message to make it stereo. 
 "
 Class {
 	#name : #PhSampler,
@@ -49,7 +52,7 @@ PhSampler >> asBox [
 		      part: self index asBox
 		      readIndex: reader asBox.
 
-	output := Cut new asBox , Cut new asBox , Wire new asBox
+	output := Cut new asBox , Cut new asBox , Cut new asBox
 	          , Wire new asBox.
 	sampler := sp connectTo: output asBox.
 	^ sampler asBox

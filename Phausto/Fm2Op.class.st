@@ -34,7 +34,7 @@ Fm2Op >> initialize [
 	self modIndex: (PhHSlider new
 			 label: self name , 'ModIndex'
 			 init: 1
-			 min: 0
+			 min: 0.5
 			 max: 1
 			 step: 0.1).
 	self modulatorPitch: (PhHSlider new
