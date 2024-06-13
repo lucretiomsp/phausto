@@ -24,7 +24,7 @@ Chordy >> asBox [
 		        trigger: self gate) asBox.
 	"filter"
 	filterFreq := (self cutoff * 127 asBox * env asBox + 100 asBox) smoo.
-	filter := ResonBp new frequency: 200.
+	filter := ResonBp new frequency: filterFreq .
 
 	"for the selection of modes the interval is expresed in ratio"
 	selectorInputs := self mode asBox , 1.189 asBox , 1.259 asBox
