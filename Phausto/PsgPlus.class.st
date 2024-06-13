@@ -46,7 +46,7 @@ PsgPlus >> asBox [
 		         sustain: 0.3;
 		         release: 0.2;
 		         trigger: self gate) asBox.
-	selectorInputs := self index asBox , sqr , saw , tri , noise.
+	selectorInputs := self modIndex asBox , sqr , saw , tri , noise.
 	synth := (selectorInputs connectTo: PhSelect4 new) * adsr asBox
 	         * self level * ringModulator.
 	^ synth
@@ -56,18 +56,18 @@ PsgPlus >> asBox [
 PsgPlus >> initialize [
 
 	super initialize.
-	self modIndex:  (PhHSlider new
+	self modIndex: (PhHSlider new
 			 label: self name , 'ModIndex'
-			 init: 10
-			 min: 10
-			 max: 100
+			 init: 0
+			 min: 0
+			 max: 3
 			 step: 1).
 	self lfoAmount: (PhHSlider new
 			 label: self name , 'LfoAmount'
-			 init: 10
-			 min: 10
-			 max: 100
-			 step: 1)
+			 init: 0
+			 min: 0
+			 max: 10
+			 step: 0.001)
 ]
 
 { #category : #accessing }
