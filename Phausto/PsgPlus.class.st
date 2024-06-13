@@ -10,7 +10,7 @@ Class {
 	#superclass : #TpSynth,
 	#instVars : [
 		'lfoAmount',
-		'index'
+		'modIndex'
 	],
 	#category : #'Phausto-ToolKit'
 }
@@ -52,23 +52,22 @@ PsgPlus >> asBox [
 	^ synth
 ]
 
-{ #category : #accessing }
-PsgPlus >> index [
-
-	^ index
-]
-
-{ #category : #accessing }
-PsgPlus >> index: anIndex [
-
-	index := anIndex asBox.
-]
-
 { #category : #initialization }
-PsgPlus >> initialize [ 
-super initialize.
-self index: 0.
-self lfoAmount: 1
+PsgPlus >> initialize [
+
+	super initialize.
+	self modIndex:  (PhHSlider new
+			 label: self name , 'ModIndex'
+			 init: 10
+			 min: 10
+			 max: 100
+			 step: 1).
+	self lfoAmount: (PhHSlider new
+			 label: self name , 'LfoAmount'
+			 init: 10
+			 min: 10
+			 max: 100
+			 step: 1)
 ]
 
 { #category : #accessing }
@@ -81,4 +80,16 @@ PsgPlus >> lfoAmount [
 PsgPlus >> lfoAmount: aNumber [
 
 	lfoAmount := aNumber asBox
+]
+
+{ #category : #accessing }
+PsgPlus >> modIndex [
+
+	^ modIndex
+]
+
+{ #category : #accessing }
+PsgPlus >> modIndex: aModIndex [
+
+	modIndex := aModIndex asBox
 ]
