@@ -10,7 +10,7 @@ Class {
 	#superclass : #TpSynth,
 	#instVars : [
 		'lfoAmount',
-		'modIndex'
+		'index'
 	],
 	#category : #'Phausto-ToolKit'
 }
@@ -46,18 +46,30 @@ PsgPlus >> asBox [
 		         sustain: 0.3;
 		         release: 0.2;
 		         trigger: self gate) asBox.
-	selectorInputs := self modIndex asBox , sqr , saw , tri , noise.
+	selectorInputs := self index asBox , sqr , saw , tri , noise.
 	synth := (selectorInputs connectTo: PhSelect4 new) * adsr asBox
 	         * self level * ringModulator.
 	^ synth
+]
+
+{ #category : #accessing }
+PsgPlus >> index [
+
+	^ index
+]
+
+{ #category : #accessing }
+PsgPlus >> index: anIndex [
+
+	index := anIndex asBox
 ]
 
 { #category : #initialization }
 PsgPlus >> initialize [
 
 	super initialize.
-	self modIndex: (PhHSlider new
-			 label: self name , 'ModIndex'
+	self index: (PhHSlider new
+			 label: self name , 'Index'
 			 init: 0
 			 min: 0
 			 max: 3
@@ -68,7 +80,7 @@ PsgPlus >> initialize [
 			 min: 0
 			 max: 10
 			 step: 0.001).
-			self level: 0.3 "level is sofwtare than TpSynth default"
+	self level: 0.3 "level is sofwtare than TpSynth default"
 ]
 
 { #category : #accessing }
@@ -81,16 +93,4 @@ PsgPlus >> lfoAmount [
 PsgPlus >> lfoAmount: aNumber [
 
 	lfoAmount := aNumber asBox
-]
-
-{ #category : #accessing }
-PsgPlus >> modIndex [
-
-	^ modIndex
-]
-
-{ #category : #accessing }
-PsgPlus >> modIndex: aModIndex [
-
-	modIndex := aModIndex asBox
 ]

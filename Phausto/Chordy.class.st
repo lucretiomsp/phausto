@@ -68,7 +68,8 @@ Chordy >> initialize [
 			 init: 10
 			 min: 10
 			 max: 100
-			 step: 1)
+			 step: 1).
+			self level: 0.7
 ]
 
 { #category : #accessing }
