@@ -14,6 +14,18 @@ Class {
 	#category : #'Phausto-BoxAPI-Filters'
 }
 
+{ #category : #converting }
+ResonatorFilter >> asBox [
+
+	| intermdiateBox finalBox |
+	intermdiateBox := super asBox.
+
+	finalBox := self frequency , self q , self gain , self input
+		            connectTo: intermdiateBox.
+
+	^ finalBox
+]
+
 { #category : #accessing }
 ResonatorFilter >> frequency [
 
