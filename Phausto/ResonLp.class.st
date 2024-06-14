@@ -8,3 +8,10 @@ Class {
 	#superclass : #ResonatorFilter,
 	#category : #'Phausto-BoxAPI-Filters'
 }
+
+{ #category : #initialization }
+ResonLp >> initialize [
+
+	super initialize.
+	processExpression := 'process = fi.resonlp;'
+]
