@@ -334,6 +334,43 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 ^ PhaustoyDynamicEngine uniqueInstance  ffiCall: #(void stopDsp (DSP* self))]
 ]
 
+{ #category : #'API - changes' }
+DSP >> sweepToValue: aTargetValue parameter: aParamAsString in: aTimeInseconds [
+	"  sweep the value of the selected parameter in a TimeInSeconds - the value is update every 10 milliseconds"
+
+	| startValue currentValue range timeInDeciSec step numberOfSteps stepDelay incrementingProcess decrementingProcess |
+	startValue := self getParamValue: aParamAsString.
+	range := (startValue max: aTargetValue)
+	         - (startValue min: aTargetValue).
+	timeInDeciSec := aTimeInseconds * 10.
+	step := range / timeInDeciSec.
+	stepDelay := Delay forSeconds: 0.1.
+	numberOfSteps := timeInDeciSec.
+	currentValue := startValue.
+	decrementingProcess := [
+	                       numberOfSteps timesRepeat: [
+		                       currentValue := currentValue - step.
+		                       self
+			                       setValue: currentValue
+			                       parameter: aParamAsString.
+		                       stepDelay wait ] ].
+	incrementingProcess := incrementingProcess := [
+	                                              numberOfSteps
+		                                              timesRepeat: [
+			                                              currentValue := currentValue
+			                                                              +
+			                                                              step.
+			                                              self
+				                                              setValue:
+				                                              currentValue
+				                                              parameter:
+				                                              aParamAsString.
+			                                              stepDelay wait ] ].
+	startValue < aTargetValue
+		ifTrue: [ incrementingProcess fork ]
+		ifFalse: [ decrementingProcess fork ]
+]
+
 { #category : #'as yet unclassified' }
 DSP >> traceAllParams [
 	"show in transcript alla vailable parameters for this DSP"
