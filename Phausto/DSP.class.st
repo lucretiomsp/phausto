@@ -282,8 +282,8 @@ DSP >> play [
 DSP >> playNote: aMidiNN prefix: aString dur: aDuration [
 	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
 	
-dsp setValue:  aMidiNN midiNoteToFreq   parameter: aString , 'Note'.
-dsp trig: aString , 'Gate' for: aDuration  
+self setValue:  aMidiNN midiNoteToFreq   parameter: aString , 'Note'.
+self trig: aString , 'Gate' for: aDuration  
 ]
 
 { #category : #'API - changes' }
