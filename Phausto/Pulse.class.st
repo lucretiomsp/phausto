@@ -13,11 +13,11 @@ Class {
 { #category : #converting }
 Pulse >> asBox [
 
-	| intermediateBox lengthInSamples periodInSamples finalBox |
+	| intermediateBox periodInSamples finalBox |
 	intermediateBox := super asBox.
 
 	periodInSamples := (Sec2Samples new value: period) asBox.
-	finalBox := lengthInSamples , periodInSamples connectTo:
+	finalBox := periodInSamples connectTo:
 		            intermediateBox.
 	^ finalBox
 ]
