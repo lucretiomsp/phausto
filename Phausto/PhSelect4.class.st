@@ -1,3 +1,6 @@
+"
+Select between 4 inputs, starts counting at 0
+"
 Class {
 	#name : #PhSelect4,
 	#superclass : #PhBox,
