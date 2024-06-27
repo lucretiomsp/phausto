@@ -14,7 +14,7 @@ Class {
 		'release',
 		'name'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : #'Phausto-TurboPhausto'
 }
 
 { #category : #accessing }

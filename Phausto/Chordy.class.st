@@ -8,7 +8,7 @@ Class {
 		'mode',
 		'cutoff'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : #'Phausto-TurboPhausto'
 }
 
 { #category : #converting }

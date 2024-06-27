@@ -8,7 +8,7 @@ Class {
 		'modulatorPitch',
 		'modIndex'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : #'Phausto-TurboPhausto'
 }
 
 { #category : #converting }
@@ -22,7 +22,7 @@ Fm2Op >> asBox [
 		         release: self release;
 		         trigger: self gate) asBox.
 	modulator := (SineOsc new freq: self modulatorPitch) * self modIndex
-	             * 80 asBox.
+	             * 4000 asBox.
 	carrier := SineOsc new freq: self pitch + modulator asBox.
 	^ carrier asBox * adsr asBox * self level
 ]
