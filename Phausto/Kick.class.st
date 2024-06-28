@@ -104,19 +104,19 @@ Kick >> initialize [
 	super initialize.
 	self processExpression: 'process = sy.kick;'.
 	self note: 50.
-	self click: 0.005s.
+	self click: 0.116.
 	self attack: 0.005.
 	self decay: (PhHSlider new
 			 label: self name , 'Decay'
-			 init: 0
-			 min: 0
-			 max: 1
-			 step: 1).
+			 init: 2
+			 min: 0.1
+			 max: 2
+			 step: 0.01).
 	self drive: (PhHSlider new
 			 label: self name , 'Drive'
-			 init: 0.314
-			 min: 0.001
-			 max: 2
+			 init: 1
+			 min: 1
+			 max: 5
 			 step: 0.001).
 	self gate: (PhHSlider new
 			 label: self name , 'Gate'
@@ -129,7 +129,8 @@ Kick >> initialize [
 			 init: 60
 			 min: 0
 			 max: 128
-			 step: 0.1)
+			 step: 0.1).
+			self uLevel: 0.4.
 ]
 
 { #category : #accessing }

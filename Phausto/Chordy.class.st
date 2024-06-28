@@ -23,8 +23,9 @@ Chordy >> asBox [
 		        release: self release;
 		        trigger: self gate) asBox.
 	"filter"
-	filterFreq := (self cutoff * 127 asBox * env asBox + 100 asBox) smoo.
-	filter := ResonBp new frequency: filterFreq .
+	filterFreq := (self cutoff * 100 asBox * env asBox + 100 asBox) smoo.
+	
+	filter := ResonLp new frequency: filterFreq.
 
 	"for the selection of modes the interval is expresed in ratio"
 	selectorInputs := self mode asBox , 1.189 asBox , 1.259 asBox
@@ -35,7 +36,7 @@ Chordy >> asBox [
 	voice1 := (SawOsc new freq: self pitch) * 0.3.
 
 	voice2 := (SawOsc new freq: self pitch * secondInterval asBox) * 0.3.
-	" a perfect fifth as a 1.6 ratio to the root"
+	" a perfect fifth as a  End of statement expected ->1.6 ratio to the root"
 	voice3 := (SawOsc new freq: self pitch * 1.5 asBox) * 0.3.
 	^ (filter input: voice1 + voice2 + voice3) * env asBox * level asBox
 ]
@@ -69,7 +70,8 @@ Chordy >> initialize [
 			 min: 10
 			 max: 100
 			 step: 1).
-			self level: 0.7
+			self sustain: 0.9.
+	self level: 0.9
 ]
 
 { #category : #accessing }
