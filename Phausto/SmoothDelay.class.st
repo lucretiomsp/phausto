@@ -16,8 +16,9 @@ SmoothDelay >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self maxDelayLength asBox , self delayLength asBox, self interpolationTime asBox
-	            , self input asBox connectTo: intermediateBox.
+	finalBox := self maxDelayLength asBox , self interpolationTime asBox
+	            , self delayLength asBox , self input asBox
+		            connectTo: intermediateBox.
 	^ finalBox
 ]
 
