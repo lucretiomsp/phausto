@@ -49,7 +49,7 @@ PsgPlus >> asBox [
 	selectorInputs := self index asBox , sqr , saw , tri , noise.
 	synth := (selectorInputs connectTo: PhSelect4 new) * adsr asBox
 	         * self level * ringModulator.
-	^ synth
+	^ synth * self level
 ]
 
 { #category : #accessing }

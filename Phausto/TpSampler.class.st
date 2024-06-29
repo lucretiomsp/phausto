@@ -55,7 +55,7 @@ TpSampler >> asBox [
 	output := Cut new asBox , Cut new asBox , Cut new asBox
 	          , Wire new asBox.
 	sampler := sp connectTo: output asBox.
-	^ sampler asBox
+	^ sampler asBox * self level
 ]
 
 { #category : #accessing }
