@@ -7,7 +7,7 @@ I can be chromatically played using MIDI NOte Numbers, where 60 plays at my defu
 PhSampler (at the moment) is always mono even if files are stereo. You need to send it the stereo message to make it stereo. 
 "
 Class {
-	#name : #PhSampler,
+	#name : #TpSampler,
 	#superclass : #TpSynth,
 	#instVars : [
 		'pathToFile',
@@ -22,7 +22,7 @@ Class {
 }
 
 { #category : #converting }
-PhSampler >> asBox [
+TpSampler >> asBox [
 
 	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler |
 	allFiles := pathToFolder asFileReference allChildren.
@@ -59,43 +59,43 @@ PhSampler >> asBox [
 ]
 
 { #category : #accessing }
-PhSampler >> attachedBox [
+TpSampler >> attachedBox [
 
 	^ attachedBox
 ]
 
 { #category : #accessing }
-PhSampler >> attachedBox: anObject [
+TpSampler >> attachedBox: anObject [
 
 	attachedBox := anObject
 ]
 
 { #category : #accessing }
-PhSampler >> debugPath [
+TpSampler >> debugPath [
 
 	^ debugPath
 ]
 
 { #category : #accessing }
-PhSampler >> debugPath: anObject [
+TpSampler >> debugPath: anObject [
 
 	debugPath := anObject
 ]
 
 { #category : #accessing }
-PhSampler >> index [
+TpSampler >> index [
 
 	^ index
 ]
 
 { #category : #accessing }
-PhSampler >> index: aSampleIndex [
+TpSampler >> index: aSampleIndex [
 
 	index := aSampleIndex asBox
 ]
 
 { #category : #initialization }
-PhSampler >> initialize [
+TpSampler >> initialize [
 
 	super initialize.
 	self pathToFolder:
@@ -115,61 +115,61 @@ PhSampler >> initialize [
 ]
 
 { #category : #accessing }
-PhSampler >> name [
+TpSampler >> name [
 
 	^ name
 ]
 
 { #category : #accessing }
-PhSampler >> name: aString [
+TpSampler >> name: aString [
 
 	name := aString
 ]
 
 { #category : #accessing }
-PhSampler >> numChannels [
+TpSampler >> numChannels [
 
 	^ numChannels
 ]
 
 { #category : #accessing }
-PhSampler >> numChannels: aNumOfChannels [
+TpSampler >> numChannels: aNumOfChannels [
 
 	numChannels := aNumOfChannels asBox
 ]
 
 { #category : #accessing }
-PhSampler >> pathToFile [
+TpSampler >> pathToFile [
 
 	^ pathToFile
 ]
 
 { #category : #accessing }
-PhSampler >> pathToFile: aString [
+TpSampler >> pathToFile: aString [
 
 	pathToFile := aString 
 ]
 
 { #category : #accessing }
-PhSampler >> pathToFolder [
+TpSampler >> pathToFolder [
 
 	^ pathToFolder 
 ]
 
 { #category : #accessing }
-PhSampler >> pathToFolder: aString [
+TpSampler >> pathToFolder: aString [
 
 	pathToFolder := aString
 ]
 
 { #category : #accessing }
-PhSampler >> readIndex [
+TpSampler >> readIndex [
 
 	^ readIndex
 ]
 
 { #category : #accessing }
-PhSampler >> readIndex: aReadIndex [
+TpSampler >> readIndex: aReadIndex [
 
 	readIndex := aReadIndex asBox
 ]
