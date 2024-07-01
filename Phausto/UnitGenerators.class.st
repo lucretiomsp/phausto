@@ -81,10 +81,11 @@ UnitGenerators >> label: aString [
 
 { #category : #'as yet unclassified' }
 UnitGenerators >> patchInto: aBox [
-	"patch the Box to another Box, if possible as in Modular synthesisers"
-	aBox patchedWith: self
+	"patch the Box to another Box, if possible as in Modular synthesisers. Returns aBox, the result of the connection"
 
-	
+	aBox patchedWith: self.
+
+	^ aBox
 ]
 
 { #category : #'as yet unclassified' }

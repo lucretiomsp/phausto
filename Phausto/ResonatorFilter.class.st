@@ -67,7 +67,7 @@ ResonatorFilter >> initialize [
 			 max: 1
 			 step: 0.01).
 	self gain: 1.
-	self input: Wire new.
+	self input: 0.
 ]
 
 { #category : #accessing }
@@ -80,6 +80,12 @@ ResonatorFilter >> input [
 ResonatorFilter >> input: anInput [
 "audio input"
 	input := anInput asBox
+]
+
+{ #category : #'accessing - input' }
+ResonatorFilter >> patchedWith: anInput [
+
+self input: anInput
 ]
 
 { #category : #accessing }
