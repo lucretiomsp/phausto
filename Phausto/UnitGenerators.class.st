@@ -79,6 +79,22 @@ UnitGenerators >> label: aString [
 	label := aString
 ]
 
+{ #category : #'as yet unclassified' }
+UnitGenerators >> patchInto: aBox [
+	"patch the Box to another Box, if possible as in Modular synthesisers"
+	aBox patchedWith: self
+
+	
+]
+
+{ #category : #'as yet unclassified' }
+UnitGenerators >> patchedWith: aBox [
+
+	^ Error new signal:
+		  'You cannnot connect a' , aBox className asString , ' with a '
+		  , self className asString
+]
+
 { #category : #accessing }
 UnitGenerators >> processExpression [
 
