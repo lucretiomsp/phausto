@@ -173,6 +173,12 @@ GreyHole >> modFreq: aFloatOrABoxBetweenZeroAndTen [
 
 ]
 
+{ #category : #'accessing - input' }
+GreyHole >> patchedWith: aUnitGenerator [
+self inputL: aUnitGenerator .
+self inputR: aUnitGenerator 
+]
+
 { #category : #accessing }
 GreyHole >> size [
 

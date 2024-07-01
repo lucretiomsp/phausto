@@ -22,3 +22,9 @@ SatRev >> asBox [
 
 	^ box
 ]
+
+{ #category : #'accessing - input' }
+SatRev >> patchedWith: aUnitGenerator [
+
+aUnitGenerator connectTo: self
+]

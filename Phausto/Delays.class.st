@@ -59,3 +59,9 @@ Delays >> maxDelayLength: aFloatOrABox [
 
 	maxDelayLength := aFloatOrABox asBox
 ]
+
+{ #category : #'as yet unclassified' }
+Delays >> patchedWith: aUnitGenerator [
+
+self input: aUnitGenerator 
+]

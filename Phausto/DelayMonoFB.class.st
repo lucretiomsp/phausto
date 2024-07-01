@@ -113,3 +113,9 @@ DelayMonoFB >> maxDelayTime: aMaxDelayTimeInSeconds [
 
 	maxDelayTime := aMaxDelayTimeInSeconds asBox
 ]
+
+{ #category : #accessing }
+DelayMonoFB >> patchedWith: aUnitGenerator [
+
+self input: aUnitGenerator 
+]

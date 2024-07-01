@@ -1,3 +1,6 @@
+"
+Use the Cut object to cut a signal (stop it!) 
+"
 Class {
 	#name : #Cut,
 	#superclass : #PhBox,
