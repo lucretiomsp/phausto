@@ -18,7 +18,7 @@ SawOsc >> asBox [
 	
 	intermediateBox := super asBox .
 	finalBox := freq asBox connectTo: intermediateBox .
-^ finalBox
+^ finalBox * uLevel
 ]
 
 { #category : #initialization }

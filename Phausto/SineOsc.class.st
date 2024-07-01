@@ -17,7 +17,7 @@ SineOsc >> asBox [
 	intermediateBox := super asBox.
 	freqBox := freq asBox.
 	finalBox := freqBox  connectTo: intermediateBox.
-	^ finalBox
+	^ finalBox * uLevel
 ]
 
 { #category : #initialization }

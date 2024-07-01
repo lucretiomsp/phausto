@@ -16,7 +16,7 @@ SquareOsc >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 	finalBox := freq connectTo: intermediateBox.
-	^ finalBox
+	^ finalBox * uLevel
 ]
 
 { #category : #initialization }
