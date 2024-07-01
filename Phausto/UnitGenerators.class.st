@@ -63,6 +63,7 @@ UnitGenerators >> initialize [
 
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
+	self label: self className asString.
 	self uLevel: 1
 ]
 
