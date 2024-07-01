@@ -34,7 +34,7 @@ LowFrequencyOscillators >> initialize [
 	self uLevel: 1.
 	self amount: 1.
 	self offset: 0.
-	self freq: 2
+	self freq: (PhHSlider new label: self label , 'Freq' init: 2  min: 0.01  max: 20  step: 0.001).
 
 	"as LFO are used for modulation, there default level is set to 1"
 ]

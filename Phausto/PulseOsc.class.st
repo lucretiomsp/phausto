@@ -43,6 +43,6 @@ PulseOsc >> initialize [
 
 	super initialize.
 	processExpression := 'process = os.pulsetrain;'.
-	duty := 0.5 asBox.
+	duty := (PhHSlider new label: self label , 'Duty' init: 0.5  min: 0  max: 1  step: 0.001).
 	self uLevel: 0.5.
 ]
