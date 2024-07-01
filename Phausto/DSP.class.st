@@ -279,6 +279,14 @@ DSP >> name: aString [
 	name := aString
 ]
 
+{ #category : #'as yet unclassified' }
+DSP >> openSliderFor: aString [ 
+	| fader |
+	
+fader := self sliderFor: aString.
+fader openInWindow.
+]
+
 { #category : #playing }
 DSP >> play [
 	"if only a DSP is meant to be used, this method do both initialization and start. in addition, it stop and destroy any dspPlaying to avoid crashes"

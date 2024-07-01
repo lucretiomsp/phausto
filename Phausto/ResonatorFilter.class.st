@@ -54,11 +54,20 @@ ResonatorFilter >> gain: aNumberOrABox [
 ResonatorFilter >> initialize [
 
 	super initialize.
-	self frequency: 900.
-	self q: 1.
+	self frequency: (PhHSlider new
+			 label: self label , 'Frequency'
+			 init: 900
+			 min: 20
+			 max: 18000
+			 step: 1).
+	self q: (PhHSlider new
+			 label: self label , 'Q'
+			 init: 1
+			 min: 0.1
+			 max: 1
+			 step: 0.01).
 	self gain: 1.
-	self input: 0
-	
+	self input: Wire new.
 ]
 
 { #category : #accessing }
