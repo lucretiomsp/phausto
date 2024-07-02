@@ -249,24 +249,6 @@ note := (self getParamIndexWithName: aSynthName , 'Note') ~= -1.
 
 ]
 
-{ #category : #'ui-building' }
-DSP >> knobFor: aString [
-	" creates a new slider for the parameter named aString"
-
-	| index |
-	index := self getParamIndex: aString.
-	"the parameter must exist!!"
-	index = -1
-		ifTrue: [
-			^ Error new signal:
-				  'Parameter named ' , aString , ' does not exist!!' ]
-		ifFalse: [
-			^ ICKnob new
-				  minValue: (self getParamMin: index);
-				  maxValue: (self getParamMax: index);
-				  callBack: [ :i | self setValue: i parameter: aString ] ]
-]
-
 { #category : #accessing }
 DSP >> name [
 
@@ -345,25 +327,6 @@ index := self getParamIndex: aString.
 (index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , aString , ' does not exist!!' ] ifFalse: [^ PhGUISlider   newWithIndex: index forDSP: self  ]
 
 
-]
-
-{ #category : #'ui-building' }
-DSP >> sliderICFor: aString [
-	" creates a new slider for the parameter named aString"
-
-	| index |
-	index := self getParamIndex: aString.
-	"the parameter must exist!!"
-	index = -1
-		ifTrue: [
-			^ Error new signal:
-				  'Parameter named ' , aString , ' does not exist!!' ]
-		ifFalse: [
-			^ ICSlider new
-				  minValue: (self getParamMin: index);
-				  maxValue: (self getParamMax: index);
-				  callBack: [ :i |
-					  self setValue: i parameter: aString] ]
 ]
 
 { #category : #'as yet unclassified' }
