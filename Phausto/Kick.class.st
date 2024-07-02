@@ -107,7 +107,7 @@ Kick >> initialize [
 	self click: 0.116.
 	self attack: 0.005.
 	self decay: (PhHSlider new
-			 label: self name , 'Decay'
+			 label: self label , 'Decay'
 			 init: 2
 			 min: 0.1
 			 max: 2
@@ -130,7 +130,7 @@ Kick >> initialize [
 			 min: 0
 			 max: 128
 			 step: 0.1).
-			self uLevel: 0.4.
+	self uLevel: 0.4
 ]
 
 { #category : #accessing }

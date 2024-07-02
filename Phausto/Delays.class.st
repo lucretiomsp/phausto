@@ -32,7 +32,12 @@ Delays >> initialize [
 
 	super initialize.
 	self maxDelayLength: 44100. "by default, maximum delay length is 1 second at 44100 Hz sample rate"
-	self delayLength: 4410.
+	self delayLength: (PhHSlider new
+			 label: self label , 'Length'
+			 init: 20050
+			 min: 1
+			 max: 44100
+			 step: 1).
 	input := Wire new
 ]
 

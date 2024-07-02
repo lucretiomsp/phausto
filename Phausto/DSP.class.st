@@ -314,10 +314,16 @@ self trig: aString , 'Gate' for: aDuration
 
 { #category : #'API - changes' }
 DSP >> setValue: aFloat parameter: aParamAsString [
-"  set the value of the parameter named aParamAsString"
+	"  set the value of the parameter named aParamAsString"
 
-| indexInteger |
-self isNull ifTrue: [^ self class invalidException] ifFalse: [ indexInteger := self getParamIndex: aParamAsString . self setValue: aFloat parameterIndex: indexInteger]
+	| indexInteger |
+	self isNull
+		ifTrue: [ ^ self class invalidException ]
+		ifFalse: [
+			indexInteger := self getParamIndex: aParamAsString.
+			indexInteger ~= -1
+				ifTrue: [ self setValue: aFloat parameterIndex: indexInteger ]
+				ifFalse: [ ^ self class invalidException   ] ]
 ]
 
 { #category : #'API - changes' }
