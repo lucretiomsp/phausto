@@ -85,7 +85,7 @@ UnitGenerators >> mono [
 
 	| mono stereo |
 	stereo := self asBox.
-	stereo := mono mergeTo: Wire new asBox , Wire new asBox.
+	mono := stereo mergeWith: Wire new asBox.
 	^ stereo
 ]
 
