@@ -11,6 +11,16 @@ Class {
 	#category : #'Phausto-BoxAPI-Basics'
 }
 
+{ #category : #converting }
+SampleAndHold >> asBox [
+
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	finalBox := self trig , self input connectTo: intermediateBox.
+
+	^ finalBox
+]
+
 { #category : #initialization }
 SampleAndHold >> initialize [
 

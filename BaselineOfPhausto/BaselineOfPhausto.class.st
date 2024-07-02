@@ -8,5 +8,8 @@ Class {
 BaselineOfPhausto >> baseline: spec [
 
 	<baseline>
-	 spec package: 'Phausto' 
+	spec for: #common do: [  
+	spec package: 'Phausto' .
+	spec group: 'default' with: #('Phausto')
+	]
 ]

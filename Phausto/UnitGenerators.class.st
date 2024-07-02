@@ -18,6 +18,14 @@ Class {
 	#category : #'Phausto-UnitGenerators'
 }
 
+{ #category : #connecting }
+UnitGenerators >> => aUnitGenerator [
+	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
+
+^ (self chuckInto: aUnitGenerator )
+	
+]
+
 { #category : #converting }
 UnitGenerators >> asBox [
 
@@ -29,6 +37,15 @@ UnitGenerators >> asBox [
 		       outputs: self outputs
 		       buffer: self errorBuffer.
 	^ box * self uLevel 
+]
+
+{ #category : #connecting }
+UnitGenerators >> chuckInto: aBox [
+	"patch the Unit Generator to an another Unit Generator, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
+
+	aBox patchedWith: self.
+
+	^ aBox
 ]
 
 { #category : #accessing }
@@ -79,7 +96,7 @@ UnitGenerators >> label: aString [
 	label := aString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #converting }
 UnitGenerators >> mono [
 	"return a mono version of the box (just one output)"
 
@@ -89,16 +106,7 @@ UnitGenerators >> mono [
 	^ stereo
 ]
 
-{ #category : #'as yet unclassified' }
-UnitGenerators >> patchInto: aBox [
-	"patch the Box to another Box, if possible as in Modular synthesisers. Returns aBox, the result of the connection"
-
-	aBox patchedWith: self.
-
-	^ aBox
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #connecting }
 UnitGenerators >> patchedWith: aBox [
 
 	^ Error new signal:
@@ -118,7 +126,7 @@ UnitGenerators >> processExpression: anObject [
 	processExpression := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #converting }
 UnitGenerators >> stereo [
 
 "return a stereo version of the box (connect to Left and Right outputs)"
