@@ -55,3 +55,8 @@ AutoWah >> level: aLevel [
 
 	level := aLevel asBox
 ]
+
+{ #category : #'as yet unclassified' }
+AutoWah >> patchedWith: aBox [
+self input: aBox
+]

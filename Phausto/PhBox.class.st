@@ -149,13 +149,6 @@ PhBox >> attachedDSP: anObject [
 ]
 
 { #category : #arithmetic }
-PhBox >> boxMerge: aBox with: anotherBox [
-	"merge Composition of boxes"
-
-	^ BoxAPI uniqueInstance boxMerge: aBox with: anotherBox
-]
-
-{ #category : #arithmetic }
 PhBox >> boxModulo: aBox with: anotherBox [
 	"modulo operator of boxes"
 
@@ -228,10 +221,10 @@ PhBox >> inputs: anObject [
 ]
 
 { #category : #arithmetic }
-PhBox >> mergeWith: aUnitGenerator [
-	"merge Composition of UnitGenerators"
+PhBox >> mergeWith: anotherBox [
+	"merge Composition of boxes"
 
-	^ self boxMerge:  self asBox with: aUnitGenerator asBox 
+	^ BoxAPI uniqueInstance boxMerge: self with: anotherBox
 ]
 
 { #category : #converting }

@@ -80,6 +80,16 @@ UnitGenerators >> label: aString [
 ]
 
 { #category : #'as yet unclassified' }
+UnitGenerators >> mono [
+	"return a mono version of the box (just one output)"
+
+	| mono stereo |
+	stereo := self asBox.
+	stereo := mono mergeTo: Wire new asBox , Wire new asBox.
+	^ stereo
+]
+
+{ #category : #'as yet unclassified' }
 UnitGenerators >> patchInto: aBox [
 	"patch the Box to another Box, if possible as in Modular synthesisers. Returns aBox, the result of the connection"
 
