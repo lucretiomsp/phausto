@@ -53,26 +53,26 @@ Djembe >> initialize [
 	super initialize.
 	processExpression := 'process = pm.djembe;'.
 	self freq: (PhHSlider new
-			 label: 'Freq'
+			 label: self label , 'Freq'
 			 init: 440
 			 min: 20
 			 max: 1200
 			 step: 1).
 	self strikePosition: (PhHSlider new
-			 label: 'StrikePos'
+			 label: self label ,'StrikePos'
 			 init: 0.5
 			 min: 0
 			 max: 1
 			 step: 0.001).
-	self strikeSharpness:  (PhHSlider new
-			 label: 'StrikeSharp'
+	self strikeSharpness: (PhHSlider new
+			 label: self label,  'StrikeSharp'
 			 init: 0.5
 			 min: 0
 			 max: 1
-			 step: 0.001)..
+			 step: 0.001).
 	self gain: 0.5.
 	self trigger: (PhHSlider new
-			 label: 'Gate'
+			 label:  self label ,'Gate'
 			 init: 0
 			 min: 0
 			 max: 1
