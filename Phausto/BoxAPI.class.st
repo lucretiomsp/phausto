@@ -147,6 +147,13 @@ self createLibContext .
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxPrint: aBox [
+
+	self ffiCall:
+		#( char * CprintBox #( PhBox * aBox , bool true , int 99999 ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxReal: aDouble [
 	"return the float/double box"
 self createLibContext.
