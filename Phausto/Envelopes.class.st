@@ -33,9 +33,24 @@ Envelopes >> attack: anObject [
 Envelopes >> initialize [
 
 	super initialize.
-	attack := 0.001 .
-	release := 0.2 .
-	trigger := 0 
+	attack := PhHSlider new
+		          label: self label , 'Attack'
+		          init: 0.001
+		          min: 0.001
+		          max: 2
+		          step: 1.
+	release := PhHSlider new
+		          label: self label , 'Attack'
+		          init: 0.001
+		          min: 0.001
+		          max: 2
+		          step: 1.
+	trigger := PhHSlider new
+		           label: self label , 'Release'
+		           init: 0.2
+		           min: 0
+		           max: 3
+		           step: 0.001
 ]
 
 { #category : #connecting }
