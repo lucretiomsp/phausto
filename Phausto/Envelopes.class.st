@@ -38,6 +38,12 @@ Envelopes >> initialize [
 	trigger := 0 
 ]
 
+{ #category : #connecting }
+Envelopes >> patchedWith: aUnitGenerator [
+
+aUnitGenerator asBox * self asBox.
+]
+
 { #category : #accessing }
 Envelopes >> release [
 

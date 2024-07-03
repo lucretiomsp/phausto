@@ -113,19 +113,19 @@ Kick >> initialize [
 			 max: 2
 			 step: 0.01).
 	self drive: (PhHSlider new
-			 label: self name , 'Drive'
+			 label: self label , 'Drive'
 			 init: 1
 			 min: 1
 			 max: 5
 			 step: 0.001).
 	self gate: (PhHSlider new
-			 label: self name , 'Gate'
+			 label: self label , 'Gate'
 			 init: 0
 			 min: 0
 			 max: 1
 			 step: 1).
 	self pitch: (PhHSlider new
-			 label: self name , 'Note'
+			 label: self label , 'Note'
 			 init: 60
 			 min: 0
 			 max: 128
