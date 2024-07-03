@@ -110,13 +110,48 @@ GreyHole >> feedback: aFloatOrABoxBetweenZeroAndOne [
 GreyHole >> initialize [
 
 	super initialize.
-	self dt: 0.8.
-	self damp: 0.1.
-	self size: 2.
-	self earlyDiff: 0.4.
-	self feedback: 0.4.
-	self modDepth: 0.4.
-	self modFreq: 4.
+	self dt: (PhHSlider new
+			 label: self label , 'DecayTime'
+			 init: 1
+			 min: 0.1
+			 max: 60
+			 step: 0.1).
+	self damp: (PhHSlider new
+			 label: self label , 'Damp'
+			 init: 0.3
+			 min: 0
+			 max: 1
+			 step: 0.001).
+	self size: (PhHSlider new
+			 label: self label , 'Size'
+			 init: 2
+			 min: 0.5
+			 max: 3
+			 step: 0.001).
+	self earlyDiff: (PhHSlider new
+			 label: self label , 'EarlyDiff'
+			 init: 0.3
+			 min: 0
+			 max: 1
+			 step: 0.001).
+	self feedback: (PhHSlider new
+			 label: self label , 'Feedback'
+			 init: 0.3
+			 min: 0
+			 max: 1
+			 step: 0.001).
+	self modDepth: (PhHSlider new
+			 label: self label , 'ModDepth'
+			 init: 0.3
+			 min: 0
+			 max: 1
+			 step: 0.001).
+	self modFreq: (PhHSlider new
+			 label: self label , 'ModFreq'
+			 init: 0.1
+			 min: 0.1
+			 max: 10
+			 step: 0.001).
 	self inputL: Wire new asBox.
 	self inputR: Wire new asBox
 ]
