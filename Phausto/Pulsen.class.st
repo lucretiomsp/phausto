@@ -29,7 +29,12 @@ Pulsen >> initialize [
 	super initialize.
 	processExpression := 'process = ba.pulsen;'.
 	self length: 0.01.
-	self period: 1
+	self period: (PhHSlider new
+			 label: self label , 'Period'
+			 init: 1
+			 min: 0.001
+			 max: 8
+			 step: 0.01)
 ]
 
 { #category : #accessing }

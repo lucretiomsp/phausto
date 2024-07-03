@@ -40,17 +40,17 @@ Envelopes >> initialize [
 		          max: 2
 		          step: 1.
 	release := PhHSlider new
-		          label: self label , 'Attack'
-		          init: 0.001
-		          min: 0.001
-		          max: 2
-		          step: 1.
-	trigger := PhHSlider new
 		           label: self label , 'Release'
-		           init: 0.2
-		           min: 0
+		           init: 0.3
+		           min: 0.001
 		           max: 3
-		           step: 0.001
+		           step: 0.001.
+	trigger := PhHSlider new
+		           label: self label , 'Gate'
+		           init: 0
+		           min: 0
+		           max: 1
+		           step: 1
 ]
 
 { #category : #connecting }

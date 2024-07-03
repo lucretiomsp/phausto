@@ -118,7 +118,7 @@ DSP >> allParameters [
 ]
 
 { #category : #'ui-building' }
-DSP >> buttonrFor: aString [
+DSP >> buttonFor: aString [
 " creates a new slider for the parameter named aString"
 | index |
 
@@ -292,7 +292,15 @@ DSP >> name: aString [
 	name := aString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'ui-building' }
+DSP >> openButtonFor: aString [
+
+	| button |
+	button := self buttonFor: aString.
+	button openInWindow
+]
+
+{ #category : #'ui-building' }
 DSP >> openSliderFor: aString [ 
 	| fader |
 	
