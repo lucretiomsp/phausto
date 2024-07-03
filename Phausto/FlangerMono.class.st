@@ -12,7 +12,7 @@ invert: 0 for normal, 1 to invert sign of flanging sum
 "
 Class {
 	#name : #FlangerMono,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'dmax',
 		'curdel',

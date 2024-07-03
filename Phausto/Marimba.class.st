@@ -56,12 +56,37 @@ Marimba >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.marimba;'.
-	self freq: 440.
-	self strikePosition: 4.
-	self strikeCutoff: 7000.
-	self strikeSharpness: 0.26.
-	self gain: 0.8.
-	self trigger: 0.0
+	self freq: (PhHSlider new
+			 label: self label , 'Freq'
+			 init: 440
+			 min: 20
+			 max: 1200
+			 step: 1).
+	self strikePosition: (PhHSlider new
+			 label: self label , 'StrikePos'
+			 init: 0.5
+			 min: 0
+			 max: 4
+			 step: 0.001).
+	self strikeCutoff: (PhHSlider new
+			 label: self label , 'StrikeCutoff'
+			 init: 7000
+			 min: 100
+			 max: 9000
+			 step: 1).
+	self strikeSharpness: (PhHSlider new
+			 label: self label , 'StrikeSharp'
+			 init: 0.25
+			 min: 0.1
+			 max: 2
+			 step: 0.01).
+	self gain: 0.5.
+	self trigger: (PhHSlider new
+			 label: self label , 'Gate'
+			 init: 0
+			 min: 0
+			 max: 1
+			 step: 1)
 ]
 
 { #category : #accessing }

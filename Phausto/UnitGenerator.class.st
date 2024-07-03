@@ -6,7 +6,7 @@ The uLevel instance variable is used to set the level of the UGen and it acts as
 Each Unit Geneterator has a label, by default is the class name; the label is used to construct the UI/control access to the Unit Generator
 "
 Class {
-	#name : #UnitGenerators,
+	#name : #UnitGenerator,
 	#superclass : #PhBox,
 	#instVars : [
 		'importStatement',
@@ -19,7 +19,7 @@ Class {
 }
 
 { #category : #connecting }
-UnitGenerators >> => aUnitGenerator [
+UnitGenerator >> => aUnitGenerator [
 	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
 
 ^ (self chuckInto: aUnitGenerator )
@@ -27,7 +27,7 @@ UnitGenerators >> => aUnitGenerator [
 ]
 
 { #category : #converting }
-UnitGenerators >> asBox [
+UnitGenerator >> asBox [
 
 	| box |
 	BoxAPI uniqueInstance createLibContext.
@@ -40,7 +40,7 @@ UnitGenerators >> asBox [
 ]
 
 { #category : #connecting }
-UnitGenerators >> chuckInto: aBox [
+UnitGenerator >> chuckInto: aBox [
 	"patch the Unit Generator to an another Unit Generator, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
 
 	aBox patchedWith: self.
@@ -49,32 +49,32 @@ UnitGenerators >> chuckInto: aBox [
 ]
 
 { #category : #accessing }
-UnitGenerators >> code [
+UnitGenerator >> code [
 
 "code returns the import statement joined with the process expression"
 	^ self importStatement , self processExpression
 ]
 
 { #category : #accessing }
-UnitGenerators >> code: anObject [
+UnitGenerator >> code: anObject [
 
 	code := anObject
 ]
 
 { #category : #accessing }
-UnitGenerators >> importStatement [
+UnitGenerator >> importStatement [
 
 	^ importStatement
 ]
 
 { #category : #accessing }
-UnitGenerators >> importStatement: anObject [
+UnitGenerator >> importStatement: anObject [
 
 	importStatement := anObject
 ]
 
 { #category : #initialization }
-UnitGenerators >> initialize [
+UnitGenerator >> initialize [
 
 	super initialize.
 
@@ -85,19 +85,19 @@ UnitGenerators >> initialize [
 ]
 
 { #category : #accessing }
-UnitGenerators >> label [
+UnitGenerator >> label [
 
 	^ label
 ]
 
 { #category : #accessing }
-UnitGenerators >> label: aString [
+UnitGenerator >> label: aString [
 
 	label := aString
 ]
 
 { #category : #converting }
-UnitGenerators >> mono [
+UnitGenerator >> mono [
 	"return a mono version of the box (just one output)"
 
 	| mono stereo |
@@ -107,7 +107,7 @@ UnitGenerators >> mono [
 ]
 
 { #category : #connecting }
-UnitGenerators >> patchedWith: aBox [
+UnitGenerator >> patchedWith: aBox [
 
 	^ Error new signal:
 		  'You cannnot connect a' , aBox className asString , ' with a '
@@ -115,19 +115,19 @@ UnitGenerators >> patchedWith: aBox [
 ]
 
 { #category : #accessing }
-UnitGenerators >> processExpression [
+UnitGenerator >> processExpression [
 
 	^ processExpression
 ]
 
 { #category : #accessing }
-UnitGenerators >> processExpression: anObject [
+UnitGenerator >> processExpression: anObject [
 
 	processExpression := anObject
 ]
 
 { #category : #converting }
-UnitGenerators >> stereo [
+UnitGenerator >> stereo [
 
 "return a stereo version of the box (connect to Left and Right outputs)"
 
@@ -139,13 +139,13 @@ stereo := mono splitTo: Wire new asBox , Wire new asBox .
 ]
 
 { #category : #accessing }
-UnitGenerators >> uLevel [
+UnitGenerator >> uLevel [
 
 	^ uLevel
 ]
 
 { #category : #accessing }
-UnitGenerators >> uLevel: aLevel [
+UnitGenerator >> uLevel: aLevel [
 
 	uLevel := aLevel asBox
 ]

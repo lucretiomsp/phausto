@@ -13,7 +13,7 @@ UnitGeneratorsTest >> testAREnvAsDsp [
 { #category : #tests }
 UnitGeneratorsTest >> testEmptyUnitGeneratorAsDsp [
 
-	self assert: UnitGenerators  new asDsp isNull equals: false
+	self assert: UnitGenerator  new asDsp isNull equals: false
 ]
 
 { #category : #tests }

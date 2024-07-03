@@ -3,6 +3,6 @@ In signal processing, a filter is a process or device that removes frequencies f
 "
 Class {
 	#name : #PhFilter,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#category : #'Phausto-BoxAPI-Filters'
 }

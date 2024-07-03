@@ -3,7 +3,7 @@ Pulses (generator of length n generated at period p.
 "
 Class {
 	#name : #Pulsen,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'length',
 		'period'

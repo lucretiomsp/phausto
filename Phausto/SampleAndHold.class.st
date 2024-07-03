@@ -3,7 +3,7 @@ I am a Sample And Hold. I ""record"" the input when trig is 1, output a frozen v
 "
 Class {
 	#name : #SampleAndHold,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'trig',
 		'input'

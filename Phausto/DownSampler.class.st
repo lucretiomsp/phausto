@@ -4,7 +4,7 @@ Deafult frequency of 1000 Hz
 "
 Class {
 	#name : #DownSampler,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'frequency',
 		'input'

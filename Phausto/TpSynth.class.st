@@ -3,7 +3,7 @@ TpSynth stands for TurboPhauto Synth. WIll be later moved to the TurboPhausto pa
 "
 Class {
 	#name : #TpSynth,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'level',
 		'pitch',

@@ -5,7 +5,7 @@ Wah-wah (or wa-wa) is an imitative word for the sound of altering the resonance 
 "
 Class {
 	#name : #AutoWah,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'level',
 		'input'

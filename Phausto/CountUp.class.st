@@ -3,7 +3,7 @@ Starts counting up from 0 to n included. While trig is 1 the output is 0. The co
 "
 Class {
 	#name : #CountUp,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'max',
 		'trig'

@@ -3,7 +3,7 @@ Convenience class to convert seconds to samples at sample rate and use the value
 "
 Class {
 	#name : #Sec2Samples,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'value'
 	],

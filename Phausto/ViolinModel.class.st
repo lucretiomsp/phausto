@@ -3,7 +3,7 @@ Ready-to-use simple violin physical model. This model implements a single string
 "
 Class {
 	#name : #ViolinModel,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'stringLength',
 		'bowVelocity',

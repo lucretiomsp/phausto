@@ -3,7 +3,7 @@ Pulses generated at period in seconds
 "
 Class {
 	#name : #Pulse,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'period'
 	],

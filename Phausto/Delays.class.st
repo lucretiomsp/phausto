@@ -5,7 +5,7 @@ A collection of delays from Faust delays.lib.
 "
 Class {
 	#name : #Delays,
-	#superclass : #UnitGenerators,
+	#superclass : #UnitGenerator,
 	#instVars : [
 		'maxDelayLength',
 		'delayLength',
