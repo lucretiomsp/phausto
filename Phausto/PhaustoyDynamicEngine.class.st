@@ -106,6 +106,12 @@ PhaustoyDynamicEngine >> defaultName [
 ]
 
 { #category : #'as yet unclassified' }
+PhaustoyDynamicEngine >> destroyDSP: aDsp [
+
+	self ffiCall: #( void destroyDsp #( DSP * aDsp ) )
+]
+
+{ #category : #'as yet unclassified' }
 PhaustoyDynamicEngine >> getLastError [
 ^ self ffiCall: #(String getLastError()) 
 ]
@@ -118,6 +124,14 @@ PhaustoyDynamicEngine >> getNumInputsDsp: aDsp [
      * @return The number of input ports.
      */"
 ^ self ffiCall: #(int getNumInputsDsp(DSPStructure* aDsp))
+]
+
+{ #category : #'as yet unclassified' }
+PhaustoyDynamicEngine >> initializeDSP: aDsp [.
+
+self  ffiCall:
+				  #( bool initDsp #( DSP * aDsp , RendererType 0 , int 44100 , int
+				        512 ) ) 
 ]
 
 { #category : #'accessing - platform' }

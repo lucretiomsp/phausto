@@ -120,9 +120,12 @@ PhBox >> asDsp [
 
 	| finalDsp interBox |
 	interBox := self asBox.
+	"initialize the final DSP to a null pointer"
+	finalDsp := DSP new.
 
 	interBox
 		ifNotNil: [
+			
 			DSP initializedDSP destroy.
 			finalDsp := PhaustoyDynamicEngine uniqueInstance
 				            createDspFromBoxes: self asBox.

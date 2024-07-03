@@ -127,16 +127,23 @@ index := self getParamIndex: aString.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'initialize - destroy' }
 DSP >> destroy [
 	"Destory the DSP object"
 
-	self isNull ifTrue: [ "Dont do anything" ] ifFalse: [  
-		self isInitialized
-			ifNil: [ ^ self class invalidException ]
-			ifNotNil: [
-				^ PhaustoyDynamicEngine uniqueInstance ffiCall:
-					  #( void destroyDsp #( DSP * self ) ) ] ]
+	self isNull
+		ifTrue: [ "Dont do anything"
+			'This is not a DSP, this is a null pointer' traceCr ]
+		ifFalse: [
+			self isInitialized
+				ifNil: [ ^ self class invalidException ]
+				ifNotNil: [
+					'DSP destroyed ' traceCr.
+
+					PhaustoyDynamicEngine uniqueInstance destroyDSP: self.
+					"return a null pointer"
+					DSP initializedDSP: DSP new.
+					'SONO ARRIVATO FINO ALLA FINE' traceCr ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -228,32 +235,23 @@ DSP >> getParamValueIndex: anInteger [
 { #category : #initialize }
 DSP >> init [
 	"
-     * @brief Initialize the DSP object.
-     *
-     * @param dsp Pointer to the DSP object.
+     * @brief Initialize the DSP object / @param dsp Pointer to the DSP object.
      * @param renderer Renderer type !!!! for test we use only portAudio.
      * @param sr Sample rate in Hz. Not used when kJackRenderer is used, since sr will be imposed by the JACK server !!!! just for thet sr is fixed to 44100.
      * @param bsize Buffer size in samples. Not used when kJackRenderer is used, since bs will be imposed by the JACK server - !!! we test it with 512 samples buffer size.
-     * @return True if initialization is successful, false otherwise.
- "
+     * @return True if initialization is successful, false otherwise. if the Faust code was compiled without errors, we can initialize the DSP"
 
-	" if the Faust code was compiled without errors, we can initialize the DSP"
-
+	'INIT EXECUTED' traceCr.
 	RendererType initialize.
-	PhaustoyDynamicEngine uniqueInstance getLastError = ''
+
+
+	self isNull
+		ifTrue: [ ^ self class invalidException ]
 		ifFalse: [
-			^ Error new signal:
-				  PhaustoyDynamicEngine uniqueInstance getLastError ]
-		ifTrue: [
-			self isNull
-				ifTrue: [ ^ self class invalidException ]
-				ifFalse: [
-					'DSP inizializzato' traceCr.
-					self isInitialized: true.
-					self class initializedDSP: self.
-					^ PhaustoyDynamicEngine uniqueInstance ffiCall:
-						  #( bool initDsp #( DSP * self , RendererType 0 , int 44100
-						        , int 512 ) ) ] ]
+			'DSP inizialized' traceCr.
+			self isInitialized: true.
+			self class initializedDSP: self.
+			PhaustoyDynamicEngine uniqueInstance initializeDSP: self ]
 ]
 
 { #category : #accessing }
