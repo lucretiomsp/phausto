@@ -19,10 +19,12 @@ Class {
 	#superclass : #FFIOpaqueObject,
 	#instVars : [
 		'name',
-		'isInitialized'
+		'isInitialized',
+		'P'
 	],
 	#classVars : [
-		'defaultName'
+		'defaultName',
+		'initializedDSP'
 	],
 	#category : #'Phausto-DSP'
 }
@@ -65,6 +67,18 @@ DSP class >> defaultName [
 DSP class >> initialize [ 
 
 defaultName := '/MyApp/'
+]
+
+{ #category : #accessing }
+DSP class >> initializedDSP [
+
+	^ initializedDSP
+]
+
+{ #category : #accessing }
+DSP class >> initializedDSP: anObject [
+
+	initializedDSP := anObject
 ]
 
 { #category : #'as yet unclassified' }
@@ -117,11 +131,12 @@ index := self getParamIndex: aString.
 DSP >> destroy [
 	"Destory the DSP object"
 
-	self isInitialized isNil
-		ifTrue: [ ^ self class invalidException ]
-		ifFalse: [
-			^ PhaustoyDynamicEngine uniqueInstance ffiCall:
-				  #( void destroyDsp #( DSP * self ) ) ]
+	self isNull ifTrue: [ "Dont do anything" ] ifFalse: [  
+		self isInitialized
+			ifNil: [ ^ self class invalidException ]
+			ifNotNil: [
+				^ PhaustoyDynamicEngine uniqueInstance ffiCall:
+					  #( void destroyDsp #( DSP * self ) ) ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -227,13 +242,15 @@ DSP >> init [
 	RendererType initialize.
 	PhaustoyDynamicEngine uniqueInstance getLastError = ''
 		ifFalse: [
-		^ Error new signal: PhaustoyDynamicEngine uniqueInstance getLastError ]
+			^ Error new signal:
+				  PhaustoyDynamicEngine uniqueInstance getLastError ]
 		ifTrue: [
 			self isNull
 				ifTrue: [ ^ self class invalidException ]
 				ifFalse: [
-					'Sono inizializzato' traceCr .
+					'DSP inizializzato' traceCr.
 					self isInitialized: true.
+					self class initializedDSP: self.
 					^ PhaustoyDynamicEngine uniqueInstance ffiCall:
 						  #( bool initDsp #( DSP * self , RendererType 0 , int 44100
 						        , int 512 ) ) ] ]

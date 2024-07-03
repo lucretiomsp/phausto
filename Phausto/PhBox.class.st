@@ -123,13 +123,13 @@ PhBox >> asDsp [
 
 	interBox
 		ifNotNil: [
-			
-			finalDsp := PhaustoyDynamicEngine uniqueInstance createDspFromBoxes:
-				            self asBox.
+			DSP initializedDSP destroy.
+			finalDsp := PhaustoyDynamicEngine uniqueInstance
+				            createDspFromBoxes: self asBox.
 			PhaustoyDynamicEngine dspPlaying: finalDsp.
 			finalDsp name: 'MyApp'.
 			attachedDSP := finalDsp.
-			
+
 			BoxAPI uniqueInstance destroyLibContext ]
 		ifNil: [ Error new signal: 'Invalid Box please check its creation' ].
 
