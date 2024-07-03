@@ -7,7 +7,7 @@ for example:
 (Button new label: 'trigger' ) connectTo: AREnv new
 "
 Class {
-	#name : #Envelopes,
+	#name : #Envelope,
 	#superclass : #UnitGenerator,
 	#instVars : [
 		'attack',
@@ -18,19 +18,19 @@ Class {
 }
 
 { #category : #accessing }
-Envelopes >> attack [
+Envelope >> attack [
 
 	^ attack
 ]
 
 { #category : #accessing }
-Envelopes >> attack: anObject [
+Envelope >> attack: anObject [
 
 	attack := anObject asBox
 ]
 
 { #category : #initialization }
-Envelopes >> initialize [
+Envelope >> initialize [
 
 	super initialize.
 	attack := PhHSlider new
@@ -54,31 +54,31 @@ Envelopes >> initialize [
 ]
 
 { #category : #connecting }
-Envelopes >> patchedWith: aUnitGenerator [
+Envelope >> patchedWith: aUnitGenerator [
 
 aUnitGenerator asBox * self asBox.
 ]
 
 { #category : #accessing }
-Envelopes >> release [
+Envelope >> release [
 
 	^ release
 ]
 
 { #category : #accessing }
-Envelopes >> release: anObject [
+Envelope >> release: anObject [
 
 	release := anObject
 ]
 
 { #category : #accessing }
-Envelopes >> trigger [
+Envelope >> trigger [
 
 	^ trigger
 ]
 
 { #category : #accessing }
-Envelopes >> trigger: anObject [
+Envelope >> trigger: anObject [
 
 	trigger := anObject asBox
 ]

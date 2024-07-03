@@ -102,6 +102,15 @@ PhBox >> / aUnitGeneratorOrANumber [
 ]
 
 { #category : #arithmetic }
+PhBox >> absolute [
+	"absolute value of a boox"
+
+	| boxed |
+	boxed := self asBox.
+	^ BoxAPI uniqueInstance boxAbs: boxed
+]
+
+{ #category : #arithmetic }
 PhBox >> add: aBox to: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and sumy them"
 

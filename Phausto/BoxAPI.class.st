@@ -33,6 +33,14 @@ BoxAPI class >> int_ptr [
 ]
 
 { #category : #'as yet unclassified' }
+BoxAPI >> boxAbs: aBox [
+	"return the absolute value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxAbsAux #( PhBox * aBox ) )
+]
+
+{ #category : #'as yet unclassified' }
 BoxAPI >> boxAdd [
 	"   
 Sum unary operator, from CboxAdd Function
