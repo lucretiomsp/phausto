@@ -427,10 +427,12 @@ DSP >> sweepToValue: aTargetValue parameter: aParamAsString in: aTimeInseconds [
 { #category : #'as yet unclassified' }
 DSP >> traceAllParams [
 	"show in transcript alla vailable parameters for this DSP"
-   self isInitialized ifTrue: [  
-	0 to: self getParamCount do: [ :i |
-	(self getParamAddress: i) traceCr ]]
-ifFalse: [ Error new signal: 'This DSP is not initialized' ]
+
+	self isInitialized
+		ifTrue: [
+			Transcript clear.
+			self allParameters do: [ :i | i traceCr ]. Transcript open ]
+		ifFalse: [ Error new signal: 'This DSP is not initialized' ]
 ]
 
 { #category : #'API - changes' }
