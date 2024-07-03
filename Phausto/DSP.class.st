@@ -87,6 +87,20 @@ DSP class >> uninitializedException [
 		  , PhaustoyDynamicEngine uniqueInstance getLastError
 ]
 
+{ #category : #'as yet unclassified' }
+DSP >> allParameters [
+	"show in transcript alla vailable parameters for this DSP"
+
+	| params |
+	params := OrderedCollection new.
+	self isInitialized
+		ifTrue: [
+			0 to: self getParamCount do: [ :i |
+			params add: ((self getParamAddress: i) reverse copyUpToSubstring: '/') reverse].
+		 ^ params ]
+		ifFalse: [ Error new signal: 'This DSP is not initialized' ]
+]
+
 { #category : #'ui-building' }
 DSP >> buttonrFor: aString [
 " creates a new slider for the parameter named aString"
