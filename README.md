@@ -7,8 +7,8 @@ Phausto is a library and API that allows to use the [FAUST](https://faust.grame.
 Then, copy and execute in a Playground
 ```Smalltalk
 Metacello new
-    baseline: 'Coypu';
-    repository: 'github://lucretiomsp/coypu:master';
+    baseline: 'Phausto';
+    repository: 'github://lucretiomsp/phausto:main';
     load
 ```
 
