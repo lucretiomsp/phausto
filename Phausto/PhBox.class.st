@@ -101,6 +101,13 @@ PhBox >> / aUnitGeneratorOrANumber [
 	^ BoxAPI uniqueInstance divide: box1 by: box2
 ]
 
+{ #category : #connecting }
+PhBox >> => aUnitGenerator [
+	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
+
+	^ self chuckInto: aUnitGenerator
+]
+
 { #category : #arithmetic }
 PhBox >> absolute [
 	"absolute value of a boox"
