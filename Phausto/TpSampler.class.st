@@ -24,7 +24,7 @@ Class {
 { #category : #converting }
 TpSampler >> asBox [
 
-	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler |
+	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler effect |
 	allFiles := pathToFolder asFileReference allChildren.
 
 	fileNames := (2 to: allFiles size) collect: [ :i |
@@ -55,7 +55,8 @@ TpSampler >> asBox [
 	output := Cut new asBox , Cut new asBox , Cut new asBox
 	          , Wire new asBox.
 	sampler := sp connectTo: output asBox.
-	^ sampler asBox * self level
+	effect := GreyHoleDW new dryWet: (PhHSlider new label: self label , 'Effect' init: 0.1 min: 0 max: 1 step: 0.001 ).
+	^ (sampler asBox * self level) => effect.
 ]
 
 { #category : #accessing }
