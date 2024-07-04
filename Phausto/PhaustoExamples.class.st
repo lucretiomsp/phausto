@@ -8,6 +8,17 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+PhaustoExamples class >> pulseModulatedDuty [
+
+	| pulse dsp |
+	pulse := PulseOsc new duty: LFOTriPos new.
+	dsp := pulse stereo asDsp.
+	dsp init.
+	dsp start.
+	dsp stop
+]
+
+{ #category : #'as yet unclassified' }
 PhaustoExamples >> grooveBox101 [
 
 	<script: ' self new grooveBox101'>
