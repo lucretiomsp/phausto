@@ -5,13 +5,14 @@ Also, smoothing time expressed in seconds - can be changed in real time
 "
 Class {
 	#name : #DelayMonoFB,
-	#superclass : #UnitGenerator,
+	#superclass : #PhBox,
 	#instVars : [
 		'maxDelayTime',
 		'dryWet',
 		'delayTime',
 		'input',
-		'feedBack'
+		'feedBack',
+		'label'
 	],
 	#category : #'Phausto-ToolKit'
 }
@@ -19,11 +20,10 @@ Class {
 { #category : #converting }
 DelayMonoFB >> asBox [
 
-	|  mixer delayWithFB finalBox  delayBox |
-	
-
+	| mixer delayWithFB finalBox delayBox delayLen |
+	delayLen := self delayTime * PhSampleRate new asBox.
 	delayBox := (SmoothDelay new
-		             delayLength: self delayTime;
+		             delayLength: delayLen;
 		             input: Wire new asBox) asBox. "self delayTime * PhSampleRate new asBox"
 
 	mixer := self input + (delayBox * self feedBack).
@@ -80,9 +80,15 @@ DelayMonoFB >> feedBack: aFloatOrAbox [
 DelayMonoFB >> initialize [
 
 	super initialize.
+	self label: self class name asString.
 	self maxDelayTime: PhSampleRate new asBox * 4.
 	self input: Wire new.
-	self delayTime: 331.
+	self delayTime: (PhHSlider new
+			 label: self label , 'DelayTime'
+			 init: 0.1
+			 min: 0.001
+			 max: 4
+			 step: 0.001).
 	self feedBack: (PhHSlider new
 			 label: self label , 'Feedback'
 			 init: 0.4
@@ -110,9 +116,27 @@ DelayMonoFB >> input: anInput [
 ]
 
 { #category : #accessing }
+DelayMonoFB >> label [
+
+	^ label
+]
+
+{ #category : #accessing }
+DelayMonoFB >> label: anObject [
+
+	label := anObject
+]
+
+{ #category : #accessing }
 DelayMonoFB >> maxDelayTime [
 
 	^ maxDelayTime
+]
+
+{ #category : #accessing }
+DelayMonoFB >> maxDelayTime1: anObject [
+
+	maxDelayTime := anObject
 ]
 
 { #category : #accessing }
