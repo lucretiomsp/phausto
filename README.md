@@ -1,5 +1,5 @@
 # phausto
-Phausto is a library and API that allows to use the FAUST compiler and its libraries [Faust](https://faust.grame.fr/) (Functional Audio Stream) inside [Pharo](https://pharo.org/)
+Phausto is a library and API that allows to use the [FAUST](https://faust.grame.fr/) compiler and its libraries  (Functional Audio Stream) inside [Pharo](https://pharo.org/)
 
 ## How to install
 
