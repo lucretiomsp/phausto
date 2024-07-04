@@ -1,12 +1,18 @@
 # phausto
-Use the [Faust](https://faust.grame.fr/) (Functional Audio Stream) functional programming language for sound synthesis inside [Pharo](https://pharo.org/)
+Phausto is a library and API that allows to use the [FAUST](https://faust.grame.fr/) compiler and its libraries  (Functional Audio Stream) inside [Pharo](https://pharo.org/)
 
-## Requirements
-### Only working for Mac Silicon at the moment!
-### Clone tis repo in Pharo with Iceberg and load the Phaust package
-#### Open the fuastLibraries.dmg and copy of the librariesBundleM1 folder in your documents/Pharo/images/yourPhaustimage
+## How to install
 
-## Code example
+#### First, download the packed fausLibraries for your platform, open the package, and copy of the librariesBundle folder into documents/Pharo/images/yourPhaustimage/
+Then, copy and execute in a Playground
+```Smalltalk
+Metacello new
+    baseline: 'Coypu';
+    repository: 'github://lucretiomsp/coypu:master';
+    load
+```
+
+## Create a DSP from a valid string of FAUST code
 
 ```Smalltalk
 "This content is Faust code inside a string"
