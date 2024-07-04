@@ -18,12 +18,12 @@ Class {
 GreyHoleDW >> asBox [
 
 	| reverb finalBox dry wet |
-	reverb := (GreyHole new
-		           inputL: self inputL;
-		           inputR: self inputL) mono.
+	reverb := self inputL =>  GreyHole new
+		        .
 	dry := self inputL * (self dryWet - 1 asBox).
-	wet := self dryWet , 1 asBox connectTo: PhMultiplier new.
-	finalBox := wet.
+	wet := (reverb asBox mergeWith: Wire new asBox) , self dryWet
+		       connectTo: PhMultiplier new.
+	finalBox := reverb asBox.
 	^ finalBox
 ]
 

@@ -48,8 +48,8 @@ GreyHole >> asBox [
 		                   buffer: self errorBuffer.
 	finalBox := self dt asBox , self damp asBox , self size asBox
 	            , self earlyDiff asBox , self feedback asBox
-	            , self modDepth asBox , self modFreq asBox, self inputL , self inputR connectTo:
-		            intermediateBox.
+	            , self modDepth asBox , self modFreq asBox , self inputL
+	            , self inputR connectTo: intermediateBox.
 
 	^ finalBox
 ]
@@ -110,6 +110,7 @@ GreyHole >> feedback: aFloatOrABoxBetweenZeroAndOne [
 GreyHole >> initialize [
 
 	super initialize.
+   self label: self className asString.
 	self dt: (PhHSlider new
 			 label: self label , 'DecayTime'
 			 init: 1
