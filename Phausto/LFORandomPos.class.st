@@ -1,3 +1,6 @@
+"
+LowFrequencyOscillator with random positive values
+"
 Class {
 	#name : #LFORandomPos,
 	#superclass : #LowFrequencyOscillators,
@@ -10,7 +13,9 @@ LFORandomPos >> asBox [
 	| sampleAndHold finalBox |
 	sampleAndHold := SampleAndHold new
 		                 input: Noise new;
-		                 trig: (Pulsen new period: 1 asBox / self freq).
-	finalBox := (sampleAndHold absolute + self offset) * self amount.
+		                 trig: (Pulsen new
+				                  length: 1 / 44100;
+				                  period: 1 asBox / self freq).
+	finalBox := sampleAndHold absolute + self offset * self amount.
 	^ finalBox
 ]
