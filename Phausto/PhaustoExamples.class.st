@@ -8,6 +8,24 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+PhaustoExamples class >> marimbaDjembe [
+
+| dsp marimba djembe pulse1 pulse2 marimbaFreq|
+pulse1 := Pulsen new period: (LFOTriPos new freq: 0.5; offset: 0.05; amount: 2) .
+pulse2 := Pulsen new period: 0.35.
+djembe := Djembe new trigger: pulse1.
+marimbaFreq := LFORandomPos new offset: 1; amount: 40; freq: (1 /0.35).
+marimba := Marimba new trigger: pulse2; freq: marimbaFreq .
+
+dsp := (djembe + marimba) stereo asDsp.
+
+
+dsp init.
+dsp start.
+dsp stop.
+]
+
+{ #category : #'as yet unclassified' }
 PhaustoExamples class >> pulseModulatedDuty [
 
 	| pulse dsp |

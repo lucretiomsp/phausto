@@ -34,9 +34,9 @@ LowFrequencyOscillators >> initialize [
 	self uLevel: 1.
 	self amount: (PhHSlider new
 			 label: self label , 'Amount'
-			 init: 100
-			 min: 1
-			 max: 4000
+			 init: 1
+			 min: 0
+			 max: 4
 			 step: 1).
 	self offset: 0.
 	self freq: (PhHSlider new
