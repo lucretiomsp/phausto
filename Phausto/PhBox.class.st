@@ -191,6 +191,15 @@ PhBox >> boxSplit: aBox to: anotherBox [
 	^ BoxAPI uniqueInstance boxSplit: aBox with: anotherBox
 ]
 
+{ #category : #connecting }
+PhBox >> chuckInto: aBox [
+	"patch the box to an another box, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
+
+	aBox patchedWith: self.
+
+	^ aBox 
+]
+
 { #category : #'public - line' }
 PhBox >> connectTo: aUnitGenerator [
 	" correspond to Faust sequential opeartor : "
