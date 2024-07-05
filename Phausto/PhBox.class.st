@@ -135,7 +135,7 @@ PhBox >> asDsp [
 	" creates a DSP from the Box"
 
 	| finalDsp interBox |
-	PhBox uniqueInstance libContext ifFalse: [ ^ Error new signal: 'Invalid Box - please (re)create one' ] ifTrue: [  
+	PhBox  libContext ifFalse: [ ^ Error new signal: 'Invalid Box - please (re)create one' ] ifTrue: [  
 	interBox := self asBox.
 	"initialize the final DSP to a null pointer"
 	finalDsp := DSP new.
