@@ -58,6 +58,7 @@ dsp stop.
 dsp destroy.
 ```
 ## Get Funky
+```Smalltalk
 “Create two pulse generators, the first has its period changed by a LowFrequency Oscillator”
 pulse1 := Pulsen new period: (LFOTriPos new freq: 0.2; offset: 0.05; amount: 4) .
 pulse2 := Pulsen new period: 0.35.
@@ -73,5 +74,6 @@ dsp := djembe + marimba => GreyHole new) stereo asDsp.
 dsp init.
 dsp start.
 dsp stop.
+``` Smalltalk
 
 
