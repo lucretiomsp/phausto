@@ -19,6 +19,13 @@ Class {
 }
 
 { #category : #connecting }
+UnitGenerator >> + aUnitGenerator [
+	"sum two Unit Generators"
+
+	^ self asBox + aUnitGenerator asBox
+]
+
+{ #category : #connecting }
 UnitGenerator >> => aUnitGenerator [
 	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
 
