@@ -42,3 +42,36 @@ s3 openInWindow .
 x1 stop.
 ```
  
+## Hello Phausto
+```Smalltalk
+"create a Sine wave Oscillator"
+sine := SineOsc new.
+"creates a stereo DSP from the Oscillator"
+dsp := sine stereo asDsp.
+"initialize the DSP"
+dsp init.
+"start the sound"
+dsp start.
+"stop the sound"
+dsp stop.
+"destroy the dsp when you no longer need it"
+dsp destroy.
+```
+## Get Funky
+“Create two pulse generators, the first has its period changed by a LowFrequency Oscillator”
+pulse1 := Pulsen new period: (LFOTriPos new freq: 0.2; offset: 0.05; amount: 4) .
+pulse2 := Pulsen new period: 0.35.
+“Create a djembe, triggered by pulse1”
+djembe := Djembe new trigger: pulse1.
+marimbaFreq := LFORandomPos new offset: 20; amount: 600; freq: (1 /0.35).
+“Create a marimba, triggered by pulse2 and with the frequency modulated by an LFO with a random shape”
+marimba := Marimba new trigger: pulse2; freq: marimbaFreq .
+“Sum the marimba and the djembe patch them to a GreyHoleDW reverb and creates a dsp”
+"The ChucK operator =>  it is our playful homage to the creators of ChucK, it simplfies and abstract the connections between Unit Generators"
+dsp := djembe + marimba => GreyHole new) stereo asDsp.
+
+dsp init.
+dsp start.
+dsp stop.
+
+
