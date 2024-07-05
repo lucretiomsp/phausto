@@ -101,6 +101,7 @@ UnitGenerator >> mono [
 	"return a mono version of the box (just one output)"
 
 	| mono stereo |
+		BoxAPI uniqueInstance createLibContext.
 	stereo := self asBox.
 	mono := stereo mergeWith: Wire new asBox.
 	^ stereo
@@ -128,14 +129,13 @@ UnitGenerator >> processExpression: anObject [
 
 { #category : #converting }
 UnitGenerator >> stereo [
+	"return a stereo version of the box (connect to Left and Right outputs)"
 
-"return a stereo version of the box (connect to Left and Right outputs)"
-
-| mono stereo |
-
-mono := self asBox.
-stereo := mono splitTo: Wire new asBox , Wire new asBox .
-^ stereo 
+	| mono stereo |
+		BoxAPI uniqueInstance createLibContext.
+	mono := self asBox.
+	stereo := mono splitTo: Wire new asBox , Wire new asBox.
+	^ stereo
 ]
 
 { #category : #accessing }

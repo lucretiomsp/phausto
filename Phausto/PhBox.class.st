@@ -135,13 +135,13 @@ PhBox >> asDsp [
 	" creates a DSP from the Box"
 
 	| finalDsp interBox |
+	PhBox uniqueInstance libContext ifFalse: [ ^ Error new signal: 'Invalid Box - please (re)create one' ] ifTrue: [  
 	interBox := self asBox.
 	"initialize the final DSP to a null pointer"
 	finalDsp := DSP new.
 
 	interBox
 		ifNotNil: [
-			
 			DSP initializedDSP destroy.
 			finalDsp := PhaustoyDynamicEngine uniqueInstance
 				            createDspFromBoxes: self asBox.
@@ -152,7 +152,7 @@ PhBox >> asDsp [
 			BoxAPI uniqueInstance destroyLibContext ]
 		ifNil: [ Error new signal: 'Invalid Box please check its creation' ].
 
-	^ finalDsp
+	^ finalDsp]
 ]
 
 { #category : #accessing }
@@ -322,6 +322,7 @@ PhBox >> stereo [
 	"return a stereo version of the box (connect to Left and Right outputs)"
 
 	| mono stereo |
+	BoxAPI uniqueInstance createLibContext .
 	mono := self asBox.
 	stereo := mono splitTo: Wire new asBox , Wire new asBox.
 	^ stereo
