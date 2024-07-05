@@ -74,6 +74,6 @@ dsp := djembe + marimba => GreyHole new) stereo asDsp.
 dsp init.
 dsp start.
 dsp stop.
-```Smalltalk
+```
 
 
