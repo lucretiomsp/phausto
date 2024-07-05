@@ -56,9 +56,9 @@ ResonatorFilter >> initialize [
 	super initialize.
 	self frequency: (PhHSlider new
 			 label: self label , 'Frequency'
-			 init: 900
+			 init: 19000
 			 min: 20
-			 max: 18000
+			 max: 19999
 			 step: 1).
 	self q: (PhHSlider new
 			 label: self label , 'Q'
@@ -67,7 +67,7 @@ ResonatorFilter >> initialize [
 			 max: 1
 			 step: 0.01).
 	self gain: 1.
-	self input: 0.
+	self input: 0
 ]
 
 { #category : #accessing }

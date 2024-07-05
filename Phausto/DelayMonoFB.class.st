@@ -33,7 +33,7 @@ DelayMonoFB >> asBox [
 
 	delayWithFB := mixer asBox ~ delayBox.
 
-	finalBox := delayWithFB + self input.
+	finalBox := delayWithFB * (self dryWet) + (self input * ( 1 asBox - self dryWet )).
 	^ finalBox
 ]
 
