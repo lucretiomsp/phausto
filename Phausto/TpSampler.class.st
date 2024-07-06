@@ -30,7 +30,8 @@ TpSampler >> asBox [
 	fileNames := (2 to: allFiles size) collect: [ :i |
 		             (allFiles at: i) asAbsolute pathString
 			             surroundedByQuotes ].
-
+	fileNames sort.
+	fileNames do: [ :f | f traceCr ].
 	allFilePaths := ''.
 	fileNames do: [ :i | allFilePaths := allFilePaths , i , ';' ].
 	filePathPrefix := '"son[url:{'.
@@ -55,8 +56,13 @@ TpSampler >> asBox [
 	output := Cut new asBox , Cut new asBox , Cut new asBox
 	          , Wire new asBox.
 	sampler := sp connectTo: output asBox.
-	effect := GreyHoleDW new dryWet: (PhHSlider new label: self label , 'Effect' init: 0.1 min: 0 max: 1 step: 0.001 ).
-	^ (sampler asBox * self level) => effect.
+	effect := GreyHoleDW new dryWet: (PhHSlider new
+			           label: self label , 'Effect'
+			           init: 0.1
+			           min: 0
+			           max: 1
+			           step: 0.001).
+	^ sampler asBox * self level => effect
 ]
 
 { #category : #accessing }
