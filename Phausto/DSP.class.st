@@ -343,8 +343,9 @@ DSP >> setValue: aFloat parameter: aParamAsString [
 		ifFalse: [
 			indexInteger := self getParamIndex: aParamAsString.
 			indexInteger ~= -1
-				ifTrue: [ self setValue: aFloat parameterIndex: indexInteger ]
-				ifFalse: [ ^ self class invalidException   ] ]
+				ifTrue: [ self setValue: aFloat parameterIndex: indexInteger.
+					Performance uniqueInstance visualizer sliderArray at: aParamAsString ifPresent: [  :slider | slider setValue: aFloat]]
+				ifFalse: [ ^ self class invalidException ] ]
 ]
 
 { #category : #'API - changes' }

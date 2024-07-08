@@ -55,13 +55,13 @@ ResonatorFilter >> initialize [
 
 	super initialize.
 	self frequency: (PhHSlider new
-			 label: self label , 'Frequency'
+			 label: 'MasterCutoff'
 			 init: 19000
 			 min: 20
 			 max: 19999
 			 step: 1).
 	self q: (PhHSlider new
-			 label: self label , 'Q'
+			 label:  'Resonance'
 			 init: 1
 			 min: 0.1
 			 max: 1

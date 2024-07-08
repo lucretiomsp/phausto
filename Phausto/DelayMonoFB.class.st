@@ -84,13 +84,13 @@ DelayMonoFB >> initialize [
 	self maxDelayTime: PhSampleRate new asBox * 4.
 	self input: Wire new.
 	self delayTime: (PhHSlider new
-			 label: self label , 'DelayTime'
+			 label: 'MasterDelayTime'
 			 init: 0.1
 			 min: 0.001
 			 max: 4
 			 step: 0.001).
 	self feedBack: (PhHSlider new
-			 label: self label , 'Feedback'
+			 label:  'MasterDelayFeedback'
 			 init: 0.4
 			 min: 0.001
 			 max: 1.1
