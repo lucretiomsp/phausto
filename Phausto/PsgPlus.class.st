@@ -6,16 +6,18 @@ lfoAMount controls the amount of LFO on Pitch.
 
 "
 Class {
-	#name : #PsgPlus,
-	#superclass : #TpSynth,
+	#name : 'PsgPlus',
+	#superclass : 'TpSynth',
 	#instVars : [
 		'lfoAmount',
 		'index'
 	],
-	#category : #'Phausto-TurboPhausto'
+	#category : 'Phausto-TurboPhausto',
+	#package : 'Phausto',
+	#tag : 'TurboPhausto'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PsgPlus >> asBox [
 
 	| adsr sqr saw tri noise pitchLfo selectorInputs synth ringModulator |
@@ -52,19 +54,19 @@ PsgPlus >> asBox [
 	^ synth * self level
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PsgPlus >> index [
 
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PsgPlus >> index: anIndex [
 
 	index := anIndex asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PsgPlus >> initialize [
 
 	super initialize.
@@ -83,13 +85,13 @@ PsgPlus >> initialize [
 	self level: 0.3 "level is sofwtare than TpSynth default"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PsgPlus >> lfoAmount [
 
 	^ lfoAmount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PsgPlus >> lfoAmount: aNumber [
 
 	lfoAmount := aNumber asBox

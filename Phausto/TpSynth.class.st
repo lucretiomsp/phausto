@@ -2,8 +2,8 @@
 TpSynth stands for TurboPhauto Synth. WIll be later moved to the TurboPhausto package
 "
 Class {
-	#name : #TpSynth,
-	#superclass : #UnitGenerator,
+	#name : 'TpSynth',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'level',
 		'pitch',
@@ -14,28 +14,30 @@ Class {
 		'release',
 		'name'
 	],
-	#category : #'Phausto-TurboPhausto'
+	#category : 'Phausto-TurboPhausto',
+	#package : 'Phausto',
+	#tag : 'TurboPhausto'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> attack [
 
 	^ attack
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> attack: aTimeInSeconds [
 
 	attack := aTimeInSeconds asBox.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> decay [
 
 	^ decay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> decay: aTimeInSeconds [
 
 
@@ -43,19 +45,19 @@ TpSynth >> decay: aTimeInSeconds [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> gate [
 
 	^ gate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> gate: aGate [
 
 	gate := aGate asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 TpSynth >> initialize [
 
 	super initialize.
@@ -81,47 +83,47 @@ TpSynth >> initialize [
 			 step: 0.1)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> level [
 
 	^ level
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> level: aNumber [
 
 	level := aNumber asBox 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> name [ 
 ^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> name: aName [
 
 	name := aName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> pitch [
 
 	^ pitch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> pitch: aFrequency [
 
 	pitch := aFrequency asBox
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 TpSynth >> release [ 
 ^ release
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> release: aTimeInSeconds [
 
 
@@ -129,13 +131,13 @@ TpSynth >> release: aTimeInSeconds [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> sustain [
 
 	^ sustain
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSynth >> sustain: aNumber [
 
 	sustain := aNumber asBox

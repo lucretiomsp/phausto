@@ -2,8 +2,8 @@
 Use computer keyboard as MIDIkeyboad for a Phausto DSP
 "
 Class {
-	#name : #KeyboardToPhausto,
-	#superclass : #SimpleSwitchMorph,
+	#name : 'KeyboardToPhausto',
+	#superclass : 'SimpleSwitchMorph',
 	#instVars : [
 		'dsp',
 		'synthName',
@@ -17,10 +17,12 @@ Class {
 		'noteDestination',
 		'gateDestination'
 	],
-	#category : #'Phausto-GUI'
+	#category : 'Phausto-GUI',
+	#package : 'Phausto',
+	#tag : 'GUI'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 KeyboardToPhausto class >> newWithAddress: anAddress [
 
 	^ (self new) 
@@ -29,29 +31,29 @@ KeyboardToPhausto class >> newWithAddress: anAddress [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 KeyboardToPhausto >> address [
 ^ address.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 KeyboardToPhausto >> address: aStringAddress [
 address := aStringAddress
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 KeyboardToPhausto >> dsp [
 
 	^ dsp
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 KeyboardToPhausto >> dsp: anObject [
 
 	dsp := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 KeyboardToPhausto >> fillNoteListDictionary [
 
 
@@ -115,7 +117,7 @@ noteArray at: $= asciiValue put: 65. "F"
 noteArray at: $] asciiValue put: 67.
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> handlesKeyDown: anEvent [
 | kv |
 "keyboard up arrow = 30, keyboard down arrow = 31"
@@ -127,28 +129,28 @@ kv := anEvent keyCharacter asciiValue .
 ^ true
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> handlesKeyUp: anEvent [
 
 ^ true
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> handlesMouseDown: anEvent [
 ^ true
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> handlesMouseOver: anEvent [
 ^ true
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> handlesMouseWheel: anEvent [
 ^ true
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 KeyboardToPhausto >> initialize [
 super initialize.
 
@@ -167,7 +169,7 @@ mouseWheelValue := 0.
 self fillNoteListDictionary .
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 KeyboardToPhausto >> keyAsMIDINoteNumber: anEvent [
 "if the key pressed corresponds to a MIDI note, returns the MIDI note otherwise returns -1"
 | keyPressed result |
@@ -184,7 +186,7 @@ keyPressed := anEvent keyCharacter asciiValue .
 
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> keyDown: anEvent [
 
 
@@ -196,7 +198,7 @@ key := (self keyAsMIDINoteNumber: anEvent) .
 ifFalse:[nil]
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> keyUp: anEvent [
 
 
@@ -208,7 +210,7 @@ key := self keyAsMIDINoteNumber: anEvent.
 ifFalse:[nil]
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> mouseDown: anEvent [
 super mouseDown: anEvent.
 
@@ -216,29 +218,29 @@ isHandlingKeyDown := isHandlingKeyDown not.
 isHandlingKeyDown ifTrue: [ anEvent hand newKeyboardFocus: self. ] ifFalse: [ anEvent hand releaseKeyboardFocus: self ]
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> mouseEnter: anEvent [
 "anEvent hand newKeyboardFocus: self"
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> mouseLeave: anEvent [
 anEvent hand newKeyboardFocus: self
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 KeyboardToPhausto >> mouseWheel: anEvent [
 
 anEvent isUp ifTrue: [ mouseWheelValue  := mouseWheelValue  -1. mouseWheelValue  toKyma: 'SawDetune'] ifFalse: [ nil ].
 anEvent isDown ifTrue: [ mouseWheelValue  := mouseWheelValue  +1. mouseWheelValue  toKyma: 'SawDetune'] ifFalse: [ nil ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 KeyboardToPhausto >> noteDictionary [
 ^ noteDictionary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 KeyboardToPhausto >> openInWindow [
 
 	| buttonWidth buttonHeight positionLeft positionTop |
@@ -252,13 +254,13 @@ KeyboardToPhausto >> openInWindow [
 		   positionLeft @ positionTop) extent: buttonWidth @ buttonHeight
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 KeyboardToPhausto >> synthName [
 
 	^ synthName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 KeyboardToPhausto >> synthName: aString [
 
 	synthName := aString.

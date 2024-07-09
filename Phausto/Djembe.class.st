@@ -4,12 +4,14 @@ Dirt-simple djembe modal physical model. Mode parameters are empirically calcula
 This model also implements a virtual ""exciter"".
 "
 Class {
-	#name : #Djembe,
-	#superclass : #ModalPercussion,
-	#category : #'Phausto-BoxAPI-PhysicalModels'
+	#name : 'Djembe',
+	#superclass : 'ModalPercussion',
+	#category : 'Phausto-BoxAPI-PhysicalModels',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-PhysicalModels'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Djembe >> asBox [
 
 	| intermediateBox finalBox |
@@ -21,33 +23,33 @@ Djembe >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> freq [
 
 	^ freq
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> freq: anObject [
 	"sets the fundamental frequency of the model"
 
 	freq := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> gain [
 
 	^ gain
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> gain: anObject [
 	" gain of the strike"
 
 	gain := anObject asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Djembe >> initialize [
 
 	super initialize.
@@ -79,39 +81,39 @@ Djembe >> initialize [
 			 step: 1)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> strikePosition [
 
 	^ strikePosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> strikePosition: anObject [
 	"strike position (0 for the middle of the membrane and 1 for the edge)"
 
 	strikePosition := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> strikeSharpness [
 
 	^ strikeSharpness
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> strikeSharpness: anObject [
 	" sharpness of the strike (0-1)"
 
 	strikeSharpness := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> trigger [
 
 	^ trigger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Djembe >> trigger: anObject [
 	"trigger signal (0: off, 1: on)"
 

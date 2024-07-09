@@ -10,15 +10,17 @@ or
 incrementer = (_~(_+1))
 "
 Class {
-	#name : #Incrementer,
-	#superclass : #PhBox,
+	#name : 'Incrementer',
+	#superclass : 'PhBox',
 	#instVars : [
 		'incrValue'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : 'Phausto-ToolKit',
+	#package : 'Phausto',
+	#tag : 'ToolKit'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Incrementer >> asBox [
 
 	| sum |
@@ -27,19 +29,19 @@ Incrementer >> asBox [
 	^ Wire new asBox ~ sum
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Incrementer >> incrValue [
 
 	^ incrValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Incrementer >> incrValue: anObject [
 
 	incrValue := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Incrementer >> initialize [ 
 
 incrValue := 1.

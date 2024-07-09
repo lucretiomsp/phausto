@@ -23,8 +23,8 @@ myDsp trig: 'drumGate'.
 
 "
 Class {
-	#name : #SamplePlayer,
-	#superclass : #PhBox,
+	#name : 'SamplePlayer',
+	#superclass : 'PhBox',
 	#instVars : [
 		'pathToFile',
 		'numChannels',
@@ -34,10 +34,12 @@ Class {
 		'debugPath',
 		'attachedBox'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : 'Phausto-ToolKit',
+	#package : 'Phausto',
+	#tag : 'ToolKit'
 }
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 SamplePlayer >> , anotherSampleOrUG [
 
 "parallelComposition of SamplePlayers with other Objects"
@@ -45,7 +47,7 @@ SamplePlayer >> , anotherSampleOrUG [
 
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 SamplePlayer >> asBox [
 
 	| code intermediateBox |
@@ -71,31 +73,31 @@ process = 0,reader:soundfile("son' , self name , ', [url:{''' , self pathToFile
 	^ intermediateBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> attachedBox [
 
 	^ attachedBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> attachedBox: aBox [
 
 	attachedBox := aBox 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> debugPath [
 
 	^ debugPath
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> debugPath: anObject [
 
 	debugPath := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SamplePlayer >> initialize [
 
 	super initialize.
@@ -106,67 +108,67 @@ SamplePlayer >> initialize [
 	name := 'sampler'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> name [
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> name: aString [
 
 	name := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> numChannels [
 
 	^ numChannels
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> numChannels: anIntegerNumOfChannels [
 
 	numChannels := anIntegerNumOfChannels
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> part [
 
 	^ part
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> part: anInt8 [
 
 	part := anInt8
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> pathToFile [
 
 	^ pathToFile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> pathToFile: aStringWithAPathToAvalidAudioFile [
 
 	pathToFile := aStringWithAPathToAvalidAudioFile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> readIndex [
 
 	^ readIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SamplePlayer >> readIndex: anIntegerOrAReder [
 
 	readIndex := anIntegerOrAReder
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SamplePlayer >> trig [
 
 	self attachedBox attachedDSP trig: self name, 'Gate'

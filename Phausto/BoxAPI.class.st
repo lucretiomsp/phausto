@@ -4,21 +4,23 @@ The box_signal_api.cpp  is compiled in libfaust.
 More about the Faust box API: https://faustdoc.grame.fr/tutorials/box-api/
 "
 Class {
-	#name : #BoxAPI,
-	#superclass : #FFILibrary,
+	#name : 'BoxAPI',
+	#superclass : 'FFILibrary',
 	#classVars : [
 		'INT_PTR',
 		'boxAlias'
 	],
-	#category : #'Phausto-BoxAPI'
+	#category : 'Phausto-BoxAPI',
+	#package : 'Phausto',
+	#tag : 'BoxAPI'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BoxAPI class >> ffiLibrary [ 
 ^ self class
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BoxAPI class >> initialize [
 
 	boxAlias := #PhBox.
@@ -26,13 +28,13 @@ BoxAPI class >> initialize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI class >> int_ptr [
 
 ^ INT_PTR 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxAbs: aBox [
 	"return the absolute value of aBox"
 
@@ -40,7 +42,7 @@ BoxAPI >> boxAbs: aBox [
 	^ self ffiCall: #( #PhBox * CboxAbsAux #( PhBox * aBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxAdd [
 	"   
 Sum unary operator, from CboxAdd Function
@@ -49,7 +51,7 @@ self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxAdd #(  ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxAdd: aBox with: anotherBox [
 	"   
 Sum binary operator, from CbobAddAuxFunxtion
@@ -59,14 +61,14 @@ self createLibContext.
 		  #( #PhBox * CboxAddAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxButton: aLabel [
 	"return a Button boxxeqFrom:  to: "
 self  createLibContext.
 	^ self ffiCall: #( #PhBox * CboxButton #( const char * aLabel ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxCut [
 "   
 The cut box, to stop/terminate a signal. 
@@ -77,7 +79,7 @@ Return the cut box
 	^ self ffiCall: #( #PhBox * CboxCut #(  ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer [
 
 	| myArgv |
@@ -93,7 +95,7 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer arguments: argv [
 
 	self createLibContext.
@@ -104,7 +106,7 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 		        , ByteArray buffer ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxHslider: aLabel init: initBox min: minBox max: maxBox step: stepBox [
 
 self createLibContext.
@@ -114,14 +116,14 @@ self createLibContext.
 		      , #PhBox * minBox , #PhBox * maxBox , #PhBox * stepBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxInt: anInteger [
 	"return the float/double box"
 self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxInt #( int anInteger ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxMerge [
 	"   
     The merge composition (e.g., A:>B) is the dual of the split composition.
@@ -132,7 +134,7 @@ BoxAPI >> boxMerge [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxMerge: aBox with: anotherBox [
 	"   
     The merge composition (e.g., A:>B) is the dual of the split composition.
@@ -144,7 +146,7 @@ BoxAPI >> boxMerge: aBox with: anotherBox [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxPar: aBox and: anotherBox [
 	" The parallel composition of two blocks (e.g., A,B).
      It places the two block-diagrams one on top of the other, without connections.
@@ -154,21 +156,21 @@ self createLibContext .
 		  #( #PhBox * CboxPar #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxPrint: aBox [
 
 	self ffiCall:
 		#( char * CprintBox #( PhBox * aBox , bool true , int 99999 ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxReal: aDouble [
 	"return the float/double box"
 self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxReal #( double aDouble ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxRecursive: aBox with: anotherBox [
 	"   
 The recursive composition (e.g., A~B) is used to create cycles in the block-diagram in order to express recursive computations.
@@ -180,7 +182,7 @@ self createLibContext.
 		  #( #PhBox * CboxRec #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxRem: aBox with: anotherBox [
 	"   
 rem operator
@@ -191,7 +193,7 @@ rem operator
 		  #( #PhBox * CboxRemAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxSelect2Aux: aSelector input0: anInput input1: anotherInput [
 	"   
 Sum unary operator, from CbobAddA Function
@@ -200,7 +202,7 @@ self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxSelect2Aux #( #PhBox * aSelector , #PhBox * anInput , #PhBox * anotherInput  ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxSeqFrom: aBox to: anotherBox [
 	" The sequential composition of two blocks (e.g., A:B) expects: outputs(A)=inputs(B)
      return the seq box.
@@ -210,7 +212,7 @@ self createLibContext .
 		  #( #PhBox * CboxSeq #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxSoundFile: aLabel numChannels: chan [
 	"return a soundfile block"
 
@@ -219,7 +221,7 @@ BoxAPI >> boxSoundFile: aLabel numChannels: chan [
 		  #( #PhBox * CboxSoundfile #( const char * aLabel , #PhBox * chan ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxSoundFile: aLabel numChannels: chan part: anInt8 readIndex: anInteger [
 	"return a soundfile block"
 
@@ -228,7 +230,7 @@ BoxAPI >> boxSoundFile: aLabel numChannels: chan part: anInt8 readIndex: anInteg
 		  #( #PhBox * CoxSoundfileAux #( const char * aLabel , #PhBox * chan, #PhBox * anInt8 , #PhBox * anInteger ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxSplit: aBox with: anotherBox [
 	"   
 The split composition (e.g., A<:B) operator is used to distribute the outputs of A to the inputs of B.
@@ -241,7 +243,7 @@ For the operation to be valid, the number of inputs of B must be a multiple of t
 		  #( #PhBox * CboxSplit #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxSubtract: aBox from: anotherBox [
 	"   
 Sum binary operator, from CbobAddAuxFunxtion
@@ -252,7 +254,7 @@ Sum binary operator, from CbobAddAuxFunxtion
 		  #( #PhBox * CboxSubAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
 	"Create a horizontal bargraph box."
 
@@ -262,7 +264,7 @@ BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
 		        , #PhBox * anInput ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BoxAPI >> boxWire [
 	"return the wire / identity box"
 
@@ -270,7 +272,7 @@ BoxAPI >> boxWire [
 	^ self ffiCall: #( #PhBox * CboxWire (  ) )
 ]
 
-{ #category : #context }
+{ #category : 'context' }
 BoxAPI >> createLibContext [
 
 	| sessionLibContext |
@@ -286,12 +288,12 @@ BoxAPI >> createLibContext [
 
 ]
 
-{ #category : #context }
+{ #category : 'context' }
 BoxAPI >> createLibContextFFI [
 self ffiCall: #( void createLibContext #(  ) )
 ]
 
-{ #category : #context }
+{ #category : 'context' }
 BoxAPI >> destroyLibContext [
 
 	| sessionLibContext |
@@ -304,7 +306,7 @@ BoxAPI >> destroyLibContext [
 		ifFalse: [ 'No active libContext at the moment' traceCr]
 ]
 
-{ #category : #context }
+{ #category : 'context' }
 BoxAPI >> destroyLibContextFFI [
 
 	
@@ -312,7 +314,7 @@ BoxAPI >> destroyLibContextFFI [
 	
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BoxAPI >> divide: aBox by: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and multiply them"
 
@@ -320,20 +322,20 @@ BoxAPI >> divide: aBox by: anotherBox [
 		  #( #PhBox * CboxDivAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BoxAPI >> isNil: aBox [
 
 	^ self ffiCall: #( bool CisNil #( void * aBox ) )
 ]
 
-{ #category : #'accessing - platform' }
-BoxAPI >> macModuleName [
+{ #category : 'accessing - platform' }
+BoxAPI >> macLibraryName [
 	"Returns the name of the dynamic libFaust for Mac."
 
 	^ 'librariesBundle/libfaust.2.dylib'
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 BoxAPI >> multiply: aBox with: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and multiply them"
 

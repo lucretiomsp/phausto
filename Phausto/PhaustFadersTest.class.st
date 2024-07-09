@@ -1,10 +1,12 @@
 Class {
-	#name : #PhaustFadersTest,
-	#superclass : #TestCase,
-	#category : #'Phausto-Tests'
+	#name : 'PhaustFadersTest',
+	#superclass : 'TestCase',
+	#category : 'Phausto-Tests',
+	#package : 'Phausto',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 PhaustFadersTest >> testSymbolAsBoxContructVerticalSlider [
 
 | slider |

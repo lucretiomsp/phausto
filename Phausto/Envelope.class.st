@@ -7,29 +7,31 @@ for example:
 (Button new label: 'trigger' ) connectTo: AREnv new
 "
 Class {
-	#name : #Envelope,
-	#superclass : #UnitGenerator,
+	#name : 'Envelope',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'attack',
 		'release',
 		'trigger'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Envelope >> attack [
 
 	^ attack
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Envelope >> attack: anObject [
 
 	attack := anObject asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Envelope >> initialize [
 
 	super initialize.
@@ -53,31 +55,31 @@ Envelope >> initialize [
 		           step: 1
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 Envelope >> patchedWith: aUnitGenerator [
 
 aUnitGenerator asBox * self asBox.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Envelope >> release [
 
 	^ release
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Envelope >> release: anObject [
 
 	release := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Envelope >> trigger [
 
 	^ trigger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Envelope >> trigger: anObject [
 
 	trigger := anObject asBox

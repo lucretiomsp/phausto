@@ -2,15 +2,17 @@
 Convenience class to convert seconds to samples at sample rate and use the values as a Box
 "
 Class {
-	#name : #Sec2Samples,
-	#superclass : #UnitGenerator,
+	#name : 'Sec2Samples',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'value'
 	],
-	#category : #'Phausto-BoxAPI-Basics'
+	#category : 'Phausto-BoxAPI-Basics',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Basics'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Sec2Samples >> asBox [
 
 	| intermediateBox finalBox |
@@ -20,7 +22,7 @@ Sec2Samples >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Sec2Samples >> initialize [
 
 	super initialize.
@@ -28,13 +30,13 @@ Sec2Samples >> initialize [
 	self value: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Sec2Samples >> value [
 
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Sec2Samples >> value: anObject [
 
 	value := anObject asBox

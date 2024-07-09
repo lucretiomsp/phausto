@@ -2,16 +2,18 @@
 I am a PhReaderWithSpeed, I read audio buffers at a desired speed. I am designed to read sample files and wavetables. If speed has a negative value, I read buffers backward
 "
 Class {
-	#name : #PhReaderWithSpeed,
-	#superclass : #PhBox,
+	#name : 'PhReaderWithSpeed',
+	#superclass : 'PhBox',
 	#instVars : [
 		'speed',
 		'trigger'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : 'Phausto-ToolKit',
+	#package : 'Phausto',
+	#tag : 'ToolKit'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhReaderWithSpeed >> asBox [
 
 	| sum resetter |
@@ -20,7 +22,7 @@ PhReaderWithSpeed >> asBox [
 	^ resetter ~ sum
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhReaderWithSpeed >> initialize [
 
 	super initialize.
@@ -28,25 +30,25 @@ PhReaderWithSpeed >> initialize [
 	self speed: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhReaderWithSpeed >> speed [
 
 	^ speed
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhReaderWithSpeed >> speed: aSpeed [
 
 	speed := aSpeed asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhReaderWithSpeed >> trigger [
 
 	^ trigger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhReaderWithSpeed >> trigger: aTrigger [	
 
 	trigger := aTrigger asBox

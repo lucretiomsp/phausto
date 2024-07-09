@@ -5,15 +5,17 @@ The term is of Bantu origin, deriving from the prefix ma- meaning 'many' and -ri
 (from Wikipedia) 
 "
 Class {
-	#name : #Marimba,
-	#superclass : #ModalPercussion,
+	#name : 'Marimba',
+	#superclass : 'ModalPercussion',
 	#instVars : [
 		'strikeCutoff'
 	],
-	#category : #'Phausto-BoxAPI-PhysicalModels'
+	#category : 'Phausto-BoxAPI-PhysicalModels',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-PhysicalModels'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Marimba >> asBox [
 
 	| intermediateBox finalBox |
@@ -27,31 +29,31 @@ Marimba >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> freq [
 
 	^ freq
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> freq: anObject [
 
 	freq := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> gain [
 
 	^ gain
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> gain: anObject [
 
 	gain := anObject asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Marimba >> initialize [
 
 	super initialize.
@@ -89,49 +91,49 @@ Marimba >> initialize [
 			 step: 1)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> strikeCutoff [
 
 	^ strikeCutoff
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> strikeCutoff: anObject [
 
 	strikeCutoff := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> strikePosition [
 
 	^ strikePosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> strikePosition: anObject [
 
 	strikePosition := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> strikeSharpness [
 
 	^ strikeSharpness
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> strikeSharpness: anObject [
 
 	strikeSharpness := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> trigger [
 
 	^ trigger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Marimba >> trigger: anObject [
 
 	trigger := anObject asBox

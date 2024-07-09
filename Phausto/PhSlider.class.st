@@ -1,26 +1,28 @@
 Class {
-	#name : #PhSlider,
-	#superclass : #UIPrimitive,
+	#name : 'PhSlider',
+	#superclass : 'UIPrimitive',
 	#instVars : [
 		'init',
 		'step'
 	],
-	#category : #'Phausto-BoxAPI-UIPrimitives'
+	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-UIPrimitives'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhSlider >> init [
 
 	^ init
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhSlider >> init: aNumber [
 
 	init := aNumber asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhSlider >> initialize [
 
 	super initialize.
@@ -30,7 +32,7 @@ PhSlider >> initialize [
 	step := 0.01
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhSlider >> label: aLabel init: initValue min: minValue max: maxValue step: stepValue [
 
 	label := aLabel.
@@ -40,13 +42,13 @@ PhSlider >> label: aLabel init: initValue min: minValue max: maxValue step: step
 	step := stepValue asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhSlider >> step [
 
 	^ step
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhSlider >> step: aNumber [
 
 	step := aNumber asBox

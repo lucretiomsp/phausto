@@ -1,10 +1,12 @@
 Class {
-	#name : #BoxAPITest,
-	#superclass : #TestCase,
-	#category : #'Phausto-Tests'
+	#name : 'BoxAPITest',
+	#superclass : 'TestCase',
+	#category : 'Phausto-Tests',
+	#package : 'Phausto',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxAPITest >> testCreateAndDestroyLibContext [
 
 BoxAPI uniqueInstance createLibContext.

@@ -2,12 +2,14 @@
 Positive LF square wave in [0,1]
 "
 Class {
-	#name : #LFOSquareWavePos,
-	#superclass : #LowFrequencyOscillators,
-	#category : #'Phausto-UnitGenerators'
+	#name : 'LFOSquareWavePos',
+	#superclass : 'LowFrequencyOscillators',
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 LFOSquareWavePos >> asBox [
 
 	| intermediateBox finalBox |
@@ -16,7 +18,7 @@ LFOSquareWavePos >> asBox [
 	^ finalBox * self amount asBox + self offset asBox.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LFOSquareWavePos >> initialize [
 
 	super initialize.

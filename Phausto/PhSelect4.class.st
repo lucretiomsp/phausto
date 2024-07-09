@@ -2,15 +2,17 @@
 Select between 4 inputs, starts counting at 0
 "
 Class {
-	#name : #PhSelect4,
-	#superclass : #PhBox,
+	#name : 'PhSelect4',
+	#superclass : 'PhBox',
 	#instVars : [
 		'index'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : 'Phausto-ToolKit',
+	#package : 'Phausto',
+	#tag : 'ToolKit'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhSelect4 >> asBox [
 
 	| code intermediateBox |
@@ -24,7 +26,7 @@ PhSelect4 >> asBox [
 	^ intermediateBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhSelect4 >> initialize [ 
 super initialize
 ]

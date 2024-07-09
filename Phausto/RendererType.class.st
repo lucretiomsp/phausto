@@ -13,8 +13,8 @@ From the dynamic-engine.h
     };
 "
 Class {
-	#name : #RendererType,
-	#superclass : #FFIEnumeration,
+	#name : 'RendererType',
+	#superclass : 'FFIEnumeration',
 	#classVars : [
 		'kAlsaRenderer',
 		'kAndroidRenderer',
@@ -24,10 +24,12 @@ Class {
 		'kRtAudioRenderer',
 		'kiOSRenderer'
 	],
-	#category : #'Phausto-RendererType'
+	#category : 'Phausto-RendererType',
+	#package : 'Phausto',
+	#tag : 'RendererType'
 }
 
-{ #category : #'enum declaration' }
+{ #category : 'enum declaration' }
 RendererType class >> enumDecl [ 
 ^     #(
         kPortAudioRenderer 0

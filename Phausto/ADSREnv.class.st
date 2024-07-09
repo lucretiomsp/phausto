@@ -10,16 +10,18 @@ rt: release time (sec)
 t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
-	#name : #ADSREnv,
-	#superclass : #Envelope,
+	#name : 'ADSREnv',
+	#superclass : 'Envelope',
 	#instVars : [
 		'decay',
 		'sustain'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 ADSREnv >> asBox [
 
 	| intermediateBox finalBox |
@@ -29,19 +31,19 @@ ADSREnv >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ADSREnv >> decay [
 
 	^ decay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ADSREnv >> decay: anObject [
 
 	decay := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ADSREnv >> initialize [
 
 	super initialize.
@@ -50,13 +52,13 @@ ADSREnv >> initialize [
 	processExpression := 'process = en.adsr;'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ADSREnv >> sustain [
 
 	^ sustain
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ADSREnv >> sustain: anObject [
 
 	sustain := anObject

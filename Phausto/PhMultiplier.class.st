@@ -4,12 +4,14 @@ For example:
 1 asBox , 2 asBox connectTo: PhMultiplier new
 "
 Class {
-	#name : #PhMultiplier,
-	#superclass : #PhBox,
-	#category : #'Phausto-BoxAPI-Boxes'
+	#name : 'PhMultiplier',
+	#superclass : 'PhBox',
+	#category : 'Phausto-BoxAPI-Boxes',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Boxes'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhMultiplier >> initialize [
 
 	BoxAPI uniqueInstance  createLibContext.

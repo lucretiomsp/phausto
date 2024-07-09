@@ -2,8 +2,8 @@
 A filtered noise excitation
 "
 Class {
-	#name : #StrikeModel,
-	#superclass : #Exciter,
+	#name : 'StrikeModel',
+	#superclass : 'Exciter',
 	#instVars : [
 		'lpCutoff',
 		'hpCutoff',
@@ -12,46 +12,48 @@ Class {
 		'gain',
 		'gate'
 	],
-	#category : #'Phausto-BoxAPI-PhysicalModels'
+	#category : 'Phausto-BoxAPI-PhysicalModels',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-PhysicalModels'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> gain [
 
 	^ gain
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> gain: anObject [
 
 	gain := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> gate [
 
 	^ gate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> gate: anObject [
 
 	gate := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> hpCutoff [
 
 	^ hpCutoff
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> hpCutoff: anObject [
 
 	hpCutoff := anObject asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 StrikeModel >> initialize [
 
 	super initialize.
@@ -64,37 +66,37 @@ StrikeModel >> initialize [
 	self gate: 0.0.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> lpCutoff [
 
 	^ lpCutoff
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> lpCutoff: anObject [
 
 	lpCutoff := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> strikePosition [
 
 	^ strikePosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> strikePosition: anObject [
 
 	strikePosition := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> strikeSharpness [
 
 	^ strikeSharpness
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 StrikeModel >> strikeSharpness: anObject [
 
 	strikeSharpness := anObject asBox

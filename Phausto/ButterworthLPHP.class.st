@@ -3,47 +3,49 @@ The Butterworth filter is a type of signal processing filter designed to have a 
 [https://en.wikipedia.org/wiki/Butterworth_filter]
 "
 Class {
-	#name : #ButterworthLPHP,
-	#superclass : #PhFilter,
+	#name : 'ButterworthLPHP',
+	#superclass : 'PhFilter',
 	#instVars : [
 		'input',
 		'poles',
 		'cutoff'
 	],
-	#category : #'Phausto-BoxAPI-Filters'
+	#category : 'Phausto-BoxAPI-Filters',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Filters'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ButterworthLPHP >> cutoff [
 
 	^ cutoff
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ButterworthLPHP >> cutoff: aFloatOrABox [
 "desired cut-off frequency (-3dB frequency) in Hz"
 	cutoff := aFloatOrABox asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ButterworthLPHP >> input [
 
 	^ input
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ButterworthLPHP >> input: aBox [
 "the mono input of the filter"
 	input := aBox asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ButterworthLPHP >> poles [
 
 	^ poles
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ButterworthLPHP >> poles: anInteger [
 	" filter order (number of poles), nonnegative constant numerical expression"
 
