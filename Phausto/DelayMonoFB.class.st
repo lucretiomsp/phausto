@@ -90,13 +90,13 @@ DelayMonoFB >> initialize [
 			 max: 4
 			 step: 0.001).
 	self feedBack: (PhHSlider new
-			 label:  'MasterDelayFeedback'
+			 label: 'MasterDelayFeedback'
 			 init: 0.4
 			 min: 0.001
 			 max: 1.1
 			 step: 0.001).
 	self dryWet: (PhHSlider new
-			 label: self label , 'DryWet'
+			 label: self label , 'MasterDelayAmount'
 			 init: 0.5
 			 min: 0
 			 max: 1
