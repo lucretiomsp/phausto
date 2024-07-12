@@ -155,6 +155,23 @@ PhBox >> asDsp [
 	^ finalDsp]
 ]
 
+{ #category : #converting }
+PhBox >> asDspFile [
+
+	(FileLocator documents / 'temp.txt') writeStream
+		nextPutAll: 'import("stdfaust.lib")';
+		nextPutAll: 'process = ';
+		nextPutAll: self asFaustCode;
+		nextPutAll: ';';
+		close
+]
+
+{ #category : #printing }
+PhBox >> asFaustCode [
+
+	^ (BoxAPI uniqueInstance boxPrint: self asBox) asString
+]
+
 { #category : #accessing }
 PhBox >> attachedDSP [
 
@@ -289,6 +306,12 @@ PhBox >> par: aBox with: anotherBox [
 	BoxAPI uniqueInstance createLibContext.
 	^ BoxAPI uniqueInstance ffiCall:
 		  #( #PhBox * CboxPar #( #PhBox * aBox , #PhBox * anotherBox ) )
+]
+
+{ #category : #printing }
+PhBox >> printOn: aStream [
+
+	^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString
 ]
 
 { #category : #smoothing }
