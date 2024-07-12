@@ -157,7 +157,25 @@ PhBox >> asDsp [
 	^ finalDsp]
 ]
 
-{ #category : 'accessing' }
+
+{ #category : #converting }
+PhBox >> asDspFile [
+
+	(FileLocator documents / 'temp.txt') writeStream
+		nextPutAll: 'import("stdfaust.lib")';
+		nextPutAll: 'process = ';
+		nextPutAll: self asFaustCode;
+		nextPutAll: ';';
+		close
+]
+
+{ #category : #printing }
+PhBox >> asFaustCode [
+
+	^ (BoxAPI uniqueInstance boxPrint: self asBox) asString
+]
+
+
 PhBox >> attachedDSP [
 
 	^ attachedDSP
@@ -293,7 +311,14 @@ PhBox >> par: aBox with: anotherBox [
 		  #( #PhBox * CboxPar #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : 'smoothing' }
+
+{ #category : #printing }
+PhBox >> printOn: aStream [
+
+	^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString
+]
+
+
 PhBox >> smoo [
 	"Smoothing function based on smooth ideal to smooth UI signals (sliders, etc.) down. Approximately, this is a 7 Hz one-pole low-pass considering the coefficient calculation: exp(-2pi*CF/SR).
 
