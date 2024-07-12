@@ -2,27 +2,29 @@
 This class contains a collection of reverb taken from the Faust reverbs.lib
 "
 Class {
-	#name : #Oscillators,
-	#superclass : #UnitGenerator,
+	#name : 'Oscillators',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'freq'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Oscillators >> freq [
 
 	^ freq 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Oscillators >> freq: aFloat [
 
 	freq := aFloat asBox 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Oscillators >> initialize [
 
 	super initialize.
@@ -32,7 +34,7 @@ Oscillators >> initialize [
 	self uLevel: 0.5
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 Oscillators >> patchedWith: aUnitGenerator [
 "by default, a Unit Generator connected to an Oscillator nodulates its frequency"
 self freq: aUnitGenerator 

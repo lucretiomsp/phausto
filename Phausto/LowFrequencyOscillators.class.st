@@ -6,28 +6,30 @@ amount: set the multiplier for the Oscillator output
 offset: an offset for the LFO output. 
 "
 Class {
-	#name : #LowFrequencyOscillators,
-	#superclass : #Oscillators,
+	#name : 'LowFrequencyOscillators',
+	#superclass : 'Oscillators',
 	#instVars : [
 		'amount',
 		'offset'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LowFrequencyOscillators >> amount [
 
 	^ amount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LowFrequencyOscillators >> amount: anAmount [
 
 	amount := anAmount asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LowFrequencyOscillators >> initialize [
 
 	super initialize.
@@ -49,13 +51,13 @@ LowFrequencyOscillators >> initialize [
 	"as LFO are used for modulation, there default level is set to 1"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LowFrequencyOscillators >> offset [
 
 	^ offset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LowFrequencyOscillators >> offset: anOffset [
 
 	offset := anOffset asBox

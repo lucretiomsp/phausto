@@ -1,10 +1,12 @@
 Class {
-	#name : #PhHSlider,
-	#superclass : #PhSlider,
-	#category : #'Phausto-BoxAPI-UIPrimitives'
+	#name : 'PhHSlider',
+	#superclass : 'PhSlider',
+	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-UIPrimitives'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhHSlider >> asBox [
 
 	| sliderBox |

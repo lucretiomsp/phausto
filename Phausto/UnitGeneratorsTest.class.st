@@ -1,52 +1,54 @@
 Class {
-	#name : #UnitGeneratorsTest,
-	#superclass : #TestCase,
-	#category : #'Phausto-Tests'
+	#name : 'UnitGeneratorsTest',
+	#superclass : 'TestCase',
+	#category : 'Phausto-Tests',
+	#package : 'Phausto',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 UnitGeneratorsTest >> testAREnvAsDsp [
 
 	self assert: AREnv new asDsp isNull equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UnitGeneratorsTest >> testEmptyUnitGeneratorAsDsp [
 
 	self assert: UnitGenerator  new asDsp isNull equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UnitGeneratorsTest >> testLFOTriAsDsp [
 
 	self assert: LFOTri  new asDsp isNull equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UnitGeneratorsTest >> testNoiseAsDsp [
 
 	self assert: Noise new asDsp isNull equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UnitGeneratorsTest >> testPulseOscAsDsp [
 
 	self assert: PulseOsc new asDsp isNull equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UnitGeneratorsTest >> testSineOscAsDsp [
 
 	self assert: SineOsc new asDsp isNull equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UnitGeneratorsTest >> testSquareOscAsDsp [
 
 	self assert: SquareOsc new asDsp isNull equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 UnitGeneratorsTest >> testTriOscAsDsp [
 
 	self assert: TriOsc new asDsp isNull equals: false

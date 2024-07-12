@@ -4,12 +4,14 @@ This artificial reverberator take a mono signal and output a stereo signal. It w
 Satrev was made from a listing of ""SATREV"", dated May 15, 1971, which was recovered from an old SAIL DART backup tape. John Chowning thinks this might be the one used on his often-heard brass canon sound examples, one of which can be found at * https://ccrma.stanford.edu/~jos/wav/FM-BrassCanon2.wav.
 "
 Class {
-	#name : #SatRev,
-	#superclass : #Reverbs,
-	#category : #'Phausto-BoxAPI-Effects'
+	#name : 'SatRev',
+	#superclass : 'Reverbs',
+	#category : 'Phausto-BoxAPI-Effects',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Effects'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 SatRev >> asBox [
 
 	| box code |
@@ -23,7 +25,7 @@ SatRev >> asBox [
 	^ box
 ]
 
-{ #category : #'accessing - input' }
+{ #category : 'accessing - input' }
 SatRev >> patchedWith: aUnitGenerator [
 
 aUnitGenerator connectTo: self

@@ -4,12 +4,14 @@ Class: ResonBp
 Simple resonant lowpass filters based on tf2s (virtual analog).
 "
 Class {
-	#name : #ResonLp,
-	#superclass : #ResonatorFilter,
-	#category : #'Phausto-BoxAPI-Filters'
+	#name : 'ResonLp',
+	#superclass : 'ResonatorFilter',
+	#category : 'Phausto-BoxAPI-Filters',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Filters'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ResonLp >> initialize [
 
 	super initialize.

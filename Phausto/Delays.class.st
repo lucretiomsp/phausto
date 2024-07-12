@@ -4,30 +4,32 @@ A collection of delays from Faust delays.lib.
 
 "
 Class {
-	#name : #Delays,
-	#superclass : #UnitGenerator,
+	#name : 'Delays',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'maxDelayLength',
 		'delayLength',
 		'input'
 	],
-	#category : #'Phausto-BoxAPI-Effects'
+	#category : 'Phausto-BoxAPI-Effects',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Effects'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Delays >> delayLength [
 
 	^ delayLength
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Delays >> delayLength: aFloatOrABox [
 	" the max delay length in samples"
 
 	delayLength := aFloatOrABox asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Delays >> initialize [
 
 	super initialize.
@@ -41,31 +43,31 @@ Delays >> initialize [
 	input := Wire new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Delays >> input [
 
 	^ input
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Delays >> input: aFloatOrABox [
 
 	input := aFloatOrABox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Delays >> maxDelayLength [
 
 	^ maxDelayLength
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Delays >> maxDelayLength: aFloatOrABox [
 
 	maxDelayLength := aFloatOrABox asBox
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 Delays >> patchedWith: aUnitGenerator [
 
 self input: aUnitGenerator 

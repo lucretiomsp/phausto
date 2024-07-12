@@ -9,8 +9,8 @@ two fixed outputs: the first one is the currently accessed sound length in frame
 several more outputs for the sound channels themselves, as a constant numerical expression
 "
 Class {
-	#name : #SoundFile,
-	#superclass : #PhBox,
+	#name : 'SoundFile',
+	#superclass : 'PhBox',
 	#instVars : [
 		'label',
 		'labelPrefix',
@@ -20,10 +20,12 @@ Class {
 		'part',
 		'readIndex'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : 'Phausto-BoxAPI-Boxes',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Boxes'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 SoundFile >> asBox [
 
 	^ BoxAPI uniqueInstance
@@ -33,19 +35,19 @@ SoundFile >> asBox [
 		readIndex: self readIndex asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SoundFile >> channels [
 
 	^ channels
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SoundFile >> channels: anInteger [
 "set the number of output channels"
 	channels := anInteger 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SoundFile >> initialize [
 
 	super initialize.
@@ -55,44 +57,44 @@ SoundFile >> initialize [
 	part := 0 . "play the first file in the list, by default"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SoundFile >> label [
 
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SoundFile >> part [
 
 	^ part
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SoundFile >> part: anInt8 [
 
 	part := anInt8
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SoundFile >> path [
 
 	^ path
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SoundFile >> path: aPathToAnAudioFile [
 
 	label := ' "sound[url:{' , aPathToAnAudioFile surroundedBySingleQuotes  , '}]"'.
 	path := aPathToAnAudioFile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SoundFile >> readIndex [
 
 	^ readIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SoundFile >> readIndex: anInteger [
 
 	readIndex := anInteger

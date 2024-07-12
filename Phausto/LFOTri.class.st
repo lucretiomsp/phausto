@@ -2,12 +2,14 @@
 LowFrequency triangle wave from the Faust Standard Library
 "
 Class {
-	#name : #LFOTri,
-	#superclass : #LowFrequencyOscillators,
-	#category : #'Phausto-UnitGenerators'
+	#name : 'LFOTri',
+	#superclass : 'LowFrequencyOscillators',
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 LFOTri >> asBox [
 
 	| intermediateBox finalBox |
@@ -16,7 +18,7 @@ LFOTri >> asBox [
 	^ finalBox * self amount asBox + self offset asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LFOTri >> initialize [
 
 	super initialize.

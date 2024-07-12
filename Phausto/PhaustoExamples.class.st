@@ -2,12 +2,14 @@
 Sound examples for Phausto
 "
 Class {
-	#name : #PhaustoExamples,
-	#superclass : #Object,
-	#category : #'Phausto-Examples'
+	#name : 'PhaustoExamples',
+	#superclass : 'Object',
+	#category : 'Phausto-Examples',
+	#package : 'Phausto',
+	#tag : 'Examples'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhaustoExamples class >> marimbaDjembe [
 
 | dsp marimba djembe pulse1 pulse2 marimbaFreq|
@@ -25,7 +27,7 @@ dsp start.
 dsp stop.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhaustoExamples class >> pulseModulatedDuty [
 
 	| pulse dsp |
@@ -36,7 +38,7 @@ PhaustoExamples class >> pulseModulatedDuty [
 	dsp stop
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhaustoExamples >> grooveBox101 [
 
 	<script: ' self new grooveBox101'>
@@ -114,7 +116,7 @@ grooveBox destroy.
 	^ StPlayground openContents: content
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhaustoExamples >> helloSine [
 
 	<script: ' self new helloSine'>
@@ -145,7 +147,7 @@ dsp destroy .
 	^ StPlayground openContents: content
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhaustoExamples >> ringTone [
 	" this example plays the first few notes of Gran Vals by Francisco Tarrega into a JCReverb"
 

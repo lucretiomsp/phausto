@@ -2,16 +2,18 @@
 Pulses (generator of length n generated at period p.
 "
 Class {
-	#name : #Pulsen,
-	#superclass : #UnitGenerator,
+	#name : 'Pulsen',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'length',
 		'period'
 	],
-	#category : #'Phausto-BoxAPI-Basics'
+	#category : 'Phausto-BoxAPI-Basics',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Basics'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Pulsen >> asBox [
 
 	| intermediateBox lengthInSamples periodInSamples finalBox |
@@ -23,7 +25,7 @@ Pulsen >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Pulsen >> initialize [
 
 	super initialize.
@@ -37,25 +39,25 @@ Pulsen >> initialize [
 			 step: 0.01)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Pulsen >> length [
 
 	^ length
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Pulsen >> length: anObject [
 
 	length := anObject asBox 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Pulsen >> period [
 
 	^ period
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Pulsen >> period: anObject [
 
 	period := anObject asBox

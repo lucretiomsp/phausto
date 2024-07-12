@@ -9,8 +9,8 @@ damp: damping of the lowpass comb filter (0-1)
 spread: spatial spread in number of samples (for stereo)
 "
 Class {
-	#name : #FreeverbMono,
-	#superclass : #Reverbs,
+	#name : 'FreeverbMono',
+	#superclass : 'Reverbs',
 	#instVars : [
 		'fb1',
 		'fb2',
@@ -18,10 +18,12 @@ Class {
 		'spread',
 		'input'
 	],
-	#category : #'Phausto-BoxAPI-Effects'
+	#category : 'Phausto-BoxAPI-Effects',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Effects'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 FreeverbMono >> asBox [
 
 	| intermediateBox code finalBox |
@@ -38,43 +40,43 @@ FreeverbMono >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> damp [
 
 	^ damp
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> damp: anObject [
 
 	damp := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> fb1 [
 
 	^ fb1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> fb1: anObject [
 
 	fb1 := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> fb2 [
 
 	^ fb2
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> fb2: anObject [
 
 	fb2 := anObject asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FreeverbMono >> initialize [
 
 	super initialize.
@@ -101,30 +103,30 @@ FreeverbMono >> initialize [
 	self input: Wire new asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> input [
 
 	^ input
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> input: anInput [
 
 	input := anInput asBox
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 FreeverbMono >> patchedWith: aUnitGenerator [
 	self input: aUnitGenerator 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> spread [
 
 	^ spread
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreeverbMono >> spread: anObject [
 
 	spread := anObject asBox

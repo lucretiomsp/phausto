@@ -2,12 +2,14 @@
 Convenience class to store useful Faust DSP as string. DSP code as string can be retired by sending message to the class.
 "
 Class {
-	#name : #DSPCode,
-	#superclass : #Object,
-	#category : #'Phausto-DSPCode'
+	#name : 'DSPCode',
+	#superclass : 'Object',
+	#category : 'Phausto-DSPCode',
+	#package : 'Phausto',
+	#tag : 'DSPCode'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DSPCode class >> basicHiHatFM [
 
 ^
@@ -41,7 +43,7 @@ process = hgroup("HiHat-FM", hihatFM);
 '
 ]
 
-{ #category : #'accessing - data' }
+{ #category : 'accessing - data' }
 DSPCode class >> basicKickWithADSR [
 ^ 
 '
@@ -68,7 +70,7 @@ kick =   (((oscillator * ampEnvelope) * volume) : ef.softclipQuadratic )<: _ , _
 process = kick;'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DSPCode class >> drumMachine7 [
 
 ^
@@ -83,7 +85,7 @@ drum = (psynth.basicKick , psynth.elementaryClap , psynth.clave , psynth.hiHatFM
 process = drum;'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 DSPCode class >> drumMachine8 [
 	" essential drum machine with extra basic sawtoot synth named dubdub and dirty 303 cassline clone"
 

@@ -3,16 +3,18 @@ This UnitGenerator makes the work of the downSample standard Faust function.  Do
 Deafult frequency of 1000 Hz
 "
 Class {
-	#name : #DownSampler,
-	#superclass : #UnitGenerator,
+	#name : 'DownSampler',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'frequency',
 		'input'
 	],
-	#category : #'Phausto-BoxAPI-Basics'
+	#category : 'Phausto-BoxAPI-Basics',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Basics'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 DownSampler >> asBox [
 
 	| intermediateBox finalBox |
@@ -22,19 +24,19 @@ DownSampler >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DownSampler >> frequency [
 
 	^ frequency
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DownSampler >> frequency: aFrequency [
 
 	frequency := aFrequency asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 DownSampler >> initialize [
 
 	super initialize.
@@ -42,13 +44,13 @@ DownSampler >> initialize [
 	self frequency: 1000
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DownSampler >> input [
 
 	^ input
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 DownSampler >> input: anInput [ 
 
 	input := anInput asBox

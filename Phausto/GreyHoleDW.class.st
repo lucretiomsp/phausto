@@ -4,17 +4,19 @@ Dry is the signal without effect.
 Wet is the processed signal
 "
 Class {
-	#name : #GreyHoleDW,
-	#superclass : #UnitGenerator,
+	#name : 'GreyHoleDW',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'dryWet',
 		'inputL',
 		'inputR'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : 'Phausto-ToolKit',
+	#package : 'Phausto',
+	#tag : 'ToolKit'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 GreyHoleDW >> asBox [
 
 	| reverb finalBox dry wet |
@@ -26,19 +28,19 @@ GreyHoleDW >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHoleDW >> dryWet [
 
 	^ dryWet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHoleDW >> dryWet: anAmount [
 
 	dryWet := anAmount asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GreyHoleDW >> initialize [
 super initialize .
 	self dryWet: (PhHSlider new
@@ -52,31 +54,31 @@ super initialize .
 		self inputR: 0.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHoleDW >> inputL [
 
 	^ inputL
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHoleDW >> inputL: anInput [
 
 	inputL := anInput asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHoleDW >> inputR [
 
 	^ inputR
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHoleDW >> inputR: anInput [
 
 	inputR := anInput asBox
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 GreyHoleDW >> patchedWith: aUnitGenerator [
 
 self inputL: aUnitGenerator .

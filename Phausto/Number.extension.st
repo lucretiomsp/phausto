@@ -1,6 +1,6 @@
-Extension { #name : #Number }
+Extension { #name : 'Number' }
 
-{ #category : #'*Phausto' }
+{ #category : '*Phausto' }
 Number >> asBox [
 
 BoxAPI uniqueInstance createLibContext .

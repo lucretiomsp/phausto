@@ -13,8 +13,8 @@ gate: the gate which triggers the amp envelope
 
 "
 Class {
-	#name : #Kick,
-	#superclass : #Synths,
+	#name : 'Kick',
+	#superclass : 'Synths',
 	#instVars : [
 		'pitch',
 		'click',
@@ -24,10 +24,12 @@ Class {
 		'gate',
 		'note'
 	],
-	#category : #'Phausto-BoxAPI-Synths'
+	#category : 'Phausto-BoxAPI-Synths',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Synths'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Kick >> asBox [
 
 	| intermediateBox finalBox |
@@ -38,67 +40,67 @@ Kick >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> attack [
 
 	^ attack
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> attack: aTimeInSeconds [ 
 
 	attack := aTimeInSeconds asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> click [
 
 	^ click
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> click: aTimeInSeconds [
 
 	click := aTimeInSeconds asBox.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> decay [
 
 	^ decay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> decay: aTimeInSeconds [ 
 
 	decay := aTimeInSeconds  asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> drive [
 
 	^ drive
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> drive: aNumber [
 
 	drive := aNumber asBox.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> gate [
 
 	^ gate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> gate: aTrigger [
 
 	gate := aTrigger asBox.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Kick >> initialize [
 
 	super initialize.
@@ -133,25 +135,25 @@ Kick >> initialize [
 	self uLevel: 0.4
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> note [
 
 	^ note
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> note: aNoteNumber [
 
 	note := aNoteNumber asBox.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> pitch [
 
 	^ pitch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Kick >> pitch: aFrequency [
 
 	pitch := aFrequency  asBox

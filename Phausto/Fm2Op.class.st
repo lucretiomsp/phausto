@@ -2,16 +2,18 @@
 Two operator FM synthesiser with ADSR envelope. Index values in the range 0-100 .
 "
 Class {
-	#name : #Fm2Op,
-	#superclass : #TpSynth,
+	#name : 'Fm2Op',
+	#superclass : 'TpSynth',
 	#instVars : [
 		'modulatorPitch',
 		'modIndex'
 	],
-	#category : #'Phausto-TurboPhausto'
+	#category : 'Phausto-TurboPhausto',
+	#package : 'Phausto',
+	#tag : 'TurboPhausto'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Fm2Op >> asBox [
 
 	| carrier modulator adsr |
@@ -27,7 +29,7 @@ Fm2Op >> asBox [
 	^ carrier asBox * adsr asBox * self level
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Fm2Op >> initialize [
 
 	super initialize.
@@ -45,25 +47,25 @@ Fm2Op >> initialize [
 			 step: 0.01)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Fm2Op >> modIndex [
 
 	^ modIndex 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Fm2Op >> modIndex: aNumber [
 
 	modIndex := aNumber asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Fm2Op >> modRatio [
 
 	^ modulatorPitch
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Fm2Op >> modRatio: aFrequency [ 
 
 	modulatorPitch := aFrequency asBox.

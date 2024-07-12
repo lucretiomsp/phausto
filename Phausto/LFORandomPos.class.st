@@ -2,12 +2,14 @@
 LowFrequencyOscillator with random positive values
 "
 Class {
-	#name : #LFORandomPos,
-	#superclass : #LowFrequencyOscillators,
-	#category : #'Phausto-ToolKit'
+	#name : 'LFORandomPos',
+	#superclass : 'LowFrequencyOscillators',
+	#category : 'Phausto-ToolKit',
+	#package : 'Phausto',
+	#tag : 'ToolKit'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 LFORandomPos >> asBox [
 
 	| sampleAndHold finalBox |

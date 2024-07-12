@@ -2,16 +2,18 @@
 Starts counting up from 0 to n included. While trig is 1 the output is 0. The countup starts with the transition of trig from 1 to 0. At the end of the countup the output value will remain at n until the next trig. countup is a standard Faust function.
 "
 Class {
-	#name : #CountUp,
-	#superclass : #UnitGenerator,
+	#name : 'CountUp',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'max',
 		'trig'
 	],
-	#category : #'Phausto-BoxAPI-Basics'
+	#category : 'Phausto-BoxAPI-Basics',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Basics'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 CountUp >> asBox [
 
 	| intermediateBox finalBox |
@@ -23,7 +25,7 @@ CountUp >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 CountUp >> initialize [
 
 	super initialize.
@@ -33,25 +35,25 @@ CountUp >> initialize [
 	self trig: 0 asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CountUp >> max [
 
 	^ max
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CountUp >> max: anInteger [
 
 	max := anInteger asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CountUp >> trig [
 
 	^ trig
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 CountUp >> trig: aTrigger [
 
 	trig := aTrigger asBox

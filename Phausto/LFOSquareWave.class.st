@@ -2,12 +2,14 @@
 Zero-mean unit-amplitude LF square wave.
 "
 Class {
-	#name : #LFOSquareWave,
-	#superclass : #LowFrequencyOscillators,
-	#category : #'Phausto-UnitGenerators'
+	#name : 'LFOSquareWave',
+	#superclass : 'LowFrequencyOscillators',
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 LFOSquareWave >> asBox [
 
 	| intermediateBox finalBox |
@@ -16,7 +18,7 @@ LFOSquareWave >> asBox [
 	^ finalBox * self amount asBox + self offset asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LFOSquareWave >> initialize [
 
 	super initialize.

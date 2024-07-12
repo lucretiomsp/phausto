@@ -2,21 +2,23 @@
 A collection of Envelopes from the Faust envelopes.lib
 "
 Class {
-	#name : #Reverbs,
-	#superclass : #PhBox,
+	#name : 'Reverbs',
+	#superclass : 'PhBox',
 	#instVars : [
 		'label'
 	],
-	#category : #'Phausto-BoxAPI-Effects'
+	#category : 'Phausto-BoxAPI-Effects',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Effects'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Reverbs >> label [
 
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Reverbs >> label: aString [
 
 	label := aString

@@ -2,16 +2,18 @@
 I am Chordy, a simple 3 voices oscillator with controllable  mode (minor/major/ sus4 / sus2) and cutoff frequency of my resonant ;owpass filter
 "
 Class {
-	#name : #Chordy,
-	#superclass : #TpSynth,
+	#name : 'Chordy',
+	#superclass : 'TpSynth',
 	#instVars : [
 		'mode',
 		'cutoff'
 	],
-	#category : #'Phausto-TurboPhausto'
+	#category : 'Phausto-TurboPhausto',
+	#package : 'Phausto',
+	#tag : 'TurboPhausto'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Chordy >> asBox [
 
 	| env voice1 voice2 voice3 filter filterFreq secondInterval selectorInputs |
@@ -42,19 +44,19 @@ Chordy >> asBox [
 	  * self level asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Chordy >> cutoff [
 
 	^ cutoff
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Chordy >> cutoff: aFrequency [ 
 
 	cutoff := aFrequency asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Chordy >> initialize [
 
 	super initialize.
@@ -75,13 +77,13 @@ Chordy >> initialize [
 	self level: 0.9
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Chordy >> mode [
 
 	^ mode
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Chordy >> mode: aMode [
 
 	mode := aMode asBox

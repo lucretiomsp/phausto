@@ -5,12 +5,14 @@ Alias-suppressed square wave oscillator. Based on the Square Faust standard func
 freq: frequency in Hz
 "
 Class {
-	#name : #SquareOsc,
-	#superclass : #Oscillators,
-	#category : #'Phausto-UnitGenerators'
+	#name : 'SquareOsc',
+	#superclass : 'Oscillators',
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 SquareOsc >> asBox [
 
 	| intermediateBox finalBox |
@@ -19,7 +21,7 @@ SquareOsc >> asBox [
 	^ finalBox * uLevel
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SquareOsc >> initialize [
 
 	super initialize.

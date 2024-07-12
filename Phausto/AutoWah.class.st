@@ -4,16 +4,18 @@ Auto-wah effect from Faust Virtual Analog Effect Library, where level is amount 
 Wah-wah (or wa-wa) is an imitative word for the sound of altering the resonance of musical notes to extend expressiveness, sounding much like a human voice saying the syllable wah. The wah-wah effect is a spectral glide, a ""modification of the vowel quality of a tone
 "
 Class {
-	#name : #AutoWah,
-	#superclass : #UnitGenerator,
+	#name : 'AutoWah',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'level',
 		'input'
 	],
-	#category : #'Phausto-BoxAPI-Effects'
+	#category : 'Phausto-BoxAPI-Effects',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Effects'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 AutoWah >> asBox [
 
 	| intermediateBox finalBox |
@@ -23,7 +25,7 @@ AutoWah >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 AutoWah >> initialize [
 
 	super initialize.
@@ -32,31 +34,31 @@ AutoWah >> initialize [
 	self level: 0.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AutoWah >> input [
 
 	^ input
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AutoWah >> input: anInput [
 
 	input := anInput asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AutoWah >> level [
 
 	^ level
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 AutoWah >> level: aLevel [
 
 	level := aLevel asBox
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 AutoWah >> patchedWith: aBox [
 self input: aBox
 ]

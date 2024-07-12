@@ -8,15 +8,17 @@ duty: duty cycle between 0 and 1
 
 "
 Class {
-	#name : #PulseOsc,
-	#superclass : #Oscillators,
+	#name : 'PulseOsc',
+	#superclass : 'Oscillators',
 	#instVars : [
 		'duty'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PulseOsc >> asBox [
 
 	| intermediateBox finalBox |
@@ -25,20 +27,20 @@ PulseOsc >> asBox [
 	^ finalBox * uLevel 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PulseOsc >> duty [
 
 	^ duty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PulseOsc >> duty: aFloat [
 	" duty cycle range 0 - 1"
 
 	duty := aFloat asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PulseOsc >> initialize [
 
 	super initialize.

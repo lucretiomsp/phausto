@@ -1,6 +1,6 @@
-Extension { #name : #ExternalAddress }
+Extension { #name : 'ExternalAddress' }
 
-{ #category : #'*Phausto' }
+{ #category : '*Phausto' }
 ExternalAddress class >> arrayOfStringsFrom: aCollection [
     "answer a char**, terminated with nil"
     | stringArray index |
@@ -14,7 +14,7 @@ ExternalAddress class >> arrayOfStringsFrom: aCollection [
     ^ stringArray
 ]
 
-{ #category : #'*Phausto' }
+{ #category : '*Phausto' }
 ExternalAddress >> freeArrayOfStrings [
 | index string |
 index := 1.
