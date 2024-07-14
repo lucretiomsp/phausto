@@ -9,7 +9,7 @@ Class {
 		'dsp',
 		'dspPlaying'
 	],
-	#category : #'Phausto-DynamicEngine'
+	#category : 'Phausto-DynamicEngine'
 }
 
 { #category : #accessing }
@@ -95,7 +95,7 @@ PhaustoyDynamicEngine >> createDspFromBoxes: aFaustBox [
 
 	^ self ffiCall:
 		  #( DSP * createDspFromBoxes #( const char * 'MyApp' , #PhBox * aFaustBox
-		        , int 0 , NULL , const char * '' , int -1 ) )
+		        , int 0 , void* 0 , const char * '' , int -1 ) )
 ]
 
 { #category : #'accessing - defaults' }
@@ -135,7 +135,7 @@ self  ffiCall:
 ]
 
 { #category : #'accessing - platform' }
-PhaustoyDynamicEngine >> macModuleName [
+PhaustoyDynamicEngine >> macLibraryName [
 	"Returns the name of the Dynamic Engine library for Mac."
 	^ 'librariesBundle/libdynamic-engine.dylib'
 ]

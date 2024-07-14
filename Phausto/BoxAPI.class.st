@@ -10,7 +10,7 @@ Class {
 		'INT_PTR',
 		'boxAlias'
 	],
-	#category : #'Phausto-BoxAPI'
+	#category : 'Phausto-BoxAPI'
 }
 
 { #category : #accessing }
@@ -327,7 +327,7 @@ BoxAPI >> isNil: aBox [
 ]
 
 { #category : #'accessing - platform' }
-BoxAPI >> macModuleName [
+BoxAPI >> macLibraryName [
 	"Returns the name of the dynamic libFaust for Mac."
 
 	^ 'librariesBundle/libfaust.2.dylib'

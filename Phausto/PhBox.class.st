@@ -16,7 +16,7 @@ Class {
 	#classVars : [
 		'libContext'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : 'Phausto-BoxAPI-Boxes'
 }
 
 { #category : #'class initialization' }
@@ -172,7 +172,7 @@ PhBox >> asFaustCode [
 	^ (BoxAPI uniqueInstance boxPrint: self asBox) asString
 ]
 
-{ #category : #accessing }
+{ #category : #'as yet unclassified' }
 PhBox >> attachedDSP [
 
 	^ attachedDSP
@@ -314,7 +314,7 @@ PhBox >> printOn: aStream [
 	^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString
 ]
 
-{ #category : #smoothing }
+{ #category : #'as yet unclassified' }
 PhBox >> smoo [
 	"Smoothing function based on smooth ideal to smooth UI signals (sliders, etc.) down. Approximately, this is a 7 Hz one-pole low-pass considering the coefficient calculation: exp(-2pi*CF/SR).
 
