@@ -221,7 +221,7 @@ PhBox >> chuckInto: aBox [
 PhBox >> connectTo: aUnitGenerator [
 	" correspond to Faust sequential opeartor : "
 
-	^ BoxAPI uniqueInstance boxSeqFrom: self to: aUnitGenerator asBox
+	^ BoxAPI uniqueInstance boxSeqFrom: self asBox to: aUnitGenerator asBox
 ]
 
 { #category : #accessing }
