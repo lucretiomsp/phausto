@@ -234,6 +234,28 @@ DSP >> getParamValueIndex: anInteger [
 				  #( float getParamValueDsp #( DSP * self , int anInteger ) )
 ]
 
+{ #category : #accessing }
+DSP >> getUIItems [
+
+	^ self getUIfromJSON at: #items
+]
+
+{ #category : #accessing }
+DSP >> getUIItemsLabeledDictionary [
+
+"returns a Dictionary with the UI items whose keys are the items labels"
+| itemsDictionary |
+itemsDictionary := Dictionary new.
+self  getUIItems do: [ :i | itemsDictionary at: (i at: 'label') put: i].
+^ itemsDictionary 
+]
+
+{ #category : #accessing }
+DSP >> getUIfromJSON [
+
+^ ((STONJSON fromString: (self getJSON)) at: #ui) at: 1
+]
+
 { #category : #initialize }
 DSP >> init [
 	"
