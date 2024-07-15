@@ -6,7 +6,9 @@ Class {
 		'numChannels',
 		'data',
 		'numSamples',
-		'sourceFile'
+		'sourceFile',
+		'isWavFile',
+		'fileStream'
 	],
 	#category : #PhAudioWavReader
 }
@@ -33,6 +35,13 @@ PhWavReader >> isBigEndian [
 PhWavReader >> isBigEndian: aBoolean [
 
 	isBigEndian := aBoolean
+]
+
+{ #category : #accessing }
+PhWavReader >> isWavFile [
+
+^ ((fileStream position: 8) next: 4) asString = 'WAVE'
+	
 ]
 
 { #category : #accessing }
@@ -68,5 +77,6 @@ PhWavReader >> sourceFile [
 { #category : #'as yet unclassified' }
 PhWavReader >> sourceFileName: aString [
 
-sourceFile := aString asFileReference 
+	sourceFile := File named: aString asFileReference fullName.
+	fileStream := sourceFile readStream
 ]
