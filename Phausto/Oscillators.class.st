@@ -19,8 +19,9 @@ Oscillators >> freq [
 { #category : #accessing }
 Oscillators >> freq: aNumberOrABox [
 
-	aNumberOrABox class = PhBox ifTrue: [ freq := aNumberOrABox  ] 
-	ifFalse:  [ self freq init: aNumberOrABox   ]
+	aNumberOrABox isNumber
+		ifTrue: [ self freq init: aNumberOrABox ]
+		ifFalse: [ freq := aNumberOrABox  ]
 ]
 
 { #category : #initialization }
