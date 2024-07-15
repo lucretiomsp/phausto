@@ -22,9 +22,12 @@ LowFrequencyOscillators >> amount [
 ]
 
 { #category : #accessing }
-LowFrequencyOscillators >> amount: anAmount [
+LowFrequencyOscillators >> amount: aNumberOrABox [
 
-	amount := anAmount asBox
+	aNumberOrABox isNumber 
+		ifTrue: [ self amount init: aNumberOrABox ]
+		ifFalse: [ amount := aNumberOrABox ]
+	
 ]
 
 { #category : #initialization }
@@ -56,7 +59,9 @@ LowFrequencyOscillators >> offset [
 ]
 
 { #category : #accessing }
-LowFrequencyOscillators >> offset: anOffset [
+LowFrequencyOscillators >> offset: aNumberOrABox [
 
-	offset := anOffset asBox
+	aNumberOrABox isNumber
+		ifTrue: [ self offset init: aNumberOrABox ]
+		ifFalse: [ offset  := aNumberOrABox ]
 ]

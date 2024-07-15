@@ -30,6 +30,13 @@ PhSlider >> initialize [
 	step := 0.01
 ]
 
+{ #category : #initialization }
+PhSlider >> initializeValue: aFloat [
+
+"used for double dispatch to set initial value of UnitGenerators"
+self init: aFloat
+]
+
 { #category : #'as yet unclassified' }
 PhSlider >> label: aLabel init: initValue min: minValue max: maxValue step: stepValue [
 

@@ -32,10 +32,11 @@ PulseOsc >> duty [
 ]
 
 { #category : #accessing }
-PulseOsc >> duty: aFloat [
+PulseOsc >> duty: aNumberOrABox [
 	" duty cycle range 0 - 1"
-
-	duty := aFloat asBox
+	aNumberOrABox class = PhBox
+		ifTrue: [ duty := aNumberOrABox ]
+		ifFalse: [ self duty init: aNumberOrABox ]
 ]
 
 { #category : #initialization }
