@@ -1,3 +1,6 @@
+"
+I am a Faust horizontal slider
+"
 Class {
 	#name : #PhHSlider,
 	#superclass : #PhSlider,

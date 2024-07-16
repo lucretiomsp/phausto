@@ -66,6 +66,14 @@ self  createLibContext.
 	^ self ffiCall: #( #PhBox * CboxButton #( const char * aLabel ) )
 ]
 
+{ #category : #'ui building' }
+BoxAPI >> boxCheckbox: aLabel [
+	"return a Checkbox box "
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxCheckbox #( const char * aLabel ) )
+]
+
 { #category : #utility }
 BoxAPI >> boxCut [
 "   
