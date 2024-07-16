@@ -1,41 +1,21 @@
 "
-A very simple button corresponding to Faust button primitive
+I represent a Faust button, you need me to display a button in your UI
 "
 Class {
 	#name : #PhButton,
-	#superclass : #SimpleButtonMorph,
+	#superclass : #UIPrimitive,
 	#instVars : [
-		'dsp'
+		'init',
+		'step'
 	],
-	#category : #'Phausto-GUI'
+	#category : #'Phausto-BoxAPI-UIPrimitives'
 }
 
-{ #category : #accessing }
-PhButton >> dsp [
+{ #category : #converting }
+PhButton >> asBox [
 
-	^ dsp
-]
-
-{ #category : #accessing }
-PhButton >> dsp: aDsp [
-
-"Assign a DSP to the button"
-	dsp := aDsp
-]
-
-{ #category : #'event handling' }
-PhButton >> mouseDown: evt [
-
-super mouseDown: evt.
-self dsp setValue: 1 parameter: self label
-
-]
-
-{ #category : #'event handling' }
-PhButton >> mouseUp: evt [
-
-super mouseUp: evt.
-
-self dsp setValue: 0 parameter: self label
+	
+	BoxAPI uniqueInstance createLibContext.
+	^ BoxAPI uniqueInstance boxButton: self label
 
 ]
