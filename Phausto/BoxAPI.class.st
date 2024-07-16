@@ -10,7 +10,7 @@ Class {
 		'INT_PTR',
 		'boxAlias'
 	],
-	#category : 'Phausto-BoxAPI'
+	#category : #'Phausto-BoxAPI'
 }
 
 { #category : #accessing }
@@ -32,7 +32,7 @@ BoxAPI class >> int_ptr [
 ^ INT_PTR 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #arithmetic }
 BoxAPI >> boxAbs: aBox [
 	"return the absolute value of aBox"
 
@@ -40,7 +40,7 @@ BoxAPI >> boxAbs: aBox [
 	^ self ffiCall: #( #PhBox * CboxAbsAux #( PhBox * aBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #arithmetic }
 BoxAPI >> boxAdd [
 	"   
 Sum unary operator, from CboxAdd Function
@@ -49,7 +49,7 @@ self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxAdd #(  ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #arithmetic }
 BoxAPI >> boxAdd: aBox with: anotherBox [
 	"   
 Sum binary operator, from CbobAddAuxFunxtion
@@ -59,14 +59,14 @@ self createLibContext.
 		  #( #PhBox * CboxAddAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'ui building' }
 BoxAPI >> boxButton: aLabel [
 	"return a Button boxxeqFrom:  to: "
 self  createLibContext.
 	^ self ffiCall: #( #PhBox * CboxButton #( const char * aLabel ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 BoxAPI >> boxCut [
 "   
 The cut box, to stop/terminate a signal. 
@@ -77,7 +77,7 @@ Return the cut box
 	^ self ffiCall: #( #PhBox * CboxCut #(  ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #creation }
 BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer [
 
 	| myArgv |
@@ -93,7 +93,7 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #creation }
 BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer arguments: argv [
 
 	self createLibContext.
@@ -104,7 +104,7 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 		        , ByteArray buffer ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'ui building' }
 BoxAPI >> boxHslider: aLabel init: initBox min: minBox max: maxBox step: stepBox [
 
 self createLibContext.
@@ -114,14 +114,14 @@ self createLibContext.
 		      , #PhBox * minBox , #PhBox * maxBox , #PhBox * stepBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #arithmetic }
 BoxAPI >> boxInt: anInteger [
 	"return the float/double box"
 self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxInt #( int anInteger ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'ui building' }
 BoxAPI >> boxMerge [
 	"   
     The merge composition (e.g., A:>B) is the dual of the split composition.
@@ -132,7 +132,7 @@ BoxAPI >> boxMerge [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'ui building' }
 BoxAPI >> boxMerge: aBox with: anotherBox [
 	"   
     The merge composition (e.g., A:>B) is the dual of the split composition.
@@ -144,7 +144,7 @@ BoxAPI >> boxMerge: aBox with: anotherBox [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #connecting }
 BoxAPI >> boxPar: aBox and: anotherBox [
 	" The parallel composition of two blocks (e.g., A,B).
      It places the two block-diagrams one on top of the other, without connections.
@@ -154,21 +154,21 @@ self createLibContext .
 		  #( #PhBox * CboxPar #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #printing }
 BoxAPI >> boxPrint: aBox [
 
 	self ffiCall:
 		#( char * CprintBox #( PhBox * aBox , bool true , int 99999 ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #arithmetic }
 BoxAPI >> boxReal: aDouble [
 	"return the float/double box"
 self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxReal #( double aDouble ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #connecting }
 BoxAPI >> boxRecursive: aBox with: anotherBox [
 	"   
 The recursive composition (e.g., A~B) is used to create cycles in the block-diagram in order to express recursive computations.
@@ -180,7 +180,7 @@ self createLibContext.
 		  #( #PhBox * CboxRec #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #arithmetic }
 BoxAPI >> boxRem: aBox with: anotherBox [
 	"   
 rem operator
@@ -191,7 +191,7 @@ rem operator
 		  #( #PhBox * CboxRemAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 BoxAPI >> boxSelect2Aux: aSelector input0: anInput input1: anotherInput [
 	"   
 Sum unary operator, from CbobAddA Function
@@ -200,7 +200,7 @@ self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxSelect2Aux #( #PhBox * aSelector , #PhBox * anInput , #PhBox * anotherInput  ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #connecting }
 BoxAPI >> boxSeqFrom: aBox to: anotherBox [
 	" The sequential composition of two blocks (e.g., A:B) expects: outputs(A)=inputs(B)
      return the seq box.
@@ -228,7 +228,7 @@ BoxAPI >> boxSoundFile: aLabel numChannels: chan part: anInt8 readIndex: anInteg
 		  #( #PhBox * CoxSoundfileAux #( const char * aLabel , #PhBox * chan, #PhBox * anInt8 , #PhBox * anInteger ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #connecting }
 BoxAPI >> boxSplit: aBox with: anotherBox [
 	"   
 The split composition (e.g., A<:B) operator is used to distribute the outputs of A to the inputs of B.
@@ -241,7 +241,7 @@ For the operation to be valid, the number of inputs of B must be a multiple of t
 		  #( #PhBox * CboxSplit #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #arithmetic }
 BoxAPI >> boxSubtract: aBox from: anotherBox [
 	"   
 Sum binary operator, from CbobAddAuxFunxtion
@@ -252,7 +252,7 @@ Sum binary operator, from CbobAddAuxFunxtion
 		  #( #PhBox * CboxSubAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'ui building' }
 BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
 	"Create a horizontal bargraph box."
 
@@ -262,7 +262,7 @@ BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
 		        , #PhBox * anInput ) )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utility }
 BoxAPI >> boxWire [
 	"return the wire / identity box"
 
