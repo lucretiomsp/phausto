@@ -14,7 +14,7 @@ Class {
 		'feedBack',
 		'label'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : #'Phausto-TurboPhausto'
 }
 
 { #category : #converting }

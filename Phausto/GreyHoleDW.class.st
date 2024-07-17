@@ -11,7 +11,7 @@ Class {
 		'inputL',
 		'inputR'
 	],
-	#category : #'Phausto-ToolKit'
+	#category : #'Phausto-TurboPhausto'
 }
 
 { #category : #converting }
