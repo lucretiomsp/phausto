@@ -16,7 +16,7 @@ Class {
 	#classVars : [
 		'libContext'
 	],
-	#category : 'Phausto-BoxAPI-Boxes'
+	#category : #'Phausto-BoxAPI-Boxes'
 }
 
 { #category : #'class initialization' }
@@ -135,24 +135,28 @@ PhBox >> asDsp [
 	" creates a DSP from the Box"
 
 	| finalDsp interBox |
-	PhBox  libContext ifFalse: [ ^ Error new signal: 'Invalid Box - please (re)create one' ] ifTrue: [  
-	interBox := self asBox.
-	"initialize the final DSP to a null pointer"
-	finalDsp := DSP new.
+	PhBox libContext
+		ifFalse: [
+		^ Error new signal: 'Invalid Box - please (re)create one' ]
+		ifTrue: [
+			interBox := self asBox.
+			"initialize the final DSP to a null pointer"
+			finalDsp := DSP new.
 
-	interBox
-		ifNotNil: [
-			DSP initializedDSP destroy.
-			finalDsp := PhaustoyDynamicEngine uniqueInstance
-				            createDspFromBoxes: self asBox.
-			PhaustoyDynamicEngine dspPlaying: finalDsp.
-			finalDsp name: 'MyApp'.
-			attachedDSP := finalDsp.
+			interBox
+				ifNotNil: [
+					DSP initializedDSP ifNotNil: [DSP initializedDSP destroy].
+					finalDsp := PhaustoyDynamicEngine uniqueInstance
+						            createDspFromBoxes: self asBox.
+					PhaustoyDynamicEngine dspPlaying: finalDsp.
+					finalDsp name: 'MyApp'.
+					attachedDSP := finalDsp.
 
-			BoxAPI uniqueInstance destroyLibContext ]
-		ifNil: [ Error new signal: 'Invalid Box please check its creation' ].
+					BoxAPI uniqueInstance destroyLibContext ]
+				ifNil: [
+				Error new signal: 'Invalid Box please check its creation' ].
 
-	^ finalDsp]
+			^ finalDsp ]
 ]
 
 { #category : #converting }
