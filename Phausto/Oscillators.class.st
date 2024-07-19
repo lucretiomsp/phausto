@@ -36,5 +36,10 @@ Oscillators >> initialize [
 		        min: 1
 		        max: 2000
 		        step: 0.001.
-	self uLevel: 0.5
+	uLevel := PhHSlider new
+		        label: self label , 'ULevel'
+		        init: 0.5
+		        min: 0
+		        max: 1
+		        step: 0.001. 
 ]
