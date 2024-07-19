@@ -72,7 +72,7 @@ defaultName := '/MyApp/'
 { #category : #accessing }
 DSP class >> initializedDSP [
 
-	^ initializedDSP
+	^ initializedDSP ifNil: [ initializedDSP := DSP new ]
 ]
 
 { #category : #accessing }

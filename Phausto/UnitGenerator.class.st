@@ -18,6 +18,18 @@ Class {
 	#category : #'Phausto-UnitGenerators'
 }
 
+{ #category : #'as yet unclassified' }
+UnitGenerator class >> newlabel: aString [
+
+	^ self new: aString
+]
+
+{ #category : #'as yet unclassified' }
+UnitGenerator class >> withlabel: aString [
+
+	^ self new 
+]
+
 { #category : #connecting }
 UnitGenerator >> + aUnitGenerator [
 	"sum two Unit Generators"
@@ -87,7 +99,18 @@ UnitGenerator >> initialize [
 
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
-	self label: self className asString.
+	label :=  self className asString.
+	self uLevel: 1
+]
+
+{ #category : #initialization }
+UnitGenerator >> initialize: aString [
+
+	super initialize.
+
+	importStatement := 'import("stdfaust.lib");'.
+	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
+	label:= aString .
 	self uLevel: 1
 ]
 
@@ -112,6 +135,13 @@ UnitGenerator >> mono [
 	stereo := self asBox.
 	mono := stereo mergeWith: Wire new asBox.
 	^ stereo
+]
+
+{ #category : #'instance creation' }
+UnitGenerator >> newLabel: aString [
+
+self initialize .
+label := aString
 ]
 
 { #category : #connecting }
