@@ -1,13 +1,5 @@
-"
-This library contains a collection of envelope generators from Faust envelopes.lib
-All the envelopes have at least an attack time and a release time.
-To be triggered they need to receive an input greater than 0
-
-for example:
-(Button new label: 'trigger' ) connectTo: AREnv new
-"
 Class {
-	#name : #Envelope,
+	#name : #PhEnvelope,
 	#superclass : #UnitGenerator,
 	#instVars : [
 		'attack',
@@ -18,21 +10,21 @@ Class {
 }
 
 { #category : #accessing }
-Envelope >> attack [
+PhEnvelope >> attack [
 
 	^ attack
 ]
 
 { #category : #accessing }
-Envelope >> attack: anObject [
+PhEnvelope >> attack: anObject [
 
 	attack := anObject asBox
 ]
 
 { #category : #initialization }
-Envelope >> initialize [
+PhEnvelope >> initialize [
 
-	super initialize.
+super initialize.
 	attack := PhHSlider new
 		          label: self label , 'Attack'
 		          init: 0.001
@@ -54,31 +46,30 @@ Envelope >> initialize [
 ]
 
 { #category : #connecting }
-Envelope >> patchedWith: aUnitGenerator [
+PhEnvelope >> patchedWith: aUnitGenerator [
 
-aUnitGenerator asBox * self asBox.
+^ aUnitGenerator asBox * self asBox
+]
+
+{ #category : #dependencies }
+PhEnvelope >> release [ 
+^ release 
 ]
 
 { #category : #accessing }
-Envelope >> release [
+PhEnvelope >> release: anObject [
 
-	^ release
+	release := anObject asBox
 ]
 
 { #category : #accessing }
-Envelope >> release: anObject [
-
-	release := anObject
-]
-
-{ #category : #accessing }
-Envelope >> trigger [
+PhEnvelope >> trigger [
 
 	^ trigger
 ]
 
 { #category : #accessing }
-Envelope >> trigger: anObject [
+PhEnvelope >> trigger: anObject [
 
 	trigger := anObject asBox
 ]

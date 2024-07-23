@@ -11,7 +11,7 @@ t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
 	#name : #ADSREnv,
-	#superclass : #Envelope,
+	#superclass : #PhEnvelope,
 	#instVars : [
 		'decay',
 		'sustain'
