@@ -24,17 +24,31 @@ LowFrequencyOscillators >> amount [
 { #category : #accessing }
 LowFrequencyOscillators >> amount: aNumberOrABox [
 
-	aNumberOrABox isNumber 
-		ifTrue: [ self amount init: aNumberOrABox ]
+	aNumberOrABox isNumber
+		ifTrue: [ amount :=PhHSlider new
+		          label: self label , 'Amount'
+		          init: aNumberOrABox 
+		          min: 0
+		          max: 28000
+		          step: 1.  ]
 		ifFalse: [ amount := aNumberOrABox ]
-	
+]
+
+{ #category : #converting }
+LowFrequencyOscillators >> asBox [
+
+	| intermediateBox finalBox |
+	self initializeUIParamters .
+	intermediateBox := super asBox.
+	finalBox := freq asBox connectTo: intermediateBox.
+	^ finalBox * self amount asBox + self offset asBox
 ]
 
 { #category : #initialization }
 LowFrequencyOscillators >> initialize [
 
 	super initialize.
-	self uLevel: 1.
+	"self uLevel: 1."
 	amount := PhHSlider new
 		          label: self label , 'Amount'
 		          init: 1
@@ -53,6 +67,33 @@ LowFrequencyOscillators >> initialize [
 		        min: 0.01
 		        max: 20
 		        step: 0.001
+
+	"as LFO are used for modulation, there default level is set to 1"
+]
+
+{ #category : #initialization }
+LowFrequencyOscillators >> initializeUIParamters [
+
+	super initializeUIParameters.
+
+	amount ifNil: [amount := PhHSlider new
+		          label: self label , 'Amount'
+		          init: 1
+		          min: 0
+		          max: 28000
+		          step: 1].
+	offset ifNil: [offset := PhHSlider new
+		          label: self label , 'Offset'
+		          init: 0
+		          min: 0
+		          max: 800
+		          step: 0.01].
+	freq ifNil: [freq := PhHSlider new
+		        label: self label , 'Freq'
+		        init: 2
+		        min: 0.01
+		        max: 20
+		        step: 0.001]
 
 	"as LFO are used for modulation, there default level is set to 1"
 ]

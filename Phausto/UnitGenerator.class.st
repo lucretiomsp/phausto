@@ -96,19 +96,9 @@ UnitGenerator >> initialize [
 
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
-	label :=  self className asString.
-	self uLevel: 1
-]
-
-{ #category : #initialization }
-UnitGenerator >> initialize: aString [
-
-	super initialize.
-
-	importStatement := 'import("stdfaust.lib");'.
-	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
-	label := aString.
-	self uLevel: 0.5
+	label := self className asString.
+	"default uLevel for all UnitGenerators is set to 0.5"
+	uLevel := 0.5.
 ]
 
 { #category : #initialization }
@@ -190,7 +180,9 @@ UnitGenerator >> uLevel [
 ]
 
 { #category : #accessing }
-UnitGenerator >> uLevel: aLevel [
+UnitGenerator >> uLevel: aNumberOrABox [
 
-	uLevel := aLevel asBox
+	aNumberOrABox class = PhBox
+		ifTrue: [ uLevel  := aNumberOrABox ]
+		ifFalse: [ self uLevel init: aNumberOrABox ]
 ]

@@ -20,7 +20,7 @@ Oscillators >> freq [
 Oscillators >> freq: aNumberOrABox [
 
 	aNumberOrABox isNumber
-		ifTrue: [ self freq init: aNumberOrABox ]
+		ifTrue: [ freq := PhHSlider new label: self label , 'Freq' init: aNumberOrABox min: 20 max: 4086 step: 1]
 		ifFalse: [ freq := aNumberOrABox  ]
 ]
 
@@ -30,31 +30,20 @@ Oscillators >> initialize [
 	super initialize.
 	"default frequency for all Oscilators is A4 at picth standard"
 
-	freq := PhHSlider new
-		        label: self label , 'Freq'
-		        init: 440
-		        min: 1
-		        max: 2000
-		        step: 0.001.
-	uLevel := PhHSlider new
-		        label: self label , 'ULevel'
-		        init: 0.5
-		        min: 0
-		        max: 1
-		        step: 0.001. 
+	
 ]
 
 { #category : #initialization }
-Oscillators >> initializeUIParameters [ 
+Oscillators >> initializeUIParameters [
 
-	super initializeUIParameters .
+	super initializeUIParameters.
 	"default frequency for all Oscilators is A4 at picth standard - maxValue corresponds to a C8 note"
 
-	freq := PhHSlider new
+	"the UI element to control the freq is created only if the parameter is nil at instance creation"
+	freq ifNil: [freq := PhHSlider new
 		        label: self label , 'Freq'
 		        init: 440
 		        min: 1
 		        max: 4186
-		        step: 0.001.
-
+		        step: 0.001]
 ]
