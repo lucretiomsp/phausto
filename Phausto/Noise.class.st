@@ -13,5 +13,5 @@ Noise >> initialize [
 
 	super initialize.
 	processExpression := 'process = no.noise;'.
-	self uLevel: 0.4
+	
 ]

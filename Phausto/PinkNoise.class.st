@@ -6,3 +6,10 @@ Class {
 	#superclass : #Noise,
 	#category : #'Phausto-UnitGenerators'
 }
+
+{ #category : #initialization }
+PinkNoise >> initialize [
+
+	super initialize.
+	processExpression := 'process = no.pink_noise;'
+]
