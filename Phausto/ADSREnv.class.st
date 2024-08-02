@@ -38,9 +38,11 @@ ADSREnv >> decay [
 ]
 
 { #category : #accessing }
-ADSREnv >> decay: anObject [
+ADSREnv >> decay: aNumberOrABox [
 
-	decay := anObject
+	aNumberOrABox isNumber
+		ifTrue: [ self decay  init: aNumberOrABox ]
+		ifFalse: [ decay := aNumberOrABox ]
 ]
 
 { #category : #initialization }
@@ -52,6 +54,24 @@ ADSREnv >> initialize [
 	processExpression := 'process = en.adsr;'
 ]
 
+{ #category : #initialization }
+ADSREnv >> initializeUIParameters [
+
+	super initializeUIParameters.
+	decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.001
+		         min: 0.001
+		         max: 2
+		         step: 1.
+	sustain := PhHSlider new
+		           label: self label , 'Sustain'
+		           init: 0.5
+		           min: 0
+		           max: 1
+		           step: 0.001
+]
+
 { #category : #accessing }
 ADSREnv >> sustain [
 
@@ -59,7 +79,9 @@ ADSREnv >> sustain [
 ]
 
 { #category : #accessing }
-ADSREnv >> sustain: anObject [
+ADSREnv >> sustain: aNumberOrABox [
 
-	sustain := anObject
+	aNumberOrABox isNumber
+		ifTrue: [ self sustain init: aNumberOrABox ]
+		ifFalse: [ sustain := aNumberOrABox ]
 ]
