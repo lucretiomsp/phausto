@@ -1,3 +1,8 @@
+"
+I am the superclass for all Phausto envelopes.
+In sound and music, an envelope describes how a sound changes over time.
+The envelope generator was created by tHerbert Deutsch for Robert Moog, the creator of the Moog synthesizer, in the 1960s.
+"
 Class {
 	#name : #PhEnvelope,
 	#superclass : #UnitGenerator,
@@ -24,7 +29,14 @@ PhEnvelope >> attack: anObject [
 { #category : #initialization }
 PhEnvelope >> initialize [
 
-super initialize.
+	super initialize.
+	
+]
+
+{ #category : #initialization }
+PhEnvelope >> initializeUIParameters [ 
+
+	super initializeUIParameters .
 	attack := PhHSlider new
 		          label: self label , 'Attack'
 		          init: 0.001

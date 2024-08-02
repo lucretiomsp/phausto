@@ -43,3 +43,18 @@ Oscillators >> initialize [
 		        max: 1
 		        step: 0.001. 
 ]
+
+{ #category : #initialization }
+Oscillators >> initializeUIParameters [ 
+
+	super initializeUIParameters .
+	"default frequency for all Oscilators is A4 at picth standard - maxValue corresponds to a C8 note"
+
+	freq := PhHSlider new
+		        label: self label , 'Freq'
+		        init: 440
+		        min: 1
+		        max: 4186
+		        step: 0.001.
+
+]

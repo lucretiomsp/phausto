@@ -20,9 +20,10 @@ Class {
 PulseOsc >> asBox [
 
 	| intermediateBox finalBox |
+	self initializeUIParameters .
 	intermediateBox := super asBox.
 	finalBox := freq , duty connectTo: intermediateBox.
-	^ finalBox * uLevel 
+	^ finalBox * uLevel
 ]
 
 { #category : #accessing }
@@ -44,6 +45,19 @@ PulseOsc >> initialize [
 
 	super initialize.
 	processExpression := 'process = os.pulsetrain;'.
-	duty := (PhHSlider new label: self label , 'Duty' init: 0.5  min: 0  max: 1  step: 0.001).
-	self uLevel: 0.5.
+	
+]
+
+{ #category : #initialization }
+PulseOsc >> initializeUIParameters [ 
+
+	super initialize.
+	
+	duty := PhHSlider new
+		        label: self label , 'Duty'
+		        init: 0.5
+		        min: 0
+		        max: 1
+		        step: 0.001.
+	
 ]

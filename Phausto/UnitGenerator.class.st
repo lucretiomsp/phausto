@@ -3,7 +3,10 @@ Super class of all Unit Generators.
 The import statement imports all the functions of Faust Standard Libraries.
 The process expression must be declared for all the different subclasses.
 The uLevel instance variable is used to set the level of the UGen and it acts as a Gain multiplier.
-Each Unit Geneterator has a label, by default is the class name; the label is used to construct the UI/control access to the Unit Generator
+Each Unit Geneterator has a label, by default is the class name; the label is used to construct the UI/control access to the Unit Generator.
+If you want to give me a custom label, send use:
+UnitGenerator withLabel: aString
+otherwise my label will be my className asString
 "
 Class {
 	#name : #UnitGenerator,
@@ -19,15 +22,9 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-UnitGenerator class >> newlabel: aString [
-
-	^ self new: aString
-]
-
-{ #category : #'as yet unclassified' }
 UnitGenerator class >> withlabel: aString [
 
-	^ self new 
+	^ self new label: aString
 ]
 
 { #category : #connecting }
@@ -110,8 +107,19 @@ UnitGenerator >> initialize: aString [
 
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
-	label:= aString .
-	self uLevel: 1
+	label := aString.
+	self uLevel: 0.5
+]
+
+{ #category : #initialization }
+UnitGenerator >> initializeUIParameters [
+
+	uLevel := PhHSlider new
+		          label: self label
+		          init: 0.5
+		          min: 0
+		          max: 1
+		          step: 0.001
 ]
 
 { #category : #accessing }
