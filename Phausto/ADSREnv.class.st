@@ -58,18 +58,18 @@ ADSREnv >> initialize [
 ADSREnv >> initializeUIParameters [
 
 	super initializeUIParameters.
-	decay := PhHSlider new
+	self decay ifNil: [decay := PhHSlider new
 		         label: self label , 'Decay'
 		         init: 0.001
 		         min: 0.001
 		         max: 2
-		         step: 1.
-	sustain := PhHSlider new
+		         step: 1.].
+	self sustain ifNil: [sustain := PhHSlider new
 		           label: self label , 'Sustain'
 		           init: 0.5
 		           min: 0
 		           max: 1
-		           step: 0.001
+		           step: 0.001]
 ]
 
 { #category : #accessing }

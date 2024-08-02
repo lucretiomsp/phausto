@@ -34,27 +34,26 @@ PhEnvelope >> initialize [
 ]
 
 { #category : #initialization }
-PhEnvelope >> initializeUIParameters [ 
+PhEnvelope >> initializeUIParameters [
 
-	super initializeUIParameters .
-	attack := PhHSlider new
-		          label: self label , 'Attack'
-		          init: 0.001
-		          min: 0.001
-		          max: 2
-		          step: 1.
-	release := PhHSlider new
-		           label: self label , 'Release'
-		           init: 0.3
-		           min: 0.001
-		           max: 3
-		           step: 0.001.
-	trigger := PhHSlider new
-		           label: self label , 'Gate'
-		           init: 0
-		           min: 0
-		           max: 1
-		           step: 1
+	super initializeUIParameters.
+	self attack ifNil: [
+		attack := PhHSlider new
+			          label: self label , 'Attack'
+			          init: 0.001
+			          min: 0.001
+			          max: 2
+			          step: 1 ].
+	self release ifNil: [
+		release := PhHSlider new
+			           label: self label , 'Release'
+			           init: 0.3
+			           min: 0.001
+			           max: 3
+			           step: 0.001 ].
+	self trigger ifNil: [
+		trigger := PhButton  new
+			           label: self label , 'Gate']
 ]
 
 { #category : #connecting }
