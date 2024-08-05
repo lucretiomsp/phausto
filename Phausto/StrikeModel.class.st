@@ -12,7 +12,7 @@ Class {
 		'gain',
 		'gate'
 	],
-	#category : #'Phausto-BoxAPI-PhysicalModels'
+	#category : #'Phausto-PhysicalModels'
 }
 
 { #category : #accessing }

@@ -10,7 +10,7 @@ Class {
 		'bowPressure',
 		'bowPosition'
 	],
-	#category : #'Phausto-BoxAPI-PhysicalModels'
+	#category : #'Phausto-PhysicalModels'
 }
 
 { #category : #converting }

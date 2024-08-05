@@ -13,7 +13,7 @@ Class {
 	#instVars : [
 		'strikeCutoff'
 	],
-	#category : #'Phausto-BoxAPI-PhysicalModels'
+	#category : #'Phausto-PhysicalModels'
 }
 
 { #category : #converting }
