@@ -80,7 +80,8 @@ PhEnvelope >> trigger [
 ]
 
 { #category : #accessing }
-PhEnvelope >> trigger: anObject [
-
-	trigger := anObject asBox
+PhEnvelope >> trigger:	aNumberOrABox [ 
+	aNumberOrABox class = PhBox
+		ifTrue: [ trigger := aNumberOrABox ]
+		ifFalse: [ self trigger init: aNumberOrABox ]
 ]

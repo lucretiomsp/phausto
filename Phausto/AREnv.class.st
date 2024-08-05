@@ -18,8 +18,9 @@ Class {
 { #category : #converting }
 AREnv >> asBox [
 
-	| intermediateBox finalBox  |
-	intermediateBox := super asBox .
+	| intermediateBox finalBox |
+	self initializeUIParameters .
+	intermediateBox := super asBox.
 	finalBox := self attack asBox , self release asBox
 	            , self trigger asBox connectTo: intermediateBox.
 	^ finalBox
