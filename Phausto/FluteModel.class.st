@@ -50,16 +50,17 @@ FluteModel >> mouthPosition [
 ]
 
 { #category : #accessing }
-FluteModel >> mouthPosition: 	aNumberOrABox [ 
+FluteModel >> mouthPosition: aNumberOrABox [
+
 	aNumberOrABox isNumber
 		ifTrue: [
-			mouthPosition  := PhHSlider new
-				        label: self label , 'MoutPosition'
-				        init: aNumberOrABox
-				        min: 20
-				        max: 4086
-				        step: 1 ]
-		ifFalse: [ mouthPosition  := aNumberOrABox ]
+			mouthPosition := PhHSlider new
+				                 label: self label , 'MoutPosition'
+				                 init: aNumberOrABox
+				                 min: 20
+				                 max: 4086
+				                 step: 1 ]
+		ifFalse: [ mouthPosition := aNumberOrABox ]
 ]
 
 { #category : #accessing }
