@@ -11,10 +11,10 @@ Class {
 TriOsc >> asBox [
 
 	| intermediateBox finalBox |
-	
-	intermediateBox := super asBox .
-	finalBox := freq asBox connectTo: intermediateBox .
-^ finalBox * uLevel
+	self initializeUIParameters .
+	intermediateBox := super asBox.
+	finalBox := freq asBox connectTo: intermediateBox.
+	^ finalBox * uLevel
 ]
 
 { #category : #initialization }

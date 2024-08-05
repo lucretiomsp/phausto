@@ -51,12 +51,13 @@ PulseOsc >> initialize [
 { #category : #initialization }
 PulseOsc >> initializeUIParameters [
 
-	super initialize.
+	super initializeUIParameters .
 
-	self duty ifNil: [duty := PhHSlider new
-		        label: self label , 'Duty'
-		        init: 0.5
-		        min: 0
-		        max: 1
-		        step: 0.001]
+	self duty ifNil: [
+		duty := PhHSlider new
+			        label: self label , 'Duty'
+			        init: 0.5
+			        min: 0
+			        max: 1
+			        step: 0.001 ]
 ]
