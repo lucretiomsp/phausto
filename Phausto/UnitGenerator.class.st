@@ -105,7 +105,7 @@ UnitGenerator >> initialize [
 UnitGenerator >> initializeUIParameters [
 
 	uLevel := PhHSlider new
-		          label: self label
+		          label: self label , 'uLevel'
 		          init: 0.5
 		          min: 0
 		          max: 1
