@@ -2,18 +2,20 @@
 Clap synthesis with filtered noise
 "
 Class {
-	#name : #Clap,
-	#superclass : #Synths,
+	#name : 'Clap',
+	#superclass : 'Synths',
 	#instVars : [
 		'tone',
 		'attack',
 		'decay',
 		'gate'
 	],
-	#category : #'Phausto-BoxAPI-Synths'
+	#category : 'Phausto-BoxAPI-Synths',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Synths'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Clap >> asBox [
 
 	| intermediateBox finalBox |
@@ -23,43 +25,43 @@ Clap >> asBox [
 	^ finalBox 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Clap >> attack [
 
 	^ attack
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Clap >> attack: aBoxorAFloat [
 
 	attack := aBoxorAFloat asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Clap >> decay [
 
 	^ decay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Clap >> decay: aBoxorAFloat [
 
 	decay := aBoxorAFloat asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Clap >> gate [
 
 	^ gate
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Clap >> gate: aBoxorAFloat [
 
 	gate := aBoxorAFloat asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Clap >> initialize [
 
 	super initialize.
@@ -75,13 +77,13 @@ Clap >> initialize [
 		        step: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Clap >> tone [
 
 	^ tone
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Clap >> tone: aBoxorAFloat [
 
 	tone := aBoxorAFloat asBox

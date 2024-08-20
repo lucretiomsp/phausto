@@ -2,12 +2,14 @@
 I represent a Faust button, you need me to display a button in your UI
 "
 Class {
-	#name : #PhButton,
-	#superclass : #UIPrimitive,
-	#category : #'Phausto-BoxAPI-UIPrimitives'
+	#name : 'PhButton',
+	#superclass : 'UIPrimitive',
+	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-UIPrimitives'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhButton >> asBox [
 
 	

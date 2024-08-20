@@ -3,15 +3,17 @@ s(mooth)delay: a mono delay that doesn't click and doesn't transpose when the de
 Interpolation time (in seconds) is by default 0.1 seconds
 "
 Class {
-	#name : #SmoothDelay,
-	#superclass : #Delays,
+	#name : 'SmoothDelay',
+	#superclass : 'Delays',
 	#instVars : [
 		'interpolationTime'
 	],
-	#category : #'Phausto-BoxAPI-Effects'
+	#category : 'Phausto-BoxAPI-Effects',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Effects'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 SmoothDelay >> asBox [
 
 	| intermediateBox finalBox |
@@ -22,7 +24,7 @@ SmoothDelay >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SmoothDelay >> initialize [
 
 	super initialize.
@@ -30,13 +32,13 @@ SmoothDelay >> initialize [
 	self interpolationTime: 0.1 asBox * PhSampleRate new asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmoothDelay >> interpolationTime [
 
 	^ interpolationTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SmoothDelay >> interpolationTime: aFloatOrABox [
 
 	interpolationTime := aFloatOrABox asBox

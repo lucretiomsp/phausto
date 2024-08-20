@@ -20,8 +20,8 @@ depth ([0..1]) of delay-line modulation. Use in combination with mod_freq to pro
 
 "
 Class {
-	#name : #GreyHole,
-	#superclass : #Reverbs,
+	#name : 'GreyHole',
+	#superclass : 'Reverbs',
 	#instVars : [
 		'inputL',
 		'inputR',
@@ -33,10 +33,12 @@ Class {
 		'modDepth',
 		'modFreq'
 	],
-	#category : #'Phausto-BoxAPI-Effects'
+	#category : 'Phausto-BoxAPI-Effects',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Effects'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 GreyHole >> asBox [
 
 	| intermediateBox code finalBox |
@@ -54,51 +56,51 @@ GreyHole >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> damp [
 
 	^ damp
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> damp: aFloatOrABoxBetweenZeroAndOne [
 
 	damp := aFloatOrABoxBetweenZeroAndOne asBox
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> dt [
 
 	^ dt
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> dt: aFloatOrABoxBetweenZeroPointOneAndSixty [
 
 
 	dt := aFloatOrABoxBetweenZeroPointOneAndSixty asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> earlyDiff [
 
 	^ earlyDiff
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> earlyDiff: anObject [
 
 	earlyDiff := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> feedback [
 
 	^ feedback
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> feedback: aFloatOrABoxBetweenZeroAndOne [
 
 
@@ -106,7 +108,7 @@ GreyHole >> feedback: aFloatOrABoxBetweenZeroAndOne [
  
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 GreyHole >> initialize [
 
 	super initialize.
@@ -157,37 +159,37 @@ GreyHole >> initialize [
 	self inputR: Wire new asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> inputL [
 
 	^ inputL
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> inputL: anInput [
 
 	inputL := anInput asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> inputR [
 
 	^ inputR
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> inputR: anInput [
 
 	inputR := anInput asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> modDepth [
 
 	^ modDepth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> modDepth: aFloatOrABoxBetweenZeroAndOne [
 
 
@@ -195,13 +197,13 @@ GreyHole >> modDepth: aFloatOrABoxBetweenZeroAndOne [
  
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> modFreq [
 
 	^ modFreq
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> modFreq: aFloatOrABoxBetweenZeroAndTen [
 
 
@@ -209,19 +211,19 @@ GreyHole >> modFreq: aFloatOrABoxBetweenZeroAndTen [
 
 ]
 
-{ #category : #'accessing - input' }
+{ #category : 'accessing - input' }
 GreyHole >> patchedWith: aUnitGenerator [
 self inputL: aUnitGenerator .
 self inputR: aUnitGenerator 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> size [
 
 	^ size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GreyHole >> size: aFloatOrABoxBetweenZeroPointFiveAndThree [
 
 

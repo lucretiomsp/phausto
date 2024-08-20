@@ -2,18 +2,20 @@
 Ready-to-use simple violin physical model. This model implements a single string. Additional strings should be created by making a polyphonic application out of this function. Pitch is changed by changing the length of the string (and not through a finger model)
 "
 Class {
-	#name : #ViolinModel,
-	#superclass : #UnitGenerator,
+	#name : 'ViolinModel',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'stringLength',
 		'bowVelocity',
 		'bowPressure',
 		'bowPosition'
 	],
-	#category : #'Phausto-PhysicalModels'
+	#category : 'Phausto-PhysicalModels',
+	#package : 'Phausto',
+	#tag : 'PhysicalModels'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 ViolinModel >> asBox [
 
 	| intermediateBox finalBox |
@@ -26,43 +28,43 @@ ViolinModel >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ViolinModel >> bowPosition [
 
 	^ bowPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ViolinModel >> bowPosition: anObject [
 
 	bowPosition := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ViolinModel >> bowPressure [
 
 	^ bowPressure
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ViolinModel >> bowPressure: anObject [
 
 	bowPressure := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ViolinModel >> bowVelocity [
 
 	^ bowVelocity
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ViolinModel >> bowVelocity: anObject [
 
 	bowVelocity := anObject asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ViolinModel >> initialize [ 
 
 super initialize .
@@ -74,13 +76,13 @@ self bowPressure: 0.6.
 self bowPosition: 0.2 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ViolinModel >> stringLength [
 
 	^ stringLength
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ViolinModel >> stringLength: anObject [
 
 	stringLength := anObject asBox

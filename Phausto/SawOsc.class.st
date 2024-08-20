@@ -6,12 +6,14 @@ Alias-suppressed sawtooth oscillator, sawtooth is a standard Faust function.
 freq: frequency in Hz
 "
 Class {
-	#name : #SawOsc,
-	#superclass : #Oscillators,
-	#category : #'Phausto-UnitGenerators'
+	#name : 'SawOsc',
+	#superclass : 'Oscillators',
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 SawOsc >> asBox [
 
 	| intermediateBox finalBox |
@@ -21,7 +23,7 @@ SawOsc >> asBox [
 	^ finalBox * uLevel
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SawOsc >> initialize [
 
 	super initialize.

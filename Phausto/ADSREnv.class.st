@@ -10,16 +10,18 @@ rt: release time (sec)
 t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
-	#name : #ADSREnv,
-	#superclass : #PhEnvelope,
+	#name : 'ADSREnv',
+	#superclass : 'PhEnvelope',
 	#instVars : [
 		'decay',
 		'sustain'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 ADSREnv >> asBox [
 
 	| intermediateBox finalBox |
@@ -31,13 +33,13 @@ ADSREnv >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ADSREnv >> decay [
 
 	^ decay
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ADSREnv >> decay: aNumberOrABox [
 
 	aNumberOrABox isNumber
@@ -45,7 +47,7 @@ ADSREnv >> decay: aNumberOrABox [
 		ifFalse: [ decay := aNumberOrABox ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ADSREnv >> initialize [
 
 	super initialize.
@@ -54,7 +56,7 @@ ADSREnv >> initialize [
 	processExpression := 'process = en.adsr;'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ADSREnv >> initializeUIParameters [
 
 	super initializeUIParameters.
@@ -72,13 +74,13 @@ ADSREnv >> initializeUIParameters [
 		           step: 0.001]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ADSREnv >> sustain [
 
 	^ sustain
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ADSREnv >> sustain: aNumberOrABox [
 
 	aNumberOrABox isNumber

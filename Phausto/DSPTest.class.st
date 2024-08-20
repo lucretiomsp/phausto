@@ -1,10 +1,12 @@
 Class {
-	#name : #DSPTest,
-	#superclass : #TestCase,
-	#category : #'Phausto-Tests'
+	#name : 'DSPTest',
+	#superclass : 'TestCase',
+	#category : 'Phausto-Tests',
+	#package : 'Phausto',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 DSPTest >> testCreateFromString [
 
 	| dsp |

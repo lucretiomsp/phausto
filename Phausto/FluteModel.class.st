@@ -8,17 +8,19 @@ mouthPosition: position of the mouth on the embouchure (0-1) (default: 0.5)
 pressure: the pressure of the air flow created by the virtual performer (0-1). This can also be any kind of signal that will directly injected in the mouthpiece (e.g., breath noise, etc.).
 "
 Class {
-	#name : #FluteModel,
-	#superclass : #UnitGenerator,
+	#name : 'FluteModel',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'tubeLength',
 		'mouthPosition',
 		'pressure'
 	],
-	#category : #'Phausto-PhysicalModels'
+	#category : 'Phausto-PhysicalModels',
+	#package : 'Phausto',
+	#tag : 'PhysicalModels'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FluteModel >> initializeUIParameters [
 
 	super initializeUIParameters.
@@ -43,13 +45,13 @@ FluteModel >> initializeUIParameters [
 		              step: 0.01
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FluteModel >> mouthPosition [
 
 	^ mouthPosition
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FluteModel >> mouthPosition: aNumberOrABox [
 
 	aNumberOrABox isNumber
@@ -63,25 +65,25 @@ FluteModel >> mouthPosition: aNumberOrABox [
 		ifFalse: [ mouthPosition := aNumberOrABox ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FluteModel >> pressure [
 
 	^ pressure
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FluteModel >> pressure: anObject [
 
 	pressure := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FluteModel >> tubeLength [
 
 	^ tubeLength
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FluteModel >> tubeLength: anObject [
 
 	tubeLength := anObject

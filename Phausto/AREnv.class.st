@@ -10,12 +10,14 @@ rt: release (sec)
 t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
-	#name : #AREnv,
-	#superclass : #PhEnvelope,
-	#category : #'Phausto-UnitGenerators'
+	#name : 'AREnv',
+	#superclass : 'PhEnvelope',
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 AREnv >> asBox [
 
 	| intermediateBox finalBox |
@@ -26,7 +28,7 @@ AREnv >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 AREnv >> initialize [
 
 	super initialize.

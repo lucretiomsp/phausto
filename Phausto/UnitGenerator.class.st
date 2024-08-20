@@ -9,8 +9,8 @@ UnitGenerator withLabel: aString
 otherwise my label will be my className asString
 "
 Class {
-	#name : #UnitGenerator,
-	#superclass : #PhBox,
+	#name : 'UnitGenerator',
+	#superclass : 'PhBox',
 	#instVars : [
 		'importStatement',
 		'processExpression',
@@ -18,23 +18,25 @@ Class {
 		'uLevel',
 		'label'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 UnitGenerator class >> withlabel: aString [
 
 	^ self new label: aString
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 UnitGenerator >> + aUnitGenerator [
 	"sum two Unit Generators"
 
 	^ self asBox + aUnitGenerator asBox
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 UnitGenerator >> => aUnitGenerator [
 	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
 
@@ -42,7 +44,7 @@ UnitGenerator >> => aUnitGenerator [
 	
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 UnitGenerator >> asBox [
 
 	| box |
@@ -55,7 +57,7 @@ UnitGenerator >> asBox [
 	^ box * self uLevel 
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 UnitGenerator >> chuckInto: aBox [
 	"patch the Unit Generator to an another Unit Generator, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
 
@@ -64,32 +66,32 @@ UnitGenerator >> chuckInto: aBox [
 	^ aBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> code [
 
 "code returns the import statement joined with the process expression"
 	^ self importStatement , self processExpression
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> code: anObject [
 
 	code := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> importStatement [
 
 	^ importStatement
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> importStatement: anObject [
 
 	importStatement := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 UnitGenerator >> initialize [
 
 	super initialize.
@@ -101,7 +103,7 @@ UnitGenerator >> initialize [
 	uLevel := 0.5.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 UnitGenerator >> initializeUIParameters [
 
 	uLevel := PhHSlider new
@@ -112,19 +114,19 @@ UnitGenerator >> initializeUIParameters [
 		          step: 0.001
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> label [
 
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> label: aString [
 
 	label := aString
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 UnitGenerator >> mono [
 	"return a mono version of the box (just one output)"
 
@@ -135,14 +137,14 @@ UnitGenerator >> mono [
 	^ stereo
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 UnitGenerator >> newLabel: aString [
 
 self initialize .
 label := aString
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 UnitGenerator >> patchedWith: aBox [
 
 	^ Error new signal:
@@ -150,19 +152,19 @@ UnitGenerator >> patchedWith: aBox [
 		  , self className asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> processExpression [
 
 	^ processExpression
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> processExpression: anObject [
 
 	processExpression := anObject
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 UnitGenerator >> stereo [
 	"return a stereo version of the box (connect to Left and Right outputs)"
 
@@ -173,13 +175,13 @@ UnitGenerator >> stereo [
 	^ stereo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> uLevel [
 
 	^ uLevel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UnitGenerator >> uLevel: aNumberOrABox [
 
 	aNumberOrABox class = PhBox

@@ -2,15 +2,17 @@
 The vbargraph primitive implements a vertical bar-graph (typically a meter displaying the level of a signal).
 "
 Class {
-	#name : #PhVBarGraph,
-	#superclass : #UIPrimitive,
+	#name : 'PhVBarGraph',
+	#superclass : 'UIPrimitive',
 	#instVars : [
 		'input'
 	],
-	#category : #'Phausto-BoxAPI-UIPrimitives'
+	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-UIPrimitives'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhVBarGraph >> asBox [
 
 	| intermediateBox finalBox intcode |
@@ -30,19 +32,19 @@ PhVBarGraph >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhVBarGraph >> initialize [ 
 super initialize .
 self input: 1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhVBarGraph >> input [
 
 	^ input
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhVBarGraph >> input: anInput [ 
 
 	input := anInput asBox

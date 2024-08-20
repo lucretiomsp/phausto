@@ -1,10 +1,12 @@
 Class {
-	#name : #BoxTest,
-	#superclass : #TestCase,
-	#category : #'Phausto-Tests'
+	#name : 'BoxTest',
+	#superclass : 'TestCase',
+	#category : 'Phausto-Tests',
+	#package : 'Phausto',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> testBoxAsDsp [
 
 | s dsp |
@@ -14,14 +16,14 @@ dsp := (s * 0.2 ) asDsp.
 self assert: dsp isNull equals: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> testCreateFromString [ 
 
 | dsp |dsp := DSP create: 'import("stdfaust.lib"); process = os.square(440);'.
 self assert: dsp isNull equals: false.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 BoxTest >> testLibContextIsFalseAtStartup [
 
 	self assert: PhBox libContext equals: false

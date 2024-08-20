@@ -4,36 +4,38 @@ In sound and music, an envelope describes how a sound changes over time.
 The envelope generator was created by tHerbert Deutsch for Robert Moog, the creator of the Moog synthesizer, in the 1960s.
 "
 Class {
-	#name : #PhEnvelope,
-	#superclass : #UnitGenerator,
+	#name : 'PhEnvelope',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'attack',
 		'release',
 		'trigger'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhEnvelope >> attack [
 
 	^ attack
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhEnvelope >> attack: anObject [
 
 	attack := anObject asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhEnvelope >> initialize [
 
 	super initialize.
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhEnvelope >> initializeUIParameters [
 
 	super initializeUIParameters.
@@ -56,30 +58,30 @@ PhEnvelope >> initializeUIParameters [
 			           label: self label , 'Gate']
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 PhEnvelope >> patchedWith: aUnitGenerator [
 
 ^ aUnitGenerator asBox * self asBox
 ]
 
-{ #category : #dependencies }
+{ #category : 'dependencies' }
 PhEnvelope >> release [ 
 ^ release 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhEnvelope >> release: anObject [
 
 	release := anObject asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhEnvelope >> trigger [
 
 	^ trigger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhEnvelope >> trigger:	aNumberOrABox [ 
 	aNumberOrABox class = PhBox
 		ifTrue: [ trigger := aNumberOrABox ]

@@ -4,17 +4,19 @@ Faust user interface widgets/primitives allow for an abstract description of a u
 Discrete and continuous elements are signal generators. For example, a button produces a signal which is 1 when the button is pressed and 0 otherwise:
 "
 Class {
-	#name : #UIPrimitive,
-	#superclass : #PhBox,
+	#name : 'UIPrimitive',
+	#superclass : 'PhBox',
 	#instVars : [
 		'label',
 		'min',
 		'max'
 	],
-	#category : #'Phausto-BoxAPI-UIPrimitives'
+	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-UIPrimitives'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 UIPrimitive >> initialize [ 
 super initialize.
 	label := 'label'.
@@ -24,36 +26,36 @@ super initialize.
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UIPrimitive >> label [
 
 	^ label
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UIPrimitive >> label: aString [
 
 	label := aString 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UIPrimitive >> max [
 
 	^ max
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UIPrimitive >> max: aNumber [
 
 	max := aNumber asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UIPrimitive >> min [ 
 ^ min
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 UIPrimitive >> min: aNumber [
 
 	min := aNumber asBox

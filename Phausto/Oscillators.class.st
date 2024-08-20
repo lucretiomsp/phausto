@@ -2,21 +2,23 @@
 This class contains a collection of reverb taken from the Faust reverbs.lib
 "
 Class {
-	#name : #Oscillators,
-	#superclass : #UnitGenerator,
+	#name : 'Oscillators',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'freq'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Oscillators >> freq [
 
 	^ freq 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Oscillators >> freq: aNumberOrABox [
 
 	aNumberOrABox isNumber
@@ -24,7 +26,7 @@ Oscillators >> freq: aNumberOrABox [
 		ifFalse: [ freq := aNumberOrABox  ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Oscillators >> initialize [
 
 	super initialize.
@@ -33,7 +35,7 @@ Oscillators >> initialize [
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Oscillators >> initializeFreqAsSlider [
 	"default value of 440 Hz, A4 - max value is 4096 i.e. C8"
 
@@ -45,7 +47,7 @@ Oscillators >> initializeFreqAsSlider [
 		        step: 1
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Oscillators >> initializeUIParameters [
 
 	super initializeUIParameters.

@@ -7,12 +7,14 @@ By Default, Phausto Butterworth LowPass is a 4 pole filters with a default cutof
 (https://ccrma.stanford.edu/~jos/filters/Butterworth_Lowpass_Design.html)
 "
 Class {
-	#name : #Lowpass,
-	#superclass : #ButterworthLPHP,
-	#category : #'Phausto-BoxAPI-Filters'
+	#name : 'Lowpass',
+	#superclass : 'ButterworthLPHP',
+	#category : 'Phausto-BoxAPI-Filters',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Filters'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Lowpass >> asBox [
 
 	| intermdiateBox finalBox |
@@ -29,7 +31,7 @@ Lowpass >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Lowpass >> initialize [
 
 	super initialize.

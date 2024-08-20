@@ -2,8 +2,8 @@
 A Slider for a DSP parameter
 "
 Class {
-	#name : #PhGUISlider,
-	#superclass : #Morph,
+	#name : 'PhGUISlider',
+	#superclass : 'Morph',
 	#instVars : [
 		'address',
 		'faderCanMove',
@@ -14,10 +14,12 @@ Class {
 		'index',
 		'dsp'
 	],
-	#category : #'Phausto-GUI'
+	#category : 'Phausto-GUI',
+	#package : 'Phausto',
+	#tag : 'GUI'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PhGUISlider class >> closeAll [
 
 	| fadersInWorld |
@@ -27,7 +29,7 @@ PhGUISlider class >> closeAll [
 	fadersInWorld do: [ :i | i delete ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PhGUISlider class >> newWithAddress: anAddress [
 
 	" the fader label is also the OSC address"
@@ -42,7 +44,7 @@ PhGUISlider class >> newWithAddress: anAddress [
 		  yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 PhGUISlider class >> newWithIndex: anIndex forDSP: aDSP [
 
 	" the fader label is also the OSC address"
@@ -60,28 +62,28 @@ PhGUISlider class >> newWithIndex: anIndex forDSP: aDSP [
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> address [ 
 ^ address 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> address: anAddress [
 "set address (and labels)"
 address := anAddress 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> cursorColor [
 ^ cursorColor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> cursorColor: aColor [
 cursor color: aColor
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhGUISlider >> drawCursor [
 "draw the fader cursor"
 | cursorWidth cursorHeight |
@@ -95,42 +97,42 @@ self addMorph: cursor.
 cursor center: self center.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> dsp [ 
 ^ dsp
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> dsp: aDSP [ 
 dsp := aDSP
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 PhGUISlider >> handlesMouseDown: anEvent [
 ^ true
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 PhGUISlider >> handlesMouseMove: anEvent [
 ^ true
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 PhGUISlider >> handlesMouseUp: anEvent [
 ^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> index [
 ^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> index: anInteger [
 index := anInteger
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhGUISlider >> initialize [
 
 	super initialize.
@@ -142,17 +144,17 @@ PhGUISlider >> initialize [
 	self drawCursor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> maxValue: aNumber [
 maxValue := aNumber asFloat .
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhGUISlider >> minValue: aNumber [
 minValue := aNumber asFloat .
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 PhGUISlider >> mouseDown: anEvent [
 
 
@@ -163,7 +165,7 @@ faderCanMove := true.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhGUISlider >> mouseMove: anEvent [
 " the VerticalFaderForSuperDirt modify the contents of the Sequencer in Performance named as destination"
 	| newLocation mappedY cursorY faderBottom range faderTop |
@@ -187,12 +189,12 @@ PhGUISlider >> mouseMove: anEvent [
 			
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 PhGUISlider >> mouseUp: anEvent [
 faderCanMove := false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhGUISlider >> openInWindow [
    
 |faderWidth faderHeight positionLeft positionTop  bgColor|

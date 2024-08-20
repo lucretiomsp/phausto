@@ -8,15 +8,17 @@ Model height is 1 m.
 This model contains 7 excitation positions going linearly from the bottom to the top of the bell.
 "
 Class {
-	#name : #FrenchBell,
-	#superclass : #ModalPercussion,
+	#name : 'FrenchBell',
+	#superclass : 'ModalPercussion',
 	#instVars : [
 		'strikeCutoff'
 	],
-	#category : #'Phausto-PhysicalModels'
+	#category : 'Phausto-PhysicalModels',
+	#package : 'Phausto',
+	#tag : 'PhysicalModels'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 FrenchBell >> asBox [
 
 	| intermediateBox finalBox |
@@ -30,7 +32,7 @@ FrenchBell >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FrenchBell >> initialize [
 
 	super initialize.
@@ -43,13 +45,13 @@ FrenchBell >> initialize [
 	self trigger: 0.0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FrenchBell >> strikeCutoff [
 
 	^ strikeCutoff
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FrenchBell >> strikeCutoff: anObject [
 
 	strikeCutoff := anObject

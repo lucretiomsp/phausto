@@ -2,12 +2,14 @@
 Alias-suppressed triangle wave oscillator. Based on os.triangle Faust standard function
 "
 Class {
-	#name : #TriOsc,
-	#superclass : #Oscillators,
-	#category : #'Phausto-UnitGenerators'
+	#name : 'TriOsc',
+	#superclass : 'Oscillators',
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 TriOsc >> asBox [
 
 	| intermediateBox finalBox |
@@ -17,7 +19,7 @@ TriOsc >> asBox [
 	^ finalBox * uLevel
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 TriOsc >> initialize [
 
 	super initialize.

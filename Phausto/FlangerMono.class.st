@@ -11,8 +11,8 @@ invert: 0 for normal, 1 to invert sign of flanging sum
 (more about flanging)[https://ccrma.stanford.edu/~jos/pasp/Flanging.html]
 "
 Class {
-	#name : #FlangerMono,
-	#superclass : #UnitGenerator,
+	#name : 'FlangerMono',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'dmax',
 		'curdel',
@@ -21,10 +21,12 @@ Class {
 		'invert',
 		'input'
 	],
-	#category : #'Phausto-BoxAPI-Effects'
+	#category : 'Phausto-BoxAPI-Effects',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Effects'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 FlangerMono >> asBox [
 
 	| intermediateBox finalBox |
@@ -34,55 +36,55 @@ FlangerMono >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> curdel [
 
 	^ curdel
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> curdel: aTimeInMs [
 
 	curdel := aTimeInMs asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> depth [
 
 	^ depth
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> depth: aDepth [
 
 	depth := aDepth asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> dmax [
 
 	^ dmax
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> dmax: aDelayLength [
 "must be constant"
 	dmax := aDelayLength asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> fb [
 
 	^ fb
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> fb: aFeedback [
 
 	fb := aFeedback asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 FlangerMono >> initialize [
 
 	super initialize.
@@ -95,25 +97,25 @@ FlangerMono >> initialize [
 	self dmax: 16.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> input [
 
 	^ input
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> input: anInput [ 
 
 	input := anInput asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> invert [
 
 	^ invert
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FlangerMono >> invert: zeroOrOne [
 
 	invert := zeroOrOne asBox

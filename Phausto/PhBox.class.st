@@ -5,8 +5,8 @@ All the UnitGenerators inherits from Box, as they need inputs, outputs, errorMes
 Phausto methods for combining and creating Boxes interface with calls to to methds of the BoxAPI, which in turns are FFI calls to Faust dynamic engine
 "
 Class {
-	#name : #PhBox,
-	#superclass : #FFIOpaqueObject,
+	#name : 'PhBox',
+	#superclass : 'FFIOpaqueObject',
 	#instVars : [
 		'errorBuffer',
 		'inputs',
@@ -16,10 +16,12 @@ Class {
 	#classVars : [
 		'libContext'
 	],
-	#category : #'Phausto-BoxAPI-Boxes'
+	#category : 'Phausto-BoxAPI-Boxes',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Boxes'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 PhBox class >> initialize [ 
 
 libContext := false.
@@ -27,31 +29,31 @@ libContext := false.
 SessionManager default register: (ClassSessionHandler forClassNamed: self name)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhBox class >> libContext [
 
 ^ libContext 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhBox class >> libContext: trueOrFalse [
 
 libContext := trueOrFalse 
 ]
 
-{ #category : #'system startup' }
+{ #category : 'system startup' }
 PhBox class >> startUp [
 
 	libContext := false
 ]
 
-{ #category : #'system startup' }
+{ #category : 'system startup' }
 PhBox class >> startUp: aBoolean [
 	super startUp: aBoolean.
 	aBoolean ifTrue: [ libContext := false ]
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> % aUnitGenerator [
 	"modulo operator for  UnitGenerators"
 
@@ -60,7 +62,7 @@ PhBox >> % aUnitGenerator [
 	^ BoxAPI uniqueInstance boxRem: self with: aUnitGenerator asBox
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> * aUnitGeneratorOrANumber [
 	"multiply UnitGenerators"
 
@@ -70,28 +72,28 @@ PhBox >> * aUnitGeneratorOrANumber [
 	^ BoxAPI uniqueInstance  multiply: box1 with: box2
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> + aUnitGenerator [
 	"sumUnitGenerators"
 
 	^ self add: self asBox to: aUnitGenerator asBox
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> , aUnitGenerator [
 	"parallelComposition of UnitGenerators"
 
 ^ self par: self asBox with: aUnitGenerator asBox
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> - aUnitGenerator [
 	"sumUnitGenerators"
 
 	^ self subtract: self asBox from: aUnitGenerator asBox
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> / aUnitGeneratorOrANumber [
 	"multiply UnitGenerators"
 
@@ -101,14 +103,14 @@ PhBox >> / aUnitGeneratorOrANumber [
 	^ BoxAPI uniqueInstance divide: box1 by: box2
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 PhBox >> => aUnitGenerator [
 	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
 
 	^ self chuckInto: aUnitGenerator
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> absolute [
 	"absolute value of a boox"
 
@@ -117,20 +119,20 @@ PhBox >> absolute [
 	^ BoxAPI uniqueInstance boxAbs: boxed
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> add: aBox to: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and sumy them"
 
 	^ BoxAPI uniqueInstance boxAdd: aBox with: anotherBox
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhBox >> asBox [ 
 
 ^ self
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhBox >> asDsp [
 	" creates a DSP from the Box"
 
@@ -159,7 +161,7 @@ PhBox >> asDsp [
 			^ finalDsp ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhBox >> asDspFile [
 
 	(FileLocator documents / 'temp.txt') writeStream
@@ -170,25 +172,25 @@ PhBox >> asDspFile [
 		close
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PhBox >> asFaustCode [
 
 	^ (BoxAPI uniqueInstance boxPrint: self asBox) asString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhBox >> attachedDSP [
 
 	^ attachedDSP
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhBox >> attachedDSP: anObject [
 
 	attachedDSP := anObject
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> boxModulo: aBox with: anotherBox [
 	"modulo operator of boxes"
 
@@ -196,7 +198,7 @@ PhBox >> boxModulo: aBox with: anotherBox [
 	^ BoxAPI uniqueInstance boxRem: aBox with: anotherBox
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> boxRecursive: aBox with: anotherBox [
 	"recursive omposition of boxes"
 
@@ -204,7 +206,7 @@ PhBox >> boxRecursive: aBox with: anotherBox [
 	^ BoxAPI uniqueInstance boxRecursive: aBox with: anotherBox
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> boxSplit: aBox to: anotherBox [
 	"split omposition of boxes"
 
@@ -212,7 +214,7 @@ PhBox >> boxSplit: aBox to: anotherBox [
 	^ BoxAPI uniqueInstance boxSplit: aBox with: anotherBox
 ]
 
-{ #category : #connecting }
+{ #category : 'connecting' }
 PhBox >> chuckInto: aBox [
 	"patch the box to an another box, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
 
@@ -221,26 +223,26 @@ PhBox >> chuckInto: aBox [
 	^ aBox 
 ]
 
-{ #category : #'public - line' }
+{ #category : 'public - line' }
 PhBox >> connectTo: aUnitGenerator [
 	" correspond to Faust sequential opeartor : "
 
 	^ BoxAPI uniqueInstance boxSeqFrom: self asBox to: aUnitGenerator asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhBox >> errorBuffer [
 
 	^ errorBuffer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhBox >> errorBuffer: anObject [
 
 	errorBuffer := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhBox >> initialize [
 
 	| intPtr |
@@ -257,26 +259,26 @@ PhBox >> initialize [
 	errorBuffer := ByteArray new: 4096
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhBox >> inputs [
 
 	^ inputs
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhBox >> inputs: anObject [
 
 	inputs := anObject
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> mergeWith: anotherBox [
 	"merge Composition of boxes"
 
 	^ BoxAPI uniqueInstance boxMerge: self with: anotherBox
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhBox >> midikey2hz [
 " Converts a MIDI key number to a frequency in Hz (MIDI key 69 = A440). midikey2hz is a standard Faust function"
 
@@ -291,19 +293,19 @@ converter := BoxAPI uniqueInstance
 ^ self asBox connectTo: converter.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhBox >> outputs [
 
 	^ outputs
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 PhBox >> outputs: anObject [
 
 	outputs := anObject
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> par: aBox with: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and compose them in parallel"
 
@@ -312,13 +314,13 @@ PhBox >> par: aBox with: anotherBox [
 		  #( #PhBox * CboxPar #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 PhBox >> printOn: aStream [
 
 	^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhBox >> smoo [
 	"Smoothing function based on smooth ideal to smooth UI signals (sliders, etc.) down. Approximately, this is a 7 Hz one-pole low-pass considering the coefficient calculation: exp(-2pi*CF/SR).
 
@@ -337,14 +339,14 @@ smoo is a standard Faust function."
 	^ self asBox connectTo: smoother
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
 
 	^ self boxSplit: self asBox to: aUnitGenerator asBox
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhBox >> stereo [
 	"return a stereo version of the box (connect to Left and Right outputs)"
 
@@ -355,14 +357,14 @@ PhBox >> stereo [
 	^ stereo
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> subtract: aBox from: anotherBox [
 	"convenience method to auto convert UnitGenerators into boxes and sumy them"
 
 	^ BoxAPI uniqueInstance boxSubtract:  aBox from: anotherBox  
 ]
 
-{ #category : #arithmetic }
+{ #category : 'arithmetic' }
 PhBox >> ~ aUnitGenerator [
 	"recursive composition of UnitGenerators"
 

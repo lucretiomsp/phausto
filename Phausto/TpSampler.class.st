@@ -7,8 +7,8 @@ I can be chromatically played using MIDI NOte Numbers, where 60 plays at my defu
 PhSampler (at the moment) is always mono even if files are stereo. You need to send it the stereo message to make it stereo. 
 "
 Class {
-	#name : #TpSampler,
-	#superclass : #TpSynth,
+	#name : 'TpSampler',
+	#superclass : 'TpSynth',
 	#instVars : [
 		'pathToFile',
 		'pathToFolder',
@@ -18,10 +18,12 @@ Class {
 		'debugPath',
 		'attachedBox'
 	],
-	#category : #'Phausto-TurboPhausto'
+	#category : 'Phausto-TurboPhausto',
+	#package : 'Phausto',
+	#tag : 'TurboPhausto'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 TpSampler >> asBox [
 
 	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler effect |
@@ -65,43 +67,43 @@ TpSampler >> asBox [
 	^ sampler asBox * self level => effect
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> attachedBox [
 
 	^ attachedBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> attachedBox: anObject [
 
 	attachedBox := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> debugPath [
 
 	^ debugPath
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> debugPath: anObject [
 
 	debugPath := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> index [
 
 	^ index
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> index: aSampleIndex [
 
 	index := aSampleIndex asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 TpSampler >> initialize [
 
 	super initialize.
@@ -121,61 +123,61 @@ TpSampler >> initialize [
 			 step: 0.1)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> name [
 
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> name: aString [
 
 	name := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> numChannels [
 
 	^ numChannels
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> numChannels: aNumOfChannels [
 
 	numChannels := aNumOfChannels asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> pathToFile [
 
 	^ pathToFile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> pathToFile: aString [
 
 	pathToFile := aString 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> pathToFolder [
 
 	^ pathToFolder 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> pathToFolder: aString [
 
 	pathToFolder := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> readIndex [
 
 	^ readIndex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TpSampler >> readIndex: aReadIndex [
 
 	readIndex := aReadIndex asBox

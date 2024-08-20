@@ -2,12 +2,14 @@
 Current sampling rate given at init time. Constant during program execution.
 "
 Class {
-	#name : #PhSampleRate,
-	#superclass : #UnitGenerator,
-	#category : #'Phausto-Math'
+	#name : 'PhSampleRate',
+	#superclass : 'UnitGenerator',
+	#category : 'Phausto-Math',
+	#package : 'Phausto',
+	#tag : 'Math'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 PhSampleRate >> initialize [
 
 	super initialize.

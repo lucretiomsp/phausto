@@ -3,18 +3,20 @@ Simple resonant filters based on tf2s (virtual analog).
 Subclasses include lowpass, highpass, bandpass.
 "
 Class {
-	#name : #ResonatorFilter,
-	#superclass : #PhFilter,
+	#name : 'ResonatorFilter',
+	#superclass : 'PhFilter',
 	#instVars : [
 		'input',
 		'q',
 		'frequency',
 		'gain'
 	],
-	#category : #'Phausto-BoxAPI-Filters'
+	#category : 'Phausto-BoxAPI-Filters',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Filters'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 ResonatorFilter >> asBox [
 
 	| intermdiateBox finalBox |
@@ -26,31 +28,31 @@ ResonatorFilter >> asBox [
 	^ finalBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ResonatorFilter >> frequency [
 
 	^ frequency
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ResonatorFilter >> frequency: aNumberOrABox [
 "center frequency in Hertz"
 	frequency := aNumberOrABox asBox.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ResonatorFilter >> gain [
 
 	^ gain
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ResonatorFilter >> gain: aNumberOrABox [
 
 	gain := aNumberOrABox asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ResonatorFilter >> initialize [
 
 	super initialize.
@@ -70,31 +72,31 @@ ResonatorFilter >> initialize [
 	self input: 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ResonatorFilter >> input [
 
 	^ input
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ResonatorFilter >> input: anInput [
 "audio input"
 	input := anInput asBox
 ]
 
-{ #category : #'accessing - input' }
+{ #category : 'accessing - input' }
 ResonatorFilter >> patchedWith: anInput [
 
 self input: anInput
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ResonatorFilter >> q [
 
 	^ q
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ResonatorFilter >> q: aNumberOrABox [
 "q(uality) of the filter - higher values for higher resonance"
 	q := aNumberOrABox asBox

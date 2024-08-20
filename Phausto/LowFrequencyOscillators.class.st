@@ -6,22 +6,24 @@ amount: set the multiplier for the Oscillator output
 offset: an offset for the LFO output. 
 "
 Class {
-	#name : #LowFrequencyOscillators,
-	#superclass : #Oscillators,
+	#name : 'LowFrequencyOscillators',
+	#superclass : 'Oscillators',
 	#instVars : [
 		'amount',
 		'offset'
 	],
-	#category : #'Phausto-UnitGenerators'
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LowFrequencyOscillators >> amount [
 
 	^ amount
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LowFrequencyOscillators >> amount: aNumberOrABox [
 
 	aNumberOrABox isNumber
@@ -34,7 +36,7 @@ LowFrequencyOscillators >> amount: aNumberOrABox [
 		ifFalse: [ amount := aNumberOrABox ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 LowFrequencyOscillators >> asBox [
 
 	| intermediateBox finalBox |
@@ -44,7 +46,7 @@ LowFrequencyOscillators >> asBox [
 	^ finalBox * self amount asBox + self offset asBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LowFrequencyOscillators >> initialize [
 
 	super initialize.
@@ -71,7 +73,7 @@ LowFrequencyOscillators >> initialize [
 	"as LFO are used for modulation, there default level is set to 1"
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LowFrequencyOscillators >> initializeUIParamters [
 
 	super initializeUIParameters.
@@ -98,13 +100,13 @@ LowFrequencyOscillators >> initializeUIParamters [
 	"as LFO are used for modulation, there default level is set to 1"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LowFrequencyOscillators >> offset [
 
 	^ offset
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LowFrequencyOscillators >> offset: aNumberOrABox [
 
 	aNumberOrABox isNumber

@@ -1,14 +1,16 @@
 Class {
-	#name : #PhVslider,
-	#superclass : #UIPrimitive,
+	#name : 'PhVslider',
+	#superclass : 'UIPrimitive',
 	#instVars : [
 		'init',
 		'step'
 	],
-	#category : #'Phausto-BoxAPI-UIPrimitives'
+	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-UIPrimitives'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhVslider >> asBox [
 
 	| box code |
@@ -23,7 +25,7 @@ PhVslider >> asBox [
 	^ box
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 PhVslider >> asString [
 	" convert the PhVSlider object in the strng that would create it in Faust"
 
@@ -35,7 +37,7 @@ PhVslider >> asString [
 	^ strng
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 PhVslider >> label: aLabel init: initValue min: minValue max: maxValue step: stepValue [
 
    label := aLabel.

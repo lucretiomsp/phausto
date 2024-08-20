@@ -2,15 +2,17 @@
 Pulses generated at period in seconds
 "
 Class {
-	#name : #Pulse,
-	#superclass : #UnitGenerator,
+	#name : 'Pulse',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'period'
 	],
-	#category : #'Phausto-BoxAPI-Basics'
+	#category : 'Phausto-BoxAPI-Basics',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Basics'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 Pulse >> asBox [
 
 	| intermediateBox periodInSamples finalBox |
@@ -22,7 +24,7 @@ Pulse >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 Pulse >> initialize [
 
 	super initialize.
@@ -36,13 +38,13 @@ Pulse >> initialize [
 		          step: 0.01)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Pulse >> period [
 
 	^ period
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Pulse >> period: aPeriod [
 
 	period := aPeriod asBox

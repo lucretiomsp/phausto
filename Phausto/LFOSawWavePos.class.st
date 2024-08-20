@@ -2,12 +2,14 @@
 Simple sawtooth waveform oscillator between 0 and 1.
 "
 Class {
-	#name : #LFOSawWavePos,
-	#superclass : #LowFrequencyOscillators,
-	#category : #'Phausto-UnitGenerators'
+	#name : 'LFOSawWavePos',
+	#superclass : 'LowFrequencyOscillators',
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LFOSawWavePos >> initialize [
 
 	super initialize.

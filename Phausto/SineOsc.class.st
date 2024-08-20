@@ -5,12 +5,14 @@ Default Sine wave oscillator, corresponding to Faust osc standard function
 freq: frequency in Hz
 "
 Class {
-	#name : #SineOsc,
-	#superclass : #Oscillators,
-	#category : #'Phausto-UnitGenerators'
+	#name : 'SineOsc',
+	#superclass : 'Oscillators',
+	#category : 'Phausto-UnitGenerators',
+	#package : 'Phausto',
+	#tag : 'UnitGenerators'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SineOsc >> asBox [
 
 	| intermediateBox finalBox freqBox |
@@ -21,7 +23,7 @@ SineOsc >> asBox [
 	^ finalBox * uLevel
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SineOsc >> initialize [
 
 	super initialize.

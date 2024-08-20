@@ -2,16 +2,18 @@
 I am a Sample And Hold. I ""record"" the input when trig is 1, output a frozen value when trig is 0.
 "
 Class {
-	#name : #SampleAndHold,
-	#superclass : #UnitGenerator,
+	#name : 'SampleAndHold',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'trig',
 		'input'
 	],
-	#category : #'Phausto-BoxAPI-Basics'
+	#category : 'Phausto-BoxAPI-Basics',
+	#package : 'Phausto',
+	#tag : 'BoxAPI-Basics'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 SampleAndHold >> asBox [
 
 	| intermediateBox finalBox |
@@ -21,7 +23,7 @@ SampleAndHold >> asBox [
 	^ finalBox
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SampleAndHold >> initialize [
 
 	super initialize.
@@ -30,25 +32,25 @@ SampleAndHold >> initialize [
 	self input: 0.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SampleAndHold >> input [
 
 	^ input
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SampleAndHold >> input: anInput [
 
 	input := anInput asBox
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SampleAndHold >> trig [
 
 	^ trig
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SampleAndHold >> trig: aTrigger [
 
 	trig := aTrigger asBox
