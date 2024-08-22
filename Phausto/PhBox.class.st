@@ -152,7 +152,7 @@ PhBox >> asDsp [
 						            createDspFromBoxes: self asBox.
 					PhaustoDynamicEngine dspPlaying: finalDsp.
 					finalDsp name: 'MyApp'.
-					finalDsp generatedCode: self asString.
+					finalDsp generatedCode: 'process = ' , self asString , ';'.
 					attachedDSP := finalDsp.
 
 					BoxAPI uniqueInstance destroyLibContext ]

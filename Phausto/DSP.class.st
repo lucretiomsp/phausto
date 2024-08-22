@@ -177,6 +177,15 @@ index := self getParamIndex: aString.
 
 ]
 
+{ #category : 'as yet unclassified' }
+DSP >> createCmajorPatchNamed: aName [
+
+"the .cmajorpatch file is always generated "
+self class asCmajorFileNamed: aName.
+"return true if the .cmajor file has been  generated"
+^ LibFaust uniqueInstance createCMajorFileFromString: self generatedCode withName: aName
+]
+
 { #category : 'initialize - destroy' }
 DSP >> destroy [
 	"Destory the DSP object"

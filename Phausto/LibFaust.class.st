@@ -24,7 +24,9 @@ errorBuffer := ByteArray new: 4096.
 
 { #category : 'as yet unclassified' }
 LibFaust >> createCMajorFileFromString: aString buffer: errorMsg [
-| myArgv |
+| myArgv fileOutput |
+
+fileOutput := FileLocator documents asAbsolute pathString .
 
 
 	myArgv := ExternalAddress arrayOfStringsFrom:
@@ -48,6 +50,32 @@ LibFaust >> createCMajorFileFromString: aString buffer: errorMsg arguments: argv
           ByteArray errorMsg
         )
     )
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createCMajorFileFromString: aString buffer: errorMsg withName: aName [
+| myArgv fileOutput |
+
+fileOutput := FileLocator documents asAbsolute pathString , '/' , aName , 'cmajor'.
+
+
+	myArgv := ExternalAddress arrayOfStringsFrom:
+		         {'-lang' . 'cmajor' . '-o' . fileOutput }.
+	
+	^ [
+	  self
+		  createCMajorFileFromString: aString 
+		  buffer: errorMsg arguments: myArgv  ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createCMajorFileFromString: aString withName: aName [
+|errorBuffer|
+
+
+errorBuffer := ByteArray new: 4096.
+
+	^  self createCMajorFileFromString: aString buffer: errorBuffer withName: aName
 ]
 
 { #category : 'accessing - platform' }
