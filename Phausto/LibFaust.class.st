@@ -56,7 +56,7 @@ LibFaust >> createCMajorFileFromString: aString buffer: errorMsg arguments: argv
 LibFaust >> createCMajorFileFromString: aString buffer: errorMsg withName: aName [
 | myArgv fileOutput |
 
-fileOutput := FileLocator documents asAbsolute pathString , '/' , aName , 'cmajor'.
+fileOutput := FileLocator documents asAbsolute pathString , '/' , aName , '.cmajor'.
 
 
 	myArgv := ExternalAddress arrayOfStringsFrom:

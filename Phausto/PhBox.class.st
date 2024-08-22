@@ -152,7 +152,7 @@ PhBox >> asDsp [
 						            createDspFromBoxes: self asBox.
 					PhaustoDynamicEngine dspPlaying: finalDsp.
 					finalDsp name: 'MyApp'.
-					finalDsp generatedCode: 'process = ' , self asString , ';'.
+					finalDsp generatedCode: 'import("stdfaust.lib"); process = ' ,  (BoxAPI uniqueInstance boxPrint: self asBox) , ';'.
 					attachedDSP := finalDsp.
 
 					BoxAPI uniqueInstance destroyLibContext ]

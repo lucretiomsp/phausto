@@ -168,7 +168,8 @@ self createLibContext .
 BoxAPI >> boxPrint: aBox [
 
 	self ffiCall:
-		#( char * CprintBox #( PhBox * aBox , bool true , int 99999 ) )
+		#( char * CprintBox #( PhBox * aBox , bool true , int 999999999
+ ) )
 ]
 
 { #category : 'arithmetic' }

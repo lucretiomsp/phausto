@@ -49,7 +49,7 @@ hasMidi := 'false,'.
 		tab;
 		nextPutAll: '"pharo.' , aName , '",'; 
 		cr;
-		nextPutAll: '"version"';
+		nextPutAll: '"version":';
 		tab;
 		nextPutAll: '"1.0",';
 		cr;
