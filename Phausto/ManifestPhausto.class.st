@@ -15,3 +15,10 @@ ManifestPhausto class >> ruleAssignmentInIfTrueRuleV1FalsePositive [
 	<ignoreForCoverage>
 	^ #(#(#(#RGMethodDefinition #(#FluteModel #mouthPosition: #false)) #'2024-08-05T15:19:53.278305+02:00') )
 ]
+
+{ #category : 'code-critics' }
+ManifestPhausto class >> ruleCascadedNextPutAllsRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#'DSP class' #asCmajorFileNamed: #true)) #'2024-08-22T09:34:26.638554+02:00') )
+]

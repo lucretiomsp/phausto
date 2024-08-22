@@ -31,6 +31,51 @@ Class {
 	#tag : 'DSP'
 }
 
+{ #category : 'ui-building' }
+DSP class >> asCmajorFileNamed: aName [
+
+| hasMidi |
+"we need to improve the mechanism to generate MIDI instruments"
+hasMidi := 'false,'.
+
+(FileLocator documents / ( aName , '.cmajorpatch')) writeStream
+      nextPutAll: '{';
+		nextPutAll: '"CmajorVersion":';
+		tab;
+		nextPutAll: '1,';
+		cr;
+		nextPutAll: '"ID":';
+		tab;
+		nextPutAll: '"pharo.' , aName , '",'; 
+		cr;
+		nextPutAll: '"version"';
+		tab;
+		nextPutAll: '"1.0",';
+		cr;
+		nextPutAll: '"name":';
+		tab;
+		nextPutAll:  '"' , aName , '"', ',';
+		cr;
+		nextPutAll: '"description":';
+		tab;
+		nextPutAll: '"A ' , aName , ' generated in Pharo using Phausto",';
+		cr;
+		nextPutAll: '"manufacturer":';
+		tab;
+		nextPutAll: '"Pharo Association",';
+		cr;
+		nextPutAll: '"isInstrument":';
+		tab;
+		nextPutAll: hasMidi ;
+		cr;
+		nextPutAll: '"source":';
+		tab;
+		nextPutAll: '"' , aName , '.cmajor"';
+		cr;
+		nextPutAll: '}';
+		close
+]
+
 { #category : 'as yet unclassified' }
 DSP class >> create: aStringWithFaustCode [
 	"create a new dsp from a string with valid Faust code"
