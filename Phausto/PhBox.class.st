@@ -148,9 +148,9 @@ PhBox >> asDsp [
 			interBox
 				ifNotNil: [
 					DSP initializedDSP ifNotNil: [DSP initializedDSP destroy].
-					finalDsp := PhaustoyDynamicEngine uniqueInstance
+					finalDsp := PhaustoDynamicEngine uniqueInstance
 						            createDspFromBoxes: self asBox.
-					PhaustoyDynamicEngine dspPlaying: finalDsp.
+					PhaustoDynamicEngine dspPlaying: finalDsp.
 					finalDsp name: 'MyApp'.
 					attachedDSP := finalDsp.
 

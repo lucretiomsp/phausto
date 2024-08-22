@@ -1,0 +1,58 @@
+"
+I am LibFaust, use me to execute functions from LibFaust
+"
+Class {
+	#name : 'LibFaust',
+	#superclass : 'FFILibrary',
+	#instVars : [
+		'errorBuffer'
+	],
+	#category : 'Phausto-DynamicEngine',
+	#package : 'Phausto',
+	#tag : 'DynamicEngine'
+}
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createCMajorFileFromString: aString [
+|errorBuffer|
+
+
+errorBuffer := ByteArray new: 4096.
+
+	^  self createCMajorFileFromString: aString buffer: errorBuffer
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createCMajorFileFromString: aString buffer: errorMsg [
+| myArgv |
+
+
+	myArgv := ExternalAddress arrayOfStringsFrom:
+		         #('-lang' 'cmajor' '-o' 'testOutput.cmajor').
+	
+	^ [
+	  self
+		  createCMajorFileFromString: aString 
+		  buffer: errorMsg arguments: myArgv  ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createCMajorFileFromString: aString buffer: errorMsg arguments: argv [ 
+
+^ self ffiCall:
+		   #( bool generateCAuxFilesFromString
+        ( const char * 'MyApp', 
+          const char * aString, 
+          int 4, 
+          void * argv, 
+          ByteArray errorMsg
+        )
+    )
+]
+
+{ #category : 'accessing - platform' }
+LibFaust >> macLibraryName [
+
+	
+	^ 'librariesBundle/libfaust.2.dylib'
+]
