@@ -20,7 +20,7 @@ Class {
 	#instVars : [
 		'name',
 		'isInitialized',
-		'P'
+		'generatedCode'
 	],
 	#classVars : [
 		'defaultName',
@@ -39,6 +39,7 @@ DSP class >> asCmajorFileNamed: aName [
 hasMidi := 'false,'.
 
 (FileLocator documents / ( aName , '.cmajorpatch')) writeStream
+      cr;
       nextPutAll: '{';
 		nextPutAll: '"CmajorVersion":';
 		tab;
@@ -193,6 +194,18 @@ DSP >> destroy [
 					"return a null pointer"
 					DSP initializedDSP: DSP new.
 					'SONO ARRIVATO FINO ALLA FINE' traceCr ] ]
+]
+
+{ #category : 'accessing' }
+DSP >> generatedCode [
+
+	^ generatedCode
+]
+
+{ #category : 'accessing' }
+DSP >> generatedCode: aString [
+
+	generatedCode := aString
 ]
 
 { #category : 'as yet unclassified' }

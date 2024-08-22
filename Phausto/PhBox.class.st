@@ -137,7 +137,7 @@ PhBox >> asDsp [
 	" creates a DSP from the Box"
 
 	| finalDsp interBox |
-	PhBox libContext
+	self class libContext
 		ifFalse: [
 		^ Error new signal: 'Invalid Box - please (re)create one' ]
 		ifTrue: [
@@ -152,6 +152,7 @@ PhBox >> asDsp [
 						            createDspFromBoxes: self asBox.
 					PhaustoDynamicEngine dspPlaying: finalDsp.
 					finalDsp name: 'MyApp'.
+					finalDsp generatedCode: self asString.
 					attachedDSP := finalDsp.
 
 					BoxAPI uniqueInstance destroyLibContext ]
