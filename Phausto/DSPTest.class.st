@@ -17,3 +17,13 @@ DSPTest >> testCreateFromString [
 
 	self assert: dsp isNull equals: false
 ]
+
+{ #category : 'tests' }
+DSPTest >> testGetUIItemsLabeledDictionary [
+
+| dsp |
+dsp := SquareOsc new asDsp.
+
+self assertCollection: dsp getUIItemsLabeledDictionary keys  equals: #('SquareOscuLevel' 'SquareOscFreq')
+
+]

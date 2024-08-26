@@ -205,6 +205,37 @@ DSP >> destroy [
 					'SONO ARRIVATO FINO ALLA FINE' traceCr ] ]
 ]
 
+{ #category : 'ui-building' }
+DSP >> displayUI [
+	"full UI made with Toplo"
+
+	| container allParams allKnobs widgetType |
+	allParams := self getUIItemsLabeledDictionary.
+	allKnobs := OrderedCollection new.
+	allParams keysAndValuesDo: [ :k :v |
+		widgetType := v at: #type.
+		" we must adjsut this to check the actual slider metadata"
+		widgetType = 'hslider'.
+		allKnobs add: (ICDarkKnob3
+				 label: (v at: #label)
+				 minValue: (v at: #min)
+				 maxValue: (v at: #max)
+				 callBack: [ :i | self setValue: i parameter: (v at: #label) ]) ].
+	container := BlElement new
+		             geometry: BlRectangleGeometry new;
+		             layout: (BlGridLayout new
+				              columnCount: 4;
+				              cellSpacing: 0);
+		             constraintsDo: [ :c |
+			             c horizontal matchParent.
+			             c vertical matchParent ];
+		             background: Color darkGray.
+		
+	
+	container addChildren: allKnobs.
+	container openInNewSpace
+]
+
 { #category : 'accessing' }
 DSP >> generatedCode [
 
