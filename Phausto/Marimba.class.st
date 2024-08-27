@@ -83,12 +83,7 @@ Marimba >> initialize [
 			 max: 2
 			 step: 0.01).
 	self gain: 0.5.
-	self trigger: (PhHSlider new
-			 label: self label , 'Gate'
-			 init: 0
-			 min: 0
-			 max: 1
-			 step: 1)
+	self trigger:  (PhButton new label: self label , 'Trigger')
 ]
 
 { #category : 'accessing' }
