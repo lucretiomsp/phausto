@@ -19,13 +19,21 @@ Class {
 { #category : 'accessing' }
 PhEnvelope >> attack [
 
-	^ attack
+	^ attack ifNil: [
+		attack := PhHSlider new
+			          label: self label , 'Attack'
+			          init: 0.001
+			          min: 0.001
+			          max: 2
+			          step: 1 ].
 ]
 
 { #category : 'accessing' }
-PhEnvelope >> attack: anObject [
+PhEnvelope >> attack: aNumberOrABox [
 
-	attack := anObject asBox
+	attack := aNumberOrABox isNumber
+		        ifTrue: [ self attack init: aNumberOrABox ]
+		        ifFalse: [ aNumberOrABox ]
 ]
 
 { #category : 'initialization' }
@@ -35,55 +43,45 @@ PhEnvelope >> initialize [
 	
 ]
 
-{ #category : 'initialization' }
-PhEnvelope >> initializeUIParameters [
+{ #category : 'connecting' }
+PhEnvelope >> patchedWith: aUnitGenerator [
 
-	super initializeUIParameters.
-	self attack ifNil: [
-		attack := PhHSlider new
-			          label: self label , 'Attack'
-			          init: 0.001
-			          min: 0.001
-			          max: 2
-			          step: 1 ].
-	self release ifNil: [
+
+	^ aUnitGenerator asBox * self asBox
+]
+
+{ #category : 'dependencies' }
+PhEnvelope >> release [
+
+	^ release ifNil: [
 		release := PhHSlider new
 			           label: self label , 'Release'
 			           init: 0.3
 			           min: 0.001
 			           max: 3
 			           step: 0.001 ].
-	self trigger ifNil: [
-		trigger := PhButton  new
-			           label: self label , 'Gate']
-]
-
-{ #category : 'connecting' }
-PhEnvelope >> patchedWith: aUnitGenerator [
-
-^ aUnitGenerator asBox * self asBox
-]
-
-{ #category : 'dependencies' }
-PhEnvelope >> release [ 
-^ release 
 ]
 
 { #category : 'accessing' }
-PhEnvelope >> release: anObject [
+PhEnvelope >> release: aNumberOrABox [
 
-	release := anObject asBox
+
+	release := aNumberOrABox isNumber
+		        ifTrue: [ self release init: aNumberOrABox ]
+		        ifFalse: [ aNumberOrABox ]
 ]
 
 { #category : 'accessing' }
 PhEnvelope >> trigger [
 
-	^ trigger
+	^ trigger  ifNil: [
+		trigger := PhButton new label: self label , 'Gate' ]
 ]
 
 { #category : 'accessing' }
-PhEnvelope >> trigger:	aNumberOrABox [ 
-	aNumberOrABox class = PhBox
-		ifTrue: [ trigger := aNumberOrABox ]
-		ifFalse: [ self trigger init: aNumberOrABox ]
+PhEnvelope >> trigger: aNumberOrABox [
+
+	aNumberOrABox isNumber
+		        ifTrue: [ self trigger init: aNumberOrABox ]
+		        ifFalse: [ aNumberOrABox ]
 ]

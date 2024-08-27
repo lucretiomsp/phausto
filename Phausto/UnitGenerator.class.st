@@ -61,9 +61,9 @@ UnitGenerator >> asBox [
 UnitGenerator >> chuckInto: aBox [
 	"patch the Unit Generator to an another Unit Generator, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
 
-	aBox patchedWith: self.
+^	aBox patchedWith: self.
 
-	^ aBox
+	
 ]
 
 { #category : 'accessing' }
@@ -101,17 +101,6 @@ UnitGenerator >> initialize [
 	label := self className asString.
 	"default uLevel for all UnitGenerators is set to 0.5"
 	uLevel := 0.5.
-]
-
-{ #category : 'initialization' }
-UnitGenerator >> initializeUIParameters [
-
-	uLevel := PhHSlider new
-		          label: self label , 'uLevel'
-		          init: 0.5
-		          min: 0
-		          max: 1
-		          step: 0.001
 ]
 
 { #category : 'accessing' }
@@ -178,13 +167,18 @@ UnitGenerator >> stereo [
 { #category : 'accessing' }
 UnitGenerator >> uLevel [
 
-	^ uLevel
+	^ uLevel ifNil: [   PhHSlider new
+		          label: self label , 'uLevel'
+		          init: 0.5
+		          min: 0
+		          max: 1
+		          step: 0.001 ]
 ]
 
 { #category : 'accessing' }
 UnitGenerator >> uLevel: aNumberOrABox [
 
-	aNumberOrABox class = PhBox
-		ifTrue: [ uLevel  := aNumberOrABox ]
-		ifFalse: [ self uLevel init: aNumberOrABox ]
+	uLevel := aNumberOrABox isNumber
+		        ifTrue: [ self uLevel init: aNumberOrABox ]
+		        ifFalse: [ aNumberOrABox ].
 ]

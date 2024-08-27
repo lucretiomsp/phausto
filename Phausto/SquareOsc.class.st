@@ -16,7 +16,7 @@ Class {
 SquareOsc >> asBox [
 
 	| intermediateBox finalBox |
-	self initializeUIParameters.
+
 	intermediateBox := super asBox.
 	finalBox := self freq connectTo: intermediateBox.
 	^ finalBox * self uLevel
