@@ -37,12 +37,17 @@ FrenchBell >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.frenchBell;'.
-	self freq: 440.
-	self strikePosition: 6.
+
+	self strikePosition: (PhHSlider new
+			 label: self label , 'StrikePos'
+			 init: 0
+			 min: 0
+			 max: 6
+			 step: 1).
 	self strikeCutoff: 7000.
 	self strikeSharpness: 0.26.
 	self gain: 0.8.
-	self trigger: 0.0
+	self trigger: (PhButton new label: self label , 'Trigger')
 ]
 
 { #category : 'accessing' }
