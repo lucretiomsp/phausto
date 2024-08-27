@@ -19,8 +19,8 @@ SawOsc >> asBox [
 	| intermediateBox finalBox |
 	self initializeUIParameters.
 	intermediateBox := super asBox.
-	finalBox := freq asBox connectTo: intermediateBox.
-	^ finalBox * uLevel
+	finalBox := self freq asBox connectTo: intermediateBox.
+	^ finalBox * self uLevel
 ]
 
 { #category : 'initialization' }

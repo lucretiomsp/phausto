@@ -39,25 +39,3 @@ Oscillators >> initialize [
 
 	
 ]
-
-{ #category : 'initialization' }
-Oscillators >> initializeFreqAsSlider [
-	"default value of 440 Hz, A4 - max value is 4096 i.e. C8"
-
-	freq := PhHSlider new
-		        label: self label , 'Freq'
-		        init: 440
-		        min: 20
-		        max: 4086
-		        step: 1
-]
-
-{ #category : 'initialization' }
-Oscillators >> initializeUIParameters [
-
-	super initializeUIParameters.
-	"default frequency for all Oscilators is A4 at picth standard - maxValue corresponds to a C8 note"
-
-	"the UI element to control the freq is created only if the parameter is nil at instance creation"
-	freq ifNil: [self initializeFreqAsSlider  ]
-]

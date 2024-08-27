@@ -22,16 +22,21 @@ Class {
 PulseOsc >> asBox [
 
 	| intermediateBox finalBox |
-	self initializeUIParameters .
 	intermediateBox := super asBox.
-	finalBox := freq , duty connectTo: intermediateBox.
-	^ finalBox * uLevel
+	finalBox := self freq , self duty connectTo: intermediateBox.
+	^ finalBox * self uLevel
 ]
 
 { #category : 'accessing' }
 PulseOsc >> duty [
 
-	^ duty
+	^ duty ifNil: [
+		duty := PhHSlider new
+			        label: self label , 'Duty'
+			        init: 0.5
+			        min: 0
+			        max: 1
+			        step: 0.001 ]
 ]
 
 { #category : 'accessing' }
