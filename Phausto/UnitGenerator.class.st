@@ -39,9 +39,8 @@ UnitGenerator >> + aUnitGenerator [
 { #category : 'connecting' }
 UnitGenerator >> => aUnitGenerator [
 	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
-
-^ (self chuckInto: aUnitGenerator )
-	
+BoxAPI uniqueInstance createLibContext .
+	^ self chuckInto: aUnitGenerator
 ]
 
 { #category : 'converting' }
@@ -59,11 +58,11 @@ UnitGenerator >> asBox [
 
 { #category : 'connecting' }
 UnitGenerator >> chuckInto: aBox [
-	"patch the Unit Generator to an another Unit Generator, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
+	"patch the box to an another box, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
 
 ^	aBox patchedWith: self.
 
-	
+
 ]
 
 { #category : 'accessing' }
