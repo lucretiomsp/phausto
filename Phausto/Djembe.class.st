@@ -61,24 +61,19 @@ Djembe >> initialize [
 			 max: 1200
 			 step: 1).
 	self strikePosition: (PhHSlider new
-			 label: self label ,'StrikePos'
+			 label: self label , 'StrikePos'
 			 init: 0.5
 			 min: 0
 			 max: 1
 			 step: 0.001).
 	self strikeSharpness: (PhHSlider new
-			 label: self label,  'StrikeSharp'
+			 label: self label , 'StrikeSharp'
 			 init: 0.5
 			 min: 0
 			 max: 1
 			 step: 0.001).
 	self gain: 0.5.
-	self trigger: (PhHSlider new
-			 label:  self label ,'Gate'
-			 init: 0
-			 min: 0
-			 max: 1
-			 step: 1)
+	self trigger: (PhButton new label: self label , 'Trigger')
 ]
 
 { #category : 'accessing' }

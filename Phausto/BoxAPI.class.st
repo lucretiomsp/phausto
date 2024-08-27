@@ -273,6 +273,16 @@ BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
 		        , #PhBox * anInput ) )
 ]
 
+{ #category : 'ui building' }
+BoxAPI >> boxVslider: aLabel init: initBox min: minBox max: maxBox step: stepBox [
+
+	self createLibContext.
+
+	self ffiCall:
+		#( #PhBox #* CboxVSlider #( const char #* aLabel #, #PhBox #* initBox
+		      #, #PhBox #* minBox #, #PhBox #* maxBox #, #PhBox #* stepBox ) )
+]
+
 { #category : 'utility' }
 BoxAPI >> boxWire [
 	"return the wire / identity box"
