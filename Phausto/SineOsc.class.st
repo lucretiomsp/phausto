@@ -16,11 +16,11 @@ Class {
 SineOsc >> asBox [
 
 	| intermediateBox finalBox freqBox |
-	self initializeUIParameters.
+	"self initializeUIParameters."
 	intermediateBox := super asBox.
-	freqBox := freq asBox.
+	freqBox := self freq asBox.
 	finalBox := freqBox connectTo: intermediateBox.
-	^ finalBox * uLevel
+	^ finalBox * self uLevel
 ]
 
 { #category : 'initialization' }
