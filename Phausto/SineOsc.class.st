@@ -16,7 +16,7 @@ Class {
 SineOsc >> asBox [
 
 	| intermediateBox finalBox freqBox |
-	"self initializeUIParameters."
+
 	intermediateBox := super asBox.
 	freqBox := self freq asBox.
 	finalBox := freqBox connectTo: intermediateBox.

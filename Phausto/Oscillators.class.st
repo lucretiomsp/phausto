@@ -26,9 +26,10 @@ Oscillators >> freq [
 { #category : 'accessing' }
 Oscillators >> freq: aNumberOrABox [
 
-	aNumberOrABox isNumber
-		ifTrue: [ freq := PhHSlider new label: self label , 'Freq' init: aNumberOrABox min: 20 max: 4086 step: 1]
-		ifFalse: [ freq := aNumberOrABox  ]
+	freq := aNumberOrABox isNumber
+		        ifTrue: [ self freq init: aNumberOrABox ]
+		        ifFalse: [ aNumberOrABox ].
+
 ]
 
 { #category : 'initialization' }
