@@ -98,8 +98,7 @@ UnitGenerator >> initialize [
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
 	label := self className asString.
-	"default uLevel for all UnitGenerators is set to 0.5"
-	uLevel := 0.5.
+
 ]
 
 { #category : 'accessing' }
