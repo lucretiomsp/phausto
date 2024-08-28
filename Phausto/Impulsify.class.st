@@ -16,7 +16,7 @@ Class {
 Impulsify >> asBox [
 
 	| intermediateBox finalBox gateBox |
-	self initializeUIParameters.
+	
 	intermediateBox := super asBox.
 	gateBox := gate asBox.
 	finalBox := gateBox connectTo: intermediateBox.
@@ -26,7 +26,7 @@ Impulsify >> asBox [
 { #category : 'accessing' }
 Impulsify >> gate [
 
-	^ gate
+	^ gate ifNil: [PhButton new label: self label]
 ]
 
 { #category : 'accessing' }
@@ -40,20 +40,4 @@ Impulsify >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.impulsify;'
-]
-
-{ #category : 'initialization' }
-Impulsify >> initializeGateAsButton [
-
-gate := PhButton new label: self label
-]
-
-{ #category : 'initialization' }
-Impulsify >> initializeUIParameters [
-
-	super initializeUIParameters.
-	"default frequency for all Oscilators is A4 at picth standard - maxValue corresponds to a C8 note"
-
-	"the UI element to control the freq is created only if the parameter is nil at instance creation"
-	gate ifNil: [self initializeGateAsButton  ]
 ]
