@@ -16,11 +16,10 @@ Class {
 Impulsify >> asBox [
 
 	| intermediateBox finalBox gateBox |
-	
 	intermediateBox := super asBox.
-	gateBox := gate asBox.
+	gateBox := self gate asBox.
 	finalBox := gateBox connectTo: intermediateBox.
-	^ finalBox * uLevel
+	^ finalBox * self uLevel
 ]
 
 { #category : 'accessing' }
