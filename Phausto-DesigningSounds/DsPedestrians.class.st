@@ -12,13 +12,13 @@ Class {
 { #category : 'initialization' }
 DsPedestrians >> initialize [
 
-| tone pulse dsp |
+| tone pulse box |
 tone := SineOsc new freq: 2500.
 pulse := Pulsen new period: 0.1 ; length: 0.05.
 
-dsp := (tone * pulse) stereo asDsp.
+box := (tone * pulse) .
 
-^ dsp
+^ box
 
 
 ]
