@@ -18,7 +18,7 @@ Pulse >> asBox [
 	| intermediateBox periodInSamples finalBox |
 	intermediateBox := super asBox.
 
-	periodInSamples := (Sec2Samples new value: period) asBox.
+	periodInSamples := (Sec2Samples new value: self period) asBox.
 	finalBox := periodInSamples connectTo:
 		            intermediateBox.
 	^ finalBox
@@ -30,22 +30,24 @@ Pulse >> initialize [
 	super initialize.
 	processExpression := 'process = ba.pulse;'.
 
-	self period: (PhHSlider new
-		          label: self label , 'Period'
-		          init: 1
-		          min: 0.001
-		          max: 8
-		          step: 0.01)
+
 ]
 
 { #category : 'accessing' }
 Pulse >> period [
 
-	^ period
+	^ period ifNil: [   PhHSlider new
+		        label: self label , 'Period'
+		        init: 1
+		        min: 0.01
+		        max: 10
+		        step: 0.01 ]
 ]
 
 { #category : 'accessing' }
-Pulse >> period: aPeriod [
+Pulse >> period: aNumberOrABox [
 
-	period := aPeriod asBox
+	period := aNumberOrABox isNumber
+		        ifTrue: [ self period init: aNumberOrABox ]
+		        ifFalse: [ aNumberOrABox ].
 ]

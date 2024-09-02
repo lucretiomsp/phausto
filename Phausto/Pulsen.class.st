@@ -18,8 +18,8 @@ Pulsen >> asBox [
 
 	| intermediateBox lengthInSamples periodInSamples finalBox |
 	intermediateBox := super asBox.
-	lengthInSamples := (Sec2Samples new value: length) asBox.
-	periodInSamples := (Sec2Samples new value: period) asBox.
+	lengthInSamples := (Sec2Samples new value: self length) asBox.
+	periodInSamples := (Sec2Samples new value: self period) asBox.
 	finalBox := lengthInSamples , periodInSamples connectTo:
 		            intermediateBox.
 	^ finalBox
@@ -31,34 +31,43 @@ Pulsen >> initialize [
 	super initialize.
 	processExpression := 'process = ba.pulsen;'.
 	self length: 0.01.
-	self period: (PhHSlider new
-			 label: self label , 'Period'
-			 init: 1
-			 min: 0.001
-			 max: 8
-			 step: 0.01)
+	
 ]
 
 { #category : 'accessing' }
 Pulsen >> length [
 
-	^ length
+	^ length ifNil: [   PhHSlider new
+		        label: self label , 'Length'
+		        init: 0.6
+		        min: 0.01
+		        max: 10
+		        step: 0.01 ]
 ]
 
 { #category : 'accessing' }
-Pulsen >> length: anObject [
+Pulsen >> length: aNumberOrABox [
 
-	length := anObject asBox 
+	length := aNumberOrABox isNumber
+		        ifTrue: [ self length init: aNumberOrABox ]
+		        ifFalse: [ aNumberOrABox ].
 ]
 
 { #category : 'accessing' }
 Pulsen >> period [
 
-	^ period
+	^ period ifNil: [   PhHSlider new
+		        label: self label , 'Period'
+		        init: 1
+		        min: 0.01
+		        max: 10
+		        step: 0.01 ]
 ]
 
 { #category : 'accessing' }
-Pulsen >> period: anObject [
+Pulsen >> period: aNumberOrABox [
 
-	period := anObject asBox
+	period := aNumberOrABox isNumber
+		        ifTrue: [ self period init: aNumberOrABox ]
+		        ifFalse: [ aNumberOrABox ].
 ]
