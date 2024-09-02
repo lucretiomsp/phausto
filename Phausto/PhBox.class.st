@@ -11,6 +11,7 @@ Class {
 		'errorBuffer',
 		'inputs',
 		'outputs',
+		'numberOfOutputs',
 		'attachedDSP'
 	],
 	#classVars : [
@@ -292,6 +293,18 @@ converter := BoxAPI uniqueInstance
 		       outputs: self outputs
 		       buffer: self errorBuffer.
 ^ self asBox connectTo: converter.
+]
+
+{ #category : 'accessing' }
+PhBox >> numberOfOutputs [
+"if a PhBox/Init Generator has more than two ouputs, it has to be specified in the subclass"
+	^ 1
+]
+
+{ #category : 'accessing' }
+PhBox >> numberOfOutputs: anInteger [
+
+	numberOfOutputs := anInteger
 ]
 
 { #category : 'accessing' }
