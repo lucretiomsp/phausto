@@ -1,6 +1,6 @@
 "
 A simple bleeping tone as used for UK pedestrian crossings.
-DsPedestrians new retruns a DSP.
+DsPedestrians new retruns a box that has to be converted to a DSP to be heard.
 "
 Class {
 	#name : 'DsPedestrians',
