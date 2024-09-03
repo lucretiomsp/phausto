@@ -25,7 +25,7 @@ Class {
 ADSREnv >> asBox [
 
 	| intermediateBox finalBox |
-	self initializeUIParameters .
+	
 	intermediateBox := super asBox.
 	finalBox := self attack asBox , self decay asBox , self sustain asBox
 	            , self release asBox , self trigger asBox connectTo:

@@ -565,7 +565,7 @@ ifFalse: [
 
 { #category : 'API - changes' }
 DSP >> trig: aString for: aDurationInSeconds [
-	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
+	"send a trigger of  aDurationInSeconds  to a Faust parameter, designed to trig envelopes and percussions-like sounds"
 
 	" parameter must exist"
 

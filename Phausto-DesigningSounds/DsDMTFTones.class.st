@@ -20,7 +20,10 @@ DsDMTFTones class >> displayUIFromDsp: aDsp [
 "generates a UI for a DSP (if it exists) generated from an instance of the class"
 | container btn1  buttons|
 
-buttons := (1 to: 12) collect: [ :i | ICLabelButton label: (self buttonsLabel at: i)  ].
+buttons := (1 to: 12) collect: 
+            [ :i | (ICLabelButton label: (self buttonsLabel at: i))
+	         callback: [ :k | aDsp trig: 'Key' for: 0.2 ]
+	         ].
 btn1 := ICLabelButton label: '1'.
 
 container := BlElement new
@@ -34,17 +37,6 @@ container := BlElement new
 		             background: Color darkGray.
 container addChildren: buttons.
 container openInSpace
-]
-
-{ #category : 'accessing' }
-DsDMTFTones class >> initialize [ 
-
-
-| tone1 tone2 |
-tone1 := SineOsc new label: 'Tone1'.
-tone2 := SineOsc new label: 'Tone2'.
-
-^ tone1 + tone2.
 ]
 
 { #category : 'accessing' }
@@ -66,4 +58,15 @@ tones at: '*' put: #(1209 941).
 tones at: '0' put: #(1336 941).
 tones at: '#' put: #(1477 941).
 ^ tones 
+]
+
+{ #category : 'accessing' }
+DsDMTFTones >> initialize [ 
+
+
+| tone1 tone2 btn|
+tone1 := SineOsc new label: 'Tone1'.
+tone2 := SineOsc new label: 'Tone2'.
+btn := PhButton new label: 'Key'.
+^ (tone1 + tone2) * btn.
 ]
