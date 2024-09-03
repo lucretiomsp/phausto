@@ -9,6 +9,15 @@ Class {
 	#tag : 'BoxAPI-Effects'
 }
 
+{ #category : 'converting' }
+SoftClipQuadratic >> asBox [
+
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	finalBox := self input connectTo: intermediateBox.
+	^ finalBox
+]
+
 { #category : 'initialization' }
 SoftClipQuadratic >> initialize [
 

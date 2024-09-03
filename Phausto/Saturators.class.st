@@ -12,15 +12,6 @@ Class {
 	#tag : 'BoxAPI-Effects'
 }
 
-{ #category : 'converting' }
-Saturators >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self input connectTo: intermediateBox.
-	^ finalBox
-]
-
 { #category : 'accessing' }
 Saturators >> input [
 

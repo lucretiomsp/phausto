@@ -18,6 +18,15 @@ Class {
 	#tag : 'BoxAPI-Effects'
 }
 
+{ #category : 'converting' }
+Wavefold >> asBox [
+
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	finalBox := self width , self input connectTo: intermediateBox.
+	^ finalBox
+]
+
 { #category : 'initialization' }
 Wavefold >> initialize [
 

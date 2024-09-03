@@ -363,7 +363,6 @@ DSP >> init [
 	'INIT EXECUTED' traceCr.
 	RendererType initialize.
 
-
 	self isNull
 		ifTrue: [ ^ self class invalidException ]
 		ifFalse: [

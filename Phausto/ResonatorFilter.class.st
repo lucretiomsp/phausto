@@ -31,7 +31,12 @@ ResonatorFilter >> asBox [
 { #category : 'accessing' }
 ResonatorFilter >> frequency [
 
-	^ frequency
+	^ frequency ifNil: [  frequency := (PhHSlider new
+			 label: 'Cutoff'
+			 init: 19000
+			 min: 20
+			 max: 19999
+			 step: 1). ]
 ]
 
 { #category : 'accessing' }
@@ -43,7 +48,7 @@ ResonatorFilter >> frequency: aNumberOrABox [
 { #category : 'accessing' }
 ResonatorFilter >> gain [
 
-	^ gain
+	^ gain ifNil: [  gain := 1 ]
 ]
 
 { #category : 'accessing' }
@@ -56,26 +61,14 @@ ResonatorFilter >> gain: aNumberOrABox [
 ResonatorFilter >> initialize [
 
 	super initialize.
-	self frequency: (PhHSlider new
-			 label: 'MasterCutoff'
-			 init: 19000
-			 min: 20
-			 max: 19999
-			 step: 1).
-	self q: (PhHSlider new
-			 label:  'Resonance'
-			 init: 1
-			 min: 0.1
-			 max: 1
-			 step: 0.01).
-	self gain: 1.
-	self input: 0
+	
+
 ]
 
 { #category : 'accessing' }
 ResonatorFilter >> input [
 
-	^ input
+	^ input ifNil: [ input := 0 ]
 ]
 
 { #category : 'accessing' }
@@ -93,7 +86,12 @@ self input: anInput
 { #category : 'accessing' }
 ResonatorFilter >> q [
 
-	^ q
+	^ q ifNil: [ q := (PhHSlider new
+			 label:  'Resonance'
+			 init: 1
+			 min: 0.1
+			 max: 24
+			 step: 0.01). ]
 ]
 
 { #category : 'accessing' }
