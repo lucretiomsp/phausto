@@ -22,7 +22,10 @@ DsDMTFTones class >> displayUIFromDsp: aDsp [
 
 buttons := (1 to: 12) collect: 
             [ :i | (ICLabelButton label: (self buttonsLabel at: i))
-	         callback: [ :k | aDsp trig: 'Key' for: 0.2 ]
+	         callback: [ :k | 
+		      aDsp setValue: ((self tones at: (self buttonsLabel at: i)) at: 1) parameter: 'Tone1Freq'.
+		      aDsp setValue: ((self tones at: (self buttonsLabel at: i)) at: 2) parameter: 'Tone2Freq'.
+		      aDsp setValue: k parameter: 'TKey']
 	         ].
 btn1 := ICLabelButton label: '1'.
 
@@ -64,9 +67,10 @@ tones at: '#' put: #(1477 941).
 DsDMTFTones >> initialize [ 
 
 
-| tone1 tone2 btn|
+| tone1 tone2 btn adsr|
 tone1 := SineOsc new label: 'Tone1'.
 tone2 := SineOsc new label: 'Tone2'.
-btn := PhButton new label: 'Key'.
-^ (tone1 + tone2) * btn.
+adsr := ADSREnv new label: 'KADSR'; decay: 0.2 ; sustain: 0; release: 0; trigger: (PhButton new label: 'TKey').
+
+^ (tone1 + tone2) * adsr
 ]

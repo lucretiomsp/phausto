@@ -57,7 +57,7 @@ PhEnvelope >> release [
 		release := PhHSlider new
 			           label: self label , 'Release'
 			           init: 0.3
-			           min: 0.001
+			           min: 0
 			           max: 3
 			           step: 0.001 ].
 ]
@@ -83,5 +83,5 @@ PhEnvelope >> trigger: aNumberOrABox [
 
 	aNumberOrABox isNumber
 		        ifTrue: [ self trigger init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ]
+		        ifFalse: [ trigger :=  aNumberOrABox ]
 ]
