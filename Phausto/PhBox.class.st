@@ -138,29 +138,34 @@ PhBox >> asDsp [
 	" creates a DSP from the Box"
 
 	| finalDsp interBox |
-	self class libContext
-		ifFalse: [
-		^ Error new signal: 'Invalid Box - please (re)create one' ]
-		ifTrue: [
-			interBox := self asBox.
-			"initialize the final DSP to a null pointer"
-			finalDsp := DSP new.
+	self getHandle
+		ifNil: [ ^ Error new signal: 'Invalid Box - please (re)create one' ]
+		ifNotNil: [
+			self class libContext
+				ifFalse: [ ^ Error new signal: 'LibCOntext does not exist' ]
+				ifTrue: [
+					interBox := self asBox.
+					"initialize the final DSP to a null pointer"
+					finalDsp := DSP new.
 
-			interBox
-				ifNotNil: [
-					DSP initializedDSP ifNotNil: [DSP initializedDSP destroy].
-					finalDsp := PhaustoDynamicEngine uniqueInstance
-						            createDspFromBoxes: self asBox.
-					PhaustoDynamicEngine dspPlaying: finalDsp.
-					finalDsp name: 'MyApp'.
-					finalDsp generatedCode: 'process = ' , self fullPrintString , ';'.
-					attachedDSP := finalDsp.
+					interBox
+						ifNotNil: [
+							DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ].
 
-					BoxAPI uniqueInstance destroyLibContext ]
-				ifNil: [
-				Error new signal: 'Invalid Box please check its creation' ].
+							finalDsp := PhaustoDynamicEngine uniqueInstance
+								            createDspFromBoxes: self asBox.
 
-			^ finalDsp ]
+							PhaustoDynamicEngine dspPlaying: finalDsp.
+							finalDsp name: 'MyApp'.
+							finalDsp generatedCode:
+								'process = ' , self fullPrintString , ';'.
+							attachedDSP := finalDsp.
+
+							BoxAPI uniqueInstance destroyLibContext ]
+						ifNil: [
+						Error new signal: 'Invalid Box please check its creation' ].
+
+					^ finalDsp ] ]
 ]
 
 { #category : 'converting' }

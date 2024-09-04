@@ -64,7 +64,7 @@ TpSampler >> asBox [
 			           min: 0
 			           max: 1
 			           step: 0.001).
-	^ sampler asBox * self level => effect
+	^ ((sampler asBox * self level )=> effect ) asBox
 ]
 
 { #category : 'accessing' }
@@ -169,6 +169,13 @@ TpSampler >> pathToFolder [
 TpSampler >> pathToFolder: aString [
 
 	pathToFolder := aString
+]
+
+{ #category : 'printing' }
+TpSampler >> printOn: aStream [
+
+"check what was the problem of this method in the superclass"
+	^ aStream << 'I am the Tp Sampler'
 ]
 
 { #category : 'accessing' }
