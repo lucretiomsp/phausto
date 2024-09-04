@@ -77,6 +77,52 @@ hasMidi := 'false,'.
 		close
 ]
 
+{ #category : 'ui-building' }
+DSP class >> asCmajorFileNamed: aName hasMIDI: aBoolean [
+
+	| hasMidi |
+	"we need to improve the mechanism to generate MIDI instruments"
+	hasMidi := aBoolean asString , ','.
+
+	(FileLocator documents / (aName , '.cmajorpatch')) writeStream
+		cr;
+		nextPutAll: '{';
+		nextPutAll: '"CmajorVersion":';
+		tab;
+		nextPutAll: '1,';
+		cr;
+		nextPutAll: '"ID":';
+		tab;
+		nextPutAll: '"pharo.' , aName , '",';
+		cr;
+		nextPutAll: '"version":';
+		tab;
+		nextPutAll: '"1.0",';
+		cr;
+		nextPutAll: '"name":';
+		tab;
+		nextPutAll: '"' , aName , '"' , ',';
+		cr;
+		nextPutAll: '"description":';
+		tab;
+		nextPutAll: '"A ' , aName , ' generated in Pharo using Phausto",';
+		cr;
+		nextPutAll: '"manufacturer":';
+		tab;
+		nextPutAll: '"Pharo Association",';
+		cr;
+		nextPutAll: '"isInstrument":';
+		tab;
+		nextPutAll: hasMidi;
+		cr;
+		nextPutAll: '"source":';
+		tab;
+		nextPutAll: '"' , aName , '.cmajor"';
+		cr;
+		nextPutAll: '}';
+		close
+]
+
 { #category : 'as yet unclassified' }
 DSP class >> create: aStringWithFaustCode [
 	"create a new dsp from a string with valid Faust code"
@@ -177,24 +223,27 @@ index := self getParamIndex: aString.
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'converting' }
 DSP >> createCmajorMIDIPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
 
-	self class asCmajorFileNamed: aName.
+
+	self class asCmajorFileNamed: aName hasMIDI: true.
 	"return true if the .cmajor file has been  generated"
 	^ LibFaust uniqueInstance
-		  createCMajorMIDIFileFromString: self generatedCode
+		  createCMajorMIDIFileFromString:	self generatedCode
 		  withName: aName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'converting' }
 DSP >> createCmajorPatchNamed: aName [
+	"the .cmajorpatch file is always generated "
 
-"the .cmajorpatch file is always generated "
-self class asCmajorFileNamed: aName.
-"return true if the .cmajor file has been  generated"
-^ LibFaust uniqueInstance createCMajorFileFromString: self generatedCode withName: aName
+	self class asCmajorFileNamed: aName hasMIDI: false.
+	"return true if the .cmajor file has been  generated"
+	^ LibFaust uniqueInstance
+		  createCMajorFileFromString: self generatedCode
+		  withName: aName
 ]
 
 { #category : 'initialize - destroy' }

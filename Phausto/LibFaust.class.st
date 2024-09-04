@@ -83,14 +83,14 @@ LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg arguments: 
 
 	^ self ffiCall:
 		  #( bool generateCAuxFilesFromString #( const char #* 'MyApp'
-		        #, const char #* aString #, int 6 #, void #* argv #, ByteArray
+		        #, const char #* aString #, int 8 #, void #* argv #, ByteArray
 		        errorMsg ) )
 ]
 
 { #category : 'as yet unclassified' }
 LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: aName [
 
-	| myArgv fileOutput|
+	| myArgv fileOutput |
 	fileOutput := FileLocator documents asAbsolute pathString , '/'
 	              , aName , '.cmajor'.
 
@@ -100,6 +100,8 @@ LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: a
 			          '/Users/domenicocipriani/MyStuff/coding/faust4pharo/architecture/cmajor/poly-dsp.cmajor'.
 			          '-lang'.
 			          'cmajor-poly'.
+			          '-cn'.
+			          'example'.
 			          '-o'.
 			          fileOutput }.
 
