@@ -138,7 +138,7 @@ PhBox >> asDsp [
 	" creates a DSP from the Box"
 
 	| finalDsp interBox |
-	self getHandle
+	self asBox getHandle
 		ifNil: [ ^ Error new signal: 'Invalid Box - please (re)create one' ]
 		ifNotNil: [
 			self class libContext

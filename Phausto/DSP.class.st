@@ -178,6 +178,17 @@ index := self getParamIndex: aString.
 ]
 
 { #category : 'as yet unclassified' }
+DSP >> createCmajorMIDIPatchNamed: aName [
+	"the .cmajorpatch file is always generated "
+
+	self class asCmajorFileNamed: aName.
+	"return true if the .cmajor file has been  generated"
+	^ LibFaust uniqueInstance
+		  createCMajorMIDIFileFromString: self generatedCode
+		  withName: aName
+]
+
+{ #category : 'as yet unclassified' }
 DSP >> createCmajorPatchNamed: aName [
 
 "the .cmajorpatch file is always generated "

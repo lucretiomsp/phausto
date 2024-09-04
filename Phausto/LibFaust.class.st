@@ -78,6 +78,50 @@ errorBuffer := ByteArray new: 4096.
 	^  self createCMajorFileFromString: aString buffer: errorBuffer withName: aName
 ]
 
+{ #category : 'as yet unclassified' }
+LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg arguments: argv [
+
+	^ self ffiCall:
+		  #( bool generateCAuxFilesFromString #( const char #* 'MyApp'
+		        #, const char #* aString #, int 6 #, void #* argv #, ByteArray
+		        errorMsg ) )
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: aName [
+
+	| myArgv fileOutput|
+	fileOutput := FileLocator documents asAbsolute pathString , '/'
+	              , aName , '.cmajor'.
+
+
+	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-a'.
+			          '/Users/domenicocipriani/MyStuff/coding/faust4pharo/architecture/cmajor/poly-dsp.cmajor'.
+			          '-lang'.
+			          'cmajor-poly'.
+			          '-o'.
+			          fileOutput }.
+
+	^ [
+	  self
+		  createCMajorMIDIFileFromString: aString
+		  buffer: errorMsg
+		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createCMajorMIDIFileFromString: aString withName: aName [
+
+	| errorBuffer |
+	errorBuffer := ByteArray new: 4096.
+
+	^ self
+		  createCMajorMIDIFileFromString: aString
+		  buffer: errorBuffer
+		  withName: aName
+]
+
 { #category : 'accessing - platform' }
 LibFaust >> macLibraryName [
 
