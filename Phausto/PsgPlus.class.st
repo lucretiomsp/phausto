@@ -24,7 +24,7 @@ PsgPlus >> asBox [
 	"lfo for Pitch"
 	pitchLfo := self pitch asBox
 	            +
-		            ((LFOSquareWavePos new freq:
+		            ((LFOSquarePos new freq:
 			              self pitch asBox * (1 / 48) asBox)
 		             * (self lfoAmount asBox * self pitch asBox)).
 	"ring modulator"

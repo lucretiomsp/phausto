@@ -19,9 +19,33 @@ UnitGeneratorsTest >> testEmptyUnitGeneratorAsDsp [
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testLFOSawPosAsDsp [
+
+	self assert: LFOSawPos  new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testLFOSquareAsDsp [
+
+	self assert: LFOSquare  new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testLFOSquarePosAsDsp [
+
+	self assert: LFOSquarePos  new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testLFOTriAsDsp [
 
 	self assert: LFOTri  new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testLFOTriPosAsDsp [
+
+	self assert: LFOTriPos  new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

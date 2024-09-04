@@ -20,7 +20,12 @@ Class {
 { #category : 'accessing' }
 LowFrequencyOscillators >> amount [
 
-	^ amount
+	^ amount ifNil: [amount := PhHSlider new
+		          label: self label , 'Amount'
+		          init: 1
+		          min: 0
+		          max: 28000
+		          step: 1.]
 ]
 
 { #category : 'accessing' }
@@ -40,9 +45,9 @@ LowFrequencyOscillators >> amount: aNumberOrABox [
 LowFrequencyOscillators >> asBox [
 
 	| intermediateBox finalBox |
-	self initializeUIParamters .
+
 	intermediateBox := super asBox.
-	finalBox := freq asBox connectTo: intermediateBox.
+	finalBox := self freq asBox connectTo: intermediateBox.
 	^ finalBox * self amount asBox + self offset asBox
 ]
 
@@ -50,60 +55,23 @@ LowFrequencyOscillators >> asBox [
 LowFrequencyOscillators >> initialize [
 
 	super initialize.
-	"self uLevel: 1."
-	amount := PhHSlider new
-		          label: self label , 'Amount'
-		          init: 1
-		          min: 0
-		          max: 28000
-		          step: 1.
-	offset := PhHSlider new
-		          label: self label , 'Offset'
-		          init: 0
-		          min: 0
-		          max: 800
-		          step: 0.01.
-	freq := PhHSlider new
-		        label: self label , 'Freq'
-		        init: 2
-		        min: 0.01
-		        max: 20
-		        step: 0.001
-
 	"as LFO are used for modulation, there default level is set to 1"
-]
+	self uLevel: 1.
+	
 
-{ #category : 'initialization' }
-LowFrequencyOscillators >> initializeUIParamters [
 
-	super initializeUIParameters.
-
-	amount ifNil: [amount := PhHSlider new
-		          label: self label , 'Amount'
-		          init: 1
-		          min: 0
-		          max: 28000
-		          step: 1].
-	offset ifNil: [offset := PhHSlider new
-		          label: self label , 'Offset'
-		          init: 0
-		          min: 0
-		          max: 800
-		          step: 0.01].
-	freq ifNil: [freq := PhHSlider new
-		        label: self label , 'Freq'
-		        init: 2
-		        min: 0.01
-		        max: 20
-		        step: 0.001]
-
-	"as LFO are used for modulation, there default level is set to 1"
+	
 ]
 
 { #category : 'accessing' }
 LowFrequencyOscillators >> offset [
 
-	^ offset
+	^ offset ifNil: [  	offset := PhHSlider new
+		          label: self label , 'Offset'
+		          init: 0
+		          min: 0
+		          max: 800
+		          step: 0.01. ]
 ]
 
 { #category : 'accessing' }

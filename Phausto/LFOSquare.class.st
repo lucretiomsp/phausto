@@ -1,8 +1,8 @@
 "
-Positive LF square wave in [0,1]
+Zero-mean unit-amplitude LF square wave.
 "
 Class {
-	#name : 'LFOSquareWavePos',
+	#name : 'LFOSquare',
 	#superclass : 'LowFrequencyOscillators',
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
@@ -10,8 +10,8 @@ Class {
 }
 
 { #category : 'initialization' }
-LFOSquareWavePos >> initialize [
+LFOSquare >> initialize [
 
 	super initialize.
-	processExpression := 'process = os.lf_squarewavepos;'
+	processExpression := 'process = os.lf_squarewave;'
 ]

@@ -1,8 +1,8 @@
 "
-Zero-mean unit-amplitude LF square wave.
+Simple sawtooth waveform oscillator between 0 and 1.
 "
 Class {
-	#name : 'LFOSquareWave',
+	#name : 'LFOSawPos',
 	#superclass : 'LowFrequencyOscillators',
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
@@ -10,8 +10,8 @@ Class {
 }
 
 { #category : 'initialization' }
-LFOSquareWave >> initialize [
+LFOSawPos >> initialize [
 
 	super initialize.
-	processExpression := 'process = os.lf_squarewave;'
+	processExpression := 'process = os.lf_sawpos;'
 ]
