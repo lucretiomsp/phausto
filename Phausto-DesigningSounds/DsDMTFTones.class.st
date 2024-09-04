@@ -39,7 +39,8 @@ container := BlElement new
 			             c vertical matchParent ];
 		             background: Color darkGray.
 container addChildren: buttons.
-container openInSpace
+.
+container openInSpace.
 ]
 
 { #category : 'accessing' }

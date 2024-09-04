@@ -4,9 +4,9 @@ Quadratic softclip nonlinearity. A soft clipper is an audio processing tool used
 Class {
 	#name : 'SoftClipQuadratic',
 	#superclass : 'Saturators',
-	#category : 'Phausto-BoxAPI-Effects',
+	#category : 'Phausto-Effects',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Effects'
+	#tag : 'Effects'
 }
 
 { #category : 'converting' }
@@ -14,7 +14,7 @@ SoftClipQuadratic >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self input connectTo: intermediateBox.
+	finalBox := self input asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 

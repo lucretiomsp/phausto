@@ -6,9 +6,9 @@ Satrev was made from a listing of ""SATREV"", dated May 15, 1971, which was reco
 Class {
 	#name : 'SatRev',
 	#superclass : 'Reverbs',
-	#category : 'Phausto-BoxAPI-Effects',
+	#category : 'Phausto-Effects',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Effects'
+	#tag : 'Effects'
 }
 
 { #category : 'converting' }

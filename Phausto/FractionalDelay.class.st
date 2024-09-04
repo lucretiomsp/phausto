@@ -4,9 +4,9 @@ Simple d samples fractional delay based on 2 interpolated delay lines where n is
 Class {
 	#name : 'FractionalDelay',
 	#superclass : 'Delays',
-	#category : 'Phausto-BoxAPI-Effects',
+	#category : 'Phausto-Effects',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Effects'
+	#tag : 'Effects'
 }
 
 { #category : 'converting' }

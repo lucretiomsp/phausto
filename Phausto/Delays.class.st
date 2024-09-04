@@ -11,9 +11,9 @@ Class {
 		'delayLength',
 		'input'
 	],
-	#category : 'Phausto-BoxAPI-Effects',
+	#category : 'Phausto-Effects',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Effects'
+	#tag : 'Effects'
 }
 
 { #category : 'accessing' }

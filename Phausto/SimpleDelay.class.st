@@ -4,9 +4,9 @@ Simple d samples delay where n is the maximum delay length as a number of sample
 Class {
 	#name : 'SimpleDelay',
 	#superclass : 'Delays',
-	#category : 'Phausto-BoxAPI-Effects',
+	#category : 'Phausto-Effects',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Effects'
+	#tag : 'Effects'
 }
 
 { #category : 'converting' }
