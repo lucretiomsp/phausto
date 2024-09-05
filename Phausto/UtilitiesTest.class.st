@@ -33,6 +33,99 @@ UtilitiesTest >> testDictionaryAsCmajorEventEndpoint [
 	self assert: button asCmajorEventEndpoint equals: resultButton.
 ]
 
+{ #category : 'as yet unclassified' }
+UtilitiesTest >> testDictionaryAsCmajorListofUIEndpoints [
+
+	| parameters attack decay release sustain level freq gain gate result |
+	parameters := Dictionary new.
+	attack := Dictionary new
+		          add: #address -> '/MyApp/ADSREnvAttack';
+		          add: #init -> 0.001;
+		          add: #label -> 'ADSREnvAttack';
+		          add: #max -> 2;
+		          add: #min -> 0.001;
+		          add: #shortname -> 'ADSREnvAttack';
+		          add: #step -> 1;
+		          add: #type -> 'hslider'.
+	decay := Dictionary new
+		         add: #address -> '/MyApp/ADSREnvDecay';
+		         add: #init -> 0.2;
+		         add: #label -> 'ADSREnvDecay';
+		         add: #max -> 2;
+		         add: #min -> 0.001;
+		         add: #shortname -> 'ADSREnvDecay';
+		         add: #step -> 1;
+		         add: #type -> 'hslider'.
+
+	release := Dictionary new
+		           add: #address -> '/MyApp/ADSREnvRelease';
+		           add: #init -> 0.3;
+		           add: #label -> 'ADSREnvRelease';
+		           add: #max -> 3;
+		           add: #min -> 0;
+		           add: #shortname -> 'ADSREnvRelease';
+		           add: #step -> 0.001;
+		           add: #type -> 'hslider'.
+
+	sustain := Dictionary new
+		           add: #address -> '/MyApp/ADSREnvSustain';
+		           add: #init -> 0.5;
+		           add: #label -> 'ADSREnvSustain';
+		           add: #max -> 1;
+		           add: #min -> 0;
+		           add: #shortname -> 'ADSREnvSustain';
+		           add: #step -> 0.001;
+		           add: #type -> 'hslider'.
+
+	level := Dictionary new
+		         add: #address -> '/MyApp/ADSREnvuLevel';
+		         add: #init -> 0.5;
+		         add: #label -> 'ADSREnvuLevel';
+		         add: #max -> 1;
+		         add: #min -> 0;
+		         add: #shortname -> 'ADSREnvuLevel';
+		         add: #step -> 0.001;
+		         add: #type -> 'hslider'.
+
+	freq := Dictionary new
+		        add: #address -> '/MyApp/freq';
+		        add: #init -> 200;
+		        add: #label -> 'freq';
+		        add: #max -> 1200;
+		        add: #min -> 20;
+		        add: #shortname -> 'freq';
+		        add: #step -> 1;
+		        add: #type -> 'hslider'.
+
+	gain := Dictionary new
+		        add: #address -> '/MyApp/gain';
+		        add: #init -> 0.5;
+		        add: #label -> 'gain';
+		        add: #max -> 1;
+		        add: #min -> 0;
+		        add: #shortname -> 'gain';
+		        add: #step -> 0.01;
+		        add: #type -> 'hslider'.
+
+	gate := Dictionary new
+		        add: #address -> '/MyApp/gate';
+		        add: #label -> 'gate';
+		        add: #shortname -> 'gate';
+		        add: #type -> 'button'.
+
+	parameters add: #ADSREnvAttack -> attack.
+	parameters add: #ADSREnvDecay -> decay.
+	parameters add: #ADSREnvRelease -> release.
+	parameters add: #ADSREnvSustain -> sustain.
+	parameters add: #ADSREnvuLevel -> level.
+	
+	result := ''.
+
+self assert: parameters asCmajorListOfUIEndpoints equals: result.
+
+	
+]
+
 { #category : 'tests' }
 UtilitiesTest >> testDictionaryAsCmajorPolyWrapper [
 
@@ -47,23 +140,77 @@ UtilitiesTest >> testDictionaryAsCmajorPolyWrapper [
 		          add: #shortname -> 'ADSREnvAttack';
 		          add: #step -> 1;
 		          add: #type -> 'hslider'.
-   decay := Dictionary new add: #address->'/MyApp/ADSREnvDecay' ; add: #init->0.2 ; add: #label->'ADSREnvDecay' ; add: #max->2 ; add: #min->0.001 ; 
-add: #shortname->'ADSREnvDecay' ; add: #step->1 ; add: #type->'hslider'.
+	decay := Dictionary new
+		         add: #address -> '/MyApp/ADSREnvDecay';
+		         add: #init -> 0.2;
+		         add: #label -> 'ADSREnvDecay';
+		         add: #max -> 2;
+		         add: #min -> 0.001;
+		         add: #shortname -> 'ADSREnvDecay';
+		         add: #step -> 1;
+		         add: #type -> 'hslider'.
 
-release := Dictionary new add:#address->'/MyApp/ADSREnvRelease' ; add:#init->0.3 ; add:#label->'ADSREnvRelease' ; add:#max->3 ; add:#min->0 ; add:#shortname->'ADSREnvRelease' ; add:#step->0.001 ; add:#type->'hslider' .
+	release := Dictionary new
+		           add: #address -> '/MyApp/ADSREnvRelease';
+		           add: #init -> 0.3;
+		           add: #label -> 'ADSREnvRelease';
+		           add: #max -> 3;
+		           add: #min -> 0;
+		           add: #shortname -> 'ADSREnvRelease';
+		           add: #step -> 0.001;
+		           add: #type -> 'hslider'.
 
-sustain := Dictionary new add: #address->'/MyApp/ADSREnvSustain' ; add: #init->0.5 ; add: #label->'ADSREnvSustain' ; add: #max->1 ; add: #min->0 ; add: #shortname->'ADSREnvSustain' ; add: #step->0.001 ; add: #type->'hslider' .
+	sustain := Dictionary new
+		           add: #address -> '/MyApp/ADSREnvSustain';
+		           add: #init -> 0.5;
+		           add: #label -> 'ADSREnvSustain';
+		           add: #max -> 1;
+		           add: #min -> 0;
+		           add: #shortname -> 'ADSREnvSustain';
+		           add: #step -> 0.001;
+		           add: #type -> 'hslider'.
 
-level := Dictionary new add: #address->'/MyApp/ADSREnvuLevel' ;add: #init->0.5 ;add: #label->'ADSREnvuLevel' ;add: #max->1 ;add: #min->0 ;add: #shortname->'ADSREnvuLevel' ;add: #step->0.001 ;add: #type->'hslider' .
+	level := Dictionary new
+		         add: #address -> '/MyApp/ADSREnvuLevel';
+		         add: #init -> 0.5;
+		         add: #label -> 'ADSREnvuLevel';
+		         add: #max -> 1;
+		         add: #min -> 0;
+		         add: #shortname -> 'ADSREnvuLevel';
+		         add: #step -> 0.001;
+		         add: #type -> 'hslider'.
 
-freq :=  Dictionary new add: #address->'/MyApp/freq' ; add: #init->200 ; add: #label->'freq' ; add: #max->1200 ; add: #min->20 ; add: #shortname->'freq' ; add: #step->1 ; add: #type->'hslider' .
+	freq := Dictionary new
+		        add: #address -> '/MyApp/freq';
+		        add: #init -> 200;
+		        add: #label -> 'freq';
+		        add: #max -> 1200;
+		        add: #min -> 20;
+		        add: #shortname -> 'freq';
+		        add: #step -> 1;
+		        add: #type -> 'hslider'.
 
-gain :=  Dictionary new add: #address->'/MyApp/gain' ;add: #init->0.5 ;add: #label->'gain' ;add: #max->1 ;add: #min->0 ;add: #shortname->'gain' ;add: #step->0.01 ;add: #type->'hslider' .
+	gain := Dictionary new
+		        add: #address -> '/MyApp/gain';
+		        add: #init -> 0.5;
+		        add: #label -> 'gain';
+		        add: #max -> 1;
+		        add: #min -> 0;
+		        add: #shortname -> 'gain';
+		        add: #step -> 0.01;
+		        add: #type -> 'hslider'.
 
-gate := Dictionary new add: #address->'/MyApp/gate' ; add: #label->'gate' ; add: #shortname->'gate' ; add: #type->'button' .
+	gate := Dictionary new
+		        add: #address -> '/MyApp/gate';
+		        add: #label -> 'gate';
+		        add: #shortname -> 'gate';
+		        add: #type -> 'button'.
 
-	parameters add: 'ADSREnvAttack' -> attack.
-
+	parameters add: #ADSREnvAttack -> attack.
+   parameters add: #ADSREnvDecay -> decay.
+   parameters add: #ADSREnvRelease -> release.
+   parameters add: #ADSREnvSustain -> sustain.
+   parameters add: #ADSREnvuLevel -> level.
 
 	result := 'graph Synth [[ main ]]
 {

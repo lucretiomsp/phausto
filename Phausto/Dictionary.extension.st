@@ -34,6 +34,12 @@ Dictionary >> asCmajorEventEndpoint [
 ]
 
 { #category : '*Phausto' }
+Dictionary >> asCmajorListOfUIEndpoints [
+
+^ 1
+]
+
+{ #category : '*Phausto' }
 Dictionary >> asCmajorPolyWrapper [
 
 	| output |
