@@ -308,12 +308,20 @@ processor NoteToFaust
 { #category : 'tests' }
 UtilitiesTest >> testDictionaryAsEventsToVoicesConnections [
 
-| result |
-
-result := 'event_ADSREnvAttack -> voices.event_ADSREnvAttack;
-event_ADSREnvDecay -> voices.event_ADSREnvDecay;
+	| result dict |
+	result := 'event_ADSREnvuLevel -> voices.event_ADSREnvuLevel;
 event_ADSREnvRelease -> voices.event_ADSREnvRelease;
+event_ADSREnvAttack -> voices.event_ADSREnvAttack;
 event_ADSREnvSustain -> voices.event_ADSREnvSustain;
-event_ADSREnvuLevel -> voices.event_ADSREnvuLevel;
-'
+event_ADSREnvDecay -> voices.event_ADSREnvDecay;
+'.
+
+	dict := Dictionary new.
+	dict
+		add: #ADSREnvAttack -> 0;
+		add: #ADSREnvDecay -> 0;
+		add: #ADSREnvSustain -> 0;
+		add: #ADSREnvRelease -> 0;
+		add: #ADSREnvuLevel -> 0.
+	self assert: dict asCmajorEventsToVoicesConnection equals: result
 ]

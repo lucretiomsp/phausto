@@ -1,12 +1,6 @@
 Extension { #name : 'Dictionary' }
 
 { #category : '*Phausto' }
-Dictionary >> asCMajorEvventsToVoicesConnection [
-
-^ 1
-]
-
-{ #category : '*Phausto' }
 Dictionary >> asCmajorEventEndpoint [
 
 	| endpoint |
@@ -38,6 +32,24 @@ Dictionary >> asCmajorEventEndpoint [
 				nextPutAll: 'f ]];' ].
 
 	^ endpoint contents
+]
+
+{ #category : '*Phausto' }
+Dictionary >> asCmajorEventsToVoicesConnection [
+| keys output|
+
+self removeKey: #freq ifAbsent: [ ] . 
+self removeKey: #gate ifAbsent: [ ] . 
+self removeKey: #gain ifAbsent: [ ] . 
+keys := self keys asString .
+
+output := WriteStream on: String new.
+
+self keys do: [ :k |  
+	output nextPutAll: 'event_' , k asString, ' -> voices.event_' , k asString , ';';
+	cr.  
+	].
+	^ output contents
 ]
 
 { #category : '*Phausto' }
