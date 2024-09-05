@@ -143,8 +143,8 @@ UtilitiesTest >> testDictionaryAsCmajorPolyWrapper [
 
 	| parameters attack decay release sustain level freq gain gate result |
 	parameters := Dictionary new.
-	attack := Dictionary new
-		          add: #address -> '/MyApp/ADSREnvAttack';
+	attack := Dictionary new.
+		          attack add: #address -> '/MyApp/ADSREnvAttack';
 		          add: #init -> 0.001;
 		          add: #label -> 'ADSREnvAttack';
 		          add: #max -> 2;
@@ -152,8 +152,8 @@ UtilitiesTest >> testDictionaryAsCmajorPolyWrapper [
 		          add: #shortname -> 'ADSREnvAttack';
 		          add: #step -> 1;
 		          add: #type -> 'hslider'.
-	decay := Dictionary new
-		         add: #address -> '/MyApp/ADSREnvDecay';
+	decay := Dictionary new.
+		         decay add: #address -> '/MyApp/ADSREnvDecay';
 		         add: #init -> 0.2;
 		         add: #label -> 'ADSREnvDecay';
 		         add: #max -> 2;
@@ -162,8 +162,8 @@ UtilitiesTest >> testDictionaryAsCmajorPolyWrapper [
 		         add: #step -> 1;
 		         add: #type -> 'hslider'.
 
-	release := Dictionary new
-		           add: #address -> '/MyApp/ADSREnvRelease';
+	release := Dictionary new.
+		          release add: #address -> '/MyApp/ADSREnvRelease';
 		           add: #init -> 0.3;
 		           add: #label -> 'ADSREnvRelease';
 		           add: #max -> 3;
@@ -172,8 +172,8 @@ UtilitiesTest >> testDictionaryAsCmajorPolyWrapper [
 		           add: #step -> 0.001;
 		           add: #type -> 'hslider'.
 
-	sustain := Dictionary new
-		           add: #address -> '/MyApp/ADSREnvSustain';
+	sustain := Dictionary new.
+		          sustain  add: #address -> '/MyApp/ADSREnvSustain';
 		           add: #init -> 0.5;
 		           add: #label -> 'ADSREnvSustain';
 		           add: #max -> 1;
@@ -182,8 +182,8 @@ UtilitiesTest >> testDictionaryAsCmajorPolyWrapper [
 		           add: #step -> 0.001;
 		           add: #type -> 'hslider'.
 
-	level := Dictionary new
-		         add: #address -> '/MyApp/ADSREnvuLevel';
+	level := Dictionary new.
+		        level add: #address -> '/MyApp/ADSREnvuLevel';
 		         add: #init -> 0.5;
 		         add: #label -> 'ADSREnvuLevel';
 		         add: #max -> 1;
@@ -192,8 +192,8 @@ UtilitiesTest >> testDictionaryAsCmajorPolyWrapper [
 		         add: #step -> 0.001;
 		         add: #type -> 'hslider'.
 
-	freq := Dictionary new
-		        add: #address -> '/MyApp/freq';
+	freq := Dictionary new.
+		       freq add: #address -> '/MyApp/freq';
 		        add: #init -> 200;
 		        add: #label -> 'freq';
 		        add: #max -> 1200;
@@ -202,46 +202,48 @@ UtilitiesTest >> testDictionaryAsCmajorPolyWrapper [
 		        add: #step -> 1;
 		        add: #type -> 'hslider'.
 
-	gain := Dictionary new
-		        add: #address -> '/MyApp/gain';
-		        add: #init -> 0.5;
-		        add: #label -> 'gain';
-		        add: #max -> 1;
-		        add: #min -> 0;
-		        add: #shortname -> 'gain';
-		        add: #step -> 0.01;
-		        add: #type -> 'hslider'.
+	gain := Dictionary new.
+	gain
+		add: #address -> '/MyApp/gain';
+		add: #init -> 0.5;
+		add: #label -> 'gain';
+		add: #max -> 1;
+		add: #min -> 0;
+		add: #shortname -> 'gain';
+		add: #step -> 0.01;
+		add: #type -> 'hslider'.
 
-	gate := Dictionary new
-		        add: #address -> '/MyApp/gate';
-		        add: #label -> 'gate';
-		        add: #shortname -> 'gate';
-		        add: #type -> 'button'.
+	gate := Dictionary new.
+	gate
+		add: #address -> '/MyApp/gate';
+		add: #label -> 'gate';
+		add: #shortname -> 'gate';
+		add: #type -> 'button'.
 
 	parameters add: #ADSREnvAttack -> attack.
-   parameters add: #ADSREnvDecay -> decay.
-   parameters add: #ADSREnvRelease -> release.
-   parameters add: #ADSREnvSustain -> sustain.
-   parameters add: #ADSREnvuLevel -> level.
+	parameters add: #ADSREnvDecay -> decay.
+	parameters add: #ADSREnvRelease -> release.
+	parameters add: #ADSREnvSustain -> sustain.
+	parameters add: #ADSREnvuLevel -> level.
 
 	result := 'graph Synth [[ main ]]
 {
-    input event std::midi::Message midiIn [[ name: "MIDI input" ]];
-    input event float32 event_ADSREnvAttack [[ name: "ADSREnvAttack", group: "/v:MyApp/ADSREnvAttack", min: 0.001f, max: 2.0f, init: 0.001f, step: 1.0f ]];
-    input event float32 event_ADSREnvDecay [[ name: "ADSREnvDecay", group: "/v:MyApp/ADSREnvDecay", min: 0.001f, max: 2.0f, init: 0.2f, step: 1.0f ]];
-    input event float32 event_ADSREnvRelease [[ name: "ADSREnvRelease", group: "/v:MyApp/ADSREnvRelease", min: 0.0f, max: 3.0f, init: 0.3f, step: 0.001f ]];
-    input event float32 event_ADSREnvSustain [[ name: "ADSREnvSustain", group: "/v:MyApp/ADSREnvSustain", min: 0.0f, max: 1.0f, init: 0.5f, step: 0.001f ]];
-    input event float32 event_ADSREnvuLevel [[ name: "ADSREnvuLevel", group: "/v:MyApp/ADSREnvuLevel", min: 0.0f, max: 1.0f, init: 0.5f, step: 0.001f ]];
+input event std::midi::Message midiIn [[ name: "MIDI input" ]];
+input event float32 event_ADSREnvuLevel [[ name: "ADSREnvuLevel", group: "/v:MyApp/ADSREnvuLevel", min: 0.0f, max: 1.0f, init: 0.5f, step: 0.001f ]];
+input event float32 event_ADSREnvRelease [[ name: "ADSREnvRelease", group: "/v:MyApp/ADSREnvRelease", min: 0.0f, max: 3.0f, init: 0.3f, step: 0.001f ]];
+input event float32 event_ADSREnvAttack [[ name: "ADSREnvAttack", group: "/v:MyApp/ADSREnvAttack", min: 0.001f, max: 2.0f, init: 0.001f, step: 1.0f ]];
+input event float32 event_ADSREnvSustain [[ name: "ADSREnvSustain", group: "/v:MyApp/ADSREnvSustain", min: 0.0f, max: 1.0f, init: 0.5f, step: 0.001f ]];
+input event float32 event_ADSREnvDecay [[ name: "ADSREnvDecay", group: "/v:MyApp/ADSREnvDecay", min: 0.001f, max: 2.0f, init: 0.2f, step: 1.0f ]];
 
-    output stream float<2> out;
+output stream float<2> out;
 
-    let voiceCount = 16;
+let voiceCount = 16;
 
-    node
-    {
-        voiceAllocator = std::voices::VoiceAllocator (voiceCount);
-        voices = Voice[voiceCount];
-    }
+node
+{
+voiceAllocator = std::voices::VoiceAllocator (voiceCount);
+voices = Voice[voiceCount];
+}
 
     connection
     {
@@ -301,4 +303,17 @@ processor NoteToFaust
     }
 }'.
 	^ self assert: parameters asCmajorPolyWrapper equals: result
+]
+
+{ #category : 'tests' }
+UtilitiesTest >> testDictionaryAsEventsToVoicesConnections [
+
+| result |
+
+result := 'event_ADSREnvAttack -> voices.event_ADSREnvAttack;
+event_ADSREnvDecay -> voices.event_ADSREnvDecay;
+event_ADSREnvRelease -> voices.event_ADSREnvRelease;
+event_ADSREnvSustain -> voices.event_ADSREnvSustain;
+event_ADSREnvuLevel -> voices.event_ADSREnvuLevel;
+'
 ]

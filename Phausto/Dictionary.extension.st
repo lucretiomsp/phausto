@@ -1,6 +1,12 @@
 Extension { #name : 'Dictionary' }
 
 { #category : '*Phausto' }
+Dictionary >> asCMajorEvventsToVoicesConnection [
+
+^ 1
+]
+
+{ #category : '*Phausto' }
 Dictionary >> asCmajorEventEndpoint [
 
 	| endpoint |
@@ -66,8 +72,25 @@ Dictionary >> asCmajorPolyWrapper [
 		nextPutAll: '{';
 		cr;
 		nextPutAll:
-			'    input event std::midi::Message midiIn [[ name: "MIDI input" ]];';
-	   nextPutAll:  self asCmajorListOfUIEndpoints .
+			'input event std::midi::Message midiIn [[ name: "MIDI input" ]];';
+		cr;	
+		nextPutAll: self asCmajorListOfUIEndpoints;
+		cr;
+		nextPutAll: 'output stream float<2> out;';
+		cr;
+		
+		nextPutAll: 'let voiceCount = 16;';
+		cr;
+		nextPutAll: 'node';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll: 'voiceAllocator = std::voices::VoiceAllocator (voiceCount);';
+		cr;
+		nextPutAll: 'voices = Voice[voiceCount];';
+		cr;
+		nextPutAll: '}'.
+		
 
 	^ output contents
 ]
