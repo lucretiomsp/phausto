@@ -9,10 +9,10 @@ Class {
 { #category : 'tests' }
 UtilitiesTest >> testDictionaryAsCmajorEventEndpoint [
 
-	| dict result |
-	result := 'input event float32 event_ADSREnvAttack [[ name: "ADSREnvAttack", group: "/v:MyApp/ADSREnvAttack", min: 0.001f, max: 2.0f, init: 0.001f, step: 1.0f ]];'.
-	dict := Dictionary new.
-	dict
+	| slider button resultSlider resultButton |
+	resultSlider := 'input event float32 event_ADSREnvAttack [[ name: "ADSREnvAttack", group: "/v:MyApp/ADSREnvAttack", min: 0.001f, max: 2.0f, init: 0.001f, step: 1.0f ]];'.
+	slider := Dictionary new.
+	slider
 		add: #min -> 0.001;
 		add: #step -> 1;
 		add: #address -> 'MyApp/ADSREnvAttack';
@@ -21,7 +21,16 @@ UtilitiesTest >> testDictionaryAsCmajorEventEndpoint [
 		add: #type -> 'hslider';
 		add: #label -> 'ADSREnvAttack';
 		add: #init -> 0.001.
-self assert: dict asCmajorEventEndpoint equals: result 
+		
+    button  := Dictionary new.
+	 button add: #address -> 'MyApp/gate';
+		     add: #label -> 'gate';
+		     add: #shortname -> 'gate';
+		     add: #type -> 'button'.
+		
+	resultButton := 'input event float32 event_gate [[ name: "gate", group: "/v:MyApp/gate", text: "gate", boolean ]];'.
+	self assert: slider asCmajorEventEndpoint equals: resultSlider.
+	self assert: button asCmajorEventEndpoint equals: resultButton.
 ]
 
 { #category : 'tests' }
