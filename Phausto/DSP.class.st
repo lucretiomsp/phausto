@@ -211,6 +211,21 @@ DSP >> allParameters [
 		ifFalse: [ Error new signal: 'This DSP is not initialized' ]
 ]
 
+{ #category : 'converting' }
+DSP >> asCmajorPolyWrapper: aName [
+
+	"write the cmajor "
+
+	(FileLocator documents / (aName , '.cmajorpatch')) writeStream
+		cr;
+		nextPutAll: 'graph Synth [[ main ]]';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll: 'input event std::midi::Message midiIn [[ name: "MIDI input" ]];'
+		close
+]
+
 { #category : 'ui-building' }
 DSP >> buttonFor: aString [
 " creates a new slider for the parameter named aString"
