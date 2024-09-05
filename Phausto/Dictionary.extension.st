@@ -23,3 +23,9 @@ Dictionary >> asCmajorEventEndpoint [
 		nextPutAll: 'f ]];'.
 	^ endpoint contents
 ]
+
+{ #category : '*Phausto' }
+Dictionary >> asCmajorPolyWrapper [
+
+^ 1.
+]
