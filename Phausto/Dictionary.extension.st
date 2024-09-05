@@ -37,14 +37,18 @@ Dictionary >> asCmajorEventEndpoint [
 { #category : '*Phausto' }
 Dictionary >> asCmajorListOfUIEndpoints [
 
-| output  |
+	| output |
+	"we remove the MIDI event endpoints, that does not have a UI element in the Cmajor patch"
+	self
+		removeKey: #gate ifAbsent: [  ];
+		removeKey: #freq ifAbsent: [  ];
+		removeKey: #gain ifAbsent: [  ].
 
-"we remove the MIDI event endpoints, that does not have a UI element in the Cmajor patch"
-self removeKey: #gate ifAbsent: [ ]; removeKey: #freq ifAbsent: [ ] ; removeKey: #gain ifAbsent: [ ]. 
 
-
-output := WriteStream on: String new.
-self keysAndValuesDo: [ :k :v | output nextPutAll: v asCmajorEventEndpoint ].
+	output := WriteStream on: String new.
+	self keysAndValuesDo: [ :k :v |
+		output nextPutAll: v asCmajorEventEndpoint.
+		output cr ].
 
 
 	^ output contents

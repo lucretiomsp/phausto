@@ -132,7 +132,8 @@ UtilitiesTest >> testDictionaryAsCmajorListofUIEndpoints [
 input event float32 event_ADSREnvRelease [[ name: "ADSREnvRelease", group: "/v:MyApp/ADSREnvRelease", min: 0.0f, max: 3.0f, init: 0.3f, step: 0.001f ]];
 input event float32 event_ADSREnvAttack [[ name: "ADSREnvAttack", group: "/v:MyApp/ADSREnvAttack", min: 0.001f, max: 2.0f, init: 0.001f, step: 1.0f ]];
 input event float32 event_ADSREnvSustain [[ name: "ADSREnvSustain", group: "/v:MyApp/ADSREnvSustain", min: 0.0f, max: 1.0f, init: 0.5f, step: 0.001f ]];
-input event float32 event_ADSREnvDecay [[ name: "ADSREnvDecay", group: "/v:MyApp/ADSREnvDecay", min: 0.001f, max: 2.0f, init: 0.2f, step: 1.0f ]];'.
+input event float32 event_ADSREnvDecay [[ name: "ADSREnvDecay", group: "/v:MyApp/ADSREnvDecay", min: 0.001f, max: 2.0f, init: 0.2f, step: 1.0f ]];
+'.
 
 	self assert: parameters asCmajorListOfUIEndpoints equals: result
 ]
