@@ -31,17 +31,18 @@ Class {
 	#tag : 'DSP'
 }
 
-{ #category : 'ui-building' }
+{ #category : 'converting' }
 DSP class >> asCmajorFileNamed: aName [
 
-	| hasMidi cmajorPatchesDir |
+	| hasMidi cmajorPatchesDir patchDir|
 	"we need to improve the mechanism to generate MIDI instruments"
 	hasMidi := 'false,'.
 
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
-	(cmajorPatchesDir / (aName , '.cmajorpatch')) writeStream
+		patchDir := (cmajorPatchesDir / aName	) ensureCreateDirectory.
+	(patchDir / (aName , '.cmajorpatch')) writeStream
 		cr;
 		nextPutAll: '{';
 		nextPutAll: '"CmajorVersion":';
@@ -80,16 +81,17 @@ DSP class >> asCmajorFileNamed: aName [
 		close
 ]
 
-{ #category : 'ui-building' }
+{ #category : 'converting' }
 DSP class >> asCmajorFileNamed: aName hasMIDI: aBoolean [
 
-	| hasMidi cmajorPatchesDir |
+	| hasMidi cmajorPatchesDir patchDir |
 	"we need to improve the mechanism to generate MIDI instruments"
 	hasMidi := aBoolean asString , ','.
-"we create the cmajorPatches folder in the documents folder if it not exists"
+	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
-	(cmajorPatchesDir / (aName , '.cmajorpatch')) writeStream
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+	(patchDir / (aName , '.cmajorpatch')) writeStream
 		cr;
 		nextPutAll: '{';
 		nextPutAll: '"CmajorVersion":';
@@ -123,7 +125,7 @@ DSP class >> asCmajorFileNamed: aName hasMIDI: aBoolean [
 		nextPutAll: '"source":';
 		tab;
 		nextPutAll: '[ "' , aName , 'polyWrapper' , '.cmajor"';
-		nextPutAll: ', "' , aName , '.cmajor"';
+		nextPutAll: ', "' , aName , '.cmajor" ]';
 		cr;
 		nextPutAll: '}';
 		close
@@ -218,18 +220,18 @@ DSP >> allParameters [
 ]
 
 { #category : 'converting' }
-DSP >> asCmajorPolyWrapper: aName [
+DSP >> asCmajorPolyWrapperFor: aName [
+	"write the cmajor polyWrapper for the patch / by default 16 voices polyphony"
 
-	"write the cmajor "
+|  cmajorPatchesDir patchDir |
 
-	(FileLocator documents / (aName , '.cmajorpatch')) writeStream
-		cr;
-		nextPutAll: 'graph Synth [[ main ]]';
-		cr;
-		nextPutAll: '{';
-		cr;
-		nextPutAll: 'input event std::midi::Message midiIn [[ name: "MIDI input" ]];'
-		close
+	"we create the cmajorPatches folder in the documents folder if it not exists"
+	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
+		                    ensureCreateDirectory.
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+	(patchDir / (aName , 'polyWrapper' , '.cmajor')) writeStream 
+	    nextPutAll: (self getUIItemsLabeledDictionary asCmajorPolyWrapperFor: 'aName'); 
+	    close
 ]
 
 { #category : 'ui-building' }
@@ -248,11 +250,11 @@ index := self getParamIndex: aString.
 DSP >> createCmajorMIDIPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
 
-
 	self class asCmajorFileNamed: aName hasMIDI: true.
+	self asCmajorPolyWrapperFor: aName.
 	"return true if the .cmajor file has been  generated"
 	^ LibFaust uniqueInstance
-		  createCMajorMIDIFileFromString:	self generatedCode
+		  createCMajorMIDIFileFromString: self generatedCode
 		  withName: aName
 ]
 

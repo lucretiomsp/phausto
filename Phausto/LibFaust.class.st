@@ -54,18 +54,27 @@ LibFaust >> createCMajorFileFromString: aString buffer: errorMsg arguments: argv
 
 { #category : 'as yet unclassified' }
 LibFaust >> createCMajorFileFromString: aString buffer: errorMsg withName: aName [
-| myArgv fileOutput |
 
-fileOutput := FileLocator documents asAbsolute pathString , '/' , aName , '.cmajor'.
-
-
-	myArgv := ExternalAddress arrayOfStringsFrom:
-		         {'-lang' . 'cmajor' . '-o' . fileOutput }.
+	| myArgv fileOutput cmajorPatchesDir patchDir|
+	"we create the cmajorPatches folder in the documents folder if it not exists"
+	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
+		                    ensureCreateDirectory.
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
 	
+	fileOutput := patchDir asAbsolute pathString , '/'
+	              , aName , '.cmajor'.
+
+	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-lang'.
+			          'cmajor'.
+			          '-o'.
+			          fileOutput }.
+
 	^ [
 	  self
-		  createCMajorFileFromString: aString 
-		  buffer: errorMsg arguments: myArgv  ] ensure: [ myArgv freeArrayOfStrings ]
+		  createCMajorFileFromString: aString
+		  buffer: errorMsg
+		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -90,8 +99,15 @@ LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg arguments: 
 { #category : 'as yet unclassified' }
 LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: aName [
 
-	| myArgv fileOutput |
-	fileOutput := FileLocator documents asAbsolute pathString , '/'
+	| myArgv fileOutput cmajorPatchesDir patchDir |
+	
+
+	"we create the cmajorPatches folder in the documents folder if it not exists"
+	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
+		                    ensureCreateDirectory.
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+	
+	fileOutput := patchDir asAbsolute pathString , '/'
 	              , aName , '.cmajor'.
 
 
