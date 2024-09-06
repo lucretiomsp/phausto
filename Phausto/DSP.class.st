@@ -250,12 +250,27 @@ index := self getParamIndex: aString.
 DSP >> createCmajorMIDIPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
 
+	| cmajorPatchesDir patchDir stringToTrim streamToTrim newString trimIndex fileToWrite |
+	
+	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
+		                    ensureCreateDirectory.
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+	fileToWrite := (patchDir / (aName , '.cmajor')).
+
 	self class asCmajorFileNamed: aName hasMIDI: true.
 	self asCmajorPolyWrapperFor: aName.
 	"return true if the .cmajor file has been  generated"
-	^ LibFaust uniqueInstance
-		  createCMajorMIDIFileFromString: self generatedCode
-		  withName: aName
+	LibFaust uniqueInstance
+		createCMajorMIDIFileFromString: self generatedCode
+		withName: aName.
+	streamToTrim := fileToWrite readStream.
+	stringToTrim := streamToTrim contents.
+	trimIndex := (stringToTrim findString: 'future') - 1.
+	newString := stringToTrim truncateTo: trimIndex.
+	fileToWrite delete.
+	fileToWrite writeStream
+		nextPutAll: newString;
+		close
 ]
 
 { #category : 'converting' }
