@@ -209,11 +209,13 @@ Dictionary >> asCmajorPolyWrapperFor: aDspName [
 		cr;cr;
 		nextPutAll: 'connection';
 		cr;
+		nextPutAll: '{';
+		cr;
 		nextPutAll: 'eventIn -> noteToFaust.eventIn;';
 		cr; cr;
 		nextPutAll: 'noteToFaust.gate     -> dsp.event_gate;';
 		cr;
-		nextPutAll: 'noteToFaust.velocity     -> dsp.event_gain;';
+		nextPutAll: 'noteToFaust.velocity -> dsp.event_gain;';
 		cr;
 		nextPutAll: 'noteToFaust.freq     -> dsp.event_freq;';
 		cr; cr;
@@ -251,9 +253,7 @@ Dictionary >> asCmajorPolyWrapperFor: aDspName [
 		cr;
 		nextPutAll: '}';
 		cr;
-		cr;
-		nextPutAll: '}';
-		cr.
+		nextPutAll: '}'.
 		
 		
       

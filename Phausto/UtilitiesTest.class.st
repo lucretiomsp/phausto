@@ -289,7 +289,6 @@ float<2> (dsp.output0, dsp.output1) -> out;
 processor NoteToFaust
 {
 input event (std::notes::NoteOn, std::notes::NoteOff) eventIn;
-
 output event float freq, gate, velocity;
 
 event eventIn (std::notes::NoteOn e)
