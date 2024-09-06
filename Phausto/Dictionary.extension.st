@@ -85,24 +85,178 @@ Dictionary >> asCmajorPolyWrapper [
 		cr;
 		nextPutAll:
 			'input event std::midi::Message midiIn [[ name: "MIDI input" ]];';
-		cr;	
+		cr;
 		nextPutAll: self asCmajorListOfUIEndpoints;
 		cr;
 		nextPutAll: 'output stream float<2> out;';
 		cr;
-		
 		nextPutAll: 'let voiceCount = 16;';
 		cr;
 		nextPutAll: 'node';
 		cr;
 		nextPutAll: '{';
 		cr;
-		nextPutAll: 'voiceAllocator = std::voices::VoiceAllocator (voiceCount);';
+		nextPutAll:
+			'voiceAllocator = std::voices::VoiceAllocator (voiceCount);';
 		cr;
 		nextPutAll: 'voices = Voice[voiceCount];';
 		cr;
-		nextPutAll: '}'.
+		nextPutAll: '}';
+		cr; cr;
+		nextPutAll: 'connection';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll: self asCmajorEventsToVoicesConnection;
+		cr;
+		nextPutAll:
+			'midiIn -> std::midi::MPEConverter -> voiceAllocator -> voices.eventIn;';
+		cr;
+		nextPutAll: 'voices.out -> out;';
+		cr;
+		nextPutAll: '}';
+		cr;
+		nextPutAll: '}';
+		cr;cr;
+		nextPutAll: 'graph Voice';
+		cr; 
+		nextPutAll: '{';
+		cr;
+		nextPutAll: '{input event (std::notes::NoteOn, std::notes::NoteOff) eventIn;';
+		cr;
+		nextPutAll: 'input dsp.*;';
+		cr;
+		nextPutAll: 'output stream float<2> out;';
+		cr;cr;
+		nextPutAll: 'node';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll: 'noteToFaust = NoteToFaust;';
+		cr;
+		nextPutAll: 'dsp = faust::example;'.
 		
+
+
+	^ output contents
+]
+
+{ #category : '*Phausto' }
+Dictionary >> asCmajorPolyWrapperFor: aDspName [
+
+	| output |
+	output := WriteStream on: String new.
+
+	output
+		nextPutAll: 'graph Synth [[ main ]]';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll:
+			'input event std::midi::Message midiIn [[ name: "MIDI input" ]];';
+		cr;
+		nextPutAll: self asCmajorListOfUIEndpoints;
+		cr;
+		nextPutAll: 'output stream float<2> out;';
+		cr;
+		nextPutAll: 'let voiceCount = 16;';
+		cr;
+		nextPutAll: 'node';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll:
+			'voiceAllocator = std::voices::VoiceAllocator (voiceCount);';
+		cr;
+		nextPutAll: 'voices = Voice[voiceCount];';
+		cr;
+		nextPutAll: '}';
+		cr; cr;
+		nextPutAll: 'connection';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll: self asCmajorEventsToVoicesConnection;
+		cr;
+		nextPutAll:
+			'midiIn -> std::midi::MPEConverter -> voiceAllocator -> voices.eventIn;';
+		cr;
+		nextPutAll: 'voices.out -> out;';
+		cr;
+		nextPutAll: '}';
+		cr;
+		nextPutAll: '}';
+		cr;cr;
+		nextPutAll: 'graph Voice';
+		cr; 
+		nextPutAll: '{';
+		cr;
+		nextPutAll: 'input event (std::notes::NoteOn, std::notes::NoteOff) eventIn;';
+		cr;
+		nextPutAll: 'input dsp.*;';
+		cr;
+		nextPutAll: 'output stream float<2> out;';
+		cr;cr;
+		nextPutAll: 'node';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll: 'noteToFaust = NoteToFaust;';
+		cr;
+		nextPutAll: 'dsp = faust::' , aDspName , ';';
+		cr;
+		nextPutAll: '}';
+		cr;cr;
+		nextPutAll: 'connection';
+		cr;
+		nextPutAll: 'eventIn -> noteToFaust.eventIn;';
+		cr; cr;
+		nextPutAll: 'noteToFaust.gate     -> dsp.event_gate;';
+		cr;
+		nextPutAll: 'noteToFaust.velocity     -> dsp.event_gain;';
+		cr;
+		nextPutAll: 'noteToFaust.freq     -> dsp.event_freq;';
+		cr; cr;
+		nextPutAll: 'float<2> (dsp.output0, dsp.output1) -> out;';
+		cr;
+		nextPutAll: '}';
+		cr;
+		nextPutAll: '}';
+		cr; cr;
+		nextPutAll: 'processor NoteToFaust';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll: 'input event (std::notes::NoteOn, std::notes::NoteOff) eventIn;';
+		cr;
+		nextPutAll: 'output event float freq, gate, velocity;';
+		cr; cr;
+		nextPutAll: 'event eventIn (std::notes::NoteOn e)';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll: 'freq <- std::notes::noteToFrequency (e.pitch);';
+		cr;
+		nextPutAll: 'gate <- 1.0f;';
+		cr;
+		nextPutAll: 'velocity <- e.velocity;';
+		cr;
+		nextPutAll: '}';
+		cr; cr;
+		nextPutAll: 'event eventIn (std::notes::NoteOff e)';
+		cr;
+		nextPutAll: '{';
+		cr;
+		nextPutAll: 'gate <- 0.0f;';
+		cr;
+		nextPutAll: '}';
+		cr;
+		cr;
+		nextPutAll: '}';
+		cr.
+		
+		
+      
 
 	^ output contents
 ]
