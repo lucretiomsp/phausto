@@ -34,57 +34,14 @@ Class {
 { #category : 'ui-building' }
 DSP class >> asCmajorFileNamed: aName [
 
-| hasMidi |
-"we need to improve the mechanism to generate MIDI instruments"
-hasMidi := 'false,'.
-
-(FileLocator documents / ( aName , '.cmajorpatch')) writeStream
-      cr;
-      nextPutAll: '{';
-		nextPutAll: '"CmajorVersion":';
-		tab;
-		nextPutAll: '1,';
-		cr;
-		nextPutAll: '"ID":';
-		tab;
-		nextPutAll: '"pharo.' , aName , '",'; 
-		cr;
-		nextPutAll: '"version":';
-		tab;
-		nextPutAll: '"1.0",';
-		cr;
-		nextPutAll: '"name":';
-		tab;
-		nextPutAll:  '"' , aName , '"', ',';
-		cr;
-		nextPutAll: '"description":';
-		tab;
-		nextPutAll: '"A ' , aName , ' generated in Pharo using Phausto",';
-		cr;
-		nextPutAll: '"manufacturer":';
-		tab;
-		nextPutAll: '"Pharo Association",';
-		cr;
-		nextPutAll: '"isInstrument":';
-		tab;
-		nextPutAll: hasMidi ;
-		cr;
-		nextPutAll: '"source":';
-		tab;
-		nextPutAll: '"' , aName , '.cmajor"';
-		cr;
-		nextPutAll: '}';
-		close
-]
-
-{ #category : 'ui-building' }
-DSP class >> asCmajorFileNamed: aName hasMIDI: aBoolean [
-
-	| hasMidi |
+	| hasMidi cmajorPatchesDir |
 	"we need to improve the mechanism to generate MIDI instruments"
-	hasMidi := aBoolean asString , ','.
+	hasMidi := 'false,'.
 
-	(FileLocator documents / (aName , '.cmajorpatch')) writeStream
+	"we create the cmajorPatches folder in the documents folder if it not exists"
+	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
+		                    ensureCreateDirectory.
+	(cmajorPatchesDir / (aName , '.cmajorpatch')) writeStream
 		cr;
 		nextPutAll: '{';
 		nextPutAll: '"CmajorVersion":';
@@ -118,6 +75,55 @@ DSP class >> asCmajorFileNamed: aName hasMIDI: aBoolean [
 		nextPutAll: '"source":';
 		tab;
 		nextPutAll: '"' , aName , '.cmajor"';
+		cr;
+		nextPutAll: '}';
+		close
+]
+
+{ #category : 'ui-building' }
+DSP class >> asCmajorFileNamed: aName hasMIDI: aBoolean [
+
+	| hasMidi cmajorPatchesDir |
+	"we need to improve the mechanism to generate MIDI instruments"
+	hasMidi := aBoolean asString , ','.
+"we create the cmajorPatches folder in the documents folder if it not exists"
+	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
+		                    ensureCreateDirectory.
+	(cmajorPatchesDir / (aName , '.cmajorpatch')) writeStream
+		cr;
+		nextPutAll: '{';
+		nextPutAll: '"CmajorVersion":';
+		tab;
+		nextPutAll: '1,';
+		cr;
+		nextPutAll: '"ID":';
+		tab;
+		nextPutAll: '"pharo.' , aName , '",';
+		cr;
+		nextPutAll: '"version":';
+		tab;
+		nextPutAll: '"1.0",';
+		cr;
+		nextPutAll: '"name":';
+		tab;
+		nextPutAll: '"' , aName , '"' , ',';
+		cr;
+		nextPutAll: '"description":';
+		tab;
+		nextPutAll: '"A ' , aName , ' generated in Pharo using Phausto",';
+		cr;
+		nextPutAll: '"manufacturer":';
+		tab;
+		nextPutAll: '"Pharo Association",';
+		cr;
+		nextPutAll: '"isInstrument":';
+		tab;
+		nextPutAll: hasMidi;
+		cr;
+		nextPutAll: '"source":';
+		tab;
+		nextPutAll: '[ "' , aName , 'polyWrapper' , '.cmajor"';
+		nextPutAll: ', "' , aName , '.cmajor"';
 		cr;
 		nextPutAll: '}';
 		close
