@@ -223,15 +223,15 @@ DSP >> allParameters [
 DSP >> asCmajorPolyWrapperFor: aName [
 	"write the cmajor polyWrapper for the patch / by default 16 voices polyphony"
 
-|  cmajorPatchesDir patchDir |
-
+	| cmajorPatchesDir patchDir |
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
-	(patchDir / (aName , 'polyWrapper' , '.cmajor')) writeStream 
-	    nextPutAll: (self getUIItemsLabeledDictionary asCmajorPolyWrapperFor: 'aName'); 
-	    close
+	(patchDir / (aName , 'polyWrapper' , '.cmajor')) writeStream
+		nextPutAll:
+			(self getUIItemsLabeledDictionary asCmajorPolyWrapperFor: aName );
+		close
 ]
 
 { #category : 'ui-building' }

@@ -171,7 +171,8 @@ Dictionary >> asCmajorPolyWrapperFor: aDspName [
 		nextPutAll: 'voices = Voice[voiceCount];';
 		cr;
 		nextPutAll: '}';
-		cr; cr;
+		cr;
+		cr;
 		nextPutAll: 'connection';
 		cr;
 		nextPutAll: '{';
@@ -186,17 +187,20 @@ Dictionary >> asCmajorPolyWrapperFor: aDspName [
 		nextPutAll: '}';
 		cr;
 		nextPutAll: '}';
-		cr;cr;
+		cr;
+		cr;
 		nextPutAll: 'graph Voice';
-		cr; 
+		cr;
 		nextPutAll: '{';
 		cr;
-		nextPutAll: 'input event (std::notes::NoteOn, std::notes::NoteOff) eventIn;';
+		nextPutAll:
+			'input event (std::notes::NoteOn, std::notes::NoteOff) eventIn;';
 		cr;
 		nextPutAll: 'input dsp.*;';
 		cr;
 		nextPutAll: 'output stream float<2> out;';
-		cr;cr;
+		cr;
+		cr;
 		nextPutAll: 'node';
 		cr;
 		nextPutAll: '{';
@@ -206,33 +210,39 @@ Dictionary >> asCmajorPolyWrapperFor: aDspName [
 		nextPutAll: 'dsp = faust::' , aDspName , ';';
 		cr;
 		nextPutAll: '}';
-		cr;cr;
+		cr;
+		cr;
 		nextPutAll: 'connection';
 		cr;
 		nextPutAll: '{';
 		cr;
 		nextPutAll: 'eventIn -> noteToFaust.eventIn;';
-		cr; cr;
+		cr;
+		cr;
 		nextPutAll: 'noteToFaust.gate     -> dsp.event_gate;';
 		cr;
 		nextPutAll: 'noteToFaust.velocity -> dsp.event_gain;';
 		cr;
 		nextPutAll: 'noteToFaust.freq     -> dsp.event_freq;';
-		cr; cr;
+		cr;
+		cr;
 		nextPutAll: 'float<2> (dsp.output0, dsp.output1) -> out;';
 		cr;
 		nextPutAll: '}';
 		cr;
 		nextPutAll: '}';
-		cr; cr;
+		cr;
+		cr;
 		nextPutAll: 'processor NoteToFaust';
 		cr;
 		nextPutAll: '{';
 		cr;
-		nextPutAll: 'input event (std::notes::NoteOn, std::notes::NoteOff) eventIn;';
+		nextPutAll:
+			'input event (std::notes::NoteOn, std::notes::NoteOff) eventIn;';
 		cr;
 		nextPutAll: 'output event float freq, gate, velocity;';
-		cr; cr;
+		cr;
+		cr;
 		nextPutAll: 'event eventIn (std::notes::NoteOn e)';
 		cr;
 		nextPutAll: '{';
@@ -244,7 +254,8 @@ Dictionary >> asCmajorPolyWrapperFor: aDspName [
 		nextPutAll: 'velocity <- e.velocity;';
 		cr;
 		nextPutAll: '}';
-		cr; cr;
+		cr;
+		cr;
 		nextPutAll: 'event eventIn (std::notes::NoteOff e)';
 		cr;
 		nextPutAll: '{';
@@ -254,9 +265,9 @@ Dictionary >> asCmajorPolyWrapperFor: aDspName [
 		nextPutAll: '}';
 		cr;
 		nextPutAll: '}'.
-		
-		
-      
+
+
+
 
 	^ output contents
 ]
