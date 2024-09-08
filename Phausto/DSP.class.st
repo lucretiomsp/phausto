@@ -251,11 +251,10 @@ DSP >> createCmajorMIDIPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
 
 	| cmajorPatchesDir patchDir stringToTrim streamToTrim newString trimIndex fileToWrite |
-	
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
-	fileToWrite := (patchDir / (aName , '.cmajor')).
+	fileToWrite := patchDir / (aName , '.cmajor').
 
 	self class asCmajorFileNamed: aName hasMIDI: true.
 	self asCmajorPolyWrapperFor: aName.
@@ -269,7 +268,7 @@ DSP >> createCmajorMIDIPatchNamed: aName [
 	newString := stringToTrim truncateTo: trimIndex.
 	fileToWrite delete.
 	fileToWrite writeStream
-		nextPutAll: newString;
+		nextPutAll: newString , 'future' ; cr; nextPutAll: '*/';
 		close
 ]
 
