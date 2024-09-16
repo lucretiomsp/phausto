@@ -35,13 +35,34 @@ instancesInDSPContext := self  instancesInDSPContext + 1
 { #category : 'class initialization' }
 UnitGenerator class >> initialize [ 
 
-instancesInDSPContext := 0 .
+	SessionManager default register:
+		(ClassSessionHandler forClassNamed: self name)
 ]
 
 { #category : 'accessing' }
 UnitGenerator class >> instancesInDSPContext [
 
-	^ instancesInDSPContext ifNil: [ instancesInDSPContext := 0 ]
+	^ instancesInDSPContext "ifNil: [ instancesInDSPContext := 0 ]"
+]
+
+{ #category : 'class initialization' }
+UnitGenerator class >> resetInstacnesInDSPContext [
+
+instancesInDSPContext := 0.
+]
+
+{ #category : 'initialization' }
+UnitGenerator class >> resetSelfAndAllSubClasses [
+
+	self allSubclassesDo: [ :c | c resetInstacnesInDSPContext ].
+	self resetInstacnesInDSPContext 
+]
+
+{ #category : 'system startup' }
+UnitGenerator class >> startUp: aBoolean [
+
+	super startUp: aBoolean.
+	aBoolean ifTrue: [ self resetSelfAndAllSubClasses ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -108,10 +129,10 @@ UnitGenerator >> importStatement: anObject [
 UnitGenerator >> initialize [
 
 	super initialize.
-   self class incrementInstancesInDSPContext .
+	self class incrementInstancesInDSPContext.
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
-	label := self className asString
+	label := self className asString , self class instancesInDSPContext asString 
 ]
 
 { #category : 'accessing' }
