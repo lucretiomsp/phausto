@@ -4,9 +4,6 @@ I am LibFaust, use me to execute functions from LibFaust
 Class {
 	#name : 'LibFaust',
 	#superclass : 'FFILibrary',
-	#instVars : [
-		'errorBuffer'
-	],
 	#category : 'Phausto-DynamicEngine',
 	#package : 'Phausto',
 	#tag : 'DynamicEngine'
@@ -55,18 +52,20 @@ LibFaust >> createCMajorFileFromString: aString buffer: errorMsg arguments: argv
 { #category : 'as yet unclassified' }
 LibFaust >> createCMajorFileFromString: aString buffer: errorMsg withName: aName [
 
-	| myArgv fileOutput cmajorPatchesDir patchDir|
+	| myArgv fileOutput cmajorPatchesDir patchDir |
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
-	
-	fileOutput := patchDir asAbsolute pathString , '/'
-	              , aName , '.cmajor'.
+
+	fileOutput := patchDir asAbsolute pathString , '/' , aName
+	              , '.cmajor'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
 			          '-lang'.
 			          'cmajor'.
+			          '-cn' ,
+			          aName ,
 			          '-o'.
 			          fileOutput }.
 
@@ -100,15 +99,13 @@ LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg arguments: 
 LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: aName [
 
 	| myArgv fileOutput cmajorPatchesDir patchDir |
-	
-
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
-	
-	fileOutput := patchDir asAbsolute pathString , '/'
-	              , aName , '.cmajor'.
+
+	fileOutput := patchDir asAbsolute pathString , '/' , aName
+	              , '.cmajor'.
 
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
@@ -117,7 +114,7 @@ LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: a
 			          '-lang'.
 			          'cmajor-poly'.
 			          '-cn'.
-			          'example'.
+			          aName .
 			          '-o'.
 			          fileOutput }.
 
