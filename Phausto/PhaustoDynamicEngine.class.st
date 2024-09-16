@@ -139,5 +139,7 @@ self  ffiCall:
 { #category : 'accessing - platform' }
 PhaustoDynamicEngine >> macLibraryName [
 	"Returns the name of the Dynamic Engine library for Mac."
-	^ 'librariesBundle/libdynamic-engine.dylib'
+
+	^ FFIMacLibraryFinder findLibrary:
+		  'librariesBundle/libdynamic-engine.dylib'
 ]

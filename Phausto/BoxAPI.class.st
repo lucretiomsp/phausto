@@ -351,7 +351,7 @@ BoxAPI >> isNil: aBox [
 BoxAPI >> macLibraryName [
 	"Returns the name of the dynamic libFaust for Mac."
 
-	^ 'librariesBundle/libfaust.2.dylib'
+	^ FFIMacLibraryFinder findLibrary: 'librariesBundle/libfaust.2.dylib'
 ]
 
 { #category : 'arithmetic' }
