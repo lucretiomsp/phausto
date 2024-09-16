@@ -46,7 +46,7 @@ UnitGenerator class >> instancesInDSPContext [
 ]
 
 { #category : 'class initialization' }
-UnitGenerator class >> resetInstacnesInDSPContext [
+UnitGenerator class >> resetInstancesInDSPContext [
 
 instancesInDSPContext := 0.
 ]
@@ -54,8 +54,8 @@ instancesInDSPContext := 0.
 { #category : 'initialization' }
 UnitGenerator class >> resetSelfAndAllSubClasses [
 
-	self allSubclassesDo: [ :c | c resetInstacnesInDSPContext ].
-	self resetInstacnesInDSPContext 
+	self allSubclassesDo: [ :c | c resetInstancesInDSPContext ].
+	self resetInstancesInDSPContext 
 ]
 
 { #category : 'system startup' }

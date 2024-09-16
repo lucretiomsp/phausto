@@ -164,8 +164,8 @@ PhBox >> asDsp [
 							BoxAPI uniqueInstance destroyLibContext ]
 						ifNil: [
 						Error new signal: 'Invalid Box please check its creation' ].
-"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
-UnitGenerator initialize .
+					"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
+					UnitGenerator resetSelfAndAllSubClasses .
 					^ finalDsp ] ]
 ]
 
