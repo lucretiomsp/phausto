@@ -140,6 +140,5 @@ LibFaust >> createCMajorMIDIFileFromString: aString withName: aName [
 { #category : 'accessing - platform' }
 LibFaust >> macLibraryName [
 
-	
-	^ 'librariesBundle/libfaust.2.dylib'
+	^ FFIMacLibraryFinder findLibrary: 'librariesBundle/libfaust.2.dylib'
 ]
