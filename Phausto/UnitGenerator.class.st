@@ -18,10 +18,31 @@ Class {
 		'uLevel',
 		'label'
 	],
+	#classInstVars : [
+		'instancesInDSPContext'
+	],
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
 	#tag : 'UnitGenerators'
 }
+
+{ #category : 'as yet unclassified' }
+UnitGenerator class >> incrementInstancesInDSPContext [
+
+instancesInDSPContext := self  instancesInDSPContext + 1
+]
+
+{ #category : 'class initialization' }
+UnitGenerator class >> initialize [ 
+
+instancesInDSPContext := 0 .
+]
+
+{ #category : 'accessing' }
+UnitGenerator class >> instancesInDSPContext [
+
+	^ instancesInDSPContext ifNil: [ instancesInDSPContext := 0 ]
+]
 
 { #category : 'as yet unclassified' }
 UnitGenerator class >> withlabel: aString [
@@ -87,11 +108,10 @@ UnitGenerator >> importStatement: anObject [
 UnitGenerator >> initialize [
 
 	super initialize.
-
+   self class incrementInstancesInDSPContext .
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
-	label := self className asString.
-
+	label := self className asString
 ]
 
 { #category : 'accessing' }

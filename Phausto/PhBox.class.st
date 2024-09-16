@@ -164,7 +164,8 @@ PhBox >> asDsp [
 							BoxAPI uniqueInstance destroyLibContext ]
 						ifNil: [
 						Error new signal: 'Invalid Box please check its creation' ].
-
+"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
+UnitGenerator initialize .
 					^ finalDsp ] ]
 ]
 
@@ -185,7 +186,7 @@ PhBox >> asFaustCode [
 	^ (BoxAPI uniqueInstance boxPrint: self asBox) asString
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhBox >> attachedDSP [
 
 	^ attachedDSP
