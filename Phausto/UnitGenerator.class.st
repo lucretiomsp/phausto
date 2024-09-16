@@ -128,11 +128,18 @@ UnitGenerator >> importStatement: anObject [
 { #category : 'initialization' }
 UnitGenerator >> initialize [
 
+	| suffix |
 	super initialize.
 	self class incrementInstancesInDSPContext.
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
-	label := self className asString , self class instancesInDSPContext asString 
+	"the label suffix is '' if  for the first instance of the UnitGenerator"
+	suffix := (self class instancesInDSPContext = 1)
+		                    ifTrue: [ '' ]
+		                    ifFalse: [
+		                    self class instancesInDSPContext asString ].
+	label := self className asString
+	         , suffix 
 ]
 
 { #category : 'accessing' }
