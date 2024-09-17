@@ -21,25 +21,24 @@ Class {
 { #category : 'initialization' }
 Select2 >> asBox [
 
-BoxAPI uniqueInstance createLibContext .
-^ BoxAPI uniqueInstance boxSelect2Aux: self selector input0: self input0   input1: self input1 
-
+	BoxAPI uniqueInstance createLibContext.
+	^ BoxAPI uniqueInstance
+		  boxSelect2Aux: self selector asBox
+		  input0: self input0 asBox
+		  input1: self input1 asBox
 ]
 
 { #category : 'initialization' }
-Select2 >> initialize [ 
+Select2 >> initialize [
 
-super initialize.
-self input0: 0.
-self input1: 0.
-self selector: 0.
-
+	super initialize.
+	
 ]
 
 { #category : 'accessing' }
 Select2 >> input0 [
 
-	^ input0
+	^ input0 ifNil: [ 0 ]
 ]
 
 { #category : 'accessing' }
@@ -51,7 +50,7 @@ Select2 >> input0: anObject [
 { #category : 'accessing' }
 Select2 >> input1 [
 
-	^ input1
+	^ input1 ifNil: [ 0 ]
 ]
 
 { #category : 'accessing' }
@@ -70,6 +69,12 @@ Select2 >> label [
 Select2 >> label: anObject [
 
 	label := anObject
+]
+
+{ #category : 'connecting' }
+Select2 >> patchedWith: aUnitGenerator [
+
+^ self shouldBeImplemented 
 ]
 
 { #category : 'accessing' }
