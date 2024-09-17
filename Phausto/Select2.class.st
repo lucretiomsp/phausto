@@ -8,10 +8,10 @@ Class {
 	#name : 'Select2',
 	#superclass : 'PhBox',
 	#instVars : [
-		'code',
 		'selector',
 		'input0',
-		'input1'
+		'input1',
+		'label'
 	],
 	#category : 'Phausto-BoxAPI-Primitives',
 	#package : 'Phausto',
@@ -24,18 +24,6 @@ Select2 >> asBox [
 BoxAPI uniqueInstance createLibContext .
 ^ BoxAPI uniqueInstance boxSelect2Aux: self selector input0: self input0   input1: self input1 
 
-]
-
-{ #category : 'accessing' }
-Select2 >> code [
-
-	^ code
-]
-
-{ #category : 'accessing' }
-Select2 >> code: aString [	
-
-	code := aString
 ]
 
 { #category : 'initialization' }
@@ -73,9 +61,22 @@ Select2 >> input1: anObject [
 ]
 
 { #category : 'accessing' }
+Select2 >> label [
+
+	^ label ifNil: [ 'Selector' ]
+]
+
+{ #category : 'accessing' }
+Select2 >> label: anObject [
+
+	label := anObject
+]
+
+{ #category : 'accessing' }
 Select2 >> selector [
 
-	^ selector
+	^ selector ifNil: [
+		  PhButton new label: self label  ]
 ]
 
 { #category : 'accessing' }
