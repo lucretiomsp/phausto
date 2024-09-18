@@ -4,9 +4,9 @@ I am a Faust horizontal slider
 Class {
 	#name : 'PhHSlider',
 	#superclass : 'PhSlider',
-	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-UIPrimitives'
+	#tag : 'UIPrimitives'
 }
 
 { #category : 'converting' }

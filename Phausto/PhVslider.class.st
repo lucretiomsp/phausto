@@ -1,9 +1,9 @@
 Class {
 	#name : 'PhVSlider',
 	#superclass : 'PhSlider',
-	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-UIPrimitives'
+	#tag : 'UIPrimitives'
 }
 
 { #category : 'converting' }

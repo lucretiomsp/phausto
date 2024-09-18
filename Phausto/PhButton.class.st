@@ -4,9 +4,9 @@ I represent a Faust button, you need me to display a button in your UI
 Class {
 	#name : 'PhButton',
 	#superclass : 'UIPrimitive',
-	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-UIPrimitives'
+	#tag : 'UIPrimitives'
 }
 
 { #category : 'converting' }

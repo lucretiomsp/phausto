@@ -154,6 +154,17 @@ BoxAPI >> boxMerge: aBox with: anotherBox [
 	
 ]
 
+{ #category : 'ui building' }
+BoxAPI >> boxNumEntry: aLabel init: initBox min: minBox max: maxBox step: stepBox [ 
+	"return a Numentry box "
+
+	self createLibContext.
+	^ 
+		self ffiCall:
+		#( #PhBox #* CboxNumEntry #( const char #* aLabel #, #PhBox #* initBox
+		      #, #PhBox #* minBox #, #PhBox #* maxBox #, #PhBox #* stepBox ) )
+]
+
 { #category : 'connecting' }
 BoxAPI >> boxPar: aBox and: anotherBox [
 	" The parallel composition of two blocks (e.g., A,B).

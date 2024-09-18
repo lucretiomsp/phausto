@@ -11,9 +11,9 @@ Class {
 		'min',
 		'max'
 	],
-	#category : 'Phausto-BoxAPI-UIPrimitives',
+	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-UIPrimitives'
+	#tag : 'UIPrimitives'
 }
 
 { #category : 'initialization' }
