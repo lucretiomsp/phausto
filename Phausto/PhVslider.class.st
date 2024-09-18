@@ -1,5 +1,5 @@
 Class {
-	#name : 'PhVslider',
+	#name : 'PhVSlider',
 	#superclass : 'PhSlider',
 	#category : 'Phausto-BoxAPI-UIPrimitives',
 	#package : 'Phausto',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'converting' }
-PhVslider >> asBox [
+PhVSlider >> asBox [
 
 	| sliderBox |
 	BoxAPI uniqueInstance createLibContext.
