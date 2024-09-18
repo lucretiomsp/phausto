@@ -1,5 +1,5 @@
 Class {
-	#name : 'PhaustFadersTest',
+	#name : 'PhaustoUITest',
 	#superclass : 'TestCase',
 	#category : 'Phausto-Tests',
 	#package : 'Phausto',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-PhaustFadersTest >> testSymbolAsBoxContructVerticalSlider [
+PhaustoUITest >> testSymbolAsBoxContructVerticalSlider [
 
 | slider |
 slider := #MySlider asBox.

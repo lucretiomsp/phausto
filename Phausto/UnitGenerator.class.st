@@ -59,6 +59,12 @@ UnitGenerator class >> resetSelfAndAllSubClasses [
 ]
 
 { #category : 'system startup' }
+UnitGenerator class >> startUp [ 
+
+ self resetSelfAndAllSubClasses 
+]
+
+{ #category : 'system startup' }
 UnitGenerator class >> startUp: aBoolean [
 
 	super startUp: aBoolean.
