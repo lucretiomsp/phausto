@@ -186,6 +186,14 @@ PhBox >> asFaustCode [
 	^ (BoxAPI uniqueInstance boxPrint: self asBox) asString
 ]
 
+{ #category : 'converting' }
+PhBox >> asParam: aString forUGen: aUGen [
+
+aUGen instVarNamed: aString put: self
+
+	
+]
+
 { #category : 'accessing' }
 PhBox >> attachedDSP [
 

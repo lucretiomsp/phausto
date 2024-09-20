@@ -61,7 +61,8 @@ UnitGenerator class >> resetSelfAndAllSubClasses [
 { #category : 'system startup' }
 UnitGenerator class >> startUp [
 
-	self startUp: true
+'IO SONO STARTATO UNIT GENERATOR PER CONTARE DA ZERO' traceCr .
+	self resetSelfAndAllSubClasses
 ]
 
 { #category : 'system startup' }
@@ -221,9 +222,8 @@ UnitGenerator >> uLevel [
 ]
 
 { #category : 'accessing' }
-UnitGenerator >> uLevel: aNumberOrABox [
+UnitGenerator >> uLevel: aNumberOrABoxOraAymbol [
 
-	uLevel := aNumberOrABox isNumber
-		        ifTrue: [ self uLevel init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ].
+	aNumberOrABoxOraAymbol asParam: 'uLevel' forUGen: self.
+
 ]

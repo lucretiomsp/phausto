@@ -24,12 +24,16 @@ Oscillators >> freq [
 ]
 
 { #category : 'accessing' }
-Oscillators >> freq: aNumberOrABox [
+Oscillators >> freq: aNumberOrABoxOraAymbol [
 
-	freq := aNumberOrABox isNumber
+
+	aNumberOrABoxOraAymbol asParam: 'freq' forUGen: self
+
+
+
+	"freq := aNumberOrABox isNumber
 		        ifTrue: [ self freq init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ].
-
+		        ifFalse: [ aNumberOrABox ]"
 ]
 
 { #category : 'initialization' }
@@ -37,6 +41,4 @@ Oscillators >> initialize [
 
 	super initialize.
 	"default frequency for all Oscilators is A4 at picth standard"
-
-	
 ]

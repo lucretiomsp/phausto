@@ -63,15 +63,16 @@ UnitGeneratorsTest >> testPulseOscAsDsp [
 { #category : 'tests' }
 UnitGeneratorsTest >> testSetOscillatorParameters [
 
-|  pulse |
+	| pulse |
+	pulse := PulseOsc new.
+	pulse uLevel: 0.5 asBox.
+	pulse freq: #freq.
+	pulse duty: 0.1.
 
-pulse := PulseOsc new.
-pulse uLevel: 0.5 asBox; freq: #freq; duty: 0.1.
-
-self assert: pulse uLevel equals: 0.5f.
-self assert: pulse freq label equals: 'freq'.
-self assert: pulse duty init equals: 0.1.
-
+	self assert: pulse uLevel class = PhBox.
+	self assert: pulse uLevel asString trimLineSpaces equals: '0.5f'.
+	self assert: pulse freq label equals: 'freq'.
+	self assert: pulse duty init asString trimLineSpaces equals: '0.1f'
 ]
 
 { #category : 'tests' }
@@ -90,4 +91,11 @@ UnitGeneratorsTest >> testSquareOscAsDsp [
 UnitGeneratorsTest >> testTriOscAsDsp [
 
 	self assert: TriOsc new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testZeroInstancesAtStartup [
+
+"test at startup"
+self assert: UnitGenerator instancesInDSPContext equals: 0
 ]
