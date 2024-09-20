@@ -59,9 +59,9 @@ UnitGenerator class >> resetSelfAndAllSubClasses [
 ]
 
 { #category : 'system startup' }
-UnitGenerator class >> startUp [ 
+UnitGenerator class >> startUp [
 
- self resetSelfAndAllSubClasses 
+	self startUp: true
 ]
 
 { #category : 'system startup' }

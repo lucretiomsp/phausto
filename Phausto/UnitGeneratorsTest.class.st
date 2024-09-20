@@ -61,6 +61,20 @@ UnitGeneratorsTest >> testPulseOscAsDsp [
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testSetOscillatorParameters [
+
+|  pulse |
+
+pulse := PulseOsc new.
+pulse uLevel: 0.5 asBox; freq: #freq; duty: 0.1.
+
+self assert: pulse uLevel equals: 0.5f.
+self assert: pulse freq label equals: 'freq'.
+self assert: pulse duty init equals: 0.1.
+
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testSineOscAsDsp [
 
 	self assert: SineOsc new asDsp isNull equals: false
