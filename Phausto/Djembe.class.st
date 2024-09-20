@@ -17,7 +17,7 @@ Djembe >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
-	finalBox := freq , strikePosition , strikeSharpness , gain, trigger
+	finalBox := self freq , self strikePosition , self strikeSharpness , self gain , self trigger
 		            connectTo: intermediateBox.
 
 	^ finalBox
@@ -26,7 +26,12 @@ Djembe >> asBox [
 { #category : 'accessing' }
 Djembe >> freq [
 
-	^ freq
+	^ freq ifNil: [  freq := (PhHSlider new
+			 label: self label , 'Freq'
+			 init: 440
+			 min: 20
+			 max: 1200
+			 step: 1). ]
 ]
 
 { #category : 'accessing' }
@@ -39,7 +44,13 @@ Djembe >> freq: anObject [
 { #category : 'accessing' }
 Djembe >> gain [
 
-	^ gain
+	^ gain ifNil: [ 
+		gain:= PhHSlider new
+			    label: self label , 'StrikePos'
+			    init: 0.5
+			                    min: 0
+			                    max: 1
+			                    step: 0.001 ] 
 ]
 
 { #category : 'accessing' }
@@ -54,32 +65,19 @@ Djembe >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.djembe;'.
-	self freq: (PhHSlider new
-			 label: self label , 'Freq'
-			 init: 440
-			 min: 20
-			 max: 1200
-			 step: 1).
-	self strikePosition: (PhHSlider new
-			 label: self label , 'StrikePos'
-			 init: 0.5
-			 min: 0
-			 max: 1
-			 step: 0.001).
-	self strikeSharpness: (PhHSlider new
-			 label: self label , 'StrikeSharp'
-			 init: 0.5
-			 min: 0
-			 max: 1
-			 step: 0.001).
-	self gain: 0.5.
-	self trigger: (PhButton new label: self label , 'Trigger')
+	
 ]
 
 { #category : 'accessing' }
 Djembe >> strikePosition [
 
-	^ strikePosition
+	^ strikePosition ifNil: [ 
+		strikePosition :=  (PhHSlider new
+			 label: self label , 'StrikePos'
+			 init: 0.5
+			 min: 0
+			 max: 1
+			 step: 0.001) ]
 ]
 
 { #category : 'accessing' }
@@ -92,7 +90,13 @@ Djembe >> strikePosition: anObject [
 { #category : 'accessing' }
 Djembe >> strikeSharpness [
 
-	^ strikeSharpness
+	^ strikeSharpness ifNil: [ 
+		strikeSharpness := (PhHSlider new
+			 label: self label , 'StrikeSharp'
+			 init: 0.5
+			 min: 0
+			 max: 1
+			 step: 0.001). ]
 ]
 
 { #category : 'accessing' }
@@ -105,7 +109,8 @@ Djembe >> strikeSharpness: anObject [
 { #category : 'accessing' }
 Djembe >> trigger [
 
-	^ trigger
+	^ trigger ifNil: [ 
+		trigger := (PhButton new label: self label , 'Trigger') ]
 ]
 
 { #category : 'accessing' }

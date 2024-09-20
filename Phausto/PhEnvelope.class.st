@@ -20,20 +20,22 @@ Class {
 PhEnvelope >> attack [
 
 	^ attack ifNil: [
-		attack := PhHSlider new
-			          label: self label , 'Attack'
-			          init: 0.001
-			          min: 0.001
-			          max: 2
-			          step: 1 ].
+		  attack := PhHSlider new
+			           label: self label , 'Attack'
+			           init: 0.001
+			           min: 0.001
+			           max: 2
+			           step: 1 ]
 ]
 
 { #category : 'accessing' }
-PhEnvelope >> attack: aNumberOrABox [
+PhEnvelope >> attack: aNumberOrABoxOraAymbol [
 
-	attack := aNumberOrABox isNumber
-		        ifTrue: [ self attack init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ]
+| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraAymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'initialization' }
@@ -54,21 +56,22 @@ PhEnvelope >> patchedWith: aUnitGenerator [
 PhEnvelope >> release [
 
 	^ release ifNil: [
-		release := PhHSlider new
+		  release := PhHSlider new
 			           label: self label , 'Release'
-			           init: 0.3
-			           min: 0
-			           max: 3
-			           step: 0.001 ].
+			           init: 0.001
+			           min: 0.001
+			           max: 2
+			           step: 1 ]
 ]
 
 { #category : 'accessing' }
-PhEnvelope >> release: aNumberOrABox [
+PhEnvelope >> release: aNumberOrABoxOraAymbol [
 
-
-	release := aNumberOrABox isNumber
-		        ifTrue: [ self release init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ]
+| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraAymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }

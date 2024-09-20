@@ -37,20 +37,22 @@ ADSREnv >> asBox [
 ADSREnv >> decay [
 
 	^ decay ifNil: [
-		decay := PhHSlider new
-			         label: self label , 'Decay'
-			         init: 0.001
-			         min: 0.001
-			         max: 2
-			         step: 1 ].
+		  decay := PhHSlider new
+			           label: self label , 'Decay'
+			           init: 0.01
+			           min: 0.001
+			           max: 2
+			           step: 1 ]
 ]
 
 { #category : 'accessing' }
-ADSREnv >> decay: aNumberOrABox [
+ADSREnv >> decay: aNumberOrABoxOraAymbol [
 
-	decay := aNumberOrABox isNumber
-		        ifTrue: [ self decay init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ]
+| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraAymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'initialization' }
@@ -75,9 +77,11 @@ ADSREnv >> sustain [
 ]
 
 { #category : 'accessing' }
-ADSREnv >> sustain: aNumberOrABox [
+ADSREnv >> sustain: aNumberOrABoxOraAymbol [
 
-sustain := aNumberOrABox isNumber
-		        ifTrue: [ self sustain init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ]
+| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraAymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
