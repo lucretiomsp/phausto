@@ -10,9 +10,6 @@ This model contains 7 excitation positions going linearly from the bottom to the
 Class {
 	#name : 'FrenchBell',
 	#superclass : 'ModalPercussion',
-	#instVars : [
-		'strikeCutoff'
-	],
 	#category : 'Phausto-PhysicalModels',
 	#package : 'Phausto',
 	#tag : 'PhysicalModels'
@@ -22,12 +19,10 @@ Class {
 FrenchBell >> asBox [
 
 	| intermediateBox finalBox |
-
 	intermediateBox := super asBox.
 
-	finalBox := 
-	strikePosition , strikeCutoff , strikeSharpness , gain
-	, trigger connectTo: intermediateBox.
+	finalBox := self strikePosition , self strikeCutoff , self strikeSharpness , self gain
+	            , self trigger connectTo: intermediateBox.
 
 	^ finalBox
 ]
@@ -38,26 +33,5 @@ FrenchBell >> initialize [
 	super initialize.
 	processExpression := 'process = pm.frenchBell;'.
 
-	self strikePosition: (PhHSlider new
-			 label: self label , 'StrikePos'
-			 init: 0
-			 min: 0
-			 max: 6
-			 step: 1).
-	self strikeCutoff: 7000.
-	self strikeSharpness: 0.26.
-	self gain: 0.8.
-	self trigger: (PhButton new label: self label , 'Trigger')
-]
 
-{ #category : 'accessing' }
-FrenchBell >> strikeCutoff [
-
-	^ strikeCutoff
-]
-
-{ #category : 'accessing' }
-FrenchBell >> strikeCutoff: anObject [
-
-	strikeCutoff := anObject
 ]

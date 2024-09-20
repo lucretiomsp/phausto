@@ -16,6 +16,11 @@ Class {
 	#tag : 'UIPrimitives'
 }
 
+{ #category : 'common' }
+UIPrimitive >> init: aNumber [
+"syntactic sugar"
+]
+
 { #category : 'initialization' }
 UIPrimitive >> initialize [ 
 super initialize.

@@ -23,99 +23,10 @@ Djembe >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
-Djembe >> freq [
-
-	^ freq ifNil: [  freq := (PhHSlider new
-			 label: self label , 'Freq'
-			 init: 440
-			 min: 20
-			 max: 1200
-			 step: 1). ]
-]
-
-{ #category : 'accessing' }
-Djembe >> freq: anObject [
-	"sets the fundamental frequency of the model"
-
-	freq := anObject asBox
-]
-
-{ #category : 'accessing' }
-Djembe >> gain [
-
-	^ gain ifNil: [ 
-		gain:= PhHSlider new
-			    label: self label , 'StrikePos'
-			    init: 0.5
-			                    min: 0
-			                    max: 1
-			                    step: 0.001 ] 
-]
-
-{ #category : 'accessing' }
-Djembe >> gain: anObject [
-	" gain of the strike"
-
-	gain := anObject asBox
-]
-
 { #category : 'initialization' }
 Djembe >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.djembe;'.
 	
-]
-
-{ #category : 'accessing' }
-Djembe >> strikePosition [
-
-	^ strikePosition ifNil: [ 
-		strikePosition :=  (PhHSlider new
-			 label: self label , 'StrikePos'
-			 init: 0.5
-			 min: 0
-			 max: 1
-			 step: 0.001) ]
-]
-
-{ #category : 'accessing' }
-Djembe >> strikePosition: anObject [
-	"strike position (0 for the middle of the membrane and 1 for the edge)"
-
-	strikePosition := anObject asBox
-]
-
-{ #category : 'accessing' }
-Djembe >> strikeSharpness [
-
-	^ strikeSharpness ifNil: [ 
-		strikeSharpness := (PhHSlider new
-			 label: self label , 'StrikeSharp'
-			 init: 0.5
-			 min: 0
-			 max: 1
-			 step: 0.001). ]
-]
-
-{ #category : 'accessing' }
-Djembe >> strikeSharpness: anObject [
-	" sharpness of the strike (0-1)"
-
-	strikeSharpness := anObject asBox
-]
-
-{ #category : 'accessing' }
-Djembe >> trigger [
-
-	^ trigger ifNil: [ 
-		trigger := (PhButton new label: self label , 'Trigger') ]
-]
-
-{ #category : 'accessing' }
-Djembe >> trigger: anObject [
-	"trigger signal (0: off, 1: on)"
-
-	trigger := anObject asBox.
 ]

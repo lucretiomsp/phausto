@@ -24,11 +24,13 @@ Oscillators >> freq [
 ]
 
 { #category : 'accessing' }
-Oscillators >> freq: aNumberOrABoxOraAymbol [
+Oscillators >> freq: aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraAymbol asParam: methodName asString allButLast forUGen: self
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'initialization' }

@@ -10,7 +10,8 @@ Class {
 		'strikePosition',
 		'strikeSharpness',
 		'gain',
-		'trigger'
+		'trigger',
+		'strikeCutoff'
 	],
 	#category : 'Phausto-PhysicalModels',
 	#package : 'Phausto',
@@ -20,115 +21,132 @@ Class {
 { #category : 'accessing' }
 ModalPercussion >> freq [
 
-	^ freq
+	^ freq ifNil: [
+		  freq := PhHSlider new
+			          label: self label , 'Freq'
+			          init: 440
+			          min: 20
+			          max: 1200
+			          step: 1 ]
 ]
 
 { #category : 'accessing' }
-ModalPercussion >> freq: anObject [
+ModalPercussion >> freq: aNumberOrABoxOrASymbol [
 
-	freq := anObject asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
 ModalPercussion >> gain [
 
-	^ gain
+	^ gain ifNil: [
+		  gain := PhHSlider new
+			          label: self label , 'Gain'
+			          init: 0.5
+			          min: 0
+			          max: 1
+			          step: 0.001 ]
 ]
 
 { #category : 'accessing' }
-ModalPercussion >> gain: anObject [
+ModalPercussion >> gain: aNumberOrABoxOrASymbol [
 
-	gain := anObject asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'initialization' }
 ModalPercussion >> initialize [ 
 super initialize .
-self freq: 440.
-	self strikePosition: 3.
-	self strikeSharpness: 0.8.
-	self gain: 0.5.
-	self trigger: 0.0
+
 ]
 
-{ #category : 'initialization' }
-ModalPercussion >> initializeFreqAsSlider [
-	"default value of 440 Hz, A4 - max value is 4096 i.e. C8"
+{ #category : 'accessing' }
+ModalPercussion >> strikeCutoff [
 
-	freq := PhHSlider new
-		        label: self label , 'Freq'
-		        init: 440
-		        min: 20
-		        max: 4086
-		        step: 1
+	^ strikeCutoff ifNil: [
+		  self strikeCutoff: (PhHSlider new
+				   label: self label , 'StrikeCutoff'
+				   init: 7000
+				   min: 100
+				   max: 9000
+				   step: 1) ]
 ]
 
-{ #category : 'initialization' }
-ModalPercussion >> initializeStrikePosAsSlider [
-	"default value of 440 Hz, A4 - max value is 4096 i.e. C8"
+{ #category : 'accessing' }
+ModalPercussion >> strikeCutoff: aNumberOrABoxOrASymbol [
 
-	freq := PhHSlider new
-		        label: self label , 'StrikePosition'
-		        init: 1
-		        min: 0
-		        max: 5
-		        step: 0.01
-]
-
-{ #category : 'initialization' }
-ModalPercussion >> initializeStrikeSharpAsSlider [
-	"default value of 440 Hz, A4 - max value is 4096 i.e. C8"
-
-	freq := PhHSlider new
-		        label: self label , 'StrikeSharpness'
-		        init: 0.3
-		        min: 0.01
-		        max: 1
-		        step: 0.01
-]
-
-{ #category : 'initialization' }
-ModalPercussion >> initializeUIParameters [
-
-	super initializeUIParameters.
-	"default frequency for all Oscilators is A4 at picth standard - maxValue corresponds to a C8 note"
-
-	"the UI element to control the freq is created only if the parameter is nil at instance creation"
-	freq ifNil: [ self initializeFreqAsSlider ]
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
 ModalPercussion >> strikePosition [
 
-	^ strikePosition
+	^ strikePosition ifNil: [
+		  self strikePosition: (PhHSlider new
+				   label: self label , 'StrikePos'
+				   init: 0
+				   min: 0
+				   max: 4
+				   step: 1) ]
 ]
 
 { #category : 'accessing' }
-ModalPercussion >> strikePosition: anObject [
+ModalPercussion >> strikePosition: aNumberOrABoxOrASymbol [
 
-	strikePosition := anObject asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
 ModalPercussion >> strikeSharpness [
 
-	^ strikeSharpness
+	^ strikeSharpness ifNil: [
+		  self strikeSharpness: (PhHSlider new
+				   label: self label , 'StrikeSharp'
+				   init: 0.3
+				   min: 0.001
+				   max: 1
+				   step: 0.001) ]
 ]
 
 { #category : 'accessing' }
-ModalPercussion >> strikeSharpness: anObject [
+ModalPercussion >> strikeSharpness:aNumberOrABoxOrASymbol [
 
-	strikeSharpness := anObject asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
 ModalPercussion >> trigger [
 
-	^ trigger
+	^ trigger ifNil: [
+		  trigger := PhButton new label: self label , 'Trigger' ]
 ]
 
 { #category : 'accessing' }
-ModalPercussion >> trigger: anObject [
+ModalPercussion >> trigger:aNumberOrABoxOrASymbol [
 
-	trigger := anObject asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
