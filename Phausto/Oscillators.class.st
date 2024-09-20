@@ -26,14 +26,9 @@ Oscillators >> freq [
 { #category : 'accessing' }
 Oscillators >> freq: aNumberOrABoxOraAymbol [
 
-
-	aNumberOrABoxOraAymbol asParam: 'freq' forUGen: self
-
-
-
-	"freq := aNumberOrABox isNumber
-		        ifTrue: [ self freq init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ]"
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraAymbol asParam: methodName asString allButLast forUGen: self
 ]
 
 { #category : 'initialization' }
