@@ -29,25 +29,21 @@ LowFrequencyOscillators >> amount [
 ]
 
 { #category : 'accessing' }
-LowFrequencyOscillators >> amount: aNumberOrABox [
+LowFrequencyOscillators >> amount: aNumberOrABoxOraAymbol [
 
-	aNumberOrABox isNumber
-		ifTrue: [ amount :=PhHSlider new
-		          label: self label , 'Amount'
-		          init: aNumberOrABox 
-		          min: 0
-		          max: 28000
-		          step: 1.  ]
-		ifFalse: [ amount := aNumberOrABox ]
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraAymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'converting' }
 LowFrequencyOscillators >> asBox [
 
 	| intermediateBox finalBox |
-
 	intermediateBox := super asBox.
-	finalBox := self freq asBox connectTo: intermediateBox.
+	finalBox := self freq  connectTo: intermediateBox.
 	^ finalBox * self amount asBox + self offset asBox
 ]
 
@@ -75,9 +71,11 @@ LowFrequencyOscillators >> offset [
 ]
 
 { #category : 'accessing' }
-LowFrequencyOscillators >> offset: aNumberOrABox [
+LowFrequencyOscillators >> offset: aNumberOrABoxOraAymbol [
 
-	aNumberOrABox isNumber
-		ifTrue: [ self offset init: aNumberOrABox ]
-		ifFalse: [ offset  := aNumberOrABox ]
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraAymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]

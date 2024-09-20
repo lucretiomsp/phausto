@@ -15,7 +15,7 @@ Number >> asParam: aString forUGen: aUnitGenerator [
 
 	| uiElement |
 	uiElement := aUnitGenerator perform: aString asSymbol.
-	uiElement init: aString.
+	uiElement init: self.
 	aUnitGenerator instVarNamed: aString put: uiElement
 
 

@@ -224,6 +224,9 @@ UnitGenerator >> uLevel [
 { #category : 'accessing' }
 UnitGenerator >> uLevel: aNumberOrABoxOraAymbol [
 
-	aNumberOrABoxOraAymbol asParam: 'uLevel' forUGen: self.
-
+| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraAymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
