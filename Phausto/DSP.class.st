@@ -32,7 +32,7 @@ Class {
 }
 
 { #category : 'converting' }
-DSP class >> asCmajorFileNamed: aName [
+DSP class >> asCmajorPatchFileNamed: aName [
 
 	| hasMidi cmajorPatchesDir patchDir|
 	"we need to improve the mechanism to generate MIDI instruments"
@@ -82,7 +82,7 @@ DSP class >> asCmajorFileNamed: aName [
 ]
 
 { #category : 'converting' }
-DSP class >> asCmajorFileNamed: aName hasMIDI: aBoolean [
+DSP class >> asCmajorPatchFileNamed: aName hasMIDI: aBoolean [
 
 	| hasMidi cmajorPatchesDir patchDir cmajorPatchFile |
 	"we need to improve the mechanism to generate MIDI instruments"
@@ -261,7 +261,7 @@ DSP >> createCmajorMIDIPatchNamed: aName [
 	fileToWrite := patchDir / (aName , '.cmajor').
 
 	
-	self class asCmajorFileNamed: aName hasMIDI: true.
+	self class asCmajorPatchFileNamed: aName hasMIDI: true.
 	self asCmajorPolyWrapperFor: aName.
 	"return true if the .cmajor file has been  generated"
 	LibFaust uniqueInstance
@@ -283,7 +283,7 @@ DSP >> createCmajorMIDIPatchNamed: aName [
 DSP >> createCmajorPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
 
-	self class asCmajorFileNamed: aName hasMIDI: false.
+	self class asCmajorPatchFileNamed: aName hasMIDI: false.
 	"return true if the .cmajor file has been  generated"
 	^ LibFaust uniqueInstance
 		  createCMajorFileFromString: self generatedCode
