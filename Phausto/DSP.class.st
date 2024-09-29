@@ -84,14 +84,18 @@ DSP class >> asCmajorFileNamed: aName [
 { #category : 'converting' }
 DSP class >> asCmajorFileNamed: aName hasMIDI: aBoolean [
 
-	| hasMidi cmajorPatchesDir patchDir |
+	| hasMidi cmajorPatchesDir patchDir cmajorPatchFile |
 	"we need to improve the mechanism to generate MIDI instruments"
 	hasMidi := aBoolean asString , ','.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
-	(patchDir / (aName , '.cmajorpatch')) writeStream
+
+	cmajorPatchFile := patchDir / (aName , '.cmajorpatch').
+	"delete the file if the file already exists and create another one. maybe should we ask for overwrite?"
+	cmajorPatchFile delete.
+	cmajorPatchFile writeStream
 		cr;
 		nextPutAll: '{';
 		nextPutAll: '"CmajorVersion":';
@@ -256,6 +260,7 @@ DSP >> createCmajorMIDIPatchNamed: aName [
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
 	fileToWrite := patchDir / (aName , '.cmajor').
 
+	
 	self class asCmajorFileNamed: aName hasMIDI: true.
 	self asCmajorPolyWrapperFor: aName.
 	"return true if the .cmajor file has been  generated"
@@ -268,7 +273,9 @@ DSP >> createCmajorMIDIPatchNamed: aName [
 	newString := stringToTrim truncateTo: trimIndex.
 	fileToWrite delete.
 	fileToWrite writeStream
-		nextPutAll: newString , 'future' ; cr; nextPutAll: '*/';
+		nextPutAll: newString , 'future';
+		cr;
+		nextPutAll: '*/';
 		close
 ]
 
