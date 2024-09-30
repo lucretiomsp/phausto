@@ -60,7 +60,7 @@ PhBox class >> startUp: aBoolean [
 	aBoolean ifTrue: [ libContext := false ]
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'composing' }
 PhBox >> % aUnitGenerator [
 	"modulo operator for  UnitGenerators"
 
@@ -69,7 +69,7 @@ PhBox >> % aUnitGenerator [
 	^ BoxAPI uniqueInstance boxRem: self with: aUnitGenerator asBox
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'composing' }
 PhBox >> * aUnitGeneratorOrANumber [
 	"multiply UnitGenerators"
 
@@ -79,28 +79,28 @@ PhBox >> * aUnitGeneratorOrANumber [
 	^ BoxAPI uniqueInstance  multiply: box1 with: box2
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'composing' }
 PhBox >> + aUnitGenerator [
 	"sumUnitGenerators"
 
 	^ self add: self asBox to: aUnitGenerator asBox
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'composing' }
 PhBox >> , aUnitGenerator [
 	"parallelComposition of UnitGenerators"
-
-^ self par: self asBox with: aUnitGenerator asBox
+self ifNotNullDo: 
+	[^ self par: self asBox with: aUnitGenerator asBox]
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'composing' }
 PhBox >> - aUnitGenerator [
 	"sumUnitGenerators"
 
 	^ self subtract: self asBox from: aUnitGenerator asBox
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'composing' }
 PhBox >> / aUnitGeneratorOrANumber [
 	"multiply UnitGenerators"
 
@@ -262,6 +262,14 @@ PhBox >> errorBuffer [
 PhBox >> errorBuffer: anObject [
 
 	errorBuffer := anObject
+]
+
+{ #category : 'enumerating' }
+PhBox >> ifNotNullDo: aBlock [
+    "If the receiver is not null, evaluate the block. Otherwise, signal an error."
+    self isNull
+        ifTrue: [ PhBox nullBoxException ] 
+        ifFalse: [ ^ aBlock value: self ].
 ]
 
 { #category : 'initialization' }
