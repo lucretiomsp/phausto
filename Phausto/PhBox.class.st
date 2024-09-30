@@ -42,6 +42,12 @@ PhBox class >> libContext: trueOrFalse [
 libContext := trueOrFalse 
 ]
 
+{ #category : 'as yet unclassified' }
+PhBox class >> nullBoxException [
+	^ Error new signal:
+		  'This PhBox is a null pointer'
+]
+
 { #category : 'system startup' }
 PhBox class >> startUp [
 
@@ -345,7 +351,8 @@ PhBox >> par: aBox with: anotherBox [
 { #category : 'printing' }
 PhBox >> printOn: aStream [
 
-	^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString
+	self isNull ifTrue: [ Error new signal: 'This box is Null' ] ifFalse:
+	[^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString]
 ]
 
 { #category : 'as yet unclassified' }

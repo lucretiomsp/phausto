@@ -7,12 +7,8 @@ ByteSymbol >> asParam: aString forUGen: aUnitGenerator [
 	| uiElement |
 	uiElement := aUnitGenerator perform: aString asSymbol.
 	uiElement label: self.
-	uiElement inspect.
-	3 inspect.
+
 	aUnitGenerator instVarNamed: aString put: uiElement
-
-
-
 ]
 
 { #category : '*Phausto' }
