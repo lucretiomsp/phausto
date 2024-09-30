@@ -227,14 +227,17 @@ DSP >> allParameters [
 DSP >> asCmajorPolyWrapperFor: aName [
 	"write the cmajor polyWrapper for the patch / by default 16 voices polyphony"
 
-	| cmajorPatchesDir patchDir |
+	| cmajorPatchesDir patchDir fileToWrite |
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
-	(patchDir / (aName , 'polyWrapper' , '.cmajor')) writeStream
+	fileToWrite := patchDir / (aName , 'polyWrapper' , '.cmajor').
+	"delete the file if the file already exists and create another one. maybe should we ask for overwrite?"
+	fileToWrite exists ifTrue: [ fileToWrite delete ].
+	fileToWrite writeStream
 		nextPutAll:
-			(self getUIItemsLabeledDictionary asCmajorPolyWrapperFor: aName );
+			(self getUIItemsLabeledDictionary asCmajorPolyWrapperFor: aName);
 		close
 ]
 
@@ -259,8 +262,10 @@ DSP >> createCmajorMIDIPatchNamed: aName [
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
 	fileToWrite := patchDir / (aName , '.cmajor').
+ 
+	"delete the file if the file already exists and create another one. maybe should we ask for overwrite?"
+	fileToWrite exists ifTrue: [ fileToWrite delete ].
 
-	
 	self class asCmajorPatchFileNamed: aName hasMIDI: true.
 	self asCmajorPolyWrapperFor: aName.
 	"return true if the .cmajor file has been  generated"
