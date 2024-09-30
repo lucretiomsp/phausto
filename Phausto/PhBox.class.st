@@ -65,8 +65,8 @@ PhBox >> % aUnitGenerator [
 	"modulo operator for  UnitGenerators"
 
 	"^ self boxModulo: self asBox with: aUnitGenerator asBox"
-	
-	^ BoxAPI uniqueInstance boxRem: self with: aUnitGenerator asBox
+self ifNotNullDo: [  
+	^ BoxAPI uniqueInstance boxRem: self with: aUnitGenerator asBox ]
 ]
 
 { #category : 'composing' }
@@ -74,16 +74,18 @@ PhBox >> * aUnitGeneratorOrANumber [
 	"multiply UnitGenerators"
 
 	| box1 box2 |
+	
+	self ifNotNullDo: [  
 	box1 := self asBox.
 	box2 := aUnitGeneratorOrANumber asBox.
-	^ BoxAPI uniqueInstance  multiply: box1 with: box2
+	^ BoxAPI uniqueInstance multiply: box1 with: box2]
 ]
 
 { #category : 'composing' }
 PhBox >> + aUnitGenerator [
 	"sumUnitGenerators"
-
-	^ self add: self asBox to: aUnitGenerator asBox
+self ifNotNullDo: [  
+	^ self add: self asBox to: aUnitGenerator asBox ]
 ]
 
 { #category : 'composing' }
@@ -96,8 +98,8 @@ self ifNotNullDo:
 { #category : 'composing' }
 PhBox >> - aUnitGenerator [
 	"sumUnitGenerators"
-
-	^ self subtract: self asBox from: aUnitGenerator asBox
+self ifNotNullDo: [  
+	^ self subtract: self asBox from: aUnitGenerator asBox   ]
 ]
 
 { #category : 'composing' }
@@ -105,16 +107,17 @@ PhBox >> / aUnitGeneratorOrANumber [
 	"multiply UnitGenerators"
 
 	| box1 box2 |
+	self ifNotNullDo: [  
 	box1 := self asBox.
 	box2 := aUnitGeneratorOrANumber asBox.
-	^ BoxAPI uniqueInstance divide: box1 by: box2
+	^ BoxAPI uniqueInstance divide: box1 by: box2]
 ]
 
 { #category : 'connecting' }
 PhBox >> => aUnitGenerator [
 	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
-
-	^ self chuckInto: aUnitGenerator
+self ifNotNullDo: [ 
+	^ self chuckInto: aUnitGenerator ]
 ]
 
 { #category : 'arithmetic' }
