@@ -94,7 +94,7 @@ DSP class >> asCmajorPatchFileNamed: aName hasMIDI: aBoolean [
 
 	cmajorPatchFile := patchDir / (aName , '.cmajorpatch').
 	"delete the file if the file already exists and create another one. maybe should we ask for overwrite?"
-	cmajorPatchFile delete.
+	cmajorPatchFile exists ifTrue: [cmajorPatchFile delete].
 	cmajorPatchFile writeStream
 		cr;
 		nextPutAll: '{';
