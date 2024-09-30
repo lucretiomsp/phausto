@@ -57,11 +57,11 @@ PhEnvelope >> release [
 
 	^ release ifNil: [
 		  release := PhHSlider new
-			           label: self label , 'Release'
-			           init: 0.001
-			           min: 0.001
-			           max: 2
-			           step: 1 ]
+			             label: self label , 'Release'
+			             init: 0.1
+			             min: 0.001
+			             max: 2
+			             step: 1 ]
 ]
 
 { #category : 'accessing' }
@@ -82,9 +82,11 @@ PhEnvelope >> trigger [
 ]
 
 { #category : 'accessing' }
-PhEnvelope >> trigger: aNumberOrABox [
+PhEnvelope >> trigger: aNumberOrABoxOrASymbol [
 
-	aNumberOrABox isNumber
-		        ifTrue: [ self trigger init: aNumberOrABox ]
-		        ifFalse: [ trigger :=  aNumberOrABox ]
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
