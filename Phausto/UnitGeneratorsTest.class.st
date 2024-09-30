@@ -49,6 +49,15 @@ UnitGeneratorsTest >> testLFOTriPosAsDsp [
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testNoUnitGeneratorsatStartup [
+
+	self assert: UnitGenerator instancesInDSPContext equals: 0.
+	self
+		assert: (UnitGenerator allSubclasses allSatisfy: [ :a | a instancesInDSPContext = 0 ])
+		equals: true
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testNoiseAsDsp [
 
 	self assert: Noise new asDsp isNull equals: false
