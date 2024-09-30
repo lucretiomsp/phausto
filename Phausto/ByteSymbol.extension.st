@@ -6,8 +6,9 @@ ByteSymbol >> asParam: aString forUGen: aUnitGenerator [
 
 	| uiElement |
 	uiElement := aUnitGenerator perform: aString asSymbol.
-	uiElement label: aString.
-	aUnitGenerator instVarNamed: aString put: uiElement 
+	uiElement label: self.
+	aUnitGenerator instVarNamed: aString put: uiElement.
+
 
 
 	"freq := aNumberOrABox isNumber
