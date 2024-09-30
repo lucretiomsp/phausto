@@ -7,13 +7,12 @@ ByteSymbol >> asParam: aString forUGen: aUnitGenerator [
 	| uiElement |
 	uiElement := aUnitGenerator perform: aString asSymbol.
 	uiElement label: self.
-	aUnitGenerator instVarNamed: aString put: uiElement.
+	uiElement inspect.
+	3 inspect.
+	aUnitGenerator instVarNamed: aString put: uiElement
 
 
 
-	"freq := aNumberOrABox isNumber
-		        ifTrue: [ self freq init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ]"
 ]
 
 { #category : '*Phausto' }
