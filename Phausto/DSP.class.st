@@ -558,6 +558,15 @@ self setValue:  aMidiNN midiNoteToFreq   parameter: aString , 'Note'.
 self trig: aString , 'Gate' for: aDuration  
 ]
 
+{ #category : 'ui-building' }
+DSP >> requirePianoKeyboard [
+	"if the dsp contains parameter named 'freq' and 'gate' i s considered a Phausto MIDI dsp and hence is UI requires a Piano Keyboard"
+
+	| params |
+	params := self getUIItemsLabeledDictionary.
+	^ (params includesKey: 'freq') & (params includesKey: 'gate')
+]
+
 { #category : 'API - changes' }
 DSP >> setValue: aFloat parameter: aParamAsString [
 	"  set the value of the parameter named aParamAsString"
