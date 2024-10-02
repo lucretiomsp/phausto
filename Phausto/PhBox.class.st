@@ -75,10 +75,10 @@ PhBox >> * aUnitGeneratorOrANumber [
 
 	| box1 box2 |
 	
-	self ifNotNullDo: [  
+	
 	box1 := self asBox.
 	box2 := aUnitGeneratorOrANumber asBox.
-	^ BoxAPI uniqueInstance multiply: box1 with: box2]
+	self ifNotNullDo: [  ^ BoxAPI uniqueInstance multiply: box1 with: box2]
 ]
 
 { #category : 'composing' }
@@ -116,8 +116,8 @@ PhBox >> / aUnitGeneratorOrANumber [
 { #category : 'connecting' }
 PhBox >> => aUnitGenerator [
 	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
-self ifNotNullDo: [ 
-	^ self chuckInto: aUnitGenerator ]
+	BoxAPI uniqueInstance createLibContext.
+	self ifNotNullDo: [ ^ self chuckInto: aUnitGenerator ]
 ]
 
 { #category : 'arithmetic' }
@@ -137,9 +137,10 @@ PhBox >> add: aBox to: anotherBox [
 ]
 
 { #category : 'converting' }
-PhBox >> asBox [ 
+PhBox >> asBox [
 
-^ self
+
+	^ self
 ]
 
 { #category : 'converting' }
@@ -243,9 +244,7 @@ PhBox >> boxSplit: aBox to: anotherBox [
 PhBox >> chuckInto: aBox [
 	"patch the box to an another box, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
 
-	aBox patchedWith: self.
-
-	^ aBox 
+	^ aBox patchedWith: self
 ]
 
 { #category : 'public - line' }
@@ -269,10 +268,11 @@ PhBox >> errorBuffer: anObject [
 
 { #category : 'enumerating' }
 PhBox >> ifNotNullDo: aBlock [
-    "If the receiver is not null, evaluate the block. Otherwise, signal an error."
-    self isNull
-        ifTrue: [ PhBox nullBoxException ] 
-        ifFalse: [ ^ aBlock value: self ].
+	"If the receiver is not null, evaluate the block. Otherwise, signal an error."
+
+	false
+		ifTrue: [ PhBox nullBoxException ]
+		ifFalse: [ ^ aBlock value ]
 ]
 
 { #category : 'initialization' }
@@ -359,11 +359,19 @@ PhBox >> par: aBox with: anotherBox [
 		  #( #PhBox * CboxPar #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
+{ #category : 'connecting' }
+PhBox >> patchedWith: aBox [
+
+	^ Error new signal:
+		  'You cannnot connect a' , aBox className asString , ' with a '
+		  , self className asString
+]
+
 { #category : 'printing' }
 PhBox >> printOn: aStream [
 
-	self isNull ifTrue: [ Error new signal: 'This box is Null' ] ifFalse:
-	[^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString]
+
+	^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString
 ]
 
 { #category : 'as yet unclassified' }

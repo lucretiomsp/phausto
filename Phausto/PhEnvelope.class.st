@@ -48,8 +48,8 @@ PhEnvelope >> initialize [
 { #category : 'connecting' }
 PhEnvelope >> patchedWith: aUnitGenerator [
 
-
-	^ aUnitGenerator asBox * self asBox
+	'sto pacciando adsr' traceCr .
+	^ aUnitGenerator "asBox" * self asBox
 ]
 
 { #category : 'dependencies' }

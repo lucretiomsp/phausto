@@ -78,33 +78,18 @@ UnitGenerator class >> withlabel: aString [
 	^ self new label: aString
 ]
 
-{ #category : 'connecting' }
-UnitGenerator >> => aUnitGenerator [
-	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
-BoxAPI uniqueInstance createLibContext .
-	^ self chuckInto: aUnitGenerator
-]
-
 { #category : 'converting' }
 UnitGenerator >> asBox [
 
 	| box |
 	BoxAPI uniqueInstance createLibContext.
+	
 	box := BoxAPI uniqueInstance
 		       boxFromString: self code
 		       inputs: self inputs
 		       outputs: self outputs
 		       buffer: self errorBuffer.
-	^ box * self uLevel 
-]
-
-{ #category : 'connecting' }
-UnitGenerator >> chuckInto: aBox [
-	"patch the box to an another box, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
-
-^	aBox patchedWith: self.
-
-
+	^ box * self uLevel
 ]
 
 { #category : 'accessing' }
@@ -177,14 +162,6 @@ UnitGenerator >> newLabel: aString [
 
 self initialize .
 label := aString
-]
-
-{ #category : 'connecting' }
-UnitGenerator >> patchedWith: aBox [
-
-	^ Error new signal:
-		  'You cannnot connect a' , aBox className asString , ' with a '
-		  , self className asString
 ]
 
 { #category : 'accessing' }
