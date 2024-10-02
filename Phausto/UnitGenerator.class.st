@@ -83,13 +83,13 @@ UnitGenerator >> asBox [
 
 	| box |
 	BoxAPI uniqueInstance createLibContext.
-	
+
 	box := BoxAPI uniqueInstance
 		       boxFromString: self code
 		       inputs: self inputs
 		       outputs: self outputs
 		       buffer: self errorBuffer.
-	^ box * self uLevel
+	^ box 
 ]
 
 { #category : 'accessing' }
