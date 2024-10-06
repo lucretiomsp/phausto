@@ -318,25 +318,33 @@ DSP >> destroy [
 DSP >> displayUI [
 	"full UI made with Toplo"
 
-	| container allParams allKnobs   |
+	| container allParams allKnobs containerKnobs  |
 	allParams := self getUIItemsLabeledDictionary.
 	allKnobs := OrderedCollection new.
 	allParams keysAndValuesDo: [ :k :v |
 				
 	allKnobs add: (BlElement new fromDictionary: v forDsp: self) 
 ].
-	container := BlElement new
+
+containerKnobs := BlElement new
 		             geometry: BlRectangleGeometry new;
+		extent: 1200@360;
 		             layout: (BlGridLayout new
 				              columnCount: 4;
 				              cellSpacing: 0);
 		             constraintsDo: [ :c |
 			             c horizontal matchParent.
-			             c vertical matchParent ];
+			             "c vertical matchParent "];
+		             background: Color darkGray.
+	container := BlElement new
+		  extent: 1200@800;
+		   layout: BlLinearLayout new beVertical ;
 		             background: Color darkGray.
 
-
-	container addChildren: allKnobs.
+containerKnobs addChildren: allKnobs. 
+	container addChild: containerKnobs .
+	self requirePianoKeyboard ifTrue: [ 
+		container addChild: (ICPianoKeyboardElement newForDsp: self) ].
 	container openInNewSpace
 ]
 
