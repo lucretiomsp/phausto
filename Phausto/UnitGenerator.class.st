@@ -42,7 +42,7 @@ UnitGenerator class >> initialize [
 { #category : 'accessing' }
 UnitGenerator class >> instancesInDSPContext [
 
-	^ instancesInDSPContext "ifNil: [ instancesInDSPContext := 0 ]"
+	^ instancesInDSPContext ifNil: [ instancesInDSPContext := 0 ]
 ]
 
 { #category : 'class initialization' }
