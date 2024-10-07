@@ -47,9 +47,13 @@ Kick >> attack [
 ]
 
 { #category : 'accessing' }
-Kick >> attack: aTimeInSeconds [ 
+Kick >> attack: aNumberOrABoxOraASymbol [
 
-	attack := aTimeInSeconds asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
@@ -59,45 +63,71 @@ Kick >> click [
 ]
 
 { #category : 'accessing' }
-Kick >> click: aTimeInSeconds [
+Kick >> click: aNumberOrABoxOraASymbol [
 
-	click := aTimeInSeconds asBox.
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
 Kick >> decay [
 
-	^ decay
+	^ decay ifNil: [ decay:= (PhHSlider new
+			 label: self label , 'Decay'
+			 init: 2
+			 min: 0.1
+			 max: 2
+			 step: 0.01). ]
 ]
 
 { #category : 'accessing' }
-Kick >> decay: aTimeInSeconds [ 
+Kick >> decay: aNumberOrABoxOraASymbol [
 
-	decay := aTimeInSeconds  asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
 Kick >> drive [
 
-	^ drive
+	^ drive ifNil: [  drive := (PhHSlider new
+			 label: self label , 'Drive'
+			 init: 1
+			 min: 1
+			 max: 5
+			 step: 0.001) ]
 ]
 
 { #category : 'accessing' }
-Kick >> drive: aNumber [
+Kick >> drive: aNumberOrABoxOraASymbol [
 
-	drive := aNumber asBox.
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
 Kick >> gate [
 
-	^ gate
+	^ gate ifNil: [ gate := PhButton new label: self label ]
 ]
 
 { #category : 'accessing' }
-Kick >> gate: aTrigger [
+Kick >> gate:aNumberOrABoxOraASymbol [
 
-	gate := aTrigger asBox.
+| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'initialization' }
@@ -105,34 +135,11 @@ Kick >> initialize [
 
 	super initialize.
 	self processExpression: 'process = sy.kick;'.
-	self note: 50.
-	self click: 0.116.
-	self attack: 0.005.
-	self decay: (PhHSlider new
-			 label: self label , 'Decay'
-			 init: 2
-			 min: 0.1
-			 max: 2
-			 step: 0.01).
-	self drive: (PhHSlider new
-			 label: self label , 'Drive'
-			 init: 1
-			 min: 1
-			 max: 5
-			 step: 0.001).
-	self gate: (PhHSlider new
-			 label: self label , 'Gate'
-			 init: 0
-			 min: 0
-			 max: 1
-			 step: 1).
-	self pitch: (PhHSlider new
-			 label: self label , 'Note'
-			 init: 60
-			 min: 0
-			 max: 128
-			 step: 0.1).
-	self uLevel: 0.4
+
+	click := 0.116.
+	attack := 0.005.
+	
+	
 ]
 
 { #category : 'accessing' }
@@ -150,11 +157,20 @@ Kick >> note: aNoteNumber [
 { #category : 'accessing' }
 Kick >> pitch [
 
-	^ pitch
+	^ pitch ifNil: [  pitch :=  (PhHSlider new
+			 label: self label , 'Note'
+			 init: 60
+			 min: 0
+			 max: 128
+			 step: 0.1). ]
 ]
 
 { #category : 'accessing' }
-Kick >> pitch: aFrequency [
+Kick >> pitch: aNumberOrABoxOraASymbol [
 
-	pitch := aFrequency  asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
