@@ -318,7 +318,7 @@ DSP >> destroy [
 DSP >> displayUI [
 	"full UI made with Toplo"
 
-	| container allParams allKnobs containerKnobs  |
+	| container allParams allKnobs containerKnobs  space |
 	allParams := self getUIItemsLabeledDictionary.
 	allKnobs := OrderedCollection new.
 	allParams keysAndValuesDo: [ :k :v |
@@ -342,10 +342,16 @@ containerKnobs := BlElement new
 		             background: Color darkGray.
 
 containerKnobs addChildren: allKnobs. 
+
 	container addChild: containerKnobs .
 	self requirePianoKeyboard ifTrue: [ 
+		containerKnobs removeGateAndFreqElement .
 		container addChild: (ICPianoKeyboardElement newForDsp: self) ].
-	container openInNewSpace
+	 space := BlSpace new extent: 1400 @ 800.
+    space root addChild: container.
+    space show.
+    ^ space 
+	
 ]
 
 { #category : 'accessing' }
