@@ -20,7 +20,7 @@ Clap >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := tone asBox , attack asBox , decay asBox , gate asBox
+	finalBox := tone asBox , attack asBox , decay asBox , self gate asBox
 		            connectTo: intermediateBox.
 	^ finalBox 
 ]
@@ -32,9 +32,13 @@ Clap >> attack [
 ]
 
 { #category : 'accessing' }
-Clap >> attack: aBoxorAFloat [
+Clap >> attack:aNumberOrABoxOraAymbol [
 
-	attack := aBoxorAFloat asBox
+| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraAymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
@@ -52,13 +56,17 @@ Clap >> decay: aBoxorAFloat [
 { #category : 'accessing' }
 Clap >> gate [
 
-	^ gate
+	^ gate ifNil: [ gate := PhButton new label: self label ,  'Gate' ]
 ]
 
 { #category : 'accessing' }
-Clap >> gate: aBoxorAFloat [
+Clap >> gate:aNumberOrABoxOraASymbol [
 
-	gate := aBoxorAFloat asBox
+| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'initialization' }
@@ -68,13 +76,8 @@ Clap >> initialize [
 	processExpression := 'process = sy.clap;'.
 	tone := 1200.
 	attack := 0.
-	decay := 3.
-	gate := PhHSlider new
-		        label: self label , 'Gate'
-		        init: 0
-		        min: 0
-		        max: 1
-		        step: 1
+	decay := 0.3.
+	
 ]
 
 { #category : 'accessing' }
