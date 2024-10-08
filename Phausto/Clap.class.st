@@ -76,8 +76,7 @@ Clap >> initialize [
 	processExpression := 'process = sy.clap;'.
 	tone := 1200.
 	attack := 0.
-	decay := 0.3.
-	
+	decay := 0.16
 ]
 
 { #category : 'accessing' }

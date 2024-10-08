@@ -20,7 +20,8 @@ Class {
 	#instVars : [
 		'name',
 		'isInitialized',
-		'generatedCode'
+		'generatedCode',
+		'displayedUI'
 	],
 	#classVars : [
 		'defaultName',
@@ -253,6 +254,12 @@ index := self getParamIndex: aString.
 
 ]
 
+{ #category : 'as yet unclassified' }
+DSP >> connectToOSCServerOnPort: aPort [
+"should we check for all children???"
+(self displayedUI children at: 1) connectToOSCServer listenOnPort: aPort
+]
+
 { #category : 'converting' }
 DSP >> createCmajorMIDIPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
@@ -318,40 +325,52 @@ DSP >> destroy [
 DSP >> displayUI [
 	"full UI made with Toplo"
 
-	| container allParams allKnobs containerKnobs  space |
+	| container allParams allKnobs containerKnobs space |
 	allParams := self getUIItemsLabeledDictionary.
 	allKnobs := OrderedCollection new.
 	allParams keysAndValuesDo: [ :k :v |
-				
-	allKnobs add: (BlElement new fromDictionary: v forDsp: self) 
-].
+		allKnobs add: (BlElement new fromDictionary: v forDsp: self) ].
 
-containerKnobs := BlElement new
-		             geometry: BlRectangleGeometry new;
-		extent: 1200@360;
-		             layout: (BlGridLayout new
-				              columnCount: 4;
-				              cellSpacing: 0);
-		             constraintsDo: [ :c |
-			             c horizontal matchParent.
-			             "c vertical matchParent "];
-		             background: Color darkGray.
+	containerKnobs := BlElement new
+		                  geometry: BlRectangleGeometry new;
+		                  extent: 1200 @ 360;
+		                  layout: (BlGridLayout new
+				                   columnCount: 4;
+				                   cellSpacing: 0);
+		                  constraintsDo: [ :c |
+			                  c horizontal matchParent
+			                  "c vertical matchParent " ];
+		                  background: Color darkGray.
 	container := BlElement new
-		  extent: 1200@800;
-		   layout: BlLinearLayout new beVertical ;
+		             extent: 1200 @ 800;
+		             layout: BlLinearLayout new beVertical;
 		             background: Color darkGray.
 
-containerKnobs addChildren: allKnobs. 
+	containerKnobs addChildren: allKnobs.
 
-	container addChild: containerKnobs .
-	self requirePianoKeyboard ifTrue: [ 
-		containerKnobs removeGateAndFreqElement .
+	container addChild: containerKnobs.
+	self requirePianoKeyboard ifTrue: [
+		containerKnobs removeGateAndFreqElement.
 		container addChild: (ICPianoKeyboardElement newForDsp: self) ].
-	 space := BlSpace new extent: 1400 @ 800.
-    space root addChild: container.
-    space show.
-    ^ space 
+	"we can later access the container if we need"
+	displayedUI := container.
 	
+	space := BlSpace new extent: 1400 @ 800.
+	space root addChild: container.
+	space show.
+	^ space
+]
+
+{ #category : 'accessing' }
+DSP >> displayedUI [
+
+	^ displayedUI
+]
+
+{ #category : 'accessing' }
+DSP >> displayedUI: aBlElement [
+
+	displayedUI := aBlElement
 ]
 
 { #category : 'accessing' }

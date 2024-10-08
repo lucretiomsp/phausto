@@ -117,7 +117,7 @@ Kick >> drive: aNumberOrABoxOraASymbol [
 { #category : 'accessing' }
 Kick >> gate [
 
-	^ gate ifNil: [ gate := PhButton new label: self label ]
+	^ gate ifNil: [ gate := PhButton new label: self label , 'Gate' ]
 ]
 
 { #category : 'accessing' }
