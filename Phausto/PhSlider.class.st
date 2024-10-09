@@ -49,6 +49,17 @@ PhSlider >> label: aLabel init: initValue min: minValue max: maxValue step: step
 	step := stepValue asBox
 ]
 
+{ #category : 'as yet unclassified' }
+PhSlider >> label: aLabel values: anArray [
+
+"initialzie the SLider with ana array of values"
+	label := aLabel.
+	init := (anArray at: 1) asBox.
+	min :=(anArray at: 2)  asBox.
+	max := (anArray at: 3)  asBox.
+	step :=(anArray at: 4)  asBox
+]
+
 { #category : 'accessing' }
 PhSlider >> step [
 
