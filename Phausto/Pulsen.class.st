@@ -30,19 +30,19 @@ Pulsen >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.pulsen;'.
-	self length: 0.01.
-	
+
 ]
 
 { #category : 'accessing' }
 Pulsen >> length [
 
-	^ length ifNil: [   PhHSlider new
-		        label: self label , 'Length'
-		        init: 0.6
-		        min: 0.01
-		        max: 10
-		        step: 0.01 ]
+	^ length ifNil: [
+		  length := PhHSlider new
+			            label: self label , 'Length'
+			            init: 0.1
+			            min: 0.01
+			            max: 2
+			            step: 0.01 ]
 ]
 
 { #category : 'accessing' }
@@ -56,18 +56,23 @@ Pulsen >> length: aNumberOrABox [
 { #category : 'accessing' }
 Pulsen >> period [
 
-	^ period ifNil: [   PhHSlider new
-		        label: self label , 'Period'
-		        init: 1
-		        min: 0.01
-		        max: 10
-		        step: 0.01 ]
+	^ period ifNil: [ period :=
+		  PhHSlider new
+			  label: self label , 'Period'
+			  init: 1
+			  min: 0.01
+			  max: 2
+			  step: 0.01 ]
 ]
 
 { #category : 'accessing' }
-Pulsen >> period: aNumberOrABox [
+Pulsen >> period: aNumberOrABoxOrASymbol [
 
-	period := aNumberOrABox isNumber
-		        ifTrue: [ self period init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ].
+	| methodName |
+	methodName := thisContext selector. 
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
