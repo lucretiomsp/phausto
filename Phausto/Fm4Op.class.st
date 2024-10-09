@@ -15,6 +15,13 @@ Class {
 	#tag : 'BoxAPI-Synths'
 }
 
+{ #category : 'converting' }
+Fm4Op >> asBox [
+
+	
+	^ carrier asBox
+]
+
 { #category : 'initialization' }
 Fm4Op >> initialize [
 
