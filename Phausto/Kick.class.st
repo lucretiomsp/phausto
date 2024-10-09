@@ -157,12 +157,13 @@ Kick >> note: aNoteNumber [
 { #category : 'accessing' }
 Kick >> pitch [
 
-	^ pitch ifNil: [  pitch :=  (PhHSlider new
-			 label: self label , 'Note'
-			 init: 60
-			 min: 0
-			 max: 128
-			 step: 0.1). ]
+	^ pitch ifNil: [
+		  pitch := PhHSlider new
+			           label: self label , 'Note'
+			           init: 50
+			           min: 0
+			           max: 800
+			           step: 0.1 ]
 ]
 
 { #category : 'accessing' }
