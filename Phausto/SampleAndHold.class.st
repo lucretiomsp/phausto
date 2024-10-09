@@ -18,7 +18,7 @@ SampleAndHold >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self trig , self input connectTo: intermediateBox.
+	finalBox := self trig  asBox, self input asBox connectTo: intermediateBox.
 
 	^ finalBox
 ]
