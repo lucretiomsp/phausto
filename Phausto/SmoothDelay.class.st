@@ -28,18 +28,28 @@ SmoothDelay >> asBox [
 SmoothDelay >> initialize [
 
 	super initialize.
-	processExpression := 'process = de.sdelay;' .
-	self interpolationTime: 0.1 asBox * PhSampleRate new asBox
+	processExpression := 'process = de.sdelay;'.
+	interpolationTime := 8200 asBox "* PhSampleRate new asBox"
 ]
 
 { #category : 'accessing' }
 SmoothDelay >> interpolationTime [
 
-	^ interpolationTime
+	^ interpolationTime ifNil: [
+		  interpolationTime := PhHSlider new
+			                 label: self label , 'InterpTime'
+			                 init: 1000
+			                 min: 100
+			                 max: 22100
+			                 step: 1 ]
 ]
 
 { #category : 'accessing' }
-SmoothDelay >> interpolationTime: aFloatOrABox [
+SmoothDelay >> interpolationTime: aNumberOrABoxOrASymbol [
 
-	interpolationTime := aFloatOrABox asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]

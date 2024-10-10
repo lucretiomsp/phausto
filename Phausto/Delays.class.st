@@ -19,27 +19,30 @@ Class {
 { #category : 'accessing' }
 Delays >> delayLength [
 
-	^ delayLength
+	^ delayLength ifNil: [ delayLength := (PhHSlider new
+			 label: self label , 'Length'
+			 init: 20050
+			 min: 1
+			 max: 44100
+			 step: 1). ]
 ]
 
 { #category : 'accessing' }
-Delays >> delayLength: aFloatOrABox [
-	" the max delay length in samples"
+Delays >> delayLength: aNumberOrABoxOrASymbol [
 
-	delayLength := aFloatOrABox asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'initialization' }
 Delays >> initialize [
 
 	super initialize.
-	self maxDelayLength: 44100. "by default, maximum delay length is 1 second at 44100 Hz sample rate"
-	self delayLength: (PhHSlider new
-			 label: self label , 'Length'
-			 init: 20050
-			 min: 1
-			 max: 44100
-			 step: 1).
+	maxDelayLength := 44100. "by default, maximum delay length is 1 second at 44100 Hz sample rate"
+
 	input := Wire new
 ]
 
@@ -62,12 +65,16 @@ Delays >> maxDelayLength [
 ]
 
 { #category : 'accessing' }
-Delays >> maxDelayLength: aFloatOrABox [
+Delays >> maxDelayLength: aNumberOrABoxOrASymbol [
 
-	maxDelayLength := aFloatOrABox asBox
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'connecting' }
 Delays >> patchedWith: aUnitGenerator [
 
 self input: aUnitGenerator 

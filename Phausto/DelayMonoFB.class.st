@@ -5,29 +5,114 @@ Also, smoothing time expressed in seconds - can be changed in real time
 "
 Class {
 	#name : 'DelayMonoFB',
-	#superclass : 'PhBox',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'maxDelayTime',
 		'dryWet',
 		'delayTime',
 		'input',
 		'feedBack',
-		'label'
+		'delayBox',
+		'finalBox'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
 	#tag : 'TurboPhausto'
 }
 
-{ #category : 'converting' }
+{ #category : 'accessing' }
 DelayMonoFB >> asBox [
 
-	| mixer delayWithFB finalBox delayBox delayLen |
-	delayLen := self delayTime * PhSampleRate new asBox.
-	delayBox := (SmoothDelay new
-		             delayLength: delayLen;
-		             input: Wire new asBox) asBox. "self delayTime * PhSampleRate new asBox"
+	
+	^ finalBox asBox
+]
 
+{ #category : 'accessing' }
+DelayMonoFB >> delayTime [
+
+	^ delayTime ifNil: [
+		  delayTime := PhHSlider new
+			               label: 'MasterDelayTime'
+			               init: 12000
+			               min: 100
+			               max: 40000
+			               step: 1 ]
+]
+
+{ #category : 'accessing' }
+DelayMonoFB >> delayTime:  aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
+DelayMonoFB >> dryWet [
+
+	^ dryWet ifNil: [ 	dryWet := (PhHSlider new
+			 label: 'MasterDelay'
+			 init: 0.5
+			 min: 0
+			 max: 1
+			 step: 0.001) ]
+]
+
+{ #category : 'accessing' }
+DelayMonoFB >> dryWet:  aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
+DelayMonoFB >> feedBack [
+
+	^ feedBack ifNil: [  feedBack := (PhHSlider new
+			 label: 'MasterDelayFeedback'
+			 init: 0.4
+			 min: 0.001
+			 max: 1.1
+			 step: 0.001). ]
+]
+
+{ #category : 'accessing' }
+DelayMonoFB >> feedBack:  aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'initialization' }
+DelayMonoFB >> initialize [
+
+| mixer delayWithFB |
+	super initialize.
+	self label: self class name asString.
+	maxDelayTime := 88200.
+	self input: Wire new.
+
+	delayBox := SmoothDelay new.
+	"delayLength: self delayTime asBox;
+		            input: Wire new self delayTime * PhSampleRate new asBox"
+
+
+
+	"delayLen := self delayTime * PhSampleRate new asBox."
 	mixer := self input + (delayBox * self feedBack).
 
 
@@ -35,74 +120,23 @@ DelayMonoFB >> asBox [
 
 	delayWithFB := mixer asBox ~ delayBox.
 
-	finalBox := delayWithFB * (self dryWet) + (self input * ( 1 asBox - self dryWet )).
-	^ finalBox
-]
-
-{ #category : 'accessing' }
-DelayMonoFB >> delayTime [
-
-	^ delayTime
-]
-
-{ #category : 'accessing' }
-DelayMonoFB >> delayTime: aDelayTimeInSeconds [
-	"delay time must never be greater than max delayTime"
-
-	 delayTime := aDelayTimeInSeconds asBox 
-]
-
-{ #category : 'accessing' }
-DelayMonoFB >> dryWet [
-
-	^ dryWet
-]
-
-{ #category : 'accessing' }
-DelayMonoFB >> dryWet: aFloatOrABox [
-
-   "a value of 0 for a dry signal , a value of 1 for a wet signal , in between for a mix"
-	dryWet := aFloatOrABox asBox
-]
-
-{ #category : 'accessing' }
-DelayMonoFB >> feedBack [
-
-	^ feedBack
-]
-
-{ #category : 'accessing' }
-DelayMonoFB >> feedBack: aFloatOrAbox [
-	"be careful, values greater of equals to 1 yield infinite resonant feedbCK"
-
-	feedBack := aFloatOrAbox asBox
+	finalBox := delayWithFB * self dryWet
+	            + (self input * (1 asBox - self dryWet))
 ]
 
 { #category : 'initialization' }
-DelayMonoFB >> initialize [
+DelayMonoFB >> initializeInternalDelay [
 
-	super initialize.
-	self label: self class name asString.
-	self maxDelayTime: PhSampleRate new asBox * 4.
-	self input: Wire new.
-	self delayTime: (PhHSlider new
-			 label: 'MasterDelayTime'
-			 init: 0.1
-			 min: 0.001
-			 max: 4
-			 step: 0.001).
-	self feedBack: (PhHSlider new
-			 label: 'MasterDelayFeedback'
-			 init: 0.4
-			 min: 0.001
-			 max: 1.1
-			 step: 0.001).
-	self dryWet: (PhHSlider new
-			 label: 'MasterDelay'
-			 init: 0.5
-			 min: 0
-			 max: 1
-			 step: 0.001)
+	| mixer delayWithFB  |
+	mixer := self input + (delayBox * self feedBack).
+
+
+
+
+	delayWithFB := mixer asBox ~ delayBox.
+
+	finalBox := delayWithFB * self dryWet
+	            + (self input * (1 asBox - self dryWet))
 ]
 
 { #category : 'accessing' }
@@ -136,20 +170,20 @@ DelayMonoFB >> maxDelayTime [
 ]
 
 { #category : 'accessing' }
-DelayMonoFB >> maxDelayTime1: anObject [
+DelayMonoFB >> maxDelayTime: aNumberOrABoxOrASymbol [
 
-	maxDelayTime := anObject
-]
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
 
-{ #category : 'accessing' }
-DelayMonoFB >> maxDelayTime: aMaxDelayTimeInSeconds [
-
-
-	maxDelayTime := aMaxDelayTimeInSeconds asBox
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
 DelayMonoFB >> patchedWith: aUnitGenerator [
 
-self input: aUnitGenerator 
+	self input: aUnitGenerator.
+	self initializeInternalDelay 
 ]
