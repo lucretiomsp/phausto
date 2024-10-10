@@ -20,9 +20,9 @@ Class {
 		'gate',
 		'pitch'
 	],
-	#category : 'Phausto-BoxAPI-Synths',
+	#category : 'Phausto-Synths',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Synths'
+	#tag : 'Synths'
 }
 
 { #category : 'converting' }
@@ -98,7 +98,7 @@ Hat >> initialize [
 	attack := 0.005
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Hat >> pitch [
 
 	^ pitch ifNil: [
@@ -110,7 +110,7 @@ Hat >> pitch [
 			           step: 1 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Hat >> pitch: aNumberOrABoxOraASymbol [
 
 	| methodName |

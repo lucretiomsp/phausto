@@ -11,6 +11,8 @@ otherwise my label will be my className asString
 Class {
 	#name : 'UnitGenerator',
 	#superclass : 'PhBox',
+	#traits : 'FreqSetter',
+	#classTraits : 'FreqSetter classTrait',
 	#instVars : [
 		'importStatement',
 		'processExpression',

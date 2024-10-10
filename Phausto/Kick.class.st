@@ -24,9 +24,9 @@ Class {
 		'gate',
 		'note'
 	],
-	#category : 'Phausto-BoxAPI-Synths',
+	#category : 'Phausto-Synths',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Synths'
+	#tag : 'Synths'
 }
 
 { #category : 'converting' }

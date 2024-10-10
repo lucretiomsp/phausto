@@ -4,9 +4,9 @@ This class contains a collection of synthesizers, including those of Faust synth
 Class {
 	#name : 'Synths',
 	#superclass : 'UnitGenerator',
-	#category : 'Phausto-BoxAPI-Synths',
+	#category : 'Phausto-Synths',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Synths'
+	#tag : 'Synths'
 }
 
 { #category : 'initialization' }

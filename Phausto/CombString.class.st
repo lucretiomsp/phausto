@@ -16,9 +16,9 @@ Class {
 		'gain',
 		'gate'
 	],
-	#category : 'Phausto-BoxAPI-Synths',
+	#category : 'Phausto-Synths',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Synths'
+	#tag : 'Synths'
 }
 
 { #category : 'converting' }
@@ -55,7 +55,7 @@ CombString >> freq: aNumberOrABoxOraASymbol [
 	
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 CombString >> gain [
 
 	^ gain ifNil: [
@@ -67,7 +67,7 @@ CombString >> gain [
 			          step: 0.01 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 CombString >> gain: aNumberOrABoxOraASymbol [
 
 	| methodName |

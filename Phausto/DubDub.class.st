@@ -17,9 +17,9 @@ Class {
 		'q',
 		'gate'
 	],
-	#category : 'Phausto-BoxAPI-Synths',
+	#category : 'Phausto-Synths',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Synths'
+	#tag : 'Synths'
 }
 
 { #category : 'converting' }
@@ -32,7 +32,7 @@ DubDub >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 DubDub >> ctFreq [
 
 	^ freq ifNil: [
@@ -93,8 +93,6 @@ DubDub >> initialize [
 
 { #category : 'accessing' }
 DubDub >> q [
-
-
 
 	^ q ifNil: [
 		  q := PhHSlider new

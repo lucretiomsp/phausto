@@ -10,9 +10,9 @@ Class {
 		'modulator2',
 		'modulator3'
 	],
-	#category : 'Phausto-BoxAPI-Synths',
+	#category : 'Phausto-Synths',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Synths'
+	#tag : 'Synths'
 }
 
 { #category : 'converting' }
