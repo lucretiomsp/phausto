@@ -11,3 +11,21 @@ SynthsTest >> testClapAsBox [
 
 self assert: Clap new asDsp isNull equals: false
 ]
+
+{ #category : 'tests' }
+SynthsTest >> testFm4OpAsBox [
+
+	self assert: Fm4Op new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+SynthsTest >> testHatAsBox [
+
+	self assert: Hat new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+SynthsTest >> testKickAsBox [
+
+	self assert: Kick new asDsp isNull equals: false
+]

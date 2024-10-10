@@ -93,7 +93,7 @@ Clap >> initialize [
 	super initialize.
 	self processExpression: 'process = sy.clap;'.
 
-	attack := 0.005
+	attack := 0
 ]
 
 { #category : 'accessing' }
@@ -102,8 +102,8 @@ Clap >> tone [
 	^ tone ifNil: [
 		  tone := PhHSlider new
 			          label: self label , 'Note'
-			          init: 400
-			          min: 2200
+			          init: 2200
+			          min: 400
 			          max: 3500
 			          step: 1 ]
 ]
