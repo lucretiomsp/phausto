@@ -25,6 +25,12 @@ self assert: FrenchBell  new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testGuitarAsDsp [
+
+	self assert: Guitar new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testMarimbaAsDsp [
 
 	self assert: Marimba new asDsp isNull equals: false

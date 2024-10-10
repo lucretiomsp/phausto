@@ -266,6 +266,14 @@ PhBox >> errorBuffer: anObject [
 	errorBuffer := anObject
 ]
 
+{ #category : 'converting' }
+PhBox >> f2l [
+
+"converts a freq in herts to  length in meters"
+
+^ F2l new freq: self
+]
+
 { #category : 'enumerating' }
 PhBox >> ifNotNullDo: aBlock [
 	"If the receiver is not null, evaluate the block. Otherwise, signal an error."
