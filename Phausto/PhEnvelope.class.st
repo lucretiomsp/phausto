@@ -28,16 +28,6 @@ PhEnvelope >> attack [
 			            step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
-PhEnvelope >> attack: aNumberOrABoxOraAymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraAymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'initialization' }
 PhEnvelope >> initialize [
 
@@ -65,29 +55,8 @@ PhEnvelope >> release [
 ]
 
 { #category : 'accessing' }
-PhEnvelope >> release: aNumberOrABoxOraAymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraAymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
-{ #category : 'accessing' }
 PhEnvelope >> trigger [
 
 	^ trigger  ifNil: [
 		trigger := PhButton new label: self label , 'Gate' ]
-]
-
-{ #category : 'accessing' }
-PhEnvelope >> trigger: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method".
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]

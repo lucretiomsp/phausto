@@ -52,16 +52,6 @@ ModalPercussion >> gain [
 			          step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
-ModalPercussion >> gain: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'initialization' }
 ModalPercussion >> initialize [ 
 super initialize .
@@ -139,14 +129,4 @@ ModalPercussion >> trigger [
 
 	^ trigger ifNil: [
 		  trigger := PhButton new label: self label , 'Trigger' ]
-]
-
-{ #category : 'accessing' }
-ModalPercussion >> trigger:aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]

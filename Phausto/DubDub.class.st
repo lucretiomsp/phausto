@@ -90,25 +90,3 @@ DubDub >> initialize [
 	super initialize.
 	processExpression := 'process = sy.dubDub;'
 ]
-
-{ #category : 'accessing' }
-DubDub >> q [
-
-	^ q ifNil: [
-		  q := PhHSlider new
-			       label: self label , 'Q'
-			       init: 5
-			       min: 2
-			       max: 10
-			       step: 0.01 ]
-]
-
-{ #category : 'accessing' }
-DubDub >> q: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]

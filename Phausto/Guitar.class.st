@@ -38,16 +38,6 @@ Guitar >> gain [
 			            step: 0.01 ]
 ]
 
-{ #category : 'accessing' }
-Guitar >> gain: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'initialization' }
 Guitar >> initialize [
 
@@ -82,14 +72,4 @@ Guitar >> trigger [
 
 	^ trigger ifNil: [
 		  trigger := PhButton new label: self label , 'Trigger' ]
-]
-
-{ #category : 'accessing' }
-Guitar >> trigger: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]

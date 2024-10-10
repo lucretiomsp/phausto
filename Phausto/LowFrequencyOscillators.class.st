@@ -28,16 +28,6 @@ LowFrequencyOscillators >> amount [
 		          step: 1.]
 ]
 
-{ #category : 'accessing' }
-LowFrequencyOscillators >> amount: aNumberOrABoxOraAymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraAymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'converting' }
 LowFrequencyOscillators >> asBox [
 
@@ -68,14 +58,4 @@ LowFrequencyOscillators >> offset [
 		          min: 0
 		          max: 800
 		          step: 0.01. ]
-]
-
-{ #category : 'accessing' }
-LowFrequencyOscillators >> offset: aNumberOrABoxOraAymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraAymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]

@@ -31,13 +31,3 @@ StringInstruments >> length [
 			          max: 1200
 			          step: 1 ]
 ]
-
-{ #category : 'accessing' }
-StringInstruments >> length: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]

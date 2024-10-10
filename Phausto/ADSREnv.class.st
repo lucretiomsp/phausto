@@ -45,16 +45,6 @@ ADSREnv >> decay [
 			           step: 1 ]
 ]
 
-{ #category : 'accessing' }
-ADSREnv >> decay: aNumberOrABoxOraAymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraAymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'initialization' }
 ADSREnv >> initialize [
 
@@ -74,14 +64,4 @@ ADSREnv >> sustain [
 			           min: 0
 			           max: 1
 			           step: 0.001 ]
-]
-
-{ #category : 'accessing' }
-ADSREnv >> sustain: aNumberOrABoxOraAymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraAymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]
