@@ -13,6 +13,12 @@ self assert: Djembe  new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testElecGuitarAsDsp [
+
+	self assert: ElecGuitar new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testF2lAsDsp [
 
 	self assert: F2l new asDsp isNull equals: false

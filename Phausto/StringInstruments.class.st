@@ -7,27 +7,27 @@ Class {
 	#name : 'StringInstruments',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'length'
+		'freq'
 	],
 	#category : 'Phausto-PhysicalModels',
 	#package : 'Phausto',
 	#tag : 'PhysicalModels'
 }
 
+{ #category : 'accessing' }
+StringInstruments >> freq [
+
+	^ freq ifNil: [
+		  freq := PhHSlider new
+			            label: self label , 'Note'
+			            init: 440
+			            min: 20
+			            max: 1200
+			            step: 1 ]
+]
+
 { #category : 'initialization' }
 StringInstruments >> initialize [
 
 	super initialize
-]
-
-{ #category : 'accessing' }
-StringInstruments >> length [
-
-	^ length ifNil: [
-		  length := PhHSlider new
-			          label: self label , 'Note'
-			          init: 440
-			          min: 20
-			          max: 1200
-			          step: 1 ]
 ]

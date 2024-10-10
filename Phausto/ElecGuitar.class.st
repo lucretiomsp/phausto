@@ -2,12 +2,13 @@
 A simple acoustic guitar model with steel strings (based on guitarModel) implementing an excitation model. This model implements a single string. Additional strings should be created by making a polyphonic application out of this function.
 "
 Class {
-	#name : 'Guitar',
+	#name : 'ElecGuitar',
 	#superclass : 'StringInstruments',
 	#instVars : [
 		'pluckPosition',
 		'gain',
-		'trigger'
+		'trigger',
+		'mute'
 	],
 	#category : 'Phausto-PhysicalModels',
 	#package : 'Phausto',
@@ -15,19 +16,19 @@ Class {
 }
 
 { #category : 'converting' }
-Guitar >> asBox [
+ElecGuitar >> asBox [
 
 	| intermediateBox finalBox length |
 	intermediateBox := super asBox.
 	length := self freq f2l.
-	finalBox := length , self pluckPosition , self gain , self trigger
+	finalBox := length , self pluckPosition , self mute asBox , self gain , self trigger
 		            connectTo: intermediateBox.
 
 	^ finalBox
 ]
 
 { #category : 'accessing' }
-Guitar >> gain [
+ElecGuitar >> gain [
 
 	^ gain ifNil: [
 		  gain := PhHSlider new
@@ -39,14 +40,20 @@ Guitar >> gain [
 ]
 
 { #category : 'initialization' }
-Guitar >> initialize [
+ElecGuitar >> initialize [
 
 	super initialize.
-	processExpression := 'process = pm.guitar;'
+	processExpression := 'process = pm.elecGuitar;'.
+	mute := 1 asBox.
 ]
 
 { #category : 'accessing' }
-Guitar >> pluckPosition [
+ElecGuitar >> mute [ 
+^ mute
+]
+
+{ #category : 'accessing' }
+ElecGuitar >> pluckPosition [
 
 	^ pluckPosition ifNil: [
 		  self pluckPosition: (PhHSlider new
@@ -58,7 +65,7 @@ Guitar >> pluckPosition [
 ]
 
 { #category : 'accessing' }
-Guitar >> pluckPosition: aNumberOrABoxOrASymbol [
+ElecGuitar >> pluckPosition: aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"
@@ -68,7 +75,7 @@ Guitar >> pluckPosition: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
-Guitar >> trigger [
+ElecGuitar >> trigger [
 
 	^ trigger ifNil: [
 		  trigger := PhButton new label: self label , 'Trigger' ]
