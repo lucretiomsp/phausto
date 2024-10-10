@@ -25,6 +25,12 @@ UnitGeneratorsTest >> testEmptyUnitGeneratorAsDsp [
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testLFORandomPosAsDsp [
+
+	self assert: LFORandomPos new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testLFOSawPosAsDsp [
 
 	self assert: LFOSawPos  new asDsp isNull equals: false
