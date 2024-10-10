@@ -13,12 +13,18 @@ Class {
 }
 
 { #category : 'converting' }
-Resetter >> asBox [ 
+Resetter >> asBox [
 
-| oneSampleTrig samp|
-samp := (1 / 48000) asFloat.
-oneSampleTrig := (AREnv new attack: samp; release: samp; trigger: self trigger) asBox.
-^ BoxAPI uniqueInstance boxSelect2Aux: oneSampleTrig  input0: Wire new asBox input1: 0 asBox
+	| oneSampleTrig samp |
+	samp := (1 / 48000) asFloat asBox.
+	oneSampleTrig := (AREnv new
+		                  attack: samp;
+		                  release: samp;
+		                  trigger: self trigger) asBox.
+	^ BoxAPI uniqueInstance
+		  boxSelect2Aux: oneSampleTrig
+		  input0: Wire new asBox
+		  input1: 0 asBox
 ]
 
 { #category : 'initialization' }

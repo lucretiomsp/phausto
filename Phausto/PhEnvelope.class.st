@@ -22,9 +22,9 @@ PhEnvelope >> attack [
 	^ attack ifNil: [
 		  attack := PhHSlider new
 			            label: self label , 'Attack'
-			            init: 0.001
-			            min: 0.001
-			            max: 2
+			            init: 0.01
+			            min: 0
+			            max: 4
 			            step: 0.001 ]
 ]
 
