@@ -36,13 +36,13 @@ Pulse >> initialize [
 { #category : 'accessing' }
 Pulse >> period [
 
-	^ period ifNil: [ period :=
-		  PhHSlider new
-			  label: self label , 'Period'
-			  init: 1
-			  min: 0.01
-			  max: 10
-			  step: 0.01 ]
+	^ period ifNil: [
+		  period := PhHSlider new
+			            label: self label , 'Period'
+			            init: 1
+			            min: 0.1
+			            max: 10
+			            step: 0.01 ]
 ]
 
 { #category : 'accessing' }

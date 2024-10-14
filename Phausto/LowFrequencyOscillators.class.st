@@ -23,9 +23,9 @@ LowFrequencyOscillators >> amount [
 	^ amount ifNil: [
 		  amount := PhHSlider new
 			            label: self label , 'Amount'
-			            init: 1
+			            init: 400
 			            min: 0
-			            max: 20000
+			            max: 8000
 			            step: 1 ]
 ]
 

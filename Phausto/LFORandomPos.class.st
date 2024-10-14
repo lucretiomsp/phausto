@@ -18,6 +18,6 @@ LFORandomPos >> asBox [
 		                 trig: (Pulsen new
 				                  length: (1 / 44100) asBox;
 				                  period: (1 asBox / self freq) asBox).
-	finalBox := sampleAndHold absolute + self offset * self amount.
+	finalBox := (sampleAndHold absolute  * self amount) + self offset.
 	^ finalBox
 ]
