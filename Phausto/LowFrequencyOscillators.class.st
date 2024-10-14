@@ -20,12 +20,13 @@ Class {
 { #category : 'accessing' }
 LowFrequencyOscillators >> amount [
 
-	^ amount ifNil: [amount := PhHSlider new
-		          label: self label , 'Amount'
-		          init: 1
-		          min: 0
-		          max: 28000
-		          step: 1.]
+	^ amount ifNil: [
+		  amount := PhHSlider new
+			            label: self label , 'Amount'
+			            init: 1
+			            min: 0
+			            max: 20000
+			            step: 1 ]
 ]
 
 { #category : 'converting' }
@@ -35,6 +36,18 @@ LowFrequencyOscillators >> asBox [
 	intermediateBox := super asBox.
 	finalBox := self freq  connectTo: intermediateBox.
 	^ finalBox * self amount asBox + self offset asBox
+]
+
+{ #category : 'accessing' }
+LowFrequencyOscillators >> freq [
+
+	^ freq ifNil: [
+		  PhHSlider new
+			  label: self label , 'Freq'
+			  init: 2
+			  min: 0.01
+			  max: 20
+			  step: 0.01 ]
 ]
 
 { #category : 'initialization' }
