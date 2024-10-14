@@ -29,7 +29,7 @@ DubDub >> asBox [
 	intermediateBox := super asBox.
 	finalBox := self freq asBox , self ctFreq , self q asBox , self gate asBox
 		            connectTo: intermediateBox.
-	^ finalBox
+	^ finalBox * 0.01 asBox
 ]
 
 { #category : 'as yet unclassified' }
@@ -89,4 +89,26 @@ DubDub >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.dubDub;'
+]
+
+{ #category : 'accessing' }
+DubDub >> q [
+
+	^ freq ifNil: [
+		  freq := PhHSlider new
+			          label: self label , 'Q'
+			          init: 3
+			          min: 1
+			          max: 12
+			          step: 0.1 ]
+]
+
+{ #category : 'accessing' }
+DubDub >> q: aNumberOrABoxOraASymbol [
+
+| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+	aNumberOrABoxOraASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]

@@ -325,27 +325,26 @@ DSP >> destroy [
 DSP >> displayUI [
 	"full UI made with Toplo"
 
-	| container allParams allKnobs containerKnobs sortedKnobs  space |
+	| container allParams allKnobs containerKnobs sortedKnobs space |
 	allParams := self getUIItemsLabeledDictionary.
 	allKnobs := OrderedCollection new.
 	allParams keysAndValuesDo: [ :k :v |
 		allKnobs add: (BlElement new fromDictionary: v forDsp: self) ].
 	sortedKnobs := allKnobs asSortedCollection: [ :a :b |
-    a inputText asLowercase < b inputText asLowercase
-].
+		               a inputText asLowercase < b inputText asLowercase ].
 
 	containerKnobs := BlElement new
 		                  geometry: BlRectangleGeometry new;
-		                  extent: 1400 @ 550;
+		                  extent: 1400 @ 750;
 		                  layout: (BlGridLayout new
-				                   columnCount: 6;
+				                   columnCount: 8;
 				                   cellSpacing: 0);
 		                  constraintsDo: [ :c |
 			                  c horizontal matchParent
 			                  "c vertical matchParent " ];
-		                  background: Color darkGray.
+		                  background: Color black.
 	container := BlElement new
-		             extent: 1200 @ 800;
+		             extent: 1400 @ 800;
 		             layout: BlLinearLayout new beVertical;
 		             background: Color darkGray.
 

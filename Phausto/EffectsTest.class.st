@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+EffectsTest >> testPannerAsDsp [
+
+	self assert: Panner new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testSineOscAsDsp [
 
 	self assert: PhClip new asDsp isNull equals: false

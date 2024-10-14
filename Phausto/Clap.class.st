@@ -28,9 +28,9 @@ Clap >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self tone asBox , self attack asBox , self decay asBox , self gate asBox
-		            connectTo: intermediateBox.
-	^ finalBox
+	finalBox := self tone asBox , self attack asBox , self decay asBox
+	            , self gate asBox connectTo: intermediateBox.
+	^ finalBox * 0.2 asBox
 ]
 
 { #category : 'accessing' }

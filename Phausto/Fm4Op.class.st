@@ -35,7 +35,7 @@ Fm4Op >> initializeOscillators [
 
 	| carrierFreq freqValues indexValues modulator2Freq modulator1Freq indexSliders |
 	freqValues := #( 50 1 900 1 ).
-	indexValues := #( 0 0 200 0.01 ).
+	indexValues := #( 0 0 400 0.01 ).
 	indexSliders := #( 'Mod3Index' 'Mod2Index' 'Mod1Index' ) collect: [
 		                :l | PhHSlider new label: l values: indexValues ].
     
