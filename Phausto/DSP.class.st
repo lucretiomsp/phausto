@@ -473,13 +473,23 @@ DSP >> getParamValueIndex: anInteger [
 				  #( float getParamValueDsp #( DSP * self , int anInteger ) )
 ]
 
-{ #category : 'accessing' }
+{ #category : 'ui-building' }
+DSP >> getUIButtons [
+
+| uiElements buttons|
+
+uiElements := self getUIItemsLabeledDictionary .
+buttons := uiElements select: [ :i | (i at: #type) = 'button' ].
+^ buttons
+]
+
+{ #category : 'ui-building' }
 DSP >> getUIItems [
 
 	^ self getUIfromJSON at: #items
 ]
 
-{ #category : 'accessing' }
+{ #category : 'ui-building' }
 DSP >> getUIItemsLabeledDictionary [
 
 "returns a Dictionary with the UI items whose keys are the items labels"
@@ -489,7 +499,17 @@ self  getUIItems do: [ :i | itemsDictionary at: (i at: 'label') put: i].
 ^ itemsDictionary 
 ]
 
-{ #category : 'accessing' }
+{ #category : 'ui-building' }
+DSP >> getUIKnobs [
+
+| uiElements knobs|
+
+uiElements := self getUIItemsLabeledDictionary .
+knobs := uiElements select: [ :i | (i at: #type) = 'hslider' ].
+^ knobs
+]
+
+{ #category : 'ui-building' }
 DSP >> getUIfromJSON [
 
 ^ ((STONJSON fromString: (self getJSON)) at: #ui) at: 1

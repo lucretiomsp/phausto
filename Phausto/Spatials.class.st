@@ -42,3 +42,9 @@ Spatials >> pan: anObject [
 
 	pan := anObject
 ]
+
+{ #category : 'connecting' }
+Spatials >> patchedWith: aPhBox [
+
+self input: aPhBox
+]
