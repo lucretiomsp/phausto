@@ -48,13 +48,7 @@ TpSynth >> decay: aTimeInSeconds [
 { #category : 'accessing' }
 TpSynth >> gate [
 
-	^ gate
-]
-
-{ #category : 'accessing' }
-TpSynth >> gate: aGate [
-
-	gate := aGate asBox
+	^ gate ifNil: [ gate := PhButton new label: self name, 'Gate' ]
 ]
 
 { #category : 'initialization' }
@@ -67,20 +61,9 @@ TpSynth >> initialize [
 		attack: 0.001;
 		decay: 0.2;
 		sustain: 0.5;
-		release: 0.1;
-		gate: (PhHSlider new
-				 label: self name , 'Gate'
-				 init: 0
-				 min: 0
-				 max: 1
-				 step: 1).
+		release: 0.1.
+		
 	self level: 0.5.
-	self pitch: (PhHSlider new
-			 label: self name , 'Note'
-			 init: 440
-			 min: 10
-			 max: 4000
-			 step: 0.1)
 ]
 
 { #category : 'accessing' }

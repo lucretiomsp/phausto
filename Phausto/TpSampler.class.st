@@ -94,7 +94,12 @@ TpSampler >> debugPath: anObject [
 { #category : 'accessing' }
 TpSampler >> index [
 
-	^ index
+	^ index ifNil: [ index := (PhHSlider new
+			 label: self name , 'Index'
+			 init: 0
+			 min: 0
+			 max: 16
+			 step: 1). ]
 ]
 
 { #category : 'accessing' }
@@ -109,18 +114,8 @@ TpSampler >> initialize [
 	super initialize.
 	self pathToFolder:
 		FileLocator documents asAbsolute pathString , '/MoofLodSamples'.
-	self index: (PhHSlider new
-			 label: self name , 'Index'
-			 init: 0
-			 min: 0
-			 max: 16
-			 step: 1).
-	self pitch: (PhHSlider new
-			 label: self name , 'Note'
-			 init: 261.625
-			 min: 10
-			 max: 4000
-			 step: 0.1)
+
+
 ]
 
 { #category : 'accessing' }
@@ -169,6 +164,17 @@ TpSampler >> pathToFolder [
 TpSampler >> pathToFolder: aString [
 
 	pathToFolder := aString
+]
+
+{ #category : 'accessing' }
+TpSampler >> pitch [ 
+
+	^ pitch ifNil: [ pitch :=  (PhHSlider new
+			 label: self name , 'Note'
+			 init: 261.625
+			 min: 10
+			 max: 4000
+			 step: 0.1) ]
 ]
 
 { #category : 'printing' }
