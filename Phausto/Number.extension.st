@@ -23,3 +23,12 @@ Number >> asParam: aString forUGen: aUnitGenerator [
 		        ifTrue: [ self freq init: aNumberOrABox ]
 		        ifFalse: [ aNumberOrABox ]"
 ]
+
+{ #category : '*Phausto' }
+Number >> midiNoteToFreq [
+	"Convert Midi note number to frequency"
+
+	| baseFreq |
+	baseFreq := 440.0. "Standard tuning frequency for A4"
+	^ (baseFreq * (2 raisedTo: self - 69 / 12.0)) asFloat
+]
