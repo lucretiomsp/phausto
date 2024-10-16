@@ -371,7 +371,7 @@ PhBox >> par: aBox with: anotherBox [
 PhBox >> patchedWith: aBox [
 
 	^ Error new signal:
-		  'You cannnot connect a' , aBox className asString , ' with a '
+		  'You cannnot connect a ' , aBox className asString , ' with a '
 		  , self className asString
 ]
 
