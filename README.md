@@ -3,7 +3,7 @@ Phausto is a library and API that allows to use the [FAUST](https://faust.grame.
 
 ## How to install
 
-#### First, download the Phausto libraries for your platform, open the package, and place the librariesBundle folder into documents/Pharo/images/yourPhaustimage/
+#### First, download the Phausto libraries for your platform, open the dmg/zip file, and place the librariesBundle folder into documents/Pharo/images/yourPhaustimage/
 Then, copy and execute in a Playground
 ```Smalltalk
 Metacello new
