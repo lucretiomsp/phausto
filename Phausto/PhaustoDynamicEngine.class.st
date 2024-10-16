@@ -143,3 +143,12 @@ PhaustoDynamicEngine >> macLibraryName [
 	^ FFIMacLibraryFinder findLibrary:
 		  'librariesBundle/libdynamic-engine.dylib'
 ]
+
+{ #category : 'accessing - platform' }
+PhaustoDynamicEngine >> win32LibraryName [
+	
+	LibFaust ensurePathInDLLSearch.
+	
+	^ FFIWindowsLibraryFinder new
+		findLibrary: 'libdynamic-engine.dll'
+]

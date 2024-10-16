@@ -372,3 +372,12 @@ BoxAPI >> multiply: aBox with: anotherBox [
 	^ BoxAPI uniqueInstance ffiCall:
 		  #( #PhBox * CboxMulAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
+
+{ #category : 'accessing - platform' }
+BoxAPI >> win32LibraryName [
+	
+	LibFaust ensurePathInDLLSearch.
+	
+	^ FFIWindowsLibraryFinder new
+		findLibrary: 'libfaust.dll'
+]
