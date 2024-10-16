@@ -25,8 +25,8 @@ Number >> asParam: aString forUGen: aUnitGenerator [
 ]
 
 { #category : '*Phausto' }
-Number >> midiNoteToFreq [
-	"Convert Midi note number to frequency"
+Number >> midiNNToFreq [
+	"This method is a copy of midiNoteToFreq in Coypu package"
 
 	| baseFreq |
 	baseFreq := 440.0. "Standard tuning frequency for A4"
