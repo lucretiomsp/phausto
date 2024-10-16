@@ -9,6 +9,18 @@ Class {
 	#tag : 'DynamicEngine'
 }
 
+{ #category : 'library path' }
+LibFaust class >> ensurePathInDLLSearch [
+
+	| currentPath librariesBundlePath |
+
+	currentPath := OSPlatform current environment at: 'PATH'.
+	librariesBundlePath := (FileLocator image parent / 'librariesBundle') resolve fullName.
+	(currentPath includesSubstring: librariesBundlePath) ifTrue: [ ^self ].
+	OSPlatform current environment at: 'PATH' put: librariesBundlePath , ';', currentPath .	
+
+]
+
 { #category : 'as yet unclassified' }
 LibFaust >> createCMajorFileFromString: aString [
 |errorBuffer|
