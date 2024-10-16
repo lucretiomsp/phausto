@@ -92,7 +92,13 @@ TpSynth >> name: aName [
 { #category : 'accessing' }
 TpSynth >> pitch [
 
-	^ pitch
+
+	^ pitch ifNil: [   PhHSlider new
+		        label: self label , 'Freq'
+		        init: 440
+		        min: 20
+		        max: 4086
+		        step: 1 ]
 ]
 
 { #category : 'accessing' }
