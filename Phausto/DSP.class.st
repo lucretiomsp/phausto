@@ -254,12 +254,6 @@ index := self getParamIndex: aString.
 
 ]
 
-{ #category : 'as yet unclassified' }
-DSP >> connectToOSCServerOnPort: aPort [
-"should we check for all children???"
-(self displayedUI children at: 1) connectToOSCServer listenOnPort: aPort
-]
-
 { #category : 'converting' }
 DSP >> createCmajorMIDIPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
