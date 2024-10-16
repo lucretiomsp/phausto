@@ -191,6 +191,7 @@ DSP class >> initializedDSP: anObject [
 { #category : 'as yet unclassified' }
 DSP class >> invalidException [
 
+Performance uniqueInstance stop.
 ^ Error new signal: ('This DSP is not valid - check its creation'  , PhaustoDynamicEngine uniqueInstance getLastError )
 ]
 

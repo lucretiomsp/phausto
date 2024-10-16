@@ -36,7 +36,7 @@ TpSampler >> asBox [
 	fileNames do: [ :f | f traceCr ].
 	allFilePaths := ''.
 	fileNames do: [ :i | allFilePaths := allFilePaths , i , ';' ].
-	filePathPrefix := '"son[url:{'.
+	filePathPrefix := '"' , self name, '[url:{'.
 	filePathSuffix := '}]"'.
 	allFilesPathsWithoutLastColumn := allFilePaths
 		                                  copyFrom: 1
