@@ -94,7 +94,7 @@ TpSynth >> pitch [
 
 
 	^ pitch ifNil: [   PhHSlider new
-		        label: self label , 'Freq'
+		        label: self label , 'Note'
 		        init: 440
 		        min: 20
 		        max: 4086

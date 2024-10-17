@@ -7,7 +7,7 @@ I can be chromatically played using MIDI NOte Numbers, where 60 plays at my defu
 PhSampler (at the moment) is always mono even if files are stereo. You need to send it the stereo message to make it stereo. 
 "
 Class {
-	#name : 'TpSampler',
+	#name : 'TpSamplerReverb',
 	#superclass : 'TpSynth',
 	#instVars : [
 		'pathToFile',
@@ -24,7 +24,7 @@ Class {
 }
 
 { #category : 'converting' }
-TpSampler >> asBox [
+TpSamplerReverb >> asBox [
 
 	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler effect |
 	allFiles := pathToFolder asFileReference allChildren.
@@ -58,36 +58,41 @@ TpSampler >> asBox [
 	output := Cut new asBox , Cut new asBox , Cut new asBox
 	          , Wire new asBox.
 	sampler := sp connectTo: output asBox.
-
-	^ ((sampler asBox * self level )) asBox
+	effect := GreyHoleDW new dryWet: (PhHSlider new
+			           label: self label , 'Effect'
+			           init: 0.1
+			           min: 0
+			           max: 1
+			           step: 0.001).
+	^ ((sampler asBox * self level )=> effect ) asBox
 ]
 
 { #category : 'accessing' }
-TpSampler >> attachedBox [
+TpSamplerReverb >> attachedBox [
 
 	^ attachedBox
 ]
 
 { #category : 'accessing' }
-TpSampler >> attachedBox: anObject [
+TpSamplerReverb >> attachedBox: anObject [
 
 	attachedBox := anObject
 ]
 
 { #category : 'accessing' }
-TpSampler >> debugPath [
+TpSamplerReverb >> debugPath [
 
 	^ debugPath
 ]
 
 { #category : 'accessing' }
-TpSampler >> debugPath: anObject [
+TpSamplerReverb >> debugPath: anObject [
 
 	debugPath := anObject
 ]
 
 { #category : 'accessing' }
-TpSampler >> index [
+TpSamplerReverb >> index [
 
 	^ index ifNil: [ index := (PhHSlider new
 			 label: self name , 'Index'
@@ -98,13 +103,13 @@ TpSampler >> index [
 ]
 
 { #category : 'accessing' }
-TpSampler >> index: aSampleIndex [
+TpSamplerReverb >> index: aSampleIndex [
 
 	index := aSampleIndex asBox
 ]
 
 { #category : 'initialization' }
-TpSampler >> initialize [
+TpSamplerReverb >> initialize [
 
 	super initialize.
 	self pathToFolder:
@@ -114,55 +119,55 @@ TpSampler >> initialize [
 ]
 
 { #category : 'accessing' }
-TpSampler >> name [
+TpSamplerReverb >> name [
 
 	^ name
 ]
 
 { #category : 'accessing' }
-TpSampler >> name: aString [
+TpSamplerReverb >> name: aString [
 
 	name := aString
 ]
 
 { #category : 'accessing' }
-TpSampler >> numChannels [
+TpSamplerReverb >> numChannels [
 
 	^ numChannels
 ]
 
 { #category : 'accessing' }
-TpSampler >> numChannels: aNumOfChannels [
+TpSamplerReverb >> numChannels: aNumOfChannels [
 
 	numChannels := aNumOfChannels asBox
 ]
 
 { #category : 'accessing' }
-TpSampler >> pathToFile [
+TpSamplerReverb >> pathToFile [
 
 	^ pathToFile
 ]
 
 { #category : 'accessing' }
-TpSampler >> pathToFile: aString [
+TpSamplerReverb >> pathToFile: aString [
 
 	pathToFile := aString 
 ]
 
 { #category : 'accessing' }
-TpSampler >> pathToFolder [
+TpSamplerReverb >> pathToFolder [
 
 	^ pathToFolder 
 ]
 
 { #category : 'accessing' }
-TpSampler >> pathToFolder: aString [
+TpSamplerReverb >> pathToFolder: aString [
 
 	pathToFolder := aString
 ]
 
 { #category : 'accessing' }
-TpSampler >> pitch [ 
+TpSamplerReverb >> pitch [ 
 
 	^ pitch ifNil: [ pitch :=  (PhHSlider new
 			 label: self name , 'Note'
@@ -173,20 +178,20 @@ TpSampler >> pitch [
 ]
 
 { #category : 'printing' }
-TpSampler >> printOn: aStream [
+TpSamplerReverb >> printOn: aStream [
 
 "check what was the problem of this method in the superclass"
 	^ aStream << 'I am the Tp Sampler'
 ]
 
 { #category : 'accessing' }
-TpSampler >> readIndex [
+TpSamplerReverb >> readIndex [
 
 	^ readIndex
 ]
 
 { #category : 'accessing' }
-TpSampler >> readIndex: aReadIndex [
+TpSamplerReverb >> readIndex: aReadIndex [
 
 	readIndex := aReadIndex asBox
 ]
