@@ -36,8 +36,8 @@ TpSampler >> asBox [
 	fileNames do: [ :f | f traceCr ].
 	allFilePaths := ''.
 	fileNames do: [ :i | allFilePaths := allFilePaths , i , ';' ].
-	filePathPrefix := '"' , self name, '[url:{'.
-	filePathSuffix := '}]"'.
+	filePathPrefix := '' , self name, '[url:{'.
+	filePathSuffix := '}]'.
 	allFilesPathsWithoutLastColumn := allFilePaths
 		                                  copyFrom: 1
 		                                  to: allFilePaths size - 1.
@@ -170,13 +170,6 @@ TpSampler >> pitch [
 			 min: 10
 			 max: 4000
 			 step: 0.1) ]
-]
-
-{ #category : 'printing' }
-TpSampler >> printOn: aStream [
-
-"check what was the problem of this method in the superclass"
-	^ aStream << 'I am the Tp Sampler'
 ]
 
 { #category : 'accessing' }

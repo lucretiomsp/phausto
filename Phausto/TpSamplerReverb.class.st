@@ -177,7 +177,7 @@ TpSamplerReverb >> pitch [
 			 step: 0.1) ]
 ]
 
-{ #category : 'printing' }
+{ #category : 'as yet unclassified' }
 TpSamplerReverb >> printOn: aStream [
 
 "check what was the problem of this method in the superclass"
