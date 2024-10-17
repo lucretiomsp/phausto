@@ -193,7 +193,7 @@ KeyboardToPhausto >> keyDown: anEvent [
 key := (self keyAsMIDINoteNumber: anEvent) .
 "key = 60 ifTrue: [ self color: Color yellow ]."
 " if the key pressed corresponds to a MIDI note"
-((key ~= -1) & isHandlingKeyDown) ifTrue: [  self dsp setValue:  key + (octave * 12) midiNoteToFreq  parameter: noteDestination . 
+((key ~= -1) & isHandlingKeyDown) ifTrue: [  self dsp setValue:  key + (octave * 12) midiNNToFreq  parameter: noteDestination . 
 	self dsp setValue:  1  parameter: gateDestination .] 
 ifFalse:[nil]
 ]
