@@ -1,16 +1,10 @@
-# phausto
+# Phausto
 Phausto is a library and API that allows to use the [FAUST](https://faust.grame.fr/) compiler and its libraries  (Functional Audio Stream) inside [Pharo](https://pharo.org/)
 
 ## How to install
 
-#### First, download the Phausto libraries for your platform, open the dmg/zip file, and place the librariesBundle folder into documents/Pharo/images/yourPhaustimage/
-Then, copy and execute in a Playground
-```Smalltalk
-Metacello new
-    baseline: 'Phausto';
-    repository: 'github://lucretiomsp/phausto:main';
-    load
-```
+Follow the instructions in the [wiki](https://github.com/lucretiomsp/phausto/wiki).
+
 
 ## Create a DSP from a valid string of FAUST code
 
