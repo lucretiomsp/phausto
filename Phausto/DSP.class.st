@@ -258,12 +258,6 @@ index := self getParamIndex: aString.
 
 ]
 
-{ #category : 'as yet unclassified' }
-DSP >> connectToOSCServerOnPort: aPort [
-"should we check for all children???"
-(self displayedUI children at: 1) connectToOSCServer listenOnPort: aPort
-]
-
 { #category : 'converting' }
 DSP >> createCmajorMIDIPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
@@ -323,60 +317,6 @@ DSP >> destroy [
 					"return a null pointer"
 					DSP initializedDSP: DSP new.
 					'SONO ARRIVATO FINO ALLA FINE' traceCr ] ]
-]
-
-{ #category : 'ui-building' }
-DSP >> displayUI [
-	"full UI made with Toplo"
-
-	| container allParams allKnobs containerKnobs sortedKnobs space |
-	allParams := self getUIItemsLabeledDictionary.
-	allKnobs := OrderedCollection new.
-	allParams keysAndValuesDo: [ :k :v |
-		allKnobs add: (BlElement new fromDictionary: v forDsp: self) ].
-	sortedKnobs := allKnobs asSortedCollection: [ :a :b |
-		               a inputText asLowercase < b inputText asLowercase ].
-
-	containerKnobs := BlElement new
-		                  geometry: BlRectangleGeometry new;
-		                  extent: 1400 @ 750;
-		                  layout: (BlGridLayout new
-				                   columnCount: 8;
-				                   cellSpacing: 0);
-		                  constraintsDo: [ :c |
-			                  c horizontal matchParent
-			                  "c vertical matchParent " ];
-		                  background: Color black.
-	container := BlElement new
-		             extent: 1400 @ 800;
-		             layout: BlLinearLayout new beVertical;
-		             background: Color darkGray.
-
-	containerKnobs addChildren: sortedKnobs.
-
-	container addChild: containerKnobs.
-	self requirePianoKeyboard ifTrue: [
-		containerKnobs removeGateAndFreqElement.
-		container addChild: (ICPianoKeyboardElement newForDsp: self) ].
-	"we can later access the container if we need"
-	displayedUI := container.
-
-	space := BlSpace new extent: 1400 @ 800.
-	space root addChild: container.
-	space show.
-	^ space
-]
-
-{ #category : 'accessing' }
-DSP >> displayedUI [
-
-	^ displayedUI
-]
-
-{ #category : 'accessing' }
-DSP >> displayedUI: aBlElement [
-
-	displayedUI := aBlElement
 ]
 
 { #category : 'accessing' }
@@ -613,7 +553,7 @@ DSP >> play [
 DSP >> playNote: aMidiNN prefix: aString dur: aDuration [
 	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
 	
-self setValue:  aMidiNN midiNoteToFreq   parameter: aString , 'Note'.
+self setValue:  aMidiNN midiNNToFreq   parameter: aString , 'Note'.
 self trig: aString , 'Gate' for: aDuration  
 ]
 
