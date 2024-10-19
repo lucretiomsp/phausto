@@ -188,11 +188,14 @@ DSP class >> initializedDSP: anObject [
 	initializedDSP := anObject
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'exceptions' }
 DSP class >> invalidException [
 
-Performance uniqueInstance stop.
-^ Error new signal: ('This DSP is not valid - check its creation'  , PhaustoDynamicEngine uniqueInstance getLastError )
+	Smalltalk
+		at: #Performance
+		ifPresent: [ :performance | performance uniqueInstance stop ].
+	^ Error new signal: 'This DSP is not valid - check its creation'
+		  , PhaustoDynamicEngine uniqueInstance getLastError
 ]
 
 { #category : 'as yet unclassified' }
