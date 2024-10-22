@@ -223,8 +223,7 @@ DSP >> allParameters [
 		ifTrue: [
 			0 to: (self getParamCount - 1) do: [ :i |
 				params add:
-					((self getParamAddress: i) reverse copyUpToSubstring: '/')
-						reverse ].
+					((self getParamAddress: i) copyAfterLast: $/) ].
 			^ params ]
 		ifFalse: [ Error new signal: 'This DSP is not initialized' ]
 ]
@@ -249,14 +248,14 @@ DSP >> asCmajorPolyWrapperFor: aName [
 
 { #category : 'ui-building' }
 DSP >> buttonFor: aString [
-" creates a new slider for the parameter named aString"
-| index |
+	" creates a new slider for the parameter named aString"
 
-index := self getParamIndex: aString.
-"the parameter must exist!!"
-(index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , aString , ' does not exist!!' ] ifFalse: [^ PhButton  new  label: aString; dsp: self ]
-
-
+	self parameters at: aString ifAbsent: [ "the parameter must exist!!"
+		^ Error new signal:
+			  'Parameter named ' , aString , ' does not exist!!' ].
+	^ PhButton new
+		  label: aString;
+		  dsp: self
 ]
 
 { #category : 'converting' }
@@ -367,13 +366,9 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 
 { #category : 'accessing' }
 DSP >> getParamIndex: aString [
+	"get the index of the parameter with aString name"
 
-	self isNull
-		ifTrue: [ self class invalidException ]
-		ifFalse: [ "self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]"
-			^ self getParamIndexWithName: '/' , self name , '/' , aString ]
-	" get the index of the parameter with aString name"
+	^ self parameters at: aString ifAbsent: [ -1 ]
 ]
 
 { #category : 'accessing' }
@@ -403,12 +398,12 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 { #category : 'API - accessing' }
 DSP >> getParamValue: aParamAsString [
 
-	| indexInteger |
-	indexInteger := self getParamIndex: aParamAsString.
-	self isNull
-		ifTrue: [ ^ self class invalidException ]
-		ifFalse: [ "ask the value for the parameter with the indexInteger"
-			^ self getParamValueIndex: indexInteger ]
+	self isNull ifTrue: [ self class invalidException ].
+	^ self parameters
+		  at: aParamAsString
+		  ifPresent: [ :index | "ask the value for the parameter with the indexInteger"
+			  self getParamValueIndex: index ]
+		  ifAbsent: [ self class paramException ]
 ]
 
 { #category : 'API - accessing' }
@@ -536,12 +531,14 @@ fader openInWindow.
 { #category : 'accessing' }
 DSP >> parameters [
 
-| paramsDictionary paramIndex |
-
-paramsDictionary := Dictionary new.
-paramIndex := 0.
-self allParameters do: [ :p | paramsDictionary at: p put: paramIndex. paramIndex := paramIndex + 1 ].
-^ paramsDictionary 
+	^ parameters ifNil: [
+		  | paramIndex |
+		  parameters := Dictionary new.
+		  paramIndex := 0.
+		  self allParameters do: [ :p |
+			  parameters at: p put: paramIndex.
+			  paramIndex := paramIndex + 1 ].
+		  parameters ]
 ]
 
 { #category : 'playing' }
@@ -582,14 +579,12 @@ DSP >> requirePianoKeyboard [
 DSP >> setValue: aFloat parameter: aParamAsString [
 	"  set the value of the parameter named aParamAsString"
 
-
 	self isNull
 		ifTrue: [ ^ self class invalidException ]
 		ifFalse: [
-			
-					self setValue: aFloat parameterIndex: (self parameters at: aParamAsString ).
-					]
-			
+			self parameters
+				at: aParamAsString
+				ifPresent: [ :index | self setValue: aFloat parameterIndex: index ] ]
 ]
 
 { #category : 'API - changes' }
@@ -603,14 +598,14 @@ PhaustoDynamicEngine uniqueInstance  ffiCall:  #(void setParamValueDsp(DSP* self
 
 { #category : 'ui-building' }
 DSP >> sliderFor: aString [
-" creates a new slider for the parameter named aString"
-| index |
+	" creates a new slider for the parameter named aString"
 
-index := self getParamIndex: aString.
-"the parameter must exist!!"
-(index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , aString , ' does not exist!!' ] ifFalse: [^ PhGUISlider   newWithIndex: index forDSP: self  ]
-
-
+	^ self parameters
+		  at: aString
+		  ifPresent: [ :index |
+			  PhGUISlider newWithIndex: index forDSP: self ]
+		  ifAbsent: [
+			  Error signal: 'Parameter named ' , aString , ' does not exist!!' ]
 ]
 
 { #category : 'start-stop' }
@@ -619,7 +614,6 @@ DSP >> start [
 
 	self isInitialized ifNil: [ ^ self class uninitializedException  ]
 		ifNotNil: [
-			parameters := self allParameters .
 			PhaustoDynamicEngine dspPlaying: self.
 			^ PhaustoDynamicEngine uniqueInstance ffiCall:
 				  #( bool startDsp #( DSP * self ) ) ]
@@ -682,12 +676,14 @@ DSP >> traceAllParams [
 
 { #category : 'API - changes' }
 DSP >> trig: aString [
-"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
+	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
 
-" parameter must exist"
-(self getParamIndex: aString) = -1 ifTrue: [  ^ self class paramException ] 
-ifFalse: [   
-[  self setValue: 1 parameter: aString. 10 milliSeconds wait. self setValue: 0 parameter: aString.  ] forkAt: 70.]
+	" parameter must exist"
+	self parameters at: aString ifAbsent: [ ^ self class paramException ].
+	[
+	self setValue: 1 parameter: aString.
+	10 milliSeconds wait.
+	self setValue: 0 parameter: aString ] forkAt: 70
 ]
 
 { #category : 'API - changes' }
@@ -696,11 +692,9 @@ DSP >> trig: aString for: aDurationInSeconds [
 
 	" parameter must exist"
 
-	(self getParamIndex: aString) = -1
-		ifTrue: [ ^ self class paramException ]
-		ifFalse: [
-			[
-			self setValue: 1 parameter: aString.
-			aDurationInSeconds  wait.
-			self setValue: 0 parameter: aString ] forkAt: 70 ]
+	self parameters at: aString ifAbsent: [ ^ self class paramException ].
+	[
+	self setValue: 1 parameter: aString.
+	aDurationInSeconds wait.
+	self setValue: 0 parameter: aString ] forkAt: 70
 ]
