@@ -71,7 +71,7 @@ DsDMTFTones >> initialize [
 | tone1 tone2 btn adsr|
 tone1 := SineOsc new label: 'Tone1'.
 tone2 := SineOsc new label: 'Tone2'.
-adsr := ADSREnv new label: 'KADSR'; decay: 0.2 ; sustain: 0; release: 0; trigger: (PhButton new label: 'TKey').
+adsr := ADSREnv new label: 'KADSR'; decay: 0.2 ; sustain: 0.001; release: 0.001; trigger: (PhButton new label: 'TKey').
 
 ^ (tone1 + tone2) * adsr
 ]
