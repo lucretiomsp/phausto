@@ -82,9 +82,33 @@ UnitGenerator class >> withlabel: aString [
 ]
 
 { #category : 'arithmetic' }
+UnitGenerator >> * aUnitGenerator [
+
+^ self asBox * aUnitGenerator 
+]
+
+{ #category : 'arithmetic' }
 UnitGenerator >> + aUnitGenerator [
 
 ^ self asBox + aUnitGenerator 
+]
+
+{ #category : 'arithmetic' }
+UnitGenerator >> , aUnitGenerator [
+
+^ self asBox , aUnitGenerator 
+]
+
+{ #category : 'arithmetic' }
+UnitGenerator >> - aUnitGenerator [
+
+^ self asBox - aUnitGenerator 
+]
+
+{ #category : 'arithmetic' }
+UnitGenerator >> / aUnitGenerator [
+
+^ self asBox / aUnitGenerator 
 ]
 
 { #category : 'converting' }

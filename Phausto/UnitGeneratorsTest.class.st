@@ -19,6 +19,12 @@ UnitGeneratorsTest >> testASREnvAsDsp [
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testDivideUGens [
+
+self assert: (SineOsc new / SquareOsc new) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testEmptyUnitGeneratorAsDsp [
 
 	self assert: UnitGenerator  new asDsp isNull equals: false
@@ -61,6 +67,12 @@ UnitGeneratorsTest >> testLFOTriPosAsDsp [
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testMultiplyUGens [
+
+self assert: (SineOsc new * SquareOsc new) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testNoUnitGeneratorsatStartup [
 
 	self assert: UnitGenerator instancesInDSPContext equals: 0.
@@ -73,6 +85,12 @@ UnitGeneratorsTest >> testNoUnitGeneratorsatStartup [
 UnitGeneratorsTest >> testNoiseAsDsp [
 
 	self assert: Noise new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testParallelUGens [
+
+self assert: (SineOsc new , SquareOsc new) asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -106,6 +124,18 @@ UnitGeneratorsTest >> testSineOscAsDsp [
 UnitGeneratorsTest >> testSquareOscAsDsp [
 
 	self assert: SquareOsc new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testSubtractUGens [
+
+self assert: (SineOsc new - SquareOsc new) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testSumUGens [
+
+self assert: (SineOsc new + SquareOsc new) asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
