@@ -111,6 +111,12 @@ UnitGenerator >> / aUnitGenerator [
 ^ self asBox / aUnitGenerator 
 ]
 
+{ #category : 'arithmetic' }
+UnitGenerator >> absolute [
+
+^ self asBox absolute 
+]
+
 { #category : 'converting' }
 UnitGenerator >> asBox [
 
