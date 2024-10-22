@@ -21,7 +21,8 @@ Class {
 		'name',
 		'isInitialized',
 		'generatedCode',
-		'displayedUI'
+		'displayedUI',
+		'parameters'
 	],
 	#classVars : [
 		'defaultName',
@@ -212,7 +213,7 @@ DSP class >> uninitializedException [
 		  , PhaustoDynamicEngine uniqueInstance getLastError
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> allParameters [
 	"show in transcript alla vailable parameters for this DSP"
 
@@ -331,20 +332,20 @@ DSP >> generatedCode: aString [
 	generatedCode := aString
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> getJSON [
 " Retrieve JSON description of the UI"
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
 ^ PhaustoDynamicEngine uniqueInstance  ffiCall: #(const char* getJSONDsp (DSP* self))]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> getNumInput [
 " Get the number of input ports."
 ^ PhaustoDynamicEngine uniqueInstance ffiCall: #( int getNumInputsDsp(DSP* self))
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> getNumOutput [
 " Get the number of output ports."
 ^ PhaustoDynamicEngine uniqueInstance ffiCall: #( int #getNumOutput(DSP* self))
@@ -357,7 +358,7 @@ self isNull ifTrue: [  self class invalidException  ] ifFalse: [
 ^ PhaustoDynamicEngine  uniqueInstance ffiCall: #( char* getParamAddressDsp(DSP* self, int anIntegerAddress ))]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> getParamCount [
 "  Get the count of parameters in the DSP object"
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
@@ -383,7 +384,7 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 ^ PhaustoDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> getParamMax: anIndex [.
 " get the maximum of the parameter at anIndex"
 
@@ -391,7 +392,7 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 ^ PhaustoDynamicEngine uniqueInstance  ffiCall:  #(float getParamMaxDsp(DSP* self, int anIndex))]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> getParamMin: anIndex [.
 " get the minimum of the parameter at anIndex"
 
@@ -399,7 +400,7 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 ^ PhaustoDynamicEngine uniqueInstance  ffiCall:  #(float getParamMinDsp(DSP* self, int anIndex))]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> getParamValue: aParamAsString [
 
 	| indexInteger |
@@ -410,7 +411,7 @@ DSP >> getParamValue: aParamAsString [
 			^ self getParamValueIndex: indexInteger ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> getParamValueIndex: anInteger [
 
 	^  PhaustoDynamicEngine uniqueInstance ffiCall:
@@ -532,6 +533,17 @@ fader := self sliderFor: aString.
 fader openInWindow.
 ]
 
+{ #category : 'accessing' }
+DSP >> parameters [
+
+| paramsDictionary paramIndex |
+
+paramsDictionary := Dictionary new.
+paramIndex := 0.
+self allParameters do: [ :p | paramsDictionary at: p put: paramIndex. paramIndex := paramIndex + 1 ].
+^ paramsDictionary 
+]
+
 { #category : 'playing' }
 DSP >> play [
 	"if only a DSP is meant to be used, this method do both initialization and start. in addition, it stop and destroy any dspPlaying to avoid crashes"
@@ -549,7 +561,7 @@ DSP >> play [
 			]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - changes' }
 DSP >> playNote: aMidiNN prefix: aString dur: aDuration [
 	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
 	
@@ -570,16 +582,14 @@ DSP >> requirePianoKeyboard [
 DSP >> setValue: aFloat parameter: aParamAsString [
 	"  set the value of the parameter named aParamAsString"
 
-	| indexInteger |
+
 	self isNull
 		ifTrue: [ ^ self class invalidException ]
 		ifFalse: [
-			indexInteger := self getParamIndex: aParamAsString.
-			indexInteger ~= -1
-				ifTrue: [
-					self setValue: aFloat parameterIndex: indexInteger.
+			
+					self setValue: aFloat parameterIndex: (self parameters at: aParamAsString ).
 					]
-				ifFalse: [ ^ self class invalidException ] ]
+			
 ]
 
 { #category : 'API - changes' }
@@ -603,19 +613,19 @@ index := self getParamIndex: aString.
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'start-stop' }
 DSP >> start [
 	" Start processing audio. It also adds the current dsp to the dspPlaying ordered collection of the FaustDynamicEngine class"
 
-	self isInitialized isNil
-		ifTrue: [ ^ self class uninitializedException  ]
-		ifFalse: [
+	self isInitialized ifNil: [ ^ self class uninitializedException  ]
+		ifNotNil: [
+			parameters := self allParameters .
 			PhaustoDynamicEngine dspPlaying: self.
 			^ PhaustoDynamicEngine uniqueInstance ffiCall:
 				  #( bool startDsp #( DSP * self ) ) ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'start-stop' }
 DSP >> stop [
 " Stop processing audio."
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
@@ -659,7 +669,7 @@ DSP >> sweepToValue: aTargetValue parameter: aParamAsString in: aTimeInseconds [
 		ifFalse: [ decrementingProcess fork ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'API - accessing' }
 DSP >> traceAllParams [
 	"show in transcript alla vailable parameters for this DSP"
 

@@ -334,7 +334,7 @@ BoxAPI >> destroyLibContext [
 			('Destroyed libContext at: ' , DateAndTime now asString) traceCr.
 			self destroyLibContextFFI.
 			PhBox libContext: false ]
-		ifFalse: [ 'No active libContext at the moment' traceCr]
+		ifFalse: [ "'No active libContext at the moment' traceCr"]
 ]
 
 { #category : 'context' }
