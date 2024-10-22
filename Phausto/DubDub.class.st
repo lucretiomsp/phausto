@@ -91,7 +91,7 @@ DubDub >> initialize [
 	processExpression := 'process = sy.dubDub;'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 DubDub >> q [
 
 	^ freq ifNil: [
@@ -103,7 +103,7 @@ DubDub >> q [
 			          step: 0.1 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 DubDub >> q: aNumberOrABoxOraASymbol [
 
 | methodName |

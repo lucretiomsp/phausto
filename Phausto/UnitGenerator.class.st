@@ -10,7 +10,7 @@ otherwise my label will be my className asString
 "
 Class {
 	#name : 'UnitGenerator',
-	#superclass : 'PhBox',
+	#superclass : 'Object',
 	#traits : 'ParamsSetter',
 	#classTraits : 'ParamsSetter classTrait',
 	#instVars : [
@@ -18,7 +18,8 @@ Class {
 		'processExpression',
 		'code',
 		'uLevel',
-		'label'
+		'label',
+		'attachedDSP'
 	],
 	#classInstVars : [
 		'instancesInDSPContext'
@@ -80,18 +81,69 @@ UnitGenerator class >> withlabel: aString [
 	^ self new label: aString
 ]
 
+{ #category : 'arithmetic' }
+UnitGenerator >> + aUnitGenerator [
+
+^ self asBox + aUnitGenerator 
+]
+
 { #category : 'converting' }
 UnitGenerator >> asBox [
 
-	| box |
+	| box emptyBox |
 	BoxAPI uniqueInstance createLibContext.
-
+   
+emptyBox := PhBox new.
 	box := BoxAPI uniqueInstance
 		       boxFromString: self code
-		       inputs: self inputs
-		       outputs: self outputs
-		       buffer: self errorBuffer.
-	^ box 
+		       inputs: emptyBox inputs
+		       outputs: emptyBox outputs
+		       buffer: emptyBox errorBuffer.
+	^ box
+]
+
+{ #category : 'converting' }
+UnitGenerator >> asDsp [
+	" creates a DSP from the Box"
+
+	| finalDsp interBox |
+	
+		
+					interBox := self asBox.
+					"initialize the final DSP to a null pointer"
+					finalDsp := DSP new.
+
+					interBox
+						ifNotNil: [
+							DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ].
+
+							finalDsp := PhaustoDynamicEngine uniqueInstance
+								            createDspFromBoxes: self asBox.
+
+							PhaustoDynamicEngine dspPlaying: finalDsp.
+							finalDsp name: 'MyApp'.
+							finalDsp generatedCode:
+								'process = ' , self fullPrintString , ';'.
+							attachedDSP := finalDsp.
+
+							BoxAPI uniqueInstance destroyLibContext 
+						ifNil: [
+						Error new signal: 'Invalid Box please check its creation' ].
+					"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
+					UnitGenerator resetSelfAndAllSubClasses.
+					^ finalDsp ] 
+]
+
+{ #category : 'accessing' }
+UnitGenerator >> attachedDSP [
+
+	^ attachedDSP
+]
+
+{ #category : 'accessing' }
+UnitGenerator >> attachedDSP: aDSP [
+
+	attachedDSP := aDSP
 ]
 
 { #category : 'accessing' }

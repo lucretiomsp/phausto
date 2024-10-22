@@ -47,7 +47,7 @@ ElecGuitar >> initialize [
 	mute := 1 asBox.
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 ElecGuitar >> mute [ 
 ^ mute
 ]
