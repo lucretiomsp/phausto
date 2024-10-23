@@ -9,9 +9,9 @@ By Default, Phausto Butterworth LowPass is a 4 pole filters with a default cutof
 Class {
 	#name : 'Lowpass',
 	#superclass : 'ButterworthLPHP',
-	#category : 'Phausto-BoxAPI-Filters',
+	#category : 'Phausto-Filters',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Filters'
+	#tag : 'Filters'
 }
 
 { #category : 'converting' }
@@ -20,11 +20,7 @@ Lowpass >> asBox [
 	| intermdiateBox finalBox |
 	
 
-	intermdiateBox := BoxAPI uniqueInstance
-		                  boxFromString: code
-		                  inputs: self inputs
-		                  outputs: self outputs
-		                  buffer: self errorBuffer.
+	intermdiateBox := super asBox .
 
 	finalBox := self cutoff , self input connectTo: intermdiateBox.
 
@@ -36,7 +32,11 @@ Lowpass >> initialize [
 
 	super initialize.
 	self processExpression: 'process = fi.lowpass(4);'.
-	self input: 0.
-	self poles: 4.
-	self cutoff: 2000
+
+]
+
+{ #category : 'connecting' }
+Lowpass >> patchedWith: aUnitGenerator [
+
+self  input: aUnitGenerator asBox
 ]

@@ -38,7 +38,7 @@ PhEnvelope >> initialize [
 { #category : 'connecting' }
 PhEnvelope >> patchedWith: aUnitGenerator [
 
-	'sto pacciando adsr' traceCr .
+	
 	^ aUnitGenerator "asBox" * self asBox
 ]
 

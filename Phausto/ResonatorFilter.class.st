@@ -6,14 +6,13 @@ Class {
 	#name : 'ResonatorFilter',
 	#superclass : 'PhFilter',
 	#instVars : [
-		'input',
 		'q',
 		'frequency',
 		'gain'
 	],
-	#category : 'Phausto-BoxAPI-Filters',
+	#category : 'Phausto-Filters',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Filters'
+	#tag : 'Filters'
 }
 
 { #category : 'converting' }

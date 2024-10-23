@@ -33,6 +33,18 @@ ParamsSetter >> attack: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> cutoff: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> decay: aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -81,6 +93,18 @@ ParamsSetter >> gate: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> input: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> length: aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -106,6 +130,18 @@ ParamsSetter >> offset: aNumberOrABoxOrASymbol [
 
 { #category : 'accessing' }
 ParamsSetter >> pan: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> poles: aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"

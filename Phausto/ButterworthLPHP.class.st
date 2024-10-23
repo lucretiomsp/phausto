@@ -6,48 +6,34 @@ Class {
 	#name : 'ButterworthLPHP',
 	#superclass : 'PhFilter',
 	#instVars : [
-		'input',
 		'poles',
 		'cutoff'
 	],
-	#category : 'Phausto-BoxAPI-Filters',
+	#category : 'Phausto-Filters',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Filters'
+	#tag : 'Filters'
 }
 
 { #category : 'accessing' }
 ButterworthLPHP >> cutoff [
 
-	^ cutoff
-]
-
-{ #category : 'accessing' }
-ButterworthLPHP >> cutoff: aFloatOrABox [
-"desired cut-off frequency (-3dB frequency) in Hz"
-	cutoff := aFloatOrABox asBox
-]
-
-{ #category : 'accessing' }
-ButterworthLPHP >> input [
-
-	^ input
-]
-
-{ #category : 'accessing' }
-ButterworthLPHP >> input: aBox [
-"the mono input of the filter"
-	input := aBox asBox
+	^ cutoff ifNil:  [
+		  cutoff  := PhHSlider new
+			          label: self label , 'Cutoff'
+			          init: 300
+			          min: 20
+			          max: 18000
+			          step: 1 ] 
 ]
 
 { #category : 'accessing' }
 ButterworthLPHP >> poles [
 
-	^ poles
-]
-
-{ #category : 'accessing' }
-ButterworthLPHP >> poles: anInteger [
-	" filter order (number of poles), nonnegative constant numerical expression"
-
-	poles := anInteger asBox
+	^ poles ifNil:  [
+		  poles  := PhHSlider new
+			          label: self label , 'Poles'
+			          init: 5000
+			          min: 20
+			          max: 18000
+			          step: 1 ] 
 ]

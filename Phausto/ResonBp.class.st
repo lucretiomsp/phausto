@@ -4,9 +4,9 @@ Simple resonant bandpass filters based on tf2s (virtual analog).
 Class {
 	#name : 'ResonBp',
 	#superclass : 'ResonatorFilter',
-	#category : 'Phausto-BoxAPI-Filters',
+	#category : 'Phausto-Filters',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Filters'
+	#tag : 'Filters'
 }
 
 { #category : 'initialization' }

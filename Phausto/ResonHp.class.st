@@ -6,9 +6,9 @@ Simple resonant highpass filters based on tf2s (virtual analog).
 Class {
 	#name : 'ResonHp',
 	#superclass : 'ResonatorFilter',
-	#category : 'Phausto-BoxAPI-Filters',
+	#category : 'Phausto-Filters',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Filters'
+	#tag : 'Filters'
 }
 
 { #category : 'initialization' }

@@ -111,6 +111,16 @@ UnitGenerator >> / aUnitGenerator [
 ^ self asBox / aUnitGenerator 
 ]
 
+{ #category : 'connecting' }
+UnitGenerator >> => aUnitGenerator [
+
+"Return the resulting UnitGenerator from the chain of operations."
+self asBox => aUnitGenerator .
+
+^ aUnitGenerator 
+
+]
+
 { #category : 'arithmetic' }
 UnitGenerator >> absolute [
 
