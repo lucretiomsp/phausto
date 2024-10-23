@@ -17,3 +17,21 @@ FiltersTest >> testMoogVcf [
 
 self assert: MoogVcf new asDsp isNull equals: false
 ]
+
+{ #category : 'tests' }
+FiltersTest >> testResonBp [
+
+self assert: ResonBp new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+FiltersTest >> testResonHp [
+
+self assert: ResonHp new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+FiltersTest >> testResonLp [
+
+self assert: ResonLp new asDsp isNull equals: false
+]
