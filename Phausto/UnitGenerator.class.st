@@ -115,9 +115,8 @@ UnitGenerator >> / aUnitGenerator [
 UnitGenerator >> => aUnitGenerator [
 
 "Return the resulting UnitGenerator from the chain of operations."
-self asBox => aUnitGenerator .
+^ self asBox => aUnitGenerator .
 
-^ aUnitGenerator 
 
 ]
 
