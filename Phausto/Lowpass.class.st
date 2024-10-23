@@ -34,9 +34,3 @@ Lowpass >> initialize [
 	self processExpression: 'process = fi.lowpass(4);'.
 
 ]
-
-{ #category : 'connecting' }
-Lowpass >> patchedWith: aUnitGenerator [
-
-self  input: aUnitGenerator asBox
-]

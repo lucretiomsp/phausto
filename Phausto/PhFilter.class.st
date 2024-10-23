@@ -23,3 +23,9 @@ PhFilter >> input [
 			          max: 18000
 			          step: 1 ] 
 ]
+
+{ #category : 'connecting' }
+PhFilter >> patchedWith: aUnitGenerator [
+
+self  input: aUnitGenerator asBox
+]
