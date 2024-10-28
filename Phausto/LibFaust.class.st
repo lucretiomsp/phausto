@@ -22,6 +22,72 @@ LibFaust class >> ensurePathInDLLSearch [
 ]
 
 { #category : 'as yet unclassified' }
+LibFaust >> createBelaCppFileFromString: aString [
+|errorBuffer|
+
+
+errorBuffer := ByteArray new: 4096.
+
+	^  self createBelaCppFileFromString: aString buffer: errorBuffer
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg [
+| myArgv fileOutput |
+
+fileOutput := FileLocator documents asAbsolute pathString .
+
+
+	myArgv := ExternalAddress arrayOfStringsFrom:
+		         #('-lang' 'cpp' '-o' 'testOutput.cpp').
+	
+	^ [
+	  self
+		  createCMajorFileFromString: aString 
+		  buffer: errorMsg arguments: myArgv  ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg arguments: argv [ 
+
+^ self ffiCall:
+		   #( bool generateCAuxFilesFromString
+        ( const char * 'MyApp', 
+          const char * aString, 
+          int 4, 
+          void * argv, 
+          ByteArray errorMsg
+        )
+    )
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aName [
+
+	| myArgv fileOutput cmajorPatchesDir patchDir |
+	"we create the cmajorPatches folder in the documents folder if it not exists"
+	cmajorPatchesDir := (FileLocator documents / 'belaPatches')
+		                    ensureCreateDirectory.
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+
+	fileOutput := patchDir asAbsolute pathString , '/' , aName
+	              , '.cpp'.
+
+	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-lang'.
+			          'cpp'.
+			          
+			          '-o'.
+			          fileOutput }.
+
+	^ [
+	  self
+		  createCMajorFileFromString: aString
+		  buffer: errorMsg
+		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'as yet unclassified' }
 LibFaust >> createCMajorFileFromString: aString [
 |errorBuffer|
 
