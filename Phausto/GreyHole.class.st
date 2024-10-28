@@ -41,13 +41,9 @@ Class {
 { #category : 'converting' }
 GreyHole >> asBox [
 
-	| intermediateBox code finalBox |
-	code := 'import("stdfaust.lib"); process = re.greyhole;'.
-	intermediateBox := BoxAPI uniqueInstance
-		                   boxFromString: code
-		                   inputs: self inputs
-		                   outputs: self outputs
-		                   buffer: self errorBuffer.
+	| intermediateBox  finalBox |
+	
+	intermediateBox := super asBox .
 	finalBox := self dt asBox , self damp asBox , self size asBox
 	            , self earlyDiff asBox , self feedback asBox
 	            , self modDepth asBox , self modFreq asBox , self inputL
@@ -77,7 +73,12 @@ GreyHole >> damp: aFloatOrABoxBetweenZeroAndOne [
 { #category : 'accessing' }
 GreyHole >> dt [
 
-	^ dt
+	^ dt ifNil: [ dt:= PhHSlider new
+			 label: self label , 'DecayTime'
+			 init: 1
+			 min: 0.1
+			 max: 60
+			 step: 0.1 ]
 ]
 
 { #category : 'accessing' }
@@ -113,7 +114,8 @@ GreyHole >> feedback [
 GreyHole >> initialize [
 
 	super initialize.
-   self label: self className asString.
+	processExpression := 'process = re.greyhole;'.
+	
 	
 	
 	

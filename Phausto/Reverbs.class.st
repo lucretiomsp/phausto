@@ -3,10 +3,7 @@ A collection of Envelopes from the Faust envelopes.lib
 "
 Class {
 	#name : 'Reverbs',
-	#superclass : 'PhBox',
-	#instVars : [
-		'label'
-	],
+	#superclass : 'UnitGenerator',
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
 	#tag : 'Effects'

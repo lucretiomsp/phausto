@@ -29,3 +29,9 @@ EffectsTest >> testWavefoldAsDsp [
 
 	self assert: Wavefold new asDsp isNull equals: false
 ]
+
+{ #category : 'tests' }
+EffectsTest >> testgreyHoleAsDsp [
+
+	self assert: GreyHole new asDsp isNull equals: false
+]
