@@ -21,7 +21,7 @@ LibFaust class >> ensurePathInDLLSearch [
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - bela' }
 LibFaust >> createBelaCppFileFromString: aString [
 |errorBuffer|
 
@@ -31,7 +31,7 @@ errorBuffer := ByteArray new: 4096.
 	^  self createBelaCppFileFromString: aString buffer: errorBuffer
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - bela' }
 LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg [
 | myArgv fileOutput |
 
@@ -43,25 +43,25 @@ fileOutput := FileLocator documents asAbsolute pathString .
 	
 	^ [
 	  self
-		  createCMajorFileFromString: aString 
+		  createBelaCppFileFromString: aString 
 		  buffer: errorMsg arguments: myArgv  ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - bela' }
 LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg arguments: argv [ 
 
 ^ self ffiCall:
 		   #( bool generateCAuxFilesFromString
         ( const char * 'MyApp', 
           const char * aString, 
-          int 4, 
+          int 6, 
           void * argv, 
           ByteArray errorMsg
         )
     )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - bela' }
 LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aName [
 
 	| myArgv fileOutput cmajorPatchesDir patchDir |
@@ -70,24 +70,34 @@ LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aNam
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
 
-	fileOutput := patchDir asAbsolute pathString , '/' , aName
-	              , '.cpp'.
+	fileOutput := patchDir asAbsolute pathString , '/' , aName , '.cpp'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-a'.
+			          '/Users/domenicocipriani/MyStuff/coding/faust4pharo/architecture/bela.cpp'.
 			          '-lang'.
 			          'cpp'.
-			          
 			          '-o'.
 			          fileOutput }.
 
 	^ [
 	  self
-		  createCMajorFileFromString: aString
+		  createBelaCppFileFromString: aString
 		  buffer: errorMsg
 		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - bela' }
+LibFaust >> createBelaCppFileFromString: aString withName: aName [
+|errorBuffer|
+
+
+errorBuffer := ByteArray new: 4096.
+
+	^  self createBelaCppFileFromString: aString buffer: errorBuffer withName: aName
+]
+
+{ #category : 'export - cmajor' }
 LibFaust >> createCMajorFileFromString: aString [
 |errorBuffer|
 
