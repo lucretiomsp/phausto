@@ -4,10 +4,26 @@ A collection of Envelopes from the Faust envelopes.lib
 Class {
 	#name : 'Reverbs',
 	#superclass : 'UnitGenerator',
+	#instVars : [
+		'inputL',
+		'inputR'
+	],
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
 	#tag : 'Effects'
 }
+
+{ #category : 'accessing' }
+Reverbs >> inputL [
+
+	^ inputL ifNil: [ inputL := Wire new ]
+]
+
+{ #category : 'accessing' }
+Reverbs >> inputR [
+
+	^ inputR ifNil: [ inputL := Wire new ]
+]
 
 { #category : 'accessing' }
 Reverbs >> label [

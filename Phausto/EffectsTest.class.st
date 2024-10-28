@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+EffectsTest >> testGreyHoleAsDsp [
+
+	self assert: GreyHole new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testPannerAsDsp [
 
 	self assert: Panner new asDsp isNull equals: false
@@ -31,7 +37,7 @@ EffectsTest >> testWavefoldAsDsp [
 ]
 
 { #category : 'tests' }
-EffectsTest >> testgreyHoleAsDsp [
+EffectsTest >> testZitaRevAsDsp [
 
-	self assert: GreyHole new asDsp isNull equals: false
+	self assert: ZitaRevStereo new asDsp isNull equals: false
 ]

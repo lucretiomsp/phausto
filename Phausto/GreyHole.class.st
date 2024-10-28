@@ -23,8 +23,6 @@ Class {
 	#name : 'GreyHole',
 	#superclass : 'Reverbs',
 	#instVars : [
-		'inputL',
-		'inputR',
 		'dt',
 		'damp',
 		'size',
@@ -125,18 +123,6 @@ GreyHole >> initialize [
 
 	self inputL: Wire new asBox.
 	self inputR: Wire new asBox
-]
-
-{ #category : 'accessing' }
-GreyHole >> inputL [
-
-	^ inputL
-]
-
-{ #category : 'accessing' }
-GreyHole >> inputR [
-
-	^ inputR
 ]
 
 { #category : 'accessing' }
