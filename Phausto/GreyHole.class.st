@@ -59,7 +59,12 @@ GreyHole >> asBox [
 { #category : 'accessing' }
 GreyHole >> damp [
 
-	^ damp
+	^ damp ifNil:  [damp := (PhHSlider new
+			 label: self label , 'Damp'
+			 init: 0.3
+			 min: 0
+			 max: 1
+			 step: 0.001)].
 ]
 
 { #category : 'accessing' }
@@ -85,27 +90,23 @@ GreyHole >> dt: aFloatOrABoxBetweenZeroPointOneAndSixty [
 { #category : 'accessing' }
 GreyHole >> earlyDiff [
 
-	^ earlyDiff
-]
-
-{ #category : 'accessing' }
-GreyHole >> earlyDiff: anObject [
-
-	earlyDiff := anObject
+	^ earlyDiff ifNil: [  earlyDiff := (PhHSlider new
+			 label: self label , 'EarlyDiff'
+			 init: 0.3
+			 min: 0
+			 max: 1
+			 step: 0.001) ]
 ]
 
 { #category : 'accessing' }
 GreyHole >> feedback [
 
-	^ feedback
-]
-
-{ #category : 'accessing' }
-GreyHole >> feedback: aFloatOrABoxBetweenZeroAndOne [
-
-
-	feedback := aFloatOrABoxBetweenZeroAndOne asBox
- 
+	^ feedback ifNil: [  feedback :=   (PhHSlider new
+			 label: self label , 'Feedback'
+			 init: 0.3
+			 min: 0
+			 max: 1
+			 step: 0.001) ]
 ]
 
 { #category : 'initialization' }
@@ -113,48 +114,13 @@ GreyHole >> initialize [
 
 	super initialize.
    self label: self className asString.
-	self dt: (PhHSlider new
-			 label: self label , 'DecayTime'
-			 init: 1
-			 min: 0.1
-			 max: 60
-			 step: 0.1).
-	self damp: (PhHSlider new
-			 label: self label , 'Damp'
-			 init: 0.3
-			 min: 0
-			 max: 1
-			 step: 0.001).
-	self size: (PhHSlider new
-			 label: self label , 'Size'
-			 init: 2
-			 min: 0.5
-			 max: 3
-			 step: 0.001).
-	self earlyDiff: (PhHSlider new
-			 label: self label , 'EarlyDiff'
-			 init: 0.3
-			 min: 0
-			 max: 1
-			 step: 0.001).
-	self feedback: (PhHSlider new
-			 label: self label , 'Feedback'
-			 init: 0.3
-			 min: 0
-			 max: 1
-			 step: 0.001).
-	self modDepth: (PhHSlider new
-			 label: self label , 'ModDepth'
-			 init: 0.3
-			 min: 0
-			 max: 1
-			 step: 0.001).
-	self modFreq: (PhHSlider new
-			 label: self label , 'ModFreq'
-			 init: 0.1
-			 min: 0.1
-			 max: 10
-			 step: 0.001).
+	
+	
+	
+	
+	
+	
+
 	self inputL: Wire new asBox.
 	self inputR: Wire new asBox
 ]
@@ -166,61 +132,49 @@ GreyHole >> inputL [
 ]
 
 { #category : 'accessing' }
-GreyHole >> inputL: anInput [
-
-	inputL := anInput asBox
-]
-
-{ #category : 'accessing' }
 GreyHole >> inputR [
 
 	^ inputR
 ]
 
 { #category : 'accessing' }
-GreyHole >> inputR: anInput [
-
-	inputR := anInput asBox
-]
-
-{ #category : 'accessing' }
 GreyHole >> modDepth [
 
-	^ modDepth
-]
-
-{ #category : 'accessing' }
-GreyHole >> modDepth: aFloatOrABoxBetweenZeroAndOne [
-
-
-	modDepth := aFloatOrABoxBetweenZeroAndOne asBox
- 
+	^ modDepth ifNil: [ modDepth := (PhHSlider new
+			 label: self label , 'ModDepth'
+			 init: 0.3
+			 min: 0
+			 max: 1
+			 step: 0.001) ]
 ]
 
 { #category : 'accessing' }
 GreyHole >> modFreq [
 
-	^ modFreq
-]
-
-{ #category : 'accessing' }
-GreyHole >> modFreq: aFloatOrABoxBetweenZeroAndTen [
-
-
-	modFreq := aFloatOrABoxBetweenZeroAndTen asBox
-
+	^ modFreq ifNil: [ (PhHSlider new
+			 label: self label , 'ModFreq'
+			 init: 0.1
+			 min: 0.1
+			 max: 10
+			 step: 0.001) ]
 ]
 
 { #category : 'accessing - input' }
 GreyHole >> patchedWith: aUnitGenerator [
-self inputL: aUnitGenerator .
-self inputR: aUnitGenerator 
+
+self inputL: aUnitGenerator asBox.
+self inputR: aUnitGenerator asBox
 ]
 
 { #category : 'accessing' }
 GreyHole >> size [
 
-	^ size
+	^ size ifNil: [ size :=  (PhHSlider new
+			 label: self label , 'Size'
+			 init: 2
+			 min: 0.5
+			 max: 3
+			 step: 0.001). ]
 ]
 
 { #category : 'accessing' }
