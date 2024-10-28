@@ -28,7 +28,7 @@ LibFaust >> createBelaCppFileFromString: aString [
 
 errorBuffer := ByteArray new: 4096.
 
-	^  self createBelaCppFileFromString: aString buffer: errorBuffer
+	^  self createBelaCppFileFromString: aString buffer: errorBuffer withName: aString
 ]
 
 { #category : 'export - bela' }
@@ -50,6 +50,8 @@ fileOutput := FileLocator documents asAbsolute pathString .
 { #category : 'export - bela' }
 LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg arguments: argv [ 
 
+'chiamato cppexportrt' traceCr.
+
 ^ self ffiCall:
 		   #( bool generateCAuxFilesFromString
         ( const char * 'MyApp', 
@@ -70,7 +72,7 @@ LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aNam
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
 
-	fileOutput := patchDir asAbsolute pathString , '/' , aName , '.cpp'.
+	fileOutput := patchDir asAbsolute pathString , '/' , 'render.cpp'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
 			          '-a'.
@@ -78,7 +80,8 @@ LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aNam
 			          '-lang'.
 			          'cpp'.
 			          '-o'.
-			          fileOutput }.
+			fileOutput 
+			          }.
 
 	^ [
 	  self

@@ -261,10 +261,8 @@ index := self getParamIndex: aString.
 
 { #category : 'converting' }
 DSP >> createBelaCppFileNamed: aName [
-	"the .cmajorpatch file is always generated "
-
-	self class asCmajorPatchFileNamed: aName hasMIDI: false.
-	"return true if the .cmajor file has been  generated"
+	.
+	"return true if the .cpp file has been  generated"
 	^ LibFaust uniqueInstance
 		  createBelaCppFileFromString: self generatedCode
 		  withName: aName

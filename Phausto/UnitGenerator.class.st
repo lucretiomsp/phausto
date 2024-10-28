@@ -162,7 +162,7 @@ UnitGenerator >> asDsp [
 							PhaustoDynamicEngine dspPlaying: finalDsp.
 							finalDsp name: 'MyApp'.
 							finalDsp generatedCode:
-								'process = ' , self fullPrintString , ';'.
+								'process = ' , self asBox fullPrintString , ';'.
 							attachedDSP := finalDsp.
 
 							BoxAPI uniqueInstance destroyLibContext 
