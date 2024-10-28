@@ -173,6 +173,12 @@ UnitGenerator >> asDsp [
 					^ finalDsp ] 
 ]
 
+{ #category : 'converting' }
+UnitGenerator >> asParam: aString forUGen: aUGen [
+
+aUGen instVarNamed: aString put: self asBox
+]
+
 { #category : 'accessing' }
 UnitGenerator >> attachedDSP [
 
