@@ -325,8 +325,8 @@ DSP >> destroy [
 
 					PhaustoDynamicEngine uniqueInstance destroyDSP: self.
 					"return a null pointer"
-					DSP initializedDSP: DSP new.
-					'SONO ARRIVATO FINO ALLA FINE' traceCr ] ]
+					self class initializedDSP: DSP new.
+					 ] ]
 ]
 
 { #category : 'accessing' }

@@ -129,7 +129,7 @@ PhaustoDynamicEngine >> getNumInputsDsp: aDsp [
 ]
 
 { #category : 'as yet unclassified' }
-PhaustoDynamicEngine >> initializeDSP: aDsp [.
+PhaustoDynamicEngine >> initializeDSP: aDsp [
 
 self  ffiCall:
 				  #( bool initDsp #( DSP * aDsp , RendererType 0 , int 44100 , int

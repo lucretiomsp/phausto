@@ -145,6 +145,25 @@ PhBox >> asBox [
 
 { #category : 'converting' }
 PhBox >> asDsp [
+	" return DSP with default name MyApp - use this method if you only need an activde DSP at time"
+
+	^ self asDspWithName: 'MyApp'.
+							
+]
+
+{ #category : 'converting' }
+PhBox >> asDspFile [
+
+	(FileLocator documents / 'temp.txt') writeStream
+		nextPutAll: 'import("stdfaust.lib")';
+		nextPutAll: 'process = ';
+		nextPutAll: self asFaustCode;
+		nextPutAll: ';';
+		close
+]
+
+{ #category : 'converting' }
+PhBox >> asDspWithName: aString [
 	" creates a DSP from the Box"
 
 	| finalDsp interBox |
@@ -166,7 +185,7 @@ PhBox >> asDsp [
 								            createDspFromBoxes: self asBox.
 
 							PhaustoDynamicEngine dspPlaying: finalDsp.
-							finalDsp name: 'MyApp'.
+							finalDsp name: aString.
 							finalDsp generatedCode:
 								'process = ' , self fullPrintString , ';'.
 							attachedDSP := finalDsp.
@@ -177,17 +196,6 @@ PhBox >> asDsp [
 					"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
 					UnitGenerator resetSelfAndAllSubClasses .
 					^ finalDsp ] ]
-]
-
-{ #category : 'converting' }
-PhBox >> asDspFile [
-
-	(FileLocator documents / 'temp.txt') writeStream
-		nextPutAll: 'import("stdfaust.lib")';
-		nextPutAll: 'process = ';
-		nextPutAll: self asFaustCode;
-		nextPutAll: ';';
-		close
 ]
 
 { #category : 'printing' }

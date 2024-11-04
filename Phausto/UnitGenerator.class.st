@@ -143,13 +143,21 @@ emptyBox := PhBox new.
 
 { #category : 'converting' }
 UnitGenerator >> asDsp [
+	" creates a DSP from the Box with the default name MyApp"
+	
+	self asDspWithName: 'MyApp'
+
+]
+
+{ #category : 'converting' }
+UnitGenerator >> asDspWithName: aString [
 	" creates a DSP from the Box"
 
 	|  interBox |
 	
 		
 					interBox := self asBox.
-					^ interBox asDsp.
+					^ interBox asDspWithName: aString.
 ]
 
 { #category : 'converting' }
