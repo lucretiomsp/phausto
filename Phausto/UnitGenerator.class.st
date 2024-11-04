@@ -145,7 +145,7 @@ emptyBox := PhBox new.
 UnitGenerator >> asDsp [
 	" creates a DSP from the Box with the default name MyApp"
 	
-	self asDspWithName: 'MyApp'
+	^ self asDspWithName: 'MyApp'
 
 ]
 
