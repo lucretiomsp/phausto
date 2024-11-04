@@ -145,32 +145,11 @@ emptyBox := PhBox new.
 UnitGenerator >> asDsp [
 	" creates a DSP from the Box"
 
-	| finalDsp interBox |
+	|  interBox |
 	
 		
 					interBox := self asBox.
-					"initialize the final DSP to a null pointer"
-					finalDsp := DSP new.
-
-					interBox
-						ifNotNil: [
-							DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ].
-
-							finalDsp := PhaustoDynamicEngine uniqueInstance
-								            createDspFromBoxes: self asBox.
-
-							PhaustoDynamicEngine dspPlaying: finalDsp.
-							finalDsp name: 'MyApp'.
-							finalDsp generatedCode:
-								'process = ' , self asBox fullPrintString , ';'.
-							attachedDSP := finalDsp.
-
-							BoxAPI uniqueInstance destroyLibContext 
-						ifNil: [
-						Error new signal: 'Invalid Box please check its creation' ].
-					"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
-					UnitGenerator resetSelfAndAllSubClasses.
-					^ finalDsp ] 
+					^ interBox asDsp.
 ]
 
 { #category : 'converting' }
