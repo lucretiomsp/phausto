@@ -117,6 +117,18 @@ ParamsSetter >> freq: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> frequency: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> gain:  aNumberOrABoxOrASymbol [
 
 	| methodName |
