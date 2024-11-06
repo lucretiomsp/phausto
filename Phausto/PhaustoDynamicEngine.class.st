@@ -100,6 +100,14 @@ PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox [
 		        , int 0 , void* 0 , const char * '' , int -1 ) )
 ]
 
+{ #category : 'as yet unclassified' }
+PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox withName: aString [
+
+	^ self ffiCall:
+		  #( DSP * createDspFromBoxes #( const char * aString , #PhBox * aFaustBox
+		        , int 0 , void* 0 , const char * '' , int -1 ) )
+]
+
 { #category : 'accessing - defaults' }
 PhaustoDynamicEngine >> defaultName [
 	"if the name of the DSP is not explicitly declared, a default name is used"

@@ -182,7 +182,7 @@ PhBox >> asDspWithName: aString [
 							DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ].
 
 							finalDsp := PhaustoDynamicEngine uniqueInstance
-								            createDspFromBoxes: self asBox.
+								            createDspFromBoxes: self asBox withName: aString.
 
 							PhaustoDynamicEngine dspPlaying: finalDsp.
 							finalDsp name: aString.
