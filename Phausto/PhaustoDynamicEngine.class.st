@@ -103,7 +103,7 @@ PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox [
 { #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox withName: aString [
 
-	^ self ffiCall:
+^ self ffiCall:
 		  #( DSP * createDspFromBoxes #( const char * aString , #PhBox * aFaustBox
 		        , int 0 , void* 0 , const char * '' , int -1 ) )
 ]

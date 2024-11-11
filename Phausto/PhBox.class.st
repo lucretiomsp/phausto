@@ -147,7 +147,7 @@ PhBox >> asBox [
 PhBox >> asDsp [
 	" return DSP with default name MyApp - use this method if you only need an activde DSP at time"
 
-	^ self asDspWithName: 'MyApp'.
+	^ self asDspWithName: 'Cane'.
 							
 ]
 
@@ -171,16 +171,19 @@ PhBox >> asDspWithName: aString [
 		ifNil: [ ^ Error new signal: 'Invalid Box - please (re)create one' ]
 		ifNotNil: [
 			self class libContext
-				ifFalse: [ ^ Error new signal: 'LibCOntext does not exist' ]
+				ifFalse: [ ^ Error new signal: 'LibContext does not exist' ]
 				ifTrue: [
 					interBox := self asBox.
 					"initialize the final DSP to a null pointer"
 					finalDsp := DSP new.
 
+					
 					interBox
 						ifNotNil: [
-							DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ].
-
+							"!!!!! What do we destroy with multiple DSPs?????????????"
+							
+							"DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ]."
+('create DSp WitName: ' , aString ) traceCr.
 							finalDsp := PhaustoDynamicEngine uniqueInstance
 								            createDspFromBoxes: self asBox withName: aString.
 
