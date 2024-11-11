@@ -4,9 +4,9 @@ Use the Cut object to cut a signal (stop it!)
 Class {
 	#name : 'Cut',
 	#superclass : 'PhBox',
-	#category : 'Phausto-BoxAPI-Boxes',
+	#category : 'Phausto-Boxes',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Boxes'
+	#tag : 'Boxes'
 }
 
 { #category : 'arithmetic' }

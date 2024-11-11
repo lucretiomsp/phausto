@@ -5,9 +5,9 @@ it does nothing else but transmit the data stream
 Class {
 	#name : 'Wire',
 	#superclass : 'PhBox',
-	#category : 'Phausto-BoxAPI-Boxes',
+	#category : 'Phausto-Boxes',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Boxes'
+	#tag : 'Boxes'
 }
 
 { #category : 'arithmetic' }

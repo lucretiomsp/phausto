@@ -7,9 +7,9 @@ Class {
 	#instVars : [
 		'value'
 	],
-	#category : 'Phausto-BoxAPI-Basics',
+	#category : 'Phausto-Basics',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Basics'
+	#tag : 'Basics'
 }
 
 { #category : 'converting' }

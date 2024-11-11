@@ -13,9 +13,9 @@ Class {
 		'input1',
 		'label'
 	],
-	#category : 'Phausto-BoxAPI-Primitives',
+	#category : 'Phausto-Primitives',
 	#package : 'Phausto',
-	#tag : 'BoxAPI-Primitives'
+	#tag : 'Primitives'
 }
 
 { #category : 'initialization' }
