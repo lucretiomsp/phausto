@@ -29,7 +29,7 @@ Class {
 	#tag : 'UnitGenerators'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'counting' }
 UnitGenerator class >> incrementInstancesInDSPContext [
 
 instancesInDSPContext := self  instancesInDSPContext + 1
@@ -46,6 +46,15 @@ UnitGenerator class >> initialize [
 UnitGenerator class >> instancesInDSPContext [
 
 	^ instancesInDSPContext ifNil: [ instancesInDSPContext := 0 ]
+]
+
+{ #category : 'removing' }
+UnitGenerator class >> removePlaygroundBindings [
+
+| myDictionary keysToRemove |
+myDictionary := StPlaygroundPagePresenter allInstances last text interactionModel bindings .
+keysToRemove := myDictionary keys select: [ :key | (myDictionary at: key) class inheritsFrom: UnitGenerator ].
+keysToRemove do: [ :key | myDictionary removeKey: key ].
 ]
 
 { #category : 'class initialization' }
@@ -75,7 +84,7 @@ UnitGenerator class >> startUp: aBoolean [
 	aBoolean ifTrue: [ self resetSelfAndAllSubClasses ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 UnitGenerator class >> withlabel: aString [
 
 	^ self new label: aString
