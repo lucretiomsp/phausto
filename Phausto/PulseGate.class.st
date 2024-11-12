@@ -25,9 +25,9 @@ Class {
 { #category : 'converting' }
 PulseGate >> asBox [ 
 
-| impulseGenerator  resetCtr finalBox|
+| impulseGenerator  resetCtr |
 impulseGenerator := Pulse new period: self period.
-resetCtr := ResetCtr new totalImpulses: self totalImpulses; impulseIndex: self impulseIndex ; input: impulseGenerator.
+resetCtr := ResetCtr new input: impulseGenerator.
 ^ resetCtr asBox 
 
 

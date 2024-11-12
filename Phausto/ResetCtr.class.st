@@ -24,7 +24,7 @@ ResetCtr >> asBox [
 	| intermediateBox  finalBox |
 	intermediateBox := super asBox.
 	
-	finalBox := totalImpulses , impulseIndex, input connectTo:
+	finalBox := self totalImpulses , self impulseIndex, self input connectTo:
 		            intermediateBox.
 	^ finalBox
 ]
@@ -34,7 +34,7 @@ ResetCtr >> impulseIndex [
 
 	^ impulseIndex ifNil: [
 		  impulseIndex := PhHSlider new
-			            label: self label , 'TotalImpulses'
+			            label: self label , 'ImpulseIndex'
 			            init: 4
 			            min: 1
 			            max: 64
