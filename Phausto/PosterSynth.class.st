@@ -1,3 +1,6 @@
+"
+A demo synth for ADC24
+"
 Class {
 	#name : 'PosterSynth',
 	#superclass : 'UnitGenerator',
