@@ -147,7 +147,7 @@ PhBox >> asBox [
 PhBox >> asDsp [
 	" return DSP with default name MyApp - use this method if you only need an activde DSP at time"
 
-	^ self asDspWithName: 'Cane'.
+	^ self asDspWithName: 'MyApp'.
 							
 ]
 
