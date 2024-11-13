@@ -97,12 +97,6 @@ TpSampler >> index [
 			 step: 1). ]
 ]
 
-{ #category : 'accessing' }
-TpSampler >> index: aSampleIndex [
-
-	index := aSampleIndex asBox
-]
-
 { #category : 'initialization' }
 TpSampler >> initialize [
 
