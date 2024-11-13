@@ -66,7 +66,9 @@ LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg arguments: arg
 { #category : 'export - bela' }
 LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aName [
 
-	| myArgv fileOutput cmajorPatchesDir patchDir |
+	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
+	"we locate the architecture file"
+	architecturePath := (FileLocator imageDirectory / 'architecture/bela.cpp')  asAbsolute pathString .
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'belaPatches')
 		                    ensureCreateDirectory.
@@ -76,7 +78,7 @@ LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aNam
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
 			          '-a'.
-			          '/Users/domenicocipriani/MyStuff/coding/faust4pharo/architecture/bela.cpp'.
+			          architecturePath .
 			          '-lang'.
 			          'cpp'.
 			          '-o'.
@@ -189,7 +191,9 @@ LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg arguments: 
 { #category : 'as yet unclassified' }
 LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: aName [
 
-	| myArgv fileOutput cmajorPatchesDir patchDir |
+	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
+	"we locate the needed archictecture files"
+	architecturePath  := (FileLocator imageDirectory / 'architecture/cmajor/poly-dsp.cmajor')  asAbsolute pathString .
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
@@ -201,7 +205,7 @@ LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: a
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
 			          '-a'.
-			          '/Users/domenicocipriani/MyStuff/coding/faust4pharo/architecture/cmajor/poly-dsp.cmajor'.
+			          architecturePath .
 			          '-lang'.
 			          'cmajor-poly'.
 			          '-cn'.
