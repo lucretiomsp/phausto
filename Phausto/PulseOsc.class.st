@@ -39,15 +39,6 @@ PulseOsc >> duty [
 			        step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
-PulseOsc >> duty: aNumberOrABox [
-	" duty cycle range 0 - 1"
-
-	duty := aNumberOrABox isNumber
-		        ifTrue: [ self duty init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ]
-]
-
 { #category : 'initialization' }
 PulseOsc >> initialize [
 
