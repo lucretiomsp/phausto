@@ -1,6 +1,10 @@
 "
 Simple resonant filters based on tf2s (virtual analog).
 Subclasses include lowpass, highpass, bandpass.
+All the sublcasses of ResonatorFilter have the following controls;
+frequency
+gain
+q
 "
 Class {
 	#name : 'ResonatorFilter',
