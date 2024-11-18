@@ -43,21 +43,26 @@ PsgPlus >> asBox [
 
 	"Envelope"
 	adsr := (ADSREnv new
-		         attack: 0.01;
-		         decay: 0.2;
-		         sustain: 0.3;
-		         release: 0.2;
+		         attack: self attack;
+		         decay: self decay;
+		         sustain: self sustain;
+		         release: self release ;
 		         trigger: self gate) asBox.
 	selectorInputs := self index asBox , sqr , saw , tri , noise.
 	synth := (selectorInputs connectTo: PhSelect4 new) * adsr asBox
-	         * self level * ringModulator.
-	^ synth * self level
+	         * self uLevel * ringModulator.
+	^ synth * self uLevel
 ]
 
 { #category : 'accessing' }
 PsgPlus >> index [
 
-	^ index
+	^ index ifNil: [ index := (PhHSlider new
+			 label: self label , 'Index'
+			 init: 0
+			 min: 0
+			 max: 3
+			 step: 1)]
 ]
 
 { #category : 'accessing' }
@@ -70,29 +75,16 @@ PsgPlus >> index: anIndex [
 PsgPlus >> initialize [
 
 	super initialize.
-	self index: (PhHSlider new
-			 label: self name , 'Index'
-			 init: 0
-			 min: 0
-			 max: 3
-			 step: 1).
-	self lfoAmount: (PhHSlider new
-			 label: self name , 'LfoAmount'
-			 init: 0
-			 min: 0
-			 max: 10
-			 step: 0.001).
-	self level: 0.3 "level is sofwtare than TpSynth default"
+
 ]
 
 { #category : 'accessing' }
 PsgPlus >> lfoAmount [
 
-	^ lfoAmount
-]
-
-{ #category : 'accessing' }
-PsgPlus >> lfoAmount: aNumber [
-
-	lfoAmount := aNumber asBox
+	^ lfoAmount ifNil: [  lfoAmount := (PhHSlider new
+			 label: self label , 'LfoAmount'
+			 init: 0
+			 min: 0
+			 max: 10
+			 step: 0.001) ]
 ]
