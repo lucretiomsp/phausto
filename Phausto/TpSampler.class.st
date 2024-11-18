@@ -36,7 +36,7 @@ TpSampler >> asBox [
 	fileNames do: [ :f | f traceCr ].
 	allFilePaths := ''.
 	fileNames do: [ :i | allFilePaths := allFilePaths , i , ';' ].
-	filePathPrefix := '' , self name, '[url:{'.
+	filePathPrefix := '' , self label , '[url:{'.
 	filePathSuffix := '}]'.
 	allFilesPathsWithoutLastColumn := allFilePaths
 		                                  copyFrom: 1
@@ -59,7 +59,7 @@ TpSampler >> asBox [
 	          , Wire new asBox.
 	sampler := sp connectTo: output asBox.
 
-	^ ((sampler asBox * self level )) asBox
+	^ (sampler asBox * self uLevel) asBox
 ]
 
 { #category : 'accessing' }
@@ -90,7 +90,7 @@ TpSampler >> debugPath: anObject [
 TpSampler >> index [
 
 	^ index ifNil: [ index := (PhHSlider new
-			 label: self name , 'Index'
+			 label: self label , 'Index'
 			 init: 0
 			 min: 0
 			 max: 16
@@ -159,7 +159,7 @@ TpSampler >> pathToFolder: aString [
 TpSampler >> pitch [ 
 
 	^ pitch ifNil: [ pitch :=  (PhHSlider new
-			 label: self name , 'Note'
+			 label: self label  , 'Note'
 			 init: 261.625
 			 min: 10
 			 max: 4000
