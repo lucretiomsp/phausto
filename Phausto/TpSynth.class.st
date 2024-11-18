@@ -26,23 +26,9 @@ TpSynth >> attack [
 ]
 
 { #category : 'accessing' }
-TpSynth >> attack: aTimeInSeconds [
-
-	attack := aTimeInSeconds asBox.
-]
-
-{ #category : 'accessing' }
 TpSynth >> decay [
 
 	^ decay
-]
-
-{ #category : 'accessing' }
-TpSynth >> decay: aTimeInSeconds [
-
-
-	decay := aTimeInSeconds asBox.
-
 ]
 
 { #category : 'accessing' }
@@ -101,33 +87,13 @@ TpSynth >> pitch [
 		        step: 1 ]
 ]
 
-{ #category : 'accessing' }
-TpSynth >> pitch: aFrequency [
-
-	pitch := aFrequency asBox
-]
-
 { #category : 'dependencies' }
 TpSynth >> release [ 
 ^ release
 ]
 
 { #category : 'accessing' }
-TpSynth >> release: aTimeInSeconds [
-
-
-	release := aTimeInSeconds asBox.
-
-]
-
-{ #category : 'accessing' }
 TpSynth >> sustain [
 
 	^ sustain
-]
-
-{ #category : 'accessing' }
-TpSynth >> sustain: aNumber [
-
-	sustain := aNumber asBox
 ]

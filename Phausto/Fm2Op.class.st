@@ -54,19 +54,7 @@ Fm2Op >> modIndex [
 ]
 
 { #category : 'accessing' }
-Fm2Op >> modIndex: aNumber [
-
-	modIndex := aNumber asBox
-]
-
-{ #category : 'accessing' }
 Fm2Op >> modRatio [
 
 	^ modulatorPitch
-]
-
-{ #category : 'accessing' }
-Fm2Op >> modRatio: aFrequency [ 
-
-	modulatorPitch := aFrequency asBox.
 ]
