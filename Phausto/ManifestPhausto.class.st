@@ -27,5 +27,5 @@ ManifestPhausto class >> ruleCascadedNextPutAllsRuleV1FalsePositive [
 ManifestPhausto class >> rulePrecedenceRuleV1FalsePositive [
 
 	<ignoreForCoverage>
-	^ #(#(#(#RGMethodDefinition #(#LFORandomPos #asBox #false)) #'2024-10-14T13:38:08.64591+02:00') )
+	^ #(#(#(#RGMethodDefinition #(#LFORandomPos #asBox #false)) #'2024-10-14T13:38:08.64591+02:00') #(#(#RGMethodDefinition #(#Fm2Op #asBox #false)) #'2024-11-18T10:34:30.410787+01:00') )
 ]
