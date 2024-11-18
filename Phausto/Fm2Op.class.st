@@ -6,7 +6,8 @@ Class {
 	#superclass : 'TpSynth',
 	#instVars : [
 		'modulatorPitch',
-		'modIndex'
+		'modIndex',
+		'modRatio'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -33,28 +34,27 @@ Fm2Op >> asBox [
 Fm2Op >> initialize [
 
 	super initialize.
-	self modIndex: (PhHSlider new
-			 label: self name , 'ModIndex'
-			 init: 1
-			 min: 0.5
-			 max: 1
-			 step: 0.1).
-	self modRatio: (PhHSlider new
-			 label: self name , 'ModRatio'
-			 init: 1
-			 min: 0.1
-			 max: 12
-			 step: 0.01)
+	
 ]
 
 { #category : 'accessing' }
 Fm2Op >> modIndex [
 
-	^ modIndex 
+	^  modIndex  ifNil: [   PhHSlider new
+		        label: self label , 'ModIndex'
+		        init: 0
+		        min: 0
+		        max: 1
+		        step: 0.01 ]
 ]
 
 { #category : 'accessing' }
 Fm2Op >> modRatio [
 
-	^ modulatorPitch
+	^ modRatio ifNil: [   PhHSlider new
+		        label: self label , 'ModRatio'
+		        init: 1
+		        min: 0.01
+		        max: 12
+		        step: 0.01 ]
 ]

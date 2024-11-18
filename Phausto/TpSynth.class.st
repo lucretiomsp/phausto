@@ -22,7 +22,13 @@ Class {
 { #category : 'accessing' }
 TpSynth >> attack [
 
-	^ attack
+	^ attack ifNil: [
+		  attack := PhHSlider new
+			            label: self label , 'Attack'
+			            init: 0.01
+			            min: 0
+			            max: 4
+			            step: 0.001 ]
 ]
 
 { #category : 'accessing' }
@@ -34,7 +40,7 @@ TpSynth >> decay [
 { #category : 'accessing' }
 TpSynth >> gate [
 
-	^ gate ifNil: [ gate := PhButton new label: self name, 'Gate' ]
+	^ gate ifNil: [ PhButton new label: self label , 'Gate']
 ]
 
 { #category : 'initialization' }
@@ -50,29 +56,6 @@ TpSynth >> initialize [
 		release: 0.1.
 		
 	self level: 0.5.
-]
-
-{ #category : 'accessing' }
-TpSynth >> level [
-
-	^ level
-]
-
-{ #category : 'accessing' }
-TpSynth >> level: aNumber [
-
-	level := aNumber asBox 
-]
-
-{ #category : 'accessing' }
-TpSynth >> name [ 
-^ name
-]
-
-{ #category : 'accessing' }
-TpSynth >> name: aName [
-
-	name := aName
 ]
 
 { #category : 'accessing' }
