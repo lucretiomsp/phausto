@@ -5,7 +5,6 @@ Class {
 	#name : 'Fm2Op',
 	#superclass : 'TpSynth',
 	#instVars : [
-		'modulatorPitch',
 		'modIndex',
 		'modRatio'
 	],
@@ -17,17 +16,21 @@ Class {
 { #category : 'converting' }
 Fm2Op >> asBox [
 
-	| carrier modulator adsr |
+	| carrier modulator carrierPitch adsr modulatorPitch |
 	adsr := (ADSREnv new
 		         attack: self attack;
 		         decay: self decay;
 		         sustain: self sustain;
 		         release: self release;
 		         trigger: self gate) asBox.
-	modulator := SineOsc new freq:
-		             self pitch * self modRatio asBox * self modIndex
-		             * 4000 asBox.
-	carrier := SineOsc new freq: "self pitch +" modulator asBox.
+	modulatorPitch := self pitch * self modRatio asBox.
+	modulator := SineOsc new
+		             freq: modulatorPitch;
+		             uLevel: self modIndex.
+	carrierPitch := self pitch + modulator * 300.
+	carrier := SineOsc new freq: carrierPitch asBox.
+
+
 	^ carrier asBox * adsr asBox
 ]
 
