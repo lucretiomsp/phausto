@@ -24,10 +24,11 @@ Fm2Op >> asBox [
 		         sustain: self sustain;
 		         release: self release;
 		         trigger: self gate) asBox.
-	modulator := (SineOsc new freq: (self pitch * self modRatio asBox) * self modIndex
-	             * 4000 asBox).
-	carrier := SineOsc new freq: self pitch + modulator asBox.
-	^ carrier asBox * adsr asBox * self level
+	modulator := SineOsc new freq:
+		             self pitch * self modRatio asBox * self modIndex
+		             * 4000 asBox.
+	carrier := SineOsc new freq: "self pitch +" modulator asBox.
+	^ carrier asBox * adsr asBox
 ]
 
 { #category : 'initialization' }
