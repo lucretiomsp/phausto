@@ -28,7 +28,7 @@ Fm2Op >> asBox [
 		             freq: modulatorPitch;
 		             uLevel: self modIndex.
 	carrierPitch := self pitch + (modulator * 3000).
-	carrier := SineOsc new freq: carrierPitch asBox.
+	carrier := SineOsc new freq: carrierPitch asBox; uLevel: 0.7 .
 
 
 	^ carrier asBox * adsr asBox

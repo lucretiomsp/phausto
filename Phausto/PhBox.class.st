@@ -177,15 +177,13 @@ PhBox >> asDspWithName: aString [
 					"initialize the final DSP to a null pointer"
 					finalDsp := DSP new.
 
-					
+
 					interBox
-						ifNotNil: [
-							"!!!!! What do we destroy with multiple DSPs?????????????"
-							
-							"DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ]."
-('create DSp WitName: ' , aString ) traceCr.
+						ifNotNil: [ "!!!!! What do we destroy with multiple DSPs?????????????""DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ]."
+							('create DSp WitName: ' , aString) traceCr.
 							finalDsp := PhaustoDynamicEngine uniqueInstance
-								            createDspFromBoxes: self asBox withName: aString.
+								            createDspFromBoxes: self asBox
+								            withName: aString.
 
 							PhaustoDynamicEngine dspPlaying: finalDsp.
 							finalDsp name: aString.
@@ -197,8 +195,9 @@ PhBox >> asDspWithName: aString [
 						ifNil: [
 						Error new signal: 'Invalid Box please check its creation' ].
 					"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
-					UnitGenerator resetSelfAndAllSubClasses .
-					UnitGenerator removePlaygroundBindings .
+					UnitGenerator resetSelfAndAllSubClasses.
+					UnitGenerator removePlaygroundBindings.
+					self inform: '! All Unit Generators have been removed from this Playground bindings !'.
 					^ finalDsp ] ]
 ]
 
