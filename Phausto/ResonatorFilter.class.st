@@ -1,6 +1,7 @@
 "
 Simple resonant filters based on tf2s (virtual analog).
 Subclasses include lowpass, highpass, bandpass.
+Cutoof control is smoothed
 All the sublcasses of ResonatorFilter have the following controls;
 frequency
 gain
@@ -25,7 +26,7 @@ ResonatorFilter >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self frequency , self q , self gain , self input
+	finalBox := self frequency smoo , self q , self gain , self input
 		            connectTo: intermdiateBox.
 
 	^ finalBox

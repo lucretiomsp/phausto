@@ -28,19 +28,21 @@ Chordy >> asBox [
 	ampEnv := ADSREnv new
 		          attack: self attack;
 		          decay: self decay;
-		          sustain: self sustain ;
+		          sustain: self sustain;
 		          release: self release;
 		          trigger: self gate.
 	"filter"
 	freqSlider := PhHSlider new
 		              label: self label , 'Cutoff'
-		              init: 404
-		              min: 20
-		              max: 8000
-		              step: 1.
-	scaledFreq := freqSlider + (filterEnv * 2000).
+		              init: 0.02
+		              min: 0.01
+		              max: 10
+		              step: 0.01.
+	scaledFreq := (2000 * freqSlider) + (filterEnv * 2000).
 
-	filter := ResonLp new frequency: scaledFreq; q: 5.7.
+	filter := ResonLp new
+		          frequency: scaledFreq;
+		          q: 5.7.
 
 	"for the selection of modes the interval is expresed in ratio"
 	secondInterval := self mode asBox , 1.189 asBox , 1.259 asBox
