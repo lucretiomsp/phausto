@@ -34,11 +34,11 @@ Chordy >> asBox [
 	"filter"
 	freqSlider := PhHSlider new
 		              label: self label , 'Cutoff'
-		              init: 0.02
-		              min: 0.01
+		              init: 0.2
+		              min: 0.2
 		              max: 10
 		              step: 0.01.
-	scaledFreq := (2000 * freqSlider) + (filterEnv * 2000).
+	scaledFreq := 202 asBox * freqSlider + (filterEnv * 2000).
 
 	filter := ResonLp new
 		          frequency: scaledFreq;
