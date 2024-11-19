@@ -16,18 +16,31 @@ Class {
 { #category : 'converting' }
 Chordy >> asBox [
 
-	| env voice1 voice2 voice3 filter filterFreq secondInterval  |
-	"enevelope"
-	env := (ADSREnv new
-		        attack: self attack;
-		        decay: self decay;
-		        sustain: self sustain;
-		        release: self release;
-		        trigger: self gate) asBox.
-	"filter"
-	filterFreq := (self cutoff * 100 asBox * env asBox + 100 asBox) smoo.
+	| filterEnv ampEnv voice1 voice2 voice3 filter freqSlider secondInterval scaledFreq |
+	"enevelopes"
+	filterEnv := ADSREnv new
+		             attack: self attack;
+		             decay: self decay;
+		             sustain: 0 asBox;
+		             release: self release;
+		             trigger: self gate.
 
-	filter := ResonLp new frequency: filterFreq.
+	ampEnv := ADSREnv new
+		          attack: self attack;
+		          decay: self decay;
+		          sustain: self sustain ;
+		          release: self release;
+		          trigger: self gate.
+	"filter"
+	freqSlider := PhHSlider new
+		              label: self label , 'Cutoff'
+		              init: 404
+		              min: 20
+		              max: 8000
+		              step: 1.
+	scaledFreq := freqSlider + (filterEnv * 2000).
+
+	filter := ResonLp new frequency: scaledFreq; q: 5.7.
 
 	"for the selection of modes the interval is expresed in ratio"
 	secondInterval := self mode asBox , 1.189 asBox , 1.259 asBox
@@ -41,7 +54,7 @@ Chordy >> asBox [
 	          * 0.3.
 	" a perfect fifth as a  End of statement expected ->1.6 ratio to the root"
 	voice3 := (SawOsc new freq: self pitch asBox * 1.5 asBox) * 0.3.
-	^ (filter input: voice1 + voice2 + voice3) * env asBox
+	^ (filter input: voice1 + voice2 + voice3) * ampEnv asBox
 	  * self uLevel asBox
 ]
 
@@ -50,8 +63,8 @@ Chordy >> cutoff [
 
 	^ cutoff ifNil: [ cutoff := (PhHSlider new
 			 label: self label , 'Cutoff'
-			 init: 10
-			 min: 10
+			 init: 20
+			 min: 20
 			 max: 100
 			 step: 1)]
 ]
@@ -61,9 +74,10 @@ Chordy >> initialize [
 
 	super initialize.
 
-	
-	
+
+   self decay: 0.21.
 	self sustain: 0.9.
+	self release: 0.18.
 	self uLevel: 0.9
 ]
 
