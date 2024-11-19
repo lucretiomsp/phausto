@@ -34,12 +34,13 @@ ResonatorFilter >> asBox [
 { #category : 'accessing' }
 ResonatorFilter >> frequency [
 
-	^ frequency ifNil: [  frequency := (PhHSlider new
-			 label: 'Frequency'
-			 init: 19000
-			 min: 20
-			 max: 19999
-			 step: 1). ]
+	^ frequency ifNil: [
+		  frequency := PhHSlider new
+			               label: self label , 'Frequency'
+			               init: 19000
+			               min: 20
+			               max: 19999
+			               step: 1 ]
 ]
 
 { #category : 'accessing' }
@@ -59,10 +60,11 @@ ResonatorFilter >> initialize [
 { #category : 'accessing' }
 ResonatorFilter >> q [
 
-	^ q ifNil: [ q := (PhHSlider new
-			 label:  'Q'
-			 init: 1
-			 min: 0.1
-			 max: 24
-			 step: 0.01). ]
+	^ q ifNil: [
+		  q := PhHSlider new
+			       label: self label ,'Q'
+			       init: 1
+			       min: 0.1
+			       max: 24
+			       step: 0.01 ]
 ]
