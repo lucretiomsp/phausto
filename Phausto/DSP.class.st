@@ -658,7 +658,7 @@ DSP >> sweepToMfValue: aTargetValue parameter: aParamAsString in: aTimeInseconds
 	                       numberOfSteps timesRepeat: [
 		                       currentValue := currentValue - step.
 		                       self
-			                       setValue: currentValue
+			                       setValueMooflod: currentValue
 			                       parameter: aParamAsString.
 		                       stepDelay wait ] ].
 	incrementingProcess := incrementingProcess := [
