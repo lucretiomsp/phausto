@@ -445,12 +445,15 @@ DSP >> getUIItems [
 
 { #category : 'ui-building' }
 DSP >> getUIItemsLabeledDictionary [
+	"returns a Dictionary with the UI items whose keys are the items labels"
 
-"returns a Dictionary with the UI items whose keys are the items labels"
-| itemsDictionary |
-itemsDictionary := Dictionary new.
-self  getUIItems do: [ :i | itemsDictionary at: (i at: 'label') put: i].
-^ itemsDictionary 
+	| itemsDictionary |
+	itemsDictionary := Dictionary new.
+	self getUIItems do: [ :i |
+		itemsDictionary at: (i at: 'label') put: i ].
+	"we remove the soundfiles UI type from the dictionary as it is actually not a UI eleement"
+	itemsDictionary keysAndValuesRemove:  [:k :v | v includes: #soundfile].
+	^ itemsDictionary
 ]
 
 { #category : 'ui-building' }
