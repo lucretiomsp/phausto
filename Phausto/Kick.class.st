@@ -34,10 +34,10 @@ Kick >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self pitch asBox * 0.25 asBox , self click asBox , self attack asBox
-	            , self decay asBox , self drive asBox , self gate asBox
-		            connectTo: intermediateBox.
-	^ finalBox
+	finalBox := self pitch asBox * 0.25 asBox , self click asBox
+	            , self attack asBox , self decay asBox , self drive asBox
+	            , self gate asBox connectTo: intermediateBox.
+	^ finalBox * self uLevel.
 ]
 
 { #category : 'accessing' }
@@ -138,8 +138,7 @@ Kick >> initialize [
 
 	click := 0.116.
 	attack := 0.005.
-	
-	
+	self uLevel: 0.8.
 ]
 
 { #category : 'accessing' }
