@@ -375,6 +375,13 @@ BoxAPI >> multiply: aBox with: anotherBox [
 ]
 
 { #category : 'accessing - platform' }
+BoxAPI >> unix64LibraryName [ 
+	"Returns the name of the dynamic libFaust for Linux."
+
+	^ FFIUnix64LibraryFinder findLibrary: 'librariesBundle/libfaust.2.so'
+]
+
+{ #category : 'accessing - platform' }
 BoxAPI >> win32LibraryName [
 	
 	LibFaust ensurePathInDLLSearch.

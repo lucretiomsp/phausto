@@ -237,3 +237,17 @@ LibFaust >> macLibraryName [
 
 	^ FFIMacLibraryFinder findLibrary: 'librariesBundle/libfaust.2.dylib'
 ]
+
+{ #category : 'accessing - platform' }
+LibFaust >> unix64LibraryName [ 
+
+	^ FFIUnix64LibraryFinder findLibrary: 'librariesBundle/libfaust.2.so'
+]
+
+{ #category : 'accessing - platform' }
+LibFaust >> win32LibraryName [
+
+	LibFaust ensurePathInDLLSearch.
+
+	^ FFIWindowsLibraryFinder new findLibrary: 'libfaust.dll'
+]
