@@ -265,6 +265,22 @@ PhBox >> connectTo: aUnitGenerator [
 	^ BoxAPI uniqueInstance boxSeqFrom: self asBox to: aUnitGenerator asBox
 ]
 
+{ #category : 'converting' }
+PhBox >> db2linear [
+	" dB-to-linear value converter. It can be used to convert an amplitude in dB to a linear gain ]0-N]."
+
+	| converter emptyBox |
+	BoxAPI uniqueInstance createLibContext.
+	emptyBox := self class new.
+	converter := BoxAPI uniqueInstance
+		             boxFromString:
+		             'import("stdfaust.lib"); process = ba.db2linear;'
+		             inputs: emptyBox inputs
+		             outputs: emptyBox outputs
+		             buffer: emptyBox errorBuffer.
+	^ self asBox connectTo: converter
+]
+
 { #category : 'accessing' }
 PhBox >> errorBuffer [
 
@@ -323,6 +339,22 @@ PhBox >> inputs: anObject [
 	inputs := anObject
 ]
 
+{ #category : 'converting' }
+PhBox >> linear2db [
+	" linea-to-dB value converter. It can be used to convert a linear gain ]0-N] to an amplitude in dB"
+
+	| converter emptyBox |
+	BoxAPI uniqueInstance createLibContext.
+	emptyBox := self class new.
+	converter := BoxAPI uniqueInstance
+		             boxFromString:
+		             'import("stdfaust.lib"); process = ba.linear2db;'
+		             inputs: emptyBox inputs
+		             outputs: emptyBox outputs
+		             buffer: emptyBox errorBuffer.
+	^ self asBox connectTo: converter
+]
+
 { #category : 'arithmetic' }
 PhBox >> mergeWith: anotherBox [
 	"merge Composition of boxes"
@@ -332,17 +364,18 @@ PhBox >> mergeWith: anotherBox [
 
 { #category : 'converting' }
 PhBox >> midikey2hz [
-" Converts a MIDI key number to a frequency in Hz (MIDI key 69 = A440). midikey2hz is a standard Faust function"
+	" Converts a MIDI key number to a frequency in Hz (MIDI key 69 = A440). midikey2hz is a standard Faust function"
 
-| converter |
-
-BoxAPI uniqueInstance createLibContext.
-converter := BoxAPI uniqueInstance
-		       boxFromString: 'import("stdfaust.lib"); process = ba.midikey2hz;'
-		       inputs: self inputs
-		       outputs: self outputs
-		       buffer: self errorBuffer.
-^ self asBox connectTo: converter.
+	| converter emptyBox|
+	BoxAPI uniqueInstance createLibContext.
+	emptyBox := PhBox new.
+	converter := BoxAPI uniqueInstance
+		             boxFromString:
+		             'import("stdfaust.lib"); process = ba.midikey2hz;'
+		             inputs: emptyBox inputs
+		             outputs: emptyBox outputs
+		             buffer: emptyBox errorBuffer.
+	^ self asBox connectTo: converter
 ]
 
 { #category : 'accessing' }
@@ -419,7 +452,7 @@ PhBox >> splitTo: aUnitGenerator [
 	^ self boxSplit: self asBox to: aUnitGenerator asBox
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'converting' }
 PhBox >> stereo [
 	"return a stereo version of the box (connect to Left and Right outputs)"
 

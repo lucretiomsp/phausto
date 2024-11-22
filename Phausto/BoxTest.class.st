@@ -24,7 +24,25 @@ self assert: dsp isNull equals: false.
 ]
 
 { #category : 'tests' }
+BoxTest >> testDb2Linear [
+
+	self assert: 60 asBox db2linear isNull equals: false
+]
+
+{ #category : 'tests' }
 BoxTest >> testLibContextIsFalseAtStartup [
 
 	self assert: PhBox libContext equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testMidiKey2Hz [
+
+	self assert: 60 asBox midikey2hz isNull equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testlinear2db [
+
+	self assert: 60 asBox linear2db isNull equals: false
 ]
