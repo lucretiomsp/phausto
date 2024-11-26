@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+FiltersTest >> testDiodeLadder [
+
+	self assert: DiodeLadder new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 FiltersTest >> testLowPassFilter [
 
 self assert: Lowpass new  asDsp isNull equals: false
