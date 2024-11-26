@@ -34,20 +34,22 @@ Acid >> accent [
 Acid >> asBox [
 
 	| saw square oscillator volume filter ampEnv filterEnv instrument |
-	saw := SawOsc new.
-	square := SquareOsc new.
-	oscillator := Select2 new
-		              label: self label , 'Waveform';
-		              input0: saw;
-		              input1.
 	volume := PhHSlider new
 		          label: self label , 'Volume'
 		          init: 0.5
 		          min: 0
 		          max: 1
 		          step: 0.01.
-	instrument := oscillator asBox * volume.
-	^ instrument
+	filter := ResonLp new.
+	saw := SawOsc new uLevel: volume.
+	square := SquareOsc new uLevel: volume.
+	oscillator := Select2 new
+		              label: self label , 'Waveform';
+		              input0: saw;
+		              input1: square.
+
+	instrument := oscillator => filter.
+	^ instrument asBox
 ]
 
 { #category : 'accessing' }
