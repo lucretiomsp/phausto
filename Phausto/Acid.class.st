@@ -33,7 +33,7 @@ Acid >> accent [
 { #category : 'initialization' }
 Acid >> asBox [
 
-	| saw square oscillator volume filterEnv filter ampEnv instrument envAmount |
+	| saw square trigger baseFreq oscillator volume filterEnv filter ampEnv instrument envAmount |
 	volume := PhHSlider new
 		          label: self label , 'Volume'
 		          init: 0.5
@@ -46,18 +46,36 @@ Acid >> asBox [
 		          min: 0
 		          max: 1
 		          step: 1.
-	filterEnv := ADSREnv new.
-	envAmount := filterEnv * (1 asBox - self cutoffFreq) * envMod.
+	baseFreq := PhHSlider new
+		            label: self label , 'Note'
+		            init: 440
+		            min: 20
+		            max: 2000
+		            step: 1.
+	trigger := PhButton new label: self label , 'Gate'.
+	filterEnv := AREnv new
+		             trigger: trigger;
+		             attack: 0.001 asBox.
+	ampEnv := AREnv new
+		          trigger: trigger;
+		          attack: 0.001 asBox.
+	envAmount := filterEnv * (1 asBox - self cutoffFreq * envMod asBox).
 
-	filter := DiodeLadder new normFreq: filterEnv; q: self resonance .
-	saw := SawOsc new uLevel: volume.
-	square := SquareOsc new uLevel: volume.
+	filter := DiodeLadder new
+		          normFreq: envAmount + self cutoffFreq;
+		          q: self resonance.
+	saw := SawOsc new
+		       uLevel: volume;
+		       freq: baseFreq + self tuning.
+	square := SquareOsc new
+		          uLevel: volume;
+		          freq: baseFreq + self tuning.
 	oscillator := Select2 new
 		              label: self label , 'Waveform';
 		              input0: saw;
 		              input1: square.
 
-	instrument := oscillator => filter.
+	instrument := oscillator * ampEnv => filter.
 	^ instrument asBox
 ]
 
@@ -66,7 +84,7 @@ Acid >> cutoffFreq [
 
 	^ cutoffFreq ifNil: [
 		  PhHSlider new
-			  label: self label , 'cutoffFreq'
+			  label: self label , 'CutoffFreq'
 			  init: 1
 			  min: 0
 			  max: 1
