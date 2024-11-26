@@ -54,9 +54,9 @@ DiodeLadder >> q [
 
 	^ q ifNil: [
 		  q := PhHSlider new
-			              label: self label , 'Q'
-			              init: 1
-			              min: 0
-			              max: 1
-			              step: 0.001 ]
+			       label: self label , 'Q'
+			       init: 1
+			       min: 1
+			       max: 20
+			       step: 0.01 ]
 ]

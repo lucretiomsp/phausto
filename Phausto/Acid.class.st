@@ -33,14 +33,23 @@ Acid >> accent [
 { #category : 'initialization' }
 Acid >> asBox [
 
-	| saw square oscillator volume filter ampEnv filterEnv instrument |
+	| saw square oscillator volume filterEnv filter ampEnv instrument envAmount |
 	volume := PhHSlider new
 		          label: self label , 'Volume'
 		          init: 0.5
 		          min: 0
 		          max: 1
 		          step: 0.01.
-	filter := ResonLp new.
+	envMod := PhHSlider new
+		          label: self label , 'EnvMod'
+		          init: 0
+		          min: 0
+		          max: 1
+		          step: 1.
+	filterEnv := ADSREnv new.
+	envAmount := filterEnv * (1 asBox - self cutoffFreq) * envMod.
+
+	filter := DiodeLadder new normFreq: filterEnv; q: self resonance .
 	saw := SawOsc new uLevel: volume.
 	square := SquareOsc new uLevel: volume.
 	oscillator := Select2 new
@@ -58,10 +67,10 @@ Acid >> cutoffFreq [
 	^ cutoffFreq ifNil: [
 		  PhHSlider new
 			  label: self label , 'cutoffFreq'
-			  init: 800
-			  min: 300
-			  max: 300
-			  step: 1 ]
+			  init: 1
+			  min: 0
+			  max: 1
+			  step: 0.001 ]
 ]
 
 { #category : 'accessing' }
@@ -77,15 +86,23 @@ Acid >> envMod [
 ]
 
 { #category : 'initialization' }
-Acid >> initialize [ 
+Acid >> initialize [
 
-super initialize 
+	super initialize.
+	self resonance: #(1 0 24 0.001)
 ]
 
 { #category : 'accessing' }
 Acid >> resonance [
 
-	^ resonance
+	^ resonance 
+ ifNil: [
+		  PhHSlider new
+			  label: self label , 'Resonance'
+			  init: 0.5
+			  min: 0.001
+			  max: 1
+			  step: 0.001 ]
 ]
 
 { #category : 'accessing' }
