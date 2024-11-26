@@ -9,6 +9,12 @@ Trait {
 }
 
 { #category : 'accessing' }
+ParamsSetter >> accent: anObject [
+
+	accent := anObject
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> amount: aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -42,6 +48,12 @@ ParamsSetter >> cutoff: aNumberOrABoxOrASymbol [
 	aNumberOrABoxOrASymbol
 		asParam: methodName asString allButLast
 		forUGen: self
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> cutoffFreq: anObject [
+
+	cutoffFreq := anObject
 ]
 
 { #category : 'accessing' }
@@ -90,6 +102,12 @@ ParamsSetter >> earlyDiff:   aNumberOrABoxOrASymbol [
 	aNumberOrABoxOrASymbol
 		asParam: methodName asString allButLast
 		forUGen: self
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> envMod: anObject [
+
+	envMod := anObject
 ]
 
 { #category : 'accessing' }
@@ -393,6 +411,12 @@ ParamsSetter >> res:  aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> resonance: anObject [
+
+	resonance := anObject
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> size:   aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -438,4 +462,16 @@ ParamsSetter >> trigger: aNumberOrABoxOrASymbol [
 	aNumberOrABoxOrASymbol
 		asParam: methodName asString allButLast
 		forUGen: self
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> tuning: anObject [
+
+	tuning := anObject
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> waveform: anObject [
+
+	waveform := anObject
 ]

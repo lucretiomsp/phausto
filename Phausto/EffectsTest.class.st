@@ -13,6 +13,12 @@ EffectsTest >> testGreyHoleAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testLimiterMonoAsDsp [
+
+	self assert: LimiterMono new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testPannerAsDsp [
 
 	self assert: Panner new asDsp isNull equals: false

@@ -1,9 +1,9 @@
 "
-PhreeOPhree is the Phausto clone of the Roland TB-303.
+Acid is the Phausto clone of the Roland TB-303.
 The Roland TB-303 is a monophonic bass synthesizer from the early 1980s, known for its squelchy, resonant sound, used extensively in acid house music. Iconic tracks like ""Acid Tracks"" by Phuture and ""Voodoo Ray"" by A Guy Called Gerald showcase its signature filter sweeps and basslines.
 "
 Class {
-	#name : 'PhreeOPhree',
+	#name : 'Acid',
 	#superclass : 'TpSynth',
 	#instVars : [
 		'tuning',
@@ -19,7 +19,7 @@ Class {
 }
 
 { #category : 'accessing' }
-PhreeOPhree >> accent [
+Acid >> accent [
 
 	^ accent ifNil: [
 		  PhHSlider new
@@ -30,14 +30,28 @@ PhreeOPhree >> accent [
 			  step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
-PhreeOPhree >> accent: anObject [
+{ #category : 'initialization' }
+Acid >> asBox [
 
-	accent := anObject
+	| saw square oscillator volume filter ampEnv filterEnv instrument |
+	saw := SawOsc new.
+	square := SquareOsc new.
+	oscillator := Select2 new
+		              label: self label , 'Waveform';
+		              input0: saw;
+		              input1.
+	volume := PhHSlider new
+		          label: self label , 'Volume'
+		          init: 0.5
+		          min: 0
+		          max: 1
+		          step: 0.01.
+	instrument := oscillator asBox * volume.
+	^ instrument
 ]
 
 { #category : 'accessing' }
-PhreeOPhree >> cutoffFreq [
+Acid >> cutoffFreq [
 
 	^ cutoffFreq ifNil: [
 		  PhHSlider new
@@ -49,13 +63,7 @@ PhreeOPhree >> cutoffFreq [
 ]
 
 { #category : 'accessing' }
-PhreeOPhree >> cutoffFreq: anObject [
-
-	cutoffFreq := anObject
-]
-
-{ #category : 'accessing' }
-PhreeOPhree >> envMod [
+Acid >> envMod [
 
 	^ envMod  ifNil: [
 		  PhHSlider new
@@ -66,26 +74,20 @@ PhreeOPhree >> envMod [
 			  step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
-PhreeOPhree >> envMod: anObject [
+{ #category : 'initialization' }
+Acid >> initialize [ 
 
-	envMod := anObject
+super initialize 
 ]
 
 { #category : 'accessing' }
-PhreeOPhree >> resonance [
+Acid >> resonance [
 
 	^ resonance
 ]
 
 { #category : 'accessing' }
-PhreeOPhree >> resonance: anObject [
-
-	resonance := anObject
-]
-
-{ #category : 'accessing' }
-PhreeOPhree >> tuning [
+Acid >> tuning [
 
 	^ tuning ifNil: [
 		  PhHSlider new
@@ -97,20 +99,8 @@ PhreeOPhree >> tuning [
 ]
 
 { #category : 'accessing' }
-PhreeOPhree >> tuning: anObject [
-
-	tuning := anObject
-]
-
-{ #category : 'accessing' }
-PhreeOPhree >> waveform [
+Acid >> waveform [
 
 	^ waveform  ifNil: [
 		  PhButton new label: self label , 'Waveform' ]
-]
-
-{ #category : 'accessing' }
-PhreeOPhree >> waveform: anObject [
-
-	waveform := anObject
 ]
