@@ -9,9 +9,15 @@ Trait {
 }
 
 { #category : 'accessing' }
-ParamsSetter >> accent: anObject [
+ParamsSetter >> accent: aNumberOrABoxOrASymbol [
 
-	accent := anObject
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
@@ -51,9 +57,15 @@ ParamsSetter >> cutoff: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
-ParamsSetter >> cutoffFreq: anObject [
+ParamsSetter >> cutoffFreq: aNumberOrABoxOrASymbol [
 
-	cutoffFreq := anObject
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
@@ -105,9 +117,15 @@ ParamsSetter >> earlyDiff:   aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
-ParamsSetter >> envMod: anObject [
+ParamsSetter >> envMod: aNumberOrABoxOrASymbol [
 
-	envMod := anObject
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
@@ -411,9 +429,15 @@ ParamsSetter >> res:  aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
-ParamsSetter >> resonance: anObject [
+ParamsSetter >> resonance: aNumberOrABoxOrASymbol [
 
-	resonance := anObject
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
@@ -465,13 +489,25 @@ ParamsSetter >> trigger: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
-ParamsSetter >> tuning: anObject [
+ParamsSetter >> tuning: aNumberOrABoxOrASymbol [
 
-	tuning := anObject
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
 
 { #category : 'accessing' }
-ParamsSetter >> waveform: anObject [
+ParamsSetter >> waveform:aNumberOrABoxOrASymbol [
 
-	waveform := anObject
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
 ]
