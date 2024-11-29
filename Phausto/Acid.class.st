@@ -45,7 +45,7 @@ Acid >> asBox [
 		          init: 0
 		          min: 0
 		          max: 1
-		          step: 1.
+		          step: 0.01.
 	baseFreq := PhHSlider new
 		            label: self label , 'Note'
 		            init: 440
@@ -75,7 +75,7 @@ Acid >> asBox [
 		              input0: saw;
 		              input1: square.
 
-	instrument := oscillator * ampEnv => filter.
+	instrument := oscillator * ampEnv => filter * self resonance.
 	^ instrument asBox
 ]
 
@@ -113,13 +113,12 @@ Acid >> initialize [
 { #category : 'accessing' }
 Acid >> resonance [
 
-	^ resonance 
- ifNil: [
+	^ resonance ifNil: [
 		  PhHSlider new
 			  label: self label , 'Resonance'
 			  init: 0.5
 			  min: 0.001
-			  max: 1
+			  max: 20
 			  step: 0.001 ]
 ]
 
