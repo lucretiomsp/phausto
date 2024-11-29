@@ -53,7 +53,7 @@ UnitGenerator class >> removePlaygroundBindings [
 
 | myDictionary keysToRemove |
 myDictionary := StPlaygroundPagePresenter allInstances last text interactionModel bindings .
-keysToRemove := myDictionary keys select: [ :key | (myDictionary at: key) class inheritsFrom: UnitGenerator ].
+keysToRemove := myDictionary keys select: [ :key | (myDictionary at: key) class inheritsFrom: self class ].
 keysToRemove do: [ :key | myDictionary removeKey: key ].
 ]
 
