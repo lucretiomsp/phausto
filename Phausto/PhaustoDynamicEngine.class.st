@@ -103,9 +103,38 @@ PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox [
 { #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox withName: aString [
 
-^ self ffiCall:
-		  #( DSP * createDspFromBoxes #( const char * aString , #PhBox * aFaustBox
-		        , int 0 , void* 0 , const char * '' , int -1 ) )
+	^ self ffiCall:
+		  #( DSP #* createDspFromBoxes #( const char #* aString #, #PhBox
+		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
+		        -1 , bool false) )
+]
+
+{ #category : 'as yet unclassified' }
+PhaustoDynamicEngine >> createDspMIDIFromBoxes: aFaustBox withName: aString [
+
+Error new signal: 'CANE PROBLEMI'.
+	^ self ffiCall:
+		  #( DSP #* createDspFromBoxes #( const char #* aString #, #PhBox
+		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
+		        -1 #, bool true ) )
+]
+
+{ #category : 'as yet unclassified' }
+PhaustoDynamicEngine >> createDspMIDIFromBoxes: aFaustBox withName: aString isMIDI: aBoolean [
+
+	^ self ffiCall:
+		  #( DSP #* createDspFromBoxes #( const char #* aString #, #PhBox
+		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
+		        -1 #, bool aBoolean ) )
+]
+
+{ #category : 'as yet unclassified' }
+PhaustoDynamicEngine >> createMIIDspFromBoxes: aFaustBox withName: aString [
+
+	^ self ffiCall:
+		  #( DSP #* createDspFromBoxes #( const char #* aString #, #PhBox
+		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
+		        -1 , bool false) )
 ]
 
 { #category : 'accessing - defaults' }

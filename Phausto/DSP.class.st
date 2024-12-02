@@ -22,7 +22,8 @@ Class {
 		'isInitialized',
 		'generatedCode',
 		'displayedUI',
-		'parameters'
+		'parameters',
+		'isMIDI'
 	],
 	#classVars : [
 		'defaultName',
@@ -503,6 +504,18 @@ DSP >> isInitialized [
 DSP >> isInitialized: anObject [
 
 	isInitialized := anObject
+]
+
+{ #category : 'accessing' }
+DSP >> isMIDI [
+
+^ isMIDI ifNil: [  ^ false ]
+]
+
+{ #category : 'accessing' }
+DSP >> isMIDI: aBoolean [
+
+	isMIDI := aBoolean
 ]
 
 { #category : 'ui-building' }
