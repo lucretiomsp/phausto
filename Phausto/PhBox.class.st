@@ -190,10 +190,12 @@ PhBox >> asDspMIDIWithName: aString [
 							('create DSp WitName: ' , aString) traceCr.
 							finalDsp := PhaustoDynamicEngine uniqueInstance
 								            createDspMIDIFromBoxes: self asBox
-								            withName: aString isMIDI: true.
+								            withName: aString
+								            isMIDI: true.
 
 							PhaustoDynamicEngine dspPlaying: finalDsp.
 							finalDsp name: aString.
+							finalDsp isMIDI: true.
 							finalDsp generatedCode:
 								'process = ' , self fullPrintString , ';'.
 							attachedDSP := finalDsp.

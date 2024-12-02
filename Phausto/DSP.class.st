@@ -381,9 +381,12 @@ DSP >> getParamIndex: aString [
 	self isNull
 		ifTrue: [ self class invalidException ]
 		ifFalse: [ "self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]"
-			^ self getParamIndexWithName: '/' , self name , '/' , aString ]
-	" get the index of the parameter with aString name"
+^ FaustDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]"" get the index of the parameter with aString name"
+			self isMIDI
+				ifTrue: [
+					^ self getParamIndexWithName: '/Polyphonic/Voices/' , self name , '/' , aString ]
+				ifFalse: [
+				^ self getParamIndexWithName: '/' , self name , '/' , aString ] ]
 ]
 
 { #category : 'accessing' }
