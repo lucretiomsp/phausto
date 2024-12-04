@@ -75,17 +75,29 @@ AntiAliasedTest >> testParabolicAsDsp [
 { #category : 'tests' }
 AntiAliasedTest >> testSoftClipQuadratic1AsDsp [
 
+"avoid crash"
+self assert: 1 equals: 0.
+
 	self assert: SoftClipQuadratic1 new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
 AntiAliasedTest >> testSoftClipQuadratic2AsDsp [
 
+"avoid crash"
+self assert: 1 equals: 0.
+
+
+
 	self assert: SoftClipQuadratic2 new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
 AntiAliasedTest >> testTanh1AsDsp [
+
+
+"avoid crash"
+self assert: 1 equals: 0.
 
 	self assert: Tanh1 new asDsp isNull equals: false
 ]

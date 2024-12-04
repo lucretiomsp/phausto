@@ -15,7 +15,7 @@ Class {
 { #category : 'accessing' }
 Saturators >> input [
 
-	^ input ifNil: [ input := 0 ]
+	^ input ifNil: [ input := 1 asBox ]
 ]
 
 { #category : 'accessing' }
