@@ -163,6 +163,55 @@ PhBox >> asDspFile [
 ]
 
 { #category : 'converting' }
+PhBox >> asDspMIDI [
+	" return MIDI DSP with default name MyApp - use this method if you only need an activde DSP at time"
+
+	^ self asDspMIDIWithName: 'MyApp'
+]
+
+{ #category : 'converting' }
+PhBox >> asDspMIDIWithName: aString [
+	" creates a DSP from the Box"
+
+	| finalDsp interBox |
+	self asBox getHandle
+		ifNil: [ ^ Error new signal: 'Invalid Box - please (re)create one' ]
+		ifNotNil: [
+			self class libContext
+				ifFalse: [ ^ Error new signal: 'LibContext does not exist' ]
+				ifTrue: [
+					interBox := self asBox.
+					"initialize the final DSP to a null pointer"
+					finalDsp := DSP new.
+
+
+					interBox
+						ifNotNil: [ "!!!!! What do we destroy with multiple DSPs?????????????""DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ]."
+							('create DSp WitName: ' , aString) traceCr.
+							finalDsp := PhaustoDynamicEngine uniqueInstance
+								            createDspMIDIFromBoxes: self asBox
+								            withName: aString
+								            isMIDI: true.
+
+							PhaustoDynamicEngine dspPlaying: finalDsp.
+							finalDsp name: aString.
+							finalDsp isMIDI: true.
+							finalDsp generatedCode:
+								'process = ' , self fullPrintString , ';'.
+							attachedDSP := finalDsp.
+
+							BoxAPI uniqueInstance destroyLibContext ]
+						ifNil: [
+						Error new signal: 'Invalid Box please check its creation' ].
+					"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
+					UnitGenerator resetSelfAndAllSubClasses.
+					UnitGenerator removePlaygroundBindings.
+					self inform:
+						'! All Unit Generators have been removed from this Playground bindings !'.
+					^ finalDsp ] ]
+]
+
+{ #category : 'converting' }
 PhBox >> asDspWithName: aString [
 	" creates a DSP from the Box"
 

@@ -22,7 +22,8 @@ Class {
 		'isInitialized',
 		'generatedCode',
 		'displayedUI',
-		'parameters'
+		'parameters',
+		'isMIDI'
 	],
 	#classVars : [
 		'defaultName',
@@ -380,9 +381,12 @@ DSP >> getParamIndex: aString [
 	self isNull
 		ifTrue: [ self class invalidException ]
 		ifFalse: [ "self isNull ifTrue: [^ self class invalidException] ifFalse: [  
-^ FaustDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]"
-			^ self getParamIndexWithName: '/' , self name , '/' , aString ]
-	" get the index of the parameter with aString name"
+^ FaustDynamicEngine uniqueInstance  ffiCall:  #(int getParamIndexDsp(DSP* self, const char* aString))]"" get the index of the parameter with aString name"
+			self isMIDI
+				ifTrue: [
+					^ self getParamIndexWithName: '/Polyphonic/Voices/' , self name , '/' , aString ]
+				ifFalse: [
+				^ self getParamIndexWithName: '/' , self name , '/' , aString ] ]
 ]
 
 { #category : 'accessing' }
@@ -452,8 +456,17 @@ DSP >> getUIItemsLabeledDictionary [
 	self getUIItems do: [ :i |
 		itemsDictionary at: (i at: 'label') put: i ].
 	"we remove the soundfiles UI type from the dictionary as it is actually not a UI eleement"
-	itemsDictionary keysAndValuesRemove:  [:k :v | v includes: #soundfile].
-	^ itemsDictionary
+	itemsDictionary keysAndValuesRemove: [ :k :v |
+		v includes: #soundfile ].
+	^ itemsDictionary 
+
+	"
+	self isMIDI
+		ifTrue: [
+		^ (((itemsDictionary at: #Voices) at: #items) at: 2) at: #items ]
+		ifFalse: [ ^ itemsDictionary ]
+		
+	"
 ]
 
 { #category : 'ui-building' }
@@ -503,6 +516,18 @@ DSP >> isInitialized [
 DSP >> isInitialized: anObject [
 
 	isInitialized := anObject
+]
+
+{ #category : 'accessing' }
+DSP >> isMIDI [
+
+^ isMIDI ifNil: [  ^ false ]
+]
+
+{ #category : 'accessing' }
+DSP >> isMIDI: aBoolean [
+
+	isMIDI := aBoolean
 ]
 
 { #category : 'ui-building' }
@@ -587,7 +612,8 @@ DSP >> requirePianoKeyboard [
 
 	| params |
 	params := self getUIItemsLabeledDictionary.
-	^ (params includesKey: 'freq') & (params includesKey: 'gate')
+	
+		^ (params includesKey: 'freq') & (params includesKey: 'gate') 
 ]
 
 { #category : 'API - changes' }
