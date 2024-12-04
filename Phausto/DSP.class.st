@@ -456,8 +456,17 @@ DSP >> getUIItemsLabeledDictionary [
 	self getUIItems do: [ :i |
 		itemsDictionary at: (i at: 'label') put: i ].
 	"we remove the soundfiles UI type from the dictionary as it is actually not a UI eleement"
-	itemsDictionary keysAndValuesRemove:  [:k :v | v includes: #soundfile].
-	^ itemsDictionary
+	itemsDictionary keysAndValuesRemove: [ :k :v |
+		v includes: #soundfile ].
+	^ itemsDictionary 
+
+	"
+	self isMIDI
+		ifTrue: [
+		^ (((itemsDictionary at: #Voices) at: #items) at: 2) at: #items ]
+		ifFalse: [ ^ itemsDictionary ]
+		
+	"
 ]
 
 { #category : 'ui-building' }
@@ -603,7 +612,8 @@ DSP >> requirePianoKeyboard [
 
 	| params |
 	params := self getUIItemsLabeledDictionary.
-	^ (params includesKey: 'freq') & (params includesKey: 'gate')
+	
+		^ (params includesKey: 'freq') & (params includesKey: 'gate') 
 ]
 
 { #category : 'API - changes' }
