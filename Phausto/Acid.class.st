@@ -45,7 +45,7 @@ Acid >> asBox [
 		          init: 0
 		          min: 0
 		          max: 1
-		          step: 0.01.
+		          step: 0.001.
 	baseFreq := PhHSlider new
 		            label: self label , 'Note'
 		            init: 440
@@ -86,7 +86,7 @@ Acid >> cutoffFreq [
 		  PhHSlider new
 			  label: self label , 'CutoffFreq'
 			  init: 1
-			  min: 0
+			  min: 0.2
 			  max: 1
 			  step: 0.001 ]
 ]
@@ -94,11 +94,11 @@ Acid >> cutoffFreq [
 { #category : 'accessing' }
 Acid >> envMod [
 
-	^ envMod  ifNil: [
+	^ envMod ifNil: [
 		  PhHSlider new
 			  label: self label , 'EnvMod'
 			  init: 0.5
-			  min: 0.001
+			  min: 0.1
 			  max: 1
 			  step: 0.001 ]
 ]

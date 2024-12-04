@@ -36,7 +36,7 @@ Wavefold >> initialize [
 	
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Wavefold >> width [
 
 	^ width ifNil: [   PhHSlider new
@@ -47,7 +47,7 @@ Wavefold >> width [
 		        step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Wavefold >> width: aNumberOrABox [
 
 
