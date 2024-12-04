@@ -1,12 +1,12 @@
 "
-First-order ADAA quadratic softclip.
+Second-order ADAA quadratic softclip.
 
 The domain of this function is ℝ; its theoretical range is [-1.0; 1.0].
 
 
 "
 Class {
-	#name : 'SofClipQuadratic1',
+	#name : 'SoftClipQuadratic2',
 	#superclass : 'Saturators',
 	#instVars : [
 		'width'
@@ -17,7 +17,7 @@ Class {
 }
 
 { #category : 'converting' }
-SofClipQuadratic1 >> asBox [
+SoftClipQuadratic2 >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -26,10 +26,10 @@ SofClipQuadratic1 >> asBox [
 ]
 
 { #category : 'initialization' }
-SofClipQuadratic1 >> initialize [
+SoftClipQuadratic2 >> initialize [
 
 	super initialize.
-	processExpression :='process = aa.softclipQuadratic1;'.
+	processExpression :='process = aa.softclipQuadratic2;'.
 	
 	
 ]
