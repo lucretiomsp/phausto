@@ -21,6 +21,17 @@ Trigonometry >> asBox [
 	^ finalBox
 ]
 
+{ #category : 'initialization' }
+Trigonometry >> initialize [
+
+| faustFunctionName |
+faustFunctionName := (self class name findBetweenSubstrings: ' ' ) first asLowercase .
+	super initialize.
+	processExpression :='process = aa.' , faustFunctionName , ';'.
+	
+	
+]
+
 { #category : 'accessing' }
 Trigonometry >> input [
 

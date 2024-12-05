@@ -12,3 +12,12 @@ Class {
 	#package : 'Phausto',
 	#tag : 'Math'
 }
+
+{ #category : 'initialization' }
+AASine >> initialize [
+
+	super initialize.
+	processExpression :='process = aa.sine;'.
+	
+	
+]
