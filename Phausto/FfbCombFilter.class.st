@@ -8,7 +8,7 @@ del: current (float) comb-filter delay between 0 and maxdel
 g: feedback gain
 "
 Class {
-	#name : 'Fb_CombFilter',
+	#name : 'FfbCombFilter',
 	#superclass : 'CombFilters',
 	#instVars : [
 		'aN',
@@ -20,7 +20,7 @@ Class {
 }
 
 { #category : 'converting' }
-Fb_CombFilter >> asBox [
+FfbCombFilter >> asBox [
 
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
@@ -32,7 +32,7 @@ Fb_CombFilter >> asBox [
 ]
 
 { #category : 'accessing' }
-Fb_CombFilter >> del [
+FfbCombFilter >> del [
 
 	^ del ifNil: [
 		  del := PhHSlider new
@@ -44,7 +44,7 @@ Fb_CombFilter >> del [
 ]
 
 { #category : 'as yet unclassified' }
-Fb_CombFilter >> g [
+FfbCombFilter >> g [
 
 	^ g ifNil: [
 		  g := PhHSlider new

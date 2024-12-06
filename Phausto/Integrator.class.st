@@ -1,7 +1,5 @@
 "
-One zero filter. Difference equation: y(n)=x(n)−zx(n−1)
-.
-
+Same as pole(1) [implemented separately for block-diagram clarity].
 
 "
 Class {
@@ -18,7 +16,7 @@ Integrator >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox :=  self input connectTo: intermdiateBox.
+	finalBox := 1 asBox , self input connectTo: intermdiateBox.
 
 	^ finalBox
 ]

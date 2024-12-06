@@ -9,7 +9,7 @@ period: is the filter period in seconds, that is, the time for the impulse respo
 
 "
 Class {
-	#name : 'Lptn',
+	#name : 'LptN',
 	#superclass : 'PhFilter',
 	#instVars : [
 		'attenuation',
@@ -21,7 +21,7 @@ Class {
 }
 
 { #category : 'converting' }
-Lptn >> asBox [
+LptN >> asBox [
 
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
@@ -32,7 +32,7 @@ Lptn >> asBox [
 ]
 
 { #category : 'accessing' }
-Lptn >> attenuation [
+LptN >> attenuation [
 
 	^ attenuation ifNil: [
 		  attenuation := PhHSlider new
@@ -44,14 +44,14 @@ Lptn >> attenuation [
 ]
 
 { #category : 'initialization' }
-Lptn >> initialize [
+LptN >> initialize [
 
 	super initialize.
 	self processExpression: 'process = fi.zero;'
 ]
 
 { #category : 'accessing' }
-Lptn >> period [
+LptN >> period [
 
 	^ period ifNil: [
 		  period := PhHSlider new
