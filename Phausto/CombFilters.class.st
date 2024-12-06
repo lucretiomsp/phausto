@@ -64,6 +64,18 @@ CombFilters >> initialize [
 ]
 
 { #category : 'accessing' }
+CombFilters >> input [
+
+	^ input ifNil: [ input := 1 asBox ]
+]
+
+{ #category : 'accessing' }
+CombFilters >> input: aPhBox [
+
+	input := aPhBox
+]
+
+{ #category : 'accessing' }
 CombFilters >> intDel [
 
 	^ intDel ifNil: [

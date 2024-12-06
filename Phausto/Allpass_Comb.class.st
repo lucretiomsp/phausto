@@ -20,11 +20,10 @@ Class {
 	#tag : 'Filters'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 Allpass_Comb >> aN [
 
-
-	^ aN ifNil: [
+^ aN ifNil: [
 		  aN := PhHSlider new
 			        label: self label , 'AN'
 			        init: 1

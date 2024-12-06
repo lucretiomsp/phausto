@@ -21,7 +21,7 @@ Class {
 	#tag : 'Filters'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 Allpass_FComb5 >> aN [
 
 
