@@ -22,19 +22,8 @@ Ff_FComb >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self maxDel , self intDel , self del , self b0 , self bM , self input connectTo: intermdiateBox.
+	finalBox := self maxDel ,  self del , self b0 , self bM
+	            , self input connectTo: intermdiateBox.
 
 	^ finalBox
-]
-
-{ #category : 'accessing' }
-Ff_FComb >> del [
-
-	^ del ifNil: [
-		  del := PhHSlider new
-			         label: self label , 'del'
-			         init: 2
-			         min: 2
-			         max: 32
-			         step: 2 ]
 ]

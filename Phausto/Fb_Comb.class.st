@@ -38,7 +38,7 @@ Fb_Comb >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self maxDel , self intDel , self del , self b0 , self aN
+	finalBox := self maxDel , self intDel ,  self b0 , self aN
 	            , self input connectTo: intermdiateBox.
 
 	^ finalBox

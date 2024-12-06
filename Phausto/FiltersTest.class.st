@@ -69,7 +69,7 @@ FiltersTest >> testFb_FComb [
 { #category : 'tests' }
 FiltersTest >> testFb_FCombFilter [
 
-	self assert:Object new asDsp isNull equals: false
+	self assert: FbCombFilter new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

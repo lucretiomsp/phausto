@@ -25,22 +25,10 @@ FfbCombFilter >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self maxDel , self intDel , self del , self g , 
-	             self input connectTo: intermdiateBox.
+	finalBox := self maxDel , self del, self g
+	            , self input connectTo: intermdiateBox.
 
 	^ finalBox
-]
-
-{ #category : 'accessing' }
-FfbCombFilter >> del [
-
-	^ del ifNil: [
-		  del := PhHSlider new
-			         label: self label , 'del'
-			         init: 2
-			         min: 2
-			         max: 32
-			         step: 0.01 ]
 ]
 
 { #category : 'as yet unclassified' }

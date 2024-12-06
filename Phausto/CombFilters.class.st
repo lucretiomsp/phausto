@@ -46,11 +46,11 @@ CombFilters >> del [
 
 	^ del ifNil: [
 		  del := PhHSlider new
-			       label: self label , 'del'
-			       init: 2
-			       min: 2
-			       max: 32
-			       step: 2 ]
+			         label: self label , 'del'
+			         init: 2
+			         min: 0
+			         max: 32
+			         step: 0.01 ]
 ]
 
 { #category : 'initialization' }
@@ -80,21 +80,15 @@ CombFilters >> intDel [
 
 	^ intDel ifNil: [
 		  intDel := PhHSlider new
-			       label: self label , 'IntDel'
-			       init: 2
-			       min: 2
-			       max: 32
-			       step: 2 ]
+			            label: self label , 'IntDel'
+			            init: 2
+			            min: 0
+			            max: 32
+			            step: 1 ]
 ]
 
 { #category : 'accessing' }
 CombFilters >> maxDel [
 
-	^ maxDel ifNil: [
-		  maxDel := PhHSlider new
-			       label: self label , 'MaxDel'
-			       init: 2
-			       min: 2
-			       max: 32
-			       step: 2 ]
+	^ 32 asBox
 ]

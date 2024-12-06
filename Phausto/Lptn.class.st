@@ -47,7 +47,7 @@ LptN >> attenuation [
 LptN >> initialize [
 
 	super initialize.
-	self processExpression: 'process = fi.zero;'
+	self processExpression: 'process = fi.lptN;'
 ]
 
 { #category : 'accessing' }
