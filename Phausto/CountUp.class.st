@@ -38,23 +38,17 @@ CountUp >> initialize [
 { #category : 'accessing' }
 CountUp >> max [
 
-	^ max
-]
-
-{ #category : 'accessing' }
-CountUp >> max: anInteger [
-
-	max := anInteger asBox
+	^ max  ifNil: [
+		  max := PhHSlider new
+			            label: self label , 'Max'
+			            init: 1
+			            min: 1
+			            max: 64
+			            step: 11 ]
 ]
 
 { #category : 'accessing' }
 CountUp >> trig [
 
 	^ trig
-]
-
-{ #category : 'accessing' }
-CountUp >> trig: aTrigger [
-
-	trig := aTrigger asBox
 ]
