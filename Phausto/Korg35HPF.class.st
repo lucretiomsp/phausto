@@ -49,7 +49,7 @@ Korg35HPF >> fr [
 Korg35HPF >> initialize [
 
 	super initialize.
-	self processExpression: 'process = ve.korg3HLPF;'
+	self processExpression: 'process = ve.korg35HPF;'
 ]
 
 { #category : 'accessing' }
