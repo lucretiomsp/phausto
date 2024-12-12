@@ -13,7 +13,7 @@ http://www.willpirkle.com/Downloads/AN-6DiodeLadderFilter.pdf
 "
 Class {
 	#name : 'DiodeLadder',
-	#superclass : 'MoogFilters',
+	#superclass : 'MKOFilters',
 	#category : 'Phausto-Filters',
 	#package : 'Phausto',
 	#tag : 'Filters'
