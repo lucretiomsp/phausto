@@ -103,6 +103,18 @@ FiltersTest >> testIntegrator [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testKorg35HPF [
+
+	self assert: Korg35HPF new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+FiltersTest >> testKorg35LPF [
+
+	self assert: Korg35LPF new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 FiltersTest >> testLowPassFilter [
 
 self assert: Lowpass new  asDsp isNull equals: false
@@ -115,9 +127,51 @@ FiltersTest >> testLptN [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testMoogHalfLadder [
+
+	self assert: MoogHalfLadder new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+FiltersTest >> testMoogLadder [
+
+	self assert: MoogLadder new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 FiltersTest >> testMoogVcf [
 
 self assert: MoogVcf new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+FiltersTest >> testOberheim [
+
+	self assert: Oberheim new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+FiltersTest >> testOberheimBPF [
+
+	self assert: OberheimBPF new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+FiltersTest >> testOberheimBSF [
+
+	self assert: OberheimBSF new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+FiltersTest >> testOberheimHPF [
+
+	self assert: OberheimHPF new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+FiltersTest >> testOberheimLPF [
+
+	self assert: OberheimLPF new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

@@ -1,13 +1,11 @@
 "
-Virtual analog model of the 2nd-order Moog Half Ladder (simplified version of (ve.)moogLadder). Several 1st-order filters are cascaded in series. Feedback is then used, in part, to control the cut-off frequency and the resonance.
-
-This filter was implemented in Faust by Eric Tarr during the 2019 Embedded DSP With Faust Workshop.
+High-Pass Oberheim filter (see description above). Specialize the generic implementation: keep the third HPF output, the compiler will only generate the needed code.
 Parameters:
 normFreq: normalized frequency (0-1)
 Q: quality factor between .707 (0 feedback coefficient) to 25 (feedback = 4, which is the self-oscillating threshold).
 "
 Class {
-	#name : 'MoogHalfLadder',
+	#name : 'OberheimHPF',
 	#superclass : 'MKOFilters',
 	#category : 'Phausto-Filters',
 	#package : 'Phausto',
@@ -15,7 +13,7 @@ Class {
 }
 
 { #category : 'converting' }
-MoogHalfLadder >> asBox [
+OberheimHPF >> asBox [
 
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
@@ -26,8 +24,8 @@ MoogHalfLadder >> asBox [
 ]
 
 { #category : 'initialization' }
-MoogHalfLadder >> initialize [
+OberheimHPF >> initialize [
 
 	super initialize.
-	self processExpression: 'process = ve.moogHalfLadder;'
+	self processExpression: 'process = ve.oberheimHPF;'
 ]

@@ -36,27 +36,3 @@ DiodeLadder >> initialize [
 	super initialize.
 	self processExpression: 'process = ve.diodeLadder;'
 ]
-
-{ #category : 'accessing' }
-DiodeLadder >> normFreq [
-
-	^ normFreq ifNil: [
-		  normFreq := PhHSlider new
-			        label: self label , 'NormFreq'
-			        init: 1
-			        min: 0
-			        max: 1
-			        step: 0.001 ]
-]
-
-{ #category : 'accessing' }
-DiodeLadder >> q [
-
-	^ q ifNil: [
-		  q := PhHSlider new
-			       label: self label , 'Q'
-			       init: 1
-			       min: 1
-			       max: 20
-			       step: 0.01 ]
-]
