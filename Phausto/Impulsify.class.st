@@ -28,18 +28,6 @@ Impulsify >> gate [
 	^ gate ifNil: [ gate := PhButton new label: self label ]
 ]
 
-{ #category : 'accessing' }
-Impulsify >> gate: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector.
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'initialization' }
 Impulsify >> initialize [
 

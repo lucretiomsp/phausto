@@ -27,13 +27,13 @@ DownSampler >> asBox [
 { #category : 'accessing' }
 DownSampler >> frequency [
 
-	^ frequency
-]
-
-{ #category : 'accessing' }
-DownSampler >> frequency: aFrequency [
-
-	frequency := aFrequency asBox
+	^ frequency  ifNil: [
+		  frequency := PhHSlider new
+			            label: self label , 'Frequency'
+			            init: 300
+			            min: 20
+			            max: 18000
+			            step: 1 ]
 ]
 
 { #category : 'initialization' }
@@ -48,10 +48,4 @@ DownSampler >> initialize [
 DownSampler >> input [
 
 	^ input
-]
-
-{ #category : 'accessing' }
-DownSampler >> input: anInput [ 
-
-	input := anInput asBox
 ]
