@@ -1,8 +1,12 @@
 "
-Pulses generated at period in seconds
+Basic sawtooth wave of period p.
+
+Parameter:
+
+p: period as a number of samples
 "
 Class {
-	#name : 'Pulse',
+	#name : 'PhPeriod',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'period'
@@ -13,28 +17,25 @@ Class {
 }
 
 { #category : 'converting' }
-Pulse >> asBox [
+PhPeriod >> asBox [
 
-	| intermediateBox periodInSamples finalBox |
+	| intermediateBox  finalBox |
 	intermediateBox := super asBox.
 
-	periodInSamples := (Sec2Samples new value: self period) asBox.
-	finalBox := periodInSamples connectTo:
-		            intermediateBox.
+
+	finalBox := self period connectTo: intermediateBox.
 	^ finalBox
 ]
 
 { #category : 'initialization' }
-Pulse >> initialize [
+PhPeriod >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.pulse;'.
-
-
+	processExpression := 'process = ba.period;'
 ]
 
 { #category : 'accessing' }
-Pulse >> period [
+PhPeriod >> period [
 
 	^ period ifNil: [
 		  period := PhHSlider new

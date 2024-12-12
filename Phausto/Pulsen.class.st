@@ -46,14 +46,6 @@ Pulsen >> length [
 ]
 
 { #category : 'accessing' }
-Pulsen >> length: aNumberOrABox [
-
-	length := aNumberOrABox isNumber
-		        ifTrue: [ self length init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ].
-]
-
-{ #category : 'accessing' }
 Pulsen >> period [
 
 	^ period ifNil: [ period :=
@@ -63,16 +55,4 @@ Pulsen >> period [
 			  min: 0.01
 			  max: 2
 			  step: 0.01 ]
-]
-
-{ #category : 'accessing' }
-Pulsen >> period: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. 
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]

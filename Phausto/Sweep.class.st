@@ -45,7 +45,7 @@ Sweep >> period [
 			            step: 0.01 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Sweep >> period: aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -57,7 +57,7 @@ Sweep >> period: aNumberOrABoxOrASymbol [
 		forUGen: self
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Sweep >> run [
 
 	^ run ifNil: [ run := PhButton new label: self label , 'Gate' ]

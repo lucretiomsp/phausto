@@ -33,7 +33,7 @@ Counter >> initialize [
 	processExpression := 'process = ba.counter;'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Counter >> trig [
 
 	^ trig ifNil: [ trig := PhButton new label: self label , 'Gate' ]

@@ -33,7 +33,7 @@ CountUp >> initialize [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 CountUp >> max [
 
 	^ max  ifNil: [

@@ -32,7 +32,7 @@ CountDown >> initialize [
 	processExpression := 'process = ba.countdown;'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 CountDown >> max [
 
 	^ max  ifNil: [
