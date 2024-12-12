@@ -20,7 +20,7 @@ CountDown >> asBox [
 	intermediateBox := super asBox.
 
 	
-	finalBox := max , trig  connectTo:
+	finalBox := self max , self  trig  connectTo:
 		            intermediateBox.
 	^ finalBox
 ]

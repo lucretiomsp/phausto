@@ -44,8 +44,10 @@ BasicsTest >> testPhBeatAsDsp [
 
 { #category : 'tests' }
 BasicsTest >> testPhCycleAsDsp [
+	"crash apparently for unexplicable reason"
 
-	self assert: PhCycle  new asDsp isNull equals: false
+	self assert: 1 equals: 0
+	"self assert: PhCycle new asDsp isNull equals: false"
 ]
 
 { #category : 'tests' }
@@ -87,7 +89,10 @@ BasicsTest >> testPulseAsDsp [
 { #category : 'tests' }
 BasicsTest >> testPulseCountDownAsDsp [
 
-	self assert: PulseCountDown new asDsp isNull equals: false
+"crash apparently for unexplicable reason"
+
+	self assert: 1 equals: 0
+	"self assert: PulseCountDown new asDsp isNull equals: false"
 ]
 
 { #category : 'tests' }
@@ -99,7 +104,10 @@ BasicsTest >> testPulseCountDownLoopAsDsp [
 { #category : 'tests' }
 BasicsTest >> testPulseCountUpAsDsp [
 
-	self assert: PulseCountUp new asDsp isNull equals: false
+"crash apparently for unexplicable reason"
+
+	self assert: 1 equals: 0
+	"self assert: PulseCountUp new asDsp isNull equals: false"
 ]
 
 { #category : 'tests' }
@@ -135,5 +143,9 @@ BasicsTest >> testSelectNAsDsp [
 { #category : 'tests' }
 BasicsTest >> testSpulsedAsDsp [
 
-	self assert: Sweep new asDsp isNull equals: false
+"crash apparently for unexplicable reason"
+
+	self assert: 1 equals: 0
+
+	"self assert: Sweep new asDsp isNull equals: false"
 ]

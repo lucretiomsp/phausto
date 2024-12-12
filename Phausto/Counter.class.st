@@ -22,7 +22,7 @@ Counter >> asBox [
 	intermediateBox := super asBox.
 
 
-	finalBox := trig connectTo: intermediateBox.
+	finalBox := self trig connectTo: intermediateBox.
 	^ finalBox
 ]
 

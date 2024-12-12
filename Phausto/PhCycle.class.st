@@ -23,7 +23,7 @@ PhCycle >> asBox [
 	intermediateBox := super asBox.
 
 
-	finalBox := self n  connectTo: intermediateBox.
+	finalBox := self n , self input  connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -32,6 +32,12 @@ PhCycle >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.cycle;'
+]
+
+{ #category : 'accessing' }
+PhCycle >> input [
+
+	^ input ifNil: [ input := SquareOsc new ]
 ]
 
 { #category : 'as yet unclassified' }
