@@ -26,10 +26,10 @@ Class {
 { #category : 'converting' }
 TpSampler >> asBox [
 
-	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler effect |
+	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler audioFiles |
 	allFiles := pathToFolder asFileReference allChildren.
-
-	fileNames := (2 to: allFiles size) collect: [ :i |
+	audioFiles := allFiles select: [ :f | f pathString isAudioFilePath ].
+	fileNames := (2 to: audioFiles size) collect: [ :i |
 		             (allFiles at: i) asAbsolute pathString
 			             surroundedByQuotes ].
 	fileNames sort.
