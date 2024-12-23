@@ -46,5 +46,5 @@ SmoothEnv >> asBox [
 SmoothEnv >> initialize [
 
 	super initialize.
-	processExpression := 'process = en.smoothenvelope;'
+	processExpression := 'process = en.smoothEnvelope;'
 ]

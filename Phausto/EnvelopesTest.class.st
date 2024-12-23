@@ -82,7 +82,6 @@ EnvelopesTest >> testDx7EnvAsDsp [
 
 { #category : 'tests' }
 EnvelopesTest >> testSmoothEnvAsDsp [
-"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
-	self assert: true equals: false
-	"self assert: SmoothEnv new asDsp isNull equals: false"
+
+	self assert: SmoothEnv new asDsp isNull equals: false
 ]
