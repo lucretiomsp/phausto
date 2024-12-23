@@ -1,18 +1,19 @@
 "
-ASR (Attack, Sustain, Release) envelope generator
+ARFE (Attack and Release-to-Final-value Exponentially) envelope generator. Approximately equal to smoothEnvelope(Attack/6.91) when Attack == Release.
 
 Where:
 
 at: attack (sec)
 sl: sustain level (between 0..1)
-rt: release (sec)
+finalLevel: final level to approach upon release (such as 0)
 t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
-	#name : 'ASREnv',
+	#name : 'ARFExpEnv',
 	#superclass : 'PhEnvelope',
 	#instVars : [
-		'sustain'
+		'sustain',
+		'finalLevel'
 	],
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
@@ -20,25 +21,38 @@ Class {
 }
 
 { #category : 'converting' }
-ASREnv >> asBox [
+ARFExpEnv >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self attack asBox , self sustain asBox
-	            , self release asBox , self trigger asBox connectTo:
+	finalBox := self attack asBox 
+	            , self release asBox , self finalLevel , self trigger asBox connectTo:
 		            intermediateBox.
 	^ finalBox
 ]
 
+{ #category : 'accessing' }
+ARFExpEnv >> finalLevel [
+
+
+	^ finalLevel ifNil: [
+		  finalLevel := PhHSlider new
+			             label: self label , 'FinalLevel'
+			             init: 0.5
+			             min: 0
+			             max: 1
+			             step: 0.001 ]
+]
+
 { #category : 'initialization' }
-ASREnv >> initialize [
+ARFExpEnv >> initialize [
 
 	super initialize.
 	processExpression := 'process = en.asr;'
 ]
 
 { #category : 'as yet unclassified' }
-ASREnv >> sustain [
+ARFExpEnv >> sustain [
 
 	^ sustain ifNil: [
 		  sustain := PhHSlider new

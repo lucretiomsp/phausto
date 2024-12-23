@@ -1,20 +1,22 @@
 "
-ADSR (Attack, Decay, Sustain, Release) envelope generator. adsr is a standard Faust function.
+ADSR (Attack, Decay, Sustain, Release, Final) envelope generator with control over bias on each segment, and toggle for legato.
 
 Where:
 
-at: attack time (sec)
-dt: decay time (sec)
-sl: sustain level (between 0..1)
-rt: release time (sec)
-t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
+attack: attack time (sec)
+hold: hold time (sec)
+decay: decay time (sec)
+sustain: sustain level (between 0..1)
+release: release time (sec)
+trigger: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
-	#name : 'ADSREnv',
+	#name : 'AHDSREEnv',
 	#superclass : 'PhEnvelope',
 	#instVars : [
 		'decay',
-		'sustain'
+		'sustain',
+		'hold'
 	],
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
@@ -22,7 +24,7 @@ Class {
 }
 
 { #category : 'converting' }
-ADSREnv >> asBox [
+AHDSREEnv >> asBox [
 
 	| intermediateBox finalBox |
 	
@@ -34,7 +36,7 @@ ADSREnv >> asBox [
 ]
 
 { #category : 'as yet unclassified' }
-ADSREnv >> decay [
+AHDSREEnv >> decay [
 
 	^ decay ifNil: [
 		  decay := PhHSlider new
@@ -45,8 +47,20 @@ ADSREnv >> decay [
 			           step: 1 ]
 ]
 
+{ #category : 'accessing' }
+AHDSREEnv >> hold [
+
+	^ hold ifNil: [
+		  hold := PhHSlider new
+			           label: self label , 'Hold'
+			           init: 0.01
+			           min: 0.001
+			           max: 2
+			           step: 1 ]
+]
+
 { #category : 'initialization' }
-ADSREnv >> initialize [
+AHDSREEnv >> initialize [
 
 	super initialize.
 	self decay: 0.2.
@@ -55,7 +69,7 @@ ADSREnv >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-ADSREnv >> sustain [
+AHDSREEnv >> sustain [
 
 	^ sustain ifNil: [
 		sustain := PhHSlider new
