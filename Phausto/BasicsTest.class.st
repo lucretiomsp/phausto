@@ -26,7 +26,9 @@ BasicsTest >> testCounterAsDsp [
 
 { #category : 'tests' }
 BasicsTest >> testDownSamplerAsDsp [
+	"crash apparently for unexplicable reason"
 
+	self assert: 1 equals: 0.
 	self assert: DownSampler new asDsp isNull equals: false
 ]
 

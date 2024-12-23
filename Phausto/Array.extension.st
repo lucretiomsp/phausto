@@ -18,3 +18,13 @@ Array >> asParam: aString forUGen: aUnitGenerator [
 
 	aUnitGenerator instVarNamed: aString put: uiElement
 ]
+
+{ #category : '*Phausto' }
+Array >> asPhList [
+
+"convert the array into a PhList a.k.a a Faust pseudo list"
+| list |
+
+list := PhList new addAll: self.
+^ list
+]

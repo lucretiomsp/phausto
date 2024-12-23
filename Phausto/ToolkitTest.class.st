@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+ToolkitTest >> testPHSelectNAsDsp [
+
+	self assert: (PhSelectN new list: #( 1 2 3 )) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhListAsDsp [
 
    | list |
