@@ -7,6 +7,14 @@ Class {
 }
 
 { #category : 'tests' }
+ToolkitTest >> testPhListAsDsp [
+
+   | list |
+ list := PhList new addAll: #( 1 2 3).
+	self assert: list asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPulseGateAsDsp [
 
 self assert: PulseGate new asDsp isNull equals: false

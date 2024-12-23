@@ -29,3 +29,10 @@ ManifestPhausto class >> rulePrecedenceRuleV1FalsePositive [
 	<ignoreForCoverage>
 	^ #(#(#(#RGMethodDefinition #(#LFORandomPos #asBox #false)) #'2024-10-14T13:38:08.64591+02:00') #(#(#RGMethodDefinition #(#Fm2Op #asBox #false)) #'2024-11-18T10:34:30.410787+01:00') #(#(#RGMethodDefinition #(#Acid #asBox #false)) #'2024-11-27T09:07:12.134506+01:00') )
 ]
+
+{ #category : 'code-critics' }
+ManifestPhausto class >> ruleStringConcatenationRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#PhList #asBox #false)) #'2024-12-23T14:16:08.160049+01:00') )
+]
