@@ -37,12 +37,12 @@ ADSREnvBias >> asBox [
 	intermediateBox := super asBox.
 	finalBox := self attack asBox , self decay asBox , self sustain asBox
 	            , self release asBox , self biasAttack asBox
-	            , self biasDecay asBox , self legato asBox
+	            , self biasDecay asBox , self biasRelease , self legato asBox
 	            , self trigger asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 ADSREnvBias >> biasAttack [
 
 	^ biasAttack ifNil: [
@@ -54,7 +54,7 @@ ADSREnvBias >> biasAttack [
 			             step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 ADSREnvBias >> biasDecay [
 
 	^ biasDecay ifNil: [
@@ -66,7 +66,7 @@ ADSREnvBias >> biasDecay [
 			             step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 ADSREnvBias >> biasRelease [
 
 	^ biasRelease ifNil: [
@@ -95,10 +95,10 @@ ADSREnvBias >> initialize [
 
 	super initialize.
 
-	processExpression := 'process = en.adsrf_bias;'
+	processExpression := 'process = en.adsr_bias;'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 ADSREnvBias >> legato [
 
 "TODO must be changed to a UI toggle!!!!!!!!!!!!!!!"

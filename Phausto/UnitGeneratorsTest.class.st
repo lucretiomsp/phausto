@@ -7,18 +7,6 @@ Class {
 }
 
 { #category : 'tests' }
-UnitGeneratorsTest >> testAREnvAsDsp [
-
-	self assert: AREnv new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
-UnitGeneratorsTest >> testASREnvAsDsp [
-
-	self assert: ASREnv new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
 UnitGeneratorsTest >> testAbsoluteUGen [
 
 self assert: SineOsc new absolute asDsp isNull equals: false

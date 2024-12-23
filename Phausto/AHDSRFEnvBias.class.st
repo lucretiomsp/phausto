@@ -38,15 +38,15 @@ AHDSRFEnvBias >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self attack asBox , self decay asBox , self hold asBox, self sustain asBox
-	            , self release asBox , self finalLevel asBox
-	            , self biasAttack asBox , self biasDecay asBox
-	            , self legato asBox , self trigger asBox connectTo:
-		            intermediateBox.
+	finalBox := self attack asBox , self decay asBox , self hold asBox
+	            , self sustain asBox , self release asBox
+	            , self finalLevel asBox , self biasAttack asBox
+	            , self biasDecay asBox , self biasRelease ,  self legato asBox
+	            , self trigger asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSRFEnvBias >> biasAttack [
 
 	^ biasAttack ifNil: [
@@ -58,7 +58,7 @@ AHDSRFEnvBias >> biasAttack [
 			             step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSRFEnvBias >> biasDecay [
 
 	^ biasDecay ifNil: [
@@ -70,7 +70,7 @@ AHDSRFEnvBias >> biasDecay [
 			             step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSRFEnvBias >> biasRelease [
 
 	^ biasRelease ifNil: [
@@ -106,7 +106,7 @@ AHDSRFEnvBias >> finalLevel [
 			             step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSRFEnvBias >> hold [
 
 	^ hold ifNil: [
@@ -126,7 +126,7 @@ AHDSRFEnvBias >> initialize [
 	processExpression := 'process = en.adsrf_bias;'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSRFEnvBias >> legato [
 
 "TODO must be changed to a UI toggle!!!!!!!!!!!!!!!"

@@ -31,7 +31,7 @@ ARFExpEnv >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 ARFExpEnv >> finalLevel [
 
 

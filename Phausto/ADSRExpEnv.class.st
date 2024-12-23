@@ -10,7 +10,7 @@ rt: release time (sec)
 t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
-	#name : 'ADSREEnv',
+	#name : 'ADSRExpEnv',
 	#superclass : 'PhEnvelope',
 	#instVars : [
 		'decay',
@@ -22,7 +22,7 @@ Class {
 }
 
 { #category : 'converting' }
-ADSREEnv >> asBox [
+ADSRExpEnv >> asBox [
 
 	| intermediateBox finalBox |
 	
@@ -34,7 +34,7 @@ ADSREEnv >> asBox [
 ]
 
 { #category : 'as yet unclassified' }
-ADSREEnv >> decay [
+ADSRExpEnv >> decay [
 
 	^ decay ifNil: [
 		  decay := PhHSlider new
@@ -46,16 +46,16 @@ ADSREEnv >> decay [
 ]
 
 { #category : 'initialization' }
-ADSREEnv >> initialize [
+ADSRExpEnv >> initialize [
 
 	super initialize.
 	self decay: 0.2.
 	self sustain: 0.5.
-	processExpression := 'process = en.adsr;'
+	processExpression := 'process = en.adsre;'
 ]
 
 { #category : 'as yet unclassified' }
-ADSREEnv >> sustain [
+ADSRExpEnv >> sustain [
 
 	^ sustain ifNil: [
 		sustain := PhHSlider new

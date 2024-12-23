@@ -37,14 +37,15 @@ AHDSREnvBias >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self attack asBox , self decay asBox , self hold asBox ,  self sustain asBox
-	            , self release asBox , self biasAttack asBox
-	            , self biasDecay asBox , self legato asBox
-	            , self trigger asBox connectTo: intermediateBox.
+	finalBox := self attack asBox , self decay asBox , self hold asBox
+	            , self sustain asBox , self release asBox
+	            , self biasAttack asBox , self biasDecay asBox , self biasRelease
+	            , self legato asBox , self trigger asBox connectTo:
+		            intermediateBox.
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSREnvBias >> biasAttack [
 
 	^ biasAttack ifNil: [
@@ -56,7 +57,7 @@ AHDSREnvBias >> biasAttack [
 			             step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSREnvBias >> biasDecay [
 
 	^ biasDecay ifNil: [
@@ -68,7 +69,7 @@ AHDSREnvBias >> biasDecay [
 			             step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSREnvBias >> biasRelease [
 
 	^ biasRelease ifNil: [
@@ -92,7 +93,7 @@ AHDSREnvBias >> decay [
 			           step: 1 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSREnvBias >> hold [
 
 	^ hold ifNil: [
@@ -112,7 +113,7 @@ AHDSREnvBias >> initialize [
 	processExpression := 'process = en.adsrf_bias;'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AHDSREnvBias >> legato [
 
 "TODO must be changed to a UI toggle!!!!!!!!!!!!!!!"
