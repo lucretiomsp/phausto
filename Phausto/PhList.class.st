@@ -1,7 +1,7 @@
 "
-I am the Phausto implementation of a Faust list, simulated in the language using parallel composition: (1,2,3,5,7,11). The main limitation of this approach is that there is no empty list.
+I am the Phausto implementation of a Faust list, simulated in the language using parallel composition: (1,2,3,5,7,11). The main limitation of this approach in Faust is that there is no empty list.
 A valid PhList needs to have at least 2 items, otherwise converting to a PhBox will cause an error.
-Consistent with Pharo's collection indexing, counting starts at index 1.
+Consistent with Pharo's collection indexing, counting starts at index 1, this means the first element of a PhList is always ""0 asBox""
 "
 Class {
 	#name : 'PhList',
