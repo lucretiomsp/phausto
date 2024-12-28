@@ -9,14 +9,26 @@ Class {
 { #category : 'tests' }
 ToolkitTest >> testPHSelectNAsDsp [
 
-	self assert: (PhSelectN new list: #( 1 2 3 )) asDsp isNull equals: false
+	self
+		assert: (PhSelectN new: #( 3 2 1 )) asDsp isNull
+		equals: false.
+		
+		self
+		assert: (PhSelectN new list:  #( 3 2 1 )) asDsp isNull
+		equals: false
+]
+
+{ #category : 'tests' }
+ToolkitTest >> testPhCounterAsDsp [
+
+	self assert: PhCounter new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
 ToolkitTest >> testPhListAsDsp [
 
-   | list |
- list := PhList new addAll: #( 1 2 3).
+	| list |
+	list := PhList new addAll: #(1 2 3).
 	self assert: list asDsp isNull equals: false
 ]
 

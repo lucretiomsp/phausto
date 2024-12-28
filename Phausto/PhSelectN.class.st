@@ -1,5 +1,7 @@
 "
-Select inputs at index
+Select inputs at index.
+PhSelectN starts counting from 1 coherently with Pharo indexing.
+This is a trick as Fuast selectN start counting from 0. actually PhSelect index 0 will return silence.
 "
 Class {
 	#name : 'PhSelectN',
@@ -17,19 +19,21 @@ Class {
 PhSelectN class >> new: anArrayOfNumbersOrUNitGenerators [
 
 	| size |
-	size := anArrayOfNumbersOrUNitGenerators size asString.
+	size := (anArrayOfNumbersOrUNitGenerators size + 1) asString.
 	"super initialize."
-	^ self new list: anArrayOfNumbersOrUNitGenerators;   processExpression: 'ba.selectn(' , size asString , ');' 
+	^ self new
+		  list: anArrayOfNumbersOrUNitGenerators;
+		  processExpression: 'process = ba.selectn(' , size asString , ');'
 ]
 
 { #category : 'converting' }
 PhSelectN >> asBox [
 
 	| intermediateBox phList finalBox |
-	phList := self list asPhList asBox.
+	phList := self list asBox.
 
 	intermediateBox := super asBox.
-	
+
 	finalBox := self index asBox , phList connectTo: intermediateBox.
 	^ finalBox
 ]
@@ -55,9 +59,9 @@ PhSelectN >> initialize [
 ]
 
 { #category : 'accessing' }
-PhSelectN >> list [ 
+PhSelectN >> list [
 
-^ list
+	^ list asPhList 
 ]
 
 { #category : 'accessing' }
@@ -67,7 +71,7 @@ PhSelectN >> list: anArrayOfNumbersOrUnitGenerators [
 	list := anArrayOfNumbersOrUnitGenerators.
 
 
-	size := anArrayOfNumbersOrUnitGenerators size asString.
+	size := (anArrayOfNumbersOrUnitGenerators size + 1) asString.
 
 	processExpression := 'process = ba.selectn(' , size asString , ');'
 ]

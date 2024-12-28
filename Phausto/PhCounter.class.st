@@ -16,7 +16,10 @@ Class {
 { #category : 'converting' }
 PhCounter >> asBox [
 
-	^ CountUp new max: self max; trigger: self trigger; yourself
+	^ CountUp new
+		  max: self max;
+		  trig: self trigger;
+		  yourself
 ]
 
 { #category : 'initialization' }

@@ -17,21 +17,21 @@ Class {
 { #category : 'adding' }
 PhList >> addAll: anArrayofNumbersOrUnitGenerators [
 
-	(items addAll: anArrayofNumbersOrUnitGenerators).
-	^ items
+	items addAll: anArrayofNumbersOrUnitGenerators.
+
 ]
 
 { #category : 'converting' }
 PhList >> asBox [
 
 	| result |
-	result := (items at: 1) asBox.
-	items size > 1
+	result := (self items at: 1) asBox.
+	self items size > 1
 		ifTrue: [ 2 to: items size do: [ :i | result := result , i asBox ] ]
 		ifFalse: [
 			^ Error new signal: 'B
 	Valid PhList needs at least 2 items' ].
-^ result
+	^ result
 ]
 
 { #category : 'initialization' }
@@ -39,4 +39,10 @@ PhList >> initialize [
 
 	super initialize.
 	items := #(0) asOrderedCollection .
+]
+
+{ #category : 'accessing' }
+PhList >> items [
+
+^ items
 ]
