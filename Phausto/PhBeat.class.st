@@ -8,7 +8,6 @@ Class {
 	#name : 'PhBeat',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'trig',
 		'tempo'
 	],
 	#category : 'Phausto-Basics',
@@ -23,7 +22,7 @@ PhBeat >> asBox [
 	intermediateBox := super asBox.
 
 
-	finalBox := self tempo connectTo: intermediateBox.
+	finalBox := 129 asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -39,9 +38,9 @@ PhBeat >> tempo [
 
 	^ tempo ifNil: [
 		  tempo := PhHSlider new
-			            label: self label , 'Tempo'
-			            init: 30
-			            min: 30
-			            max: 220
-			            step: 0.01 ]
+			           label: self label , 'Tempo'
+			           init: 120
+			           min: 30
+			           max: 220
+			           step: 0.01 ]
 ]

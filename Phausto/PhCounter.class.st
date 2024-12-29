@@ -18,10 +18,10 @@ Class {
 { #category : 'converting' }
 PhCounter >> asBox [
 
-	^ CountUp new
-		  max: self max;
-		  trig: self trigger;
-		  yourself
+	| count finalBox |
+	count := Counter new trig: self trigger.
+	finalBox := count asBox % self max.
+	^ finalBox 
 ]
 
 { #category : 'initialization' }
@@ -37,7 +37,7 @@ PhCounter >> max [
 	^ max ifNil: [
 		  max := PhHSlider new
 			         label: self label , 'Max'
-			         init: 1
+			         init: self maxValue
 			         min: 1
 			         max: self maxValue
 			         step: 1 ]
