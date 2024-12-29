@@ -22,7 +22,7 @@ PhBeat >> asBox [
 	intermediateBox := super asBox.
 
 
-	finalBox := 129 asBox connectTo: intermediateBox.
+	finalBox := self tempo asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
