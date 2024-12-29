@@ -115,6 +115,16 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 ]
 
 { #category : 'ui building' }
+BoxAPI >> boxHBarGraphAux: aLabel min: aMin max: aMax input: anInput [
+	"Create a horizontal bargraph box."
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( #PhBox #* CboxHBargraph #( char #* aLabel #, #PhBox #* aMin
+		        #, #PhBox #* aMax #, #PhBox #* anInput ) )
+]
+
+{ #category : 'ui building' }
 BoxAPI >> boxHslider: aLabel init: initBox min: minBox max: maxBox step: stepBox [
 
 self createLibContext.

@@ -1,12 +1,14 @@
 "
-I am a Phausto counter, I count from 1 to max when triggered
+I am a Phausto counter, I count from 1 to maxValue when triggered.
+By default, I count to 8 and I am triggered by a Button
 "
 Class {
 	#name : 'PhCounter',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'trigger',
-		'max'
+		'max',
+		'maxValue'
 	],
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
@@ -23,8 +25,10 @@ PhCounter >> asBox [
 ]
 
 { #category : 'initialization' }
-PhCounter >> initialize [ 
-super initialize
+PhCounter >> initialize [
+
+	super initialize.
+	maxValue := 8.
 ]
 
 { #category : 'accessing' }
@@ -35,8 +39,13 @@ PhCounter >> max [
 			         label: self label , 'Max'
 			         init: 1
 			         min: 1
-			         max: 64
-			         step: 11 ]
+			         max: self maxValue
+			         step: 1 ]
+]
+
+{ #category : 'accessing' }
+PhCounter >> maxValue [
+^ maxValue
 ]
 
 { #category : 'accessing' }

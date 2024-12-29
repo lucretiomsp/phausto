@@ -41,14 +41,13 @@ PhSelectN >> asBox [
 { #category : 'accessing' }
 PhSelectN >> index [
 
-
 	^ index ifNil: [
 		  index := PhHSlider new
-			          label: self label , 'Index'
-			          init: 0
-			          min: 0
-			          max: 1
-			          step: 1 ]
+			           label: self label , 'Index'
+			           init: 1
+			           min: 1
+			           max: 8
+			           step: 1 ]
 ]
 
 { #category : 'initialization' }
