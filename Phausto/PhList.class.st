@@ -27,7 +27,7 @@ PhList >> asBox [
 	| result |
 	result := (self items at: 1) asBox.
 	self items size > 1
-		ifTrue: [ 2 to: items size do: [ :i | result := result , i asBox ] ]
+		ifTrue: [ items allButFirstDo: [ :i | result := result , i asBox ] ]
 		ifFalse: [
 			^ Error new signal: 'B
 	Valid PhList needs at least 2 items' ].

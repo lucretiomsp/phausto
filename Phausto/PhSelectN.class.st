@@ -29,12 +29,12 @@ PhSelectN class >> new: anArrayOfNumbersOrUNitGenerators [
 { #category : 'converting' }
 PhSelectN >> asBox [
 
-	| intermediateBox phList finalBox |
+	| intermediateBox phList finalBox indexBox |
 	phList := self list asBox.
-
+   indexBox := self index asBox.
 	intermediateBox := super asBox.
 
-	finalBox := self index asBox , phList connectTo: intermediateBox.
+	finalBox :=  indexBox , phList connectTo: intermediateBox.
 	^ finalBox
 ]
 
