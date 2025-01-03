@@ -33,6 +33,12 @@ ToolkitTest >> testPhListAsDsp [
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhSubBeatAsDsp [
+
+	self assert: PhSubBeat new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPulseGateAsDsp [
 
 self assert: PulseGate new asDsp isNull equals: false
