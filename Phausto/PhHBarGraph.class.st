@@ -1,3 +1,6 @@
+"
+The hbargraph primitive implements a vertical bar-graph (typically a meter displaying the level of a signal).
+"
 Class {
 	#name : 'PhHBarGraph',
 	#superclass : 'PhBox',

@@ -21,7 +21,8 @@ PhaustoUITest >> testPhHCheckBoxAsBox [
 	| checkBox |
 	checkBox := PhCheckbox new label: 'CheckBox'.
 
-	self assert: checkBox asBox isNull equals: false
+	self assert: checkBox asBox isNull equals: false.
+	self assert: (checkBox label includesSubstring: '~checkbox') equals: true
 ]
 
 { #category : 'tests' }

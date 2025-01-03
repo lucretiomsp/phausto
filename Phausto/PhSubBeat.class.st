@@ -24,9 +24,9 @@ Class {
 PhSubBeat >> asBox [
 
 	| subBeat subDivision |
-	subDivision := self tempo * 8 asBox * self clockDivider.
+	subDivision := self tempo * 8 asBox / self clockDivider.
 	subBeat := (PhBeat new tempo: subDivision) * self start asBox.
-	^ subBeat 
+	^ subBeat
 ]
 
 { #category : 'accessing' }
@@ -50,8 +50,7 @@ super initialize.
 { #category : 'accessing' }
 PhSubBeat >> start [
 
-	^ start ifNil: [
-		  start := PhButton new label: self label , 'Start']
+	^ start ifNil: [ start := PhCheckbox new label: self label , 'Start' ]
 ]
 
 { #category : 'accessing' }
