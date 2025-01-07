@@ -31,12 +31,23 @@ Class {
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'fund',
-		'index'
+		'index',
+		'res'
 	],
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
 	#tag : 'UnitGenerators'
 }
+
+{ #category : 'converting' }
+CasioCZOscillators >> asBox [
+
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	self hasResParameter ifTrue: [ finalBox := self fund , self res connectTo: intermediateBox ] ifFalse:
+	[finalBox := self fund , self index connectTo: intermediateBox].
+	^ finalBox * self uLevel
+]
 
 { #category : 'accessing' }
 CasioCZOscillators >> fund [
@@ -48,6 +59,12 @@ CasioCZOscillators >> fund [
 			  min: 0
 			  max: 1
 			  step: 0.001 ]
+]
+
+{ #category : 'accessing' }
+CasioCZOscillators >> hasResParameter [
+"check if the class name contains res , hence the Oscillator has the res parameter isntead of the index"
+	^ self className includesSubstring: 'res'
 ]
 
 { #category : 'accessing' }
@@ -67,4 +84,16 @@ CasioCZOscillators >> initialize [
 
 	super initialize.
 	processExpression := 'process = os.' , self className , ';'
+]
+
+{ #category : 'accessing' }
+CasioCZOscillators >> res [
+
+	^ res ifNil: [
+		  PhHSlider new
+			  label: self label , 'Res'
+			  init: 0
+			  min: 0
+			  max: 1
+			  step: 0.001 ]
 ]

@@ -13,6 +13,12 @@ self assert: SineOsc new absolute asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testCZsawAsDsp [
+
+	self assert: CZsaw new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testDivideUGens [
 
 self assert: (SineOsc new / SquareOsc new) asDsp isNull equals: false
