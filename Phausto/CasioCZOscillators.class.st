@@ -94,6 +94,6 @@ CasioCZOscillators >> res [
 			  label: self label , 'Res'
 			  init: 0
 			  min: 0
-			  max: 1
+			  max: 8
 			  step: 0.001 ]
 ]

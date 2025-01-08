@@ -13,9 +13,75 @@ self assert: SineOsc new absolute asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testCZhalfSineAsDsp [
+
+	self assert: CZhalfSine new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZhalfSinePAsDsp [
+
+	self assert: CZhalfSineP new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZpulseAsDsp [
+
+	self assert: CZpulse new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZpulsePAsDsp [
+
+	self assert: CZpulseP new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZresSawAsDsp [
+
+	self assert: CZresSaw new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZresTrapAsDsp [
+
+	self assert: CZresTrap new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZresTriangleAsDsp [
+
+	self assert: CZresTriangle new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testCZsawAsDsp [
 
 	self assert: CZsaw new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZsawPAsDsp [
+
+	self assert: CZsawP new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZsinePulseAsDsp [
+
+	self assert: CZsinePulse new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZsinePulsePAsDsp [
+
+	self assert: CZsinePulseP new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testCZsquarePAsDsp [
+
+	self assert: CZsquareP new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
