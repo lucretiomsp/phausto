@@ -3,7 +3,7 @@ LowFrequencyOscillator with random positive values
 "
 Class {
 	#name : 'LFORandomPos',
-	#superclass : 'LowFrequencyOscillators',
+	#superclass : 'LFOForModulation',
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
 	#tag : 'ToolKit'

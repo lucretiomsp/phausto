@@ -1,16 +1,16 @@
 "
-Simple sawtooth waveform oscillator between 0 and 1.
+Simple sawtooth waveform oscillator between -1 and 1.
 "
 Class {
-	#name : 'LFOSawPos',
-	#superclass : 'LFOForModulation',
+	#name : 'LFOSaw',
+	#superclass : 'LFO',
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
 	#tag : 'UnitGenerators'
 }
 
 { #category : 'initialization' }
-LFOSawPos >> initialize [
+LFOSaw >> initialize [
 
 	super initialize.
 	processExpression := 'process = os.lf_sawpos;'

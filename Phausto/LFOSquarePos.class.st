@@ -3,7 +3,7 @@ Positive LF square wave in [0,1]
 "
 Class {
 	#name : 'LFOSquarePos',
-	#superclass : 'LowFrequencyOscillators',
+	#superclass : 'LFOForModulation',
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
 	#tag : 'UnitGenerators'

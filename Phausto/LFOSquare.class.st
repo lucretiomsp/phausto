@@ -3,7 +3,7 @@ Zero-mean unit-amplitude LF square wave.
 "
 Class {
 	#name : 'LFOSquare',
-	#superclass : 'LowFrequencyOscillators',
+	#superclass : 'LFOForModulation',
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
 	#tag : 'UnitGenerators'

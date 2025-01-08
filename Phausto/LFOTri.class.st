@@ -3,7 +3,7 @@ LowFrequency triangle wave from the Faust Standard Library
 "
 Class {
 	#name : 'LFOTri',
-	#superclass : 'LowFrequencyOscillators',
+	#superclass : 'LFOForModulation',
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
 	#tag : 'UnitGenerators'

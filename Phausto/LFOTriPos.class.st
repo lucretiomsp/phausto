@@ -3,7 +3,7 @@ Positive unit-amplitude LF triangle wave from the Faust Standard Library
 "
 Class {
 	#name : 'LFOTriPos',
-	#superclass : 'LowFrequencyOscillators',
+	#superclass : 'LFOForModulation',
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
 	#tag : 'UnitGenerators'

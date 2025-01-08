@@ -1,12 +1,14 @@
 "
-LowFrequencyOScillators are oscillators with no aliasing suppression intended to be used for modulating parameters.
-In Phausto all LFOs have 3 instance variables:
+LFOForModulations are oscillators with no aliasing suppression intended to be used for modulating parameters, with positive range
+These LFOs have 3 instance variables:
 freq: set the frequency of the Oscillator
 amount: set the multiplier for the Oscillator output 
 offset: an offset for the LFO output. 
+
+*** If you want to use 'standard' LFOs with range -1 , 1 please use subclasses of LFO
 "
 Class {
-	#name : 'LowFrequencyOscillators',
+	#name : 'LFOForModulation',
 	#superclass : 'Oscillators',
 	#instVars : [
 		'amount',
@@ -17,8 +19,8 @@ Class {
 	#tag : 'UnitGenerators'
 }
 
-{ #category : 'accessing' }
-LowFrequencyOscillators >> amount [
+{ #category : 'as yet unclassified' }
+LFOForModulation >> amount [
 
 	^ amount ifNil: [
 		  amount := PhHSlider new
@@ -30,7 +32,7 @@ LowFrequencyOscillators >> amount [
 ]
 
 { #category : 'converting' }
-LowFrequencyOscillators >> asBox [
+LFOForModulation >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -39,7 +41,7 @@ LowFrequencyOscillators >> asBox [
 ]
 
 { #category : 'accessing' }
-LowFrequencyOscillators >> freq [
+LFOForModulation >> freq [
 
 	^ freq ifNil: [
 		  PhHSlider new
@@ -51,7 +53,7 @@ LowFrequencyOscillators >> freq [
 ]
 
 { #category : 'initialization' }
-LowFrequencyOscillators >> initialize [
+LFOForModulation >> initialize [
 
 	super initialize.
 	"as LFO are used for modulation, there default level is set to 1"
@@ -62,8 +64,8 @@ LowFrequencyOscillators >> initialize [
 	
 ]
 
-{ #category : 'accessing' }
-LowFrequencyOscillators >> offset [
+{ #category : 'as yet unclassified' }
+LFOForModulation >> offset [
 
 	^ offset ifNil: [  	offset := PhHSlider new
 		          label: self label , 'Offset'
