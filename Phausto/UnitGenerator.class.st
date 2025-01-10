@@ -159,6 +159,22 @@ UnitGenerator >> asDsp [
 ]
 
 { #category : 'converting' }
+UnitGenerator >> asDspMIDI [
+	" creates a MIDI DSP from the Box with the default name MyApp"
+
+	^ self asDspMIDIWithName: 'MyApp' 
+]
+
+{ #category : 'converting' }
+UnitGenerator >> asDspMIDIWithName: aString [
+	" creates a DSP from the Box"
+
+	| interBox |
+	interBox := self asBox.
+	^ interBox asDspMIDIWithName: aString
+]
+
+{ #category : 'converting' }
 UnitGenerator >> asDspWithName: aString [
 	" creates a DSP from the Box"
 

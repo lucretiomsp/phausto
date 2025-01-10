@@ -106,7 +106,7 @@ PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox withName: aString [
 	^ self ffiCall:
 		  #( DSP #* createDspFromBoxes #( const char #* aString #, #PhBox
 		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
-		        -1 #, int 1 ) )
+		        -1 , int 0) )
 ]
 
 { #category : 'as yet unclassified' }
@@ -120,12 +120,13 @@ Error new signal: 'CANE PROBLEMI'.
 ]
 
 { #category : 'as yet unclassified' }
-PhaustoDynamicEngine >> createDspMIDIFromBoxes: aFaustBox withName: aString isMIDI: aBoolean [
+PhaustoDynamicEngine >> createDspMIDIFromBoxes: aFaustBox withName: aString isMIDI: anInteger [
 
+"boolean value does not work so we use 1 for ture an 0 for false"
 	^ self ffiCall:
 		  #( DSP #* createDspFromBoxes #( const char #* aString #, #PhBox
 		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
-		        -1 #, bool aBoolean ) )
+		        -1 #, int anInteger) )
 ]
 
 { #category : 'as yet unclassified' }

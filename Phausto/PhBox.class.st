@@ -191,7 +191,7 @@ PhBox >> asDspMIDIWithName: aString [
 							finalDsp := PhaustoDynamicEngine uniqueInstance
 								            createDspMIDIFromBoxes: self asBox
 								            withName: aString
-								            isMIDI: true.
+								            isMIDI: 1.
 
 							PhaustoDynamicEngine dspPlaying: finalDsp.
 							finalDsp name: aString.

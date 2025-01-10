@@ -41,7 +41,7 @@ Delays >> delayLength: aNumberOrABoxOrASymbol [
 Delays >> initialize [
 
 	super initialize.
-	maxDelayLength := 44100. "by default, maximum delay length is 1 second at 44100 Hz sample rate"
+	maxDelayLength := 88200. "by default, maximum delay length is 2 second at 44100 Hz sample rate"
 
 	input := Wire new
 ]
