@@ -9,7 +9,7 @@ pressure: the pressure of the air flow created by the virtual performer (0-1). T
 "
 Class {
 	#name : 'FluteModel',
-	#superclass : 'UnitGenerator',
+	#superclass : 'WindInstruments',
 	#instVars : [
 		'tubeLength',
 		'mouthPosition',

@@ -1,8 +1,8 @@
 "
-Ready-to-use MIDI-enabled violin physical model with built-in UI.
+Ready-to-use, MIDI-enabled Karplus-Strong string with buil-in UI.
 "
 Class {
-	#name : 'ViolinMIDI',
+	#name : 'KarplusStrongMIDI',
 	#superclass : 'StringInstruments',
 	#category : 'Phausto-PhysicalModels',
 	#package : 'Phausto',
@@ -10,9 +10,9 @@ Class {
 }
 
 { #category : 'initialization' }
-ViolinMIDI >> initialize [
+KarplusStrongMIDI >> initialize [
 
 	super initialize.
 
-	processExpression := 'process = pm.violin_ui_MIDI;'.
+	processExpression := 'process = pm.ks_ui_MIDI;'
 ]

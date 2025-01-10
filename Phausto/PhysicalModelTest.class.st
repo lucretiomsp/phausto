@@ -49,6 +49,12 @@ PhysicalModelTest >> testStrikeModelAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testViolinMIDIAsDsp [
+
+	self assert: ViolinMIDI new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testViolinModelAsDsp [
 
 self assert: ViolinModel  new asDsp isNull equals: false

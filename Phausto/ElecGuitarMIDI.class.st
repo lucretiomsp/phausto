@@ -1,8 +1,8 @@
 "
-Ready-to-use MIDI-enabled violin physical model with built-in UI.
+Ready-to-use MIDI-enabled electric guitar physical model with built-in UI.
 "
 Class {
-	#name : 'ViolinMIDI',
+	#name : 'ElecGuitarMIDI',
 	#superclass : 'StringInstruments',
 	#category : 'Phausto-PhysicalModels',
 	#package : 'Phausto',
@@ -10,9 +10,9 @@ Class {
 }
 
 { #category : 'initialization' }
-ViolinMIDI >> initialize [
+ElecGuitarMIDI >> initialize [
 
 	super initialize.
 
-	processExpression := 'process = pm.violin_ui_MIDI;'.
+	processExpression := 'process = pm.elecGuitar_ui_MIDI;'
 ]
