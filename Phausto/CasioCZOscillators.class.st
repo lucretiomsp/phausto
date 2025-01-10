@@ -1,12 +1,13 @@
 "
 Super class for Oscillators that mimic the Casio CZ oscillators. 
+By default, the fund parameter is set to an LFO Saw with controllable frequency
+
 The Casio CZ is a line of synthesizers from the 1980s, known for their unique Phase Distortion synthesis, offering rich, digital tones. Popular for its affordability and distinctive sound, it remains a favorite among vintage synth enthusiasts. 
 https://en.wikipedia.org/wiki/Casio_CZ_synthesizers
 
 There are two sets:
 
 a set with an index parameter
-
 a set with a res parameter
 
 The ""index oscillators"" outputs a sine wave at index=0 and gets brighter with a higher index. There are two versions of the ""index oscillators"":
@@ -22,8 +23,9 @@ For the fund waveform, use a low-frequency oscillator without anti-aliasing such
 
 Parameters:f
 
-und: a saw-tooth waveform between 0 and 1 that the oscillator slaves to
+fund: a saw-tooth waveform between 0 and 1 that the oscillator slaves to
 index: the brightness of the oscillator, 0 to 1. 0 = sine-wave, 1 = saw-wave
+res: the resonance value
 
 "
 Class {
@@ -53,12 +55,7 @@ CasioCZOscillators >> asBox [
 CasioCZOscillators >> fund [
 
 	^ fund ifNil: [
-		  PhHSlider new
-			  label: self label , 'Fund'
-			  init: 0
-			  min: 0
-			  max: 1
-			  step: 0.001 ]
+		  LFOSaw new freq: (self class , 'Freq') asSymbol ]
 ]
 
 { #category : 'accessing' }

@@ -103,6 +103,12 @@ UnitGeneratorsTest >> testLFORandomPosAsDsp [
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testLFOSawAsDsp [
+
+	self assert: LFOSaw new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testLFOSawPosAsDsp [
 
 	self assert: LFOSawPos  new asDsp isNull equals: false

@@ -106,7 +106,7 @@ PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox withName: aString [
 	^ self ffiCall:
 		  #( DSP #* createDspFromBoxes #( const char #* aString #, #PhBox
 		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
-		        -1 , bool false) )
+		        -1 #, int 1 ) )
 ]
 
 { #category : 'as yet unclassified' }
@@ -126,6 +126,15 @@ PhaustoDynamicEngine >> createDspMIDIFromBoxes: aFaustBox withName: aString isMI
 		  #( DSP #* createDspFromBoxes #( const char #* aString #, #PhBox
 		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
 		        -1 #, bool aBoolean ) )
+]
+
+{ #category : 'as yet unclassified' }
+PhaustoDynamicEngine >> createMIDIDspFromBoxes: aFaustBox [
+1halt.
+	^ self ffiCall:
+		  #( DSP #* createDspFromBoxes #( const char #* 'MyApp' #, #PhBox
+		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
+		        -1 , bool true) )
 ]
 
 { #category : 'as yet unclassified' }
