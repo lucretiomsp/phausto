@@ -6,7 +6,8 @@ Class {
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'inputL',
-		'inputR'
+		'inputR',
+		'input'
 	],
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
@@ -22,7 +23,7 @@ Reverbs >> inputL [
 { #category : 'accessing' }
 Reverbs >> inputR [
 
-	^ inputR ifNil: [ inputL := Wire new ]
+	^ input ifNil: [ input := Wire new ]
 ]
 
 { #category : 'accessing' }

@@ -15,8 +15,7 @@ Class {
 		'fb1',
 		'fb2',
 		'damp',
-		'spread',
-		'input'
+		'spread'
 	],
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
@@ -101,12 +100,6 @@ FreeverbMono >> initialize [
 			 step: 0.001).
 	self spread: 0.
 	self input: Wire new asBox
-]
-
-{ #category : 'accessing' }
-FreeverbMono >> input [
-
-	^ input
 ]
 
 { #category : 'accessing' }

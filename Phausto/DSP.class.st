@@ -193,25 +193,35 @@ DSP class >> initializedDSP: anObject [
 { #category : 'exceptions' }
 DSP class >> invalidException [
 
+^ 'Invalid DSP' inspect.
 	Smalltalk
 		at: #Performance
 		ifPresent: [ :performance | performance uniqueInstance stop ].
-	^ Error new signal: 'This DSP is not valid - check its creation'
+"	^ Error new signal: 'This DSP is not valid - check its creation'
 		  , PhaustoDynamicEngine uniqueInstance getLastError
+		
+	"
 ]
 
 { #category : 'as yet unclassified' }
 DSP class >> paramException [
 
-^ Error new signal: ('This parameter does not exist, check the DSP code'  , PhaustoDynamicEngine uniqueInstance getLastError )
+^ 'Invalid parameter' inspect
+
+"	^ Error new signal:
+		  'This parameter does not exist, check the DSP code'
+		  , PhaustoDynamicEngine uniqueInstance getLastError "
 ]
 
 { #category : 'as yet unclassified' }
 DSP class >> uninitializedException [
 
-	^ Error new signal:
+
+
+^ 'Uninitialized DSP !' inspect.
+	"^ Error new signal:
 		  'This DSP is not initialzed, so it cannot be destroyed'
-		  , PhaustoDynamicEngine uniqueInstance getLastError
+		  , PhaustoDynamicEngine uniqueInstance getLastError "
 ]
 
 { #category : 'API - accessing' }
@@ -444,7 +454,9 @@ buttons := uiElements select: [ :i | (i at: #type) = 'button' ].
 { #category : 'ui-building' }
 DSP >> getUIItems [
 
-	^ self getUIfromJSON at: #items
+	self isMIDI
+		ifFalse: [ ^ self getUIfromJSON at: #items ]
+		ifTrue: [^ ((self getUIfromJSON at: #items) at: 2) at: #items   ]
 ]
 
 { #category : 'ui-building' }
@@ -498,7 +510,9 @@ DSP >> init [
 	RendererType initialize.
 
 	self isNull
-		ifTrue: [ ^ self class invalidException ]
+		ifTrue: [ "mysterious bug on exception"
+			
+			^ self class invalidException ]
 		ifFalse: [
 			'DSP inizialized' traceCr.
 			self isInitialized: true.

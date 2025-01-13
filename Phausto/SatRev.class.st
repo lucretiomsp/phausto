@@ -14,15 +14,17 @@ Class {
 { #category : 'converting' }
 SatRev >> asBox [
 
-	| box code |
-	code := 'import("stdfaust.lib"); process = re.satrev;'.
-	box := BoxAPI uniqueInstance
-		       boxFromString: code
-		       inputs: self inputs
-		       outputs: self outputs
-		       buffer: self errorBuffer.
+| intermediateBox finalBox |
+intermediateBox := super asBox.
+finalBox := self input connectTo: intermediateBox.
 
-	^ box
+	^ finalBox
+]
+
+{ #category : 'initialization' }
+SatRev >> initialize [ 
+	super initialize.
+	processExpression := 'process = re.satrev;'.
 ]
 
 { #category : 'accessing - input' }

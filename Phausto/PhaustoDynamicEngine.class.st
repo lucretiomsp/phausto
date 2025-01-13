@@ -130,15 +130,6 @@ PhaustoDynamicEngine >> createDspMIDIFromBoxes: aFaustBox withName: aString isMI
 ]
 
 { #category : 'as yet unclassified' }
-PhaustoDynamicEngine >> createMIDIDspFromBoxes: aFaustBox [
-1halt.
-	^ self ffiCall:
-		  #( DSP #* createDspFromBoxes #( const char #* 'MyApp' #, #PhBox
-		        #* aFaustBox #, int 0 #, void #* 0 #, const char #* '' #, int
-		        -1 , bool true) )
-]
-
-{ #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> createMIIDspFromBoxes: aFaustBox withName: aString [
 
 	^ self ffiCall:
@@ -162,7 +153,10 @@ PhaustoDynamicEngine >> destroyDSP: aDsp [
 
 { #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> getLastError [
-^ self ffiCall: #(String getLastError()) 
+
+^ 'Errore'
+	"^ PhaustoDynamicEngine uniqueInstance ffiCall:
+		  #( char #* getLastError #(  ) )"
 ]
 
 { #category : 'as yet unclassified' }
