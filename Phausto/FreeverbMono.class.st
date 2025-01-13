@@ -25,13 +25,8 @@ Class {
 { #category : 'converting' }
 FreeverbMono >> asBox [
 
-	| intermediateBox code finalBox |
-	code := 'import("stdfaust.lib"); process = re.mono_freeverb;'.
-	intermediateBox := BoxAPI uniqueInstance
-		                   boxFromString: code
-		                   inputs: self inputs
-		                   outputs: self outputs
-		                   buffer: self errorBuffer.
+	| intermediateBox  finalBox |
+		intermediateBox := super asBox.
 	finalBox := self fb1 asBox , self fb2 asBox , self damp asBox
 	            , self spread asBox , self input connectTo:
 		            intermediateBox.
@@ -42,70 +37,45 @@ FreeverbMono >> asBox [
 { #category : 'accessing' }
 FreeverbMono >> damp [
 
-	^ damp
-]
-
-{ #category : 'accessing' }
-FreeverbMono >> damp: anObject [
-
-	damp := anObject asBox
+	^ damp ifNil: [ 
+	
+	damp :=  (PhHSlider new
+			 label: self label , 'Damp'
+			 init: 0.3
+			 min: 0
+			 max: 1
+			 step: 0.001) ]
 ]
 
 { #category : 'accessing' }
 FreeverbMono >> fb1 [
 
-	^ fb1
-]
-
-{ #category : 'accessing' }
-FreeverbMono >> fb1: anObject [
-
-	fb1 := anObject asBox
+	^ fb1 ifNil: [  fb1 := PhHSlider new
+			 label: self label , 'Fb1'
+			 init: 0.3
+			 min: 0.001
+			 max: 1
+			 step: 0.001].
+	
 ]
 
 { #category : 'accessing' }
 FreeverbMono >> fb2 [
 
-	^ fb2
-]
-
-{ #category : 'accessing' }
-FreeverbMono >> fb2: anObject [
-
-	fb2 := anObject asBox
+	^ fb2 ifNil: [ fb2 :=  (PhHSlider new
+			 label: self label , 'Fb2'
+			 init: 0.3
+			 min: 0.001
+			 max: 1
+			 step: 0.001).]
 ]
 
 { #category : 'initialization' }
 FreeverbMono >> initialize [
 
 	super initialize.
-	self label: self className asString.
-	self fb1: (PhHSlider new
-			 label: self label , 'Fb1'
-			 init: 0.3
-			 min: 0.001
-			 max: 1
-			 step: 0.001).
-	self fb2: (PhHSlider new
-			 label: self label , 'Fb2'
-			 init: 0.3
-			 min: 0.001
-			 max: 1
-			 step: 0.001).
-	self damp: (PhHSlider new
-			 label: self label , 'Damp'
-			 init: 0.3
-			 min: 0
-			 max: 1
-			 step: 0.001).
-	self spread: 0.
-	self input: Wire new asBox
-]
-
-{ #category : 'accessing' }
-FreeverbMono >> input: anInput [
-
-	input := anInput asBox
+	processExpression := 'process = re.mono_freeverb;'.
+	
 ]
 
 { #category : 'connecting' }
@@ -116,11 +86,5 @@ FreeverbMono >> patchedWith: aUnitGenerator [
 { #category : 'accessing' }
 FreeverbMono >> spread [
 
-	^ spread
-]
-
-{ #category : 'accessing' }
-FreeverbMono >> spread: anObject [
-
-	spread := anObject asBox
+	^ spread ifNil: [ spread := 0 asBox ]
 ]

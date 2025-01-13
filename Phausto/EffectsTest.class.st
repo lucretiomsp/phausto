@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+EffectsTest >> testFreeverbMonoAsDsp [
+
+	self assert: FreeverbMono new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testGreyHoleAsDsp [
 
 	self assert: GreyHole new asDsp isNull equals: false
@@ -22,6 +28,12 @@ EffectsTest >> testLimiterMonoAsDsp [
 EffectsTest >> testPannerAsDsp [
 
 	self assert: Panner new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testSatRevAsDsp [
+
+	self assert: SatRev new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
