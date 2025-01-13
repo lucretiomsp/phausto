@@ -15,6 +15,12 @@ Class {
 }
 
 { #category : 'accessing' }
+Reverbs >> input [
+
+	^ input ifNil: [ input := Wire new ]
+]
+
+{ #category : 'accessing' }
 Reverbs >> inputL [
 
 	^ inputL ifNil: [ inputL := Wire new ]
@@ -23,7 +29,7 @@ Reverbs >> inputL [
 { #category : 'accessing' }
 Reverbs >> inputR [
 
-	^ input ifNil: [ input := Wire new ]
+	^ inputR ifNil: [ inputR := Wire new ]
 ]
 
 { #category : 'accessing' }

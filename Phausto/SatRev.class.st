@@ -30,5 +30,5 @@ SatRev >> initialize [
 { #category : 'accessing - input' }
 SatRev >> patchedWith: aUnitGenerator [
 
-aUnitGenerator connectTo: self
+	self input: aUnitGenerator 
 ]
