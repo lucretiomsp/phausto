@@ -91,7 +91,8 @@ DSP class >> asCmajorPatchFileNamed: aName hasMIDI: aBoolean [
 	"we need to improve the mechanism to generate MIDI instruments"
 	hasMidi := aBoolean asString , ','.
 	polyWrapperString := ''.
-	aBoolean ifTrue: [ polyWrapperString , '"' , aName , 'polyWrapper' , '.cmajor",' ].
+	aBoolean ifTrue: [
+		polyWrapperString :=  '"' , aName , 'polyWrapper' , '.cmajor",' ].
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
@@ -134,7 +135,7 @@ DSP class >> asCmajorPatchFileNamed: aName hasMIDI: aBoolean [
 		nextPutAll: '"source":';
 		tab;
 		nextPutAll: '[';
-			nextPutAll:  polyWrapperString ;
+		nextPutAll: polyWrapperString;
 		nextPutAll: ' "' , aName , '.cmajor" ]';
 		cr;
 		nextPutAll: '}';
