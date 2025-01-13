@@ -87,9 +87,11 @@ DSP class >> asCmajorPatchFileNamed: aName [
 { #category : 'converting' }
 DSP class >> asCmajorPatchFileNamed: aName hasMIDI: aBoolean [
 
-	| hasMidi cmajorPatchesDir patchDir cmajorPatchFile |
+	| hasMidi cmajorPatchesDir patchDir cmajorPatchFile polyWrapperString |
 	"we need to improve the mechanism to generate MIDI instruments"
 	hasMidi := aBoolean asString , ','.
+	polyWrapperString := ''.
+	aBoolean ifTrue: [ polyWrapperString , '"' , aName , 'polyWrapper' , '.cmajor",' ].
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
 		                    ensureCreateDirectory.
@@ -97,7 +99,7 @@ DSP class >> asCmajorPatchFileNamed: aName hasMIDI: aBoolean [
 
 	cmajorPatchFile := patchDir / (aName , '.cmajorpatch').
 	"delete the file if the file already exists and create another one. maybe should we ask for overwrite?"
-	cmajorPatchFile exists ifTrue: [cmajorPatchFile delete].
+	cmajorPatchFile exists ifTrue: [ cmajorPatchFile delete ].
 	cmajorPatchFile writeStream
 		cr;
 		nextPutAll: '{';
@@ -131,8 +133,9 @@ DSP class >> asCmajorPatchFileNamed: aName hasMIDI: aBoolean [
 		cr;
 		nextPutAll: '"source":';
 		tab;
-		nextPutAll: '[ "' , aName , 'polyWrapper' , '.cmajor"';
-		nextPutAll: ', "' , aName , '.cmajor" ]';
+		nextPutAll: '[';
+			nextPutAll:  polyWrapperString ;
+		nextPutAll: ' "' , aName , '.cmajor" ]';
 		cr;
 		nextPutAll: '}';
 		close
@@ -277,6 +280,37 @@ DSP >> createBelaCppFileNamed: aName [
 	^ LibFaust uniqueInstance
 		  createBelaCppFileFromString: self generatedCode
 		  withName: aName
+]
+
+{ #category : 'converting' }
+DSP >> createCmajorFXPatchNamed: aName [
+	"the .cmajorpatch file is always generated "
+
+	| cmajorPatchesDir patchDir stringToTrim streamToTrim newString trimIndex fileToWrite |
+	cmajorPatchesDir := (FileLocator documents / 'cmajorPatches')
+		                    ensureCreateDirectory.
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+	fileToWrite := patchDir / (aName , '.cmajor').
+
+	"delete the file if the file already exists and create another one. maybe should we ask for overwrite?"
+	fileToWrite exists ifTrue: [ fileToWrite delete ].
+
+	self class asCmajorPatchFileNamed: aName hasMIDI: false.
+   "self asCmajorPolyWrapperFor: aName."
+	"return true if the .cmajor file has been  generated"
+	LibFaust uniqueInstance
+		createCMajorMIDIFileFromString: self generatedCode
+		withName: aName.
+	streamToTrim := fileToWrite readStream.
+	stringToTrim := streamToTrim contents.
+	trimIndex := (stringToTrim findString: 'future') - 1.
+	newString := stringToTrim truncateTo: trimIndex.
+	fileToWrite delete.
+	fileToWrite writeStream
+		nextPutAll: newString , 'future';
+		cr;
+		nextPutAll: '*/';
+		close
 ]
 
 { #category : 'converting' }
