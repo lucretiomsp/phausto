@@ -40,19 +40,19 @@ AutoWah >> input [
 	^ input
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AutoWah >> input: anInput [
 
 	input := anInput asBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AutoWah >> level [
 
 	^ level
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 AutoWah >> level: aLevel [
 
 	level := aLevel asBox

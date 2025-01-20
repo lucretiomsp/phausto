@@ -17,10 +17,11 @@ Class {
 SmoothDelay >> asBox [
 
 	| intermediateBox finalBox delayInSeconds |
-	delayInSeconds := self interpolationTime * 44100 asBox.
+	delayInSeconds := self interpolationTime asBox
+	                  * PhSampleRate new asBox.
 	intermediateBox := super asBox.
 	finalBox := self maxDelayLength asBox , delayInSeconds asBox
-	            , self delayLength asBox , self input asBox connectTo:
+	            , self interpolationTime asBox , self input asBox connectTo:
 		            intermediateBox.
 	^ finalBox
 ]
@@ -43,14 +44,4 @@ SmoothDelay >> interpolationTime [
 			                       min: 0.01
 			                       max: 2
 			                       step: 0.001 ]
-]
-
-{ #category : 'accessing' }
-SmoothDelay >> interpolationTime: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]

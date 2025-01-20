@@ -249,6 +249,18 @@ ParamsSetter >> envMod: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> excitation:   aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> fb1: aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -309,7 +321,7 @@ ParamsSetter >> finalLevel: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
-ParamsSetter >> fr:  aNumberOrABoxOrASymbol [
+ParamsSetter >> fr: aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"
@@ -501,6 +513,18 @@ ParamsSetter >> interpControl: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> interpolationTime: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> legato: aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -670,6 +694,18 @@ ParamsSetter >> n: aNumberOrABoxOrASymbol [
 
 { #category : 'accessing' }
 ParamsSetter >> normFreq: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> numberOfBands:   aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"
@@ -861,6 +897,18 @@ ParamsSetter >> size:   aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> source:  aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> spread: aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -934,6 +982,18 @@ ParamsSetter >> trigger: aNumberOrABoxOrASymbol [
 
 { #category : 'accessing' }
 ParamsSetter >> tuning: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> wah: aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"

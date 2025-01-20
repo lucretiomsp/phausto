@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+EffectsTest >> testCryBabyAsDsp [
+
+	self assert: CryBaby new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testFreeverbMonoAsDsp [
 
 	self assert: FreeverbMono new asDsp isNull equals: false
@@ -31,6 +37,14 @@ EffectsTest >> testPannerAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testPhVocoderDsp [
+
+self assert: 1 equals: 0.
+"dsp crash apparently for no reason"
+	self assert: PhVocoder new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testSatRevAsDsp [
 
 	self assert: SatRev new asDsp isNull equals: false
@@ -46,6 +60,12 @@ EffectsTest >> testSineOscAsDsp [
 EffectsTest >> testSoftClipQaudraticAsDsp [
 
 	self assert: SoftClipQuadratic new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testWahAsDsp [
+
+	self assert: Wah new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
