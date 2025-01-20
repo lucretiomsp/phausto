@@ -7,6 +7,13 @@ Class {
 }
 
 { #category : 'tests' }
+PhaustoUITest >> testPhHBargraphAsBox [
+
+
+	self assert: PhHBarGraph new  asBox isNull equals: false
+]
+
+{ #category : 'tests' }
 PhaustoUITest >> testPhHButtonAsBox [
 
 	| button |
@@ -46,6 +53,13 @@ PhaustoUITest >> testPhNumEntryAsBox [
 		          step: 0.001.
 
 	self assert: numEntry asBox isNull equals: false
+]
+
+{ #category : 'tests' }
+PhaustoUITest >> testPhVBargraphAsBox [
+
+
+	self assert: PhVBarGraph new  asBox isNull equals: false
 ]
 
 { #category : 'tests' }
