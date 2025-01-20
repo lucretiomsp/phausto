@@ -1,14 +1,15 @@
 "
-The vbargraph primitive implements a vertical bar-graph (typically a meter displaying the level of a signal).
+The hbargraph primitive implements a vertical bar-graph (typically a meter displaying the level of a signal).
 "
 Class {
 	#name : 'PhVBarGraph',
-	#superclass : 'UIPrimitive',
+	#superclass : 'PhBox',
 	#instVars : [
-		'input'
-	],
-	#classInstVars : [
-		'aNumber'
+		'input',
+		'sinput',
+		'min',
+		'max',
+		'label'
 	],
 	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
@@ -18,54 +19,23 @@ Class {
 { #category : 'converting' }
 PhVBarGraph >> asBox [
 
-	| intermediateBox finalBox intcode |
+	| sliderBox |
 	BoxAPI uniqueInstance createLibContext.
-	"sliderBox := BoxAPI uniqueInstance
+	sliderBox := BoxAPI uniqueInstance
 		             boxVBarGraphAux: self label
-		             min: self min
-		             max: self max
-		             input: self input asBox."
-	intcode := 'import("stdfaust.lib"); process = vbargraph("'
-	           , self label , '", ' , self min asString , ','
-	           , self max asString , ');'.
+		             min: self min asBox
+		             max: self max asBox
+		             input: self input asBox.
 
-	intermediateBox := BoxAPI uniqueInstance
-		                   boxFromString: intcode
-		                   inputs: self inputs
-		                   outputs: self outputs
-		                   buffer: self errorBuffer.
-	finalBox := self input connectTo: intermediateBox.
-	^ finalBox
-]
-
-{ #category : 'converting' }
-PhVBarGraph >> asBox2 [
-
-	| intermediateBox finalBox intcode |
-	BoxAPI uniqueInstance createLibContext.
-	"sliderBox := BoxAPI uniqueInstance
-		             boxVBarGraphAux: self label
-		             min: self min
-		             max: self max
-		             input: self input asBox."
-	intcode := 'import("stdfaust.lib"); process = vbargraph("'
-	           , self label , '", ' , self min asString , ','
-	           , self max asString , ');'.
-	intcode traceCr.
-	intermediateBox := BoxAPI uniqueInstance
-		                   boxFromString: intcode
-		                   inputs: self inputs
-		                   outputs: self outputs
-		                   buffer: self errorBuffer.
-	finalBox := self input connectTo: intermediateBox.
-	^ finalBox
+	^ sliderBox
 ]
 
 { #category : 'initialization' }
 PhVBarGraph >> initialize [
 
 	super initialize.
-	self input: 1.
+	label := 'HBarGraph'.
+	input := 1 asBox.
 	min := -1.
 	max := 1
 ]
@@ -77,15 +47,33 @@ PhVBarGraph >> input [
 ]
 
 { #category : 'accessing' }
-PhVBarGraph >> input: anInput [ 
+PhVBarGraph >> input: anInput [
 
-	input := anInput asBox
+	input := anInput 
 ]
 
 { #category : 'accessing' }
-PhVBarGraph >> max: aNumber [
+PhVBarGraph >> label [
 
-	max := aNumber 
+	^ label
+]
+
+{ #category : 'accessing' }
+PhVBarGraph >> label: aString [
+
+	label := aString 
+]
+
+{ #category : 'accessing' }
+PhVBarGraph >> max [
+
+	^ max
+]
+
+{ #category : 'accessing' }
+PhVBarGraph >> max: aMax [
+
+	max := aMax
 ]
 
 { #category : 'accessing' }
@@ -94,13 +82,13 @@ PhVBarGraph >> min [
 ]
 
 { #category : 'accessing' }
-PhVBarGraph >> min: aNumber [
+PhVBarGraph >> min: aMin [
 
-	min := aNumber 
+	min := aMin
 ]
 
 { #category : 'connecting' }
 PhVBarGraph >> patchedWith: aUnitGenerator [
 
-self input: aUnitGenerator 
+	self input: aUnitGenerator
 ]

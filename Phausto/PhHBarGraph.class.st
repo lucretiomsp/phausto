@@ -59,6 +59,12 @@ PhHBarGraph >> label [
 ]
 
 { #category : 'accessing' }
+PhHBarGraph >> label: aString [
+
+	label := aString 
+]
+
+{ #category : 'accessing' }
 PhHBarGraph >> max [
 
 	^ max
@@ -79,4 +85,10 @@ PhHBarGraph >> min [
 PhHBarGraph >> min: aMin [
 
 	min := aMin
+]
+
+{ #category : 'connecting' }
+PhHBarGraph >> patchedWith: aUnitGenerator [
+
+	self input: aUnitGenerator
 ]

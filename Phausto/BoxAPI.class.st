@@ -116,12 +116,12 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 
 { #category : 'ui building' }
 BoxAPI >> boxHBarGraphAux: aLabel min: aMin max: aMax input: anInput [
-	"Create a horizontal bargraph box."
+	"Create a vertical bargraph box."
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( #PhBox #* CboxHBargraph #( char #* aLabel #, #PhBox #* aMin
-		        #, #PhBox #* aMax #, #PhBox #* anInput ) )
+		  #( PhBox #* CboxVBargraphAux #( const char #* aLabel #, PhBox
+		        #* aMin #, PhBox #* aMax #, PhBox #* anInput ) )
 ]
 
 { #category : 'ui building' }
@@ -286,12 +286,12 @@ Sum binary operator, from CbobAddAuxFunxtion
 
 { #category : 'ui building' }
 BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
-	"Create a horizontal bargraph box."
+	"Create a vertical bargraph box."
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( #PhBox * CboxVBargraph #( char * aLabel , #PhBox * aMin , #PhBox * aMax
-		        , #PhBox * anInput ) )
+		  #( PhBox #* CboxVBargraphAux #( const char #* aLabel #, PhBox #* aMin
+		        #, PhBox #* aMax #, PhBox #* anInput ) )
 ]
 
 { #category : 'ui building' }

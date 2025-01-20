@@ -13,5 +13,5 @@ Class {
 PhSampleRate >> initialize [
 
 	super initialize.
-	self processExpression: 'process = aa.' , self class name ,  ';'
+	self processExpression: 'process = ma.SR;'
 ]
