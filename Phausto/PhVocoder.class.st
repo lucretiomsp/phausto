@@ -42,7 +42,7 @@ PhVocoder >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 PhVocoder >> attack [
 
 	^ attack ifNil: [
@@ -54,7 +54,7 @@ PhVocoder >> attack [
 			         step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 PhVocoder >> bwRatio [
 
 	^ bwRatio ifNil: [
@@ -66,7 +66,7 @@ PhVocoder >> bwRatio [
 			         step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 PhVocoder >> excitation [
 
 	^ excitation ifNil: [ excitation := Noise new  ]
@@ -85,7 +85,7 @@ PhVocoder >> input [
 	^ input ifNil: [ input := 0 asBox ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 PhVocoder >> numberOfBands [
 
 	^ numberOfBands ifNil: [
@@ -97,7 +97,7 @@ PhVocoder >> patchedWith: aBox [
 self input: aBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 PhVocoder >> release [
 
 	^ release ifNil: [
@@ -109,7 +109,7 @@ PhVocoder >> release [
 			         step: 0.001 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 PhVocoder >> source [
 
 	^ source ifNil: [

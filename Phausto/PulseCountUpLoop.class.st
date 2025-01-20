@@ -38,7 +38,7 @@ PulseCountUpLoop >> initialize [
 	processExpression := 'process = ba.pulse_countup_loop;'
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 PulseCountUpLoop >> input [
 
 	^ input ifNil: [
@@ -50,7 +50,7 @@ PulseCountUpLoop >> input [
 			           step: 1 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 PulseCountUpLoop >> n [
 
 	^ n ifNil: [

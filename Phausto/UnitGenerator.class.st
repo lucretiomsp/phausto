@@ -19,7 +19,9 @@ Class {
 		'code',
 		'uLevel',
 		'label',
-		'attachedDSP'
+		'attachedDSP',
+		'numberOfInputs',
+		'numberOfOutputs'
 	],
 	#classInstVars : [
 		'instancesInDSPContext'

@@ -37,6 +37,13 @@ EffectsTest >> testPannerAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testPhTranssposeDsp [
+
+
+	self assert: PhTranspose new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testPhVocoderDsp [
 
 self assert: 1 equals: 0.
