@@ -120,7 +120,7 @@ BoxAPI >> boxHBarGraphAux: aLabel min: aMin max: aMax input: anInput [
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( PhBox #* CboxVBargraphAux #( const char #* aLabel #, PhBox
+		  #( PhBox #* CboxHBargraphAux #( const char #* aLabel #, PhBox
 		        #* aMin #, PhBox #* aMax #, PhBox #* anInput ) )
 ]
 
