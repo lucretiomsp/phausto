@@ -26,7 +26,7 @@ CryBaby >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self input , self wah connectTo: intermediateBox.
+	finalBox :=  self wah , self input  connectTo: intermediateBox.
 	^ finalBox
 ]
 

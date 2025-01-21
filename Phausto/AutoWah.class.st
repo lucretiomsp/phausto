@@ -20,8 +20,7 @@ AutoWah >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self input, self level
-		            connectTo: intermediateBox.
+	finalBox := self level , self input  connectTo: intermediateBox.
 	^ finalBox
 ]
 

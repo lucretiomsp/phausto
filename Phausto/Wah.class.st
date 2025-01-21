@@ -24,7 +24,7 @@ Wah >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self input , self fr connectTo: intermediateBox.
+	finalBox :=  self fr , self input  connectTo: intermediateBox.
 	^ finalBox
 ]
 
