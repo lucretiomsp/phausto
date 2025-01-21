@@ -28,8 +28,9 @@ PhTranspose >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
-	finalBox := self input asBox , self window asBox , self crossfade asBox
-	            , self shift asBox connectTo: intermediateBox.
+	finalBox := self window asBox
+	            , self crossfade asBox , self shift , self input asBox  asBox connectTo:
+		            intermediateBox.
 
 	^ finalBox
 ]
@@ -37,8 +38,7 @@ PhTranspose >> asBox [
 { #category : 'accessing' }
 PhTranspose >> crossfade [
 
-	^ crossfade ifNil: [
-		  crossfade := 512 asBox]
+	^ crossfade ifNil: [ crossfade := 256 asBox ]
 ]
 
 { #category : 'initialization' }
@@ -69,6 +69,5 @@ PhTranspose >> shift [
 { #category : 'accessing' }
 PhTranspose >> window [
 
-	^ window ifNil: [
-		  window := 512 asBox ]
+	^ window ifNil: [ window := 256 asBox ]
 ]

@@ -235,16 +235,17 @@ UnitGenerator >> initialize [
 
 	| suffix |
 	super initialize.
+	"by default a Unit Gereator is considere to have 0 inputs and 1 output, every subclass will define different values".
+	numberOfInputs := 0.
+	numberOfOutputs := 1.
 	self class incrementInstancesInDSPContext.
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
 	"the label suffix is '' if  for the first instance of the UnitGenerator"
-	suffix := (self class instancesInDSPContext = 1)
-		                    ifTrue: [ '' ]
-		                    ifFalse: [
-		                    self class instancesInDSPContext asString ].
-	label := self className asString
-	         , suffix 
+	suffix := self class instancesInDSPContext = 1
+		          ifTrue: [ '' ]
+		          ifFalse: [ self class instancesInDSPContext asString ].
+	label := self className asString , suffix
 ]
 
 { #category : 'accessing' }
@@ -275,6 +276,30 @@ UnitGenerator >> newLabel: aString [
 
 self initialize .
 label := aString
+]
+
+{ #category : 'accessing' }
+UnitGenerator >> numberOfInputs [
+
+	^ numberOfInputs
+]
+
+{ #category : 'accessing' }
+UnitGenerator >> numberOfInputs: anInteger [
+
+	numberOfInputs := anInteger 
+]
+
+{ #category : 'accessing' }
+UnitGenerator >> numberOfOutputs [
+
+	^ numberOfOutputs
+]
+
+{ #category : 'accessing' }
+UnitGenerator >> numberOfOutputs: anInteger [
+
+	numberOfOutputs := anInteger
 ]
 
 { #category : 'accessing' }
