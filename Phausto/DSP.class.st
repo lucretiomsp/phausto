@@ -489,8 +489,34 @@ buttons := uiElements select: [ :i | (i at: #type) = 'button' ].
 { #category : 'ui-building' }
 DSP >> getUIItems [
 
+| dic collectDictionariesWithAddress result |
+dic :=  self getUIfromJSON at: #items.
+"Recursive function to collect dictionaries containing the key #address"
+collectDictionariesWithAddress := [ :anObject :aCollection |
+    (anObject isKindOf: Dictionary) ifTrue: [
+        "If the dictionary contains the key #address, add it to the collection"
+        (anObject includesKey: #address) ifTrue: [
+            aCollection add: anObject.
+        ].
+        "Recursively check all values in the dictionary"
+        anObject values do: [ :value |
+            collectDictionariesWithAddress value: value value: aCollection.
+        ].
+    ].
+
+    (anObject isKindOf: Array) ifTrue: [
+        "Recursively check all elements in the array"
+        anObject do: [ :element |
+            collectDictionariesWithAddress value: element value: aCollection.
+        ].
+    ].
+].
+
+"Call the recursive function on your dictionary (mydic)"
+result := OrderedCollection new.
+collectDictionariesWithAddress value: dic value: result.
 	self isMIDI
-		ifFalse: [ ^ self getUIfromJSON at: #items ]
+		ifFalse: [ ^ result ]
 		ifTrue: [^ ((self getUIfromJSON at: #items) at: 2) at: #items   ]
 ]
 
