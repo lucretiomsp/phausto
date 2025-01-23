@@ -13,6 +13,24 @@ EffectsTest >> testCryBabyAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testDatorroRevDemoAsDsp [
+
+	self assert: Datorro_Rev_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testExciterDemoAsDsp [
+
+	self assert: Exciter_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testFreeverbDemoAsDsp [
+
+	self assert: Freeverb_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testFreeverbMonoAsDsp [
 
 	self assert: FreeverbMono new asDsp isNull equals: false
@@ -25,9 +43,21 @@ EffectsTest >> testGreyHoleAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testGreyHoleDemoAsDsp [
+
+	self assert: GreyHole_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testLimiterMonoAsDsp [
 
 	self assert: LimiterMono new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testOScrsDemoAsDsp [
+
+	self assert: Oscrs_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -58,6 +88,12 @@ EffectsTest >> testSatRevAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testSawtoohDemoAsDsp [
+
+	self assert: Sawtooth_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testSineOscAsDsp [
 
 	self assert: PhClip new asDsp isNull equals: false
@@ -70,6 +106,26 @@ EffectsTest >> testSoftClipQaudraticAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testVelvetNoiseDemoAsDsp [
+
+	self assert: Velvet_Noise_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testVirtualAnalogOscillatorDemoAsDsp [
+
+	self assert: Virtual_Analog_Oscillator_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testVitalRevDemoAsDsp [
+
+self assert: 1 equals: 0.
+"it crashes without reason"
+	self assert: Vital_Rev_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testWahAsDsp [
 
 	self assert: Wah new asDsp isNull equals: false
@@ -79,6 +135,12 @@ EffectsTest >> testWahAsDsp [
 EffectsTest >> testWavefoldAsDsp [
 
 	self assert: Wavefold new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testZitaLighDemoAsDsp [
+
+	self assert: Zita_Light new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

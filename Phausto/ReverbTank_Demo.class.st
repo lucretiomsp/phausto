@@ -11,7 +11,7 @@ References
 [4] Valhalla DSP. (2010, August 25). RIP Keith Barr. Retrieved 2024-04-16, from https://valhalladsp.com/2010/08/25/rip-keith-barr/
 "
 Class {
-	#name : 'RverbTank_Demo',
+	#name : 'ReverbTank_Demo',
 	#superclass : 'Demos',
 	#instVars : [
 		'inputL',
@@ -23,7 +23,7 @@ Class {
 }
 
 { #category : 'converting' }
-RverbTank_Demo >> asBox [
+ReverbTank_Demo >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -33,14 +33,14 @@ RverbTank_Demo >> asBox [
 ]
 
 { #category : 'accessing' }
-RverbTank_Demo >> inputL [
+ReverbTank_Demo >> inputL [
 
 
 	^ inputL ifNil: [ inputL := 0 asBox ]
 ]
 
 { #category : 'accessing' }
-RverbTank_Demo >> inputR [
+ReverbTank_Demo >> inputR [
 
 
 	^ inputR ifNil: [ inputR := 0 asBox ]
