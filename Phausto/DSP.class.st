@@ -236,10 +236,9 @@ DSP >> allParameters [
 	params := OrderedCollection new.
 	self isInitialized
 		ifTrue: [
-			0 to: (self getParamCount - 1) do: [ :i |
+			0 to: self getParamCount - 1 do: [ :i |
 				params add:
-					((self getParamAddress: i) reverse copyUpToSubstring: '/')
-						reverse ].
+					(self getParamAddress: i) afterLastSlash ].
 			^ params ]
 		ifFalse: [ Error new signal: 'This DSP is not initialized' ]
 ]
