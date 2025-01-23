@@ -9,24 +9,27 @@ https://www.researchgate.net/publication/258333577_Modeling_the_Harmonic_Exciter
 Class {
 	#name : 'Exciter_Demo',
 	#superclass : 'Demos',
+	#instVars : [
+		'input'
+	],
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
 }
 
 { #category : 'converting' }
-Exciter_Demo >> asBox [ 
+Exciter_Demo >> asBox [
 
-| intermediateBox finalBox |
-intermediateBox := super asBox .
-finalBox := self input asBox.
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	finalBox := self input asBox connectTo: intermediateBox .
 
-^ finalBox
+	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Exciter_Demo >> input [
 
-| input |
-^ input ifNil: [ input := 0 asBox ]
+
+	^ input ifNil: [ input := 0 asBox ]
 ]
