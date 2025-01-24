@@ -23,14 +23,14 @@ Zita_Light >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Zita_Light >> inputL [
 
 
 	^ inputL ifNil: [ inputL := 0 asBox ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Zita_Light >> inputR [
 
 

@@ -13,14 +13,14 @@ Class {
 	#tag : 'Demo'
 }
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Vital_Rev_Demo >> inputL [
 
 
 	^ inputL ifNil: [ inputL := 0 asBox ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Vital_Rev_Demo >> inputR [
 
 

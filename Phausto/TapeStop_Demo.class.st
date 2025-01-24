@@ -3,7 +3,7 @@ TapeStop effect demo.
 A tape stop effect mimics the sound of a tape recorder or turntable slowing to a stop, creating a dramatic drop in pitch and speed that gradually fades into silence.
 "
 Class {
-	#name : 'TapeStop__demo',
+	#name : 'TapeStop_Demo',
 	#superclass : 'Demos',
 	#instVars : [
 		'inputL',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-TapeStop__demo >> asBox [
+TapeStop_Demo >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -25,22 +25,22 @@ TapeStop__demo >> asBox [
 ]
 
 { #category : 'initialization' }
-TapeStop__demo >> initialize [
+TapeStop_Demo >> initialize [
 
 	super initialize.
 
 	processExpression := 'process = dm.tapeStop_demo;'
 ]
 
-{ #category : 'accessing' }
-TapeStop__demo >> inputL [
+{ #category : 'as yet unclassified' }
+TapeStop_Demo >> inputL [
 
 
 	^ inputL ifNil: [ inputL := 0 asBox ]
 ]
 
-{ #category : 'accessing' }
-TapeStop__demo >> inputR [
+{ #category : 'as yet unclassified' }
+TapeStop_Demo >> inputR [
 
 
 	^ inputR ifNil: [ inputR := 0 asBox ]

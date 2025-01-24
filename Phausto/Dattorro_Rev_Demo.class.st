@@ -5,7 +5,7 @@ see:
 https://ccrma.stanford.edu/~dattorro/EffectDesignPart1.pdf
 "
 Class {
-	#name : 'Datorro_Rev_Demo',
+	#name : 'Dattorro_Rev_Demo',
 	#superclass : 'Demos',
 	#instVars : [
 		'inputL',
@@ -17,7 +17,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Datorro_Rev_Demo >> asBox [
+Dattorro_Rev_Demo >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -26,15 +26,15 @@ Datorro_Rev_Demo >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
-Datorro_Rev_Demo >> inputL [
+{ #category : 'as yet unclassified' }
+Dattorro_Rev_Demo >> inputL [
 
 
 	^ inputL ifNil: [ inputL := 0 asBox ]
 ]
 
-{ #category : 'accessing' }
-Datorro_Rev_Demo >> inputR [
+{ #category : 'as yet unclassified' }
+Dattorro_Rev_Demo >> inputR [
 
 
 	^ inputR ifNil: [ inputR := 0 asBox ]

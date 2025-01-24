@@ -24,14 +24,14 @@ Flanger_Demo >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Flanger_Demo >> inputL [
 
 
 	^ inputL ifNil: [ inputL := 0 asBox ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Flanger_Demo >> inputR [
 
 

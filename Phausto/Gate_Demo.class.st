@@ -24,14 +24,14 @@ Gate_Demo >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Gate_Demo >> inputL [
 
 
 	^ inputL ifNil: [ inputL := 0 asBox ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Gate_Demo >> inputR [
 
 

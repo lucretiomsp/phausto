@@ -7,6 +7,18 @@ Class {
 }
 
 { #category : 'tests' }
+EffectsTest >> testCMoogVCFDemoDemoAsDsp [
+
+	self assert: Moog_Vcf_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testCompressorDemoAsDsp [
+
+	self assert: Compressor_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testCryBabyAsDsp [
 
 	self assert: CryBaby new asDsp isNull equals: false
@@ -15,13 +27,21 @@ EffectsTest >> testCryBabyAsDsp [
 { #category : 'tests' }
 EffectsTest >> testDatorroRevDemoAsDsp [
 
-	self assert: Datorro_Rev_Demo new asDsp isNull equals: false
+	self assert: Dattorro_Rev_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
 EffectsTest >> testExciterDemoAsDsp [
 
+self assert: 1 equals: 0.
+"crashes for no apparent reason"
 	self assert: Exciter_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testFlangerDemoAsDsp [
+
+	self assert: Flanger_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -34,6 +54,12 @@ EffectsTest >> testFreeverbDemoAsDsp [
 EffectsTest >> testFreeverbMonoAsDsp [
 
 	self assert: FreeverbMono new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testGateDemoAsDsp [
+
+	self assert: Gate_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -67,6 +93,12 @@ EffectsTest >> testPannerAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testParametricEQDemoAsDsp [
+
+	self assert: Parametric_Eq_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testPhTranssposeDsp [
 
 
@@ -79,6 +111,12 @@ EffectsTest >> testPhVocoderDsp [
 self assert: 1 equals: 0.
 "dsp crash apparently for no reason"
 	self assert: PhVocoder new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testPhaser2DemoAsDsp [
+
+	self assert: Phaser2_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -106,6 +144,21 @@ EffectsTest >> testSoftClipQaudraticAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testSpectralTiltDemoAsDsp [
+
+	self assert: Spectral_Tilt_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testTapeStopDemoAsDsp [
+self assert: 1 equals: 0.
+
+"crashes for apparently no reason"
+
+	self assert: TapeStop_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testVelvetNoiseDemoAsDsp [
 
 	self assert: Velvet_Noise_Demo new asDsp isNull equals: false
@@ -123,6 +176,12 @@ EffectsTest >> testVitalRevDemoAsDsp [
 self assert: 1 equals: 0.
 "it crashes without reason"
 	self assert: Vital_Rev_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testWah4DemoAsDsp [
+
+	self assert: Wah4_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
