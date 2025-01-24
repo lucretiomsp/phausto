@@ -16,7 +16,7 @@ Class {
 	#tag : 'Demo'
 }
 
-{ #category : 'converting' }
+{ #category : 'as yet unclassified' }
 Datorro_Rev_Demo >> asBox [
 
 	| intermediateBox finalBox |
