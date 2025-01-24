@@ -44,15 +44,9 @@ PhaustoUITest >> testPhHSliderAsBox [
 { #category : 'tests' }
 PhaustoUITest >> testPhNumEntryAsBox [
 
-	| numEntry |
-	numEntry := PhNumEntry new
-		          label: 'NumeEntry'
-		          init: 0
-		          min: 0
-		          max: 1
-		          step: 0.001.
+.
 
-	self assert: numEntry asBox isNull equals: false
+	self assert: PhNumEntry new asBox isNull equals: false
 ]
 
 { #category : 'tests' }
