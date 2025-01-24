@@ -22,7 +22,7 @@ Class {
 	#tag : 'Demo'
 }
 
-{ #category : 'converting' }
+{ #category : 'as yet unclassified' }
 ReverbTank_Demo >> asBox [
 
 	| intermediateBox finalBox |

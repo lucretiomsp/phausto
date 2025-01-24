@@ -13,7 +13,7 @@ Class {
 	#tag : 'Demo'
 }
 
-{ #category : 'converting' }
+{ #category : 'as yet unclassified' }
 GreyHole_Demo >> asBox [
 
 	| intermediateBox finalBox |

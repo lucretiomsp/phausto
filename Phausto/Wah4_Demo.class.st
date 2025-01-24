@@ -1,13 +1,8 @@
 "
-Psychoacoustic harmonic exciter, with GUI.
-
-References
-https://secure.aes.org/forum/pubs/ebriefs/?elib=16939
-https://www.researchgate.net/publication/258333577_Modeling_the_Harmonic_Exciter
-
+WahWah pedal demo
 "
 Class {
-	#name : 'Exciter_Demo',
+	#name : 'Wah4_Demo',
 	#superclass : 'Demos',
 	#instVars : [
 		'input'
@@ -18,7 +13,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Exciter_Demo >> asBox [
+Wah4_Demo >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -27,8 +22,8 @@ Exciter_Demo >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'as yet unclassified' }
-Exciter_Demo >> input [
+{ #category : 'accessing' }
+Wah4_Demo >> input [
 
 
 	^ input ifNil: [ input := 0 asBox ]

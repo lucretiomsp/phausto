@@ -1,8 +1,9 @@
 "
-Jp REverb demo
+Audio Compressor demo.
+A COMPRESSOR is an audio signal processing operation that reduces the volume of loud sounds or amplifies quiet sounds, 
 "
 Class {
-	#name : 'JpRev_Demo',
+	#name : 'Compressor_Demo',
 	#superclass : 'Demos',
 	#instVars : [
 		'inputL',
@@ -14,7 +15,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-JpRev_Demo >> asBox [
+Compressor_Demo >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -24,14 +25,14 @@ JpRev_Demo >> asBox [
 ]
 
 { #category : 'accessing' }
-JpRev_Demo >> inputL [
+Compressor_Demo >> inputL [
 
 
 	^ inputL ifNil: [ inputL := 0 asBox ]
 ]
 
 { #category : 'accessing' }
-JpRev_Demo >> inputR [
+Compressor_Demo >> inputR [
 
 
 	^ inputR ifNil: [ inputR := 0 asBox ]
