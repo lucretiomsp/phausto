@@ -57,7 +57,7 @@ Acid >> asBox [
 	trigger := PhButton new label: self label , 'Gate'.
 
 	filterDecay := PhHSlider new
-		               label: 'FilterEnvDecay'
+		               label: self label , 'EnvDecay'
 		               init: 0.2
 		               min: 0.01
 		               max: 2
@@ -65,7 +65,7 @@ Acid >> asBox [
 	filterEnv := AREnv new
 		             trigger: trigger;
 		             attack: 0.001 asBox;
-		release: filterDecay .
+		             release: filterDecay.
 	ampEnv := AREnv new
 		          trigger: trigger;
 		          attack: 0.001 asBox;
@@ -73,9 +73,9 @@ Acid >> asBox [
 
 	envAmount := filterEnv * (1 asBox - self cutoffFreq * envMod asBox).
 
-	compensation := 1 asBox / (0.5 asBox  + self cutoffFreq).
+	compensation := 1 asBox / (0.5 asBox + self cutoffFreq).
 	filter := Korg35LPF new
-		          fr:  "envAmount + "self cutoffFreq;
+		          fr: envAmount + self cutoffFreq;
 		          res: self resonance.
 	saw := SawOsc new
 		       uLevel: volume;
@@ -89,8 +89,8 @@ Acid >> asBox [
 		              input1: square.
 
 	distortion := Cubic1 new.
-	instrument := oscillator * ampEnv => filter 
-	              * compensation => distortion.
+	instrument := oscillator * ampEnv => filter * compensation
+	              => distortion.
 	^ instrument asBox
 ]
 
@@ -133,7 +133,7 @@ Acid >> resonance [
 			  label: self label , 'Resonance'
 			  init: 0.5
 			  min: 0.001
-			  max: 9
+			  max: 7
 			  step: 0.001 ]
 ]
 
