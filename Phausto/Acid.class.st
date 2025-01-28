@@ -75,8 +75,8 @@ Acid >> asBox [
 
 	compensation := 1 asBox / (0.5 asBox  + self cutoffFreq).
 	filter := Korg35LPF new
-		          normFreq: envAmount + self cutoffFreq;
-		          q: self resonance.
+		          fr:  envAmount + self cutoffFreq;
+		          res: self resonance.
 	saw := SawOsc new
 		       uLevel: volume;
 		       freq: baseFreq + self tuning.
@@ -122,7 +122,7 @@ Acid >> envMod [
 Acid >> initialize [
 
 	super initialize.
-	self resonance: #(1 0 24 0.001)
+	self resonance: #(1 1 9 0.001)
 ]
 
 { #category : 'accessing' }
