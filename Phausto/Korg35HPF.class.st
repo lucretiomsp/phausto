@@ -28,7 +28,7 @@ Korg35HPF >> asBox [
 
 	intermdiateBox := super asBox .
 
-	finalBox := self res , self fr ,  self input connectTo: intermdiateBox.
+	finalBox := self fr , self res ,  self input connectTo: intermdiateBox.
 
 	^ finalBox
 ]
@@ -39,10 +39,10 @@ Korg35HPF >> fr [
 	^ fr ifNil:  [
 		  fr  := PhHSlider new
 			          label: self label , 'Fr'
-			          init: 600
-			          min: 20
-			          max:  5600
-			          step: 1 ] 
+			          init: 1
+			          min: 0.001
+			          max:  1
+			          step: 0.001 ] 
 ]
 
 { #category : 'initialization' }
