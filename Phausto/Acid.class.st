@@ -88,9 +88,7 @@ Acid >> asBox [
 		              input0: saw;
 		              input1: square.
 
-	distortion := Cubic1 new
-		              drive: 0.002 asBox;
-		              offset: 0.84 asBox.
+	distortion := Cubic1 new.
 	instrument := oscillator * ampEnv => filter * self resonance
 	              * compensation => distortion.
 	^ instrument asBox
