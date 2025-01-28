@@ -28,7 +28,7 @@ Korg35LPF >> asBox [
 
 	intermdiateBox := super asBox .
 
-	finalBox := self res , self fr ,  self input connectTo: intermdiateBox.
+	finalBox := self fr , self res ,  self input connectTo: intermdiateBox.
 
 	^ finalBox
 ]
@@ -58,8 +58,8 @@ Korg35LPF >> res [
 	^ res ifNil:  [
 		  res  := PhHSlider new
 			          label: self label , 'Res'
-			          init: 0.3
-			          min: 0
-			          max: 1
-			          step: 0.01 ] 
+			          init: 1
+			          min: 1
+			          max: 8
+			          step: 0.001 ] 
 ]
