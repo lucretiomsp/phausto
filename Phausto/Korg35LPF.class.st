@@ -39,10 +39,10 @@ Korg35LPF >> fr [
 	^ fr ifNil:  [
 		  fr  := PhHSlider new
 			          label: self label , 'Fr'
-			          init: 600
-			          min: 20
-			          max:  5600
-			          step: 1 ] 
+			          init: 0.001
+			          min: 0
+			          max:  1
+			          step: 0.001 ] 
 ]
 
 { #category : 'initialization' }
