@@ -11,7 +11,9 @@ Class {
 		'resonance',
 		'envMod',
 		'accent',
-		'waveform'
+		'waveform',
+		'compensation',
+		'distortion'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -33,7 +35,7 @@ Acid >> accent [
 { #category : 'initialization' }
 Acid >> asBox [
 
-	| saw square trigger baseFreq oscillator volume filterEnv filter ampEnv instrument envAmount |
+	| saw square trigger baseFreq oscillator volume filterEnv filter ampEnv instrument envAmount filterDecay |
 	volume := PhHSlider new
 		          label: self label , 'Volume'
 		          init: 0.5
@@ -53,15 +55,26 @@ Acid >> asBox [
 		            max: 2000
 		            step: 1.
 	trigger := PhButton new label: self label , 'Gate'.
+
+	filterDecay := PhHSlider new
+		               label: 'FilterEnvDecay'
+		               init: 0.2
+		               min: 0.01
+		               max: 2
+		               step: 0.001.
 	filterEnv := AREnv new
 		             trigger: trigger;
-		             attack: 0.001 asBox.
+		             attack: 0.001 asBox;
+		release: filterDecay .
 	ampEnv := AREnv new
 		          trigger: trigger;
-		          attack: 0.001 asBox.
+		          attack: 0.001 asBox;
+		          release: 0.2 asBox.
+
 	envAmount := filterEnv * (1 asBox - self cutoffFreq * envMod asBox).
 
-	filter := DiodeLadder new
+	compensation := 1 asBox / (0.5 asBox  + self cutoffFreq).
+	filter := Korg35LPF new
 		          normFreq: envAmount + self cutoffFreq;
 		          q: self resonance.
 	saw := SawOsc new
@@ -75,7 +88,11 @@ Acid >> asBox [
 		              input0: saw;
 		              input1: square.
 
-	instrument := oscillator * ampEnv => filter * self resonance.
+	distortion := Cubic1 new
+		              drive: 0.002 asBox;
+		              offset: 0.84 asBox.
+	instrument := oscillator * ampEnv => filter * self resonance
+	              * compensation => distortion.
 	^ instrument asBox
 ]
 

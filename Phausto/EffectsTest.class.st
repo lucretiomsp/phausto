@@ -25,6 +25,12 @@ EffectsTest >> testCryBabyAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testCubicNlAsDsp [
+
+	self assert: CubicNl new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testDatorroRevDemoAsDsp [
 
 	self assert: Dattorro_Rev_Demo new asDsp isNull equals: false
