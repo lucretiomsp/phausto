@@ -247,9 +247,9 @@ PhBox >> asDspWithName: aString [
 					UnitGenerator resetSelfAndAllSubClasses.
 					"all UniTgenerators become UnitGeneratorNullObjects"
 
-					(UnitGenerator allSubclasses flatCollect: [ :each |
-						 each allInstances ]) do: [ :instance |
+					UnitGenerator activeInstances do: [ :instance |
 						instance become: UnitGeneratorNullObject new ].
+					UnitGenerator activeInstances removeAll.
 
 					^ finalDsp ] ]
 ]

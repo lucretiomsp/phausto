@@ -23,6 +23,9 @@ Class {
 		'numberOfInputs',
 		'numberOfOutputs'
 	],
+	#classVars : [
+		'activeInstances'
+	],
 	#classInstVars : [
 		'instancesInDSPContext'
 	],
@@ -30,6 +33,21 @@ Class {
 	#package : 'Phausto',
 	#tag : 'UnitGenerators'
 }
+
+{ #category : 'accessing' }
+UnitGenerator class >> activeInstances [
+
+	^ activeInstances 
+]
+
+{ #category : 'adding' }
+UnitGenerator class >> addInstance: anInstance [
+	"Add a new instance to the class variable collection"
+
+	activeInstances ifNil: [ activeInstances := Set new ].
+	(activeInstances class = OrderedCollection ) ifTrue: [ activeInstances := Set new ].
+	activeInstances add: anInstance
+]
 
 { #category : 'counting' }
 UnitGenerator class >> incrementInstancesInDSPContext [
@@ -75,7 +93,7 @@ UnitGenerator class >> resetSelfAndAllSubClasses [
 { #category : 'system startup' }
 UnitGenerator class >> startUp [
 
-'IO SONO STARTATO UNIT GENERATOR PER CONTARE DA ZERO' traceCr .
+	'Unit Generators start counting from zero' traceCr.
 	self resetSelfAndAllSubClasses
 ]
 
@@ -235,7 +253,10 @@ UnitGenerator >> initialize [
 
 	| suffix |
 	super initialize.
-	"by default a Unit Gereator is considere to have 0 inputs and 1 output, every subclass will define different values".
+	"we keep track of how many UnitGenerators instances are active"
+	self class addInstance: self.
+	self class activeInstances traceCr.
+	"by default a Unit Gereator is considere to have 0 inputs and 1 output, every subclass will define different values"
 	numberOfInputs := 0.
 	numberOfOutputs := 1.
 	self class incrementInstancesInDSPContext.
