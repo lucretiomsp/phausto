@@ -256,6 +256,13 @@ UnitGenerator >> initialize [
 	"we keep track of how many UnitGenerators instances are active"
 	self class addInstance: self.
 	self class activeInstances traceCr.
+	"initialize uLevel slider for ruff volume control"
+	uLevel := PhHSlider new
+			  label: self label , 'uLevel'
+			  init: 0.5
+			  min: 0
+			  max: 1
+			  step: 0.001.
 	"by default a Unit Gereator is considere to have 0 inputs and 1 output, every subclass will define different values"
 	numberOfInputs := 0.
 	numberOfOutputs := 1.
@@ -349,12 +356,13 @@ UnitGenerator >> stereo [
 { #category : 'accessing' }
 UnitGenerator >> uLevel [
 
-	^ uLevel ifNil: [   PhHSlider new
-		          label: self label , 'uLevel'
-		          init: 0.5
-		          min: 0
-		          max: 1
-		          step: 0.001 ]
+	^ uLevel "ifNil: [
+		  PhHSlider new
+			  label: self label , 'uLevel'
+			  init: 0.5
+			  min: 0
+			  max: 1
+			  step: 0.001 ]"
 ]
 
 { #category : 'accessing' }
