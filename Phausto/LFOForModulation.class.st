@@ -58,10 +58,13 @@ LFOForModulation >> initialize [
 	super initialize.
 	"as LFO are used for modulation, there default level is set to 1"
 	self uLevel: 1.
-	
-
-
-	
+	"default frequency for all Oscilators is a slider iranged 0.1 - 20 Hz initialized at: 1"
+	freq := PhHSlider new
+		        label: self label , 'Freq'
+		        init: 1
+		        min: 0.1
+		        max: 20
+		        step: 0.1
 ]
 
 { #category : 'as yet unclassified' }
