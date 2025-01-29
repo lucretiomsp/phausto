@@ -583,7 +583,7 @@ DSP >> init [
 { #category : 'accessing' }
 DSP >> isInitialized [
 
-	^ isInitialized
+	^ isInitialized ifNil: [ isInitialized := false ]
 ]
 
 { #category : 'accessing' }

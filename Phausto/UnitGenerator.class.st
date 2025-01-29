@@ -251,29 +251,44 @@ UnitGenerator >> importStatement: anObject [
 { #category : 'initialization' }
 UnitGenerator >> initialize [
 
-	| suffix |
+	
 	super initialize.
 	"we keep track of how many UnitGenerators instances are active"
 	self class addInstance: self.
-	self class activeInstances traceCr.
-	"initialize uLevel slider for ruff volume control"
-	uLevel := PhHSlider new
-			  label: self label , 'uLevel'
-			  init: 0.5
-			  min: 0
-			  max: 1
-			  step: 0.001.
+
+
 	"by default a Unit Gereator is considere to have 0 inputs and 1 output, every subclass will define different values"
 	numberOfInputs := 0.
 	numberOfOutputs := 1.
 	self class incrementInstancesInDSPContext.
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
-	"the label suffix is '' if  for the first instance of the UnitGenerator"
+   
+   self initializeLabel. 
+	self initializeULevel.
+]
+
+{ #category : 'initialization' }
+UnitGenerator >> initializeLabel [
+
+"the label suffix is '' if  for the first instance of the UnitGenerator"
+	| suffix |
 	suffix := self class instancesInDSPContext = 1
 		          ifTrue: [ '' ]
 		          ifFalse: [ self class instancesInDSPContext asString ].
-	label := self className asString , suffix
+	label := self className asString , suffix.
+	
+]
+
+{ #category : 'initialization' }
+UnitGenerator >> initializeULevel [
+"initialize uLevel slider for ruff volume control"
+	uLevel := PhHSlider new
+		          label: self label , 'uLevel'
+		          init: 0.5
+		          min: 0
+		          max: 1
+		          step: 0.001
 ]
 
 { #category : 'accessing' }
