@@ -245,8 +245,12 @@ PhBox >> asDspWithName: aString [
 						Error new signal: 'Invalid Box please check its creation' ].
 					"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
 					UnitGenerator resetSelfAndAllSubClasses.
-					UnitGenerator removePlaygroundBindings.
-					self inform: '! All Unit Generators have been removed from this Playground bindings !'.
+					"all UniTgenerators become UnitGeneratorNullObjects"
+
+					(UnitGenerator allSubclasses flatCollect: [ :each |
+						 each allInstances ]) do: [ :instance |
+						instance become: UnitGeneratorNullObject new ].
+
 					^ finalDsp ] ]
 ]
 
