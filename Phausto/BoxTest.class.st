@@ -30,15 +30,33 @@ BoxTest >> testDb2Linear [
 ]
 
 { #category : 'tests' }
+BoxTest >> testFMod [
+
+	self assert: ((1 asBox fMod: 2 asBox) asDsp) isNull equals: false
+]
+
+{ #category : 'tests' }
 BoxTest >> testLibContextIsFalseAtStartup [
 
 	self assert: PhBox libContext equals: false
 ]
 
 { #category : 'tests' }
+BoxTest >> testMax [
+
+	self assert: ((1 asBox max: 2 asBox) asDsp) isNull equals: false
+]
+
+{ #category : 'tests' }
 BoxTest >> testMidiKey2Hz [
 
 	self assert: 60 asBox midikey2hz isNull equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testMin [
+
+	self assert: ((1 asBox min: 2 asBox) asDsp) isNull equals: false
 ]
 
 { #category : 'tests' }
