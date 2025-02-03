@@ -87,6 +87,14 @@ Return the cut box
 	^ self ffiCall: #( #PhBox * CboxCut #(  ) )
 ]
 
+{ #category : 'arithmetic' }
+BoxAPI >> boxFModBetween: aBox and: anotherBox [
+	"return the floatModulo  between the to boxes"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxFmodAux #( PhBox * aBox  , PhBox * anotherBox) )
+]
+
 { #category : 'creation' }
 BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buffer [
 
@@ -141,6 +149,14 @@ self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxInt #( int anInteger ) )
 ]
 
+{ #category : 'arithmetic' }
+BoxAPI >> boxMaxBetween: aBox and: anotherBox [
+	"return the max between two boxes"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxMaxAux #( PhBox * aBox  , PhBox * anotherBox) )
+]
+
 { #category : 'ui building' }
 BoxAPI >> boxMerge [
 	"   
@@ -164,6 +180,14 @@ BoxAPI >> boxMerge: aBox with: anotherBox [
 	
 ]
 
+{ #category : 'arithmetic' }
+BoxAPI >> boxMinBetween: aBox and: anotherBox [
+	"return the min between two boxes"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxMinAux #( PhBox * aBox  , PhBox * anotherBox) )
+]
+
 { #category : 'ui building' }
 BoxAPI >> boxNumEntry: aLabel init: initBox min: minBox max: maxBox step: stepBox [ 
 	"return a Numentry box "
@@ -183,6 +207,14 @@ BoxAPI >> boxPar: aBox and: anotherBox [
 self createLibContext .
 	^ self ffiCall:
 		  #( #PhBox * CboxPar #( #PhBox * aBox , #PhBox * anotherBox ) )
+]
+
+{ #category : 'arithmetic' }
+BoxAPI >> boxPower: aBox exponent: anotherBox [
+	"return aBox raised to the power of  anotherBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxPowAux #( PhBox * aBox  , PhBox * anotherBox) )
 ]
 
 { #category : 'printing' }

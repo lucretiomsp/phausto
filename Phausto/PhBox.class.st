@@ -354,6 +354,14 @@ PhBox >> f2l [
 ^ F2l new freq: self
 ]
 
+{ #category : 'arithmetic' }
+PhBox >> fMod: anotherBox [
+	" return the flaoat modulo"
+
+	
+	^ BoxAPI uniqueInstance boxFModBetween:  self  and: anotherBox asBox
+]
+
 { #category : 'enumerating' }
 PhBox >> ifNotNullDo: aBlock [
 	"If the receiver is not null, evaluate the block. Otherwise, signal an error."
@@ -409,6 +417,14 @@ PhBox >> linear2db [
 ]
 
 { #category : 'arithmetic' }
+PhBox >> max: anotherBox [
+	" return max between the two boxes"
+
+	
+	^ BoxAPI uniqueInstance boxMaxBetween: self  and: anotherBox asBox
+]
+
+{ #category : 'arithmetic' }
 PhBox >> mergeWith: anotherBox [
 	"merge Composition of boxes"
 
@@ -429,6 +445,14 @@ PhBox >> midikey2hz [
 		             outputs: emptyBox outputs
 		             buffer: emptyBox errorBuffer.
 	^ self asBox connectTo: converter
+]
+
+{ #category : 'arithmetic' }
+PhBox >> min: anotherBox [
+	"min between the two boxes"
+
+	
+	^ BoxAPI uniqueInstance boxMinBetween: self  and: anotherBox asBox
 ]
 
 { #category : 'accessing' }
