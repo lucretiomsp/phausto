@@ -300,7 +300,9 @@ UnitGenerator >> label [
 { #category : 'accessing' }
 UnitGenerator >> label: aString [
 
-	label := aString
+	label := aString.
+	"chaning a label for a UnitGenerator also changes the label for its UI parameters"
+	self  uiParameters keysAndValuesDo: [ :k :v |v label: ( aString  , k asString )  ].
 ]
 
 { #category : 'converting' }
