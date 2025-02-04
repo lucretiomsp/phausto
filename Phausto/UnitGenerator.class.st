@@ -389,3 +389,10 @@ UnitGenerator >> uLevel: aNumberOrABoxOraAymbol [
 		asParam: methodName asString allButLast
 		forUGen: self
 ]
+
+{ #category : 'accessing' }
+UnitGenerator >> uiParameters [
+
+"return a dictionary with all the UI parameters active for the given UnitGenerator".
+
+]

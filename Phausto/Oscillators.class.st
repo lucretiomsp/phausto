@@ -15,13 +15,7 @@ Class {
 { #category : 'accessing' }
 Oscillators >> freq [
 
-	^ freq "ifNil: [
-		  PhHSlider new
-			  label: self label , 'Freq'
-			  init: 440
-			  min: 20
-			  max: 4086
-			  step: 1 ]"
+	^ freq 
 ]
 
 { #category : 'initialization' }

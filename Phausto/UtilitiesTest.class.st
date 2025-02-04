@@ -326,3 +326,31 @@ event_ADSREnvDecay -> voices.event_ADSREnvDecay;
 		add: #ADSREnvuLevel -> 0.
 	self assert: dict asCmajorEventsToVoicesConnection equals: result
 ]
+
+{ #category : 'tests' }
+UtilitiesTest >> testUnitGeneratorUIParameters [
+
+	| ugen parametersDictionary |
+	ugen := PulseOsc new freq: #PulseFreq; duty: #PulseDuty; level: #PulseULevel.
+
+	parametersDictionary := Dictionary new.
+	parametersDictionary at: #freq put: (PhHSlider new
+			 label: 'PulseFreq'
+			 init: 440
+			 min: 20
+			 max: 4086
+			 step: 1).
+			parametersDictionary at: #duty put: ( PhHSlider new
+			          label: 'PulseDuty'
+			          init: 0.5
+			          min: 0
+			          max: 1
+			          step: 0.001).
+			parametersDictionary at: #uLevel put: ( PhHSlider new
+			          label: 'PulseULevel'
+			          init: 0.5
+			          min: 0
+			          max: 1
+			          step: 0.001).
+	self assert: ugen uiParameters equals: parametersDictionary
+]

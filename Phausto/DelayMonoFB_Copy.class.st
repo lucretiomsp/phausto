@@ -4,7 +4,7 @@ It has a maximum delay time of 4 seconds, and a smoothed delay time in seconds c
 Also, smoothing time expressed in seconds - can be changed in real time
 "
 Class {
-	#name : 'DelayMonoFB',
+	#name : 'DelayMonoFB_Copy',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'maxDelayTime',
@@ -21,14 +21,14 @@ Class {
 }
 
 { #category : 'accessing' }
-DelayMonoFB >> asBox [
+DelayMonoFB_Copy >> asBox [
 
 	
 	^ finalBox asBox
 ]
 
 { #category : 'accessing' }
-DelayMonoFB >> delayTime [
+DelayMonoFB_Copy >> delayTime [
 
 	^ delayTime ifNil: [
 		  delayTime := PhHSlider new
@@ -39,19 +39,8 @@ DelayMonoFB >> delayTime [
 			               step: 1 ]
 ]
 
-{ #category : 'accessing' }
-DelayMonoFB >> dryWet [
-
-	^ dryWet ifNil: [ 	dryWet := (PhHSlider new
-			 label: 'MasterDelay'
-			 init: 0.5
-			 min: 0
-			 max: 1
-			 step: 0.001) ]
-]
-
-{ #category : 'accessing' }
-DelayMonoFB >> dryWet:  aNumberOrABoxOrASymbol [
+{ #category : 'as yet unclassified' }
+DelayMonoFB_Copy >> delayTime:  aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"
@@ -63,7 +52,30 @@ DelayMonoFB >> dryWet:  aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
-DelayMonoFB >> feedBack [
+DelayMonoFB_Copy >> dryWet [
+
+	^ dryWet ifNil: [ 	dryWet := (PhHSlider new
+			 label: 'MasterDelay'
+			 init: 0.5
+			 min: 0
+			 max: 1
+			 step: 0.001) ]
+]
+
+{ #category : 'accessing' }
+DelayMonoFB_Copy >> dryWet:  aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
+DelayMonoFB_Copy >> feedBack [
 
 	^ feedBack ifNil: [  feedBack := (PhHSlider new
 			 label: 'MasterDelayFeedback'
@@ -73,16 +85,34 @@ DelayMonoFB >> feedBack [
 			 step: 0.001). ]
 ]
 
+{ #category : 'as yet unclassified' }
+DelayMonoFB_Copy >> feedBack:  aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
 { #category : 'initialization' }
-DelayMonoFB >> initialize [
+DelayMonoFB_Copy >> initialize [
 
 | mixer delayWithFB |
 	super initialize.
-	label := self class name asString.
+	self label: self class name asString.
 	maxDelayTime := 88200.
 	self input: Wire new.
 
-	delayBox := SmoothDelay new label: self label.
+	delayBox := SmoothDelay new.
+	"delayLength: self delayTime asBox;
+		            input: Wire new self delayTime * PhSampleRate new asBox"
+
+
+
+	"delayLen := self delayTime * PhSampleRate new asBox."
 	mixer := self input + (delayBox * self feedBack).
 
 
@@ -95,7 +125,7 @@ DelayMonoFB >> initialize [
 ]
 
 { #category : 'initialization' }
-DelayMonoFB >> initializeInternalDelay [
+DelayMonoFB_Copy >> initializeInternalDelay [
 
 	| mixer delayWithFB  |
 	mixer := self input + (delayBox * self feedBack).
@@ -110,37 +140,49 @@ DelayMonoFB >> initializeInternalDelay [
 ]
 
 { #category : 'accessing' }
-DelayMonoFB >> input [
+DelayMonoFB_Copy >> input [
 
 	^ input
 ]
 
 { #category : 'accessing' }
-DelayMonoFB >> input: anInput [
+DelayMonoFB_Copy >> input: anInput [
 
 	input := anInput asBox
 ]
 
 { #category : 'accessing' }
-DelayMonoFB >> label [
+DelayMonoFB_Copy >> label [
 
 	^ label
 ]
 
 { #category : 'accessing' }
-DelayMonoFB >> label: anObject [
+DelayMonoFB_Copy >> label: anObject [
 
 	label := anObject
 ]
 
 { #category : 'accessing' }
-DelayMonoFB >> maxDelayTime [
+DelayMonoFB_Copy >> maxDelayTime [
 
 	^ maxDelayTime
 ]
 
+{ #category : 'as yet unclassified' }
+DelayMonoFB_Copy >> maxDelayTime: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
 { #category : 'accessing' }
-DelayMonoFB >> patchedWith: aUnitGenerator [
+DelayMonoFB_Copy >> patchedWith: aUnitGenerator [
 
 	self input: aUnitGenerator.
 	self initializeInternalDelay 

@@ -30,19 +30,18 @@ PulseOsc >> asBox [
 { #category : 'accessing' }
 PulseOsc >> duty [
 
-	^ duty ifNil: [
-		duty := PhHSlider new
-			        label: self label , 'Duty'
-			        init: 0.5
-			        min: 0
-			        max: 1
-			        step: 0.001 ]
+	^ duty 
 ]
 
 { #category : 'initialization' }
 PulseOsc >> initialize [
 
 	super initialize.
-	processExpression := 'process = os.pulsetrain;'.
-	
+	 duty := PhHSlider new
+			          label: self label , 'Duty'
+			          init: 0.5
+			          min: 0
+			          max: 1
+			          step: 0.001.
+	processExpression := 'process = os.pulsetrain;'
 ]
