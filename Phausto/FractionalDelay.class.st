@@ -12,9 +12,10 @@ Class {
 { #category : 'converting' }
 FractionalDelay >> asBox [
 
-	| intermediateBox finalBox |
+	| intermediateBox finalBox delayInSamples |
 	intermediateBox := super asBox.
-	finalBox := self maxDelayLength asBox , self delayLength asBox
+	delayInSamples := self delayLength * PhSampleRate new.
+	finalBox := self maxDelayLength asBox , delayInSamples asBox
 	            , self input asBox connectTo: intermediateBox.
 	^ finalBox
 ]

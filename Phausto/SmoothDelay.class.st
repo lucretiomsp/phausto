@@ -16,11 +16,10 @@ Class {
 { #category : 'converting' }
 SmoothDelay >> asBox [
 
-	| intermediateBox finalBox delayInSeconds |
-	delayInSeconds := self interpolationTime asBox
-	                  * PhSampleRate new asBox.
+	| intermediateBox finalBox  delayInSamples |
+	delayInSamples := self delayLength * PhSampleRate new.
 	intermediateBox := super asBox.
-	finalBox := self maxDelayLength asBox , delayInSeconds asBox
+	finalBox := self maxDelayLength asBox , delayInSamples asBox
 	            , self interpolationTime asBox , self input asBox connectTo:
 		            intermediateBox.
 	^ finalBox
@@ -31,17 +30,17 @@ SmoothDelay >> initialize [
 
 	super initialize.
 	processExpression := 'process = de.sdelay;'.
+	interpolationTime := PhHSlider new
+			                       label: self label , 'InterpTime'
+			                       init: 0.1
+			                       min: 0.01
+			                       max: 2
+			                       step: 0.001
 	
 ]
 
 { #category : 'accessing' }
 SmoothDelay >> interpolationTime [
 
-	^ interpolationTime ifNil: [
-		  interpolationTime := PhHSlider new
-			                       label: self label , 'InterpTime'
-			                       init: 0.1
-			                       min: 0.01
-			                       max: 2
-			                       step: 0.001 ]
+	^ interpolationTime
 ]

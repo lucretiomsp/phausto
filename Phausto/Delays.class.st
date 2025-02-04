@@ -27,23 +27,19 @@ Delays >> delayLength [
 			 step: 1). ]
 ]
 
-{ #category : 'accessing' }
-Delays >> delayLength: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'initialization' }
 Delays >> initialize [
 
 	super initialize.
-	maxDelayLength := 88200. "by default, maximum delay length is 2 second at 44100 Hz sample rate"
+	maxDelayLength := 2 asBox * PhSampleRate new. "by default, maximum delay length is 2 second "
 
-	input := Wire new
+	input := Wire new.
+	delayLength := (PhHSlider new
+			 label: self label , 'Length'
+			 init: 1
+			 min: 0.001
+			 max: 2
+			 step: 0.001).
 ]
 
 { #category : 'accessing' }
@@ -53,25 +49,16 @@ Delays >> input [
 ]
 
 { #category : 'accessing' }
-Delays >> input: aFloatOrABox [
-
-	input := aFloatOrABox
-]
-
-{ #category : 'accessing' }
 Delays >> maxDelayLength [
 
 	^ maxDelayLength
 ]
 
 { #category : 'accessing' }
-Delays >> maxDelayLength: aNumberOrABoxOrASymbol [
+Delays >> maxDelayLength: aTimeInSeconds [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+"must be a constant"
+	maxDelayLength := aTimeInSeconds asBox * PhSampleRate new.
 ]
 
 { #category : 'connecting' }
