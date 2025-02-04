@@ -40,41 +40,15 @@ Clap >> attack [
 ]
 
 { #category : 'accessing' }
-Clap >> attack: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
-{ #category : 'accessing' }
 Clap >> decay [
 
-	^ decay ifNil: [
-		  decay := PhHSlider new
-			          label: self label , 'Decay'
-			          init: 0.2
-			          min: 0
-			          max: 4.0
-			          step: 0.01 ]
-]
-
-{ #category : 'accessing' }
-Clap >> decay:  aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	^ decay 
 ]
 
 { #category : 'accessing' }
 Clap >> gate [
 
-	^ gate ifNil: [ gate := PhButton new label: self label , 'Gate' ]
+	^ gate 
 ]
 
 { #category : 'accessing' }
@@ -93,27 +67,24 @@ Clap >> initialize [
 	super initialize.
 	self processExpression: 'process = sy.clap;'.
 
-	attack := 0
+	attack := 0.
+	gate := PhButton new label: self label , 'Gate'.
+	decay := decay := PhHSlider new
+			          label: self label , 'Decay'
+			          init: 0.2
+			          min: 0
+			          max: 4.0
+			          step: 0.01 .
+			tone := PhHSlider new
+			          label: self label , 'Note'
+			          init: 2200
+			          min: 400
+			          max: 3500
+			          step: 1 
 ]
 
 { #category : 'accessing' }
 Clap >> tone [
 
-	^ tone ifNil: [
-		  tone := PhHSlider new
-			          label: self label , 'Note'
-			          init: 2200
-			          min: 400
-			          max: 3500
-			          step: 1 ]
-]
-
-{ #category : 'accessing' }
-Clap >> tone:  aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	^ tone
 ]

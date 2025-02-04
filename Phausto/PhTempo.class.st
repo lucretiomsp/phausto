@@ -32,23 +32,17 @@ PhTempo >> asBox [
 PhTempo >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.tempo;'
+	processExpression := 'process = ba.tempo;'.
+	tempo := PhHSlider new
+			           label: self label , 'Tempo'
+			           init: 30
+			           min: 120
+			           max: 220
+			           step: 0.01 
 ]
 
 { #category : 'accessing' }
 PhTempo >> tempo [
 
-	^ tempo ifNil: [
-		  tempo := PhHSlider new
-			           label: self label , 'Tempo'
-			           init: 30
-			           min: 120
-			           max: 220
-			           step: 0.01 ]
-]
-
-{ #category : 'as yet unclassified' }
-PhTempo >> trig [
-
-	^ trig ifNil: [ trig := PhButton new label: self label , 'Gate' ]
+	^ tempo 
 ]

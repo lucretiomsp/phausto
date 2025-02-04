@@ -1,5 +1,6 @@
 "
-Super class for Horizontal, Vertical and NumEntry slider created by the Faust compiler
+Super class for Horizontal, Vertical and NumEntry slider created by the Faust compiler.
+
 "
 Class {
 	#name : 'PhSlider',
