@@ -331,7 +331,7 @@ event_ADSREnvDecay -> voices.event_ADSREnvDecay;
 UtilitiesTest >> testUnitGeneratorUIParameters [
 
 	| ugen parametersDictionary |
-	ugen := PulseOsc new freq: #PulseFreq; duty: #PulseDuty; level: #PulseULevel.
+	ugen := PulseOsc new freq: #PulseFreq; duty: #PulseDuty; uLevel: #PulseULevel.
 
 	parametersDictionary := Dictionary new.
 	parametersDictionary at: #freq put: (PhHSlider new

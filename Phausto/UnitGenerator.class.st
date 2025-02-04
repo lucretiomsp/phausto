@@ -392,7 +392,12 @@ UnitGenerator >> uLevel: aNumberOrABoxOraAymbol [
 
 { #category : 'accessing' }
 UnitGenerator >> uiParameters [
+"return a dictionary with all the UI parameters active for the given UnitGenerator"
 
-"return a dictionary with all the UI parameters active for the given UnitGenerator".
-
+| allSlots arrayOfUiParams paramDictionary|
+allSlots := self class allSlots.
+arrayOfUiParams := allSlots select: [ :i | (self  instVarNamed: i name) isKindOf: UIPrimitive ].
+paramDictionary := Dictionary new.
+arrayOfUiParams do: [  :param | paramDictionary at: param name asSymbol put: (self instVarNamed: param name) ].
+^ paramDictionary 
 ]
