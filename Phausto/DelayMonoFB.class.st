@@ -28,18 +28,6 @@ DelayMonoFB >> asBox [
 ]
 
 { #category : 'accessing' }
-DelayMonoFB >> delayTime [
-
-	^ delayTime ifNil: [
-		  delayTime := PhHSlider new
-			               label: 'MasterDelayTime'
-			               init: 12000
-			               min: 100
-			               max: 40000
-			               step: 1 ]
-]
-
-{ #category : 'accessing' }
 DelayMonoFB >> dryWet [
 
 	^ dryWet ifNil: [ 	dryWet := (PhHSlider new
@@ -76,13 +64,18 @@ DelayMonoFB >> feedBack [
 { #category : 'initialization' }
 DelayMonoFB >> initialize [
 
-| mixer delayWithFB |
+	| mixer delayWithFB |
 	super initialize.
 	label := self class name asString.
-	maxDelayTime := 88200.
+   
 	self input: Wire new.
-
-	delayBox := SmoothDelay new label: self label.
+     delayTime := (PhHSlider new
+			               label: 'MasterDelayTime'
+			               init: 1
+			               min: 0.001
+			               max: 2
+			               step: 0.0001) smoo.
+	delayBox := SmoothDelay new label: self label; delayLength: delayTime .
 	mixer := self input + (delayBox * self feedBack).
 
 
@@ -119,18 +112,6 @@ DelayMonoFB >> input [
 DelayMonoFB >> input: anInput [
 
 	input := anInput asBox
-]
-
-{ #category : 'accessing' }
-DelayMonoFB >> label [
-
-	^ label
-]
-
-{ #category : 'accessing' }
-DelayMonoFB >> label: anObject [
-
-	label := anObject
 ]
 
 { #category : 'accessing' }

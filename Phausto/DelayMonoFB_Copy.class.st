@@ -27,7 +27,7 @@ DelayMonoFB_Copy >> asBox [
 	^ finalBox asBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 DelayMonoFB_Copy >> delayTime [
 
 	^ delayTime ifNil: [
@@ -151,13 +151,13 @@ DelayMonoFB_Copy >> input: anInput [
 	input := anInput asBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 DelayMonoFB_Copy >> label [
 
 	^ label
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 DelayMonoFB_Copy >> label: anObject [
 
 	label := anObject
