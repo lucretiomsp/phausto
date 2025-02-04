@@ -51,6 +51,12 @@ EffectsTest >> testFlangerDemoAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testFractionalDelayAsDsp [
+
+	self assert: FractionalDelay new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testFreeverbDemoAsDsp [
 
 	self assert: Freeverb_Demo new asDsp isNull equals: false
@@ -138,9 +144,21 @@ EffectsTest >> testSawtoohDemoAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testSimpleDelayAsDsp [
+
+	self assert: SimpleDelay new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 EffectsTest >> testSineOscAsDsp [
 
 	self assert: PhClip new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testSmoothDelayAsDsp [
+
+	self assert: SmoothDelay new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

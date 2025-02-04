@@ -16,11 +16,13 @@ Class {
 { #category : 'converting' }
 SmoothDelay >> asBox [
 
-	| intermediateBox finalBox  delayInSamples |
-	delayInSamples := self delayLength * PhSampleRate new.
+	| intermediateBox finalBox  delayInSamples interpInSamples sampleRate |
+	sampleRate := PhSampleRate new.
+	delayInSamples := self delayLength * sampleRate .
+	interpInSamples := interpolationTime  * sampleRate .
 	intermediateBox := super asBox.
-	finalBox := self maxDelayLength asBox , delayInSamples asBox
-	            , self interpolationTime asBox , self input asBox connectTo:
+	finalBox := self maxDelayLength asBox 
+	            , self interpolationTime asBox , delayInSamples asBox , self input asBox connectTo:
 		            intermediateBox.
 	^ finalBox
 ]
