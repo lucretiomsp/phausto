@@ -1,7 +1,22 @@
 "
 I am the Phausto implementation of a Faust list, simulated in the language using parallel composition: (1,2,3,5,7,11). The main limitation of this approach in Faust is that there is no empty list.
 A valid PhList needs to have at least 2 items, otherwise converting to a PhBox will cause an error.
-Consistent with Pharo's collection indexing, counting starts at index 1, this means the first element of a PhList is always ""0 asBox""
+Consistent with Pharo's collection indexing, counting starts at index 1, this means the first element of a PhList is always ""0 asBox"".
+
+## Special cases.
+By sending the message
+Here is some code 
+
+```language=Pharo
+   countingFromZero
+```
+
+
+before adding items to do the PhList, the list start counting from 0 and the first element is not that
+```language=Pharo
+   0 asBox
+```
+
 "
 Class {
 	#name : 'PhList',
@@ -35,6 +50,13 @@ PhList >> asBox [
 ]
 
 { #category : 'initialization' }
+PhList >> countingFromZero [
+
+
+	items := OrderedCollection new
+]
+
+{ #category : 'initialization' }
 PhList >> initialize [
 
 	super initialize.
@@ -45,4 +67,12 @@ PhList >> initialize [
 PhList >> items [
 
 ^ items
+]
+
+{ #category : 'accessing' }
+PhList >> size [
+	"return the number of items in the PhList"
+	^ self items size
+
+	
 ]
