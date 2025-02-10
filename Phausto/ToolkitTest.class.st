@@ -33,6 +33,15 @@ ToolkitTest >> testPhListAsDsp [
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhListCountingFromZero [
+
+| list |
+
+list := PhList new countingFromZero addAll: #(1 2 3 4).
+self assert: list size equals: 4.
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhSubBeatAsDsp [
 
 	self assert: PhSubBeat new asDsp isNull equals: false
