@@ -56,7 +56,8 @@ Class {
 		'egLevels1',
 		'lfoDelays',
 		'opDetunes',
-		'keyVelocities'
+		'keyVelocities',
+		'opFrequencies'
 	],
 	#category : 'Phausto-Dx7',
 	#package : 'Phausto',
@@ -85,6 +86,26 @@ Dx7Algo >> ampModSensitivities [
 Dx7Algo >> ampModSensitivities: aPhListCountingfromZero [
 
 	ampModSensitivities := aPhListCountingfromZero
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> asBox [
+
+	| interBox finalBox |
+	interBox := super asBox.
+	finalBox := (self algoNumber asBox , self egRates1 asBox
+	            , self egRates2 asBox , self egRates3 asBox
+	            , self egRates4 asBox , self egLevels1 asBox
+	            , self egLevels2 asBox , self egLevels3 asBox
+	            , self egLevels4 asBox , self outLevels asBox
+	            , self keyVelocities asBox
+	            , self ampModSensitivities asBox , self opModes asBox
+	            , self opFrequencies asBox , self opDetunes asBox
+	            , self opRateScales asBox , self feedbacks asBox
+	            , self lfoDelays asBox , self lfoDepths asBox
+	            , self lfoSpeeds asBox , self freq asBox
+	            , self gain asBox , self gate asBox ) connectTo: interBox .
+	^ finalBox 
 ]
 
 { #category : 'accessing' }
@@ -226,74 +247,230 @@ Dx7Algo >> initialize [
 ]
 
 { #category : 'initialization' }
+Dx7Algo >> initializeAmpModSensitivities [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'AmpModSens'
+			           values: #( 0 0 99 1 ) ].
+	self ampModSensitivities: (PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
 Dx7Algo >> initializeEgLevels1 [
 
 	| sliders |
-	sliders := (1 to: 6) collect: [ :i |  PhHSlider new label: self class name , 'Op' , i asString , 'Levels1' values: #(0 0 99 1)].
-	self egLevels1: sliders. 
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Level1'
+			           values: #( 0 0 99 1 ) ].
+	self egLevels1: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeEgLevels2 [
 
 	| sliders |
-	sliders := (1 to: 6) collect: [ :i |  PhHSlider new label: self class name , 'Op' , i asString , 'Levels2' values: #(0 0 99 1)].
-	self egLevels2: sliders. 
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Level2'
+			           values: #( 0 0 99 1 ) ].
+	self egLevels2: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeEgLevels3 [
 
 	| sliders |
-	sliders := (1 to: 6) collect: [ :i |  PhHSlider new label: self class name , 'Op' , i asString , 'Levels3' values: #(0 0 99 1)].
-	self egLevels3: sliders. 
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Level3'
+			           values: #( 0 0 99 1 ) ].
+	self egLevels3: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeEgLevels4 [
 
 	| sliders |
-	sliders := (1 to: 6) collect: [ :i |  PhHSlider new label: self class name , 'Op' , i asString , 'Levels4' values: #(0 0 99 1)].
-	self egLevels4: sliders. 
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Level4'
+			           values: #( 0 0 99 1 ) ].
+	self egLevels4: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeEgRates1 [
 
 	| sliders |
-	sliders := (1 to: 16) collect: [ :i |  PhHSlider new label: self class name , 'Op' , i asString , 'Rates1' values: #(0 0 99 1)].
-	self egRates1: sliders. 
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Rate1'
+			           values: #( 0 0 99 1 ) ].
+	self egRates1: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeEgRates2 [
 
 	| sliders |
-	sliders := (1 to: 16) collect: [ :i |  PhHSlider new label: self class name , 'Op' , i asString , 'Rates2' values: #(0 0 99 1)].
-	self egRates2: sliders. 
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Rate2'
+			           values: #( 0 0 99 1 ) ].
+	self egRates2: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeEgRates3 [
 
 	| sliders |
-	sliders := (1 to: 16) collect: [ :i |  PhHSlider new label: self class name , 'Op' , i asString , 'Rates3' values: #(0 0 99 1)].
-	self egRates3: sliders. 
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Rate3'
+			           values: #( 0 0 99 1 ) ].
+	self egRates3: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeEgRates4 [
 
 	| sliders |
-	sliders := (1 to: 16) collect: [ :i |  PhHSlider new label: self class name , 'Op' , i asString , 'Rates4' values: #(0 0 99 1)].
-	self egRates4: sliders. 
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Rate4'
+			           values: #( 0 0 99 1 ) ].
+	self egRates4: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeEnvelopeGenerators [
 
-self initializeEgLevels1; initializeEgLevels2 ; initializeEgLevels3 ; initializeEgLevels4.
-self initializeEgRates1 ; initializeEgRates2 ; initializeEgRates3 ; initializeEgRates4 . 
+	self
+		initializeEgLevels1;
+		initializeEgLevels2;
+		initializeEgLevels3;
+		initializeEgLevels4.
+	self
+		initializeEgRates1;
+		initializeEgRates2;
+		initializeEgRates3;
+		initializeEgRates4.
+		
+	self initializeOutLevels; initializeKeyVelocities ; initializeAmpModSensitivities .
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeKeyVelocities [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'KeyVel'
+			           values: #( 0 0 99 1 ) ].
+	self ampModSensitivities: (PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeLFOs [
+
+self initializeLfoSpeed ; initializeLfoDepth ; initializeLfoDelay 
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeLfoDelay [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'LfoDelay'
+			           values: #( 0 0 99 1 ) ].
+	self lfoDelays: (PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeLfoDepth [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'LfoDepth'
+			           values: #( 0 0 99 1 ) ].
+	self lfoDepths: (PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeLfoSpeed [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'LfoSpeed'
+			           values: #( 0 0 99 1 ) ].
+	self lfoSpeeds: (PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeOpFeedbacks [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Feedback'
+			           values: #( 0 0 99 1 ) ].
+	self feedbacks: (PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeOpFrequencies [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Frequency'
+			           values: #( 0 0 99 1 ) ].
+	self opFrequencies: (PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeOpModes [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'Mode'
+			           values: #( 0 0 1 0.01 ) ].
+	self opModes: (PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeOps [
+
+self initializeOpFrequencies ; initializeOpModes ; initializeOpFeedbacks 
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeOutLevels [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'OutLevel'
+			           values: #( 0 0 99 1 ) ].
+	self outLevels: (PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeRateScale [
+
+	| sliders |
+	sliders := (1 to: 6) collect: [ :i |
+		           PhHSlider new
+			           label: self class name , 'Op' , i asString , 'RateScale'
+			           values: #( 0 0 99 1 ) ].
+	self opRateScales: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'accessing' }
@@ -354,6 +531,18 @@ Dx7Algo >> opDetunes [
 Dx7Algo >> opDetunes: aPhListCountingfromZero [
 
 	opDetunes := aPhListCountingfromZero
+]
+
+{ #category : 'accessing' }
+Dx7Algo >> opFrequencies [
+
+	 ^ opFrequencies 
+]
+
+{ #category : 'accessing' }
+Dx7Algo >> opFrequencies: aPhListCountingfromZero [
+
+	opFrequencies := aPhListCountingfromZero
 ]
 
 { #category : 'accessing' }
