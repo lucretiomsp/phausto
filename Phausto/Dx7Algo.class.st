@@ -23,10 +23,10 @@ Where:
 **opFrequencies**: preset operator frequencies (a list of 6 values between 0-99)
 **opDetunes**: preset operator detuning (a list of 6 values between 0-99)
 **opRateScale**: preset operator rate scale (a list of 6 values between 0-99)
-**feedbacks**: preset operator feedback (a list of 6 values between 0-99)
-**lfoDelays**: preset LFO delay (a list of 6 values between 0-99)
-**lfoDepths**: preset LFO depth (a list of 6 values between 0-99)
-**lfoSpeeds**: preset LFO speed (a list of 6 values between 0-99)
+**feedback**: preset operator feedback 
+**lfoDelay**: preset LFO delay 
+**lfoDepth**: preset LFO depth 
+**lfoSpeed**: preset LFO speed 
 **freq**: fundamental frequency
 **gain**: general gain
 **gate**: trigger signal
@@ -35,12 +35,12 @@ Class {
 	#name : 'Dx7Algo',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'lfoDepths',
+		'lfoDepth',
 		'freq',
 		'gain',
 		'egLevels4',
 		'opRateScales',
-		'feedbacks',
+		'feedback',
 		'egRates3',
 		'outLevels',
 		'egRates1',
@@ -48,13 +48,13 @@ Class {
 		'algoNumber',
 		'ampModSensitivities',
 		'egRates4',
-		'lfoSpeeds',
+		'lfoSpeed',
 		'gate',
 		'egLevels2',
 		'egLevels3',
 		'egRates2',
 		'egLevels1',
-		'lfoDelays',
+		'lfoDelay',
 		'opDetunes',
 		'keyVelocities',
 		'opFrequencies'
@@ -101,9 +101,9 @@ Dx7Algo >> asBox [
 	            , self keyVelocities asBox
 	            , self ampModSensitivities asBox , self opModes asBox
 	            , self opFrequencies asBox , self opDetunes asBox
-	            , self opRateScales asBox , self feedbacks asBox
-	            , self lfoDelays asBox , self lfoDepths asBox
-	            , self lfoSpeeds asBox , self freq asBox
+	            , self opRateScales asBox , self feedback asBox
+	            , self lfoDelay asBox , self lfoDepth asBox
+	            , self lfoSpeed asBox , self freq asBox
 	            , self gain asBox , self gate asBox ) connectTo: interBox .
 	^ finalBox 
 ]
@@ -205,15 +205,15 @@ Dx7Algo >> egRates4: aPhListCountingfromZero [
 ]
 
 { #category : 'accessing' }
-Dx7Algo >> feedbacks [
+Dx7Algo >> feedback [
 
-	^ feedbacks
+	^ feedback
 ]
 
 { #category : 'accessing' }
-Dx7Algo >> feedbacks: aPhListCountingfromZero [
+Dx7Algo >> feedback: aPhListCountingfromZero [
 
-	feedbacks := aPhListCountingfromZero
+	feedback := aPhListCountingfromZero
 ]
 
 { #category : 'accessing' }
@@ -241,9 +241,20 @@ Dx7Algo >> initialize [
 	processExpression := 'process = dx.dx7_algo;'.
 	gate := PhButton new label: self class name , 'Gate'.
 	gain := (self class name , 'Gain') asSymbol asPhHSlider.
-	freq := PhHSlider new label: self class name , 'Freq'.
+	freq := PhHSlider new label: self class name , 'Freq' values: #(440 20 932 1).
 	"algo number must be an int"
-	algoNumber := PhHSlider new label: self class name , 'AlgoNumber' values: #(0 0 31 1)
+	algoNumber := PhHSlider new
+		              label: self class name , 'AlgoNumber'
+		              values: #( 0 0 31 1 ).
+	self
+		initializeEnvelopeGenerators;
+		initializeLFOs;
+		initializeOps;
+		initializeAmpModSensitivities;
+		initializeKeyVelocities;
+		initializeOutLevels;
+		initializeRateScale;
+		initializeFeedback
 ]
 
 { #category : 'initialization' }
@@ -363,6 +374,14 @@ Dx7Algo >> initializeEnvelopeGenerators [
 ]
 
 { #category : 'initialization' }
+Dx7Algo >> initializeFeedback [
+
+	self feedback: (PhHSlider new
+			 label: self class name , 'Feedback'
+			 values: #( 0 0 99 1 ))
+]
+
+{ #category : 'initialization' }
 Dx7Algo >> initializeKeyVelocities [
 
 	| sliders |
@@ -370,57 +389,54 @@ Dx7Algo >> initializeKeyVelocities [
 		           PhHSlider new
 			           label: self class name , 'Op' , i asString , 'KeyVel'
 			           values: #( 0 0 99 1 ) ].
-	self ampModSensitivities: (PhList new countingFromZero addAll: sliders)
+	self keyVelocities:
+		(PhList new countingFromZero addAll: sliders)
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeLFODelay [
+
+	
+		          
+	self lfoDelay: ( PhHSlider new
+			           label: self class name , 'LFODelay'
+			           values: #( 0 0 99 1 ) )
+]
+
+{ #category : 'initialization' }
+Dx7Algo >> initializeLFODepth [
+
+
+	self lfoDepth:  (PhHSlider new
+			           label: self class name ,  'LFODepth'
+			           values: #( 0 0 99 1 ) )
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeLFOs [
 
-self initializeLfoSpeed ; initializeLfoDepth ; initializeLfoDelay 
-]
-
-{ #category : 'initialization' }
-Dx7Algo >> initializeLfoDelay [
-
-	| sliders |
-	sliders := (1 to: 6) collect: [ :i |
-		           PhHSlider new
-			           label: self class name , 'Op' , i asString , 'LfoDelay'
-			           values: #( 0 0 99 1 ) ].
-	self lfoDelays: (PhList new countingFromZero addAll: sliders)
-]
-
-{ #category : 'initialization' }
-Dx7Algo >> initializeLfoDepth [
-
-	| sliders |
-	sliders := (1 to: 6) collect: [ :i |
-		           PhHSlider new
-			           label: self class name , 'Op' , i asString , 'LfoDepth'
-			           values: #( 0 0 99 1 ) ].
-	self lfoDepths: (PhList new countingFromZero addAll: sliders)
+self initializeLfoSpeed ; initializeLFODepth ; initializeLFODelay 
 ]
 
 { #category : 'initialization' }
 Dx7Algo >> initializeLfoSpeed [
 
-	| sliders |
-	sliders := (1 to: 6) collect: [ :i |
-		           PhHSlider new
-			           label: self class name , 'Op' , i asString , 'LfoSpeed'
-			           values: #( 0 0 99 1 ) ].
-	self lfoSpeeds: (PhList new countingFromZero addAll: sliders)
+	
+	self lfoSpeed: 
+		           (PhHSlider new
+			           label: self class name , 'LfoSpeed'
+			           values: #( 0 0 99 1 ) )
 ]
 
 { #category : 'initialization' }
-Dx7Algo >> initializeOpFeedbacks [
+Dx7Algo >> initializeOpDetunes [
 
 	| sliders |
 	sliders := (1 to: 6) collect: [ :i |
 		           PhHSlider new
-			           label: self class name , 'Op' , i asString , 'Feedback'
-			           values: #( 0 0 99 1 ) ].
-	self feedbacks: (PhList new countingFromZero addAll: sliders)
+			           label: self class name , 'Op' , i asString , 'Detune'
+			           values: #( 0 0 1 0.01 ) ].
+	self opDetunes: (PhList new countingFromZero addAll: sliders)
 ]
 
 { #category : 'initialization' }
@@ -448,7 +464,11 @@ Dx7Algo >> initializeOpModes [
 { #category : 'initialization' }
 Dx7Algo >> initializeOps [
 
-self initializeOpFrequencies ; initializeOpModes ; initializeOpFeedbacks 
+	self
+		initializeOpFrequencies;
+		initializeOpModes;
+		initializeFeedback;
+		initializeOpDetunes.
 ]
 
 { #category : 'initialization' }
@@ -486,39 +506,39 @@ Dx7Algo >> keyVelocities: aPhListCountingfromZero [
 ]
 
 { #category : 'accessing' }
-Dx7Algo >> lfoDelays [
+Dx7Algo >> lfoDelay [
 
-	^ lfoDelays
+	^ lfoDelay
 ]
 
 { #category : 'accessing' }
-Dx7Algo >> lfoDelays: aPhListCountingfromZero [
+Dx7Algo >> lfoDelay: aPhListCountingfromZero [
 
-	lfoDelays := aPhListCountingfromZero
+	lfoDelay := aPhListCountingfromZero
 ]
 
 { #category : 'accessing' }
-Dx7Algo >> lfoDepths [
+Dx7Algo >> lfoDepth [
 
-	^ lfoDepths
+	^ lfoDepth
 ]
 
 { #category : 'accessing' }
-Dx7Algo >> lfoDepths: aPhListCountingfromZero [
+Dx7Algo >> lfoDepth: aPhListCountingfromZero [
 
-	lfoDepths := aPhListCountingfromZero
+	lfoDepth := aPhListCountingfromZero
 ]
 
 { #category : 'accessing' }
-Dx7Algo >> lfoSpeeds [
+Dx7Algo >> lfoSpeed [
 
-	^ lfoSpeeds
+	^ lfoSpeed
 ]
 
 { #category : 'accessing' }
-Dx7Algo >> lfoSpeeds: aPhListCountingfromZero [
+Dx7Algo >> lfoSpeed: aPhListCountingfromZero [
 
-	lfoSpeeds := aPhListCountingfromZero
+	lfoSpeed := aPhListCountingfromZero
 ]
 
 { #category : 'accessing' }
