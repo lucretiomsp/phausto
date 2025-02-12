@@ -154,9 +154,9 @@ PhaustoDynamicEngine >> destroyDSP: aDsp [
 { #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> getLastError [
 
-^ 'Errore'
-	"^ PhaustoDynamicEngine uniqueInstance ffiCall:
-		  #( char #* getLastError #(  ) )"
+	
+	^ PhaustoDynamicEngine uniqueInstance ffiCall:
+		  #( char #* getLastError #(  ) )
 ]
 
 { #category : 'as yet unclassified' }

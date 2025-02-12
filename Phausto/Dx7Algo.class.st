@@ -91,21 +91,36 @@ Dx7Algo >> ampModSensitivities: aPhListCountingfromZero [
 { #category : 'initialization' }
 Dx7Algo >> asBox [
 
-	| interBox finalBox |
-	interBox := super asBox.
-	finalBox := (self algoNumber asBox , self egRates1 asBox
-	            , self egRates2 asBox , self egRates3 asBox
-	            , self egRates4 asBox , self egLevels1 asBox
-	            , self egLevels2 asBox , self egLevels3 asBox
-	            , self egLevels4 asBox , self outLevels asBox
-	            , self keyVelocities asBox
-	            , self ampModSensitivities asBox , self opModes asBox
-	            , self opFrequencies asBox , self opDetunes asBox
-	            , self opRateScales asBox , self feedback asBox
-	            , self lfoDelay asBox , self lfoDepth asBox
-	            , self lfoSpeed asBox , self freq asBox
-	            , self gain asBox , self gate asBox ) connectTo: interBox .
-	^ finalBox 
+	| interBox finalBox algN egR1 egR2 egR3 egR4 egL1 egL2 egL3 egL4 outLev keyVel ampMod opMode opFreqs opRateScl fb lfoDel lfoDep lfoSp opDetune fr g gt |
+	interBox := MoogVcf new asBox .
+	
+	"all boxes are created before to give time to the inner Faust compiler to create them"
+	algN := self algoNumber asBox.
+	egR1 := self egRates1 asBox.
+	egR2 := self egRates2 asBox.
+	egR3 := self egRates3 asBox.
+	egR4 := self egRates4 asBox.
+	egL1 := self egLevels1 asBox.
+	egL2 := self egLevels2 asBox.
+	egL3 := self egLevels3 asBox.
+	egL4 := self egLevels4 asBox.
+	outLev := self outLevels asBox.
+	keyVel := self keyVelocities asBox.
+	ampMod := self ampModSensitivities asBox .
+	opMode := self  opModes asBox.
+	opFreqs := self opFrequencies asBox.
+	opDetune := self opDetunes asBox .
+	opRateScl := self opRateScales asBox .
+	fb := self feedback asBox.
+	lfoDel := self lfoDelay asBox.
+	lfoDep := self lfoDepth asBox .
+	lfoSp := self lfoSpeed asBox .
+	fr := self freq asBox .
+	g := self gain asBox .
+	gt := self gate asBox .
+	
+	finalBox :=  (algN , egR1 , egR2 , egR3 , egR4 , egL1 , egL2 , egL3 , egL4 , outLev , keyVel , opMode , opFreqs , opDetune , opRateScl , fb , lfoDel , lfoDep , lfoSp , fr , g , gt ) connectTo: interBox .
+	^ finalBox
 ]
 
 { #category : 'accessing' }

@@ -127,6 +127,12 @@ Dx7Test >> testDx7LFODelay [
 ]
 
 { #category : 'tests' }
+Dx7Test >> testDx7LFODepth [
+
+	self assert: dx7 lfoDepth asBox isNull equals: false
+]
+
+{ #category : 'tests' }
 Dx7Test >> testDx7LFOSpeed [
 
 	
