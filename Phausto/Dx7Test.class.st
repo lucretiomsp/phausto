@@ -140,6 +140,12 @@ Dx7Test >> testDx7LFOSpeed [
 ]
 
 { #category : 'tests' }
+Dx7Test >> testDx7Op [
+
+	self assert: Dx7Op new  asDsp  isNull equals: false
+]
+
+{ #category : 'tests' }
 Dx7Test >> testDx7OpDetunes [
 
 	self assert: dx7 opDetunes size equals: 6.

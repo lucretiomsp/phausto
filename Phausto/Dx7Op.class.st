@@ -41,9 +41,7 @@ Class {
 		'egLevel3',
 		'egRate2',
 		'keyVelocity',
-		'egLevel1',
-		'egLevels',
-		'egRates2'
+		'egLevel1'
 	],
 	#category : 'Phausto-Dx7',
 	#package : 'Phausto',
@@ -55,7 +53,12 @@ Dx7Op >> asBox [
 
 	| finalBox intermediateBox |
 	intermediateBox := super asBox.
-	finalBox := self freq , self phaseMod  , self outLevel  , self egRate1 , self egRate2 ,  self egRate3 , self egRate4, self egLevel1 , self egLevel2 , self egLevel3 , self egLevel4, self keyVelocity , self rateScale , self type , self gain , self gate.
+	finalBox := self freq  , self phaseMod , self outLevel , self egRate1
+	            , self egRate2 , self egRate3 , self egRate4
+	            , self egLevel1 , self egLevel2 , self egLevel3
+	            , self egLevel4 , self keyVelocity , self rateScale
+	            , self type , self gain , self gate connectTo: intermediateBox .
+	^ finalBox .
 ]
 
 { #category : 'accessing' }
@@ -107,18 +110,6 @@ Dx7Op >> egLevel4: anObject [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egLevels [
-
-	^ egLevels
-]
-
-{ #category : 'accessing' }
-Dx7Op >> egLevels: anObject [
-
-	egLevels := anObject
-]
-
-{ #category : 'accessing' }
 Dx7Op >> egRate1 [
 
 	^ egRate1
@@ -133,7 +124,7 @@ Dx7Op >> egRate1: anObject [
 { #category : 'accessing' }
 Dx7Op >> egRate2 [
 
-	^ egRates2
+	^ egRate2
 ]
 
 { #category : 'accessing' }
@@ -167,12 +158,6 @@ Dx7Op >> egRate4: anObject [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egRates2: anObject [
-
-	egRates2 := anObject
-]
-
-{ #category : 'accessing' }
 Dx7Op >> freq [
 
 	^ freq
@@ -191,37 +176,32 @@ Dx7Op >> gain [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> gain1: anObject [
-
-	gain := anObject
-]
-
-{ #category : 'accessing' }
 Dx7Op >> gate [
 
 	^ gate
-]
-
-{ #category : 'accessing' }
-Dx7Op >> gate1: anObject [
-
-	gate := anObject
 ]
 
 { #category : 'initialization' }
 Dx7Op >> initialize [
 
 	super initialize.
+	processExpression := 'process = dx.dx7_op;'.
 	self initializeEgLevels.
 	self initializeEgRates.
-	type := PhNumEntry new
+	type := 0 asBox. "PhNumEntry new
 		        label: self label , 'Type'
-		        values: #( 0 0 1 0 ).
-	freq := PhHSlider new label: self label , 'Freq' values: #(20 20 900 0.1).
+		        values: #( 0 0 1 0 )."
+	freq := PhHSlider new
+		        label: self label , 'Freq'
+		        values: #( 20 20 900 0.1 ).
 	gate := PhButton new label: self label , 'Gate'.
-	gain :=  PhHSlider new label: self label , 'Gain' values: #(0.5 0 1 0.001).
-	keyVelocity :=  PhHSlider new label: self label , 'KeyVel' values: #(50 0 99 1).
-	phaseMod := 0 asBox.
+	gain := PhHSlider new
+		        label: self label , 'Gain'
+		        values: #( 0.5 0 1 0.001 ).
+	keyVelocity := PhHSlider new
+		               label: self label , 'KeyVel'
+		               values: #( 50 0 99 1 ).
+	phaseMod := 0 asBox
 ]
 
 { #category : 'initialization' }
@@ -247,7 +227,9 @@ outLevel := PhHSlider new
 { #category : 'initialization' }
 Dx7Op >> initializeEgRates [
 
-rateScale := PhHSlider new label: self label , 'RateScale' values: #( 0 0 99 1 ).
+	rateScale := PhHSlider new
+		             label: self label , 'RateScale'
+		             values: #( 0 0 1 0.001 ).
 	egRate1 := PhHSlider new
 		           label: self label , 'R1'
 		           values: #( 99 0 99 1 ).
@@ -257,7 +239,7 @@ rateScale := PhHSlider new label: self label , 'RateScale' values: #( 0 0 99 1 )
 	egRate3 := PhHSlider new
 		           label: self label , 'R3'
 		           values: #( 99 0 99 1 ).
-	egRate3 := PhHSlider new
+	egRate4 := PhHSlider new
 		           label: self label , 'R4'
 		           values: #( 99 0 99 1 )
 ]
