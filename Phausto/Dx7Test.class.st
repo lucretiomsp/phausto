@@ -61,8 +61,8 @@ Dx7Test >> testDx7EgRates1 [
 { #category : 'tests' }
 Dx7Test >> testDx7EgRates2 [
 
-	self assert: dx7 egRates2 size equals: 6.
-	self assert: dx7 egRates2 asBox isNull equals: false
+	self assert: dx7 egRate2 size equals: 6.
+	self assert: dx7 egRate2 asBox isNull equals: false
 ]
 
 { #category : 'tests' }

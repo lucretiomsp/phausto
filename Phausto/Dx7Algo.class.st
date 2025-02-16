@@ -97,7 +97,7 @@ Dx7Algo >> asBox [
 	"all boxes are created before to give time to the inner Faust compiler to create them"
 	algN := self algoNumber asBox.
 	egR1 := self egRates1 asBox.
-	egR2 := self egRates2 asBox.
+	egR2 := self egRate2 asBox.
 	egR3 := self egRates3 asBox.
 	egR4 := self egRates4 asBox.
 	egL1 := self egLevels1 asBox.
@@ -172,6 +172,12 @@ Dx7Algo >> egLevels4: aPhListCountingfromZero [
 ]
 
 { #category : 'accessing' }
+Dx7Algo >> egRate2 [
+
+	^ egRates2
+]
+
+{ #category : 'accessing' }
 Dx7Algo >> egRates1 [
 
 	^ egRates1
@@ -181,12 +187,6 @@ Dx7Algo >> egRates1 [
 Dx7Algo >> egRates1: aPhListCountingfromZero [
 
 	egRates1 := aPhListCountingfromZero
-]
-
-{ #category : 'accessing' }
-Dx7Algo >> egRates2 [
-
-	^ egRates2
 ]
 
 { #category : 'accessing' }
