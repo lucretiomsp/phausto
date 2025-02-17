@@ -1,5 +1,12 @@
 "
-This class contains a collection of Oscllators taken from the Faust oscillators.lib
+This class contains a collection of Oscllators taken from the Faust [oscillators.lib](https://faustlibraries.grame.fr/libs/oscillators/). This collection includes:
+- WaveTable Based Oscillators;
+- Low Frequency Oscillators;
+- Alias Suppressed Oscillators;
+- Filter Based Oscillators;
+- Waveguide REsonator Based Oscillators;
+- Casio CZ Oscillator;
+- Poly BLEP Based Oscillatora
 "
 Class {
 	#name : 'Oscillators',

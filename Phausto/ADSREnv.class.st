@@ -1,13 +1,13 @@
 "
-ADSR (Attack, Decay, Sustain, Release) envelope generator. adsr is a standard Faust function.
+#ADSR (Attack, Decay, Sustain, Release) linear envelope generator. 
 
 Where:
 
-at: attack time (sec)
-dt: decay time (sec)
-sl: sustain level (between 0..1)
-rt: release time (sec)
-t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
+- **attack**: attack time (sec)
+- **decay**: decay time (sec)
+- **sustain**: sustain level (between 0..1)
+- **release**: release time (sec)
+- **trigger**: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
 	#name : 'ADSREnv',
