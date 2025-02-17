@@ -1,6 +1,6 @@
 "
-Phaust noise generators library, taken from Faust noises.lib
-Creating an instance of this class generates a white noise.
+Phaust noise generators superclass, taken from Faust [noises.lib](https://faustlibraries.grame.fr/libs/noises/)
+Creating an instance of this class generates a white noise. Subclasses implement noise with differnt colors
 "
 Class {
 	#name : 'Noise',
