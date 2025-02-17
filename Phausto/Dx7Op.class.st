@@ -188,12 +188,12 @@ Dx7Op >> initialize [
 	processExpression := 'process = dx.dx7_op;'.
 	self initializeEgLevels.
 	self initializeEgRates.
-	type := 0 asBox. "PhNumEntry new
+	type := 1 asBox. "PhNumEntry new
 		        label: self label , 'Type'
 		        values: #( 0 0 1 0 )."
 	freq := PhHSlider new
 		        label: self label , 'Freq'
-		        values: #( 20 20 900 0.1 ).
+		        values: #( 440 20 900 0.1 ).
 	gate := PhButton new label: self label , 'Gate'.
 	gain := PhHSlider new
 		        label: self label , 'Gain'
@@ -229,7 +229,7 @@ Dx7Op >> initializeEgRates [
 
 	rateScale := PhHSlider new
 		             label: self label , 'RateScale'
-		             values: #( 0 0 1 0.001 ).
+		             values: #( 1 0 1 0.001 ).
 	egRate1 := PhHSlider new
 		           label: self label , 'R1'
 		           values: #( 99 0 99 1 ).
