@@ -217,6 +217,16 @@ DSP class >> paramException [
 		  , PhaustoDynamicEngine uniqueInstance getLastError "
 ]
 
+{ #category : 'accessing' }
+DSP class >> rendereType [
+	
+|rtype|
+"if not Apple Silicon, renderer type 0 = PortAudio"
+rtype := 0.
+(Smalltalk os family = #MacOSX ) ifTrue: [ Smalltalk os processorArchitecture = 'arm64' ifTrue: [rtype := 3]].
+^ rtype 
+]
+
 { #category : 'as yet unclassified' }
 DSP class >> uninitializedException [
 
@@ -571,13 +581,12 @@ DSP >> init [
 
 	self isNull
 		ifTrue: [ "mysterious bug on exception"
-			
-			^ self class invalidException ]
+		^ self class invalidException ]
 		ifFalse: [
 			'DSP inizialized' traceCr.
 			self isInitialized: true.
 			self class initializedDSP: self.
-			PhaustoDynamicEngine uniqueInstance initializeDSP: self ]
+			PhaustoDynamicEngine uniqueInstance initializeDSP: self withRenderer: self class rendereType ]
 ]
 
 { #category : 'accessing' }

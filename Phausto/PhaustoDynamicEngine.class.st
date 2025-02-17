@@ -169,12 +169,20 @@ PhaustoDynamicEngine >> getNumInputsDsp: aDsp [
 ^ self ffiCall: #(int getNumInputsDsp(DSPStructure* aDsp))
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initializing' }
 PhaustoDynamicEngine >> initializeDSP: aDsp [.
 
 self  ffiCall:
 				  #( bool initDsp #( DSP * aDsp , RendererType 0 , int 44100 , int
 				        512 ) ) 
+]
+
+{ #category : 'initializing' }
+PhaustoDynamicEngine >> initializeDSP: aDsp withRenderer: aType [
+
+	self ffiCall:
+		#( bool initDsp #( DSP #* aDsp #, int aType #, int 44100 #, int
+		      512 ) )
 ]
 
 { #category : 'accessing - platform' }
