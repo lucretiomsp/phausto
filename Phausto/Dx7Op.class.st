@@ -164,12 +164,6 @@ Dx7Op >> freq [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> freq1: anObject [
-
-	freq := anObject
-]
-
-{ #category : 'accessing' }
 Dx7Op >> gain [
 
 	^ gain
@@ -188,7 +182,7 @@ Dx7Op >> initialize [
 	processExpression := 'process = dx.dx7_op;'.
 	self initializeEgLevels.
 	self initializeEgRates.
-	type := 1 asBox. "PhNumEntry new
+	type := 0 asBox. "PhNumEntry new
 		        label: self label , 'Type'
 		        values: #( 0 0 1 0 )."
 	freq := PhHSlider new
@@ -200,25 +194,25 @@ Dx7Op >> initialize [
 		        values: #( 0.5 0 1 0.001 ).
 	keyVelocity := PhHSlider new
 		               label: self label , 'KeyVel'
-		               values: #( 50 0 99 1 ).
+		               values: #( 0 0 99 1 ).
 	phaseMod := 0 asBox
 ]
 
 { #category : 'initialization' }
 Dx7Op >> initializeEgLevels [
 
-outLevel := PhHSlider new
+	outLevel := PhHSlider new
 		            label: self label , 'OutLevel'
-		            values: #( 0 0 99 1 ).
+		            values: #( 90 0 99 1 ).
 	egLevel1 := PhHSlider new
 		            label: self label , 'L1'
-		            values: #( 0 0 99 1 ).
+		            values: #(99 0 99 1 ).
 	egLevel2 := PhHSlider new
 		            label: self label , 'L2'
-		            values: #( 30 0 99 1 ).
+		            values: #( 88 0 99 1 ).
 	egLevel3 := PhHSlider new
 		            label: self label , 'L3'
-		            values: #( 20 0 99 1 ).
+		            values: #( 96 0 99 1 ).
 	egLevel4 := PhHSlider new
 		            label: self label , 'L4'
 		            values: #( 0 0 99 1 )
@@ -229,19 +223,19 @@ Dx7Op >> initializeEgRates [
 
 	rateScale := PhHSlider new
 		             label: self label , 'RateScale'
-		             values: #( 1 0 1 0.001 ).
+		             values: #( 0 0 9 1 ).
 	egRate1 := PhHSlider new
 		           label: self label , 'R1'
-		           values: #( 99 0 99 1 ).
+		           values: #( 72 0 99 1 ).
 	egRate2 := PhHSlider new
 		           label: self label , 'R2'
-		           values: #( 99 0 99 1 ).
+		           values: #( 75 0 99 1 ).
 	egRate3 := PhHSlider new
 		           label: self label , 'R3'
-		           values: #( 99 0 99 1 ).
+		           values: #( 49 0 99 1 ).
 	egRate4 := PhHSlider new
 		           label: self label , 'R4'
-		           values: #( 99 0 99 1 )
+		           values: #( 71 0 99 1 )
 ]
 
 { #category : 'accessing' }
@@ -275,9 +269,9 @@ Dx7Op >> phaseMod [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> phaseMod: anObject [
+Dx7Op >> phaseMod: anOscillatorOrANumber [
 
-	phaseMod := anObject
+	phaseMod := anOscillatorOrANumber 
 ]
 
 { #category : 'accessing' }
