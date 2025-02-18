@@ -1,11 +1,28 @@
 "
-Alias-suppressed pulse train oscillator with a duty-cycle control. Based on pulsetrainN(2). Pulse comes from the Faust standard library.
+Alias-suppressed pulse train oscillator with a duty-cycle control. Based on Faust pulsetrainN(2).
 
 ## Parameters:
 
-freq: frequency in Hz
-duty: duty cycle between 0 and 1
+- **freq**: frequency in Hz
+- **duty**: duty cycle between 0 and 1
 
+The duty cycle of a pulse oscillator controls the ratio of ON time to OFF time in each cycle of the waveform. 
+Effect on Sound:
+50% duty cycle (Square Wave) → Balanced sound with odd harmonics, giving a hollow tone.
+<50% (Narrow Pulse) → More nasal or thin sound, emphasizing higher harmonics.
+>50% (Wide Pulse) → Darker, warmer tone with fewer high harmonics.
+Modulating the duty cycle over time (Pulse Width Modulation, PWM) creates dynamic, evolving timbres useful in synthesis.
+
+### Example:
+```language=Pharo
+""A Triangular LFO with a 1 Hz frequency modulating the duty cycle of a PulseOsc""
+modulator := LFOTriPos new offset: 0; amount: 1; freq: 1.
+s := PulseOsc new duty: modulator.
+dsp := s stereo asDsp.
+dsp init.
+dsp start.
+dsp stop.
+```
 "
 Class {
 	#name : 'PulseOsc',

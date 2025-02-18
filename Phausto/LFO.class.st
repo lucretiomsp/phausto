@@ -2,7 +2,7 @@
 #LowFrequencyOscillators with range -1,1. 
 No Aliasing suppression. 
 They can also have freq > 20 Hz, so they can work at _audio rate.
-[Low Frequency Oscillators](https://en.wikipedia.org/wiki/Low-frequency_oscillation) are used to modulate synthesisers' and effects parameters
+[Low Frequency Oscillators](https://en.wikipedia.org/wiki/Low-frequency_oscillation) are used to modulate synthesisers and effects parameters
 "
 Class {
 	#name : 'LFO',

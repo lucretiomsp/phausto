@@ -1,11 +1,22 @@
 "
-LFOForModulations are oscillators with no aliasing suppression intended to be used for modulating parameters, with positive range
-These LFOs have 3 instance variables:
-freq: set the frequency of the Oscillator
-amount: set the multiplier for the Oscillator output 
-offset: an offset for the LFO output. 
+LFOForModulation are oscillators with no aliasing suppression intended to be used for modulating parameters, with positive range
 
-*** If you want to use 'standard' LFOs with range -1 , 1 please use subclasses of LFO
+## Patameters
+- **freq**: set the frequency of the Oscillator
+- **amount**: set the multiplier for the Oscillator output 
+- **offset**: an offset for the LFO output. 
+
+## Example:
+```language=Pharo
+""A Sawtooth LFO modulating the frequency of a SineOsc between 20 and 200 Hz""
+modulator := LFOSawPos new offset: 20; amount: 200.
+s := SineOsc new freq: modulator.
+dsp := s stereo asDsp.
+dsp init.
+dsp start.
+dsp stop.
+```
+#### If you want to use _standard_ LFOs with range -1, 1 please use subclasses of `LFO`.
 "
 Class {
 	#name : 'LFOForModulation',
