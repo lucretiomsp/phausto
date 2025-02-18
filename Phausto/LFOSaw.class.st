@@ -1,5 +1,9 @@
 "
 Simple sawtooth waveform oscillator between -1 and 1.
+
+## Parameters:
+
+- **freq: frequency in Hz
 "
 Class {
 	#name : 'LFOSaw',

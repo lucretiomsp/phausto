@@ -1,7 +1,7 @@
 "
 LFOForModulation are oscillators with no aliasing suppression intended to be used for modulating parameters, with positive range
 
-## Patameters
+## Parameters
 - **freq**: set the frequency of the Oscillator
 - **amount**: set the multiplier for the Oscillator output 
 - **offset**: an offset for the LFO output. 

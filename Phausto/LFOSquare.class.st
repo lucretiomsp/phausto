@@ -1,9 +1,13 @@
 "
-Zero-mean unit-amplitude LF square wave.
+Zero-mean unit-amplitude LFO square wave withrange -1 1.
+
+## Parameters:
+
+- **freq: frequency in Hz
 "
 Class {
 	#name : 'LFOSquare',
-	#superclass : 'LFOForModulation',
+	#superclass : 'LFO',
 	#category : 'Phausto-UnitGenerators',
 	#package : 'Phausto',
 	#tag : 'UnitGenerators'

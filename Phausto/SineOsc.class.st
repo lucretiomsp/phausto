@@ -1,8 +1,9 @@
 "
 Default Sine wave oscillator, corresponding to Faust osc standard function
+
 ## Parameters:
 
-freq: frequency in Hz
+- **freq**: frequency in Hz
 "
 Class {
 	#name : 'SineOsc',
