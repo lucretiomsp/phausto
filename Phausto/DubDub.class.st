@@ -3,10 +3,19 @@ A simple synth based on a sawtooth wave filtered by a resonant lowpass. dubDub i
 
 
 
-freq: frequency of the sawtooth in Hz
-ctFreq: cutoff frequency of the filter
-q: Q of the filter
-gate: the trigger signal (0 or 1)
+- **freq**: frequency of the sawtooth in Hz
+- **ctFreq**: cutoff frequency of the filter
+- **q**: Q of the filter
+- **gate**: the trigger signal (0 or 1)
+
+```language=Pharo
+""DubDub is ready to played, just need to be transformed into a DSP""
+dsp := DubDub new stereo asDsp.
+dsp init.
+dsp start.
+dsp displayUI.
+dsp stop.
+```
 "
 Class {
 	#name : 'DubDub',
@@ -74,16 +83,6 @@ DubDub >> gate [
 	^ gate ifNil: [ gate := PhButton new label: self label ,  'Gate' ]
 ]
 
-{ #category : 'accessing' }
-DubDub >> gate:aNumberOrABoxOraASymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'initialization' }
 DubDub >> initialize [
 
@@ -101,14 +100,4 @@ DubDub >> q [
 			          min: 1
 			          max: 12
 			          step: 0.1 ]
-]
-
-{ #category : 'as yet unclassified' }
-DubDub >> q: aNumberOrABoxOraASymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]

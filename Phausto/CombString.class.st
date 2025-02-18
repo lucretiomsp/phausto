@@ -2,11 +2,20 @@
 Simplest string physical model ever based on a comb filter. combString is a standard Faust function.
 
 
+## Parameters
+- **freq**: the frequency of the string in Hz
+- **res**: string T60 (resonance time) in second
+- **gate**: trigger signal (0 or 1)
 
-freq: the frequency of the string in Hz
-res: string T60 (resonance time) in second
-gate: trigger signal (0 or 1)
-
+### Example
+```language=Pharo
+""CombString is ready to played, just need to be transformed into a DSP""
+dsp := CombString new stereo asDsp.
+dsp init.
+dsp start.
+dsp displayUI.
+dsp stop.
+```
 "
 Class {
 	#name : 'CombString',
@@ -67,30 +76,10 @@ CombString >> gain [
 			          step: 0.01 ]
 ]
 
-{ #category : 'as yet unclassified' }
-CombString >> gain: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'accessing' }
 CombString >> gate [
 
 	^ gate ifNil: [ gate := PhButton new label: self label ,  'Gate' ]
-]
-
-{ #category : 'accessing' }
-CombString >> gate:aNumberOrABoxOraASymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]
 
 { #category : 'initialization' }

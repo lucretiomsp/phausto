@@ -1,13 +1,27 @@
 "
-Clap synthesis via filtered white noise.
+Clap synthesis through filtered white noise.
 
 
-Where:
+## Parameters:
 
-tone: bandpass filter cutoff frequency, tuned for [400Hz, 3500Hz]
-attack: attack time in seconds, tuned for [0s, 0.2s]
-decay: decay time in seconds, tuned for [0s, 4.0s]
-gate: the gate which triggers the amp envelope
+- **tone**: bandpass filter cutoff frequency, tuned for [400Hz, 3500Hz]
+- **attack**: attack time in seconds, tuned for [0s, 0.2s]
+- **decay**: decay time in seconds, tuned for [0s, 4.0s]
+- **gate**: the gate which triggers the amp envelope
+
+## Example
+
+
+```language=Pharo
+""Clap is ready to played, just need to be transformed into a DSP""
+dsp := Clap new stereo asDsp.
+dsp init.
+dsp start.
+dsp displayUI.
+dsp stop.
+```
+
+
 "
 Class {
 	#name : 'Clap',
@@ -49,16 +63,6 @@ Clap >> decay [
 Clap >> gate [
 
 	^ gate 
-]
-
-{ #category : 'accessing' }
-Clap >> gate: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]
 
 { #category : 'initialization' }
