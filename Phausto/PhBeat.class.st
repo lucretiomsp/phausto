@@ -1,8 +1,18 @@
 "
-Pulses at tempo t in BPM. beat is a standard Faust function.
-Parameter:
-t: tempo in BPM
+Pulses at tempo in BPM. beat is a standard Faust function.
 
+##Parameter:
+-** tempo**: tempo in BPM
+
+##Example
+```language=Pharo
+""Play beats on a djembe at 156 bpm""
+beat := PhBeat new tempo: 156.
+dsp := (Djembe new trigger: indx) stereo asDsp.
+dsp init.
+dsp start.
+dsp stop.
+```
 "
 Class {
 	#name : 'PhBeat',
