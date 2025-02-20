@@ -67,5 +67,5 @@ PulseOsc >> initialize [
 PulseOsc >> initializeControlParameters [
 
 	super initializeControlParameters.
-	self controlParameters add: #duty -> 'Duty Cycle , range 0 - 1'
+	self controlParameters add: (PhControlParameter  new name: #duty; description:  'Duty Cycle' ;  range: (0 to: 1); value: self duty ; widgetType: #knob)
 ]
