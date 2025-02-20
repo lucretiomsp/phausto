@@ -4,9 +4,14 @@ The import statement imports all the functions of Faust Standard Libraries.
 The process expression must be declared for all the different subclasses.
 The uLevel instance variable is used to set the level of the UGen and it acts as a Gain multiplier.
 Each Unit Geneterator has a label, by default is the class name; the label is used to construct the UI/control access to the Unit Generator.
-If you want to give me a custom label, send use:
-UnitGenerator withLabel: aString
-otherwise my label will be my className asString
+If you want to give me a custom label:
+```language=Pharo
+UnitGenerator new withLabel: aString
+```
+otherwise my label will be my
+```language=Pharo
+self className asString
+```
 "
 Class {
 	#name : 'UnitGenerator',
@@ -21,7 +26,8 @@ Class {
 		'label',
 		'attachedDSP',
 		'numberOfInputs',
-		'numberOfOutputs'
+		'numberOfOutputs',
+		'controlParameters'
 	],
 	#classVars : [
 		'activeInstances'
@@ -237,6 +243,11 @@ UnitGenerator >> code: anObject [
 ]
 
 { #category : 'accessing' }
+UnitGenerator >> controlParameters [
+^ controlParameters 
+]
+
+{ #category : 'accessing' }
 UnitGenerator >> importStatement [
 
 	^ importStatement
@@ -251,7 +262,6 @@ UnitGenerator >> importStatement: anObject [
 { #category : 'initialization' }
 UnitGenerator >> initialize [
 
-	
 	super initialize.
 	"we keep track of how many UnitGenerators instances are active"
 	self class addInstance: self.
@@ -263,9 +273,19 @@ UnitGenerator >> initialize [
 	self class incrementInstancesInDSPContext.
 	importStatement := 'import("stdfaust.lib");'.
 	processExpression := 'process = 0;'. "an empty UnitGenerator simply out zeros"
-   
-   self initializeLabel. 
+
+	self initializeLabel.
 	self initializeULevel.
+	self initializeControlParameters .
+]
+
+{ #category : 'initialization' }
+UnitGenerator >> initializeControlParameters [
+
+	controlParameters := Dictionary new.
+	controlParameters
+		at: #uLevel
+		put: 'Controls the linear output level of the UGen, withing range 0 - 1'
 ]
 
 { #category : 'initialization' }
