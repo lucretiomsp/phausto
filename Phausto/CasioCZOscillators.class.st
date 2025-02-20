@@ -89,7 +89,26 @@ CasioCZOscillators >> initialize [
 		         min: 0
 		         max: 1
 		         step: 0.001.
-		fund := LFOSaw new freq: (self class , 'Freq') asSymbol
+	fund := LFOSaw new freq: (self label , 'Freq') asSymbol
+]
+
+{ #category : 'initialization' }
+CasioCZOscillators >> initializeControlParameters [
+
+	| r f ind |
+	super initializeControlParameters.
+
+	f := #fund
+	     ->
+	     'A saw-tooth waveform between 0 and 1 that the oscillator slaves to'.
+	ind := #index
+	       ->
+	       'The brightness of the oscillator, 0 to 1. 0 = sine-wave, 1 = saw-wave'.
+	r := #res -> 'The resonance value'.
+		self controlParameters
+		add: f;
+		add: r;
+		add: ind.
 ]
 
 { #category : 'accessing' }

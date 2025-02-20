@@ -37,3 +37,11 @@ Oscillators >> initialize [
 			  max: 4086
 			  step: 1 
 ]
+
+{ #category : 'initialization' }
+Oscillators >> initializeControlParameters [ 
+
+super initializeControlParameters .
+
+self controlParameters add: #freq -> 'Controls the frequency of the Oscillator in Hertz'
+]

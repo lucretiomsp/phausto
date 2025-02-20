@@ -62,3 +62,10 @@ PulseOsc >> initialize [
 			          step: 0.001.
 	processExpression := 'process = os.pulsetrain;'
 ]
+
+{ #category : 'initialization' }
+PulseOsc >> initializeControlParameters [
+
+	super initializeControlParameters.
+	self controlParameters add: #duty -> 'Duty Cycle , range 0 - 1'
+]
