@@ -283,10 +283,12 @@ UnitGenerator >> initialize [
 UnitGenerator >> initializeControlParameters [
 
 	controlParameters := OrderedCollection new.
-	controlParameters
-		 add: PhControlParameter new name: #uLevel;
-		description:
-		'Controls the linear output level of the UGen, withing range 0 - 1'
+	controlParameters add: (PhControlParameter new
+			 name: #uLevel;
+			 range: (0 to: 1);
+			 description: 'cane';
+			 value: self uLevel;
+			 widgetType: #knob)
 ]
 
 { #category : 'initialization' }

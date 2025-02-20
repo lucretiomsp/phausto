@@ -18,9 +18,15 @@ Class {
 }
 
 { #category : 'accessing' }
-PhControlParameter >> description:  aString [
+PhControlParameter >> description [
 
-	range := aString
+^ description 
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> description: aString [
+
+	description := aString
 ]
 
 { #category : 'accessing' }
