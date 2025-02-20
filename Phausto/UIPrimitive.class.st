@@ -9,7 +9,8 @@ Class {
 	#instVars : [
 		'label',
 		'min',
-		'max'
+		'max',
+		'widgetType'
 	],
 	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
@@ -64,4 +65,16 @@ UIPrimitive >> min [
 UIPrimitive >> min: aNumber [
 
 	min := aNumber asBox
+]
+
+{ #category : 'accessing' }
+UIPrimitive >> widgetType [
+
+	^ widgetType
+]
+
+{ #category : 'accessing' }
+UIPrimitive >> widgetType: aSymbol [
+
+widgetType := aSymbol
 ]

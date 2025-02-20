@@ -282,11 +282,11 @@ UnitGenerator >> initialize [
 { #category : 'initialization' }
 UnitGenerator >> initializeControlParameters [
 
-	controlParameters := OrderedCollection new.
-	controlParameters add: (PhControlParameter new
+	controlParameters := Dictionary new.
+	controlParameters add: #uLevel -> (PhControlParameter new
 			 name: #uLevel;
 			 range: (0 to: 1);
-			 description: 'cane';
+			 description: 'Output level';
 			 value: self uLevel;
 			 widgetType: #knob)
 ]

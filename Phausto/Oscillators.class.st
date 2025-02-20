@@ -44,5 +44,5 @@ Oscillators >> initializeControlParameters [
 	super initializeControlParameters.
 
 	self controlParameters add:
-		(PhControlParameter  new name: #freq; description: 'Controls the frequency of the Oscillator in Hertz'; range: (1 to: 4186); value: self freq; widgetType: #knob)
+		#freq -> ((PhControlParameter  new name: #freq; description: 'Controls the frequency of the Oscillator in Hertz'; range: (1 to: 4186); value: self freq; widgetType: #knob))
 ]
