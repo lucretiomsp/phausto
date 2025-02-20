@@ -282,10 +282,11 @@ UnitGenerator >> initialize [
 { #category : 'initialization' }
 UnitGenerator >> initializeControlParameters [
 
-	controlParameters := Dictionary new.
+	controlParameters := OrderedCollection new.
 	controlParameters
-		at: #uLevel
-		put: 'Controls the linear output level of the UGen, withing range 0 - 1'
+		 add: PhControlParameter new name: #uLevel;
+		description:
+		'Controls the linear output level of the UGen, withing range 0 - 1'
 ]
 
 { #category : 'initialization' }
