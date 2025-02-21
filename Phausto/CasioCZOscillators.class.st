@@ -89,7 +89,8 @@ CasioCZOscillators >> initialize [
 		         min: 0
 		         max: 1
 		         step: 0.001.
-	fund := LFOSaw new freq: (self label , 'Freq') asSymbol
+	fund := LFOSaw new freq: (self label , 'Freq') asSymbol.
+	self initializeControlParameters .
 ]
 
 { #category : 'initialization' }

@@ -32,8 +32,9 @@ PhSlider >> initialize [
 	super initialize.
 
 	init := 0.5.
-
-	step := 0.01
+   step := 0.01.
+   "by default, sliders are knobs"
+   widgetType := #knob.
 ]
 
 { #category : 'initialization' }

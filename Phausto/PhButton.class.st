@@ -17,3 +17,9 @@ PhButton >> asBox [
 	^ BoxAPI uniqueInstance boxButton: self label
 
 ]
+
+{ #category : 'initialization' }
+PhButton >> initialize [ 
+super initialize.
+widgetType := #button
+]

@@ -1,7 +1,8 @@
 "
-I am the Phaust Box API, I call C functions from the Faust Box API
+I call C functions from the Faust Box API
 The box_signal_api.cpp  is compiled in libfaust.
-More about the Faust box API: https://faustdoc.grame.fr/tutorials/box-api/
+More about the [Faust box API](https://faustdoc.grame.fr/tutorials/box-api/).
+Phausto objects are always converted to a Box before being assembled into a DSP
 "
 Class {
 	#name : 'BoxAPI',
@@ -122,6 +123,15 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 		        , ByteArray buffer ) )
 ]
 
+{ #category : 'arithmetic' }
+BoxAPI >> boxGt: aBox than: anotherBox [
+	"return the Box with the highest value"
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( #PhBox #* CboxGTAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
+]
+
 { #category : 'ui building' }
 BoxAPI >> boxHBarGraphAux: aLabel min: aMin max: aMax input: anInput [
 	"Create a vertical bargraph box."
@@ -147,6 +157,15 @@ BoxAPI >> boxInt: anInteger [
 	"return the float/double box"
 self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxInt #( int anInteger ) )
+]
+
+{ #category : 'arithmetic' }
+BoxAPI >> boxLt: aBox than: anotherBox [
+	"return the Box with the lowest value"
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( #PhBox #* CboxLTAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
 ]
 
 { #category : 'arithmetic' }

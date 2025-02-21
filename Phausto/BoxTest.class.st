@@ -36,6 +36,12 @@ BoxTest >> testFMod [
 ]
 
 { #category : 'tests' }
+BoxTest >> testGT [
+
+	self assert: (2 asBox >  1 asBox) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 BoxTest >> testLibContextIsFalseAtStartup [
 
 	self assert: PhBox libContext equals: false

@@ -36,8 +36,5 @@ PhNumEntry >> asBox [
 PhNumEntry >> initialize [
 
 	super initialize.
-	init := 1.
-	min := 1.
-	max := 4.
-	step := 1
+	widgetType := #numEntry
 ]

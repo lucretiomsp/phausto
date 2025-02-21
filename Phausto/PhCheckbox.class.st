@@ -16,6 +16,13 @@ PhCheckbox >> asBox [
 	^ BoxAPI uniqueInstance boxCheckbox: self label
 ]
 
+{ #category : 'initialization' }
+PhCheckbox >> initialize [
+
+	super initialize.
+	widgetType := #checkbox
+]
+
 { #category : 'accessing' }
 PhCheckbox >> label: aString [
 

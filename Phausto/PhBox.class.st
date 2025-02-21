@@ -120,6 +120,11 @@ PhBox >> => aUnitGenerator [
 	self ifNotNullDo: [ ^ self chuckInto: aUnitGenerator ]
 ]
 
+{ #category : 'comparing' }
+PhBox >> > aPhBox [ 
+	BoxAPI uniqueInstance boxGt: self  than: aPhBox 
+]
+
 { #category : 'arithmetic' }
 PhBox >> absolute [
 	"absolute value of a boox"
