@@ -113,6 +113,21 @@ PhBox >> / aUnitGeneratorOrANumber [
 	^ BoxAPI uniqueInstance divide: box1 by: box2]
 ]
 
+{ #category : 'comparing' }
+PhBox >> < aPhBox [ 
+	BoxAPI uniqueInstance boxLE: self  than: aPhBox 
+]
+
+{ #category : 'comparing' }
+PhBox >> <= aPhBox [ 
+	BoxAPI uniqueInstance boxLE: self  than: aPhBox 
+]
+
+{ #category : 'comparing' }
+PhBox >> = aPhBox [ 
+	BoxAPI uniqueInstance boxEQ: self  than: aPhBox 
+]
+
 { #category : 'connecting' }
 PhBox >> => aUnitGenerator [
 	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
@@ -123,6 +138,11 @@ PhBox >> => aUnitGenerator [
 { #category : 'comparing' }
 PhBox >> > aPhBox [ 
 	BoxAPI uniqueInstance boxGt: self  than: aPhBox 
+]
+
+{ #category : 'comparing' }
+PhBox >> >= aPhBox [ 
+	BoxAPI uniqueInstance boxGE: self  than: aPhBox 
 ]
 
 { #category : 'arithmetic' }
@@ -558,4 +578,9 @@ PhBox >> ~ aUnitGenerator [
 
 	"^ self boxRecursive: self with: aUnitGenerator"
 	^ BoxAPI uniqueInstance boxRecursive: self with: aUnitGenerator asBox
+]
+
+{ #category : 'comparing' }
+PhBox >> ~= aPhBox [ 
+	BoxAPI uniqueInstance boxNE: self  than: aPhBox 
 ]

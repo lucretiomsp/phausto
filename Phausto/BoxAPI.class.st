@@ -89,6 +89,15 @@ Return the cut box
 ]
 
 { #category : 'arithmetic' }
+BoxAPI >> boxEQ: aBox than: anotherBox [
+	"return 1 if the output of aBox is equal to the output of anotherBox"
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( #PhBox #* CboxEQAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
+]
+
+{ #category : 'arithmetic' }
 BoxAPI >> boxFModBetween: aBox and: anotherBox [
 	"return the floatModulo  between the to boxes"
 
@@ -124,8 +133,17 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 ]
 
 { #category : 'arithmetic' }
+BoxAPI >> boxGE: aBox than: anotherBox [
+		"return 1 if the output of aBox is greater  or  equal than the output of anotherBox"
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( #PhBox #* CboxGEAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
+]
+
+{ #category : 'arithmetic' }
 BoxAPI >> boxGt: aBox than: anotherBox [
-	"return the Box with the highest value"
+	"return 1 if the output of aBox is greaterthan the output of anotherBox"
 
 	self createLibContext.
 	^ self ffiCall:
@@ -160,8 +178,17 @@ self createLibContext.
 ]
 
 { #category : 'arithmetic' }
-BoxAPI >> boxLt: aBox than: anotherBox [
-	"return the Box with the lowest value"
+BoxAPI >> boxLE: aBox than: anotherBox [
+	"return 1 if the output of aBox is smaller or  equal than the output of anotherBox"
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( #PhBox #* CboxLEAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
+]
+
+{ #category : 'arithmetic' }
+BoxAPI >> boxLT: aBox than: anotherBox [
+		"return 1 if the output of aBox is smalle than the output of anotherBox"
 
 	self createLibContext.
 	^ self ffiCall:
@@ -205,6 +232,15 @@ BoxAPI >> boxMinBetween: aBox and: anotherBox [
 
 	self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxMinAux #( PhBox * aBox  , PhBox * anotherBox) )
+]
+
+{ #category : 'arithmetic' }
+BoxAPI >> boxNE: aBox than: anotherBox [
+	"return 1 if the output of aBox is not equal to the output of anotherBox"
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( #PhBox #* CboxNEAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
 ]
 
 { #category : 'ui building' }

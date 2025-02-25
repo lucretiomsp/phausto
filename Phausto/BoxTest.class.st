@@ -30,15 +30,41 @@ BoxTest >> testDb2Linear [
 ]
 
 { #category : 'tests' }
+BoxTest >> testEQ [
+
+	self assert: (2 asBox =  1 asBox) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 BoxTest >> testFMod [
 
+self assert: 1 equals: 0.
+"it doesnt work for an error in the Faust compiler - please check"
 	self assert: ((1 asBox fMod: 2 asBox) asDsp) isNull equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testGE [
+
+	self assert: (2 asBox >=  1 asBox) asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
 BoxTest >> testGT [
 
 	self assert: (2 asBox >  1 asBox) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testLE [
+
+	self assert: (2 asBox <=  1 asBox) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testLT [
+
+	self assert: (2 asBox <  1 asBox) asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -63,6 +89,12 @@ BoxTest >> testMidiKey2Hz [
 BoxTest >> testMin [
 
 	self assert: ((1 asBox min: 2 asBox) asDsp) isNull equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testNE [
+
+	self assert: (2 asBox ~=  1 asBox) asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
