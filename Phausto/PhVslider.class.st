@@ -1,3 +1,6 @@
+"
+I am a Phausto vertical slider
+"
 Class {
 	#name : 'PhVSlider',
 	#superclass : 'PhSlider',
