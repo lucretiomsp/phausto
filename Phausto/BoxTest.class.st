@@ -32,7 +32,7 @@ BoxTest >> testDb2Linear [
 { #category : 'tests' }
 BoxTest >> testEQ [
 
-	self assert: (2 asBox =  1 asBox) asDsp isNull equals: false
+	self assert: (2 asBox equalTo: 1 asBox) asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -94,7 +94,7 @@ BoxTest >> testMin [
 { #category : 'tests' }
 BoxTest >> testNE [
 
-	self assert: (2 asBox ~=  1 asBox) asDsp isNull equals: false
+	self assert: (2 asBox notEqualTo: 1 asBox) asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
