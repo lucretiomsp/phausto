@@ -47,37 +47,19 @@ ADSRFEnvBias >> asBox [
 { #category : 'as yet unclassified' }
 ADSRFEnvBias >> biasAttack [
 
-	^ biasAttack ifNil: [
-		  biasAttack := PhHSlider new
-			             label: self label , 'BiasAttack'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ biasAttack 
 ]
 
 { #category : 'as yet unclassified' }
 ADSRFEnvBias >> biasDecay [
 
-	^ biasDecay ifNil: [
-		  biasDecay := PhHSlider new
-			             label: self label , 'BiasDecay'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ biasDecay 
 ]
 
 { #category : 'as yet unclassified' }
 ADSRFEnvBias >> biasRelease [
 
-	^ biasRelease ifNil: [
-		  biasRelease := PhHSlider new
-			             label: self label , 'BiasRelease'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ biasRelease 
 ]
 
 { #category : 'as yet unclassified' }
@@ -109,7 +91,52 @@ ADSRFEnvBias >> initialize [
 
 	super initialize.
 
-	processExpression := 'process = en.adsrf_bias;'
+	processExpression := 'process = en.adsrf_bias;'.
+	self initializeDecayAndSustain.
+	self initializeBias 
+]
+
+{ #category : 'initialization' }
+ADSRFEnvBias >> initializeBias [
+
+	biasAttack := PhHSlider new
+		              label: self label , 'BiasAttack'
+		              init: 0.5
+		              min: 0
+		              max: 1
+		              step: 0.001.
+
+	biasDecay := PhHSlider new
+		             label: self label , 'BiasDecay'
+		             init: 0.5
+		             min: 0
+		             max: 1
+		             step: 0.001.
+		
+	
+biasRelease := PhHSlider new
+			                 label: self label , 'BiasRelease'
+			                 init: 0.5
+			                 min: 0
+			                 max: 1
+			                 step: 0.001 
+]
+
+{ #category : 'initialization' }
+ADSRFEnvBias >> initializeDecayAndSustain [
+
+	decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.2
+		         min: 0.001
+		         max: 2
+		         step: 1.
+	sustain := PhHSlider new
+		           label: self label , 'Sustain'
+		           init: 0.5
+		           min: 0
+		           max: 1
+		           step: 0.001
 ]
 
 { #category : 'as yet unclassified' }

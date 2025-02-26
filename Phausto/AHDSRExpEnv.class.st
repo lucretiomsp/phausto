@@ -36,44 +36,48 @@ AHDSRExpEnv >> asBox [
 { #category : 'as yet unclassified' }
 AHDSRExpEnv >> decay [
 
-	^ decay ifNil: [
-		  decay := PhHSlider new
-			           label: self label , 'Decay'
-			           init: 0.01
-			           min: 0.001
-			           max: 2
-			           step: 1 ]
+	^ decay 
 ]
 
 { #category : 'accessing' }
 AHDSRExpEnv >> hold [
 
-	^ hold ifNil: [
-		  hold := PhHSlider new
-			           label: self label , 'Hold'
-			           init: 0.01
-			           min: 0.001
-			           max: 2
-			           step: 1 ]
+	^ hold 
 ]
 
 { #category : 'initialization' }
 AHDSRExpEnv >> initialize [
 
 	super initialize.
-	self decay: 0.2.
-	self sustain: 0.5.
-	processExpression := 'process = en.ahdsre;'
+	processExpression := 'process = en.ahdsre;'.
+	self initializeDecayAndSustain .
+	hold := PhHSlider new
+			          label: self label , 'Hold'
+			          init: 0.01
+			          min: 0.001
+			          max: 2
+			          step: 1
+]
+
+{ #category : 'initialization' }
+AHDSRExpEnv >> initializeDecayAndSustain [
+
+	decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.2
+		         min: 0.001
+		         max: 2
+		         step: 1.
+	sustain := PhHSlider new
+		           label: self label , 'Sustain'
+		           init: 0.5
+		           min: 0
+		           max: 1
+		           step: 0.001
 ]
 
 { #category : 'as yet unclassified' }
 AHDSRExpEnv >> sustain [
 
-	^ sustain ifNil: [
-		sustain := PhHSlider new
-			           label: self label , 'Sustain'
-			           init: 0.5
-			           min: 0
-			           max: 1
-			           step: 0.001 ]
+	^ sustain 
 ]

@@ -53,6 +53,23 @@ ADSRExpEnv >> initialize [
 	processExpression := 'process = en.adsre;'
 ]
 
+{ #category : 'initialization' }
+ADSRExpEnv >> initializeDecayAndSustain [
+
+	decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.2
+		         min: 0.001
+		         max: 2
+		         step: 1.
+	sustain := PhHSlider new
+		           label: self label , 'Sustain'
+		           init: 0.5
+		           min: 0
+		           max: 1
+		           step: 0.001
+]
+
 { #category : 'as yet unclassified' }
 ADSRExpEnv >> sustain [
 

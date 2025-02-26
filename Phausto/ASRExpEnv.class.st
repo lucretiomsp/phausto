@@ -34,17 +34,17 @@ ASRExpEnv >> asBox [
 ASRExpEnv >> initialize [
 
 	super initialize.
-	processExpression := 'process = en.asre;'
+	processExpression := 'process = en.asre;'.
+	sustain := PhHSlider new
+			             label: self label , 'Sustain'
+			             init: 0.5
+			             min: 0
+			             max: 1
+			             step: 0.001
 ]
 
 { #category : 'as yet unclassified' }
 ASRExpEnv >> sustain [
 
-	^ sustain ifNil: [
-		  sustain := PhHSlider new
-			             label: self label , 'Sustain'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ sustain 
 ]

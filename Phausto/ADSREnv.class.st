@@ -32,35 +32,39 @@ ADSREnv >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSREnv >> decay [
 
-	^ decay ifNil: [
-		  decay := PhHSlider new
-			           label: self label , 'Decay'
-			           init: 0.01
-			           min: 0.001
-			           max: 2
-			           step: 1 ]
+	^ decay 
 ]
 
 { #category : 'initialization' }
 ADSREnv >> initialize [
 
 	super initialize.
-	self decay: 0.2.
-	self sustain: 0.5.
-	processExpression := 'process = en.adsr;'
+	processExpression := 'process = en.adsr;'.
+	self initializeDecayAndSustain 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
+ADSREnv >> initializeDecayAndSustain [
+
+decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.2
+		         min: 0.001
+		         max: 2
+		         step: 1.
+	sustain := PhHSlider new
+		           label: self label , 'Sustain'
+		           init: 0.5
+		           min: 0
+		           max: 1
+		           step: 0.001
+]
+
+{ #category : 'accessing' }
 ADSREnv >> sustain [
 
-	^ sustain ifNil: [
-		sustain := PhHSlider new
-			           label: self label , 'Sustain'
-			           init: 0.5
-			           min: 0
-			           max: 1
-			           step: 0.001 ]
+	^ sustain 
 ]

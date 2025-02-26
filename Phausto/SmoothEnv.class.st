@@ -21,13 +21,7 @@ Class {
 { #category : 'initialization' }
 SmoothEnv >> ar [
 
-	^ ar ifNil: [
-		  ar := PhHSlider new
-			             label: self label , 'Ar'
-			             init: 0.1
-			             min: 0.001
-			             max: 2
-			             step: 0.001 ]
+	^ ar 
 ]
 
 { #category : 'converting' }
@@ -44,5 +38,11 @@ SmoothEnv >> asBox [
 SmoothEnv >> initialize [
 
 	super initialize.
-	processExpression := 'process = en.smoothEnvelope;'
+	processExpression := 'process = en.smoothEnvelope;'.
+	ar := PhHSlider new
+			        label: self label , 'Ar'
+			        init: 0.1
+			        min: 0.001
+			        max: 2
+			        step: 0.001
 ]

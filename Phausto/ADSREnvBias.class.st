@@ -41,52 +41,28 @@ ADSREnvBias >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSREnvBias >> biasAttack [
 
-	^ biasAttack ifNil: [
-		  biasAttack := PhHSlider new
-			             label: self label , 'BiasAttack'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ biasAttack 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSREnvBias >> biasDecay [
 
-	^ biasDecay ifNil: [
-		  biasDecay := PhHSlider new
-			             label: self label , 'BiasDecay'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ biasDecay i
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSREnvBias >> biasRelease [
 
-	^ biasRelease ifNil: [
-		  biasRelease := PhHSlider new
-			             label: self label , 'BiasRelease'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ biasRelease 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSREnvBias >> decay [
 
-	^ decay ifNil: [
-		  decay := PhHSlider new
-			           label: self label , 'Decay'
-			           init: 0.01
-			           min: 0.001
-			           max: 2
-			           step: 1 ]
+	^ decay 
 ]
 
 { #category : 'initialization' }
@@ -94,30 +70,69 @@ ADSREnvBias >> initialize [
 
 	super initialize.
 
-	processExpression := 'process = en.adsr_bias;'
+	processExpression := 'process = en.adsr_bias;'.
+	self initializeDecayAndSustain.
+	self initializeBias.
+	legato := PhHSlider new
+			            label: self label , 'Legato'
+			            init: 0
+			            min: 0
+			            max: 1
+			            step: 1 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
+ADSREnvBias >> initializeBias [
+
+	biasAttack := PhHSlider new
+		              label: self label , 'BiasAttack'
+		              init: 0.5
+		              min: 0
+		              max: 1
+		              step: 0.001.
+
+	biasDecay := PhHSlider new
+		             label: self label , 'BiasDecay'
+		             init: 0.5
+		             min: 0
+		             max: 1
+		             step: 0.001.
+
+
+	biasRelease := PhHSlider new
+		               label: self label , 'BiasRelease'
+		               init: 0.5
+		               min: 0
+		               max: 1
+		               step: 0.001
+]
+
+{ #category : 'initialization' }
+ADSREnvBias >> initializeDecayAndSustain [
+
+	decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.2
+		         min: 0.001
+		         max: 2
+		         step: 1.
+	sustain := PhHSlider new
+		           label: self label , 'Sustain'
+		           init: 0.5
+		           min: 0
+		           max: 1
+		           step: 0.001
+]
+
+{ #category : 'accessing' }
 ADSREnvBias >> legato [
+	"TODO must be changed to a UI toggle!!!!!!!!!!!!!!!"
 
-"TODO must be changed to a UI toggle!!!!!!!!!!!!!!!"
-	^ legato ifNil: [
-		  legato := PhHSlider new
-			             label: self label , 'Legato'
-			             init: 0
-			             min: 0
-			             max: 1
-			             step: 1 ]
+	^ legato 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSREnvBias >> sustain [
 
-	^ sustain ifNil: [
-		sustain := PhHSlider new
-			           label: self label , 'Sustain'
-			           init: 0.5
-			           min: 0
-			           max: 1
-			           step: 0.001 ]
+	^ sustain 
 ]

@@ -45,64 +45,34 @@ AHDSREnvBias >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 AHDSREnvBias >> biasAttack [
 
-	^ biasAttack ifNil: [
-		  biasAttack := PhHSlider new
-			             label: self label , 'BiasAttack'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ biasAttack 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 AHDSREnvBias >> biasDecay [
 
-	^ biasDecay ifNil: [
-		  biasDecay := PhHSlider new
-			             label: self label , 'BiasDecay'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ biasDecay 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 AHDSREnvBias >> biasRelease [
 
-	^ biasRelease ifNil: [
-		  biasRelease := PhHSlider new
-			             label: self label , 'BiasRelease'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ biasRelease 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 AHDSREnvBias >> decay [
 
-	^ decay ifNil: [
-		  decay := PhHSlider new
-			           label: self label , 'Decay'
-			           init: 0.01
-			           min: 0.001
-			           max: 2
-			           step: 1 ]
+	^ decay 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 AHDSREnvBias >> hold [
 
-	^ hold ifNil: [
-		  hold := PhHSlider new
-			             label: self label , 'Hold'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ hold 
 ]
 
 { #category : 'initialization' }
@@ -110,10 +80,61 @@ AHDSREnvBias >> initialize [
 
 	super initialize.
 
-	processExpression := 'process = en.adsrf_bias;'
+	processExpression := 'process = en.adsrf_bias;'.
+	self initializeDecayAndSustain.
+	self initializeBias.
+		hold := PhHSlider new
+		        label: self label , 'Hold'
+		        init: 0.5
+		        min: 0
+		        max: 1
+		        step: 0.001.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
+AHDSREnvBias >> initializeBias [
+
+	biasAttack := PhHSlider new
+		              label: self label , 'BiasAttack'
+		              init: 0.5
+		              min: 0
+		              max: 1
+		              step: 0.001.
+
+	biasDecay := PhHSlider new
+		             label: self label , 'BiasDecay'
+		             init: 0.5
+		             min: 0
+		             max: 1
+		             step: 0.001.
+
+
+	biasRelease := PhHSlider new
+		               label: self label , 'BiasRelease'
+		               init: 0.5
+		               min: 0
+		               max: 1
+		               step: 0.001
+]
+
+{ #category : 'initialization' }
+AHDSREnvBias >> initializeDecayAndSustain [
+
+	decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.2
+		         min: 0.001
+		         max: 2
+		         step: 1.
+	sustain := PhHSlider new
+		           label: self label , 'Sustain'
+		           init: 0.5
+		           min: 0
+		           max: 1
+		           step: 0.001
+]
+
+{ #category : 'accessing' }
 AHDSREnvBias >> legato [
 
 "TODO must be changed to a UI toggle!!!!!!!!!!!!!!!"
@@ -126,7 +147,7 @@ AHDSREnvBias >> legato [
 			             step: 1 ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 AHDSREnvBias >> sustain [
 
 	^ sustain ifNil: [

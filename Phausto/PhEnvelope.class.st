@@ -19,20 +19,25 @@ Class {
 { #category : 'accessing' }
 PhEnvelope >> attack [
 
-	^ attack ifNil: [
-		  attack := PhHSlider new
-			            label: self label , 'Attack'
-			            init: 0.01
-			            min: 0
-			            max: 4
-			            step: 0.001 ]
+	^ attack 
 ]
 
 { #category : 'initialization' }
 PhEnvelope >> initialize [
 
 	super initialize.
-	
+	attack := PhHSlider new
+		          label: self label , 'Attack'
+		          init: 0.01
+		          min: 0
+		          max: 4
+		          step: 0.001.
+		release := PhHSlider new
+			             label: self label , 'Release'
+			             init: 0.1
+			             min: 0.001
+			             max: 2
+			             step: 0.001
 ]
 
 { #category : 'connecting' }
@@ -45,13 +50,7 @@ PhEnvelope >> patchedWith: aUnitGenerator [
 { #category : 'dependencies' }
 PhEnvelope >> release [
 
-	^ release ifNil: [
-		  release := PhHSlider new
-			             label: self label , 'Release'
-			             init: 0.1
-			             min: 0.001
-			             max: 2
-			             step: 0.001 ]
+	^ release 
 ]
 
 { #category : 'accessing' }
