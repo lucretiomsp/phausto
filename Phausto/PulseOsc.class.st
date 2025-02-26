@@ -26,7 +26,7 @@ dsp stop.
 "
 Class {
 	#name : 'PulseOsc',
-	#superclass : 'Oscillators',
+	#superclass : 'Oscillator',
 	#instVars : [
 		'duty'
 	],

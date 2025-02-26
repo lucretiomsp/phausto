@@ -9,24 +9,24 @@ This class contains a collection of Oscllators taken from the Faust [oscillators
 - Poly BLEP Based Oscillatora
 "
 Class {
-	#name : 'Oscillators',
+	#name : 'Oscillator',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'freq'
 	],
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Oscillators'
 }
 
 { #category : 'accessing' }
-Oscillators >> freq [
+Oscillator >> freq [
 
 	^ freq 
 ]
 
 { #category : 'initialization' }
-Oscillators >> initialize [
+Oscillator >> initialize [
 
 	super initialize.
 	"default frequency for all Oscilators is a slider initialized at A4 / picth standard"
@@ -39,7 +39,7 @@ Oscillators >> initialize [
 ]
 
 { #category : 'initialization' }
-Oscillators >> initializeControlParameters [
+Oscillator >> initializeControlParameters [
 
 	super initializeControlParameters.
 

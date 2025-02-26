@@ -20,7 +20,7 @@ dsp stop.
 "
 Class {
 	#name : 'LFOForModulation',
-	#superclass : 'Oscillators',
+	#superclass : 'Oscillator',
 	#instVars : [
 		'amount',
 		'offset'

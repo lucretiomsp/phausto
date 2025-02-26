@@ -123,11 +123,6 @@ PhBox >> <= aPhBox [
 	BoxAPI uniqueInstance boxLE: self  than: aPhBox 
 ]
 
-{ #category : 'comparing' }
-PhBox >> = aPhBox [ 
-	BoxAPI uniqueInstance boxEQ: self  than: aPhBox 
-]
-
 { #category : 'connecting' }
 PhBox >> => aUnitGenerator [
 	"binary operator to patch Unit Generators / the ChucK operator, friendly adopted from the ChucK programming language"
@@ -359,6 +354,12 @@ PhBox >> db2linear [
 	^ self asBox connectTo: converter
 ]
 
+{ #category : 'comparing' }
+PhBox >> equalTo: aPhBox [
+
+	BoxAPI uniqueInstance boxEQ: self than: aPhBox
+]
+
 { #category : 'accessing' }
 PhBox >> errorBuffer [
 
@@ -480,6 +481,12 @@ PhBox >> min: anotherBox [
 	^ BoxAPI uniqueInstance boxMinBetween: self  and: anotherBox asBox
 ]
 
+{ #category : 'comparing' }
+PhBox >> notEqualTo: aPhBox [
+
+	BoxAPI uniqueInstance boxNE: self than: aPhBox
+]
+
 { #category : 'accessing' }
 PhBox >> numberOfOutputs [
 "if a PhBox/Init Generator has more than two ouputs, it has to be specified in the subclass"
@@ -578,9 +585,4 @@ PhBox >> ~ aUnitGenerator [
 
 	"^ self boxRecursive: self with: aUnitGenerator"
 	^ BoxAPI uniqueInstance boxRecursive: self with: aUnitGenerator asBox
-]
-
-{ #category : 'comparing' }
-PhBox >> ~= aPhBox [ 
-	BoxAPI uniqueInstance boxNE: self  than: aPhBox 
 ]

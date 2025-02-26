@@ -6,7 +6,7 @@ They can also have freq > 20 Hz, so they can work at _audio rate.
 "
 Class {
 	#name : 'LFO',
-	#superclass : 'Oscillators',
+	#superclass : 'Oscillator',
 	#instVars : [
 		'amount',
 		'offset'
