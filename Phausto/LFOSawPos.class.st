@@ -10,9 +10,9 @@ Simple sawtooth waveform oscillator between 0 and 1.
 Class {
 	#name : 'LFOSawPos',
 	#superclass : 'LFOForModulation',
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Oscillators'
 }
 
 { #category : 'initialization' }

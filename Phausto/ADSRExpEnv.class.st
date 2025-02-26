@@ -1,13 +1,12 @@
 "
-ADSR (Attack, Decay, Sustain, Release) envelope generator. adsr is a standard Faust function.
+**ADSR** (_Attack_, _Decay_, _Sustain_, _Release_) exponential envelope generator. 
 
-Where:
-
-at: attack time (sec)
-dt: decay time (sec)
-sl: sustain level (between 0..1)
-rt: release time (sec)
-t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
+## Parameters:
+- **attack**: attack time (sec)
+- **decay**: decay time (sec)
+- **sustain**: sustain level (between 0..1)
+- **release**: release time (sec)
+- **trigger**: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
 	#name : 'ADSRExpEnv',
@@ -16,9 +15,9 @@ Class {
 		'decay',
 		'sustain'
 	],
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Envelopes',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Envelopes'
 }
 
 { #category : 'converting' }

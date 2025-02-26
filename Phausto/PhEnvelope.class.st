@@ -11,9 +11,9 @@ Class {
 		'release',
 		'trigger'
 	],
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Envelopes',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Envelopes'
 }
 
 { #category : 'accessing' }

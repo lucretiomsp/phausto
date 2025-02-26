@@ -1,12 +1,12 @@
 "
-ARFE (Attack and Release-to-Final-value Exponentially) envelope generator. Approximately equal to smoothEnvelope(Attack/6.91) when Attack == Release.
+**ARFE** (_Attack and Release-to-Final-value Exponentially_) envelope generator. Approximately equal to `SmoothEnvelope`(_Attack/6.91_) when Attack = Release.
 
-Where:
+## Parameters
 
-at: attack (sec)
-sl: sustain level (between 0..1)
-finalLevel: final level to approach upon release (such as 0)
-t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
+- **attack**: attack (sec)
+- **sustain**: sustain level (between 0..1)
+- **finalLevel**: final level to approach upon release (such as 0)
+- **trigger**: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
 	#name : 'ARFExpEnv',
@@ -15,9 +15,9 @@ Class {
 		'sustain',
 		'finalLevel'
 	],
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Envelopes',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Envelopes'
 }
 
 { #category : 'converting' }

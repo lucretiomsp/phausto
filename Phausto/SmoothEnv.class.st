@@ -1,12 +1,10 @@
 "
-An envelope with an exponential attack and release. smoothEnvelope is a standard Faust function.
+An envelope with an exponential _Attack_ and _Release_ time. 
 
+## Parameters
 
-Where:
-
-
-ar: attack and release (sec)
-t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
+- **ar**: attack and release time (sec)
+- **trigger**: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
 	#name : 'SmoothEnv',
@@ -15,12 +13,12 @@ Class {
 		'sustain',
 		'ar'
 	],
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Envelopes',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Envelopes'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 SmoothEnv >> ar [
 
 	^ ar ifNil: [

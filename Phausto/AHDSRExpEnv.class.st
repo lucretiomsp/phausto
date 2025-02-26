@@ -1,14 +1,13 @@
 "
-ADSR (Attack, Decay, Sustain, Release, Final) envelope generator with control over bias on each segment, and toggle for legato.
+**AHDSR** (_Attack_, _Hold_, _Decay_, _Sustain_, _Release_) envelope generator.
 
-Where:
+## Parameters
 
-attack: attack time (sec)
-hold: hold time (sec)
-decay: decay time (sec)
-sustain: sustain level (between 0..1)
-release: release time (sec)
-trigger: trigger signal (attack is triggered when t>0, release is triggered when t=0)
+- **attack**: attack time (sec)
+- **decay**: decay time (sec)
+- **sustain**: sustain level (between 0..1)
+- **release**: release time (sec)
+- **trigger**: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
 	#name : 'AHDSRExpEnv',
@@ -18,9 +17,9 @@ Class {
 		'sustain',
 		'hold'
 	],
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Envelopes',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Envelopes'
 }
 
 { #category : 'converting' }

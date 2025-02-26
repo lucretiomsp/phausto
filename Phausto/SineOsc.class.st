@@ -8,9 +8,9 @@ Default Sine wave oscillator, corresponding to Faust osc standard function
 Class {
 	#name : 'SineOsc',
 	#superclass : 'Oscillators',
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Oscillators'
 }
 
 { #category : 'initialization' }

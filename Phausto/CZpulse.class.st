@@ -4,7 +4,7 @@ Oscillator that mimics the Casio CZ pulse oscillator.
 Class {
 	#name : 'CZpulse',
 	#superclass : 'CasioCZOscillators',
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Oscillators'
 }

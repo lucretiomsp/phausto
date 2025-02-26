@@ -1,8 +1,7 @@
 "
-#ADSR (Attack, Decay, Sustain, Release) linear envelope generator. 
+**ADSR** (_Attack_, _Decay_, _Sustain_, _Release_) exponential envelope generator. 
 
-Where:
-
+## Parameters:
 - **attack**: attack time (sec)
 - **decay**: decay time (sec)
 - **sustain**: sustain level (between 0..1)
@@ -16,9 +15,9 @@ Class {
 		'decay',
 		'sustain'
 	],
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Envelopes',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Envelopes'
 }
 
 { #category : 'converting' }

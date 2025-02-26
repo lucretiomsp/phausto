@@ -8,9 +8,9 @@ LowFrequency triangle wave from the Faust Standard Library
 Class {
 	#name : 'LFOTri',
 	#superclass : 'LFO',
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Oscillators'
 }
 
 { #category : 'initialization' }

@@ -4,7 +4,7 @@ Oscillator that mimics the Casio CZ square oscillator, with it's phase aligned t
 Class {
 	#name : 'CZsquareP',
 	#superclass : 'CasioCZOscillators',
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Oscillators'
 }

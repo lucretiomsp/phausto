@@ -8,9 +8,9 @@ Zero-mean unit-amplitude LFO square wave withrange -1 1.
 Class {
 	#name : 'LFOSquare',
 	#superclass : 'LFO',
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Oscillators'
 }
 
 { #category : 'initialization' }

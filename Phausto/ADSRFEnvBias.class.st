@@ -1,18 +1,18 @@
 "
-ADSR (Attack, Decay, Sustain, Release, Final) envelope generator with control over bias on each segment, and toggle for legato.
+**ADSR** (_Attack_, _Decay_, _Sustain_, _Release_)  envelope generator with control over bias on each segment, and toggle for legato.
 
-Where:
+## Parameters:
 
-attack: attack time (sec)
-decay: decay time (sec)
-sustain: sustain level (between 0..1)
-release: release time (sec)
-finalLevel: final level (between 0..1) but less than or equal to sl
-biasAttack: bias during attack (between 0..1) where 0.5 is no bias.
-biasDecay: bias during decay (between 0..1) where 0.5 is no bias.
-biasRelease: bias during release (between 0..1) where 0.5 is no bias.
-legato: toggle for legato. If disabled, envelopes ""re-trigger"" from zero.
-trigger: trigger signal (attack is triggered when t>0, release is triggered when t=0)
+- **attack**: attack time (sec)
+- **decay**: decay time (sec)
+- **sustain**: sustain level (between 0..1)
+- **release**: release time (sec)
+- **finalLevel**: final level (between 0..1) but less than or equal to sl
+- **biasAttack**: bias during attack (between 0..1) where 0.5 is no bias.
+- **biasDecay**: bias during decay (between 0..1) where 0.5 is no bias.
+- **biasRelease**: bias during release (between 0..1) where 0.5 is no bias.
+- **legato**: toggle for legato. If disabled, envelopes ""re-trigger"" from zero.
+- **trigger**: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
 	#name : 'ADSRFEnvBias',
@@ -26,9 +26,9 @@ Class {
 		'biasRelease',
 		'legato'
 	],
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Envelopes',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Envelopes'
 }
 
 { #category : 'converting' }

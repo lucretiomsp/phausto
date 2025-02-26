@@ -1,20 +1,18 @@
 "
-AR (Attack, Release) envelope generator (useful to create percussion envelopes). 
+**AR** (_Attack_, _Release_) envelope generator (useful to create percussion envelopes). 
 
-Usage
-ar(at,rt,t) : _
-Where:
+## Parameters: 
 
-at: attack (sec)
-rt: release (sec)
-t: trigger signal (attack is triggered when t>0, release is triggered when t=0)
+-** attack**: attack (sec)
+-** release**: release (sec)
+-** trigger**: trigger signal (attack is triggered when t>0, release is triggered when t=0)
 "
 Class {
 	#name : 'AREnv',
 	#superclass : 'PhEnvelope',
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Envelopes',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Envelopes'
 }
 
 { #category : 'converting' }

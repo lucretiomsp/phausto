@@ -7,9 +7,9 @@ freq: frequency in Hz
 Class {
 	#name : 'SquareOsc',
 	#superclass : 'Oscillators',
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Oscillators'
 }
 
 { #category : 'converting' }
