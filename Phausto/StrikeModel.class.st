@@ -7,7 +7,6 @@ Class {
 	#instVars : [
 		'lpCutoff',
 		'hpCutoff',
-		'strikePosition',
 		'strikeSharpness',
 		'gain'
 	],
@@ -33,7 +32,7 @@ StrikeModel >> gain [
 	^ gain
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 StrikeModel >> hpCutoff [
 
 	^ hpCutoff
@@ -45,36 +44,35 @@ StrikeModel >> initialize [
 	super initialize.
 	processExpression := 'process = pm.strikeModel;'.
 	"initialize controlParameters"
-	hpCutoff :=  (PhHSlider new
-				   label: self label , 'HpCutoff'
-				   init: 700
-				   min: 20
-				   max: 7000
-				   step: 1).
-	lpCutoff := (PhHSlider new
-				   label: self label , 'LpCutoff'
-				   init: 7000
-				   min: 20
-				   max: 9000
-				   step: 1).
-	
-	gain := (PhHSlider new
-				   label: self label , 'Gain'
-				   init: 0.5
-				   min: 0
-				   max: 1
-				   step: 0.001).
+	hpCutoff := PhHSlider new
+		            label: self label , 'HpCutoff'
+		            init: 700
+		            min: 20
+		            max: 7000
+		            step: 1.
+	lpCutoff := PhHSlider new
+		            label: self label , 'LpCutoff'
+		            init: 7000
+		            min: 20
+		            max: 9000
+		            step: 1.
 
-	strikeSharpness := (PhHSlider new
-				   label: self label , 'StrikePos'
-				   init: 0
-				   min: 0
-				   max: 4
-				   step: 1).
+	gain := PhHSlider new
+		        label: self label , 'Gain'
+		        init: 0.5
+		        min: 0
+		        max: 1
+		        step: 0.001.
 
+	strikeSharpness := PhHSlider new
+		                   label: self label , 'StrikePos'
+		                   init: 0
+		                   min: 0
+		                   max: 4
+		                   step: 1
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 StrikeModel >> lpCutoff [
 
 	^ lpCutoff
