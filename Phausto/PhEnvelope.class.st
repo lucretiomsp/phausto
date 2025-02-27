@@ -32,12 +32,13 @@ PhEnvelope >> initialize [
 		          min: 0
 		          max: 4
 		          step: 0.001.
-		release := PhHSlider new
-			             label: self label , 'Release'
-			             init: 0.1
-			             min: 0.001
-			             max: 2
-			             step: 0.001
+	release := PhHSlider new
+		           label: self label , 'Release'
+		           init: 0.1
+		           min: 0.001
+		           max: 2
+		           step: 0.001.
+		trigger := PhButton new label: self label , 'Trigger'
 ]
 
 { #category : 'connecting' }

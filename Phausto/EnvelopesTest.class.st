@@ -14,9 +14,11 @@ EnvelopesTest >> testADSREnvAsDsp [
 
 { #category : 'tests' }
 EnvelopesTest >> testADSREnvBiasAsDsp [
-"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+	"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+	"does not crash if Pharo runs from lldb !!!!!"
+
 	self assert: true equals: false
-	
+
 	"self assert: ADSREnvBias new asDsp isNull equals: false"
 ]
 
@@ -28,15 +30,16 @@ EnvelopesTest >> testADSRExpEnvAsDsp [
 
 { #category : 'tests' }
 EnvelopesTest >> testADSRFEnvBiasAsDsp [
-
-"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+	"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+"does not crash if Pharo runs from lldb !!!!!"
 	self assert: true equals: false
 	"self assert: ADSRFEnvBias new asDsp isNull equals: false"
 ]
 
 { #category : 'tests' }
 EnvelopesTest >> testAHDSREnvBiasAsDsp [
-"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+	"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+"does not crash if Pharo runs from lldb !!!!!"
 	self assert: true equals: false
 	"self assert: AHDSREnvBias new asDsp isNull equals: false"
 ]
@@ -49,10 +52,10 @@ EnvelopesTest >> testAHDSRExpEnvAsDsp [
 
 { #category : 'tests' }
 EnvelopesTest >> testAHDSRFEnvBiasAsDsp [
-
-"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+	"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+"does not crash if Pharo runs from lldb !!!!!"
 	self assert: true equals: false
-"	self assert: AHDSRFEnvBias new asDsp isNull equals: false"
+	"	self assert: AHDSRFEnvBias new asDsp isNull equals: false"
 ]
 
 { #category : 'tests' }
@@ -75,7 +78,8 @@ EnvelopesTest >> testASREnvAsDsp [
 
 { #category : 'tests' }
 EnvelopesTest >> testDx7EnvAsDsp [
-"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+	"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
+"does not crash if Pharo runs from lldb !!!!!"
 	self assert: true equals: false
 	"self assert: Dx7Env new asDsp isNull equals: false"
 ]

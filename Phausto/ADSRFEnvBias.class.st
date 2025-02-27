@@ -34,35 +34,36 @@ Class {
 { #category : 'converting' }
 ADSRFEnvBias >> asBox [
 
-	| intermediateBox finalBox |
+	| intermediateBox finalBox group |
 	intermediateBox := super asBox.
-	finalBox := self attack asBox , self decay asBox , self sustain asBox
+	group := self attack asBox , self decay asBox , self sustain asBox
 	            , self release asBox , self finalLevel asBox
-	            , self biasAttack asBox , self biasDecay asBox , self biasRelease 
-	            , self legato asBox , self trigger asBox connectTo:
-		            intermediateBox.
+	            , self biasAttack asBox , self biasDecay asBox
+	            , self biasRelease asBox , self legato asBox
+	            , self trigger asBox .
+	finalBox := group connectTo: intermediateBox.
 	^ finalBox
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSRFEnvBias >> biasAttack [
 
 	^ biasAttack 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSRFEnvBias >> biasDecay [
 
 	^ biasDecay 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSRFEnvBias >> biasRelease [
 
 	^ biasRelease 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSRFEnvBias >> decay [
 
 	^ decay ifNil: [
@@ -74,16 +75,10 @@ ADSRFEnvBias >> decay [
 			           step: 1 ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSRFEnvBias >> finalLevel [
 
-	^ finalLevel ifNil: [
-		  finalLevel := PhHSlider new
-			             label: self label , 'FinalLevel'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001 ]
+	^ finalLevel 
 ]
 
 { #category : 'initialization' }
@@ -93,7 +88,19 @@ ADSRFEnvBias >> initialize [
 
 	processExpression := 'process = en.adsrf_bias;'.
 	self initializeDecayAndSustain.
-	self initializeBias 
+	self initializeBias.
+	finalLevel := PhHSlider new
+		              label: self label , 'FinalLevel'
+		              init: 0.5
+		              min: 0
+		              max: 1
+		              step: 0.001.
+	legato := PhHSlider new
+		          label: self label , 'Legato'
+		          init: 0
+		          min: 0
+		          max: 1
+		          step: 1
 ]
 
 { #category : 'initialization' }
@@ -139,7 +146,7 @@ ADSRFEnvBias >> initializeDecayAndSustain [
 		           step: 0.001
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSRFEnvBias >> legato [
 
 "TODO must be changed to a UI toggle!!!!!!!!!!!!!!!"
@@ -152,7 +159,7 @@ ADSRFEnvBias >> legato [
 			             step: 1 ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ADSRFEnvBias >> sustain [
 
 	^ sustain ifNil: [

@@ -9,8 +9,7 @@ Class {
 		'hpCutoff',
 		'strikePosition',
 		'strikeSharpness',
-		'gain',
-		'gate'
+		'gain'
 	],
 	#category : 'Phausto-PhysicalModels',
 	#package : 'Phausto',
@@ -24,33 +23,9 @@ StrikeModel >> gain [
 ]
 
 { #category : 'accessing' }
-StrikeModel >> gain: anObject [
-
-	gain := anObject asBox
-]
-
-{ #category : 'accessing' }
-StrikeModel >> gate [
-
-	^ gate
-]
-
-{ #category : 'accessing' }
-StrikeModel >> gate: anObject [
-
-	gate := anObject asBox
-]
-
-{ #category : 'accessing' }
 StrikeModel >> hpCutoff [
 
 	^ hpCutoff
-]
-
-{ #category : 'accessing' }
-StrikeModel >> hpCutoff: anObject [
-
-	hpCutoff := anObject asBox
 ]
 
 { #category : 'initialization' }
@@ -73,31 +48,13 @@ StrikeModel >> lpCutoff [
 ]
 
 { #category : 'accessing' }
-StrikeModel >> lpCutoff: anObject [
-
-	lpCutoff := anObject asBox
-]
-
-{ #category : 'accessing' }
 StrikeModel >> strikePosition [
 
 	^ strikePosition
 ]
 
 { #category : 'accessing' }
-StrikeModel >> strikePosition: anObject [
-
-	strikePosition := anObject asBox
-]
-
-{ #category : 'accessing' }
 StrikeModel >> strikeSharpness [
 
 	^ strikeSharpness
-]
-
-{ #category : 'accessing' }
-StrikeModel >> strikeSharpness: anObject [
-
-	strikeSharpness := anObject asBox
 ]
