@@ -1,5 +1,14 @@
 "
-A filtered noise excitation
+Creates a filtered noise excitation
+
+
+## Parameters
+
+- **hPcutoff**: highpass cutoff frequency
+- **lPcutoff**: lowpass cutoff frequency
+- **strikeSharpness**: sharpness of the attack and release (0-1)
+- **gain**: gain of the excitation
+- **gate**: a gate button/trigger signal (0/1)
 "
 Class {
 	#name : 'StrikeModel',

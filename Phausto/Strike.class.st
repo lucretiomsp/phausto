@@ -1,5 +1,12 @@
 "
-A filtered noise excitation
+Strikes generator with controllable excitation position
+
+## Parameters
+
+- **strikePosition**: excitation position wiht 0: for max low freqs and 1: for max high freqs. So, on membrane for example, 0 would be the middle and 1 the edge
+- **strikeSharpness**: sharpness of the attack and release (0-1)
+- **gain**: gain of the excitation
+- **gate**: a gate button/trigger signal (0-1)
 "
 Class {
 	#name : 'Strike',

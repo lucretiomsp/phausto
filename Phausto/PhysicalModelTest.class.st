@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+PhysicalModelTest >> testBlowerAsDsp [
+
+	self assert: Blower new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testDjembeAsDsp [
 
 self assert: Djembe  new asDsp isNull equals: false
