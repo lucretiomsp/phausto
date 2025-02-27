@@ -1,5 +1,7 @@
 "
 Super class for Oscillators that mimic the Casio CZ oscillators.
+
+** Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead.**
 By default, the fund parameter is set to an LFO Saw with controllable frequency
 
 The [Casio CZ](https://en.wikipedia.org/wiki/CasioCZsynthesizers) is a line of synthesizers from the 1980s, known for their unique Phase Distortion synthesis, offering rich, digital tones. Popular for its affordability and distinctive sound, it remains a favorite among vintage synth enthusiasts.

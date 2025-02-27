@@ -1,14 +1,14 @@
 "
-Creates a filtered noise excitation
+Creates a plucking excitation signal.
 
+## Parameter
 
-## Parameters
-
-- **hPcutoff**: highpass cutoff frequency
-- **lPcutoff**: lowpass cutoff frequency
-- **strikeSharpness**: sharpness of the attack and release (0-1)
-- **gain**: gain of the excitation
-- **gate**: a gate button/trigger signal (0/1)
+- **stringLength: length of the string to pluck
+- **cutoff: cutoff ratio (1 for default)
+- **maxFreq: max frequency ratio (1 for default)
+- **strikeSharpness: sharpness of the attack and release (1 for default)
+- **gain: gain of the excitation (0-1)
+- **gate: trigger signal (1 for on, 0 for off)
 "
 Class {
 	#name : 'PluckString',

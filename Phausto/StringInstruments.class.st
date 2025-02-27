@@ -1,7 +1,9 @@
 "
 Low and high level string instruments parts. Most of the elments in this section can be used in a bidirectional chain.
 length is the length of the string in meters.
-a fequency in herts can be converted to a lenght in meters by sending the f2l message
+a fequency in hertz can be converted to a lenght in meters by sending the f2l message.
+
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead.**.
 "
 Class {
 	#name : 'StringInstruments',

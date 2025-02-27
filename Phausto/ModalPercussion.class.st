@@ -1,6 +1,8 @@
 "
 High and low level objects for modal synthesis of percussion instruments.
 
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead**.
+
 "
 Class {
 	#name : 'ModalPercussion',

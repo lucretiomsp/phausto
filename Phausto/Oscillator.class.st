@@ -1,10 +1,14 @@
 "
-This class contains a collection of Oscllators taken from the Faust [oscillators.lib](https://faustlibraries.grame.fr/libs/oscillators/). This collection includes:
+This class contains a collection of Oscllators taken from the Faust [oscillators.lib](https://faustlibraries.grame.fr/libs/oscillators/). 
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead**.
+
+This collection includes:
+- Basic Oscillators (`SineOsc` , `TriOsc` , `SawOsc` , `SquareOsc` , `PulseOsc`)
 - WaveTable Based Oscillators;
 - Low Frequency Oscillators;
 - Alias Suppressed Oscillators;
 - Filter Based Oscillators;
-- Waveguide REsonator Based Oscillators;
+- Waveguide Resonator Based Oscillators;
 - Casio CZ Oscillator;
 - Poly BLEP Based Oscillatora
 "

@@ -1,5 +1,6 @@
 "
 Superclass for various kind of _excitation_ signal generators. 
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead**.
 Use one of the subclasses to provide excitation for a model:
 
 - impulseExcitation
