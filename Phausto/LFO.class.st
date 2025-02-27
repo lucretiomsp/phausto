@@ -1,8 +1,10 @@
 "
 #LowFrequencyOscillators with range -1,1. 
+
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead.**
 No Aliasing suppression. 
-They can also have freq > 20 Hz, so they can work at _audio rate.
-[Low Frequency Oscillators](https://en.wikipedia.org/wiki/Low-frequency_oscillation) are used to modulate synthesisers and effects parameters
+They can also have freq > 20 Hz, so they can work at _audio rate_.
+[Low Frequency Oscillators](https://en.wikipedia.org/wiki/Low-frequency_oscillation	) are used to modulate synthesisers and effects parameters
 "
 Class {
 	#name : 'LFO',

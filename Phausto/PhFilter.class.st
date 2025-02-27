@@ -1,5 +1,7 @@
 "
-In signal processing, a filter is a process or device that removes frequencies from a signal
+In signal processing, a filter is a process or device that removes frequencies from a signal.
+
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead. **
 "
 Class {
 	#name : 'PhFilter',

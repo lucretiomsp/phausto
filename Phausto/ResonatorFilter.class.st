@@ -1,11 +1,15 @@
 "
 Simple resonant filters based on tf2s (virtual analog).
 Subclasses include lowpass, highpass, bandpass.
-Cutoof control is smoothed
-All the sublcasses of ResonatorFilter have the following controls;
-frequency
-gain
-q
+Cutoof control is smoothed.
+
+
+## Parameters
+- **frequency**
+- **gain**
+- **q**
+
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead. **
 "
 Class {
 	#name : 'ResonatorFilter',

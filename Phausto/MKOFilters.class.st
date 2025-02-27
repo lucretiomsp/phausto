@@ -1,8 +1,11 @@
 "
-Collection of Moog, Krg Oberheim style filters where:
+Collection of _Moog_, _Korg_ _Oberheim_ style filters where:
 
-normFreq: normalized frequency (0-1)
-Q: q
+## Parameters
+- **normFreq**: normalized frequency (0-1)
+- **q**: q factor(resonance of the filter.
+
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead. **
 "
 Class {
 	#name : 'MKOFilters',

@@ -5,7 +5,7 @@ This class contains a collection of Oscllators taken from the Faust [oscillators
 This collection includes:
 - Basic Oscillators (`SineOsc` , `TriOsc` , `SawOsc` , `SquareOsc` , `PulseOsc`)
 - WaveTable Based Oscillators;
-- Low Frequency Oscillators;
+- Low Frequency Oscillators (`LFO`);
 - Alias Suppressed Oscillators;
 - Filter Based Oscillators;
 - Waveguide Resonator Based Oscillators;

@@ -1,6 +1,8 @@
 "
 Colllection of Comb Filters from the Faust Library
-In signal processing, a comb filter is a filter implemented by adding a delayed version of a signal to itself, causing constructive and destructive interference. The frequency response of a comb filter consists of a series of regularly spaced notches in between regularly spaced peaks (sometimes called teeth) giving the appearance of a comb
+In signal processing, a comb filter is a filter implemented by adding a delayed version of a signal to itself, causing constructive and destructive interference. The frequency response of a comb filter consists of a series of regularly spaced notches in between regularly spaced peaks (sometimes called teeth) giving the appearance of a comb.
+
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead. **
 "
 Class {
 	#name : 'CombFilters',

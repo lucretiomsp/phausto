@@ -1,5 +1,7 @@
 "
-LFOForModulation are oscillators with no aliasing suppression intended to be used for modulating parameters, with positive range
+LFOForModulation are oscillators with no aliasing suppression intended to be used for modulating parameters, with positive range.
+
+** Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead.**
 
 ## Parameters
 - **freq**: set the frequency of the Oscillator

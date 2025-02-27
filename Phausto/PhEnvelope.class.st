@@ -2,6 +2,8 @@
 I am the superclass for all Phausto envelopes.
 In sound and music, an envelope describes how a sound changes over time.
 The envelope generator was created by [Herbert Deutsch](https://en.wikipedia.org/wiki/Herbert_Deutsch) for [Robert Moog](https://en.wikipedia.org/wiki/Robert_Moog), the creator of the Moog synthesizer, in the 1960s.
+
+**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead.**
 "
 Class {
 	#name : 'PhEnvelope',
