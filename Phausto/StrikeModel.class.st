@@ -16,6 +16,17 @@ Class {
 	#tag : 'PhysicalModels'
 }
 
+{ #category : 'converting' }
+StrikeModel >> asBox [ 
+
+| intermediateBox finalBox |
+intermediateBox := super asBox.
+
+finalBox := self hpCutoff asBox , self lpCutoff asBox , self strikeSharpness asBox , self gain asBox , self gate asBox connectTo: intermediateBox.
+
+^ finalBox
+]
+
 { #category : 'accessing' }
 StrikeModel >> gain [
 
@@ -33,24 +44,40 @@ StrikeModel >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.strikeModel;'.
-	self hpCutoff: 10.
-	self lpCutoff: 7000.
-	self gain: 0.6.
-	self strikePosition: 3.
-	self strikeSharpness: 0.3.
-	self gate: 0.0.
+	"initialize controlParameters"
+	hpCutoff :=  (PhHSlider new
+				   label: self label , 'HpCutoff'
+				   init: 700
+				   min: 20
+				   max: 7000
+				   step: 1).
+	lpCutoff := (PhHSlider new
+				   label: self label , 'LpCutoff'
+				   init: 7000
+				   min: 20
+				   max: 9000
+				   step: 1).
+	
+	gain := (PhHSlider new
+				   label: self label , 'Gain'
+				   init: 0.5
+				   min: 0
+				   max: 1
+				   step: 0.001).
+
+	strikeSharpness := (PhHSlider new
+				   label: self label , 'StrikePos'
+				   init: 0
+				   min: 0
+				   max: 4
+				   step: 1).
+
 ]
 
 { #category : 'accessing' }
 StrikeModel >> lpCutoff [
 
 	^ lpCutoff
-]
-
-{ #category : 'accessing' }
-StrikeModel >> strikePosition [
-
-	^ strikePosition
 ]
 
 { #category : 'accessing' }

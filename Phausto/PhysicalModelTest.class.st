@@ -43,6 +43,12 @@ PhysicalModelTest >> testMarimbaAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testStikeModelAsDsp [
+
+	self assert: StrikeModel new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testStrikeModelAsDsp [
 
 	self assert: StrikeModel new asDsp isNull equals: false

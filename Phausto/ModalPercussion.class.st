@@ -93,16 +93,6 @@ ModalPercussion >> strikePosition [
 ]
 
 { #category : 'accessing' }
-ModalPercussion >> strikePosition: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
-{ #category : 'accessing' }
 ModalPercussion >> strikeSharpness [
 
 	^ strikeSharpness ifNil: [
@@ -112,16 +102,6 @@ ModalPercussion >> strikeSharpness [
 				   min: 0.001
 				   max: 1
 				   step: 0.001) ]
-]
-
-{ #category : 'accessing' }
-ModalPercussion >> strikeSharpness:aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
 ]
 
 { #category : 'accessing' }
