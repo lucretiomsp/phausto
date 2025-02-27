@@ -13,6 +13,12 @@ PhysicalModelTest >> testBlowerAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testBlowerUIAsDsp [
+
+	self assert: Blower_UI new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testDjembeAsDsp [
 
 self assert: Djembe  new asDsp isNull equals: false
@@ -43,9 +49,21 @@ PhysicalModelTest >> testGuitarAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testImpulseExcitationAsDsp [
+
+	self assert: ImpulseExcitation new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testMarimbaAsDsp [
 
 	self assert: Marimba new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testPluckStringAsDsp [
+
+	self assert: PluckString new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

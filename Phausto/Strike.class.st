@@ -67,7 +67,7 @@ Strike >> initialize [
 		                   step: 1
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Strike >> strikePosition [
 	^ strikePosition
 ]

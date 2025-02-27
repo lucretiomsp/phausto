@@ -693,6 +693,18 @@ ParamsSetter >> maxDel: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> maxFreq: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> modDepth:  aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -1030,6 +1042,18 @@ ParamsSetter >> strikePosition: aNumberOrABoxOrASymbol [
 
 { #category : 'accessing' }
 ParamsSetter >> strikeSharpness: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> stringLength: aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"
