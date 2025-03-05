@@ -1,7 +1,9 @@
 "
-Put N cables in parallel.
+Put _anInteger_ number of signals in parallel.
 Create a new instance of the class with
+```language=pharo
 PhBus new: anInteger
+```
 "
 Class {
 	#name : 'PhBus',
