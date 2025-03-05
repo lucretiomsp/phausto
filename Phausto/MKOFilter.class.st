@@ -8,7 +8,7 @@ Collection of _Moog_, _Korg_ _Oberheim_ style filters where:
 **Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead. **
 "
 Class {
-	#name : 'MKOFilters',
+	#name : 'MKOFilter',
 	#superclass : 'PhFilter',
 	#instVars : [
 		'normFreq',
@@ -20,7 +20,7 @@ Class {
 }
 
 { #category : 'accessing' }
-MKOFilters >> normFreq [
+MKOFilter >> normFreq [
 
 	^ normFreq ifNil: [
 		  normFreq := PhHSlider new
@@ -32,7 +32,7 @@ MKOFilters >> normFreq [
 ]
 
 { #category : 'accessing' }
-MKOFilters >> q [
+MKOFilter >> q [
 
 	^ q ifNil: [
 		  q := PhHSlider new

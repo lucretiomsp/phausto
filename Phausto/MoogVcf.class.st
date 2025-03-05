@@ -8,7 +8,7 @@ fr: corner-resonance frequency in Hz (less than SampleRate/6.3 or so)
 "
 Class {
 	#name : 'MoogVcf',
-	#superclass : 'MKOFilters',
+	#superclass : 'MKOFilter',
 	#instVars : [
 		'res',
 		'fr'

@@ -10,7 +10,7 @@ fr: corner-resonance frequency in Hz (less than SampleRate/6.3 or so)
 "
 Class {
 	#name : 'Korg35LPF',
-	#superclass : 'MKOFilters',
+	#superclass : 'MKOFilter',
 	#instVars : [
 		'res',
 		'fr'

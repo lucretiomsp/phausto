@@ -6,7 +6,7 @@ Q: quality factor between .707 (0 feedback coefficient) to 25 (feedback = 4, whi
 "
 Class {
 	#name : 'Oberheim',
-	#superclass : 'MKOFilters',
+	#superclass : 'MKOFilter',
 	#category : 'Phausto-Filters',
 	#package : 'Phausto',
 	#tag : 'Filters'
