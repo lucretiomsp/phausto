@@ -314,6 +314,12 @@ UnitGenerator >> initializeULevel [
 		          step: 0.001
 ]
 
+{ #category : 'testing' }
+UnitGenerator >> isUGen [
+
+^ true
+]
+
 { #category : 'accessing' }
 UnitGenerator >> label [
 
