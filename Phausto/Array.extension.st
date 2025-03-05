@@ -28,3 +28,13 @@ Array >> asPhList [
 list := PhList new addAll: self.
 ^ list
 ]
+
+{ #category : '*Phausto' }
+Array >> asSumOfUGen [
+
+| sum firstUGen|
+firstUGen := self first.
+"sum all the Unit Generator in the collection"
+(self allSatisfy: [ :each | each isUGen ]) ifTrue: [   self allButFirstDo: [ :u | sum := firstUGen + u ] ].
+^ sum
+]
