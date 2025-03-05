@@ -70,4 +70,9 @@ dsp start.
 dsp stop.
 ```
 
-
+## Explore Phausto's Unit Generator and classes
+If CoypuIDE is [installed](https://github.com/lucretiomsp/phausto/wiki) you can explore all Phausto classes and Unit Generators by evaluating in a Playground
+```Smalltalk
+PhaustoClassReference new openInSpace.
+```
+Classes can be browsed by type (i.e. _Oscillators_ , _Effects_ , _Envelopes_ and so on), their comments include examples to help you get started.
