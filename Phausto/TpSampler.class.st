@@ -1,10 +1,14 @@
 "
-I am a (Multi) Sample Player. Load a folder containing only .wav files with pathToFolder. Select the file number with the index: parameter (an Integer bewteen 0 and 255).
+I am a **(Multi)Sample Player**. Load a folder containing only _.wav_ or _.aiff_ files with 
+```language=pharo
+self new pathToFolder: aString. 
+```
+Select the file number with the _index_ parameter (an Integer bewteen 0 and 255). If index> folder size, no sound will be reprodduces 
 All sample files int he folder must have the same number of channels (i.e. all must be moro or stereo).
 
 I can be chromatically played using MIDI NOte Numbers, where 60 plays at my defualt speed.
 
-PhSampler (at the moment) is always mono even if files are stereo. You need to send it the stereo message to make it stereo. 
+I am always mono even if files are stereo. You need to send it the `stereo` message to make it stereo. 
 "
 Class {
 	#name : 'TpSampler',
