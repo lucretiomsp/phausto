@@ -80,6 +80,25 @@ LFOForModulation >> initialize [
 		        step: 0.1
 ]
 
+{ #category : 'initialization' }
+LFOForModulation >> initializeControlParameters [
+
+	super initializeControlParameters.
+	self controlParameters add: #amount -> (PhControlParameter new
+			 name: #amount;
+			 description: 'Amount of modulation';
+			 range: (400 to: 8000);
+			 value: self amount;
+			 widgetType: #knob).
+
+	self controlParameters add: #offset -> (PhControlParameter new
+			 name: #offset;
+			 description: 'Modulation Offset';
+			 range: (0 to: 800);
+			 value: self offset;
+			 widgetType: #knob)
+]
+
 { #category : 'as yet unclassified' }
 LFOForModulation >> offset [
 
