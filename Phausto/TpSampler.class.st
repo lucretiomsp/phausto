@@ -136,6 +136,12 @@ TpSampler >> numChannels: aNumOfChannels [
 ]
 
 { #category : 'accessing' }
+TpSampler >> numberOfSamples [
+
+^ self pathToFolder asFileReference children size
+]
+
+{ #category : 'accessing' }
 TpSampler >> pathToFile [
 
 	^ pathToFile
@@ -156,7 +162,9 @@ TpSampler >> pathToFolder [
 { #category : 'accessing' }
 TpSampler >> pathToFolder: aString [
 
-	pathToFolder := aString
+	pathToFolder := aString.
+	"we set the maximum value for index as the number of samples in the folder"
+	self index max: self numberOfSamples .
 ]
 
 { #category : 'accessing' }
