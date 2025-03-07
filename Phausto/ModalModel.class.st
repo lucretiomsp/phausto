@@ -32,7 +32,8 @@ ModalModel >> asBox [
 	intermediateBox := super asBox.
 	"finalBox := self freqs asBox , self t60s asBox , self gains asBox
 	            , self input asBox connectTo: intermediateBox."
-	finalBox := 440 asBox, 0.5 asBox, 0.5 asBox , 1 asBox connectTo: intermediateBox .
+	finalBox := 440 asBox , 0.5 asBox , 0.5 asBox , self input connectTo:
+		            intermediateBox.
 	^ intermediateBox
 ]
 

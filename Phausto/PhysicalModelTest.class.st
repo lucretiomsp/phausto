@@ -61,6 +61,12 @@ PhysicalModelTest >> testMarimbaAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testModeFilterAsDsp [
+
+	self assert: ModeFilter new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testPluckStringAsDsp [
 
 	self assert: PluckString new asDsp isNull equals: false
