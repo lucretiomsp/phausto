@@ -1,5 +1,5 @@
 "
-Pulses (generator of length n generated at period p.
+Ggenerator of _pulses_ with **length** and **period** in seconds
 "
 Class {
 	#name : 'Pulsen',

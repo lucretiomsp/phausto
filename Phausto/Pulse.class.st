@@ -1,5 +1,5 @@
 "
-Pulses generated at period in seconds
+Pulses generated at **period** in seconds
 "
 Class {
 	#name : 'Pulse',
