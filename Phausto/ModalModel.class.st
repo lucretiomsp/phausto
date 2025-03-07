@@ -30,8 +30,10 @@ ModalModel >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self numberOfModes, self freqs , self t60s , self gains , self input connectTo: intermediateBox .
-	^ finalBox 
+	"finalBox := self freqs asBox , self t60s asBox , self gains asBox
+	            , self input asBox connectTo: intermediateBox."
+	finalBox := 440 asBox, 0.5 asBox, 0.5 asBox , 1 asBox connectTo: intermediateBox .
+	^ intermediateBox
 ]
 
 { #category : 'accessing' }
@@ -51,12 +53,17 @@ ModalModel >> initialize [
 	"default ModalModel comes from the example in the Faust libraries documentation but is triggered with a Pulsen"
 
 	super initialize.
-	processExpression := 'process = pm.modalModel'.
-	numberOfModes := 2.
+	processExpression := 'process = pm.modalModel(1);'.
 	freqs := 440 asBox , 660 asBox.
 	t60s := 0.5 asBox , 0.25 asBox.
 	gains := 0.6 asBox , 0.8 asBox.
 	input := Pulse new period: 0.16 asBox
+]
+
+{ #category : 'accessing' }
+ModalModel >> input [
+
+	^ input
 ]
 
 { #category : 'accessing' }
