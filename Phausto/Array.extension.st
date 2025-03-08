@@ -32,9 +32,11 @@ list := PhList new addAll: self.
 { #category : '*Phausto' }
 Array >> asSumOfUGen [
 
-| sum firstUGen|
-firstUGen := self first.
-"sum all the Unit Generator in the collection"
-(self allSatisfy: [ :each | each isUGen ]) ifTrue: [   self allButFirstDo: [ :u | sum := firstUGen + u ] ].
-^ sum
+	| sum firstUGen |
+	firstUGen := self first.
+	"sum all the Unit Generator in the collection"
+	(self allSatisfy: [ :each | each isUGen ]) ifTrue: [
+		sum :=self inject: UnitGenerator new into: [:a :c | a + c].
+		"self allButFirstDo: [ :u | sum := firstUGen + u ]" ].
+	^ sum
 ]
