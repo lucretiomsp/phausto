@@ -44,17 +44,37 @@ ModeFilter >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.modeFilter;'.
-	gain := 0.5.
-	freq := 440.
-	t60 := 0.3.
-	input := Pulse new period: 0.1.
-	
+	 freq := PhHSlider new
+			          label: self label , 'Freq'
+			          init: 440
+			          min: 20
+			          max: 2000
+			          step: 0.001.
+	gain := PhHSlider new
+		        label: self label , 'Gain'
+		        init: 0.5
+		        min: 0
+		        max: 1
+		        step: 0.001.
+	t60 := PhHSlider new
+		       label: self label , 'T60'
+		       init: 0.5
+		       min: 0
+		       max: 2
+		       step: 0.001.
+	input := Pulse new period: 0.1
 ]
 
 { #category : 'accessing' }
 ModeFilter >> input [
 
 	^ input
+]
+
+{ #category : 'connecting' }
+ModeFilter >> patchedWith: aUnitGenerator [
+
+self input: aUnitGenerator 
 ]
 
 { #category : 'accessing' }
