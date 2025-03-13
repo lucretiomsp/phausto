@@ -35,21 +35,9 @@ ViolinModel >> bowPosition [
 ]
 
 { #category : 'accessing' }
-ViolinModel >> bowPosition: anObject [
-
-	bowPosition := anObject asBox
-]
-
-{ #category : 'accessing' }
 ViolinModel >> bowPressure [
 
 	^ bowPressure
-]
-
-{ #category : 'accessing' }
-ViolinModel >> bowPressure: anObject [
-
-	bowPressure := anObject asBox
 ]
 
 { #category : 'accessing' }
@@ -58,32 +46,40 @@ ViolinModel >> bowVelocity [
 	^ bowVelocity
 ]
 
-{ #category : 'accessing' }
-ViolinModel >> bowVelocity: anObject [
-
-	bowVelocity := anObject asBox
-]
-
 { #category : 'initialization' }
-ViolinModel >> initialize [ 
+ViolinModel >> initialize [
 
-super initialize .
+	super initialize.
 
-processExpression := 'process = pm.violinModel;'.
-self stringLength: 1.
-self bowVelocity: 0.4.
-self bowPressure: 0.6.
-self bowPosition: 0.2 
+	processExpression := 'process = pm.violinModel;'.
+	stringLength := (PhHSlider new
+				   label: self label , 'StringLength'
+				   init: 1
+				   min: 0
+				   max: 4
+				   step: 0.001) .
+	bowVelocity := (PhHSlider new
+				   label: self label , 'BowVelocity'
+				   init: 0.5
+				   min: 0
+				   max: 1
+				   step: 0.001) .
+	bowPressure := (PhHSlider new
+				   label: self label , 'BowPressure'
+				   init: 0.5
+				   min: 0
+				   max: 1
+				   step: 0.001) ..
+    bowPosition := (PhHSlider new
+				   label: self label , 'BowPressure'
+				   init: 0.5
+				   min: 0
+				   max: 1
+				   step: 0.001) ..
 ]
 
 { #category : 'accessing' }
 ViolinModel >> stringLength [
 
 	^ stringLength
-]
-
-{ #category : 'accessing' }
-ViolinModel >> stringLength: anObject [
-
-	stringLength := anObject asBox
 ]
