@@ -43,13 +43,3 @@ Marimba >> strikePosition [
 			 max: 4
 			 step: 1). ]
 ]
-
-{ #category : 'accessing' }
-Marimba >> strikePosition: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
