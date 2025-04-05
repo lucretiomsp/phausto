@@ -29,11 +29,20 @@ Class {
 
 { #category : 'testing' }
 TpSampler class >> hasTurboSamplesFolder [
-		| pathToFolder |
-	pathToFolder := (FileLocator documents asAbsolute pathString
-	                 , '/TurboSamples') asFileReference.
-	^ pathToFolder exists.
 
+	^ self turboSamplesFolder asFileReference exists
+]
+
+{ #category : 'as yet unclassified' }
+TpSampler class >> loadAllTurboSamplers [
+	self shouldBeImplemented.
+]
+
+{ #category : 'accessing' }
+TpSampler class >> turboSamplesFolder [
+
+^ (FileLocator documents asAbsolute pathString
+	                 , '/TurboSamples')
 ]
 
 { #category : 'converting' }
