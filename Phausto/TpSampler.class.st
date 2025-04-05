@@ -27,6 +27,15 @@ Class {
 	#tag : 'TurboPhausto'
 }
 
+{ #category : 'testing' }
+TpSampler class >> hasTurboSamplesFolder [
+		| pathToFolder |
+	pathToFolder := (FileLocator documents asAbsolute pathString
+	                 , '/TurboSamples') asFileReference.
+	^ pathToFolder exists.
+
+]
+
 { #category : 'converting' }
 TpSampler >> asBox [
 

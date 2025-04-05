@@ -50,3 +50,12 @@ pathToFolder:= (FileLocator documents asAbsolute pathString , '/MoofLodSamples')
 self assert: pathToFolder exists equals: true.
 self assert: TpSampler new asDsp isNull equals: false
 ]
+
+{ #category : 'tests' }
+TurboPhaustoTest >> testTurboSamplesFolderExists [
+
+
+
+	self assert: TpSampler hasTurboSamplesFolder equals: true.
+	
+]
