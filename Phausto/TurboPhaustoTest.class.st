@@ -35,9 +35,11 @@ self assert: GreyHoleDW new asDsp isNull equals: false
 { #category : 'tests' }
 TurboPhaustoTest >> testLoadAllTurboSamplers [
 
-| allTurboSamplers |
-allTurboSamplers := TpSampler loadAllTurboSamplers.
-self assert: allTurboSamplers size equals: TpSampler turboSamplesFolder asFileReference children size. 
+	| allTurboSamplers |
+	allTurboSamplers := TurboPhausto loadAllTurboSamplers.
+	self
+		assert: allTurboSamplers size
+		equals: TpSampler turboSamplesFolder asFileReference children size.
 	self assert: TpSampler hasTurboSamplesFolder equals: true
 ]
 
@@ -63,8 +65,5 @@ self assert: TpSampler new asDsp isNull equals: false
 { #category : 'tests' }
 TurboPhaustoTest >> testTurboSamplesFolderExists [
 
-
-
-	self assert: TpSampler hasTurboSamplesFolder equals: true.
-	
+	self assert: TurboPhausto hasTurboSamplesFolder equals: true
 ]

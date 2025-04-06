@@ -35,7 +35,13 @@ TpSampler class >> hasTurboSamplesFolder [
 
 { #category : 'as yet unclassified' }
 TpSampler class >> loadAllTurboSamplers [
-	self shouldBeImplemented.
+
+| size allFolders allSamplers subDir|
+subDir := TpSampler turboSamplesFolder asFileReference children.
+size := subDir size.
+allSamplers := subDir collect: [ :i | TpSampler new pathToFolder: i  ].
+
+^ allSamplers
 ]
 
 { #category : 'accessing' }
