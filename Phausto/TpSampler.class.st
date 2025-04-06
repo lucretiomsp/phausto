@@ -27,30 +27,6 @@ Class {
 	#tag : 'TurboPhausto'
 }
 
-{ #category : 'testing' }
-TpSampler class >> hasTurboSamplesFolder [
-
-	^ self turboSamplesFolder asFileReference exists
-]
-
-{ #category : 'as yet unclassified' }
-TpSampler class >> loadAllTurboSamplers [
-
-| size allFolders allSamplers subDir|
-subDir := TpSampler turboSamplesFolder asFileReference children.
-size := subDir size.
-allSamplers := subDir collect: [ :i | TpSampler new pathToFolder: i  ].
-
-^ allSamplers
-]
-
-{ #category : 'accessing' }
-TpSampler class >> turboSamplesFolder [
-
-^ (FileLocator documents asAbsolute pathString
-	                 , '/TurboSamples')
-]
-
 { #category : 'converting' }
 TpSampler >> asBox [
 

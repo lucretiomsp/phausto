@@ -39,8 +39,8 @@ TurboPhaustoTest >> testLoadAllTurboSamplers [
 	allTurboSamplers := TurboPhausto loadAllTurboSamplers.
 	self
 		assert: allTurboSamplers size
-		equals: TpSampler turboSamplesFolder asFileReference children size.
-	self assert: TpSampler hasTurboSamplesFolder equals: true
+		equals: TurboPhausto turboSamplesFolder asFileReference children size.
+	
 ]
 
 { #category : 'tests' }
