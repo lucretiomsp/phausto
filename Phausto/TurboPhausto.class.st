@@ -111,12 +111,13 @@ TurboPhausto class >> loadAllSynths [
 		add: (DubDub new
 				 label: 'dubdub';
 				 freq: #dubdubNote);
-					add: (Acid new
+		add: (Acid new
 				 label: 'acid';
-				 freq: #acidNote);
-					add: (Chordy new
-				 label: 'chordy';
-				 freq: #chordyNote)
+				 pitch: #acidNote);add:
+		(Chordy new
+			 label: 'chordy';
+			 pitch: #chordyNote);
+		add: TpHoover new
 ]
 
 { #category : 'testing' }
