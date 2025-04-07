@@ -77,9 +77,22 @@ TurboPhausto class >> loadAllSamplers [
 
 { #category : 'loading' }
 TurboPhausto class >> loadAllSynths [
+	"load all TurboSynths - kept empty for now"
 
-"load all TurboSynths - kept empty for now"
-allSynths := #()
+	allSynths := OrderedCollection new.
+	allSynths
+		add: (Djembe new
+				 label: 'djembe';
+				 freq: #djembeNote);
+		add: (Marimba new
+				 label: 'marimba';
+				 freq: #marimbaNote);
+				add: (Guitar new
+				 label: 'guitar';
+				 freq: #guitarNote);
+			add: (SawTrombone new
+				 label: 'trombone';
+				 freq: #tromboneNote).
 ]
 
 { #category : 'testing' }

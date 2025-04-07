@@ -23,7 +23,7 @@ Class {
 { #category : 'initialization' }
 FluteModel >> initializeUIParameters [
 
-	super initializeUIParameters.
+
 
 	tubeLength := PhHSlider new
 		              label: self label , 'TubeLength'
@@ -37,12 +37,12 @@ FluteModel >> initializeUIParameters [
 		                 min: 0.1
 		                 max: 1
 		                 step: 0.01.
-		pressure := PhHSlider new
-		              label: self label , 'Pressure'
-		              init: 0.1
-		              min: 0
-		              max: 1
-		              step: 0.01
+	pressure := PhHSlider new
+		            label: self label , 'Pressure'
+		            init: 0.1
+		            min: 0
+		            max: 1
+		            step: 0.01
 ]
 
 { #category : 'accessing' }
