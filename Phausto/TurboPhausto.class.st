@@ -86,8 +86,38 @@ TurboPhausto class >> start [
 ]
 
 { #category : 'accessing' }
+TurboPhausto class >> tpDsp [
+
+	^ tpDsp.
+]
+
+{ #category : 'accessing' }
+TurboPhausto class >> tpPerf [
+
+^ tpPerf 
+]
+
+{ #category : 'accessing' }
 TurboPhausto class >> turboSamplesFolder [
 
 ^ (FileLocator documents asAbsolute pathString
 	                 , '/TurboSamples')
+]
+
+{ #category : 'accessing' }
+TurboPhausto >> bpm: aNumber [
+
+	self class tpPerf bpm: aNumber bpm
+]
+
+{ #category : 'playing' }
+TurboPhausto >> play [
+
+	self class tpPerf play
+]
+
+{ #category : 'playing' }
+TurboPhausto >> playFor: aNumberOfBars [
+
+	self class tpPerf playFor: aNumberOfBars
 ]

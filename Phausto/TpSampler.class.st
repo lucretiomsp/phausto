@@ -79,17 +79,25 @@ TpSampler >> attachedBox: anObject [
 	attachedBox := anObject
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'changing' }
 TpSampler >> changeParamsPrefix [
 
-| prefix |
-prefix := self name.
+	| prefix |
+	prefix := self name.
 
-self gate: ((WriteStream  on: String new) nextPutAll: prefix; nextPutAll: 'Gate') asSymbol.
-			self pitch: ((WriteStream  on: String new)  nextPutAll: prefix; nextPutAll: 'Note') asSymbol.
-			self index: ((WriteStream  on: String new)  nextPutAll: prefix; nextPutAll: 'Index') asSymbol.
-			self uLevel: ((WriteStream  on: String new) nextPutAll: prefix; nextPutAll: 'uLevel') asSymbol.
-
+	self gate: ((WriteStream on: String new)
+			 nextPutAll: prefix;
+			 nextPutAll: 'Gate'; yourself) contents  asSymbol.
+			
+	self pitch: ((WriteStream on: String new)
+			 nextPutAll: prefix;
+			 nextPutAll: 'Note') yourself asSymbol.
+	self index: ((WriteStream on: String new)
+			 nextPutAll: prefix;
+			 nextPutAll: 'Index') yourself  asSymbol.
+	self uLevel: ((WriteStream on: String new)
+			 nextPutAll: prefix;
+			 nextPutAll: 'uLevel') yourself asSymbol
 ]
 
 { #category : 'accessing' }

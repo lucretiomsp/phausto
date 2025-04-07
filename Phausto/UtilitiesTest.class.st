@@ -328,6 +328,12 @@ event_ADSREnvDecay -> voices.event_ADSREnvDecay;
 ]
 
 { #category : 'tests' }
+UtilitiesTest >> testPrefixasSymbolWithSuffix [
+
+self assert:( 'Kick' asSymbolWithSuffix: 'Gate') equals: #KickGate
+]
+
+{ #category : 'tests' }
 UtilitiesTest >> testUnitGeneratorUIParameters [
 
 	| ugen parametersDictionary |
