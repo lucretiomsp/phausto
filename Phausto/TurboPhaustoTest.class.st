@@ -33,6 +33,12 @@ self assert: GreyHoleDW new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
+TurboPhaustoTest >> testHooverAsBox [
+
+	self assert: TpHoover new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 TurboPhaustoTest >> testLoadAllTurboSamplers [
 
 	| allTurboSamplers numOfSamplers|

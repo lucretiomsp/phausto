@@ -125,7 +125,7 @@ UnitGenerator >> * aUnitGenerator [
 { #category : 'arithmetic' }
 UnitGenerator >> + aUnitGenerator [
 
-^ self asBox + aUnitGenerator 
+	^ self asBox + aUnitGenerator asBox
 ]
 
 { #category : 'arithmetic' }
