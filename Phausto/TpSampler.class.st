@@ -143,7 +143,7 @@ TpSampler >> name [
 TpSampler >> name: aString [
 
 	name := aString.
-	self changeParamsPrefix.
+
 ]
 
 { #category : 'accessing' }
