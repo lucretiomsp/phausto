@@ -157,6 +157,13 @@ TurboPhausto >> bpm: aNumber [
 	self class tpPerf bpm: aNumber bpm
 ]
 
+{ #category : 'initialization' }
+TurboPhausto >> initialize [
+
+	super initialize.
+	self muteAll.
+]
+
 { #category : 'playing' }
 TurboPhausto >> mute: aSymbol [
 
@@ -164,9 +171,9 @@ TurboPhausto >> mute: aSymbol [
 ]
 
 { #category : 'playing' }
-TurboPhausto >> muteAll: anArrayOfSymbols [
+TurboPhausto >> muteAll [
 
-	self class tpPerf mute: anArrayOfSymbols 
+	self class tpPerf muteAll
 ]
 
 { #category : 'playing' }
