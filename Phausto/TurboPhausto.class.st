@@ -83,16 +83,34 @@ TurboPhausto class >> loadAllSynths [
 	allSynths
 		add: (Djembe new
 				 label: 'djembe';
+				 trigger: #djembeGate;
 				 freq: #djembeNote);
 		add: (Marimba new
 				 label: 'marimba';
+				 trigger: #marimbaGate;
 				 freq: #marimbaNote);
-				add: (Guitar new
+		add: (Guitar new
 				 label: 'guitar';
+				 trigger: #guitarGate;
 				 freq: #guitarNote);
-			add: (SawTrombone new
+		add: (SawTrombone new
 				 label: 'trombone';
-				 freq: #tromboneNote).
+				 freq: #tromboneNote);
+		add: (Clap new
+				 label: 'syclap';
+				 freq: #syclapNote);
+		add: (Kick new
+				 label: 'sykick';
+				 freq: #sykickNote);
+		add: (Hat new
+				 label: 'syhat';
+				 freq: #syhatNote);
+		add: (CombString new
+				 label: 'combstring';
+				 freq: #combstringNote);
+				add: (DubDub new
+				 label: 'dubdub';
+				 freq: #dubdubNote)
 ]
 
 { #category : 'testing' }
