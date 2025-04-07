@@ -43,31 +43,37 @@ TpSynth >> initialize [
 	super initialize.
 	"by default the name of the TpSynth is the name of the class"
 	gate := PhButton new label: self label , 'Gate'.
-	
+
 	pitch := PhHSlider new
-			  label: self label , 'Note'
-			  init: 440
-			  min: 20
-			  max: 4086
-			  step: 1 .
-			attack := PhHSlider new
-			            label: self label , 'Attack'
-			            init: 0.01
-			            min: 0
-			            max: 4
-			            step: 0.001 .
-			  sustain := PhHSlider new
-			             label: self label , 'Sustain'
-			             init: 0.5
-			             min: 0
-			             max: 1
-			             step: 0.001.
-			 release := PhHSlider new
-			             label: self label , 'Release'
-			             init: 0.1
-			             min: 0.001
-			             max: 2
-			             step: 0.001
+		         label: self label , 'Note'
+		         init: 440
+		         min: 20
+		         max: 4086
+		         step: 1.
+	attack := PhHSlider new
+		          label: self label , 'Attack'
+		          init: 0.01
+		          min: 0
+		          max: 4
+		          step: 0.001.
+	decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.2
+		         min: 0.001
+		         max: 2
+		         step: 0.001.
+	sustain := PhHSlider new
+		           label: self label , 'Sustain'
+		           init: 0.5
+		           min: 0
+		           max: 1
+		           step: 0.001.
+	release := PhHSlider new
+		           label: self label , 'Release'
+		           init: 0.1
+		           min: 0.001
+		           max: 2
+		           step: 0.001
 ]
 
 { #category : 'initialization' }
