@@ -32,68 +32,37 @@ SawTrombone >> asBox [
 { #category : 'accessing' }
 SawTrombone >> freq [
 
-	^ freq ifNil: [
-		  freq := PhHSlider new
-			          label: self label , 'Note'
-			          init: 440
-			          min: 20
-			          max: 1400
-			          step: 0.1 ]
-]
-
-{ #category : 'accessing' }
-SawTrombone >> freq: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-
-	
+	^ freq
 ]
 
 { #category : 'as yet unclassified' }
 SawTrombone >> gain [
 
-	^ gain ifNil: [
-		  freq := PhHSlider new
-			          label: self label , 'Gain'
-			          init: 0.5
-			          min: 0
-			          max: 1
-			          step: 0.01 ]
-]
-
-{ #category : 'as yet unclassified' }
-SawTrombone >> gain: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	^ gain 
 ]
 
 { #category : 'accessing' }
 SawTrombone >> gate [
 
-	^ gate ifNil: [ gate := PhButton new label: self label ,  'Gate' ]
-]
-
-{ #category : 'accessing' }
-SawTrombone >> gate:aNumberOrABoxOraASymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	^ gate 
 ]
 
 { #category : 'initialization' }
 SawTrombone >> initialize [
 
 	super initialize.
-	processExpression := 'process = sy.sawTrombone;'
+	processExpression := 'process = sy.sawTrombone;'.
+	freq := PhHSlider new
+		        label: self label , 'Note'
+		        init: 440
+		        min: 20
+		        max: 1400
+		        step: 0.1.
+		gate := PhButton new label: self label , 'Gate'.
+	gain := PhHSlider new
+		        label: self label , 'Gain'
+		        init: 0.3
+		        min: 0
+		        max: 1
+		        step: 0.001
 ]

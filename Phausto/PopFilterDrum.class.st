@@ -34,41 +34,13 @@ PopFilterDrum >> asBox [
 { #category : 'accessing' }
 PopFilterDrum >> freq [
 
-	^ freq ifNil: [
-		  freq := PhHSlider new
-			          label: self label , 'Note'
-			          init: 440
-			          min: 20
-			          max: 1400
-			          step: 0.1 ]
-]
-
-{ #category : 'accessing' }
-PopFilterDrum >> freq: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-
-	
+	^ freq 
 ]
 
 { #category : 'accessing' }
 PopFilterDrum >> gate [
 
-	^ gate ifNil: [ gate := PhButton new label: self label ,  'Gate' ]
-]
-
-{ #category : 'accessing' }
-PopFilterDrum >> gate:aNumberOrABoxOraASymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	^ gate 
 ]
 
 { #category : 'initialization' }
@@ -76,5 +48,12 @@ PopFilterDrum >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.popFilterDrum;'.
+	freq := PhHSlider new
+		        label: self label , 'Note'
+		        init: 440
+		        min: 20
+		        max: 1400
+		        step: 0.1.
+	gate := PhButton new label: self label , 'Gate'.
 	
 ]

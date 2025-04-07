@@ -42,35 +42,9 @@ Hat >> attack [
 ]
 
 { #category : 'accessing' }
-Hat >> attack: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
-{ #category : 'accessing' }
 Hat >> decay [
 
-	^ decay ifNil: [
-		  decay := PhHSlider new
-			          label: self label , 'Decay'
-			          init: 0.2
-			          min: 0
-			          max: 4.0
-			          step: 0.01 ]
-]
-
-{ #category : 'accessing' }
-Hat >> decay:  aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	^ decay 
 ]
 
 { #category : 'accessing' }
@@ -79,23 +53,33 @@ Hat >> gate [
 	^ gate ifNil: [ gate := PhButton new label: self label , 'Gate' ]
 ]
 
-{ #category : 'accessing' }
-Hat >> gate: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'initialization' }
 Hat >> initialize [
 
 	super initialize.
 	self processExpression: 'process = sy.hat;'.
 
-	attack := 0.005
+	attack := 0.005.
+	pitch := PhHSlider new
+		         label: self label , 'Note'
+		         init: 440
+		         min: 20
+		         max: 1400
+		         step: 0.1.
+	gate := PhButton new label: self label , 'Gate'.
+	decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.2
+		         min: 0
+		         max: 4.0
+		         step: 0.01.
+		
+	tone := PhHSlider new
+			          label: self label , 'Tone'
+			          init: 9800
+			          min: 800
+			          max: 18000
+			          step: 1 
 ]
 
 { #category : 'as yet unclassified' }
@@ -110,34 +94,8 @@ Hat >> pitch [
 			           step: 1 ]
 ]
 
-{ #category : 'as yet unclassified' }
-Hat >> pitch: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
 { #category : 'accessing' }
 Hat >> tone [
 
-	^ tone ifNil: [
-		  tone := PhHSlider new
-			          label: self label , 'Tone'
-			          init: 9800
-			          min: 800
-			          max: 18000
-			          step: 1 ]
-]
-
-{ #category : 'accessing' }
-Hat >> tone:  aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	^ tone
 ]

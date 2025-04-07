@@ -75,5 +75,11 @@ CombString >> initialize [
 		        min: 2900
 		        max: 1
 		        step: 0.01.
-		gate := PhButton new label: self label , 'Gate' 
+	gate := PhButton new label: self label , 'Gate'.
+	gain := PhHSlider new
+		        label: self label , 'Gain'
+		        init: 0.3
+		        min: 0
+		        max: 1
+		        step: 0.001
 ]
