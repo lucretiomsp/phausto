@@ -105,12 +105,18 @@ TurboPhausto class >> loadAllSynths [
 		add: (Hat new
 				 label: 'syhat';
 				 pitch: #syhatNote);
-	"	add: (CombString new
+		"	add: (CombString new
 				 label: 'combstring';
 				 freq: #combstringNote);"
 		add: (DubDub new
 				 label: 'dubdub';
-				 freq: #dubdubNote)
+				 freq: #dubdubNote);
+					add: (Acid new
+				 label: 'acid';
+				 freq: #acidNote);
+					add: (Chordy new
+				 label: 'chordy';
+				 freq: #chordyNote)
 ]
 
 { #category : 'testing' }

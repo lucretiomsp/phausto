@@ -71,17 +71,17 @@ DubDub >> initialize [
 	super initialize.
 	processExpression := 'process = sy.dubDub;'.
 	freq := PhHSlider new
-			          label: self label , 'Note'
-			          init: 50
-			          min: 20
-			          max: 1400
-			          step: 0.1.
-				uLevel := PhHSlider new
-			          label: self label , 'uLevel'
-			          init: 0.1
-			          min: 0
-			          max: 1
-			          step: 0.001
+		        label: self label , 'Note'
+		        init: 50
+		        min: 20
+		        max: 1400
+		        step: 0.1.
+	uLevel := PhHSlider new
+		          label: self label , 'uLevel'
+		          init: 0.05
+		          min: 0
+		          max: 1
+		          step: 0.001
 ]
 
 { #category : 'as yet unclassified' }
