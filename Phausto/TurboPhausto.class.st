@@ -125,13 +125,10 @@ TurboPhausto class >> start [
 
 	self loadAllSamplers.
 	self loadAllSynths.
-	tpDsp := self allInstruments asSumOfUGen stereo
-		         asDsp.
-	[ 0.1 seconds wait ] fork.
-		         tpDsp init.
-		[ 0.1 seconds wait ] fork.
-		         tpDsp start.
-		[ 0.11 seconds wait ] fork.
+	tpDsp := self allInstruments asSumOfUGen stereo asDsp.
+	[[[tpDsp ] value ifNotNil: [ tpDsp init]] value ifNotNil: 
+	[tpDsp start]] fork.
+	[ 0.11 seconds wait ] fork.
 	tpPerf := Performance uniqueInstance forDsp: tpDsp
 ]
 

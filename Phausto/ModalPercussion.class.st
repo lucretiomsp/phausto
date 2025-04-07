@@ -23,23 +23,7 @@ Class {
 { #category : 'accessing' }
 ModalPercussion >> freq [
 
-	^ freq ifNil: [
-		  freq := PhHSlider new
-			          label: self label , 'Freq'
-			          init: 440
-			          min: 20
-			          max: 1200
-			          step: 1 ]
-]
-
-{ #category : 'accessing' }
-ModalPercussion >> freq: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	^ freq 
 ]
 
 { #category : 'accessing' }
@@ -70,12 +54,18 @@ ModalPercussion >> initialize [
 		                  min: 0
 		                  max: 4
 		                  step: 1.
-		strikeSharpness :=  (PhHSlider new
-				   label: self label , 'StrikeSharp'
-				   init: 0.3
-				   min: 0.001
-				   max: 1
-				   step: 0.001)
+	strikeSharpness := PhHSlider new
+		                   label: self label , 'StrikeSharp'
+		                   init: 0.3
+		                   min: 0.001
+		                   max: 1
+		                   step: 0.001.
+		freq := PhHSlider new
+			          label: self label , 'Freq'
+			          init: 440
+			          min: 20
+			          max: 1200
+			          step: 1
 ]
 
 { #category : 'accessing' }

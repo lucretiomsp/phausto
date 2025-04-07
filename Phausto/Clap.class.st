@@ -74,17 +74,17 @@ Clap >> initialize [
 	attack := 0.
 	gate := PhButton new label: self label , 'Gate'.
 	decay := decay := PhHSlider new
-			          label: self label , 'Decay'
-			          init: 0.2
-			          min: 0
-			          max: 4.0
-			          step: 0.01 .
-			tone := PhHSlider new
-			          label: self label , 'Note'
-			          init: 2200
-			          min: 400
-			          max: 3500
-			          step: 1 
+		                  label: self label , 'Decay'
+		                  init: 0.9
+		                  min: 0
+		                  max: 4.0
+		                  step: 0.01.
+	tone := PhHSlider new
+		        label: self label , 'Note'
+		        init: 3200
+		        min: 400
+		        max: 3500
+		        step: 1
 ]
 
 { #category : 'accessing' }
