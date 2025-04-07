@@ -331,7 +331,8 @@ UnitGenerator >> label: aString [
 
 	label := aString.
 	"chaning a label for a UnitGenerator also changes the label for its UI parameters"
-	self  uiParameters keysAndValuesDo: [ :k :v |v label: ( aString  , k asString )  ].
+	self  uiParameters keysAndValuesDo: [ :k :v |v label: ( aString  , k asString capitalized )  ].
+	
 ]
 
 { #category : 'converting' }
@@ -429,6 +430,7 @@ UnitGenerator >> uiParameters [
 allSlots := self class allSlots.
 arrayOfUiParams := allSlots select: [ :i | (self  instVarNamed: i name) isKindOf: UIPrimitive ].
 paramDictionary := Dictionary new.
+
 arrayOfUiParams do: [  :param | paramDictionary at: param name asSymbol put: (self instVarNamed: param name) ].
 ^ paramDictionary 
 ]

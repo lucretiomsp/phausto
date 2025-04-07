@@ -43,6 +43,7 @@ TpSynth >> initialize [
 	super initialize.
 	"by default the name of the TpSynth is the name of the class"
 	gate := PhButton new label: self label , 'Gate'.
+	
 	pitch := PhHSlider new
 			  label: self label , 'Note'
 			  init: 440
@@ -67,6 +68,19 @@ TpSynth >> initialize [
 			             min: 0.001
 			             max: 2
 			             step: 0.001
+]
+
+{ #category : 'initialization' }
+TpSynth >> initializeControlParameters [ 
+super initializeControlParameters .
+self controlParameters add: 
+
+#Attack -> (PhControlParameter new
+			 name: #Attack;
+			 range: (0 to: 1);
+			 description: 'Attack Time';
+			 value: self attack;
+			 widgetType: #knob)
 ]
 
 { #category : 'accessing' }
