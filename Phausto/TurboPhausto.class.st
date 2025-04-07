@@ -9,32 +9,31 @@ Class {
 	#tag : 'TurboPhausto'
 }
 
-{ #category : 'testing' }
-TurboPhausto class >> hasTurboSamplesFolder [
-
-	^ self turboSamplesFolder asFileReference exists
-]
-
 { #category : 'as yet unclassified' }
-TurboPhausto class >> loadAllTurboSamplers [
+TurboPhausto class >> loadAllSamplers [
 
 	| size allSamplers subDir allLabels |
-	subDir := self turboSamplesFolder asFileReference children.
-	size := subDir size.
-	allSamplers := subDir collect: [ :i |
-		               TpSampler new pathToFolder: i pathString ].
-	allLabels := subDir collect: [ :i |
-		             (i pathString findBetweenSubstrings: '/') last asString ].
-	1 to: size do: [ :i |
-		(allSamplers at: i)
-			gate: ((allLabels at: i) , 'Gate') asSymbol;
-			pitch: ((allLabels at: i) , 'Note') asSymbol;
-			index: ((allLabels at: i) , 'Index') asSymbol;
-			uLevel: ((allLabels at: i) , 'ULevel') asSymbol.
-			
-			 ].
+	self samplesFolderExists
+		ifTrue: [
+			subDir := self turboSamplesFolder asFileReference children select: [:i | i isDirectory].
+			size := subDir size.
+			allSamplers := subDir collect: [ :i |
+				               TpSampler new pathToFolder: i pathString ].
+			allLabels := subDir collect: [ :i |
+				             (i pathString findBetweenSubstrings: '/') last
+					             asString ].
+			1 to: size do: [ :i | (allSamplers at: i) name: (allLabels at: i) ].
 
-	^ allSamplers
+			^ allSamplers ]
+		ifFalse: [
+			^ Error new signal:
+				  'Please place TurboSamples folder in your Documents Folder' ]
+]
+
+{ #category : 'testing' }
+TurboPhausto class >> samplesFolderExists [
+
+	^ self turboSamplesFolder asFileReference exists
 ]
 
 { #category : 'accessing' }
