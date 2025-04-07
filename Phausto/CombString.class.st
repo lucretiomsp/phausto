@@ -53,33 +53,15 @@ CombString >> freq [
 ]
 
 { #category : 'accessing' }
-CombString >> freq: aNumberOrABoxOraASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-
-	
-]
-
-{ #category : 'as yet unclassified' }
 CombString >> gain [
 
-	^ gain ifNil: [
-		  freq := PhHSlider new
-			          label: self label , 'Gain'
-			          init: 0.5
-			          min: 0
-			          max: 1
-			          step: 0.01 ]
+	^ gain 
 ]
 
 { #category : 'accessing' }
 CombString >> gate [
 
-	^ gate ifNil: [ gate := PhButton new label: self label ,  'Gate' ]
+	^ gate 
 ]
 
 { #category : 'initialization' }
@@ -87,5 +69,11 @@ CombString >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.popFilterDrum;'.
-	
+	freq := PhHSlider new
+		        label: self label , 'Freq'
+		        init: 20
+		        min: 2900
+		        max: 1
+		        step: 0.01.
+		gate := PhButton new label: self label , 'Gate' 
 ]

@@ -98,17 +98,17 @@ TurboPhausto class >> loadAllSynths [
 				 freq: #tromboneNote);
 		add: (Clap new
 				 label: 'syclap';
-				 freq: #syclapNote);
+				 tone: #syclapNote);
 		add: (Kick new
 				 label: 'sykick';
-				 freq: #sykickNote);
+				 pitch: #sykickNote);
 		add: (Hat new
 				 label: 'syhat';
-				 freq: #syhatNote);
+				 pitch: #syhatNote);
 		add: (CombString new
 				 label: 'combstring';
 				 freq: #combstringNote);
-				add: (DubDub new
+		add: (DubDub new
 				 label: 'dubdub';
 				 freq: #dubdubNote)
 ]
