@@ -23,7 +23,8 @@ Class {
 	#instVars : [
 		'freq',
 		'gain',
-		'gate'
+		'gate',
+		'res'
 	],
 	#category : 'Phausto-Synths',
 	#package : 'Phausto',
@@ -35,7 +36,7 @@ CombString >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self freq  asBox , self gain  asBox , self gate asBox
+	finalBox := self freq asBox , self res asBox , self gate asBox
 		            connectTo: intermediateBox.
 	^ finalBox
 ]
@@ -43,32 +44,20 @@ CombString >> asBox [
 { #category : 'accessing' }
 CombString >> freq [
 
-	^ freq ifNil: [
-		  freq := PhHSlider new
-			          label: self label , 'Note'
-			          init: 440
-			          min: 20
-			          max: 1400
-			          step: 0.1 ]
-]
-
-{ #category : 'accessing' }
-CombString >> gain [
-
-	^ gain 
+	^ freq 
 ]
 
 { #category : 'accessing' }
 CombString >> gate [
 
-	^ gate 
+	^ gate
 ]
 
 { #category : 'initialization' }
 CombString >> initialize [
 
 	super initialize.
-	processExpression := 'process = sy.popFilterDrum;'.
+	processExpression := 'process = sy.combString;'.
 	freq := PhHSlider new
 		        label: self label , 'Freq'
 		        init: 20
@@ -76,10 +65,16 @@ CombString >> initialize [
 		        max: 1
 		        step: 0.01.
 	gate := PhButton new label: self label , 'Gate'.
-	gain := PhHSlider new
-		        label: self label , 'Gain'
-		        init: 0.3
-		        min: 0
-		        max: 1
-		        step: 0.001
+	res := PhHSlider new
+		       label: self label , 'Res'
+		       init: 0.3
+		       min: 0
+		       max: 1
+		       step: 0.001
+]
+
+{ #category : 'accessing' }
+CombString >> res [
+
+	^ res
 ]
