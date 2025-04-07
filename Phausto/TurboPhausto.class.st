@@ -161,7 +161,8 @@ TurboPhausto >> bpm: aNumber [
 TurboPhausto >> initialize [
 
 	super initialize.
-	self muteAll.
+	self class tpPerf resetAllSequencers .
+	self muteAll
 ]
 
 { #category : 'playing' }

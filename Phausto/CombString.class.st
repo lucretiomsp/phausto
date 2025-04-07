@@ -38,7 +38,7 @@ CombString >> asBox [
 	intermediateBox := super asBox.
 	finalBox := self freq asBox , self res asBox , self gate asBox
 		            connectTo: intermediateBox.
-	^ finalBox
+	^ finalBox *  self uLevel
 ]
 
 { #category : 'accessing' }

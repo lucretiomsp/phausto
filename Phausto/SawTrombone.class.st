@@ -26,7 +26,7 @@ SawTrombone >> asBox [
 	intermediateBox := super asBox.
 	finalBox := self freq asBox , self gain asBox , self gate asBox
 		            connectTo: intermediateBox.
-	^ finalBox
+	^ finalBox *  self uLevel
 ]
 
 { #category : 'accessing' }
@@ -35,7 +35,7 @@ SawTrombone >> freq [
 	^ freq
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 SawTrombone >> gain [
 
 	^ gain 

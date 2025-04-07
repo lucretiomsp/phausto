@@ -36,9 +36,9 @@ DubDub >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self freq asBox , self ctFreq , self q asBox , self gate asBox
-		            connectTo: intermediateBox.
-	^ finalBox * 0.01 asBox
+	finalBox := self freq asBox , self ctFreq , self q asBox
+	            , self gate asBox connectTo: intermediateBox.
+	^ finalBox *  self uLevel
 ]
 
 { #category : 'as yet unclassified' }

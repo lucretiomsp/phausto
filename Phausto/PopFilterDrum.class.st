@@ -26,9 +26,9 @@ PopFilterDrum >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self freq  asBox , self q  asBox , self gate asBox
+	finalBox := self freq asBox , self q asBox , self gate asBox
 		            connectTo: intermediateBox.
-	^ finalBox
+	^ finalBox * self uLevel
 ]
 
 { #category : 'accessing' }
@@ -55,5 +55,16 @@ PopFilterDrum >> initialize [
 		        max: 1400
 		        step: 0.1.
 	gate := PhButton new label: self label , 'Gate'.
-	
+	q := PhHSlider new
+		        label: self label , 'Q'
+		        init: 5
+		        min: 1
+		        max: 12
+		        step: 0.01.
+]
+
+{ #category : 'accessing' }
+PopFilterDrum >> q [
+
+	^ q
 ]
