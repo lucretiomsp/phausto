@@ -1,5 +1,18 @@
 "
-This class is used to load all the instruments of TurboPhausto.
+This class is used to load all the instruments and effect of TurboPhausto.
+When we create a new instance of the class, a DSP is created and assigned to a Performance.
+TurboPhausto instances understands the messages to play/stop/mute/solo a Performance.
+Basi usage:
+Here is some code 
+
+```language=Pharo
+   TurboPhausto start.
+   tp := TurboPhausto new.
+   tp bpm: 140.
+   16 downbeats to: #snare.
+   tp playFor: 8 bars.
+
+```
 "
 Class {
 	#name : 'TurboPhausto',
@@ -31,6 +44,12 @@ TurboPhausto class >> allSamplers [
 TurboPhausto class >> allSynths [
 
 	^ allSynths 
+]
+
+{ #category : 'SuperDirt-List' }
+TurboPhausto class >> listOfSamples [ 
+
+self turboSamplesFolder asFileReference inspect.
 ]
 
 { #category : 'loading' }
