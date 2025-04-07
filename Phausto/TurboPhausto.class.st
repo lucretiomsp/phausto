@@ -111,6 +111,18 @@ TurboPhausto >> bpm: aNumber [
 ]
 
 { #category : 'playing' }
+TurboPhausto >> mute: aSymbol [
+
+	self class tpPerf mute: aSymbol 
+]
+
+{ #category : 'playing' }
+TurboPhausto >> muteAll: anArrayOfSymbols [
+
+	self class tpPerf mute: anArrayOfSymbols 
+]
+
+{ #category : 'playing' }
 TurboPhausto >> play [
 
 	self class tpPerf play
@@ -120,4 +132,16 @@ TurboPhausto >> play [
 TurboPhausto >> playFor: aNumberOfBars [
 
 	self class tpPerf playFor: aNumberOfBars
+]
+
+{ #category : 'playing' }
+TurboPhausto >> solo: aSymbol [
+
+	self class tpPerf solo: aSymbol
+]
+
+{ #category : 'playing' }
+TurboPhausto >> stop [
+
+	self class tpPerf stop
 ]

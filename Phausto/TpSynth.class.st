@@ -84,6 +84,14 @@ self controlParameters add:
 ]
 
 { #category : 'accessing' }
+TpSynth >> label: aString [
+
+"to adhere with Cooypu syntax, we change the prefix of the pitch parameter"
+super label: aString .
+self pitch: (aString , 'Note') asSymbol 
+]
+
+{ #category : 'accessing' }
 TpSynth >> pitch [
 
 
