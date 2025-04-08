@@ -330,9 +330,9 @@ event_ADSREnvDecay -> voices.event_ADSREnvDecay;
 { #category : 'tests' }
 UtilitiesTest >> testFileIsAudioFile [
 
-| file |
-file := TurboPhausto turboSamplesFolder , '/B-Clap.wav'  asFileReference .
-self assert: file isAudioFile equals: true
+	| file |
+	file := (TurboPhausto turboSamplesFolder , 'clap/B-Clap.wav') asFileReference.
+	self assert: file isAudioFile equals: true
 ]
 
 { #category : 'tests' }
