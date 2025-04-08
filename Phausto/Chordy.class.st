@@ -42,7 +42,7 @@ Chordy >> asBox [
 
 	filter := ResonLp new
 		          frequency: scaledFreq;
-		          q: 5.7.
+		          q: 4.8.
 
 	"for the selection of modes the interval is expresed in ratio"
 	secondInterval := self mode asBox , 1.189 asBox , 1.259 asBox
@@ -77,19 +77,20 @@ Chordy >> initialize [
 	super initialize.
 
 
-   self decay: 0.21.
+	self decay: 0.21.
 	self sustain: 0.9.
 	self release: 0.18.
-	self uLevel: 0.9
+	self uLevel: 0.9.
+	mode := (PhHSlider new
+				   label: self label , 'Mode'
+				   init: 0
+				   min: 0
+				   max: 3
+				   step: 1) 
 ]
 
 { #category : 'accessing' }
 Chordy >> mode [
 
-	^ mode ifNil: [ self mode: (PhHSlider new
-			 label: self label , 'Mode'
-			 init: 0
-			 min: 0
-			 max: 3
-			 step: 1). ]
+	^ mode 
 ]

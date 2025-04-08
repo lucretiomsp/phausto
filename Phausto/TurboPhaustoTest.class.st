@@ -39,6 +39,14 @@ TurboPhaustoTest >> testHooverAsBox [
 ]
 
 { #category : 'tests' }
+TurboPhaustoTest >> testLoadAllSynths [
+
+	| dsp |
+	dsp := TurboPhausto loadAllSynths allSynths asArray asSumOfUGen asDsp.
+	self assert: dsp isNull equals: false
+]
+
+{ #category : 'tests' }
 TurboPhaustoTest >> testLoadAllTurboSamplers [
 
 	| allTurboSamplers numOfSamplers|

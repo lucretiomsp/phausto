@@ -15,5 +15,11 @@ Class {
 ResonHp >> initialize [
 
 	super initialize.
-	processExpression := 'process = fi.resonhp;'
+	processExpression := 'process = fi.resonhp;'.
+	frequency := PhHSlider new
+		             label: self label , 'Frequency'
+		             init: 25
+		             min: 25
+		             max: 22040
+		             step: 1
 ]

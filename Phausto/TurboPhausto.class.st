@@ -21,7 +21,9 @@ Class {
 		'allSamplers',
 		'tpDsp',
 		'tpPerf',
-		'allSynths'
+		'allSynths',
+		'lpf',
+		'hpf'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -44,6 +46,12 @@ TurboPhausto class >> allSamplers [
 TurboPhausto class >> allSynths [
 
 	^ allSynths 
+]
+
+{ #category : 'accessing' }
+TurboPhausto class >> hpf [
+
+	^ hpf
 ]
 
 { #category : 'SuperDirt-List' }
@@ -113,11 +121,26 @@ TurboPhausto class >> loadAllSynths [
 				 freq: #dubdubNote);
 		add: (Acid new
 				 label: 'acid';
-				 pitch: #acidNote);add:
-		(Chordy new
-			 label: 'chordy';
-			 pitch: #chordyNote);
-		add: TpHoover new
+				 pitch: #acidNote);
+		add: (Chordy new
+				 label: 'chordy';
+				 pitch: #chordyNote);
+		add: TpHoover new.
+	^ self
+]
+
+{ #category : 'as yet unclassified' }
+TurboPhausto class >> loadFilters [
+
+lpf := ResonLp new frequency: #lowpassfreq ; q: #lowpassq.
+hpf := ResonHp new frequency: #highpassfreq ; q: #highpassq
+
+	
+]
+
+{ #category : 'accessing' }
+TurboPhausto class >> lpf [
+^ lpf
 ]
 
 { #category : 'testing' }
@@ -130,14 +153,19 @@ TurboPhausto class >> samplesFolderExists [
 TurboPhausto class >> start [
 	"load all the Turbo- Samplers, Synths and Effects. initialize and start a dsp and assign it to a Performance"
 
+	| rack |
 	self loadAllSamplers.
 	self loadAllSynths.
-	self tpDsp ifNotNil: [ self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	tpDsp := self allInstruments asSumOfUGen stereo asDsp.
+	self loadFilters.
+
+	rack := self allInstruments asSumOfUGen => self lpf => self hpf.
+	self tpDsp ifNotNil: [
+		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
+	tpDsp := (self allInstruments asSumOfUGen ) stereo asDsp.
 	[
-	[ [ tpDsp ] value ifNotNil: [ tpDsp init ] ] value ifNotNil: [
-		tpDsp start ] ] fork.
-	[ 0.11 seconds wait ] fork.
+	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
+		ifNotNil: [ self tpDsp start ] ] fork.
+
 	tpPerf := Performance uniqueInstance forDsp: tpDsp
 ]
 
