@@ -26,7 +26,7 @@ self uLevel: #hooveruLevel .
 TpHoover >> initialize [
 
 	| pitchEnv pitchEnvAmt |
-	super initialize .
+	super initialize.
 	pitchEnv := ADSREnv new
 		            label: #PE;
 		            trigger: #hooverGate;
@@ -39,9 +39,9 @@ TpHoover >> initialize [
 		          label: 'hooverNote'
 		          values: #( 200 20 2000 1 )) + (pitchEnv * pitchEnvAmt).
 	oscillators := (SawOsc new freq: pitch)
-	               + (SawOsc new freq: pitch + 3)
-	               + (SawOsc new freq: pitch * 2 + 3)
-	               + (TriOsc new freq: pitch * 0.5).
+	               + (SawOsc new uLevel: 0.3 asBox; freq: pitch + 3)
+	               + (SawOsc new uLevel: 0.3 asBox; freq: pitch * 2 + 3)
+	               + (TriOsc new uLevel: 0.3 asBox; freq: pitch * 0.5).
 	ampEnv := ADSREnv new
 		          trigger: #hooverGate;
 		          attack: 0 asBox;
