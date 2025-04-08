@@ -132,10 +132,12 @@ TurboPhausto class >> loadAllSynths [
 { #category : 'as yet unclassified' }
 TurboPhausto class >> loadFilters [
 
-lpf := ResonLp new frequency: #lowpassfreq ; q: #lowpassq.
-hpf := ResonHp new frequency: #highpassfreq ; q: #highpassq
-
-	
+	lpf := ResonLp new
+		       frequency: #lowpassfreq;
+		       q: #lowpassq.
+	hpf := ResonHp new
+		       frequency: #highpassfreq;
+		       q: #highpassq
 ]
 
 { #category : 'accessing' }
@@ -194,12 +196,68 @@ TurboPhausto >> bpm: aNumber [
 	self class tpPerf bpm: aNumber bpm
 ]
 
+{ #category : 'API - changes' }
+TurboPhausto >> highPassFreq: aFrequency [
+	"aFrequency value is forced in filter range"
+
+	self
+		setValue: (aFrequency min: 22040 max: 25)
+		parameter: #highpassfreq
+]
+
+{ #category : 'API - changes' }
+TurboPhausto >> highPassQ: aQValue [
+	"aQValue value is forced in filter range"
+
+	self setValue: (aQValue min: 5 max: 1) parameter: #highpassq
+]
+
+{ #category : 'API - changes' }
+TurboPhausto >> highPassSweep: anArrayWithAFrequencyAndATimeInSeconds [
+	"aFrequency value is forced in filter range"
+
+	| freq duration |
+	freq := (anArrayWithAFrequencyAndATimeInSeconds at: 1)
+		        min: 22040
+		        max: 25.
+	duration := anArrayWithAFrequencyAndATimeInSeconds at: 2.
+	self sweepToValue: freq parameter: #highpassfreq in: duration
+]
+
 { #category : 'initialization' }
 TurboPhausto >> initialize [
 
 	super initialize.
 	self class tpPerf resetAllSequencers .
 	self muteAll
+]
+
+{ #category : 'API - changes' }
+TurboPhausto >> lowPassFreq: aFrequency [
+	"aFrequency value is forced in filter range"
+
+	self
+		setValue: (aFrequency min: 22040 max: 25)
+		parameter: #lowpassfreq
+]
+
+{ #category : 'API - changes' }
+TurboPhausto >> lowPassQ: aQValue [
+	"aQValue value is forced in filter range"
+
+	self setValue: (aQValue min: 5 max: 1) parameter: #lowpassq
+]
+
+{ #category : 'API - changes' }
+TurboPhausto >> lowPassSweep: anArrayWithAFrequencyAndATimeInSeconds [
+	"aFrequency value is forced in filter range"
+
+	| freq duration |
+	freq := (anArrayWithAFrequencyAndATimeInSeconds at: 1)
+		        min: 22040
+		        max: 25.
+	duration := anArrayWithAFrequencyAndATimeInSeconds at: 2.
+	self sweepToValue: freq parameter: #lowpassfreq in: duration
 ]
 
 { #category : 'playing' }
