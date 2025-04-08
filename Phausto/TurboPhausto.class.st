@@ -161,7 +161,7 @@ TurboPhausto class >> start [
 	rack := self allInstruments asSumOfUGen => self lpf => self hpf.
 	self tpDsp ifNotNil: [
 		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	tpDsp := (self allInstruments asSumOfUGen ) stereo asDsp.
+	tpDsp := rack  stereo asDsp.
 	[
 	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
 		ifNotNil: [ self tpDsp start ] ] fork.
@@ -226,6 +226,21 @@ TurboPhausto >> playFor: aNumberOfBars [
 	self class tpPerf playFor: aNumberOfBars
 ]
 
+{ #category : 'API - changes' }
+TurboPhausto >> playNote: aMidiNN prefix: aString dur: aDuration [
+	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
+	self class playNote: aMidiNN prefix: aString dur: aDuration
+	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
+]
+
+{ #category : 'initialization' }
+TurboPhausto >> setValue: aFloat parameter: aParamAsString [
+	"  set the value of the parameter named aParamAsString"
+self class setValue: aFloat parameter: aParamAsString
+	"  set the value of the parameter named aParamAsString"
+
+]
+
 { #category : 'playing' }
 TurboPhausto >> solo: aSymbol [
 
@@ -236,4 +251,22 @@ TurboPhausto >> solo: aSymbol [
 TurboPhausto >> stop [
 
 	self class tpPerf stop
+]
+
+{ #category : 'API - changes' }
+TurboPhausto >> sweepToValue: aTargetValue parameter: aParamAsString in: aTimeInseconds [
+
+	self class tpDsp
+		sweepToValue: aTargetValue
+		parameter: aParamAsString
+		in: aTimeInseconds
+	"  sweep the value of the selected parameter in a TimeInSeconds - the value is update every 10 milliseconds"
+]
+
+{ #category : 'accessing' }
+TurboPhausto >> trig: aString [
+	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
+
+	self class trig: aString
+	
 ]
