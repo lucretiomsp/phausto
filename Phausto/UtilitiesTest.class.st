@@ -328,9 +328,33 @@ event_ADSREnvDecay -> voices.event_ADSREnvDecay;
 ]
 
 { #category : 'tests' }
+UtilitiesTest >> testFileIsAudioFile [
+
+| file |
+file := TurboPhausto turboSamplesFolder , '/B-Clap.wav'  asFileReference .
+self assert: file isAudioFile equals: true
+]
+
+{ #category : 'tests' }
 UtilitiesTest >> testPrefixasSymbolWithSuffix [
 
 self assert:( 'Kick' asSymbolWithSuffix: 'Gate') equals: #KickGate
+]
+
+{ #category : 'tests' }
+UtilitiesTest >> testStringAfterLastSlash [
+
+self assert: 'test/after/slash' afterLastSlash equals: 'slash'
+]
+
+{ #category : 'tests' }
+UtilitiesTest >> testStringAsTpSampler [
+
+|filePath |
+filePath := FileLocator documents asAbsolute pathString , '/TurboSamples/clap'.
+	self assert: filePath asTpSampler class equals: TpSampler.
+	self assert: filePath asTpSampler label equals: 'clap'.
+	self assert: filePath asTpSampler pathToFolder  equals: filePath 
 ]
 
 { #category : 'tests' }

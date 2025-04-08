@@ -30,14 +30,15 @@ Class {
 { #category : 'converting' }
 TpSampler >> asBox [
 
-	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler audioFiles |
-	allFiles := pathToFolder asFileReference allChildren.
+	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler audioFiles  unsortedfileNames |
+	allFiles := pathToFolder asFileReference allChildren reject: [:i | i isHidden].
 	"first we select only valid audio files"
 	audioFiles := allFiles select: [ :f | f pathString isAudioFilePath ].
-	fileNames := (2 to: audioFiles size) collect: [ :i |
+	unsortedfileNames := (2 to: audioFiles size) collect: [ :i |
 		             (allFiles at: i) asAbsolute pathString
 			             surroundedByQuotes ].
-	fileNames sort.
+	fileNames := unsortedfileNames sort.
+
 	fileNames do: [ :f | f traceCr ].
 	allFilePaths := ''.
 	fileNames do: [ :i | allFilePaths := allFilePaths , i , ';' ].
