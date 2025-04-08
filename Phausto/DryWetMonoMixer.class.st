@@ -28,7 +28,7 @@ Class {
 DryWetMonoMixer >> asBox [
 
 	|drySignal wetSignal |
-	drySignal := self input * ( 1- self wetAmount) .
+	drySignal := self input * ( 1 asBox - self wetAmount) .
 	wetSignal:= self input * ( self wetAmount) .
 	^ drySignal asBox + wetSignal asBox.
 	
@@ -41,6 +41,7 @@ DryWetMonoMixer >> initialize [
 	processExpression := 'process =  dryWetMixer;'.
 	input := SineOsc new.
 	fx := SatRev new.
+	wetAmount := PhHSlider new label: self label , 'WetAmount' values: #(0 0 1 0.001).
 ]
 
 { #category : 'accessing' }
