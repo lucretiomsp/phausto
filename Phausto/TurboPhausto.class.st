@@ -23,12 +23,20 @@ Class {
 		'tpPerf',
 		'allSynths',
 		'lpf',
-		'hpf'
+		'hpf',
+		'allEffects',
+		'rack'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
 	#tag : 'TurboPhausto'
 }
+
+{ #category : 'accessing' }
+TurboPhausto class >> allEffects [
+
+	^ allEffects
+]
 
 { #category : 'accessing' }
 TurboPhausto class >> allInstruments [
@@ -129,7 +137,21 @@ TurboPhausto class >> loadAllSynths [
 	^ self
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'loading' }
+TurboPhausto class >> loadEffects [
+
+	
+	allEffects := Dictionary new.
+
+	allEffects add: #reverb -> (DryWetMonoMixer new
+			 wetAmount: #reverb;
+			 fx: (FreeverbMono new
+					  fb2: 0.5 asBox;
+					  damp: 0.3 asBox;
+					  fb1: #size))
+]
+
+{ #category : 'loading' }
 TurboPhausto class >> loadFilters [
 
 	lpf := ResonLp new
@@ -140,9 +162,22 @@ TurboPhausto class >> loadFilters [
 		       q: #highpassq
 ]
 
+{ #category : 'loading' }
+TurboPhausto class >> loadRack [
+	"load the chain of synthesizers, effects and filter which become the TurboPhausto dsp"
+
+	rack := self allInstruments asSumOfUGen => self lpf => self hpf
+	        => (allEffects at: #reverb)
+]
+
 { #category : 'accessing' }
 TurboPhausto class >> lpf [
 ^ lpf
+]
+
+{ #category : 'accessing' }
+TurboPhausto class >> rack [ 
+^ rack
 ]
 
 { #category : 'testing' }
@@ -155,15 +190,16 @@ TurboPhausto class >> samplesFolderExists [
 TurboPhausto class >> start [
 	"load all the Turbo- Samplers, Synths and Effects. initialize and start a dsp and assign it to a Performance"
 
-	| rack |
 	self loadAllSamplers.
 	self loadAllSynths.
 	self loadFilters.
+	self loadEffects.
+   self loadRack.
 
-	rack := self allInstruments asSumOfUGen => self lpf => self hpf.
+
 	self tpDsp ifNotNil: [
 		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	tpDsp := rack  stereo asDsp.
+	tpDsp := self rack stereo asDsp.
 	[
 	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
 		ifNotNil: [ self tpDsp start ] ] fork.

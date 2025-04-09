@@ -9,7 +9,7 @@ Unit Generator => DryWetMixer new fx: anEffect new.
 ## Parameters:
 
 **wetAmount**: the wet amount (0-1). 0 produces only the dry signal and 1 produces only the wet signal
-**fx**: an arbitrary effect (N inputs and N outputs) to apply to the input bus
+**fx**: a mono effect (ONLY MONO EFFECTS WORK)
 "
 Class {
 	#name : 'DryWetMonoMixer',
@@ -29,7 +29,7 @@ DryWetMonoMixer >> asBox [
 
 	| drySignal wetSignal |
 	drySignal := self input * (1 asBox - self wetAmount).
-	wetSignal := (self input => self fx) mono * self wetAmount .
+	wetSignal := (self input => self fx)  * self wetAmount .
 	^ wetSignal + drySignal 
 ]
 
@@ -37,6 +37,12 @@ DryWetMonoMixer >> asBox [
 DryWetMonoMixer >> fx [
 
 	^ fx
+]
+
+{ #category : 'accessing' }
+DryWetMonoMixer >> fx: aMonoEffect [
+   
+aMonoEffect numberOfOutputs = 1 ifTrue: [ fx := aMonoEffect ] ifFalse: [ ^ Error new signal: 'Please use a mono effect' ]
 ]
 
 { #category : 'initialization' }
@@ -57,10 +63,11 @@ DryWetMonoMixer >> input [
 	^ input
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'connecting' }
 DryWetMonoMixer >> patchedWith: aUnitGenerator [
 
-self input: aUnitGenerator 
+
+	self input: aUnitGenerator
 ]
 
 { #category : 'accessing' }
