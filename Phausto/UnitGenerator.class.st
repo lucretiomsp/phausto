@@ -340,10 +340,10 @@ UnitGenerator >> mono [
 	"return a mono version of the box (just one output)"
 
 	| mono stereo |
-		BoxAPI uniqueInstance createLibContext.
+	BoxAPI uniqueInstance createLibContext.
 	stereo := self asBox.
 	mono := stereo mergeWith: Wire new asBox.
-	^ stereo
+	^ mono
 ]
 
 { #category : 'instance creation' }

@@ -27,27 +27,40 @@ Class {
 { #category : 'converting' }
 DryWetMonoMixer >> asBox [
 
-	|drySignal wetSignal |
-	drySignal := self input * ( 1 asBox - self wetAmount) .
-	wetSignal:= self input * ( self wetAmount) .
-	^ drySignal asBox + wetSignal asBox.
-	
+	| drySignal wetSignal |
+	drySignal := self input * (1 asBox - self wetAmount).
+	wetSignal := (self input => self fx) mono * self wetAmount .
+	^ wetSignal + drySignal
+]
+
+{ #category : 'accessing' }
+DryWetMonoMixer >> fx [
+
+	^ fx
 ]
 
 { #category : 'initialization' }
 DryWetMonoMixer >> initialize [
 
 	super initialize.
-	processExpression := 'process =  dryWetMixer;'.
+	
 	input := SineOsc new.
 	fx := SatRev new.
-	wetAmount := PhHSlider new label: self label , 'WetAmount' values: #(0 0 1 0.001).
+	wetAmount := PhHSlider new
+		             label: self label , 'WetAmount'
+		             values: #( 0 0 1 0.001 )
 ]
 
 { #category : 'accessing' }
 DryWetMonoMixer >> input [
 
 	^ input
+]
+
+{ #category : 'as yet unclassified' }
+DryWetMonoMixer >> patchedWith: aUnitGenerator [
+
+self input: aUnitGenerator 
 ]
 
 { #category : 'accessing' }
