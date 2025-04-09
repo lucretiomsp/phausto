@@ -3,7 +3,7 @@ I am a **(Multi)Sample Player**. Load a folder containing only _.wav_ or _.aiff_
 ```language=pharo
 self new pathToFolder: aString. 
 ```
-Select the file number with the _index_ parameter (an Integer bewteen 0 and 255). If index> folder size, no sound will be reprodduces 
+Select the file number with the _index_ parameter (an Integer bewteen 0 and 255). If index> folder size, last available sound will be reproduced
 All sample files int he folder must have the same number of channels (i.e. all must be moro or stereo).
 
 I can be chromatically played using MIDI NOte Numbers, where 60 plays at my defualt speed.
@@ -20,7 +20,8 @@ Class {
 		'index',
 		'readIndex',
 		'debugPath',
-		'attachedBox'
+		'attachedBox',
+		'filesURL'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -30,35 +31,15 @@ Class {
 { #category : 'converting' }
 TpSampler >> asBox [
 
-	| allFiles allFilePaths allFilesPathsWithoutLastColumn fileNames filesURL filePathPrefix filePathSuffix reader sp output sampler audioFiles  unsortedfileNames |
-	allFiles := pathToFolder asFileReference allChildren reject: [:i | i isHidden].
-	"first we select only valid audio files"
-	audioFiles := allFiles select: [ :f | f pathString isAudioFilePath ].
-	unsortedfileNames := (2 to: audioFiles size) collect: [ :i |
-		             (allFiles at: i) asAbsolute pathString
-			             surroundedByQuotes ].
-	fileNames := unsortedfileNames sort.
-
-	fileNames do: [ :f | f traceCr ].
-	allFilePaths := ''.
-	fileNames do: [ :i | allFilePaths := allFilePaths , i , ';' ].
-	filePathPrefix := '' , self label , '[url:{'.
-	filePathSuffix := '}]'.
-	allFilesPathsWithoutLastColumn := allFilePaths
-		                                  copyFrom: 1
-		                                  to: allFilePaths size - 1.
-	filesURL := filePathPrefix , allFilesPathsWithoutLastColumn
-	            , filePathSuffix.
-
-
-
+	| reader sp output sampler partNumber|
+	partNumber := self index asBox min: self numberOfSamples asBox.
 	reader := PhReaderWithSpeed new
 		          trigger: self gate;
 		          speed: self pitch / 261.625 asBox.
 	sp := BoxAPI uniqueInstance
 		      boxSoundFile: filesURL
 		      numChannels: 2 asBox
-		      part: self index asBox
+		      part: partNumber 
 		      readIndex: reader asBox.
 
 	output := Cut new asBox , Cut new asBox , Cut new asBox
@@ -101,6 +82,31 @@ TpSampler >> changeParamsPrefix [
 			 nextPutAll: 'uLevel') yourself asSymbol
 ]
 
+{ #category : 'as yet unclassified' }
+TpSampler >> createFilesURL [
+
+| allFiles audioFiles unsortedfileNames fileNames allFilePaths filePathPrefix filePathSuffix allFilesPathsWithoutLastColumn |
+allFiles := pathToFolder asFileReference allChildren reject: [ :i |
+		            i isHidden ].
+	"first we select only valid audio files"
+	audioFiles := allFiles select: [ :f | f pathString isAudioFilePath ].
+	unsortedfileNames := (2 to: audioFiles size) collect: [ :i |
+		                     (allFiles at: i) asAbsolute pathString
+			                     surroundedByQuotes ].
+	fileNames := unsortedfileNames sort.
+
+	fileNames do: [ :f | f traceCr ].
+	allFilePaths := ''.
+	fileNames do: [ :i | allFilePaths := allFilePaths , i , ';' ].
+	filePathPrefix := '' , self label , '[url:{'.
+	filePathSuffix := '}]'.
+	allFilesPathsWithoutLastColumn := allFilePaths
+		                                  copyFrom: 1
+		                                  to: allFilePaths size - 1.
+	filesURL := filePathPrefix , allFilesPathsWithoutLastColumn
+	            , filePathSuffix.
+]
+
 { #category : 'accessing' }
 TpSampler >> debugPath [
 
@@ -116,22 +122,22 @@ TpSampler >> debugPath: anObject [
 { #category : 'accessing' }
 TpSampler >> index [
 
-	^ index ifNil: [ index := (PhHSlider new
-			 label: self label , 'Index'
-			 init: 0
-			 min: 0
-			 max: 16
-			 step: 1). ]
+	^ index 
 ]
 
 { #category : 'initialization' }
 TpSampler >> initialize [
 
 	super initialize.
+	index := PhHSlider new
+			           label: self label , 'Index'
+			           init: 0
+			           min: 0
+			           max: 16
+			           step: 1.
 	self pathToFolder:
-		FileLocator documents asAbsolute pathString , '/MoofLodSamples'.
-
-
+		FileLocator documents asAbsolute pathString , '/TurboSamples'.
+	
 ]
 
 { #category : 'accessing' }
@@ -187,8 +193,9 @@ TpSampler >> pathToFolder [
 TpSampler >> pathToFolder: aString [
 
 	pathToFolder := aString.
+	self createFilesURL .
 	"we set the maximum value for index as the number of samples in the folder"
-	self index max: self numberOfSamples .
+	self index max: self numberOfSamples
 ]
 
 { #category : 'accessing' }
