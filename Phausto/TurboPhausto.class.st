@@ -327,12 +327,26 @@ TurboPhausto >> playNote: aMidiNN prefix: aString dur: aDuration [
 	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
 ]
 
-{ #category : 'initialization' }
+{ #category : 'API - changes' }
+TurboPhausto >> reverb: anAmount [
+	"aSize maximum is 1 to prevent distortion"
+
+	self setValue: (anAmount min: 0.99) parameter: 'reverb'
+]
+
+{ #category : 'API - changes' }
 TurboPhausto >> setValue: aFloat parameter: aParamAsString [
 	"  set the value of the parameter named aParamAsString"
-self class setValue: aFloat parameter: aParamAsString
-	"  set the value of the parameter named aParamAsString"
 
+	self class tpDsp setValue: aFloat parameter: aParamAsString
+	"  set the value of the parameter named aParamAsString"
+]
+
+{ #category : 'API - changes' }
+TurboPhausto >> size: aSize [
+	"aSize maximum is 0.99 to prvenet explosion"
+
+	self setValue: (aSize min: 0.99) parameter: 'size'
 ]
 
 { #category : 'playing' }
