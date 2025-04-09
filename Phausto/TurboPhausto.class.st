@@ -262,10 +262,10 @@ TurboPhausto class >> turboSamplesFolder [
 	                 , '/TurboSamples')
 ]
 
-{ #category : 'accessing' }
+{ #category : 'API - changes' }
 TurboPhausto >> bpm: aNumber [
 
-	self class tpPerf bpm: aNumber bpm
+	self class tpPerf freq: aNumber bpm
 ]
 
 { #category : 'API - changes' }
@@ -407,7 +407,7 @@ TurboPhausto >> sweepToValue: aTargetValue parameter: aParamAsString in: aTimeIn
 	"  sweep the value of the selected parameter in a TimeInSeconds - the value is update every 10 milliseconds"
 ]
 
-{ #category : 'accessing' }
+{ #category : 'API - changes' }
 TurboPhausto >> trig: aString [
 	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
 
