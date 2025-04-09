@@ -30,7 +30,7 @@ DryWetMonoMixer >> asBox [
 	| drySignal wetSignal |
 	drySignal := self input * (1 asBox - self wetAmount).
 	wetSignal := (self input => self fx) mono * self wetAmount .
-	^ wetSignal + drySignal
+	^ wetSignal + drySignal 
 ]
 
 { #category : 'accessing' }
@@ -43,9 +43,9 @@ DryWetMonoMixer >> fx [
 DryWetMonoMixer >> initialize [
 
 	super initialize.
-	
-	input := SineOsc new.
-	fx := SatRev new.
+
+	input := Pulse new period: 1.
+	fx := FreeverbMono new.
 	wetAmount := PhHSlider new
 		             label: self label , 'WetAmount'
 		             values: #( 0 0 1 0.001 )

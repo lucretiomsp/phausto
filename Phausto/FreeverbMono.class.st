@@ -37,37 +37,19 @@ FreeverbMono >> asBox [
 { #category : 'accessing' }
 FreeverbMono >> damp [
 
-	^ damp ifNil: [ 
-	
-	damp :=  (PhHSlider new
-			 label: self label , 'Damp'
-			 init: 0.3
-			 min: 0
-			 max: 1
-			 step: 0.001) ]
+	^ damp 
 ]
 
 { #category : 'accessing' }
 FreeverbMono >> fb1 [
 
-	^ fb1 ifNil: [  fb1 := PhHSlider new
-			 label: self label , 'Fb1'
-			 init: 0.3
-			 min: 0.001
-			 max: 1
-			 step: 0.001].
-	
+	^ fb1 
 ]
 
 { #category : 'accessing' }
 FreeverbMono >> fb2 [
 
-	^ fb2 ifNil: [ fb2 :=  (PhHSlider new
-			 label: self label , 'Fb2'
-			 init: 0.3
-			 min: 0.001
-			 max: 1
-			 step: 0.001).]
+	^ fb2 
 ]
 
 { #category : 'initialization' }
@@ -75,7 +57,25 @@ FreeverbMono >> initialize [
 
 	super initialize.
 	processExpression := 'process = re.mono_freeverb;'.
-	
+	fb1 := PhHSlider new
+		       label: self label , 'Fb1'
+		       init: 0.5
+		       min: 0
+		       max: 1
+		       step: 0.001.
+	fb2 := PhHSlider new
+		       label: self label , 'Fb2'
+		       init: 0.3
+		       min: 0
+		       max: 1
+		       step: 0.001.
+	damp := PhHSlider new
+		        label: self label , 'Damp'
+		        init: 0.2
+		        min: 0
+		        max: 1
+		        step: 0.001.
+		spread := 0 asBox 
 ]
 
 { #category : 'connecting' }
@@ -86,5 +86,5 @@ FreeverbMono >> patchedWith: aUnitGenerator [
 { #category : 'accessing' }
 FreeverbMono >> spread [
 
-	^ spread ifNil: [ spread := 0 asBox ]
+	^ spread 
 ]
