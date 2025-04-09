@@ -56,6 +56,42 @@ TurboPhausto class >> allSynths [
 	^ allSynths 
 ]
 
+{ #category : 'examples' }
+TurboPhausto class >> example1 [
+
+	^ '
+
+TurboPhausto start.
+
+
+tp := TurboPhausto new.
+tp playFor: 32 bars.
+tp stop.
+TurboPhausto tpPerf stop.
+''c-maj'' arpeggiate: 
+TurboPhausto tpDsp traceAllParams.
+16 downbeats to: #sykick.
+''0808'' hexBeat to: #syclap.
+16 upbeats to: #syhat.
+18 quavers  notes: ''38 , 26 , 49, 41'' ;  to: #acid.
+16 rumba index: ''3 5 9'' ; to: #speakspell.
+4 semibreves  notes: ''38 , 45 , 43 , 45'' ; to: #hoover.
+16 semiquavers  arpeggiate: ''c-min7'' octave: -2; to: #chordy.
+"it would be cool to write"
+16 semiquavers  arpeggiate: ''12-min7'' octave: -2; to: #chordy.
+16 claveSon to: #djembe.
+tp solo: #snare.
+
+tp highPassSweep: #(25 12).
+tp reverb: 1.
+TurboPhausto tpDsp setValue: 1 parameter:  ''reverb''.
+TurboPhausto tpDsp sweepToValue: 19000  parameter: ''lowpassfreq'' in: 10.
+TurboPhausto tpDsp trig: ''marimbaGate'' for: 1 .
+tp size: 0.2
+
+'
+]
+
 { #category : 'accessing' }
 TurboPhausto class >> hpf [
 
