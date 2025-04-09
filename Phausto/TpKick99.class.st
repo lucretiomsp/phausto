@@ -8,3 +8,8 @@ Class {
 	#package : 'Phausto',
 	#tag : 'TurboPhausto'
 }
+
+{ #category : 'initialization' }
+TpKick99 >> initialize [ 
+self shouldBeImplemented 
+]

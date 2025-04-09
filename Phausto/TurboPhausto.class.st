@@ -60,34 +60,44 @@ TurboPhausto class >> allSynths [
 TurboPhausto class >> example1 [
 
 	^ '
+	
 
 TurboPhausto start.
+TurboPhausto loadEffects .
+
+TurboPhausto allEffects at: #reverb.
 
 
 tp := TurboPhausto new.
-tp playFor: 32 bars.
+tp bpm: 160.
+tp playFor: 64 bars.
 tp stop.
-TurboPhausto tpPerf stop.
-''c-maj'' arpeggiate: 
+
 TurboPhausto tpDsp traceAllParams.
-16 downbeats to: #sykick.
-''0808'' hexBeat to: #syclap.
-16 upbeats to: #syhat.
+#jungleKick rhythm to: #sykick.
+''00000000F''hexBeat  to: #blip.
+#jungleSnare rhythm to: #snare.
+#jungleRim rhythm to: #rim.
+16 quavers to: #ch; index: ''3''.
+16 semiquavers to: #tamb.
+''0002'' hexBeat to: #syhat.
 18 quavers  notes: ''38 , 26 , 49, 41'' ;  to: #acid.
 16 rumba index: ''3 5 9'' ; to: #speakspell.
 4 semibreves  notes: ''38 , 45 , 43 , 45'' ; to: #hoover.
-16 semiquavers  arpeggiate: ''c-min7'' octave: -2; to: #chordy.
+16 banda arpeggiate: ''c-min7'' octave: -2; to: #chordy.
 "it would be cool to write"
 16 semiquavers  arpeggiate: ''12-min7'' octave: -2; to: #chordy.
 16 claveSon to: #djembe.
-tp solo: #snare.
+tp solo: #hoover.
+
 
 tp highPassSweep: #(25 12).
-tp reverb: 1.
+tp reverb: 0.3.
 TurboPhausto tpDsp setValue: 1 parameter:  ''reverb''.
 TurboPhausto tpDsp sweepToValue: 19000  parameter: ''lowpassfreq'' in: 10.
 TurboPhausto tpDsp trig: ''marimbaGate'' for: 1 .
-tp size: 0.2
+tp size: 0.3
+
 
 '
 ]
