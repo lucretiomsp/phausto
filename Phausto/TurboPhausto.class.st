@@ -275,7 +275,7 @@ TurboPhausto class >> turboSamplesFolder [
 { #category : 'API - changes' }
 TurboPhausto >> bpm: aNumber [
 
-	self class tpPerf freq: aNumber bpm
+self class tpPerf freq: aNumber bpm
 ]
 
 { #category : 'API - changes' }

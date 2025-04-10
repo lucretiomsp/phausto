@@ -96,17 +96,18 @@ Kick >> initialize [
 	self uLevel: 0.8.
 	pitch := PhHSlider new
 		         label: self label , 'Note'
-		         init: 440
+		         init: 220
 		         min: 20
 		         max: 1400
 		         step: 0.1.
 	gate := PhButton new label: self label , 'Gate'.
 	drive := PhHSlider new
-			           label: self label , 'Drive'
-			           init: 1
-			           min: 1
-			           max: 5
-			           step: 0.001 
+		         label: self label , 'Drive'
+		         init: 1
+		         min: 1
+		         max: 5
+		         step: 0.001.
+	self uLevel: 0.35
 ]
 
 { #category : 'accessing' }
