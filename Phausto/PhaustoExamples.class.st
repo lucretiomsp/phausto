@@ -173,7 +173,7 @@ process = oscillator : re.jcrev;'.
 	         0.00001 wait.
 	         p := Performance uniqueInstance.
 	         0.00001 wait.
-	         p performer: PerformerPhaust new.
+	         p performer: PerformerPhausto new.
 	         0.00001 wait.
 	         p activeDSP: tone.
 	         0.00001 wait.
