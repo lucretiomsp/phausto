@@ -39,6 +39,12 @@ BasicsTest >> testImpulsifyAsDsp [
 ]
 
 { #category : 'tests' }
+BasicsTest >> testPhAutomatAsDsp [
+	
+	self assert: PhAutomat new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 BasicsTest >> testPhBeatAsDsp [
 
 	self assert: PhBeat new asDsp isNull equals: false
@@ -139,7 +145,7 @@ BasicsTest >> testSampleAndHoldAsDsp [
 { #category : 'tests' }
 BasicsTest >> testSelectNAsDsp [
 
-	self assert: SelectN new asDsp isNull equals: false
+	self assert: PhSelectN new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
