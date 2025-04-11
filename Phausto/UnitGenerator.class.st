@@ -336,6 +336,14 @@ UnitGenerator >> label: aString [
 ]
 
 { #category : 'converting' }
+UnitGenerator >> midikey2hz [ 
+
+"convert the midi key number to a value in hertz"
+
+self asBox midikey2hz 
+]
+
+{ #category : 'converting' }
 UnitGenerator >> mono [
 	"return a mono version of the box (just one output)"
 

@@ -5,6 +5,15 @@ Record and replay in a loop the successives values of the input signal.
 **tempo**: tempo in BPM;
 **size**: number of items in the loop;
 **init**: initial value in the loop;
+
+
+### Example
+```language=Pharo
+""control the pitch of an oscillator changing the value of AutomatInput""
+auto := PhAutomat new.
+osci := SawOsc new freq: auto  midikey2hz .
+```
+
 "
 Class {
 	#name : 'PhAutomat',
@@ -47,7 +56,7 @@ PhAutomat >> initialize [
 	processExpression := 'process=ba.automat;'.
 	size := 8.
 	init := 28.
-	tempo := 240.
+	tempo := PhHSlider new label: 'AutomTempo' values: #( 120 120 560 1 ).
 	input := PhHSlider new label: 'AutomInput' values: #( 38 38 56 1 )
 ]
 
