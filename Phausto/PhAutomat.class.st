@@ -57,7 +57,7 @@ PhAutomat >> initialize [
 	size := 8.
 	init := 28.
 	tempo := PhHSlider new label: 'AutomTempo' values: #( 120 120 560 1 ).
-	input := PhHSlider new label: 'AutomInput' values: #( 38 38 56 1 )
+	input := PhHSlider new label: 'AutomInput' values: #( 28 28 88 1 )
 ]
 
 { #category : 'accessing' }

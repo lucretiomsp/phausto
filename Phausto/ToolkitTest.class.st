@@ -19,6 +19,14 @@ ToolkitTest >> testPHSelectNAsDsp [
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhCaptureAsDsp [
+
+
+
+	self assert: PhCapture new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhCounterAsDsp [
 
 	self assert: PhCounter new asDsp isNull equals: false
