@@ -6,6 +6,12 @@ Please check your system audio input before Pharo is started.
 
 ##Parameters:
 **captureButton**: press it to capture audio input;
+
+### Usage
+```language=Pharo
+myCapture :=(PhCapture   withLabel: 'Test').
+dsp := myCapture stereo asDsp.
+```
 "
 Class {
 	#name : 'PhCapture',
@@ -17,6 +23,21 @@ Class {
 	#package : 'Phausto',
 	#tag : 'ToolKit'
 }
+
+{ #category : 'initialization' }
+PhCapture class >> withLabel: aLabel [
+
+	^ self new processExpression: '
+        B = button("' , aLabel , ' Capture");	
+        I = int(B);				
+        R = (I-I'') <= 0;		
+        D = (+(I):*(R))~_;	
+
+        capture = *(B) : (+ : de.delay(8*65536, D-1)) ~ *(1.0-B);
+        level = hslider("' , aLabel
+		, ' Level", 0, -96, 4, 0.1) : ba.db2linear : si.smoo;
+        process = capture : *(level);'
+]
 
 { #category : 'converting' }
 PhCapture >> asBox [
@@ -30,7 +51,7 @@ PhCapture >> asBox [
 PhCapture >> initialize [
 
 	super initialize.
-
+   
 	processExpression := '
 B = button("Capture");	
 I = int(B);				
