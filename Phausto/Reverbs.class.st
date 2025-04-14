@@ -37,9 +37,3 @@ Reverbs >> label [
 
 	^ label
 ]
-
-{ #category : 'accessing' }
-Reverbs >> label: aString [
-
-	label := aString
-]
