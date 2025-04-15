@@ -7,7 +7,7 @@ Iceberg remoteTypeSelector: #httpsUrl.
 EpMonitor disableDuring: [ 
     Metacello new
         baseline: 'Phausto';
-        repository: 'github://lucretiomsp/phausto:main';
+        repository: 'github://lucretiomsp/phausto:add-ci';
         onWarningLog;
         load
 ].
