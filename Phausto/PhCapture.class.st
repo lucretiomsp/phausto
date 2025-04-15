@@ -27,16 +27,21 @@ Class {
 { #category : 'initialization' }
 PhCapture class >> withLabel: aLabel [
 
-	^ self new processExpression: '
-        B = button("' , aLabel , ' Capture");	
-        I = int(B);				
-        R = (I-I'') <= 0;		
-        D = (+(I):*(R))~_;	
+	| expr bVar rVar iVar dVar |
+	bVar := 'B' , aLabel.
+rVar := 'R' , aLabel.
+iVar := 'I' , aLabel.
+dVar := 'D' , aLabel.
+	expr := 
+        bVar, ' = button("' , aLabel , ' Capture");' ,	
+        iVar , ' = int(' , bVar , ');' ,				
+        rVar , '= (' , iVar,  '-' , iVar , ''') <= 0;' ,		
+        dVar , '= (+(' , iVar , '):*(' , rVar , '))~_;	
 
-        capture = *(B) : (+ : de.delay(8*65536, D-1)) ~ *(1.0-B);
-        level = hslider("' , aLabel
-		, ' Level", 0, -96, 4, 0.1) : ba.db2linear : si.smoo;
-        process = capture : *(level);'
+        capture = *(' , bVar ,  ') : (+ : de.delay(8*65536, ' , dVar , '-1)) ~ *(1.0-' , bVar , ');
+        level = hslider("' , aLabel , ' Level", 0, -96, 4, 0.1) : ba.db2linear : si.smoo;
+        process = capture : *(level);'.
+	^ self new processExpression: expr
 ]
 
 { #category : 'converting' }
