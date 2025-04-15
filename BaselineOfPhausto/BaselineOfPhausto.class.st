@@ -42,6 +42,7 @@ BaselineOfPhausto >> copyARM64LibrariesFrom: repoDirectory [
 		             << '&& cp -R /Volumes/phaustoLibrariesM1/* "'
 		             << imgDirPath << '/librariesBundle"'
 		             << '); hdiutil detach /Volumes/phaustoLibrariesM1' ].
+	command traceCr.
 	(LibC runCommand: command) = 0 ifFalse: [ self warnCopyFailed ]
 ]
 
