@@ -3,6 +3,7 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'Phausto',
       #platforms : [ #pharo ],
+      #load : [ 'ci' ],
       #onConflict : #useIncoming,
       #onUpgrade : #useIncoming,
       #onWarningLog : true
