@@ -1,0 +1,9 @@
+SmalltalkCISpec {
+  #preLoading : 'ci/preLoading.st',
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'Phausto',
+      #platforms : [ #pharo ]
+    }
+  ]
+}
