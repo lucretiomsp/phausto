@@ -23,10 +23,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
     steps:
-      # - name: Checkout Phausto
-      #   uses: actions/checkout@v3
-      #   with:
-      #     fetch-depth: 0
+      - name: Checkout Phausto
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Setup smalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
