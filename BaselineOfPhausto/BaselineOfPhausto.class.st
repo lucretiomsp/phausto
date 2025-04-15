@@ -60,18 +60,22 @@ BaselineOfPhausto >> copyLibraries [
 { #category : 'utilities' }
 BaselineOfPhausto >> copyLibrariesFrom: repoDirectory [
 
-	| platform |
+	| platform source |
 	platform := OSPlatform current.
 	(platform isMacOS and: [ platform processorArchitecture = 'arm64' ])
 		ifTrue: [ ^ self copyARM64LibrariesFrom: repoDirectory ].
 
+	source := repoDirectory / (platform isMacOS
+		           ifTrue: [ 'librariesBundle_mac_intel.zip' ]
+		           ifFalse: [
+			           platform isUnix
+				           ifTrue: [ 'librariesBundle_Linux.zip' ]
+				           ifFalse: [ 'librariesBundle_windows_intel.zip' ] ]).
+
+	('Unzip ' , source , ' into ' , Smalltalk imagePath asFileReference parent) traceCr.
+
 	ZipArchive
-		extractFrom: repoDirectory / (platform isMacOS
-				 ifTrue: [ 'librariesBundle_mac_intel.zip' ]
-				 ifFalse: [
-					 platform isUnix
-						 ifTrue: [ 'librariesBundle_Linux.zip' ]
-						 ifFalse: [ 'librariesBundle_windows_intel.zip' ] ])
+		extractFrom: source
 		to: Smalltalk imagePath asFileReference parent
 ]
 
