@@ -75,9 +75,28 @@ BaselineOfPhausto >> copyLibrariesFrom: repoDirectory [
 ]
 
 { #category : 'utilities' }
+BaselineOfPhausto >> logDirectories [
+
+	Character cr traceCr.
+
+	'Iceberg repositories:' traceCr.
+	Transcript trace: (Character cr join: IceRepository registry).
+
+	Character cr traceCr.
+	Character cr traceCr.
+
+	'Image directory:' traceCr.
+	Smalltalk imageDirectory traceCr.
+
+	Character cr traceCr
+]
+
+{ #category : 'utilities' }
 BaselineOfPhausto >> warnCopyFailed [
 
 	<debuggerCompleteToSender>
+	self logDirectories.
+	
 	Warning signal:
 		'Failed to install Faust libraries, they must be copied to the image directory manually, see https://github.com/lucretiomsp/phausto/wiki'
 ]
