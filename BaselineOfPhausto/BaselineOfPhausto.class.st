@@ -21,7 +21,9 @@ BaselineOfPhausto >> baseline: spec [
 
 		spec package: 'Phausto' with: [ spec requires: #( 'MasterLu' ) ].
 
-		spec group: 'default' with: #( 'Phausto' 'MasterLu' ) ]
+		spec group: 'default' with: #( 'Phausto' 'MasterLu' ).
+
+		spec group: 'ci' with: #( 'Phausto' )]
 ]
 
 { #category : 'utilities' }
