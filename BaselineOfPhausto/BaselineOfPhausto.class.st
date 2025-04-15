@@ -72,7 +72,7 @@ BaselineOfPhausto >> copyLibrariesFrom: repoDirectory [
 				           ifTrue: [ 'librariesBundle_Linux.zip' ]
 				           ifFalse: [ 'librariesBundle_windows_intel.zip' ] ]).
 
-	('Unzip ' , source , ' into ' , Smalltalk imagePath asFileReference parent) traceCr.
+	('Unzip ' , source asString , ' into ' , Smalltalk imagePath asFileReference parent asString) traceCr.
 
 	ZipArchive
 		extractFrom: source
