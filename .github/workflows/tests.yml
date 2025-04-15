@@ -1,0 +1,37 @@
+name: Run Tests
+
+on:
+  # Run on push and pull requests on any branch, but ignore if change doesn't affect code.
+  push:
+    paths-ignore:
+    - 'README.md'
+  pull_request:
+    paths-ignore:
+    - 'README.md'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      # Default value means that a failure in one OS cancels all 
+      fail-fast: false
+      matrix:
+        smalltalk: [ Pharo64-12 ]
+        os: [ ubuntu-20.04, macos-latest, windows-2016 ]
+        ston: [ .smalltalk.ston ]
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
+    steps:
+      - name: Checkout Druid
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup smalltalkCI
+        uses: hpi-swa/setup-smalltalkCI@v1
+        with:
+          smalltalk-image: ${{ matrix.smalltalk }}
+      - name: Load Image and Run Tests
+        run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
+        shell: bash
+        timeout-minutes: 20
