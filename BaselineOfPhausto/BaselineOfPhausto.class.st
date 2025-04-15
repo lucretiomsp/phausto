@@ -38,8 +38,8 @@ BaselineOfPhausto >> copyARM64LibrariesFrom: repoDirectory [
 		           s << '(hdiutil attach "'
 		             << (repoDirectory / 'phaustoLibrariesM1.dmg') pathString
 		             << '" -mountpoint /Volumes/phaustoLibrariesM1 -nobrowse -readonly'
-		             << '&& mkdir -p "' << imgDirPath << '/librariesBundle"'
-		             << '&& cp -R /Volumes/phaustoLibrariesM1/* "'
+		             << ' && mkdir -m 777 -p "' << imgDirPath << '/librariesBundle"'
+		             << ' && cp -R /Volumes/phaustoLibrariesM1/* "'
 		             << imgDirPath << '/librariesBundle"'
 		             << '); hdiutil detach /Volumes/phaustoLibrariesM1' ].
 	command traceCr.
