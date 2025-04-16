@@ -9,6 +9,9 @@ Class {
 { #category : 'tests' }
 CITest >> testDsp [
 	
+	self assert: PhBox new getHandle isNil.
+	
+	
 	{ 
 		FFIMacLibraryFinder findLibrary: 'librariesBundle/libfaust.2.dylib'.
 		FFIMacLibraryFinder findLibrary: 'librariesBundle/libdynamic-engine.dylib' 
