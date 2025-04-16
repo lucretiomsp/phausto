@@ -100,6 +100,13 @@ UnitGenerator class >> resetSelfAndAllSubClasses [
 UnitGenerator class >> startUp [
 
 	'Unit Generators start counting from zero' traceCr.
+	
+	{ 
+		FFIMacLibraryFinder findLibrary: 'librariesBundle/libfaust.2.dylib'.
+		FFIMacLibraryFinder findLibrary: 'librariesBundle/libdynamic-engine.dylib' 
+	} traceCr.
+	
+	
 	self resetSelfAndAllSubClasses
 ]
 
