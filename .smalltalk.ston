@@ -8,5 +8,8 @@ SmalltalkCISpec {
       #onUpgrade : #useIncoming,
       #onWarningLog : true
     }
-  ]
+  ],
+  #testing: {
+    #classes : [ #CITest ]
+  }
 }
