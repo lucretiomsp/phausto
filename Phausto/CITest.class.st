@@ -11,9 +11,6 @@ CITest >> testDsp [
 	
 	self deny: SineOsc new asBox isNull.
 	
-	
-	
-	
 	{ 
 		FFIMacLibraryFinder findLibrary: 'librariesBundle/libfaust.2.dylib'.
 		FFIMacLibraryFinder findLibrary: 'librariesBundle/libdynamic-engine.dylib' 
@@ -22,4 +19,5 @@ CITest >> testDsp [
 	'DSP process:' traceCr.
 	(DSP create: 'process=0;') getHandle asInteger traceCr.
 
+	BoxAPI uniqueInstance destroyLibContext
 ]
