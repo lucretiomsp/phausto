@@ -407,7 +407,7 @@ BoxAPI >> createLibContext [
 	sessionLibContext
 		ifFalse: [
 			"Uncomment next lines if you need to debug libCObtext creation"
-			"('Created libContext at: ' , DateAndTime now asString) traceCr."
+			('Created libContext at: ' , DateAndTime now asString) traceCr.
 			self createLibContextFFI.
 
 			PhBox libContext: true ]
