@@ -15,6 +15,6 @@ CITest >> testDsp [
 	} traceCr.
 	
 	'DSP process:' traceCr.
-	(DSP create: 'process=0;') getHandle asInteger traceCr.
+	(DSP create: 'asdasd') getHandle asInteger traceCr.
 
 ]
