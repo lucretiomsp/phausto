@@ -112,6 +112,9 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 	myArgv := ExternalAddress arrayOfStringsFrom:
 		          #( '-I' 'librariesBundle/faustLibs' ).
 	
+	'myArgv: ' trace.
+	myArgv asInteger traceCr.
+	
 	^ [
 	  self
 		  boxFromString: aFaustCode
