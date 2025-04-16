@@ -28,14 +28,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Libraries Bundle
-        run: (hdiutil attach "/Users/runner/.smalltalkCI/_builds/pharo-local/iceberg/lucretiomsp/phausto/phaustoLibrariesM1.dmg" -mountpoint /Volumes/phaustoLibrariesM1 -nobrowse -readonly && mkdir -p "/Users/runner/.smalltalkCI/_builds/librariesBundle" && cp -R /Volumes/phaustoLibrariesM1/* "/Users/runner/.smalltalkCI/_builds/librariesBundle"); hdiutil detach /Volumes/phaustoLibrariesM1expected
-        if: ${{ contains(matrix.os, 'macos') }}
-
       - name: Setup smalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
+
+      - name: Install Libraries Bundle
+        run: (hdiutil attach "/Users/runner/work/phausto/phausto/phaustoLibrariesM1.dmg" -mountpoint /Volumes/phaustoLibrariesM1 -nobrowse -readonly && mkdir -p "/Users/runner/.smalltalkCI/_builds/librariesBundle" && cp -R /Volumes/phaustoLibrariesM1/* "/Users/runner/.smalltalkCI/_builds/librariesBundle"); hdiutil detach /Volumes/phaustoLibrariesM1expected
+        if: ${{ contains(matrix.os, 'macos') }}
+
       - name: Load Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
         shell: bash
