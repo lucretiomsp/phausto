@@ -531,8 +531,7 @@ PhBox >> patchedWith: aBox [
 { #category : 'printing' }
 PhBox >> printOn: aStream [
 
-
-	^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString
+	self handle ifNotNil: [^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString]
 ]
 
 { #category : 'smoothing' }
