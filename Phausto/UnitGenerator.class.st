@@ -106,6 +106,9 @@ UnitGenerator class >> startUp [
 		FFIMacLibraryFinder findLibrary: 'librariesBundle/libdynamic-engine.dylib' 
 	} traceCr.
 	
+	'DSP process:' traceCr.
+	(DSP create: 'process=0;') getHandle asInteger traceCr.
+	
 	
 	self resetSelfAndAllSubClasses
 ]
