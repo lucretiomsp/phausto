@@ -45,18 +45,20 @@ PhaustoDynamicEngine class >> ffiLibrary [
 
 { #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> createDsp: aFaustCode [
-| myArgv |
 
-myArgv := ExternalAddress arrayOfStringsFrom: #('-I' 'librariesBundle/faustLibs') .
-^ [ self createDsp: aFaustCode arguments: myArgv ]
-  ensure: [ myArgv freeArrayOfStrings ]
+	| myArgv |
+	myArgv := ExternalAddress arrayOfStringsFrom: #( '-I' 'librariesBundle/faustLibs' ).
 
+	myArgv asInteger traceCr.
+
+	^ [ self createDsp: aFaustCode arguments: myArgv ] ensure: [
+		  myArgv freeArrayOfStrings ]
 ]
 
 { #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> createDsp: aFaustCode arguments: argv [
 
-  ^ self ffiCall: #(DSP* createDsp (const char* 'MyApp',  const char* aFaustCode,  int 2, void * argv  , const char* '', int -1))
+  ^ self ffiCall: #(DSP* createDsp (const char* 'MyApp',  const char* aFaustCode,  int 0, void * argv , const char* '', int -1))
 
 
 ]
