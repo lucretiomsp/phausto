@@ -13,7 +13,7 @@ BaselineOfPhausto >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [
-		spec postLoadDoIt: #copyLibraries.
+		"spec postLoadDoIt: #copyLibraries."
 
 		spec
 			baseline: 'MasterLu'
