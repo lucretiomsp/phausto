@@ -9,7 +9,9 @@ Class {
 { #category : 'tests' }
 CITest >> testDsp [
 	
-	self assert: PhBox new getHandle isNil.
+	self deny: 1 asBox isNull.
+	
+	
 	
 	
 	{ 
