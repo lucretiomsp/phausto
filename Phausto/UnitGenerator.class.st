@@ -215,6 +215,7 @@ UnitGenerator >> asDspWithName: aString [
 	
 		
 					interBox := self asBox.
+					interBox traceCr.
 					^ interBox asDspWithName: aString.
 ]
 
