@@ -16,6 +16,7 @@ Class {
 Trigonometry >> asBox [
 
 	| intermediateBox finalBox |
+	self code traceCr.
 	intermediateBox := super asBox.
 	intermediateBox traceCr.
 	finalBox :=  self input connectTo: intermediateBox.
