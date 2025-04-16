@@ -9,7 +9,7 @@ Class {
 { #category : 'tests' }
 CITest >> testDsp [
 	
-	self deny: 1 asBox isNull.
+	self deny: SineOsc new asBox isNull.
 	
 	
 	
