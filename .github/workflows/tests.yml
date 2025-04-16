@@ -34,7 +34,7 @@ jobs:
           smalltalk-image: ${{ matrix.smalltalk }}
 
       - name: Install Libraries Bundle
-        run: (hdiutil attach "/Users/runner/work/phausto/phausto/phaustoLibrariesM1.dmg" -mountpoint /Volumes/phaustoLibrariesM1 -nobrowse -readonly && mkdir -p "/Users/runner/.smalltalkCI/_builds/librariesBundle" && cp -R /Volumes/phaustoLibrariesM1/* "/Users/runner/.smalltalkCI/_builds/librariesBundle"); hdiutil detach /Volumes/phaustoLibrariesM1 && ls -all "/Users/runner/.smalltalkCI/_builds/librariesBundle"
+        run: (hdiutil attach "/Users/runner/work/phausto/phausto/phaustoLibrariesM1.dmg" -mountpoint /Volumes/phaustoLibrariesM1 -nobrowse -readonly && mkdir -p "/Users/runner/.smalltalkCI/_builds/librariesBundle" && cp -R /Volumes/phaustoLibrariesM1/* "/Users/runner/.smalltalkCI/_builds/librariesBundle"); hdiutil detach /Volumes/phaustoLibrariesM1 && ls -all "/Users/runner/.smalltalkCI/_builds/librariesBundle" && ls -all "/Users/runner/.smalltalkCI/_builds/librariesBundle/faustLibs"
         if: ${{ contains(matrix.os, 'macos') }}
 
       - name: Load Image and Run Tests
