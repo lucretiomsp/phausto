@@ -18,6 +18,7 @@ Trigonometry >> asBox [
 	| intermediateBox finalBox |
 	self code traceCr.
 	intermediateBox := super asBox.
+	intermediateBox getHandle asInteger traceCr.
 	intermediateBox traceCr.
 	finalBox :=  self input connectTo: intermediateBox.
 	^ finalBox
