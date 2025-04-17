@@ -10,7 +10,7 @@ Class {
 CITest >> setUp [
 
 	'VM: ' trace.
-	Smalltalk vm fullPath traceCr.
+	Smalltalk vm fullPath asFileReference parent children traceCr.
 
 	Smalltalk platform isMacOS ifTrue: [
 		{
