@@ -38,11 +38,11 @@ jobs:
         if: ${{ contains(matrix.os, 'macos') }}
 
       - name: Install Libraries Bundle (ubuntu)
-        run: ls -all "/home/runner/work/phausto/phausto" && unzip "/home/runner/work/phausto/phausto/librariesBundle_Linux.zip" -d "/home/runner/.smalltalkCI/_builds" && ls -all "/home/runner/.smalltalkCI/_builds/librariesBundle" && ls -all "/home/runner/.smalltalkCI/_builds/librariesBundle/faustLibs"
+        run: ls -all "/home/runner/work/phausto/phausto" && unzip "/home/runner/work/phausto/phausto/librariesBundle_Linux.zip" -d "/home/runner/.smalltalkCI/_builds" && ls -all "/home/runner/.smalltalkCI/_builds/librariesBundle"
         if: ${{ contains(matrix.os, 'ubuntu') }}
 
       - name: Install Libraries Bundle (win)
-        run: unzip "D:\a\phausto\phausto\librariesBundle_windows_intel.zip" -d "C:\Users\runneradmin\.smalltalkCI\_builds" && ls -all "C:\Users\runneradmin\.smalltalkCI\_builds\librariesBundle" && ls -all "C:\Users\runneradmin\.smalltalkCI\_builds\librariesBundle\faustLibs"
+        run: unzip "D:\a\phausto\phausto\librariesBundle_windows_intel.zip" -d "C:\Users\runneradmin\.smalltalkCI\_builds" && dir "C:\Users\runneradmin\.smalltalkCI\_builds\librariesBundle"
         if: ${{ contains(matrix.os, 'win') }}
 
       - name: Load Image and Run Tests
