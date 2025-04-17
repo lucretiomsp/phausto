@@ -189,7 +189,6 @@ PhaustoDynamicEngine >> initializeDSP: aDsp withRenderer: aType [
 
 { #category : 'accessing - platform' }
 PhaustoDynamicEngine >> macLibraryName [
-	"Returns the name of the Dynamic Engine library for Mac."
 
 	^ FFIMacLibraryFinder findLibrary:
 		  'librariesBundle/libdynamic-engine.dylib'

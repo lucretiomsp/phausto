@@ -9,10 +9,20 @@ Class {
 { #category : 'tests' }
 CITest >> setUp [
 
-	{
-		(FFIMacLibraryFinder findLibrary: 'librariesBundle/libfaust.2.dylib').
-		(FFIMacLibraryFinder findLibrary: 'librariesBundle/libdynamic-engine.dylib') 
-	} traceCr
+	Smalltalk platform isMacOS ifTrue: [
+		{
+			BoxAPI uniqueInstance macLibraryName.
+			PhaustoDynamicEngine uniqueInstance macLibraryName } traceCr ].
+
+	Smalltalk platform isUnix ifTrue: [
+		{
+			BoxAPI uniqueInstance unixLibraryName.
+			PhaustoDynamicEngine uniqueInstance unixLibraryName } traceCr ].
+
+	Smalltalk platform isWindows ifTrue: [
+		{
+			BoxAPI uniqueInstance win32LibraryName.
+			PhaustoDynamicEngine uniqueInstance win32LibraryName } traceCr ]
 ]
 
 { #category : 'tests' }
