@@ -16,8 +16,8 @@ CITest >> setUp [
 
 	Smalltalk platform isUnix ifTrue: [
 		{
-			BoxAPI uniqueInstance unixLibraryName.
-			PhaustoDynamicEngine uniqueInstance unixLibraryName } traceCr ].
+			BoxAPI uniqueInstance unix64LibraryName.
+			PhaustoDynamicEngine uniqueInstance unix64LibraryName } traceCr ].
 
 	Smalltalk platform isWindows ifTrue: [
 		{
