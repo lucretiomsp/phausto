@@ -108,17 +108,19 @@ TurboPhausto class >> hpf [
 	^ hpf
 ]
 
-{ #category : 'SuperDirt-List' }
+{ #category : 'accessing' }
 TurboPhausto class >> listOfSamples [ 
 
 self turboSamplesFolder asFileReference inspect.
 ]
 
-{ #category : 'SuperDirt-List' }
+{ #category : 'accessing' }
 TurboPhausto class >> listOfSamplesFolder [ 
 
-| labels |
-labels := self turboSamplesFolder asFileReference children collect: [:i | i pathString afterLastSlash ].
+| dirs labels |
+"eliminate .DS"
+dirs :=  self turboSamplesFolder asFileReference children select: [ :i | i isDirectory ].
+labels := dirs collect:  [:i | i pathString afterLastSlash ].
 ^ labels  
 ]
 
@@ -271,6 +273,14 @@ TurboPhausto class >> tpDsp [
 TurboPhausto class >> tpPerf [
 
 ^ tpPerf 
+]
+
+{ #category : 'accessing' }
+TurboPhausto class >> traceAllInstruments [
+
+Transcript clear.
+self listOfSamplesFolder do: [ :i | Transcript  show: i; cr ].
+Transcript open
 ]
 
 { #category : 'accessing' }
