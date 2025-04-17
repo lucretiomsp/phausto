@@ -19,7 +19,7 @@ CITest >> setUp [
 
 	Smalltalk platform isUnix ifTrue: [
 		PhaustoDynamicEngine uniqueInstance unix64LibraryName asFileReference copyTo:
-			Smalltalk vm fullPath asFileReference parent.
+			Smalltalk vm fullPath asFileReference parent / 'libdynamic-engine.so'.
 
 		{
 			BoxAPI uniqueInstance unix64LibraryName.
