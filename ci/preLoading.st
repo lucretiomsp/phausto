@@ -5,9 +5,8 @@ Iceberg remoteTypeSelector: #httpsUrl.
 
 "Load the Pharo VM repository and lock it"
 EpMonitor disableDuring: [ 
-    Metacello new
-        baseline: 'Phausto';
-        repository: 'github://lucretiomsp/phausto:add-ci';
-        onWarningLog;
-        load
+    Smalltalk platform isUnix ifTrue: [
+		'/home/runner/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so' asFileReference moveTo:
+			Smalltalk vm fullPath asFileReference parent / 'libdynamic-engine.so'.
+    ]
 ].
