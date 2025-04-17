@@ -54,6 +54,12 @@ PhTranspose >> input [
 	^ input ifNil: [ input := 0 asBox ]
 ]
 
+{ #category : 'connecting' }
+PhTranspose >> patchedWith: aUnitGenerator [
+
+self input: aUnitGenerator 
+]
+
 { #category : 'accessing' }
 PhTranspose >> shift [
 
