@@ -114,6 +114,14 @@ TurboPhausto class >> listOfSamples [
 self turboSamplesFolder asFileReference inspect.
 ]
 
+{ #category : 'SuperDirt-List' }
+TurboPhausto class >> listOfSamplesFolder [ 
+
+| labels |
+labels := self turboSamplesFolder asFileReference children collect: [:i | i pathString afterLastSlash ].
+^ labels  
+]
+
 { #category : 'loading' }
 TurboPhausto class >> loadAllSamplers [
 
