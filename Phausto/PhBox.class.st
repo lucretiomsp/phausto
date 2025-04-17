@@ -405,9 +405,6 @@ PhBox >> initialize [
 	BoxAPI uniqueInstance createLibContext .
 	
 	intPtr := FFIExternalValueHolder ofType: 'int'.
-	
-
-
 
 	inputs := intPtr new value: 0.
 	outputs := intPtr new value: 0.
