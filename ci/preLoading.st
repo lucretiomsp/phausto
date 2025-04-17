@@ -6,7 +6,7 @@ Iceberg remoteTypeSelector: #httpsUrl.
 "Load the Pharo VM repository and lock it"
 EpMonitor disableDuring: [ 
     Smalltalk platform isUnix ifTrue: [
-		'/home/runner/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so' asFileReference moveTo:
+		'/home/runner/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so' asFileReference copyTo:
 			Smalltalk vm fullPath asFileReference parent / 'libdynamic-engine.so'.
     ]
 ].
