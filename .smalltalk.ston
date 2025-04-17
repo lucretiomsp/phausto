@@ -1,5 +1,5 @@
 SmalltalkCISpec {
-  #preLoading : 'scripts/preLoading.st',
+  #preLoading : 'ci/preLoading.st',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'Phausto',
