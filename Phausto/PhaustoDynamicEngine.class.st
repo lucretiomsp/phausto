@@ -196,8 +196,7 @@ PhaustoDynamicEngine >> macLibraryName [
 ]
 
 { #category : 'accessing - platform' }
-PhaustoDynamicEngine >> unix64LibraryName [ 
-	"Returns the name of the Dynamic Engine library for Mac."
+PhaustoDynamicEngine >> unix64LibraryName [
 
 	^ FFIUnix64LibraryFinder findLibrary:
 		  'librariesBundle/libdynamic-engine.so'
@@ -205,9 +204,8 @@ PhaustoDynamicEngine >> unix64LibraryName [
 
 { #category : 'accessing - platform' }
 PhaustoDynamicEngine >> win32LibraryName [
-	
+
 	LibFaust ensurePathInDLLSearch.
-	
-	^ FFIWindowsLibraryFinder new
-		findLibrary: 'libdynamic-engine.dll'
+
+	^ FFIWindowsLibraryFinder new findLibrary: 'libdynamic-engine.dll'
 ]
