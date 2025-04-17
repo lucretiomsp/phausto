@@ -10,7 +10,7 @@ Class {
 CITest >> setUp [
 
 	'VM: ' trace.
-	Smalltalk vm fullPath asFileReference parent children traceCr.
+	Smalltalk vm fullPath asFileReference parent traceCr.
 
 	Smalltalk platform isMacOS ifTrue: [
 		{
@@ -18,6 +18,9 @@ CITest >> setUp [
 			PhaustoDynamicEngine uniqueInstance macLibraryName } traceCr ].
 
 	Smalltalk platform isUnix ifTrue: [
+		PhaustoDynamicEngine uniqueInstance unix64LibraryName asFileReference copyTo:
+			Smalltalk vm fullPath asFileReference parent.
+
 		{
 			BoxAPI uniqueInstance unix64LibraryName.
 			PhaustoDynamicEngine uniqueInstance unix64LibraryName } traceCr ].
