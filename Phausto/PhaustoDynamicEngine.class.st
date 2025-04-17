@@ -197,8 +197,7 @@ PhaustoDynamicEngine >> macLibraryName [
 { #category : 'accessing - platform' }
 PhaustoDynamicEngine >> unix64LibraryName [
 
-	^ FFIUnix64LibraryFinder findLibrary:
-		  'librariesBundle/libdynamic-engine.so'
+	^ FFIUnix64LibraryFinder findLibrary: 'libdynamic-engine.so'
 ]
 
 { #category : 'accessing - platform' }
