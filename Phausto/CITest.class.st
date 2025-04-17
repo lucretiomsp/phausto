@@ -9,6 +9,9 @@ Class {
 { #category : 'tests' }
 CITest >> setUp [
 
+	'VM: ' trace.
+	Smalltalk vm fullPath traceCr.
+
 	Smalltalk platform isMacOS ifTrue: [
 		{
 			BoxAPI uniqueInstance macLibraryName.
