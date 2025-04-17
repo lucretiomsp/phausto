@@ -64,6 +64,7 @@ instancesInDSPContext := self  instancesInDSPContext + 1
 { #category : 'class initialization' }
 UnitGenerator class >> initialize [ 
 
+	activeInstances := Set new.
 	SessionManager default register:
 		(ClassSessionHandler forClassNamed: self name)
 ]
