@@ -38,7 +38,7 @@ jobs:
         if: ${{ contains(matrix.os, 'macos') }}
 
       - name: Install Libraries Bundle (ubuntu)
-        run: mkdir -p "/Users/runner/.smalltalkCI/_builds/librariesBundle" && unzip "/home/runner/work/phausto/phausto/librariesBundle_Linux.zip" -d "/home/runner/.smalltalkCI/_builds/librariesBundle" && ls -all "/home/runner/.smalltalkCI/_builds/librariesBundle"
+        run: mkdir -p "/home/runner/.smalltalkCI/_builds/librariesBundle" && unzip "/home/runner/work/phausto/phausto/librariesBundle_Linux.zip" -d "/home/runner/.smalltalkCI/_builds/librariesBundle" && ls -all "/home/runner/.smalltalkCI/_builds/librariesBundle"
         if: ${{ contains(matrix.os, 'ubuntu') }}
 
       - name: Install Libraries Bundle (win)
