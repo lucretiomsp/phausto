@@ -17,14 +17,14 @@ CITest >> setUp [
 			BoxAPI uniqueInstance macLibraryName.
 			PhaustoDynamicEngine uniqueInstance macLibraryName } traceCr ].
 
-	Smalltalk platform isUnix ifTrue: [
+"	Smalltalk platform isUnix ifTrue: [
 		PhaustoDynamicEngine uniqueInstance unix64LibraryName asFileReference copyTo:
 			Smalltalk vm fullPath asFileReference parent / 'libdynamic-engine.so'.
 
 		{
 			BoxAPI uniqueInstance unix64LibraryName.
 			PhaustoDynamicEngine uniqueInstance unix64LibraryName } traceCr ].
-
+"
 	Smalltalk platform isWindows ifTrue: [
 		{
 			BoxAPI uniqueInstance win32LibraryName.
