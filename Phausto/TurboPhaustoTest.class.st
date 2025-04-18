@@ -66,6 +66,13 @@ self assert: PsgPlus new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
+TurboPhaustoTest >> testReeseAsBox [
+
+
+self assert: TpReese new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 TurboPhaustoTest >> testTpSamplerAsBox [
 
 | pathToFolder |

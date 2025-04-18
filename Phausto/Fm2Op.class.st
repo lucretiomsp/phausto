@@ -43,7 +43,7 @@ Fm2Op >> initialize [
 	
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Fm2Op >> modIndex [
 
 	^  modIndex  ifNil: [   PhHSlider new
@@ -54,7 +54,7 @@ Fm2Op >> modIndex [
 		        step: 0.01 ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'as yet unclassified' }
 Fm2Op >> modRatio [
 
 	^ modRatio ifNil: [   PhHSlider new
