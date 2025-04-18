@@ -189,7 +189,8 @@ TurboPhausto class >> loadAllSynths [
 		add: (Chordy new
 				 label: 'chordy';
 				 pitch: #chordyNote);
-		add: TpHoover new.
+		add: TpHoover new;
+		add: TpReese new.
 	^ self
 ]
 
