@@ -336,6 +336,15 @@ UtilitiesTest >> testFileIsAudioFile [
 ]
 
 { #category : 'tests' }
+UtilitiesTest >> testFolderHasAudioFiles [
+
+| folder |
+folder := TurboPhausto turboSamplesFolder asFileReference children at: 1.
+
+self assert: folder hasAudioFiles equals:  true.
+]
+
+{ #category : 'tests' }
 UtilitiesTest >> testPrefixasSymbolWithSuffix [
 
 self assert:( 'Kick' asSymbolWithSuffix: 'Gate') equals: #KickGate
