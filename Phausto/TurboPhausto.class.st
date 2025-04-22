@@ -126,13 +126,13 @@ labels := dirs collect:  [:i | i pathString afterLastSlash ].
 
 { #category : 'loading' }
 TurboPhausto class >> loadAllSamplers [
+	"transform all the subfolder of TurboPhausto into TpSamplers and collect themm into an Array"
 
-"transform all the subfolder of TurboPhausto into TpSamplers and collect themm into an Array"
-	| size  subDir allLabels |
+	| size subDir allLabels |
 	self samplesFolderExists
 		ifTrue: [
 			subDir := self turboSamplesFolder asFileReference children select: [
-				          :i | i isDirectory ].
+				          :i | i hasAudioFiles ].
 			size := subDir size.
 			allSamplers := subDir collect: [ :i |
 				               TpSampler new pathToFolder: i pathString ].
