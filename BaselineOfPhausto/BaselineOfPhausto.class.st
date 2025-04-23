@@ -13,15 +13,17 @@ BaselineOfPhausto >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [
-		"spec postLoadDoIt: #copyLibraries."
+		spec postLoadDoIt: #copyLibraries.
+
+		spec package: 'Phausto'.
 
 		spec
 			baseline: 'MasterLu'
 			with: [ spec repository: 'github://lucretiomsp/MasterLu:main' ].
 
-		spec package: 'Phausto' with: [ spec requires: #( 'MasterLu' ) ].
+		spec group: 'default' with: #( 'Phausto' 'MasterLu' ).
 
-		spec group: 'default' with: #( 'Phausto' 'MasterLu' ) ]
+		spec group: 'ci' with: #( 'Phausto' )]
 ]
 
 { #category : 'utilities' }
@@ -36,10 +38,11 @@ BaselineOfPhausto >> copyARM64LibrariesFrom: repoDirectory [
 		           s << '(hdiutil attach "'
 		             << (repoDirectory / 'phaustoLibrariesM1.dmg') pathString
 		             << '" -mountpoint /Volumes/phaustoLibrariesM1 -nobrowse -readonly'
-		             << '&& mkdir -p "' << imgDirPath << '/librariesBundle"'
-		             << '&& cp -R /Volumes/phaustoLibrariesM1/* "'
+		             << ' && mkdir -m 777 -p "' << imgDirPath << '/librariesBundle"'
+		             << ' && cp -R /Volumes/phaustoLibrariesM1/* "'
 		             << imgDirPath << '/librariesBundle"'
 		             << '); hdiutil detach /Volumes/phaustoLibrariesM1' ].
+	command traceCr.
 	(LibC runCommand: command) = 0 ifFalse: [ self warnCopyFailed ]
 ]
 
@@ -57,25 +60,48 @@ BaselineOfPhausto >> copyLibraries [
 { #category : 'utilities' }
 BaselineOfPhausto >> copyLibrariesFrom: repoDirectory [
 
-	| platform |
+	| platform source |
 	platform := OSPlatform current.
 	(platform isMacOS and: [ platform processorArchitecture = 'arm64' ])
 		ifTrue: [ ^ self copyARM64LibrariesFrom: repoDirectory ].
 
+	source := repoDirectory / (platform isMacOS
+		           ifTrue: [ 'librariesBundle_mac_intel.zip' ]
+		           ifFalse: [
+			           platform isUnix
+				           ifTrue: [ 'librariesBundle_Linux.zip' ]
+				           ifFalse: [ 'librariesBundle_windows_intel.zip' ] ]).
+
+	('Unzip ' , source asString , ' into ' , Smalltalk imagePath asFileReference parent asString) traceCr.
+
 	ZipArchive
-		extractFrom: repoDirectory / (platform isMacOS
-				 ifTrue: [ 'librariesBundle_mac_intel.zip' ]
-				 ifFalse: [
-					 platform isUnix
-						 ifTrue: [ 'librariesBundle_Linux.zip' ]
-						 ifFalse: [ 'librariesBundle_windows_intel.zip' ] ])
+		extractFrom: source
 		to: Smalltalk imagePath asFileReference parent
+]
+
+{ #category : 'utilities' }
+BaselineOfPhausto >> logDirectories [
+
+	Character cr traceCr.
+
+	'Iceberg repositories:' traceCr.
+	Transcript trace: (Character cr join: IceRepository registry).
+
+	Character cr traceCr.
+	Character cr traceCr.
+
+	'Image directory:' traceCr.
+	Smalltalk imageDirectory traceCr.
+
+	Character cr traceCr
 ]
 
 { #category : 'utilities' }
 BaselineOfPhausto >> warnCopyFailed [
 
 	<debuggerCompleteToSender>
+	self logDirectories.
+	
 	Warning signal:
 		'Failed to install Faust libraries, they must be copied to the image directory manually, see https://github.com/lucretiomsp/phausto/wiki'
 ]

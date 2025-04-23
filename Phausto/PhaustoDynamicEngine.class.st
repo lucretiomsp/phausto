@@ -45,18 +45,20 @@ PhaustoDynamicEngine class >> ffiLibrary [
 
 { #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> createDsp: aFaustCode [
-| myArgv |
 
-myArgv := ExternalAddress arrayOfStringsFrom: #('-I' 'librariesBundle/faustLibs') .
-^ [ self createDsp: aFaustCode arguments: myArgv ]
-  ensure: [ myArgv freeArrayOfStrings ]
+	| myArgv |
+	myArgv := ExternalAddress arrayOfStringsFrom: #( '-I' 'librariesBundle/faustLibs' ).
 
+	myArgv asInteger traceCr.
+
+	^ [ self createDsp: aFaustCode arguments: myArgv ] ensure: [
+		  myArgv freeArrayOfStrings ]
 ]
 
 { #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> createDsp: aFaustCode arguments: argv [
 
-  ^ self ffiCall: #(DSP* createDsp (const char* 'MyApp',  const char* aFaustCode,  int 2, void * argv  , const char* '', int -1))
+  ^ self ffiCall: #(DSP* createDsp (const char* 'MyApp',  const char* aFaustCode, int 2, void * argv , const char* '', int -1))
 
 
 ]
@@ -187,25 +189,21 @@ PhaustoDynamicEngine >> initializeDSP: aDsp withRenderer: aType [
 
 { #category : 'accessing - platform' }
 PhaustoDynamicEngine >> macLibraryName [
-	"Returns the name of the Dynamic Engine library for Mac."
 
 	^ FFIMacLibraryFinder findLibrary:
 		  'librariesBundle/libdynamic-engine.dylib'
 ]
 
 { #category : 'accessing - platform' }
-PhaustoDynamicEngine >> unix64LibraryName [ 
-	"Returns the name of the Dynamic Engine library for Mac."
+PhaustoDynamicEngine >> unix64LibraryName [
 
-	^ FFIUnix64LibraryFinder findLibrary:
-		  'librariesBundle/libdynamic-engine.so'
+	^ FFIUnix64LibraryFinder findLibrary: 'librariesBundle/libdynamic-engine.so'
 ]
 
 { #category : 'accessing - platform' }
 PhaustoDynamicEngine >> win32LibraryName [
-	
+
 	LibFaust ensurePathInDLLSearch.
-	
-	^ FFIWindowsLibraryFinder new
-		findLibrary: 'libdynamic-engine.dll'
+
+	^ FFIWindowsLibraryFinder new findLibrary: 'libdynamic-engine.dll'
 ]

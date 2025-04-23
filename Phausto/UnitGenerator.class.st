@@ -64,6 +64,7 @@ instancesInDSPContext := self  instancesInDSPContext + 1
 { #category : 'class initialization' }
 UnitGenerator class >> initialize [ 
 
+	activeInstances := Set new.
 	SessionManager default register:
 		(ClassSessionHandler forClassNamed: self name)
 ]
@@ -99,7 +100,8 @@ UnitGenerator class >> resetSelfAndAllSubClasses [
 { #category : 'system startup' }
 UnitGenerator class >> startUp [
 
-	'Unit Generators start counting from zero' traceCr.
+	'Unit Generators start counting from zero' traceCr.	
+	
 	self resetSelfAndAllSubClasses
 ]
 
@@ -208,6 +210,7 @@ UnitGenerator >> asDspWithName: aString [
 	
 		
 					interBox := self asBox.
+					interBox traceCr.
 					^ interBox asDspWithName: aString.
 ]
 

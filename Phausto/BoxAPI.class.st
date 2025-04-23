@@ -112,6 +112,9 @@ BoxAPI >> boxFromString: aFaustCode inputs: inputs outputs: outputs buffer: buff
 	myArgv := ExternalAddress arrayOfStringsFrom:
 		          #( '-I' 'librariesBundle/faustLibs' ).
 	
+	'myArgv: ' trace.
+	myArgv asInteger traceCr.
+	
 	^ [
 	  self
 		  boxFromString: aFaustCode
@@ -407,7 +410,7 @@ BoxAPI >> createLibContext [
 	sessionLibContext
 		ifFalse: [
 			"Uncomment next lines if you need to debug libCObtext creation"
-			"('Created libContext at: ' , DateAndTime now asString) traceCr."
+			('Created libContext at: ' , DateAndTime now asString) traceCr.
 			self createLibContextFFI.
 
 			PhBox libContext: true ]
@@ -458,7 +461,6 @@ BoxAPI >> isNil: aBox [
 
 { #category : 'accessing - platform' }
 BoxAPI >> macLibraryName [
-	"Returns the name of the dynamic libFaust for Mac."
 
 	^ FFIMacLibraryFinder findLibrary: 'librariesBundle/libfaust.2.dylib'
 ]
@@ -472,17 +474,15 @@ BoxAPI >> multiply: aBox with: anotherBox [
 ]
 
 { #category : 'accessing - platform' }
-BoxAPI >> unix64LibraryName [ 
-	"Returns the name of the dynamic libFaust for Linux."
+BoxAPI >> unix64LibraryName [
 
-	^ FFIUnix64LibraryFinder findLibrary: 'librariesBundle/libfaust.2.so'
+	^ FFIUnix64LibraryFinder findLibrary: 'librariesBundle/libfaust.so.2'
 ]
 
 { #category : 'accessing - platform' }
 BoxAPI >> win32LibraryName [
-	
+
 	LibFaust ensurePathInDLLSearch.
-	
-	^ FFIWindowsLibraryFinder new
-		findLibrary: 'libfaust.dll'
+
+	^ FFIWindowsLibraryFinder new findLibrary: 'libfaust.dll'
 ]
