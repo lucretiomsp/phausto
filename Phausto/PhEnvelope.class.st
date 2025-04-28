@@ -39,7 +39,11 @@ PhEnvelope >> initialize [
 		           min: 0.001
 		           max: 2
 		           step: 0.001.
-		trigger := PhButton new label: self label , 'Trigger'
+	trigger := PhButton new label: self label , 'Trigger'.
+
+	self controlParameters add: #trigger -> (self trigger
+			 asControlParameterOfWidgetType: #button
+			 description: 'Trig Envelopes').
 ]
 
 { #category : 'connecting' }

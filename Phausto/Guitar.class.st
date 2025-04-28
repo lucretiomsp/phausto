@@ -42,7 +42,11 @@ Guitar >> gain [
 Guitar >> initialize [
 
 	super initialize.
-	processExpression := 'process = pm.guitar;'
+	processExpression := 'process = pm.guitar;'.
+		trigger := PhButton new label: self label , 'Trigger'.
+	self controlParameters add: #trigger -> (self trigger
+			 asControlParameterOfWidgetType: #button
+			 description: 'Trig Percussion')
 ]
 
 { #category : 'accessing' }
@@ -60,6 +64,5 @@ Guitar >> pluckPosition [
 { #category : 'accessing' }
 Guitar >> trigger [
 
-	^ trigger ifNil: [
-		  trigger := PhButton new label: self label , 'Trigger' ]
+	^ trigger 
 ]

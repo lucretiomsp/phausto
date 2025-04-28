@@ -84,7 +84,11 @@ Clap >> initialize [
 		        init: 3200
 		        min: 400
 		        max: 3500
-		        step: 1
+		        step: 1.
+	
+	self controlParameters add: #tone -> (self tone
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Filter Frequency')
 ]
 
 { #category : 'accessing' }

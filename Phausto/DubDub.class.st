@@ -62,7 +62,7 @@ DubDub >> freq [
 { #category : 'accessing' }
 DubDub >> gate [
 
-	^ gate ifNil: [ gate := PhButton new label: self label ,  'Gate' ]
+	^ gate 
 ]
 
 { #category : 'initialization' }
@@ -76,12 +76,18 @@ DubDub >> initialize [
 		        min: 20
 		        max: 1400
 		        step: 0.1.
+
+	self controlParameters add: #freq -> (self freq
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Frequency in Hertz').
 	uLevel := PhHSlider new
 		          label: self label , 'uLevel'
 		          init: 0.05
 		          min: 0
 		          max: 1
-		          step: 0.001
+		          step: 0.001.
+		gate := PhButton new label: self label , 'Gate'.
+		self controlParameters add: #gate -> (self gate asControlParameterOfWidgetType: #button description: 'Trig the Sund').
 ]
 
 { #category : 'as yet unclassified' }

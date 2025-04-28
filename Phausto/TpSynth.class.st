@@ -12,7 +12,8 @@ Class {
 		'decay',
 		'sustain',
 		'release',
-		'name'
+		'name',
+		'trigger'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -43,6 +44,9 @@ TpSynth >> initialize [
 	super initialize.
 	"by default the name of the TpSynth is the name of the class"
 	gate := PhButton new label: self label , 'Gate'.
+	self controlParameters add: #gate -> (self gate
+			 asControlParameterOfWidgetType: #button
+			 description: 'Trig Synth').
 	self uLevel: (self label , 'Level') asSymbol.
 
 	pitch := PhHSlider new
@@ -78,10 +82,7 @@ TpSynth >> initialize [
 		           min: 0.001
 		           max: 2
 		           step: 0.001.
-	gate := PhButton new label: self label , 'Gate'.
-	self controlParameters add: #gate -> (self gate
-			 asControlParameterOfWidgetType: #button
-			 description: 'Trig Synth').
+
 ]
 
 { #category : 'initialization' }
@@ -124,4 +125,10 @@ TpSynth >> release [
 TpSynth >> sustain [
 
 	 ^ sustain 
+]
+
+{ #category : 'accessing' }
+TpSynth >> trigger [
+
+^ trigger
 ]

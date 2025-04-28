@@ -60,12 +60,19 @@ ModalPercussion >> initialize [
 		                   min: 0.001
 		                   max: 1
 		                   step: 0.001.
-		freq := PhHSlider new
-			          label: self label , 'Freq'
-			          init: 440
-			          min: 20
-			          max: 1200
-			          step: 1
+	freq := PhHSlider new
+		        label: self label , 'Freq'
+		        init: 440
+		        min: 20
+		        max: 1200
+		        step: 1.
+self controlParameters add: #freq -> (self freq
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Frequency in Hertz').
+	trigger := PhButton new label: self label , 'Trigger'.
+	self controlParameters add: #trigger -> (self trigger
+			 asControlParameterOfWidgetType: #button
+			 description: 'Trig Percussion')
 ]
 
 { #category : 'accessing' }
@@ -89,6 +96,5 @@ ModalPercussion >> strikeSharpness [
 { #category : 'accessing' }
 ModalPercussion >> trigger [
 
-	^ trigger ifNil: [
-		  trigger := PhButton new label: self label , 'Trigger' ]
+	^ trigger 
 ]

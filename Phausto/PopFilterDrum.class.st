@@ -54,13 +54,22 @@ PopFilterDrum >> initialize [
 		        min: 20
 		        max: 1400
 		        step: 0.1.
+		freq := PhHSlider new
+			          label: self label , 'Note'
+			          init: 440
+			          min: 20
+			          max: 1200
+			          step: 1.
+	self controlParameters add: #freq -> (self freq
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Filter Frequency in Hertz').
 	gate := PhButton new label: self label , 'Gate'.
 	q := PhHSlider new
-		        label: self label , 'Q'
-		        init: 5
-		        min: 1
-		        max: 12
-		        step: 0.01.
+		     label: self label , 'Q'
+		     init: 5
+		     min: 1
+		     max: 12
+		     step: 0.01
 ]
 
 { #category : 'accessing' }

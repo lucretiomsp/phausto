@@ -59,12 +59,18 @@ ResonatorFilter >> initialize [
 		     min: 0.1
 		     max: 5
 		     step: 0.001.
+	self controlParameters add: #q -> (self q
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Filter Resonance').
 	frequency := PhHSlider new
 		             label: self label , 'Frequency'
 		             init: 22040
 		             min: 25
 		             max: 22040
-		             step: 1
+		             step: 1.
+	self controlParameters add: #frequency -> (self frequency
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Cutoff Frequency in Hertz')
 ]
 
 { #category : 'accessing' }

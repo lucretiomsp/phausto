@@ -45,6 +45,10 @@ ElecGuitar >> initialize [
 	super initialize.
 	processExpression := 'process = pm.elecGuitar;'.
 	mute := 1 asBox.
+	trigger := PhButton new label: self label , 'Trigger'.
+	self controlParameters add: #trigger -> (self trigger
+			 asControlParameterOfWidgetType: #button
+			 description: 'Trig Guitar')
 ]
 
 { #category : 'as yet unclassified' }
@@ -77,6 +81,5 @@ ElecGuitar >> pluckPosition: aNumberOrABoxOrASymbol [
 { #category : 'accessing' }
 ElecGuitar >> trigger [
 
-	^ trigger ifNil: [
-		  trigger := PhButton new label: self label , 'Trigger' ]
+	^ trigger 
 ]
