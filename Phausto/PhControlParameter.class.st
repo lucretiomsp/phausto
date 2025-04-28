@@ -11,7 +11,8 @@ Class {
 		'step',
 		'widgetType',
 		'value',
-		'description'
+		'description',
+		'name'
 	],
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
@@ -40,6 +41,17 @@ PhControlParameter >> label [
 PhControlParameter >> label: aString [
 
 	label := aString
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> name [
+^ name
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> name: aSymbol [
+
+	name := aSymbol 
 ]
 
 { #category : 'accessing' }
