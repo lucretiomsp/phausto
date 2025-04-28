@@ -287,8 +287,9 @@ UnitGenerator >> initializeControlParameters [
 
 	controlParameters := Dictionary new.
 	controlParameters add: #uLevel -> (PhControlParameter new
-			 label:  self label , 'uLevel';
+			 label: self label , 'uLevel';
 			 range: (0 to: 1);
+			step: 0.001;
 			 description: 'Output level';
 			 value: self uLevel;
 			 widgetType: #verticalSlider)
