@@ -1,6 +1,6 @@
 Extension { #name : 'BlElement' }
 
 { #category : '*Phausto' }
-BlElement classSide >> fromDictionary: aCollection forDsp: aDSP [ 
+BlElement class >> fromDictionary: aCollection forDsp: aDSP [ 
 	^ nil.
 ]

@@ -431,13 +431,7 @@ ParamsSetter >> fr: aNumberOrABoxOrASymbol [
 { #category : 'accessing' }
 ParamsSetter >> freq: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	thisContext selector changeLabelOrInitialValue: aNumberOrABoxOrASymbol forUGen: self
 ]
 
 { #category : 'accessing' }

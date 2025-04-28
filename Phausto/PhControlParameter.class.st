@@ -6,8 +6,9 @@ Class {
 	#name : 'PhControlParameter',
 	#superclass : 'Object',
 	#instVars : [
-		'name',
+		'label',
 		'range',
+		'step',
 		'widgetType',
 		'value',
 		'description'
@@ -30,15 +31,15 @@ PhControlParameter >> description: aString [
 ]
 
 { #category : 'accessing' }
-PhControlParameter >> name [
+PhControlParameter >> label [
 
-	^ name
+	^ label
 ]
 
 { #category : 'accessing' }
-PhControlParameter >> name: aSymbol [
+PhControlParameter >> label: aString [
 
-	name := aSymbol
+	label := aString
 ]
 
 { #category : 'accessing' }
@@ -51,6 +52,24 @@ PhControlParameter >> range [
 PhControlParameter >> range: anInterval [
 
 	range := anInterval
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> step [
+	
+^ step
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> step: aNumber [
+
+	step := aNumber
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> step: aNumber
+
+	step: aNumber [
 ]
 
 { #category : 'accessing' }

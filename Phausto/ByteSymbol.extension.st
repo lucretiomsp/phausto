@@ -8,7 +8,10 @@ ByteSymbol >> asParam: aString forUGen: aUnitGenerator [
 	uiElement := aUnitGenerator perform: aString asSymbol.
 	uiElement label: self.
 
-	aUnitGenerator instVarNamed: aString put: uiElement
+	aUnitGenerator instVarNamed: aString put: uiElement.
+	
+"change corresponding controlParameter label"
+(aUnitGenerator controlParameters at: aString asSymbol) label: self.
 ]
 
 { #category : '*Phausto' }
@@ -28,4 +31,14 @@ ByteSymbol >> asPhHSlider [
 		   min: 0
 		   max: 1
 		   step: 0.001) asBox
+]
+
+{ #category : '*Phausto' }
+ByteSymbol >> changeLabelOrInitialValue: aNumberOrABoxOrASymbol forUGen: aUGen [
+
+	aNumberOrABoxOrASymbol
+		asParam: self asString allButLast
+		forUGen: aUGen
+		
+	
 ]
