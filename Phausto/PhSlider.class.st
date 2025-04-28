@@ -5,20 +5,10 @@ Super class for Horizontal, Vertical and NumEntry slider created by the Faust co
 Class {
 	#name : 'PhSlider',
 	#superclass : 'UIPrimitive',
-	#instVars : [
-		'init',
-		'step'
-	],
 	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
 	#tag : 'UIPrimitives'
 }
-
-{ #category : 'accessing' }
-PhSlider >> init [
-
-	^ init
-]
 
 { #category : 'accessing' }
 PhSlider >> init: aNumber [
@@ -63,12 +53,6 @@ PhSlider >> label: aLabel values: anArray [
 	min := (anArray at: 2) .
 	max := (anArray at: 3) .
 	step := (anArray at: 4) 
-]
-
-{ #category : 'accessing' }
-PhSlider >> step [
-
-	^ step
 ]
 
 { #category : 'accessing' }

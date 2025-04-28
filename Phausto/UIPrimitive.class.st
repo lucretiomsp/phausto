@@ -10,8 +10,10 @@ Class {
 	#superclass : 'PhBox',
 	#instVars : [
 		'label',
+		'init',
 		'min',
 		'max',
+		'step',
 		'widgetType'
 	],
 	#category : 'Phausto-UIPrimitives',
@@ -32,19 +34,27 @@ UIPrimitive >> asControlParameterOfWidgetType: aSymbol description: aString [
 	^ controlParam
 ]
 
+{ #category : 'accessing' }
+UIPrimitive >> init [
+
+	^ init
+]
+
 { #category : 'common' }
 UIPrimitive >> init: aNumber [
 "syntactic sugar"
 ]
 
 { #category : 'initialization' }
-UIPrimitive >> initialize [ 
-super initialize.
+UIPrimitive >> initialize [
+
+	super initialize.
 	label := 'label'.
-	
+
 	min := 0.
 	max := 1.
-	
+	init := 0.
+	step := 1.
 ]
 
 { #category : 'accessing' }
@@ -80,6 +90,12 @@ UIPrimitive >> min [
 UIPrimitive >> min: aNumber [
 
 	min := aNumber asBox
+]
+
+{ #category : 'accessing' }
+UIPrimitive >> step [
+
+	^ step
 ]
 
 { #category : 'accessing' }
