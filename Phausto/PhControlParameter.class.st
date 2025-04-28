@@ -44,6 +44,18 @@ PhControlParameter >> label: aString [
 ]
 
 { #category : 'accessing' }
+PhControlParameter >> max [
+
+^ self range last
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> min [ 
+
+^ self range first
+]
+
+{ #category : 'accessing' }
 PhControlParameter >> name [
 ^ name
 ]

@@ -19,6 +19,19 @@ Class {
 	#tag : 'UIPrimitives'
 }
 
+{ #category : 'converting' }
+UIPrimitive >> asControlParameter [
+	self shouldBeImplemented.
+]
+
+{ #category : 'converting' }
+UIPrimitive >> asControlParameterOfWidgetType: aSymbol description: aString [ 
+	| controlParam |
+	
+	controlParam := PhControlParameter new label: self label; range: (self min to: self max); initialValue: self init; step: self step; widgetType: aSymbol; description: aString.
+	^ controlParam
+]
+
 { #category : 'common' }
 UIPrimitive >> init: aNumber [
 "syntactic sugar"

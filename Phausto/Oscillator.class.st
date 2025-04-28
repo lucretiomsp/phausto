@@ -35,11 +35,12 @@ Oscillator >> initialize [
 	super initialize.
 	"default frequency for all Oscilators is a slider initialized at A4 / picth standard"
 	freq := PhHSlider new
-			  label: self label , 'Freq'
-			  init: 440
-			  min: 20
-			  max: 4086
-			  step: 1 
+		        label: self label , 'Freq'
+		        init: 440
+		        min: 20
+		        max: 4086
+		        step: 1.
+	self initializeControlParameters 
 ]
 
 { #category : 'initialization' }
