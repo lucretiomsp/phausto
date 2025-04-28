@@ -12,7 +12,8 @@ Class {
 		'widgetType',
 		'value',
 		'description',
-		'name'
+		'name',
+		'initialValue'
 	],
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
@@ -29,6 +30,19 @@ PhControlParameter >> description [
 PhControlParameter >> description: aString [
 
 	description := aString
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> initialValue [
+
+
+^ initialValue 
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> initialValue: aNumber [
+
+	initialValue :=  aNumber 
 ]
 
 { #category : 'accessing' }
