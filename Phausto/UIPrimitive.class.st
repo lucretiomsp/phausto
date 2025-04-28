@@ -28,7 +28,7 @@ UIPrimitive >> asControlParameter [
 UIPrimitive >> asControlParameterOfWidgetType: aSymbol description: aString [ 
 	| controlParam |
 	
-	controlParam := PhControlParameter new label: self label; range: (self min to: self max); initialValue: self init; step: self step; widgetType: aSymbol; description: aString.
+	controlParam := PhControlParameter new label: self label; min: self min; max: self max; initialValue: self init; step: self step; widgetType: aSymbol; description: aString.
 	^ controlParam
 ]
 

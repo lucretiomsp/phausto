@@ -13,7 +13,9 @@ Class {
 		'value',
 		'description',
 		'name',
-		'initialValue'
+		'initialValue',
+		'min',
+		'max'
 	],
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
@@ -60,13 +62,25 @@ PhControlParameter >> label: aString [
 { #category : 'accessing' }
 PhControlParameter >> max [
 
-^ self range last
+	^ max
 ]
 
 { #category : 'accessing' }
-PhControlParameter >> min [ 
+PhControlParameter >> max: aNumber [
 
-^ self range first
+	max := aNumber
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> min [
+
+	^ min
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> min: aNumber [
+
+	min := aNumber
 ]
 
 { #category : 'accessing' }
@@ -83,13 +97,7 @@ PhControlParameter >> name: aSymbol [
 { #category : 'accessing' }
 PhControlParameter >> range [
 
-	^ range
-]
-
-{ #category : 'accessing' }
-PhControlParameter >> range: anInterval [
-
-	range := anInterval
+	^ self min asString , ' - ' , self max asString
 ]
 
 { #category : 'accessing' }
