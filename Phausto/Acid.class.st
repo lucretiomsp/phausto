@@ -14,7 +14,6 @@ Class {
 		'waveform',
 		'compensation',
 		'distortion',
-		'volume',
 		'filterDecay'
 	],
 	#category : 'Phausto-TurboPhausto',
@@ -32,7 +31,6 @@ Acid >> accent [
 Acid >> asBox [
 
 	| saw square baseFreq oscillator filterEnv filter ampEnv instrument envAmount |
-	
 	baseFreq := PhHSlider new
 		            label: self label , 'Note'
 		            init: 440
@@ -43,11 +41,11 @@ Acid >> asBox [
 
 
 	filterEnv := AREnv new
-		             trigger: self trigger;
+		             trigger: #acidGate;
 		             attack: 0.001 asBox;
 		             release: self filterDecay.
 	ampEnv := AREnv new
-		          trigger: self trigger;
+		          trigger: #acidGate;
 		          attack: 0.001 asBox;
 		          release: 0.2 asBox.
 
@@ -58,10 +56,10 @@ Acid >> asBox [
 		          fr: envAmount + self cutoffFreq;
 		          res: self resonance.
 	saw := SawOsc new
-		       uLevel: self volume;
+		       uLevel: self uLevel * 0.25 asBox;
 		       freq: baseFreq + self tuning.
 	square := SquareOsc new
-		          uLevel: self volume;
+		          uLevel: self uLevel * 0.25 asBox;
 		          freq: baseFreq + self tuning.
 	oscillator := Select2 new
 		              label: self label , 'Waveform';
@@ -103,7 +101,7 @@ Acid >> initialize [
 		             max: 7
 		             step: 0.001.
 
-	volume := PhHSlider new
+	level := PhHSlider new
 		          label: self label , 'uLevel'
 		          init: 0.5
 		          min: 0
@@ -157,9 +155,9 @@ Acid >> tuning [
 ]
 
 { #category : 'accessing' }
-Acid >> volume [
+Acid >> uLevel [
 
-^ volume
+	^ uLevel
 ]
 
 { #category : 'accessing' }

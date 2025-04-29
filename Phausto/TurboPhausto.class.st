@@ -185,6 +185,7 @@ TurboPhausto class >> loadAllSynths [
 				 freq: #dubdubNote);
 		add: (Acid new
 				 label: 'acid';
+				
 				 pitch: #acidNote);
 		add: (Chordy new
 				 label: 'chordy';
