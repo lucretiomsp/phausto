@@ -14,7 +14,8 @@ Class {
 		'waveform',
 		'compensation',
 		'distortion',
-		'volume'
+		'volume',
+		'filterDecay'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -30,13 +31,8 @@ Acid >> accent [
 { #category : 'initialization' }
 Acid >> asBox [
 
-	| saw square baseFreq oscillator filterEnv filter ampEnv instrument envAmount filterDecay |
-	envMod := PhHSlider new
-		          label: self label , 'EnvMod'
-		          init: 0
-		          min: 0
-		          max: 1
-		          step: 0.001.
+	| saw square baseFreq oscillator filterEnv filter ampEnv instrument envAmount |
+	
 	baseFreq := PhHSlider new
 		            label: self label , 'Note'
 		            init: 440
@@ -45,16 +41,11 @@ Acid >> asBox [
 		            step: 1.
 
 
-	filterDecay := PhHSlider new
-		               label: self label , 'EnvDecay'
-		               init: 0.2
-		               min: 0.01
-		               max: 2
-		               step: 0.001.
+
 	filterEnv := AREnv new
 		             trigger: self trigger;
 		             attack: 0.001 asBox;
-		             release: filterDecay.
+		             release: self filterDecay.
 	ampEnv := AREnv new
 		          trigger: self trigger;
 		          attack: 0.001 asBox;
@@ -95,11 +86,23 @@ Acid >> envMod [
 	^ envMod 
 ]
 
+{ #category : 'accessing' }
+Acid >> filterDecay [
+
+	^ filterDecay
+]
+
 { #category : 'initialization' }
 Acid >> initialize [
 
 	super initialize.
-	self resonance: #( 1 1 7 0.001 ).
+	resonance := PhHSlider new
+		             label: self label , 'Resonance'
+		             init: 4.5
+		             min: 1
+		             max: 7
+		             step: 0.001.
+
 	volume := PhHSlider new
 		          label: self label , 'uLevel'
 		          init: 0.5
@@ -108,19 +111,14 @@ Acid >> initialize [
 		          step: 0.01.
 	cutoffFreq := PhHSlider new
 		              label: self label , 'CutoffFreq'
-		              init: 1
+		              init: 0.3
 		              min: 0.2
 		              max: 1
 		              step: 0.001.
-	resonance := PhHSlider new
-		             label: self label , 'Resonance'
-		             init: 0.5
-		             min: 0.001
-		             max: 7
-		             step: 0.001.
+
 	envMod := PhHSlider new
 		          label: self label , 'EnvMod'
-		          init: 0.5
+		          init: 0.64
 		          min: 0.1
 		          max: 1
 		          step: 0.001.
@@ -131,13 +129,19 @@ Acid >> initialize [
 		          max: 100
 		          step: 1.
 	waveform := PhButton new label: self label , 'Waveform'.
-		trigger := PhButton new label: self label , 'Gate'.
+	trigger := PhButton new label: self label , 'Gate'.
 	accent := PhHSlider new
 		          label: self label , 'Accent'
-		          init: 0.5
+		          init: 0.6
 		          min: 0
 		          max: 1
-		          step: 0.001
+		          step: 0.001.
+	filterDecay := PhHSlider new
+		               label: self label , 'EnvDecay'
+		               init: 0.282
+		               min: 0.01
+		               max: 2
+		               step: 0.001
 ]
 
 { #category : 'accessing' }
