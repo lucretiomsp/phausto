@@ -19,17 +19,20 @@ Class {
 { #category : 'accessing' }
 StringInstruments >> freq [
 
-	^ freq ifNil: [
-		  freq := PhHSlider new
-			            label: self label , 'Note'
-			            init: 440
-			            min: 20
-			            max: 1200
-			            step: 1 ]
+	^ freq
 ]
 
 { #category : 'initialization' }
 StringInstruments >> initialize [
 
-	super initialize
+	super initialize.
+  freq := PhHSlider new
+			          label: self label , 'Note'
+			          init: 440
+			          min: 20
+			          max: 1200
+			          step: 1.
+	self controlParameters add: #freq -> (self freq
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Frequency in Hertz')
 ]

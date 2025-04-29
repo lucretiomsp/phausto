@@ -12,7 +12,8 @@ Class {
 		'decay',
 		'sustain',
 		'release',
-		'name'
+		'name',
+		'trigger'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -34,7 +35,7 @@ TpSynth >> decay [
 { #category : 'accessing' }
 TpSynth >> gate [
 
-	^ gate ifNil: [ PhButton new label: self label , 'Gate']
+	^ gate 
 ]
 
 { #category : 'initialization' }
@@ -43,6 +44,10 @@ TpSynth >> initialize [
 	super initialize.
 	"by default the name of the TpSynth is the name of the class"
 	gate := PhButton new label: self label , 'Gate'.
+	self controlParameters add: #gate -> (self gate
+			 asControlParameterOfWidgetType: #button
+			 description: 'Trig Synth').
+	self uLevel: (self label , 'Level') asSymbol.
 
 	pitch := PhHSlider new
 		         label: self label , 'Note'
@@ -50,6 +55,9 @@ TpSynth >> initialize [
 		         min: 20
 		         max: 4086
 		         step: 1.
+	self controlParameters add: #pitch -> (self pitch
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Frequency in Hertz').
 	attack := PhHSlider new
 		          label: self label , 'Attack'
 		          init: 0.01
@@ -73,7 +81,8 @@ TpSynth >> initialize [
 		           init: 0.1
 		           min: 0.001
 		           max: 2
-		           step: 0.001
+		           step: 0.001.
+
 ]
 
 { #category : 'initialization' }
@@ -83,7 +92,9 @@ self controlParameters add:
 
 #Attack -> (PhControlParameter new
 			 name: #Attack;
-			 range: (0 to: 1);
+			 min: 0;
+			max: 1;
+			step: 0.001;
 			 description: 'Attack Time';
 			 value: self attack;
 			 widgetType: #knob)
@@ -114,4 +125,10 @@ TpSynth >> release [
 TpSynth >> sustain [
 
 	 ^ sustain 
+]
+
+{ #category : 'accessing' }
+TpSynth >> trigger [
+
+^ trigger
 ]

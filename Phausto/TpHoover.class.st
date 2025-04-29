@@ -27,6 +27,10 @@ TpHoover >> initialize [
 
 	| pitchEnv pitchEnvAmt |
 	super initialize.
+	trigger := PhButton new label: self label , 'Trigger'.
+	self controlParameters add: #trigger -> (self trigger
+			 asControlParameterOfWidgetType: #button
+			 description: 'Trig Envelopes').
 	pitchEnv := ADSREnv new
 		            label: #PE;
 		            trigger: #hooverGate;
@@ -38,10 +42,13 @@ TpHoover >> initialize [
 	pitch := (PhHSlider new
 		          label: 'hooverNote'
 		          values: #( 200 20 2000 1 )) + (pitchEnv * pitchEnvAmt).
-	oscillators := (SawOsc new freq: pitch)
-	               + (SawOsc new uLevel: 0.3 asBox; freq: pitch + 3)
-	               + (SawOsc new uLevel: 0.3 asBox; freq: pitch * 2 + 3)
-	               + (TriOsc new uLevel: 0.3 asBox; freq: pitch * 0.5).
+	oscillators := (SawOsc new freq: pitch) + (SawOsc new
+		                uLevel: 0.3 asBox;
+		                freq: pitch + 3) + (SawOsc new
+		                uLevel: 0.3 asBox;
+		                freq: pitch * 2 + 3) + (TriOsc new
+		                uLevel: 0.3 asBox;
+		                freq: pitch * 0.5).
 	ampEnv := ADSREnv new
 		          trigger: #hooverGate;
 		          attack: 0 asBox;

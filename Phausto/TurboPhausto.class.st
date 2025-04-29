@@ -185,6 +185,7 @@ TurboPhausto class >> loadAllSynths [
 				 freq: #dubdubNote);
 		add: (Acid new
 				 label: 'acid';
+				
 				 pitch: #acidNote);
 		add: (Chordy new
 				 label: 'chordy';
@@ -434,6 +435,12 @@ TurboPhausto >> sweepToValue: aTargetValue parameter: aParamAsString in: aTimeIn
 		parameter: aParamAsString
 		in: aTimeInseconds
 	"  sweep the value of the selected parameter in a TimeInSeconds - the value is update every 10 milliseconds"
+]
+
+{ #category : 'tracing' }
+TurboPhausto >> traceAllParams [ 
+
+self class tpDsp traceAllParams 
 ]
 
 { #category : 'API - changes' }

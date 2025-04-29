@@ -64,6 +64,10 @@ CombString >> initialize [
 		        min: 2900
 		        max: 1
 		        step: 0.01.
+
+	self controlParameters add: #freq -> (self freq
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Frequency in Hertz').
 	gate := PhButton new label: self label , 'Gate'.
 	res := PhHSlider new
 		       label: self label , 'Res'

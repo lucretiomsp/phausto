@@ -74,13 +74,17 @@ Hat >> initialize [
 		         min: 0
 		         max: 4.0
 		         step: 0.01.
-		
+	
+	self controlParameters add: #pitch -> (self pitch
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Frequency in Hertz').
+
 	tone := PhHSlider new
-			          label: self label , 'Tone'
-			          init: 9800
-			          min: 800
-			          max: 18000
-			          step: 1 
+		        label: self label , 'Tone'
+		        init: 9800
+		        min: 800
+		        max: 18000
+		        step: 1
 ]
 
 { #category : 'as yet unclassified' }

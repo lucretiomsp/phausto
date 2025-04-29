@@ -12,7 +12,10 @@ Class {
 		'widgetType',
 		'value',
 		'description',
-		'name'
+		'name',
+		'initialValue',
+		'min',
+		'max'
 	],
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
@@ -32,6 +35,19 @@ PhControlParameter >> description: aString [
 ]
 
 { #category : 'accessing' }
+PhControlParameter >> initialValue [
+
+
+^ initialValue 
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> initialValue: aNumber [
+
+	initialValue :=  aNumber 
+]
+
+{ #category : 'accessing' }
 PhControlParameter >> label [
 
 	^ label
@@ -41,6 +57,30 @@ PhControlParameter >> label [
 PhControlParameter >> label: aString [
 
 	label := aString
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> max [
+
+	^ max
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> max: aNumber [
+
+	max := aNumber
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> min [
+
+	^ min
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> min: aNumber [
+
+	min := aNumber
 ]
 
 { #category : 'accessing' }
@@ -57,13 +97,7 @@ PhControlParameter >> name: aSymbol [
 { #category : 'accessing' }
 PhControlParameter >> range [
 
-	^ range
-]
-
-{ #category : 'accessing' }
-PhControlParameter >> range: anInterval [
-
-	range := anInterval
+	^ self min asString , ' - ' , self max asString
 ]
 
 { #category : 'accessing' }

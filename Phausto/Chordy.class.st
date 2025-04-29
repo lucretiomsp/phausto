@@ -50,12 +50,12 @@ Chordy >> asBox [
 		                  PhSelect4 new.
 
 	"voices"
-	voice1 := (SawOsc new freq: self pitch asBox) * 0.3.
+	voice1 := (SawOsc new freq: self pitch asBox; uLevel: 0.25 asBox) .
 
-	voice2 := (SawOsc new freq: self pitch asBox * secondInterval asBox)
-	          * 0.3.
+	voice2 := (SawOsc new uLevel: 0.25 ;freq: self pitch asBox * secondInterval asBox)
+	          .
 	" a perfect fifth as a  End of statement expected ->1.6 ratio to the root"
-	voice3 := (SawOsc new freq: self pitch asBox * 1.5 asBox) * 0.3.
+	voice3 := (SawOsc new uLevel ; freq: self pitch asBox * 1.5 asBox) .
 	^ (filter input: voice1 + voice2 + voice3) * ampEnv asBox
 	  * self uLevel asBox
 ]

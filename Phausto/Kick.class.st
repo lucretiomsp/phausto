@@ -100,6 +100,10 @@ Kick >> initialize [
 		         min: 20
 		         max: 1400
 		         step: 0.1.
+
+	self controlParameters add: #pitch -> (self pitch
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Frequency in Hertz').
 	gate := PhButton new label: self label , 'Gate'.
 	drive := PhHSlider new
 		         label: self label , 'Drive'
