@@ -137,8 +137,7 @@ TurboPhausto class >> loadAllSamplers [
 			allSamplers := subDir collect: [ :i |
 				               TpSampler new pathToFolder: i pathString ].
 			allLabels := subDir collect: [ :i |
-				             (i pathString findBetweenSubstrings: '/') last
-					             asString ].
+				             i pathString  afterLastSlashOfPath ].
 			1 to: size do: [ :i | (allSamplers at: i) label: (allLabels at: i) ].
 
 			^ allSamplers ]

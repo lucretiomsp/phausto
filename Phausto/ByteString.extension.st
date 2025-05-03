@@ -8,6 +8,16 @@ ByteString >> afterLastSlash [
 ]
 
 { #category : '*Phausto' }
+ByteString >> afterLastSlashOfPath [
+
+
+Smalltalk os family = #MacOSX ifTrue: 
+	[^ (self findBetweenSubstrings: '/') last].
+Smalltalk os family = #Windows ifTrue: [^ (self findBetweenSubstrings: '
+\') last]
+]
+
+{ #category : '*Phausto' }
 ByteString >> asSymbolWithSuffix: aString [
 
 	^ ((WriteStream on: String new)
