@@ -3,7 +3,11 @@ Extension { #name : 'ByteString' }
 { #category : '*Phausto' }
 ByteString >> afterLastSlash [
 
-	^ (self findBetweenSubstrings: '/') last
+Smalltalk os family = #MacOSX ifTrue: 
+	[^ (self findBetweenSubstrings: '/') last].
+Smalltalk os family = #Windows ifTrue: [^ (self findBetweenSubstrings: '
+\') last].
+
 ]
 
 { #category : '*Phausto' }
