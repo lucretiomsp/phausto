@@ -10,5 +10,5 @@ FileReference >> hasAudioFiles [
 { #category : '*Phausto' }
 FileReference >> isAudioFile [
 
-self asString isAudioFilePath 
+	^ self pathString isAudioFilePath
 ]
