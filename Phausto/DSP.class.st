@@ -219,13 +219,17 @@ DSP class >> paramException [
 ]
 
 { #category : 'accessing' }
-DSP class >> rendereType [
-	
-|rtype|
-"if not Apple Silicon, renderer type 0 = PortAudio"
-rtype := 0.
-(Smalltalk os family = #MacOSX ) ifTrue: [ Smalltalk os processorArchitecture = 'arm64' ifTrue: [rtype := 3]].
-^ rtype 
+DSP class >> rendererType [
+
+	| rtype |
+	"if Mac and not Apple Silicon, renderer type 0 = PortAudio
+	if Windows, renderer type = 1
+	"
+	rtype := 0.
+	Smalltalk os family = #MacOSX ifTrue: [
+		Smalltalk os processorArchitecture = 'arm64' ifTrue: [ rtype := 3 ] ].
+	Smalltalk os family = #Windows ifTrue: [ rtype := 1 ].
+	^ rtype
 ]
 
 { #category : 'as yet unclassified' }
@@ -587,7 +591,7 @@ DSP >> init [
 			'DSP inizialized' traceCr.
 			self isInitialized: true.
 			self class initializedDSP: self.
-			PhaustoDynamicEngine uniqueInstance initializeDSP: self withRenderer: self class rendereType ]
+			PhaustoDynamicEngine uniqueInstance initializeDSP: self withRenderer: self class rendererType ]
 ]
 
 { #category : 'accessing' }
