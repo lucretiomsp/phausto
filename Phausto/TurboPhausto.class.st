@@ -247,12 +247,13 @@ TurboPhausto class >> samplesFolderExists [
 { #category : 'accessing' }
 TurboPhausto class >> start [
 	"load all the Turbo- Samplers, Synths and Effects. initialize and start a dsp and assign it to a Performance"
-
+   | perf |
+perf := Performance uniqueInstance.
 	self loadAllSamplers.
 	self loadAllSynths.
 	self loadFilters.
 	self loadEffects.
-   self loadRack.
+	self loadRack.
 
 
 	self tpDsp ifNotNil: [
@@ -262,7 +263,7 @@ TurboPhausto class >> start [
 	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
 		ifNotNil: [ self tpDsp start ] ] fork.
 
-	tpPerf := Performance uniqueInstance forDsp: tpDsp
+	tpPerf := perf forDsp: tpDsp
 ]
 
 { #category : 'accessing' }
