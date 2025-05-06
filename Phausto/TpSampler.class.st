@@ -114,8 +114,8 @@ TpSampler >> createSingleFilesURL [
 	| filePathPrefix filePathSuffix filePath |
 	filePathPrefix := '' , self label , '[url:'.
 	filePathSuffix := ']'.
-"fix WIndows paths"
-	filePath := self pathToFile copyReplaceAll: '\' with: '/' .
+	"fix WIndows paths"
+	filePath := self pathToFile copyReplaceAll: '\' with: '/'.
 	filesURL := filePathPrefix , filePath , filePathSuffix
 ]
 
