@@ -31,15 +31,16 @@ Class {
 { #category : 'converting' }
 TpSampler >> asBox [
 
-	| reader sp output sampler partNumber|
+	| reader sp output sampler partNumber |
 	partNumber := self index asBox min: self numberOfSamples asBox.
+	
 	reader := PhReaderWithSpeed new
 		          trigger: self gate;
 		          speed: self pitch / 261.625 asBox.
 	sp := BoxAPI uniqueInstance
 		      boxSoundFile: filesURL
 		      numChannels: 2 asBox
-		      part: partNumber 
+		      part: partNumber
 		      readIndex: reader asBox.
 
 	output := Cut new asBox , Cut new asBox , Cut new asBox
@@ -83,10 +84,10 @@ TpSampler >> changeParamsPrefix [
 ]
 
 { #category : 'as yet unclassified' }
-TpSampler >> createFilesURL [
+TpSampler >> createMultiFilesURL [
 
-| allFiles audioFiles unsortedfileNames fileNames allFilePaths filePathPrefix filePathSuffix allFilesPathsWithoutLastColumn |
-allFiles := pathToFolder asFileReference allChildren reject: [ :i |
+	| allFiles audioFiles unsortedfileNames fileNames allFilePaths filePathPrefix filePathSuffix allFilesPathsWithoutLastColumn |
+	allFiles := pathToFolder asFileReference allChildren reject: [ :i |
 		            i isHidden ].
 	"first we select only valid audio files"
 	audioFiles := allFiles select: [ :f | f pathString isAudioFilePath ].
@@ -97,14 +98,25 @@ allFiles := pathToFolder asFileReference allChildren reject: [ :i |
 
 	fileNames do: [ :f | f traceCr ].
 	allFilePaths := ''.
-	fileNames do: [ :i | allFilePaths := allFilePaths , i , ';' ].
+	fileNames do: [ :i | allFilePaths := (allFilePaths copyReplaceAll: '\'  with: '/') , i , ';' ].
 	filePathPrefix := '' , self label , '[url:{'.
 	filePathSuffix := '}]'.
 	allFilesPathsWithoutLastColumn := allFilePaths
 		                                  copyFrom: 1
 		                                  to: allFilePaths size - 1.
 	filesURL := filePathPrefix , allFilesPathsWithoutLastColumn
-	            , filePathSuffix.
+	            , filePathSuffix
+]
+
+{ #category : 'as yet unclassified' }
+TpSampler >> createSingleFilesURL [
+
+	| filePathPrefix filePathSuffix filePath |
+	filePathPrefix := '' , self label , '[url:'.
+	filePathSuffix := ']'.
+"fix WIndows paths"
+	filePath := self pathToFile copyReplaceAll: '\' with: '/' .
+	filesURL := filePathPrefix , filePath , filePathSuffix
 ]
 
 { #category : 'accessing' }
@@ -180,7 +192,8 @@ TpSampler >> pathToFile [
 { #category : 'accessing' }
 TpSampler >> pathToFile: aString [
 
-	pathToFile := aString 
+	pathToFile := aString.
+	self createSingleFilesURL .
 ]
 
 { #category : 'accessing' }
@@ -193,7 +206,7 @@ TpSampler >> pathToFolder [
 TpSampler >> pathToFolder: aString [
 
 	pathToFolder := aString.
-	self createFilesURL .
+	self createMultiFilesURL .
 	"we set the maximum value for index as the number of samples in the folder"
 	self index max: self numberOfSamples
 ]

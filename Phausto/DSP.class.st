@@ -569,7 +569,8 @@ knobs := uiElements select: [ :i | (i at: #type) = 'hslider' ].
 { #category : 'ui-building' }
 DSP >> getUIfromJSON [
 
-^ ((STONJSON fromString: (self getJSON)) at: #ui) at: 1
+	^ ((STONJSON fromString:
+		    self getJSON ) at: #ui) at: 1
 ]
 
 { #category : 'initialize' }
