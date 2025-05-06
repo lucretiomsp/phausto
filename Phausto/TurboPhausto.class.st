@@ -250,7 +250,7 @@ TurboPhausto class >> start [
 	| perf |
 	perf := Performance uniqueInstance.
 	self loadAllSamplers.
-	self loadAllSynths.
+	"self loadAllSynths."
 	"self loadFilters.
 	self loadEffects.
 	self loadRack."
@@ -258,7 +258,7 @@ TurboPhausto class >> start [
 
 	self tpDsp ifNotNil: [
 		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	tpDsp := self allInstruments asSumOfUGen stereo  asDsp.
+	tpDsp := self allSamplers asSumOfUGen stereo asDsp.
 	"tpDsp := self rack stereo asDsp."
 	[
 	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
