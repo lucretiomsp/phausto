@@ -16,25 +16,25 @@ EcoPhausto class >> start [
 	| kick snare ch oh cowbell conga acid perf |
 	perf := Performance uniqueInstance .
 	kick := TpSampler new
-		        pathToFile: self turboSamplesFolder , '\kick\_full909.wav';
+		        pathToFile: self turboSamplesFolder , '/kick/_full909.wav';
 		        label: 'kick'.
 	snare := TpSampler new
 		         pathToFile:
-			         self turboSamplesFolder , '\snare\SD_Drumaxia.wav';
+			         self turboSamplesFolder , '/snare/SD_Drumaxia.wav';
 		         label: 'snare'.
 	ch := TpSampler new
 		      pathToFile:
-			      self turboSamplesFolder , '\ch\CH_Filtix Closed Hat.wav';
+			      self turboSamplesFolder , '/ch/CH_Filtix Closed Hat.wav';
 		      label: 'ch'.
 	oh := TpSampler new
-		      pathToFile: self turboSamplesFolder , '\oh\OH_Punchtron.wav';
+		      pathToFile: self turboSamplesFolder , '/oh/OH_Punchtron.wav';
 		      label: 'oh'.
 	cowbell := TpSampler new
 		           pathToFile:
-			           self turboSamplesFolder , '\cowbell\Cow1-R50.wav';
+			           self turboSamplesFolder , '/cowbell/Cow1-R50.wav';
 		           label: 'cowbell'.
 	conga := TpSampler new
-		         pathToFolder: self turboSamplesFolder , '\conga';
+		         pathToFolder: self turboSamplesFolder , '/conga';
 		         label: 'conga'.
 	acid := Acid new label: 'acid'.
 
