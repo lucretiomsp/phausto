@@ -13,18 +13,17 @@ Class {
 { #category : 'accessing' }
 EcoPhausto class >> start [
 
-	| kick snare ch oh cowbell conga acid perf |
-	perf := Performance uniqueInstance .
+	| kick snare ch oh cowbell conga acid perf bongo bleep psg |
+	perf := Performance uniqueInstance.
 	kick := TpSampler new
-		        pathToFile: self turboSamplesFolder , '/kick/_full909.wav';
+		        pathToFile: self turboSamplesFolder , '/kick/BD_full909.wav';
 		        label: 'kick'.
 	snare := TpSampler new
 		         pathToFile:
 			         self turboSamplesFolder , '/snare/SD_Drumaxia.wav';
 		         label: 'snare'.
 	ch := TpSampler new
-		      pathToFile:
-			      self turboSamplesFolder , '/ch/CH_Filtix Closed Hat.wav';
+		      pathToFile: self turboSamplesFolder , '/ch/CH_Juxtapos.wav';
 		      label: 'ch'.
 	oh := TpSampler new
 		      pathToFile: self turboSamplesFolder , '/oh/OH_Punchtron.wav';
@@ -36,20 +35,26 @@ EcoPhausto class >> start [
 	conga := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/conga';
 		         label: 'conga'.
+	bongo := TpSampler new
+		         pathToFolder: self turboSamplesFolder , '/bongo';
+		         label: 'bongo'.
+	bleep := TpSampler new
+		         pathToFolder: self turboSamplesFolder , '/bleep';
+		         label: 'bleep'.
+	psg := PsgPlus new label: 'psg'.
 	acid := Acid new label: 'acid'.
 
 
-self tpDsp ifNotNil: [
+	self tpDsp ifNotNil: [
 		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	tpDsp := (kick + snare + ch + oh + cowbell + conga + acid) stereo asDsp.
+	tpDsp := (kick + snare + ch + oh + cowbell + conga + bongo + bleep + acid + psg) stereo
+		         asDsp.
 	"tpDsp := self rack stereo asDsp."
 	[
 	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
 		ifNotNil: [ self tpDsp start ] ] fork.
 
 	tpPerf := perf forDsp: tpDsp
-
-
 ]
 
 { #category : 'initialization' }

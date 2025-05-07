@@ -87,14 +87,7 @@ LFOForModulation >> initializeControlParameters [
 	self controlParameters add: #amount -> (PhControlParameter new
 			 name: #amount;
 			 description: 'Amount of modulation';
-			 range: (400 to: 8000);
-			 value: self amount;
-			 widgetType: #knob).
-
-	self controlParameters add: #offset -> (PhControlParameter new
-			 name: #offset;
-			 description: 'Modulation Offset';
-			 range: (0 to: 800);
+			 min: 400 ; max: 80000;
 			 value: self offset;
 			 widgetType: #knob)
 ]
