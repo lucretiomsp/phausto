@@ -484,5 +484,5 @@ BoxAPI >> win32LibraryName [
 
 	LibFaust ensurePathInDLLSearch.
 
-	^ FFIWindowsLibraryFinder new findLibrary: 'libfaust.dll'
+	^ FFIWindowsLibraryFinder new findLibrary: 'librariesBundle\libfaust.dll'
 ]

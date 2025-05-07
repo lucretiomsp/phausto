@@ -205,5 +205,5 @@ PhaustoDynamicEngine >> win32LibraryName [
 
 	LibFaust ensurePathInDLLSearch.
 
-	^ FFIWindowsLibraryFinder new findLibrary: 'libdynamic-engine.dll'
+	^ FFIWindowsLibraryFinder new findLibrary: 'librariesBundle\libdynamic-engine.dll'
 ]
