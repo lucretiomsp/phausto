@@ -300,6 +300,12 @@ TurboPhausto >> bpm: aNumber [
 self class tpPerf freq: aNumber bpm
 ]
 
+{ #category : 'playing' }
+TurboPhausto >> destroy [ 
+
+	self class tpDsp destroy
+]
+
 { #category : 'API - changes' }
 TurboPhausto >> highPassFreq: aFrequency [
 	"aFrequency value is forced in filter range"
