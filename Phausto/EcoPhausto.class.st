@@ -13,7 +13,7 @@ Class {
 { #category : 'accessing' }
 EcoPhausto class >> start [
 
-	| kick snare ch oh cowbell conga acid perf bongo bleep psg |
+	| kick snare ch oh cowbell conga acid perf bongo bleep psg speakspell |
 	perf := Performance uniqueInstance.
 	kick := TpSampler new
 		        pathToFile: self turboSamplesFolder , '/kick/BD_full909.wav';
@@ -41,14 +41,17 @@ EcoPhausto class >> start [
 	bleep := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/bleep';
 		         label: 'bleep'.
+	speakspell := TpSampler new
+		         pathToFolder: self turboSamplesFolder , '/speakspell';
+		         label: 'bleep'.
 	psg := PsgPlus new label: 'psg'.
 	acid := Acid new label: 'acid'.
 
 
 	self tpDsp ifNotNil: [
 		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	tpDsp := (kick + snare + ch + oh + cowbell + conga + bongo + bleep + acid + psg) stereo
-		         asDsp.
+	tpDsp := (kick + snare + ch + oh + cowbell + conga + bongo + bleep + speakspell
+	          + acid + psg) stereo asDsp.
 	"tpDsp := self rack stereo asDsp."
 	[
 	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
