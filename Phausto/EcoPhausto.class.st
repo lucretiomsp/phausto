@@ -42,16 +42,16 @@ EcoPhausto class >> start [
 		         pathToFolder: self turboSamplesFolder , '/bleep';
 		         label: 'bleep'.
 	speakspell := TpSampler new
-		         pathToFolder: self turboSamplesFolder , '/speakspell';
-		         label: 'bleep'.
+		              pathToFolder: self turboSamplesFolder , '/speakspell';
+		              label: 'speakspell'.
 	psg := PsgPlus new label: 'psg'.
 	acid := Acid new label: 'acid'.
 
 
 	self tpDsp ifNotNil: [
 		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	tpDsp := (kick + snare + ch + oh + cowbell + conga + bongo + bleep + speakspell
-	          + acid + psg) stereo asDsp.
+	tpDsp := (kick + snare + ch + oh + cowbell + conga + bongo + bleep
+	          + speakspell + acid + psg) stereo asDsp.
 	"tpDsp := self rack stereo asDsp."
 	[
 	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
