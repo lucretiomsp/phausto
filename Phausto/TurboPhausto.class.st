@@ -458,3 +458,9 @@ TurboPhausto >> trig: aString [
 	self class trig: aString
 	
 ]
+
+{ #category : 'LiveCoding - Performance' }
+TurboPhausto >> unsolo: aSymbol [
+
+	self class tpPerf unsolo: aSymbol
+]
