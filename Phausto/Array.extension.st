@@ -45,9 +45,16 @@ Array >> asSumOfUGen [
 Array >> setValue: aFloat parameter: aParamAsString forDsp: aDsp [
 	"  set the value of the parameter named aParamAsString"
 
-aDsp
+	| indx |
+	indx := self indexOf: aParamAsString.
+	indx ~= 0
+		ifTrue: [
+			aDsp
 				setValue: aFloat
-				parameterIndex: (self indexOf: aParamAsString ) -1
+				parameterIndex: (self indexOf: aParamAsString) - 1 ]
+		ifFalse: [
+			self inform:
+				aParamAsString , ' is not a valid parameter for this DSP' ]
 ]
 
 { #category : '*Phausto' }
