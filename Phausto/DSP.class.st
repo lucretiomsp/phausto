@@ -252,9 +252,8 @@ DSP >> allParameters [
 	self isInitialized
 		ifTrue: [
 			0 to: self getParamCount - 1 do: [ :i |
-				params add:
-					(self getParamAddress: i) afterLastSlash ].
-			^ params ]
+			params add: (self getParamAddress: i) afterLastSlash ].
+			^ params asArray ]
 		ifFalse: [ Error new signal: 'This DSP is not initialized' ]
 ]
 
@@ -722,8 +721,8 @@ DSP >> setValue: aFloat parameter: aParamAsString [
 { #category : 'API - changes' }
 DSP >> setValue: aFloat parameterIndex: anInteger [
 "  set the value of the parameter with index anInteger"
-.
-self isNull ifTrue: [^ self class invalidException] ifFalse: [  
+
+self isNull ifTrue: [^ self class invalidException ] ifFalse: [  
 
 PhaustoDynamicEngine uniqueInstance  ffiCall:  #(void setParamValueDsp(DSP* self, int anInteger, float aFloat))]
 ]

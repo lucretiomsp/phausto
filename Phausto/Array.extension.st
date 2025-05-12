@@ -40,3 +40,25 @@ Array >> asSumOfUGen [
 		"self allButFirstDo: [ :u | sum := firstUGen + u ]" ].
 	^ sum
 ]
+
+{ #category : '*Phausto' }
+Array >> setValue: aFloat parameter: aParamAsString forDsp: aDsp [
+	"  set the value of the parameter named aParamAsString"
+
+aDsp
+				setValue: aFloat
+				parameterIndex: (self indexOf: aParamAsString ) -1
+]
+
+{ #category : '*Phausto' }
+Array >> trig: aString for: aDurationInSeconds forDsp: aDsp [
+
+	
+			[
+			self setValue: 1 parameter: aString forDsp: aDsp.
+			aDurationInSeconds wait.
+			self setValue: 0 parameter: aString forDsp: aDsp.] forkAt: 70 
+	"send a trigger of  aDurationInSeconds  to a Faust parameter, designed to trig envelopes and percussions-like sounds"
+
+	" parameter must exist"
+]
