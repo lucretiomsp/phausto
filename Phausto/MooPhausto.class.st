@@ -1,5 +1,5 @@
 "
-The Mooflod is a reduced TurboPhausto engine designed for the live coding performance with MOOFLOD widgets.
+The MooPhausto is a reduced TurboPhausto engine designed for the live coding performance with MOOFLOD widgets.
 MOOFLOD
 (Music on-the-fly with Levels of Detail), a Pharo tool born from a joint research
 by the Evref group of INRIA and the MINT team of CRIStAL. MOOFLOD
@@ -15,7 +15,7 @@ synthesis’ parameters is conceived to increase the audience’s awareness abou
 the musical performance. 
 "
 Class {
-	#name : 'Mooflod',
+	#name : 'MooPhausto',
 	#superclass : 'TurboPhausto',
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -23,7 +23,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Mooflod class >> loadAllSamplers [
+MooPhausto class >> loadAllSamplers [
 
 allSamplers := OrderedCollection new.
 allSamplers add:  (TpSampler new pathToFolder: '/Users/domenicocipriani/Documents/MoofLodSamples')
@@ -31,7 +31,7 @@ allSamplers add:  (TpSampler new pathToFolder: '/Users/domenicocipriani/Document
 ]
 
 { #category : 'as yet unclassified' }
-Mooflod class >> loadAllSynths [
+MooPhausto class >> loadAllSynths [
 
 	allSynths := OrderedCollection new.
 	allSynths add: ( Kick new uLevel: 1).
@@ -42,7 +42,7 @@ Mooflod class >> loadAllSynths [
 ]
 
 { #category : 'accessing' }
-Mooflod class >> start [
+MooPhausto class >> start [
 
 	| perf |
 	perf := Performance uniqueInstance.
@@ -60,7 +60,7 @@ Mooflod class >> start [
 ]
 
 { #category : 'accessing - ui' }
-Mooflod >> levelOfDetail: anIntegerBetweenOneAndFive [
+MooPhausto >> levelOfDetail: anIntegerBetweenOneAndFive [
 
 self class tpPerf performanceType levelOfDetail: anIntegerBetweenOneAndFive 
 ]
