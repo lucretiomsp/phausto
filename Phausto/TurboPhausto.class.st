@@ -47,7 +47,7 @@ TurboPhausto class >> allInstruments [
 { #category : 'accessing' }
 TurboPhausto class >> allSamplers [
 
-^ allSamplers
+	^ allSamplers 
 ]
 
 { #category : 'accessing' }

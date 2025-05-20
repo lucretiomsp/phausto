@@ -23,11 +23,22 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Mooflod class >> loadSamplers [
+Mooflod class >> loadAllSamplers [
 
 allSamplers := OrderedCollection new.
 allSamplers add:  (TpSampler new pathToFolder: '/Users/domenicocipriani/Documents/MoofLodSamples')
    
+]
+
+{ #category : 'as yet unclassified' }
+Mooflod class >> loadAllSynths [
+
+	allSynths := OrderedCollection new.
+	allSynths add: ( Kick new uLevel: 1).
+	allSynths add: ( TpSampler new uLevel: 0.6).
+	allSynths add: ( PsgPlus new uLevel: 0.5).
+	allSynths add: ( Fm2Op new uLevel: 0.6).
+	allSynths add: ( Chordy new uLevel: 0.4)
 ]
 
 { #category : 'accessing' }
@@ -46,4 +57,10 @@ Mooflod class >> start [
 		ifNotNil: [ self tpDsp start ] ] fork.
    perf performanceType: PerfTypeMooflod new.
 	tpPerf := perf forDsp: tpDsp
+]
+
+{ #category : 'accessing - ui' }
+Mooflod >> levelOfDetail: anIntegerBetweenOneAndFive [
+
+self class tpPerf performanceType levelOfDetail: anIntegerBetweenOneAndFive 
 ]
