@@ -142,14 +142,13 @@ TpSampler >> initialize [
 
 	super initialize.
 	index := PhHSlider new
-			           label: self label , 'Index'
-			           init: 0
-			           min: 0
-			           max: 16
-			           step: 1.
+		         label: self label , 'Index'
+		         init: 0
+		         min: 0
+		         max: 16
+		         step: 1.
 	self pathToFolder:
-		FileLocator documents asAbsolute pathString , '/TurboSamples'.
-	
+		FileLocator documents asAbsolute pathString , '/TurboSamples/bleep'
 ]
 
 { #category : 'accessing' }
