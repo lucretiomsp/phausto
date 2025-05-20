@@ -48,13 +48,13 @@ MooPhausto class >> start [
 	perf := Performance uniqueInstance.
 	self loadAllSamplers.
 	self loadAllSynths.
+	self tpDsp ifNotNil: [
+		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
+	tpDsp := self allInstruments asArray asSumOfUGen stereo asDsp.
 
-	tpDsp := self allSynths asArray asSumOfUGen stereo asDsp.
-	1 halt.
-	"tpDsp := self rack stereo asDsp."
+	[
 	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
-		ifNotNil: [ self tpDsp start ]  fork.
-
+		ifNotNil: [ self tpDsp start ] ] fork.
 	perf performanceType: PerfTypeMooflod new.
 	tpPerf := perf forDsp: tpDsp
 ]
