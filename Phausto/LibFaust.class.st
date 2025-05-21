@@ -241,7 +241,7 @@ LibFaust >> macLibraryName [
 { #category : 'accessing - platform' }
 LibFaust >> unix64LibraryName [
 
-	^ FFIUnix64LibraryFinder findLibrary: 'librariesBundle/libfaust.so.2'
+	^ FFIUnix64LibraryFinder findLibrary: 'librariesBundle/libfaust.so'
 ]
 
 { #category : 'accessing - platform' }

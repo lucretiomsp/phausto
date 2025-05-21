@@ -229,6 +229,7 @@ DSP class >> rendererType [
 	Smalltalk os family = #MacOSX ifTrue: [
 		Smalltalk os processorArchitecture = 'arm64' ifTrue: [ rtype := 3 ] ].
 	Smalltalk os family = #Windows ifTrue: [ rtype := 1 ].
+	Smalltalk os family = #Unix ifTrue: [ rtype := 1 ].
 	^ rtype
 ]
 
