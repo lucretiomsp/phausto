@@ -21,7 +21,9 @@ Class {
 		'readIndex',
 		'debugPath',
 		'attachedBox',
-		'filesURL'
+		'filesURL',
+		'fileNamesSorted',
+		'sampleNamesSorted'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -86,7 +88,7 @@ TpSampler >> changeParamsPrefix [
 { #category : 'as yet unclassified' }
 TpSampler >> createMultiFilesURL [
 
-	| allFiles audioFiles unsortedfileNames fileNames allFilePaths filePathPrefix filePathSuffix allFilesPathsWithoutLastColumn |
+	| allFiles audioFiles unsortedfileNames  allFilePaths filePathPrefix filePathSuffix allFilesPathsWithoutLastColumn |
 	allFiles := pathToFolder asFileReference allChildren reject: [ :i |
 		            i isHidden ].
 	"first we select only valid audio files"
@@ -94,11 +96,13 @@ TpSampler >> createMultiFilesURL [
 	unsortedfileNames := (2 to: audioFiles size) collect: [ :i |
 		                     (allFiles at: i) asAbsolute pathString
 			                     surroundedByQuotes ].
-	fileNames := unsortedfileNames sort.
+	fileNamesSorted := unsortedfileNames sort.
 
-	fileNames do: [ :f | f traceCr ].
+	fileNamesSorted do: [ :f | f traceCr ].
 	allFilePaths := ''.
-	fileNames do: [ :i | allFilePaths := (allFilePaths copyReplaceAll: '\'  with: '/') , i , ';' ].
+	fileNamesSorted do: [ :i |
+		allFilePaths := (allFilePaths copyReplaceAll: '\' with: '/') , i
+		                , ';' ].
 	filePathPrefix := '' , self label , '[url:{'.
 	filePathSuffix := '}]'.
 	allFilesPathsWithoutLastColumn := allFilePaths
@@ -129,6 +133,12 @@ TpSampler >> debugPath [
 TpSampler >> debugPath: anObject [
 
 	debugPath := anObject
+]
+
+{ #category : 'accessing' }
+TpSampler >> fileNamesSorted [
+
+	^ fileNamesSorted
 ]
 
 { #category : 'accessing' }
@@ -205,9 +215,11 @@ TpSampler >> pathToFolder [
 TpSampler >> pathToFolder: aString [
 
 	pathToFolder := aString.
-	self createMultiFilesURL .
+	self createMultiFilesURL.
 	"we set the maximum value for index as the number of samples in the folder"
-	self index max: self numberOfSamples
+	self index max: self numberOfSamples.
+	sampleNamesSorted := self fileNamesSorted collect: [ :i |
+		               (i afterLastSlash findBetweenSubstrings: '.') first ]
 ]
 
 { #category : 'accessing' }
@@ -231,4 +243,11 @@ TpSampler >> readIndex [
 TpSampler >> readIndex: aReadIndex [
 
 	readIndex := aReadIndex asBox
+]
+
+{ #category : 'accessing' }
+TpSampler >> sampleNamesSorted [
+
+	
+	^ sampleNamesSorted
 ]
