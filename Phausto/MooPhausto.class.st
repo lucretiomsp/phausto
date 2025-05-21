@@ -17,6 +17,9 @@ the musical performance.
 Class {
 	#name : 'MooPhausto',
 	#superclass : 'TurboPhausto',
+	#instVars : [
+		'midiSender'
+	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
 	#tag : 'TurboPhausto'
