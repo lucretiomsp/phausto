@@ -28,9 +28,9 @@ Class {
 { #category : 'as yet unclassified' }
 MooPhausto class >> loadAllSamplers [
 
-allSamplers := OrderedCollection new.
-allSamplers add:  (TpSampler new pathToFolder: '/Users/domenicocipriani/Documents/MoofLodSamples')
-   
+	allSamplers := OrderedCollection new.
+	allSamplers add: (TpSampler new pathToFolder:
+			 '/Users/domenicocipriani/Documents/MFICLCSamples')
 ]
 
 { #category : 'as yet unclassified' }
