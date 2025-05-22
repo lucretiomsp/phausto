@@ -740,6 +740,14 @@ index := self getParamIndex: aString.
 
 ]
 
+{ #category : 'accessing' }
+DSP >> soundfiles [
+
+| allItems |
+allItems := (((STONJSON fromString: self getJSON) at: #ui) at: 1) at: #items.
+^  allItems select: [ :i | i values includes: 'soundfile' ].
+]
+
 { #category : 'start-stop' }
 DSP >> start [
 	" Start processing audio. It also adds the current dsp to the dspPlaying ordered collection of the FaustDynamicEngine class"
