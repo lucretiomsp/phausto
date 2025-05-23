@@ -22,20 +22,25 @@ PsgPlus >> asBox [
 
 	| adsr sqr saw tri noise pitchLfo selectorInputs synth ringModulator |
 	"lfo for Pitch"
-	pitchLfo := self pitch asBox
-	            +
-		            ((LFOSquarePos new freq:
-			              self pitch asBox * (1 / 48) asBox)
-		             * (self lfoAmount asBox * self pitch asBox)).
+	pitchLfo := self pitch asBox + ((LFOSquarePos new
+		              offset: 0; amount: 1;
+		              freq: self pitch asBox * (1 / 48) asBox)
+	             * (self lfoAmount asBox * self pitch asBox)).
 	"ring modulator"
 	ringModulator := 1 asBox - (SineOsc new
-		                  freq: 242;
-		                  uLevel: 0.3).
+		                  freq: 242 asBox;
+		                  uLevel: 0.3 asBox).
 
 	"Oscillators"
-	sqr := SquareOsc new freq: pitchLfo.
-	tri := TriOsc new freq: pitchLfo.
-	saw := SawOsc new freq: pitchLfo.
+	sqr := SquareOsc new
+		       freq: pitchLfo;
+		       uLevel: 0.3 asBox.
+	tri := TriOsc new
+		       freq: pitchLfo;
+		       uLevel: 0.3 asBox.
+	saw := SawOsc new
+		       freq: pitchLfo;
+		       uLevel: 0.3 asBox.
 	noise := ResonBp new
 		         input: (DownSampler new input: Noise new);
 		         frequency: pitchLfo asBox * 3 asBox;
@@ -46,7 +51,7 @@ PsgPlus >> asBox [
 		         attack: self attack;
 		         decay: self decay;
 		         sustain: self sustain;
-		         release: self release ;
+		         release: self release;
 		         trigger: self gate) asBox.
 	selectorInputs := self index asBox , sqr , saw , tri , noise.
 	synth := (selectorInputs connectTo: PhSelect4 new) * adsr asBox
@@ -81,10 +86,11 @@ PsgPlus >> initialize [
 { #category : 'accessing' }
 PsgPlus >> lfoAmount [
 
-	^ lfoAmount ifNil: [  lfoAmount := (PhHSlider new
-			 label: self label , 'LfoAmount'
-			 init: 0
-			 min: 0
-			 max: 10
-			 step: 0.001) ]
+	^ lfoAmount ifNil: [
+		  lfoAmount := PhHSlider new
+			               label: self label , 'LfoAmount'
+			               init: 0
+			               min: 0
+			               max: 1
+			               step: 0.001 ]
 ]
