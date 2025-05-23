@@ -42,7 +42,7 @@ MooPhausto class >> loadAllSynths [
 
 	allSynths add: (TpSampler new uLevel: 0.6).
 	allSynths add: (PsgPlus new uLevel: 0.5).
-	allSynths add: (Fm2Op new uLevel: 0.6).
+	allSynths add: (Fm2Op new uLevel: 0.5).
 	allSynths add: (Chordy new uLevel: 0.4)
 ]
 
