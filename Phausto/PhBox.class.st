@@ -388,6 +388,20 @@ PhBox >> fMod: anotherBox [
 	^ BoxAPI uniqueInstance boxFModBetween:  self  and: anotherBox asBox
 ]
 
+{ #category : 'instance creation' }
+PhBox >> fromString: aStringOfValidFaustCode [
+	" creates a PhBox from a string of Faust code"
+
+	| emptyBox box |
+	emptyBox := PhBox new.
+	box := BoxAPI uniqueInstance
+		        boxFromString: aStringOfValidFaustCode
+		        inputs: emptyBox inputs
+		        outputs: emptyBox outputs
+		        buffer: emptyBox errorBuffer.
+	^ box	
+]
+
 { #category : 'enumerating' }
 PhBox >> ifNotNullDo: aBlock [
 	"If the receiver is not null, evaluate the block. Otherwise, signal an error."

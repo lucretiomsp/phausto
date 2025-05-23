@@ -26,6 +26,22 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+MooPhausto class >> kick [
+
+| code |
+code := 'import("stdfaust.lib");
+
+click = hslider("clik" , 0.0005 , 0.0005 , 1 , 0.001);
+decay = hslider("decay" , 1.08 , 1 , 4 , 0.001);
+pitch = hslider("pitch" , 80 , 20 , 900 , 1);
+pitchamt = hslider("pitchAmt" , 90 , 20 , 200 , 1);
+pitchEnv = pitchamt * en.are(0.001 , decay , ba.pulsen(300 , 20000));
+process = os.osc(pitch + pitchEnv) * en.are(0.001 , 1 , ba.pulsen(300 , 20000));'.
+
+^ PhBox new fromString: code.
+]
+
+{ #category : 'as yet unclassified' }
 MooPhausto class >> loadAllSamplers [
 
 	allSamplers := OrderedCollection new.
@@ -38,8 +54,8 @@ MooPhausto class >> loadAllSamplers [
 MooPhausto class >> loadAllSynths [
 
 	allSynths := OrderedCollection new.
-	allSynths add: (Kick new uLevel: 1).
-
+	"allSynths add: (Kick new uLevel: 1)."
+   allSynths add: MooPhausto kick.
 	allSynths add: (TpSampler new uLevel: 0.6).
 	allSynths add: (PsgPlus new uLevel: 0.5).
 	allSynths add: (Fm2Op new uLevel: 0.5).
