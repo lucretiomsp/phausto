@@ -29,19 +29,21 @@ Class {
 MooPhausto class >> loadAllSamplers [
 
 	allSamplers := OrderedCollection new.
-	allSamplers add: (TpSampler new pathToFolder:
-			 '/Users/domenicocipriani/Documents/MFICLCSamples')
+	allSamplers add: (TpSampler new
+			 label: 'TpSampler';
+			 pathToFolder: '/Users/domenicocipriani/Documents/MFICLCSamples')
 ]
 
 { #category : 'as yet unclassified' }
 MooPhausto class >> loadAllSynths [
 
 	allSynths := OrderedCollection new.
-	allSynths add: ( Kick new uLevel: 1).
-	allSynths add: ( TpSampler new uLevel: 0.6).
-	allSynths add: ( PsgPlus new uLevel: 0.5).
-	allSynths add: ( Fm2Op new uLevel: 0.6).
-	allSynths add: ( Chordy new uLevel: 0.4)
+	allSynths add: (Kick new uLevel: 1).
+
+	allSynths add: (TpSampler new uLevel: 0.6).
+	allSynths add: (PsgPlus new uLevel: 0.5).
+	allSynths add: (Fm2Op new uLevel: 0.6).
+	allSynths add: (Chordy new uLevel: 0.4)
 ]
 
 { #category : 'accessing' }
