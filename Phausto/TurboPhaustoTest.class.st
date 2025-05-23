@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+TurboPhaustoTest >> testAcidAsBox [
+
+	self assert: Acid new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 TurboPhaustoTest >> testChordyAsBox [
 
 self assert: Chordy new asDsp isNull equals: false
@@ -68,8 +74,7 @@ self assert: PsgPlus new asDsp isNull equals: false
 { #category : 'tests' }
 TurboPhaustoTest >> testReeseAsBox [
 
-
-self assert: TpReese new asDsp isNull equals: false
+	self assert: TpReese new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
