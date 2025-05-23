@@ -65,12 +65,6 @@ MooPhausto class >> start [
 ]
 
 { #category : 'accessing - ui' }
-MooPhausto >> cleanRow: aNumber [
-
-Performance uniqueInstance performanceType visualizer cleanRow: aNumber
-]
-
-{ #category : 'accessing - ui' }
 MooPhausto >> levelOfDetail: anIntegerBetweenOneAndFive [
 
 self class tpPerf performanceType levelOfDetail: anIntegerBetweenOneAndFive 
