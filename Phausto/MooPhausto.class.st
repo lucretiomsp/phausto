@@ -28,17 +28,20 @@ Class {
 { #category : 'as yet unclassified' }
 MooPhausto class >> kick [
 
-| code |
-code := 'import("stdfaust.lib");
+	| code |
+	code := 'import("stdfaust.lib");
 
-click = hslider("clik" , 0.0005 , 0.0005 , 1 , 0.001);
-decay = hslider("decay" , 1.08 , 1 , 4 , 0.001);
-pitch = hslider("pitch" , 80 , 20 , 900 , 1);
-pitchamt = hslider("pitchAmt" , 90 , 20 , 200 , 1);
-pitchEnv = pitchamt * en.are(0.001 , decay , ba.pulsen(300 , 20000));
-process = os.osc(pitch + pitchEnv) * en.are(0.001 , 1 , ba.pulsen(300 , 20000));'.
+click = hslider("KickClik" , 0.0005 , 0.0005 , 1 , 0.001);
+decay = hslider("KickDecay" , 1.08 , 1 , 4 , 0.001);
+pitch = hslider("KickNote" , 261 , 20 , 900 , 1) *  0.03;
+pitchamt = hslider("pitchAmt" , 45 , 20 , 200 , 1);
+gate = button("KickGate");
+drive = hslider("KickDrive" , 0 , 0 , 1 , 0.001);
+pitchEnv = pitchamt * en.ar(0.001 , decay , gate);
+process = (os.osc(pitch + pitchEnv) * en.ar(0.001 , 0.6 , gate)) : ef.wavefold(drive) ;'.
 
-^ PhBox new fromString: code.
+
+	^ PhBox new fromString: code
 ]
 
 { #category : 'as yet unclassified' }
@@ -84,4 +87,10 @@ MooPhausto class >> start [
 MooPhausto >> levelOfDetail: anIntegerBetweenOneAndFive [
 
 self class tpPerf performanceType levelOfDetail: anIntegerBetweenOneAndFive 
+]
+
+{ #category : 'accessing' }
+MooPhausto >> visualizer [
+
+^ self class tpPerf performanceType visualizer.
 ]
