@@ -51,8 +51,9 @@ MooPhausto class >> loadAllSamplers [
 	allSamplers add: (TpSampler new
 			 label: 'TpSampler';
 			 pathToFolder: '/Users/domenicocipriani/Documents/MFICLCSamples').
-			allSamplers add: (TpSampler new
+	allSamplers add: (TpSampler new
 			 label: 'chomsky';
+			 pitch: 228;
 			 gate: 0;
 			 pathToFile: '/Users/domenicocipriani/Documents/chomsky.wav')
 ]
