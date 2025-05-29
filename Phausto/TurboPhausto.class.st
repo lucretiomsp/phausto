@@ -470,8 +470,7 @@ self class tpDsp traceAllParams
 TurboPhausto >> trig: aString [
 	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
 
-	self class trig: aString
-	
+	self class tpDsp trig: aString
 ]
 
 { #category : 'LiveCoding - Performance' }

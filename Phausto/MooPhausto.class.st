@@ -50,7 +50,11 @@ MooPhausto class >> loadAllSamplers [
 	allSamplers := OrderedCollection new.
 	allSamplers add: (TpSampler new
 			 label: 'TpSampler';
-			 pathToFolder: '/Users/domenicocipriani/Documents/MFICLCSamples')
+			 pathToFolder: '/Users/domenicocipriani/Documents/MFICLCSamples').
+			allSamplers add: (TpSampler new
+			 label: 'chomsky';
+			 gate: 0;
+			 pathToFile: '/Users/domenicocipriani/Documents/chomsky.wav')
 ]
 
 { #category : 'as yet unclassified' }
