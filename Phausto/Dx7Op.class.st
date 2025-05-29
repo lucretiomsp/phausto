@@ -199,6 +199,23 @@ Dx7Op >> initialize [
 ]
 
 { #category : 'initialization' }
+Dx7Op >> initializeControlParameters [
+
+	| g |
+	super initializeControlParameters.
+
+	g := #gate -> (PhControlParameter new
+		      label: #gate;
+		      description: 'Gate trigger';
+		      min: 0;
+		      max: 1;
+		      value: self gate;
+		      widgetType: #button).
+		
+	self controlParameters add: g
+]
+
+{ #category : 'initialization' }
 Dx7Op >> initializeEgLevels [
 
 	outLevel := PhHSlider new

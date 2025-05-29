@@ -36,7 +36,7 @@ decay = hslider("KickDecay" , 1.08 , 1 , 4 , 0.001);
 pitch = hslider("KickNote" , 261 , 20 , 900 , 1) *  0.03;
 pitchamt = hslider("pitchAmt" , 45 , 20 , 200 , 1);
 gate = button("KickGate");
-drive = hslider("KickDrive" , 0 , 0 , 1 , 0.001);
+drive = hslider("KickDrive" , 0 , 0 , 1 , 0.001) * 0.2;
 pitchEnv = pitchamt * en.ar(0.001 , decay , gate);
 process = (os.osc(pitch + pitchEnv) * en.ar(0.001 , 0.6 , gate)) : ef.wavefold(drive) ;'.
 
@@ -58,10 +58,10 @@ MooPhausto class >> loadAllSynths [
 
 	allSynths := OrderedCollection new.
 	"allSynths add: (Kick new uLevel: 1)."
-   allSynths add: MooPhausto kick.
+	allSynths add: MooPhausto kick.
 	allSynths add: (TpSampler new uLevel: 0.6).
-	allSynths add: (PsgPlus new uLevel: 0.5).
-	allSynths add: (Fm2Op new uLevel: 0.5).
+	allSynths add: (PsgPlus new uLevel: 0.7).
+	allSynths add: (Fm2Op new uLevel: 0.4).
 	allSynths add: (Chordy new uLevel: 0.4)
 ]
 

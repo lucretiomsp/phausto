@@ -20,17 +20,17 @@ Fm2Op >> asBox [
 	adsr := (ADSREnv new
 		         attack: self attack;
 		         decay: self decay;
-		         sustain: self sustain;
+		         sustain: 1 asBox;
 		         release: self release;
 		         trigger: self gate) asBox.
 	modulatorPitch := self pitch * self modRatio asBox.
 	modulator := SineOsc new
 		             freq: modulatorPitch;
 		             uLevel: self modIndex.
-	carrierPitch := self pitch + (modulator * 3000).
+	carrierPitch := self pitch + (modulator * 70).
 	carrier := SineOsc new
 		           freq: carrierPitch asBox;
-		           uLevel: (self label , 'uLevel' ) asSymbol.
+		           uLevel: (self label , 'uLevel') asSymbol.
 
 
 	^ carrier asBox * adsr asBox

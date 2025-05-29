@@ -23,7 +23,8 @@ PsgPlus >> asBox [
 	| adsr sqr saw tri noise pitchLfo selectorInputs synth ringModulator |
 	"lfo for Pitch"
 	pitchLfo := self pitch asBox + ((LFOSquarePos new
-		              offset: 0; amount: 1;
+		              offset: 0;
+		              amount: 1;
 		              freq: self pitch asBox * (1 / 48) asBox)
 	             * (self lfoAmount asBox * self pitch asBox)).
 	"ring modulator"
