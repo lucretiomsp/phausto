@@ -203,6 +203,7 @@ DSP class >> invalidException [
 		ifPresent: [ :performance | performance uniqueInstance stop ]"
 	"^ Error new signal: 'This DSP is not valid - check its creation'
 		  , PhaustoDynamicEngine uniqueInstance getLastError"
+		Performance uniqueInstance stop.
 		Transcript clear; show: ( 'This DSP is not valid - check its creation'
 		  , PhaustoDynamicEngine uniqueInstance getLastError); open
 	

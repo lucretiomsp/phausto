@@ -83,6 +83,12 @@ MooPhausto class >> start [
 	tpPerf := perf forDsp: tpDsp
 ]
 
+{ #category : 'initialization' }
+MooPhausto >> initialize [ 
+super initialize.
+self class tpPerf performanceType: PerfTypeMooflod new.
+]
+
 { #category : 'accessing - ui' }
 MooPhausto >> levelOfDetail: anIntegerBetweenOneAndFive [
 

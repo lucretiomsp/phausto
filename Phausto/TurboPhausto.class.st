@@ -124,6 +124,21 @@ labels := dirs collect:  [:i | i pathString afterLastSlash ].
 ^ labels  
 ]
 
+{ #category : 'accessing' }
+TurboPhausto class >> listOfSynths [
+
+| synths |
+synths := #('Djembe' 
+'Marimba' 'Guitar'
+		'syclap'
+				 
+	'SyKick' 'Hat' 'DubDub' 
+		 'acid' 'chordy'
+				 'TpHoover' 
+	'TpReese' ).
+	^ synths inspect
+]
+
 { #category : 'loading' }
 TurboPhausto class >> loadAllSamplers [
 	"transform all the subfolder of TurboPhausto into TpSamplers and collect themm into an Array"
@@ -250,21 +265,21 @@ TurboPhausto class >> start [
 	| perf |
 	perf := Performance uniqueInstance.
 	self loadAllSamplers.
-	"self loadAllSynths."
-	"self loadFilters.
+	self loadAllSynths.
+	self loadFilters.
 	self loadEffects.
-	self loadRack."
+	self loadRack.
 
 
 	self tpDsp ifNotNil: [
 		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	tpDsp := self allSamplers asSumOfUGen stereo asDsp.
-	"tpDsp := self rack stereo asDsp."
+	"tpDsp := self allSamplers asSumOfUGen stereo asDsp."
+	tpDsp := self rack stereo asDsp.
 	[
 	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
 		ifNotNil: [ self tpDsp start ] ] fork.
-
-	tpPerf := perf forDsp: tpDsp
+	tpPerf := perf forDsp: tpDsp.
+	tpPerf performanceType: PerfType new.
 ]
 
 { #category : 'accessing' }
