@@ -18,7 +18,9 @@ Class {
 	#name : 'MooPhausto',
 	#superclass : 'TurboPhausto',
 	#instVars : [
-		'midiSender'
+		'midiSender',
+		'masterCutoff',
+		'masterDelayAmount'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -89,9 +91,12 @@ MooPhausto class >> start [
 ]
 
 { #category : 'initialization' }
-MooPhausto >> initialize [ 
-super initialize.
-self class tpPerf performanceType: PerfTypeMooflod new.
+MooPhausto >> initialize [
+
+	super initialize.
+	self class tpPerf performanceType: PerfTypeMooflod new.
+	masterCutoff := 0.
+	masterDelayAmount := 0
 ]
 
 { #category : 'accessing - ui' }
