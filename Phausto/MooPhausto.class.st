@@ -20,7 +20,8 @@ Class {
 	#instVars : [
 		'midiSender',
 		'masterCutoff',
-		'masterDelayAmount'
+		'masterDelayAmount',
+		'masterDelayTime'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -96,13 +97,31 @@ MooPhausto >> initialize [
 	super initialize.
 	self class tpPerf performanceType: PerfTypeMooflod new.
 	masterCutoff := 0.
-	masterDelayAmount := 0
+	masterDelayAmount := 0.
+	masterDelayTime := 3.
 ]
 
 { #category : 'accessing - ui' }
 MooPhausto >> levelOfDetail: anIntegerBetweenOneAndFive [
 
 self class tpPerf performanceType levelOfDetail: anIntegerBetweenOneAndFive 
+]
+
+{ #category : 'accessing' }
+MooPhausto >> masterCutoff [ 
+^ masterCutoff 
+]
+
+{ #category : 'accessing' }
+MooPhausto >> masterDelayAmount [
+
+	^ masterDelayAmount 
+]
+
+{ #category : 'accessing' }
+MooPhausto >> masterDelayTime [
+
+	^ masterDelayTime 
 ]
 
 { #category : 'accessing' }
