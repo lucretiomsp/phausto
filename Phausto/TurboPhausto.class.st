@@ -466,6 +466,15 @@ TurboPhausto >> traceAllParams [
 self class tpDsp traceAllParams 
 ]
 
+{ #category : 'printing' }
+TurboPhausto >> traceAllSamples [
+
+	'/Users/domenicocipriani/Documents/MFICLCSamples' asFileReference
+		children do: [ :i |
+		(i pathString afterLastSlash findBetweenSubstrings: '.') first
+			traceCr ]
+]
+
 { #category : 'API - changes' }
 TurboPhausto >> trig: aString [
 	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"

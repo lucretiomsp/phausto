@@ -108,8 +108,9 @@ self class tpPerf performanceType levelOfDetail: anIntegerBetweenOneAndFive
 ]
 
 { #category : 'accessing' }
-MooPhausto >> masterCutoff [ 
-^ masterCutoff 
+MooPhausto >> masterCutoff [
+
+	^ masterCutoff
 ]
 
 { #category : 'accessing' }
