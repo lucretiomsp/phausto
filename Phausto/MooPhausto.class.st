@@ -99,6 +99,7 @@ MooPhausto >> initialize [
 	masterCutoff := 0.
 	masterDelayAmount := 0.
 	masterDelayTime := 3.
+	self visualizer tracks removeAll
 ]
 
 { #category : 'accessing - ui' }
