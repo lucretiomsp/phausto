@@ -28,7 +28,13 @@ ByteString >> asSymbolWithSuffix: aString [
 
 { #category : '*Phausto' }
 ByteString >> asTpSampler [
-	"creates a TpSampler loaded with the folder with self as path"
-
-	^ TpSampler new pathToFolder: self ;  label: self afterLastSlash
+	"creates a TpSampler loaded with the file or folder with self as path"
+self isAudioFilePath ifTrue: [  
+	^ TpSampler new
+		  pathToFile: self.
+		  "label: self afterLastSlash"]
+	ifFalse: [ 
+			^ TpSampler new
+		  pathToFolder: self;
+		  label: self afterLastSlash ]
 ]
