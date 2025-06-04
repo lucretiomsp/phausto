@@ -25,5 +25,5 @@ SFFormantModelFofCycle_UI >> asBox [
 SFFormantModelFofCycle_UI >> initialize [
 
 	super initialize.
-	processExpression := 'process = SFFormantModelFofCycle_ui;'
+	processExpression := 'process = pm.SFFormantModelFofCycle_ui;'
 ]

@@ -20,5 +20,5 @@ Class {
 SFFormantModelFofCycle >> initialize [
 
 	super initialize.
-	processExpression := 'process = SFFormantModelFofCycle;'
+	processExpression := 'process = pm.SFFormantModelFofCycle;'
 ]
