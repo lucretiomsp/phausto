@@ -9,9 +9,9 @@ ByteSymbol >> asParam: aString forUGen: aUnitGenerator [
 	uiElement label: self.
 
 	aUnitGenerator instVarNamed: aString put: uiElement.
-	
-"change corresponding controlParameter label"
-(aUnitGenerator controlParameters at: aString asSymbol) label: self.
+
+	"change corresponding controlParameter label"
+	"(aUnitGenerator controlParameters at: aString asSymbol) label: self"
 ]
 
 { #category : '*Phausto' }

@@ -40,18 +40,16 @@ Oscillator >> initialize [
 		        min: 20
 		        max: 4086
 		        step: 1.
-	self controlParameters add: #freq  -> (self freq asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz')
+	self initializeControlParameters.
+	self controlParameters add: #freq -> (self freq
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Frequency in Hertz')
 ]
 
 { #category : 'initialization' }
 Oscillator >> initializeControlParameters [
 
-	super initializeControlParameters.
+	super initializeControlParameters
 
-"	self controlParameters add: #freq -> (PhControlParameter new
-			 label: self label , 'Freq';
-			 description: 'Controls the frequency of the Oscillator in Hertz';
-			 range: (1 to: 4186);
-			 value: self freq;
-			 widgetType: #knob)"
+
 ]

@@ -105,21 +105,20 @@ CasioCZOscillators >> initializeControlParameters [
 		      label: #fund;
 		      description:
 			      'A saw-tooth waveform between 0 and 1 that the oscillator slaves to';
-		      range: (-1 to: 1);
+		      min: -1; max: 1;
 		      value: self fund;
 		      widgetType: #knob).
 	ind := #index -> (PhControlParameter new
 		        label: #index;
 		        description:
 			        'The brightness of the oscillator, 0 to 1. 0 = sine-wave, 1 = saw-wave';
-		        range: (0 to: 1);
-		        range: (-1 to: 1);
+		        min: -1; max: 1;
 		        value: self fund;
 		        widgetType: #knob).
 	r := #res -> (PhControlParameter new
 		      label: #res;
 		      description: 'The resonance value';
-		      range: (-1 to: 1);
+		       min: -1; max: 1;
 		      value: self fund;
 		      widgetType: #knob).
 	self controlParameters

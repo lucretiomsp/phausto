@@ -7,12 +7,10 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'label',
-		'range',
 		'step',
 		'widgetType',
 		'value',
 		'description',
-		'name',
 		'initialValue',
 		'min',
 		'max'
@@ -81,17 +79,6 @@ PhControlParameter >> min [
 PhControlParameter >> min: aNumber [
 
 	min := aNumber
-]
-
-{ #category : 'accessing' }
-PhControlParameter >> name [
-^ name
-]
-
-{ #category : 'accessing' }
-PhControlParameter >> name: aSymbol [
-
-	name := aSymbol 
 ]
 
 { #category : 'accessing' }
