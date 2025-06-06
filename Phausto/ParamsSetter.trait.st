@@ -431,7 +431,11 @@ ParamsSetter >> fr: aNumberOrABoxOrASymbol [
 { #category : 'accessing' }
 ParamsSetter >> freq: aNumberOrABoxOrASymbol [
 
-	thisContext selector changeLabelOrInitialValue: aNumberOrABoxOrASymbol forUGen: self
+	thisContext selector
+		changeLabelOrInitialValue: aNumberOrABoxOrASymbol
+		forUGen: self.
+		"experimental".
+		
 ]
 
 { #category : 'accessing' }

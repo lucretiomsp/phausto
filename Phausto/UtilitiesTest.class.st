@@ -367,6 +367,15 @@ filePath := FileLocator documents asAbsolute pathString , '/TurboSamples/clap'.
 ]
 
 { #category : 'tests' }
+UtilitiesTest >> testStringasPhControlParameter [ 
+
+	| string result|
+	string := 'hslider("DjembeFreq", 440, 20, 1200, 1)'.
+	result := PhControlParameter new label: 'DjembeFreq'; value: 440; min: 20 ; max: 1200 ; step: 1.
+	self assert: string asPhControlParameter equals: result
+]
+
+{ #category : 'tests' }
 UtilitiesTest >> testUnitGeneratorUIParameters [
 
 	| ugen parametersDictionary |

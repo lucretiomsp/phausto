@@ -372,6 +372,16 @@ PhBox >> errorBuffer: anObject [
 	errorBuffer := anObject
 ]
 
+{ #category : 'printing' }
+PhBox >> extractUIPrimitivesFromPrint [
+
+	| print regex matches |
+	print := BoxAPI uniqueInstance boxPrint: self.
+	regex := '(hslider|button|nentry)\([^)]*\)' asRegex.
+	matches := regex matchesIn: print.
+	matches
+]
+
 { #category : 'converting' }
 PhBox >> f2l [
 

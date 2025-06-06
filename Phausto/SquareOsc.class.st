@@ -7,6 +7,9 @@ freq: frequency in Hz
 Class {
 	#name : 'SquareOsc',
 	#superclass : 'Oscillator',
+	#instVars : [
+		'cpx'
+	],
 	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
 	#tag : 'Oscillators'
@@ -20,6 +23,12 @@ SquareOsc >> asBox [
 	intermediateBox := super asBox.
 	finalBox := self freq connectTo: intermediateBox.
 	^ finalBox * self uLevel
+]
+
+{ #category : 'as yet unclassified' }
+SquareOsc >> cpx [
+
+	^ cpx
 ]
 
 { #category : 'initialization' }
