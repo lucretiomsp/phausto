@@ -10,7 +10,7 @@ or
 incrementer = (_~(_+1))
 "
 Class {
-	#name : 'Incrementer',
+	#name : 'PhIncrementer',
 	#superclass : 'PhBox',
 	#instVars : [
 		'incrValue'
@@ -21,7 +21,7 @@ Class {
 }
 
 { #category : 'converting' }
-Incrementer >> asBox [
+PhIncrementer >> asBox [
 
 	| sum |
 	sum := Wire new asBox + self incrValue asBox.
@@ -30,19 +30,19 @@ Incrementer >> asBox [
 ]
 
 { #category : 'accessing' }
-Incrementer >> incrValue [
+PhIncrementer >> incrValue [
 
 	^ incrValue
 ]
 
 { #category : 'accessing' }
-Incrementer >> incrValue: anObject [
+PhIncrementer >> incrValue: anObject [
 
 	incrValue := anObject
 ]
 
 { #category : 'initialization' }
-Incrementer >> initialize [ 
+PhIncrementer >> initialize [ 
 
 incrValue := 1.
 ]
