@@ -13,7 +13,8 @@ Class {
 		'description',
 		'initialValue',
 		'min',
-		'max'
+		'max',
+		'name'
 	],
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
@@ -79,6 +80,18 @@ PhControlParameter >> min [
 PhControlParameter >> min: aNumber [
 
 	min := aNumber
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> name [
+
+^ name
+]
+
+{ #category : 'accessing' }
+PhControlParameter >> name: aString [
+
+	name := aString
 ]
 
 { #category : 'accessing' }
