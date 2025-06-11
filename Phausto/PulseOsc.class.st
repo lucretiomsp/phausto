@@ -70,7 +70,7 @@ PulseOsc >> initializeControlParameters [
 
 
 	self controlParameters add: #duty -> (PhControlParameter new
-			 name: #duty;
+			 label: #duty;
 			 description: 'Controls the Duty Cycle of the Oscillator';
 			 min: 0;
 			 max: 1;

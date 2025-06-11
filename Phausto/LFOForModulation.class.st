@@ -85,7 +85,7 @@ LFOForModulation >> initializeControlParameters [
 
 	super initializeControlParameters.
 	self controlParameters add: #amount -> (PhControlParameter new
-			 name: #amount;
+			 label: #amount;
 			 description: 'Amount of modulation';
 			 min: 400 ; max: 80000;
 			 value: self offset;
