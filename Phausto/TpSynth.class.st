@@ -91,7 +91,7 @@ super initializeControlParameters .
 self controlParameters add: 
 
 #Attack -> (PhControlParameter new
-			 name: #Attack;
+			 label: #Attack;
 			 min: 0;
 			max: 1;
 			step: 0.001;
