@@ -22,25 +22,13 @@ Class {
 { #category : 'accessing' }
 CombFilters >> b0 [
 
-	^ b0 ifNil: [
-		  b0 := PhHSlider new
-			       label: self label , 'B0'
-			       init: 1
-			       min: 0
-			       max: 1
-			       step: 0.001 ]
+	^ b0 
 ]
 
 { #category : 'accessing' }
 CombFilters >> bM [
 
-	^ bM ifNil: [
-		  bM := PhHSlider new
-			       label: self label , 'BM'
-			       init: 1
-			       min: 0
-			       max: 1
-			       step: 0.001 ]
+	^ bM 
 ]
 
 { #category : 'accessing' }
@@ -63,13 +51,36 @@ del := PhHSlider new
 			         init: 2
 			         min: 0
 			         max: 32
-			         step: 0.01 
+			         step: 0.01 .
+			
+		bM := PhHSlider new
+			       label: self label , 'BM'
+			       init: 1
+			       min: 0
+			       max: 1
+			       step: 0.001 .
+			 b0 := PhHSlider new
+			       label: self label , 'B0'
+			       init: 1
+			       min: 0
+			       max: 1
+			       step: 0.001.
+			
+		input := 1 asBox.
+		
+	intDel := PhHSlider new
+			            label: self label , 'IntDel'
+			            init: 2
+			            min: 0
+			            max: 32
+			            step: 1 .
+			maxDel := 32 asBox.
 ]
 
 { #category : 'accessing' }
 CombFilters >> input [
 
-	^ input ifNil: [ input := 1 asBox ]
+	^ input 
 ]
 
 { #category : 'accessing' }
@@ -81,17 +92,11 @@ CombFilters >> input: aPhBox [
 { #category : 'accessing' }
 CombFilters >> intDel [
 
-	^ intDel ifNil: [
-		  intDel := PhHSlider new
-			            label: self label , 'IntDel'
-			            init: 2
-			            min: 0
-			            max: 32
-			            step: 1 ]
+	^ intDel 
 ]
 
 { #category : 'accessing' }
 CombFilters >> maxDel [
 
-	^ 32 asBox
+	^ maxDel 
 ]
