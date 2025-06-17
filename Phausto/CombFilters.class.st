@@ -46,13 +46,7 @@ CombFilters >> bM [
 { #category : 'accessing' }
 CombFilters >> del [
 
-	^ del ifNil: [
-		  del := PhHSlider new
-			         label: self label , 'del'
-			         init: 2
-			         min: 0
-			         max: 32
-			         step: 0.01 ]
+	^ del 
 ]
 
 { #category : 'initialization' }
@@ -62,7 +56,14 @@ CombFilters >> initialize [
 	faustFunctionName := (self class name findBetweenSubstrings: ' ')
 		                     first asLowercase.
 	super initialize.
-	processExpression := 'process = fi.' , faustFunctionName , ';'
+	processExpression := 'process = fi.' , faustFunctionName , ';'.
+	
+del := PhHSlider new
+			         label: self label , 'del'
+			         init: 2
+			         min: 0
+			         max: 32
+			         step: 0.01 
 ]
 
 { #category : 'accessing' }

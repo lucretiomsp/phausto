@@ -34,11 +34,16 @@ FfbCombFilter >> asBox [
 { #category : 'as yet unclassified' }
 FfbCombFilter >> g [
 
-	^ g ifNil: [
-		  g := PhHSlider new
+	^ g 
+]
+
+{ #category : 'initialization' }
+FfbCombFilter >> initialize [ 
+super initialize .
+g := PhHSlider new
 			        label: self label , 'G'
 			        init: 1
 			        min: 0
 			        max: 1
-			        step: 0.001 ]
+			        step: 0.001
 ]
