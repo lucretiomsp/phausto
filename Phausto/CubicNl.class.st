@@ -49,7 +49,20 @@ CubicNl >> drive [
 CubicNl >> initialize [
 
 	super initialize.
-	processExpression := 'process = ef.cubicnl;'
+	processExpression := 'process = ef.cubicnl;'.
+	  drive := PhHSlider new
+			         label: self class name , 'Drive'
+			         init: 0.03
+			         min: 0
+			         max: 1
+			         step: 0.001 .
+			
+		offset := PhHSlider new
+			           label: self class name , 'Offset'
+			           init: 0.81
+			           min: 0
+			           max: 1
+			           step: 0.001 
 ]
 
 { #category : 'accessing' }
@@ -61,13 +74,7 @@ CubicNl >> input [
 { #category : 'as yet unclassified' }
 CubicNl >> offset [
 
-	^ offset ifNil: [
-		  offset := PhHSlider new
-			           label: self class name , 'Offset'
-			           init: 0.81
-			           min: 0
-			           max: 1
-			           step: 0.001 ]
+	^ offset 
 ]
 
 { #category : 'as yet unclassified' }
