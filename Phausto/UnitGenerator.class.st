@@ -250,6 +250,14 @@ UnitGenerator >> controlParameters [
 ^ controlParameters 
 ]
 
+{ #category : 'initialization' }
+UnitGenerator >> counterSuffix [
+
+self class instancesInDSPContext = 1
+		          ifTrue: [ ^ '' ]
+		          ifFalse: [ ^ self class instancesInDSPContext asString ].
+]
+
 { #category : 'accessing' }
 UnitGenerator >> importStatement [
 
