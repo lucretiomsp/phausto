@@ -36,13 +36,7 @@ CubicNl >> asBox [
 { #category : 'as yet unclassified' }
 CubicNl >> drive [
 
-	^ drive ifNil: [
-		  drive := PhHSlider new
-			         label: self class name , 'Drive'
-			         init: 0.03
-			         min: 0
-			         max: 1
-			         step: 0.001 ]
+	^ drive 
 ]
 
 { #category : 'initialization' }
@@ -62,13 +56,15 @@ CubicNl >> initialize [
 			           init: 0.81
 			           min: 0
 			           max: 1
-			           step: 0.001 
+			           step: 0.001 .
+			
+		input := 0 asBox 
 ]
 
 { #category : 'accessing' }
 CubicNl >> input [
 
-	^ input ifNil: [ input := 0 asBox ]
+	^ input 
 ]
 
 { #category : 'as yet unclassified' }
