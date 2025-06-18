@@ -41,20 +41,20 @@ PhSelectN >> asBox [
 { #category : 'accessing' }
 PhSelectN >> index [
 
-	^ index ifNil: [
-		  index := PhHSlider new
-			           label: self label , 'Index'
-			           init: 1
-			           min: 1
-			           max: 8
-			           step: 1 ]
+	^ index 
 ]
 
 { #category : 'initialization' }
 PhSelectN >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.selectn (5);'
+	processExpression := 'process = ba.selectn (5);'.
+	index := PhHSlider new
+			           label: self label , 'Index'
+			           init: 1
+			           min: 1
+			           max: 8
+			           step: 1
 ]
 
 { #category : 'accessing' }

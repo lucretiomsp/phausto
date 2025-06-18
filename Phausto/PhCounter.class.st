@@ -30,6 +30,13 @@ PhCounter >> initialize [
 
 	super initialize.
 	maxValue := 8.
+	max := PhHSlider new
+			         label: self label , 'Max'
+			         init: self maxValue
+			         min: 1
+			         max: self maxValue
+			         step: 1 .
+			 trigger := PhButton new label: self label , 'Trigger'
 ]
 
 { #category : 'accessing' }
@@ -52,6 +59,5 @@ PhCounter >> maxValue [
 { #category : 'accessing' }
 PhCounter >> trigger [
 
-	^ trigger ifNil: [
-		  trigger := PhButton new label: self label , 'Trigger' ]
+	^ trigger 
 ]
