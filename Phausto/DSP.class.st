@@ -149,9 +149,10 @@ DSP class >> create: aStringWithFaustCode [
 	| currentDsp |
 	currentDsp := PhaustoDynamicEngine uniqueInstance createDsp:
 		              aStringWithFaustCode.
+		1halt.
 	currentDsp isNull ifTrue: [
 		self error: PhaustoDynamicEngine uniqueInstance getLastError ].
-	currentDsp name: 'MyApp' .
+	currentDsp name: 'MyApp'.
 
 	^ currentDsp
 ]
