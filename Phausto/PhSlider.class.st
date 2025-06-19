@@ -10,6 +10,21 @@ Class {
 	#tag : 'UIPrimitives'
 }
 
+{ #category : 'converting' }
+PhSlider >> asBox [
+
+	| sliderBox |
+	BoxAPI uniqueInstance createLibContext.
+	sliderBox := BoxAPI uniqueInstance
+		             boxHslider: self label
+		             init: self init asBox
+		             min: self min asBox
+		             max: self max asBox
+		             step: self step asBox.
+
+	^ sliderBox
+]
+
 { #category : 'accessing' }
 PhSlider >> init: aNumber [
 

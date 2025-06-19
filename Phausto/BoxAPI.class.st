@@ -390,8 +390,8 @@ BoxAPI >> boxVslider: aLabel init: initBox min: minBox max: maxBox step: stepBox
 	self createLibContext.
 
 	self ffiCall:
-		#( #PhBox #* CboxVSlider #( const char #* aLabel #, #PhBox #* initBox
-		      #, #PhBox #* minBox #, #PhBox #* maxBox #, #PhBox #* stepBox ) )
+		#( #PhBox * CboxVSlider #( const char * aLabel , #PhBox * initBox
+		      , #PhBox * minBox , #PhBox * maxBox , #PhBox * stepBox ) )
 ]
 
 { #category : 'utility' }
