@@ -26,28 +26,11 @@ PhLooper >> initialize [
 	super initialize.
 
 	processExpression := '
-import("stdfaust.lib");
-tableSize = 196000;
+tableSize = 48000;
 recIndex = (+(1) : %(tableSize)) ~ *(record);
 readIndex = readSpeed/float(ma.SR) : (+ : ma.frac) ~ _ : *(float(tableSize)) : int;
-readSpeed = hslider("Read Speed",1,0.001,10,0.01);
-record = button("Record") : int;
+readSpeed = hslider("LoopSpeed",1,0.001,10,0.01);
+record = button("RecordLoop") : int;
 looper = rwtable(tableSize,0.0,recIndex,_,readIndex);
-process = looper;'
-]
-
-{ #category : 'accessing' }
-PhLooper >> processExpression [
-
-	^ '
-import("stdfaust.lib");
-tableSize = 44100;
-recIndex = (+(1) : %(tableSize)) ~ *(record);
-readIndex = readSpeed/float(ma.SR) : (+ : ma.frac) ~ _ : *(float(tableSize)) : int;
-readSpeed = hslider("Read Speed",1,0.001,10,0.01);
-record = 1;
-looper = rwtable(tableSize,0.0,recIndex,_,readIndex);
-process = looper;
-
-'
+process =  looper ;'
 ]
