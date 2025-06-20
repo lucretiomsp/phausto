@@ -321,6 +321,24 @@ TurboPhausto >> destroy [
 	self class tpDsp destroy
 ]
 
+{ #category : 'displaying' }
+TurboPhausto >> destroyDsp [
+
+self class tpDsp destroy.
+]
+
+{ #category : 'displaying' }
+TurboPhausto >> displayUI [
+
+self class tpDsp displayUI
+]
+
+{ #category : 'displaying' }
+TurboPhausto >> displayUIForLevels [ 
+
+	self class tpDsp displayUIForLevels
+]
+
 { #category : 'API - changes' }
 TurboPhausto >> highPassFreq: aFrequency [
 	"aFrequency value is forced in filter range"
@@ -448,6 +466,12 @@ TurboPhausto >> solo: aSymbol [
 TurboPhausto >> stop [
 
 	self class tpPerf stop
+]
+
+{ #category : 'displaying' }
+TurboPhausto >> stopDsp [
+
+self class tpDsp stop.
 ]
 
 { #category : 'API - changes' }
