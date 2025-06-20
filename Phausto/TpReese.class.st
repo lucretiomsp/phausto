@@ -18,7 +18,14 @@ Class {
 { #category : 'converting' }
 TpReese >> asBox [
 
-	^ (osci1 + osci2) * adsr 
+adsr := (ADSREnv new
+		         label: 'reese';
+		         attack: self attack;
+		         decay: self decay;
+		         sustain: self sustain;
+		         release: self release;
+		         trigger: self gate) asBox.
+	^ osci1 + osci2 * adsr
 ]
 
 { #category : 'initialization' }
@@ -33,13 +40,7 @@ TpReese >> initialize [
 	noteSlider := PhHSlider new
 		              label: 'reeseNote'
 		              values: #( 48 1 127 1 ).
-	adsr := (ADSREnv new
-		         label: 'reese';
-		         attack: self attack;
-		         decay: self decay;
-		         sustain: self sustain;
-		         release: self release;
-		         trigger: self gate) asBox.
+	
 	osci1 := SineOsc new
 		         freq: #reeseNote;
 		         uLevel: 0.3 asBox.
