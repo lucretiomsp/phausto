@@ -41,7 +41,7 @@ TurboPhausto class >> allEffects [
 { #category : 'accessing' }
 TurboPhausto class >> allInstruments [
 
-^ allSamplers , allSynths
+	^ allSamplers , allSynths asArray
 ]
 
 { #category : 'accessing' }
