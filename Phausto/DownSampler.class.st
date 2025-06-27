@@ -27,13 +27,7 @@ DownSampler >> asBox [
 { #category : 'accessing' }
 DownSampler >> frequency [
 
-	^ frequency  ifNil: [
-		  frequency := PhHSlider new
-			            label: self label , 'Frequency'
-			            init: 300
-			            min: 20
-			            max: 18000
-			            step: 1 ]
+	^ frequency 
 ]
 
 { #category : 'initialization' }
@@ -41,11 +35,23 @@ DownSampler >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.downSample;'.
-	self frequency: 1000
+	frequency := PhHSlider new
+		             label: self label , 'Frequency'
+		             init: 300
+		             min: 20
+		             max: 18000
+		             step: 1.
+   input := Wire new.
 ]
 
 { #category : 'accessing' }
 DownSampler >> input [
 
 	^ input
+]
+
+{ #category : 'connecting' }
+DownSampler >> patchedWith: aUnitGenerator [
+
+	self input: aUnitGenerator
 ]

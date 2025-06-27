@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+BasicLibTest >> testDownSamplerAsDsp [ 
+
+	self deny: DownSampler new asDsp isNull
+]
+
+{ #category : 'tests' }
 BasicLibTest >> testPulseAsDsp [
 
 	self assert: Pulse new asDsp isNull equals: false
@@ -27,5 +33,5 @@ BasicLibTest >> testSampleAndHoldAsDsp [
 { #category : 'tests' }
 BasicLibTest >> testSec2Samples [
 
-	self assert: Sec2Samples  new asDsp isNull equals: false
+	self deny: Sec2Samples new asDsp isNull
 ]

@@ -309,6 +309,18 @@ ParamsSetter >> drive: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> dsfreq: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> duty:  aNumberOrABoxOrASymbol [
 
 	| methodName |

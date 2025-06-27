@@ -10,7 +10,9 @@ Class {
 	#superclass : 'TpSynth',
 	#instVars : [
 		'lfoAmount',
-		'index'
+		'index',
+		'q',
+		'dsfreq'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -43,9 +45,9 @@ PsgPlus >> asBox [
 		       freq: pitchLfo;
 		       uLevel: 0.3 asBox.
 	noise := ResonBp new
-		         input: (DownSampler new input: Noise new);
+		         input: (DownSampler new frequency: self dsfreq ;input: Noise new);
 		         frequency: pitchLfo asBox * 3 asBox;
-		         q: 4.
+		         q: self q .
 
 	"Envelope"
 	adsr := (ADSREnv new
@@ -58,6 +60,12 @@ PsgPlus >> asBox [
 	synth := (selectorInputs connectTo: PhSelect4 new) * adsr asBox
 	         * self uLevel * ringModulator.
 	^ synth * self uLevel
+]
+
+{ #category : 'accessing' }
+PsgPlus >> dsfreq [
+
+	^ dsfreq
 ]
 
 { #category : 'accessing' }
@@ -81,7 +89,8 @@ PsgPlus >> index: anIndex [
 PsgPlus >> initialize [
 
 	super initialize.
-
+	dsfreq := PhHSlider new label: 'PsgPlusDSFreq' values: #(180 20 16000 1).
+	q := PhHSlider new label: 'PsgPlusQ' values: #(3 1 5 0.01).
 ]
 
 { #category : 'accessing' }
@@ -94,4 +103,10 @@ PsgPlus >> lfoAmount [
 			               min: 0
 			               max: 1
 			               step: 0.001 ]
+]
+
+{ #category : 'accessing' }
+PsgPlus >> q [
+
+^ q
 ]
