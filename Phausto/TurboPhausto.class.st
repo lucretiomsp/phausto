@@ -199,13 +199,12 @@ TurboPhausto class >> loadAllSynths [
 				 freq: #dubdubNote);
 		add: (Acid new
 				 label: 'acid';
-				
 				 pitch: #acidNote);
 		add: (Chordy new
 				 label: 'chordy';
 				 pitch: #chordyNote);
-		add: TpHoover new;
-		add: TpReese new.
+		add: (TpHoover new );
+		add: (TpReese new ).
 	^ self
 ]
 
