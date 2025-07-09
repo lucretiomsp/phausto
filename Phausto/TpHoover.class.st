@@ -27,6 +27,7 @@ TpHoover >> initialize [
 
 	| pitchEnv pitchEnvAmt |
 	super initialize.
+	label := 'hoover'.
 	trigger := PhButton new label: self label , 'Trigger'.
 	self controlParameters add: #trigger -> (self trigger
 			 asControlParameterOfWidgetType: #button

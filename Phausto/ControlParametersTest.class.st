@@ -11,10 +11,11 @@ Class {
 
 { #category : 'running' }
 ControlParametersTest >> setUp [
+
 	super setUp.
 
 	"Put here a common initialization logic for tests"
-	osci := SineOsc new.
+	osci := SineOsc new label: 'SineOsc'
 ]
 
 { #category : 'tests' }
@@ -40,4 +41,13 @@ ControlParametersTest >> testInitializeControlParameterFromUIPrimitive [
 	self assert: freqParam widgetType equals: #knob.
 	self assert: freqParam description equals:  'Frequency in Hertz'.
 	self assert: freqParam initialValue equals: osci freq init
+]
+
+{ #category : 'tests' }
+ControlParametersTest >> testLFOForFreq [
+
+osci freq: (LFOTriPos  new label: 'Lfo').
+
+
+self assert: (osci controlParameters includesKey: #uLevel)
 ]
