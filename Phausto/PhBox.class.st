@@ -235,43 +235,45 @@ PhBox >> asDspMIDIWithName: aString [
 PhBox >> asDspWithName: aString [
 	" creates a DSP from the Box"
 
-	| finalDsp interBox |
+	| finalDsp interBox sourceGen |
+	"store it for the NullObject"
+	sourceGen := self.
 	self asBox getHandle
 		ifNil: [ ^ Error new signal: 'Invalid Box - please (re)create one' ]
 		ifNotNil: [
-			self class libContext
-				ifFalse: [ ^ Error new signal: 'LibContext does not exist' ]
-				ifTrue: [
-					interBox := self asBox.
-					"initialize the final DSP to a null pointer"
-					finalDsp := DSP new.
+				self class libContext
+					ifFalse: [ ^ Error new signal: 'LibContext does not exist' ]
+					ifTrue: [
+							interBox := self asBox.
+							"initialize the final DSP to a null pointer"
+							finalDsp := DSP new.
 
 
-					interBox
-						ifNotNil: [ "!!!!! What do we destroy with multiple DSPs?????????????""DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ]."
-							('create DSp WitName: ' , aString) traceCr.
-							finalDsp := PhaustoDynamicEngine uniqueInstance
-								            createDspFromBoxes: self asBox
-								            withName: aString.
+							interBox
+								ifNotNil: [ "!!!!! What do we destroy with multiple DSPs?????????????""DSP initializedDSP ifNotNil: [ DSP initializedDSP destroy ]."
+										('create DSp WitName: ' , aString) traceCr.
+										finalDsp := PhaustoDynamicEngine uniqueInstance
+											            createDspFromBoxes: self asBox
+											            withName: aString.
 
-							PhaustoDynamicEngine dspPlaying: finalDsp.
-							finalDsp name: aString.
-							finalDsp generatedCode:
-								'process = ' , self fullPrintString , ';'.
-							attachedDSP := finalDsp.
+										PhaustoDynamicEngine dspPlaying: finalDsp.
+										finalDsp name: aString.
+										finalDsp generatedCode:
+											'process = ' , self fullPrintString , ';'.
+										attachedDSP := finalDsp.
 
-							BoxAPI uniqueInstance destroyLibContext ]
-						ifNil: [
-						Error new signal: 'Invalid Box please check its creation' ].
-					"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
-					UnitGenerator resetSelfAndAllSubClasses.
-					"all UniTgenerators become UnitGeneratorNullObjects"
+										BoxAPI uniqueInstance destroyLibContext ]
+								ifNil: [
+								Error new signal: 'Invalid Box please check its creation' ].
+							"if the DSP is created, we re-initialize the counter for the Unit Generators created in this context"
+							UnitGenerator resetSelfAndAllSubClasses.
+							"all UniTgenerators become UnitGeneratorNullObjects"
 
-					UnitGenerator activeInstances do: [ :instance |
-						instance become: UnitGeneratorNullObject new ].
-					UnitGenerator activeInstances removeAll.
+							UnitGenerator activeInstances do: [ :instance |
+								instance become: (UnitGeneratorNullObject new sourceGenerator: sourceGen )].
+							UnitGenerator activeInstances removeAll.
 
-					^ finalDsp ] ]
+							^ finalDsp ] ]
 ]
 
 { #category : 'printing' }

@@ -154,6 +154,20 @@ PhaustoDynamicEngine >> destroyDSP: aDsp [
 ]
 
 { #category : 'as yet unclassified' }
+PhaustoDynamicEngine >> getBuffer [
+
+^ self ffiCall:
+		   #( float *  getBuffer(DSPStructure* aDsp))
+]
+
+{ #category : 'as yet unclassified' }
+PhaustoDynamicEngine >> getBuffer: aDsp [
+
+^ self ffiCall:
+		   #( float *  getBuffer(DSP * aDsp ))
+]
+
+{ #category : 'as yet unclassified' }
 PhaustoDynamicEngine >> getLastError [
 
 	

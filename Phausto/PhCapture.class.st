@@ -56,7 +56,7 @@ PhCapture >> asBox [
 PhCapture >> initialize [
 
 	super initialize.
-   
+
 	processExpression := '
 B = button("Capture");	
 I = int(B);				
@@ -66,7 +66,7 @@ D = (+(I):*(R))~_;
 
 capture = *(B) : (+ : de.delay(8*65536, D-1)) ~ *(1.0-B);
 
-level = hslider("level", 0, -96, 4, 0.1) : ba.db2linear : si.smoo;
+level = hslider("CaptureuLevel", 0, -96, 4, 0.1) : ba.db2linear : si.smoo;
 
 process =  capture : *(level);'.
 
