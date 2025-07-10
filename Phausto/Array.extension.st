@@ -1,6 +1,15 @@
 Extension { #name : 'Array' }
 
 { #category : '*Phausto' }
+Array >> asChainOfUGen [
+	"connect Ugen in the Array from first to last"
+
+	| chain |
+	chain := self allButFirst inject: self first into: [ :a :c | a => c ].
+	^ chain
+]
+
+{ #category : '*Phausto' }
 Array >> asParam: aString forUGen: aUnitGenerator [
 	"change init, min, max, step of the UI element to the array value"
 

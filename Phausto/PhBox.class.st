@@ -235,9 +235,9 @@ PhBox >> asDspMIDIWithName: aString [
 PhBox >> asDspWithName: aString [
 	" creates a DSP from the Box"
 
-	| finalDsp interBox sourceGen |
+	| finalDsp interBox  |
 	"store it for the NullObject"
-	sourceGen := self.
+
 	self asBox getHandle
 		ifNil: [ ^ Error new signal: 'Invalid Box - please (re)create one' ]
 		ifNotNil: [
@@ -270,7 +270,8 @@ PhBox >> asDspWithName: aString [
 							"all UniTgenerators become UnitGeneratorNullObjects"
 
 							UnitGenerator activeInstances do: [ :instance |
-								instance become: (UnitGeneratorNullObject new sourceGenerator: sourceGen )].
+									instance become:
+										(UnitGeneratorNullObject new ) ].
 							UnitGenerator activeInstances removeAll.
 
 							^ finalDsp ] ]
