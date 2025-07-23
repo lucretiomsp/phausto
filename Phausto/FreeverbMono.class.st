@@ -63,18 +63,14 @@ FreeverbMono >> initialize [
 		       min: 0
 		       max: 1
 		       step: 0.001.
-		self controlParameters add: #fb1 -> (self fb1
-			 asControlParameterOfWidgetType: #knob
-			 description: 'FeedBack 1').
+	
 	fb2 := PhHSlider new
 		       label: self label , 'Fb2'
 		       init: 0.3
 		       min: 0
 		       max: 1
 		       step: 0.001.
-		self controlParameters add: #fb2 -> (self fb2
-			 asControlParameterOfWidgetType: #knob
-			 description: 'FeedBack 2').
+
 	damp := PhHSlider new
 		        label: self label , 'Damp'
 		        init: 0.2

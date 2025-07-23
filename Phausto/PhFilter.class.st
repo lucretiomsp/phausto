@@ -29,5 +29,5 @@ PhFilter >> input [
 { #category : 'connecting' }
 PhFilter >> patchedWith: aUnitGenerator [
 
-self  input: aUnitGenerator asBox
+	self input: aUnitGenerator 
 ]

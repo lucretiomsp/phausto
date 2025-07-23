@@ -217,7 +217,7 @@ UnitGenerator >> asDspWithName: aString [
 { #category : 'converting' }
 UnitGenerator >> asParam: aString forUGen: aUGen [
 
-aUGen instVarNamed: aString put: self asBox
+	aUGen instVarNamed: aString put: self 
 ]
 
 { #category : 'accessing' }
