@@ -18,7 +18,8 @@ PhClip >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self min , self max , self input connectTo: intermediateBox.
+	finalBox := self min  asBox, self max asBox , self input asBox connectTo:
+		            intermediateBox.
 	^ finalBox
 ]
 

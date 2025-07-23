@@ -29,7 +29,8 @@ CubicNl >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox :=  self drive , self offset, self input  connectTo: intermediateBox.
+	finalBox := self drive asBox , self offset asBox, self input asBox connectTo:
+		            intermediateBox.
 	^ finalBox
 ]
 

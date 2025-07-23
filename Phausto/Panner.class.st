@@ -16,7 +16,7 @@ Panner >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self pan , self input connectTo: intermediateBox.
+	finalBox := self pan asBox , self input asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 

@@ -39,13 +39,12 @@ Class {
 { #category : 'converting' }
 GreyHole >> asBox [
 
-	| intermediateBox  finalBox |
-	
-	intermediateBox := super asBox .
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
 	finalBox := self dt asBox , self damp asBox , self size asBox
 	            , self earlyDiff asBox , self feedback asBox
-	            , self modDepth asBox , self modFreq asBox , self inputL
-	            , self inputR connectTo: intermediateBox.
+	            , self modDepth asBox , self modFreq asBox , self inputL asBox
+	            , self inputR asBox connectTo: intermediateBox.
 
 	^ finalBox
 ]

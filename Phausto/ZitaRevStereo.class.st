@@ -28,10 +28,11 @@ Class {
 { #category : 'converting' }
 ZitaRevStereo >> asBox [
 
-	| intermediateBox  finalBox |
-	
-	intermediateBox := super asBox .
-	finalBox := self rdel, self f1 asBox, self f2 asBox , self t60dc asBox , self t60m asBox , self fsMax asBox , self inputL, self inputR connectTo: intermediateBox.
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	finalBox := self rdel , self f1 asBox , self f2 asBox
+	            , self t60dc asBox , self t60m asBox , self fsMax asBox
+	            , self inputL asBox , self inputR asBox connectTo: intermediateBox.
 
 	^ finalBox
 ]

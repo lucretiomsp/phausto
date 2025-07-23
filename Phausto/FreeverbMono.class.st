@@ -25,10 +25,10 @@ Class {
 { #category : 'converting' }
 FreeverbMono >> asBox [
 
-	| intermediateBox  finalBox |
-		intermediateBox := super asBox.
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
 	finalBox := self fb1 asBox , self fb2 asBox , self damp asBox
-	            , self spread asBox , self input connectTo:
+	            , self spread asBox , self input asBox connectTo:
 		            intermediateBox.
 
 	^ finalBox

@@ -23,7 +23,7 @@ Wavefold >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self width , self input connectTo: intermediateBox.
+	finalBox := self width asBox , self input asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 

@@ -14,9 +14,9 @@ Class {
 { #category : 'converting' }
 SatRev >> asBox [
 
-| intermediateBox finalBox |
-intermediateBox := super asBox.
-finalBox := self input connectTo: intermediateBox.
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
+	finalBox := self input asBox connectTo: intermediateBox.
 
 	^ finalBox
 ]

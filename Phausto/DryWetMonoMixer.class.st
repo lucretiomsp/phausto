@@ -28,9 +28,9 @@ Class {
 DryWetMonoMixer >> asBox [
 
 	| drySignal wetSignal |
-	drySignal := self input * (1 asBox - self wetAmount).
-	wetSignal := (self input => self fx)  * self wetAmount .
-	^ wetSignal + drySignal 
+	drySignal := self input asBox * (1 asBox - self wetAmount asBox).
+	wetSignal := self input asBox => self fx * self wetAmount asBox.
+	^ wetSignal + drySignal
 ]
 
 { #category : 'accessing' }

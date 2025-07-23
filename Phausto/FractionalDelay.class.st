@@ -14,7 +14,7 @@ FractionalDelay >> asBox [
 
 	| intermediateBox finalBox delayInSamples |
 	intermediateBox := super asBox.
-	delayInSamples := self delayLength * PhSampleRate new.
+	delayInSamples := self delayLength asBox * PhSampleRate new.
 	finalBox := self maxDelayLength asBox , delayInSamples asBox
 	            , self input asBox connectTo: intermediateBox.
 	^ finalBox
