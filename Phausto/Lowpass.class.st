@@ -18,11 +18,9 @@ Class {
 Lowpass >> asBox [
 
 	| intermdiateBox finalBox |
-	
+	intermdiateBox := super asBox.
 
-	intermdiateBox := super asBox .
-
-	finalBox := self cutoff , self input connectTo: intermdiateBox.
+	finalBox := self cutoff asBox, self input asBox connectTo: intermdiateBox.
 
 	^ finalBox
 ]

@@ -26,7 +26,8 @@ LptN >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self attenuation , self period , self input connectTo: intermdiateBox.
+	finalBox := self attenuation asBox, self period asBox, self input asBox connectTo:
+		            intermdiateBox.
 
 	^ finalBox
 ]

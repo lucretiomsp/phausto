@@ -24,8 +24,8 @@ FfCombFilter >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self maxDel , self intDel , self bM
-	            , self input connectTo: intermdiateBox.
+	finalBox := self maxDel asBox, self intDel asBox, self bM asBox, self input asBox
+		            connectTo: intermdiateBox.
 
 	^ finalBox
 ]

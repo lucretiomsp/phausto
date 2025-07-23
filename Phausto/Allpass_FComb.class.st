@@ -39,8 +39,8 @@ Allpass_FComb >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self maxDel , self del ,  self aN , self input
-		            connectTo: intermdiateBox.
+	finalBox := self maxDel asBox, self del asBox, self aN asBox, self input asBox connectTo:
+		            intermdiateBox.
 
 	^ finalBox
 ]

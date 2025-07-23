@@ -22,8 +22,8 @@ Ff_FComb >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self maxDel ,  self del , self b0 , self bM
-	            , self input connectTo: intermdiateBox.
+	finalBox := self maxDel asBox, self del asBox, self b0 asBox, self bM asBox, self input asBox
+		            connectTo: intermdiateBox.
 
 	^ finalBox
 ]

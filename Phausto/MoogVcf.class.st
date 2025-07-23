@@ -22,11 +22,9 @@ Class {
 MoogVcf >> asBox [
 
 	| intermdiateBox finalBox |
-	
+	intermdiateBox := super asBox.
 
-	intermdiateBox := super asBox .
-
-	finalBox := self res , self fr ,  self input connectTo: intermdiateBox.
+	finalBox := self res asBox, self fr asBox , self input asBox connectTo: intermdiateBox.
 
 	^ finalBox
 ]
