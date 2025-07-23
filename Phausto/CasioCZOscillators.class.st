@@ -50,9 +50,12 @@ CasioCZOscillators >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	self hasResParameter ifTrue: [ finalBox := self fund , self res connectTo: intermediateBox ] ifFalse:
-	[finalBox := self fund , self index connectTo: intermediateBox].
-	^ finalBox * self uLevel
+	self hasResParameter
+		ifTrue: [
+		finalBox := self fund asBox, self res asBox connectTo: intermediateBox ]
+		ifFalse: [
+		finalBox := self fund asBox , self index asBox connectTo: intermediateBox ].
+	^ finalBox * self uLevel asBox
 ]
 
 { #category : 'accessing' }

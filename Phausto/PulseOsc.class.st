@@ -40,8 +40,9 @@ PulseOsc >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self freq , self duty connectTo: intermediateBox.
-	^ finalBox * self uLevel
+	finalBox := self freq asBox , self duty asBox connectTo:
+		            intermediateBox.
+	^ finalBox * self uLevel asBox
 ]
 
 { #category : 'accessing' }
