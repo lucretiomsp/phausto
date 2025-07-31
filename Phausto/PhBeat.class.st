@@ -20,9 +20,9 @@ Class {
 	#instVars : [
 		'tempo'
 	],
-	#category : 'Phausto-Basics',
+	#category : 'Phausto-Basics - Counters/TimeTools',
 	#package : 'Phausto',
-	#tag : 'Basics'
+	#tag : 'Basics - Counters/TimeTools'
 }
 
 { #category : 'converting' }
@@ -40,17 +40,17 @@ PhBeat >> asBox [
 PhBeat >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.beat;'
+	processExpression := 'process = ba.beat;'.
+	tempo := PhHSlider new
+		         label: self label , 'Tempo'
+		         init: 120
+		         min: 30
+		         max: 220
+		         step: 0.01
 ]
 
 { #category : 'accessing' }
 PhBeat >> tempo [
 
-	^ tempo ifNil: [
-		  tempo := PhHSlider new
-			           label: self label , 'Tempo'
-			           init: 120
-			           min: 30
-			           max: 220
-			           step: 0.01 ]
+	^ tempo 
 ]

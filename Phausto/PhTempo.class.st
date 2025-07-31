@@ -12,9 +12,9 @@ Class {
 		'trig',
 		'tempo'
 	],
-	#category : 'Phausto-Basics',
+	#category : 'Phausto-Basics - Counters/TimeTools',
 	#package : 'Phausto',
-	#tag : 'Basics'
+	#tag : 'Basics - Counters/TimeTools'
 }
 
 { #category : 'converting' }
@@ -24,7 +24,7 @@ PhTempo >> asBox [
 	intermediateBox := super asBox.
 
 
-	finalBox := self tempo connectTo: intermediateBox.
+	finalBox := self tempo asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 

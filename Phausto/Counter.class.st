@@ -10,9 +10,9 @@ Class {
 	#instVars : [
 		'trig'
 	],
-	#category : 'Phausto-Basics',
+	#category : 'Phausto-Basics - Counters/TimeTools',
 	#package : 'Phausto',
-	#tag : 'Basics'
+	#tag : 'Basics - Counters/TimeTools'
 }
 
 { #category : 'converting' }
@@ -22,7 +22,7 @@ Counter >> asBox [
 	intermediateBox := super asBox.
 
 
-	finalBox := self trig connectTo: intermediateBox.
+	finalBox := self trig asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -30,11 +30,12 @@ Counter >> asBox [
 Counter >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.counter;'
+	processExpression := 'process = ba.counter;'.
+	trig := PhButton new label: self label , 'Gate' .
 ]
 
 { #category : 'as yet unclassified' }
 Counter >> trig [
 
-	^ trig ifNil: [ trig := PhButton new label: self label , 'Gate' ]
+	^ trig 
 ]

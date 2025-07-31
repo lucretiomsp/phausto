@@ -42,13 +42,7 @@ PhCounter >> initialize [
 { #category : 'accessing' }
 PhCounter >> max [
 
-	^ max ifNil: [
-		  max := PhHSlider new
-			         label: self label , 'Max'
-			         init: self maxValue
-			         min: 1
-			         max: self maxValue
-			         step: 1 ]
+	^ max 
 ]
 
 { #category : 'accessing' }

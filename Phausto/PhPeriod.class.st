@@ -11,19 +11,19 @@ Class {
 	#instVars : [
 		'period'
 	],
-	#category : 'Phausto-Basics',
+	#category : 'Phausto-Basics - Counters/TimeTools',
 	#package : 'Phausto',
-	#tag : 'Basics'
+	#tag : 'Basics - Counters/TimeTools'
 }
 
 { #category : 'converting' }
 PhPeriod >> asBox [
 
-	| intermediateBox  finalBox |
+	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
 
-	finalBox := self period connectTo: intermediateBox.
+	finalBox := self period asBox  connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -31,17 +31,17 @@ PhPeriod >> asBox [
 PhPeriod >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.period;'
+	processExpression := 'process = ba.period;'.
+	period := PhHSlider new
+		          label: self label , 'Period'
+		          init: 1
+		          min: 0.1
+		          max: 10
+		          step: 0.01
 ]
 
 { #category : 'accessing' }
 PhPeriod >> period [
 
-	^ period ifNil: [
-		  period := PhHSlider new
-			            label: self label , 'Period'
-			            init: 1
-			            min: 0.1
-			            max: 10
-			            step: 0.01 ]
+	^ period
 ]

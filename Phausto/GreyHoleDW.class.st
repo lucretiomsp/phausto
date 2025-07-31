@@ -22,7 +22,7 @@ GreyHoleDW >> asBox [
 	| reverb finalBox dry wet |
 	reverb := self inputL => GreyHole new.
 	dry := self inputL * (self dryWet - 1 asBox).
-	wet := (reverb asBox mergeWith: Wire new asBox) , self dryWet
+	wet := (reverb asBox mergeWith: Wire new asBox) , self dryWet asBox
 		       connectTo: PhMultiplier new.
 	finalBox := dry + wet.
 	^ finalBox

@@ -8,9 +8,9 @@ Class {
 		'max',
 		'trig'
 	],
-	#category : 'Phausto-Basics',
+	#category : 'Phausto-Basics - Counters/TimeTools',
 	#package : 'Phausto',
-	#tag : 'Basics'
+	#tag : 'Basics - Counters/TimeTools'
 }
 
 { #category : 'converting' }
@@ -19,9 +19,8 @@ CountUp >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
-	
-	finalBox := self max , self  trig  connectTo:
-		            intermediateBox.
+
+	finalBox := self max asBox  , self trig asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -30,24 +29,23 @@ CountUp >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.countup;'.
-
+	max := PhHSlider new
+		       label: self label , 'Max'
+		       init: 1
+		       min: 1
+		       max: 64
+		       step: 1.
+	trig := PhButton new label: self label , 'Gate'
 ]
 
 { #category : 'as yet unclassified' }
 CountUp >> max [
 
-	^ max  ifNil: [
-		  max := PhHSlider new
-			            label: self label , 'Max'
-			            init: 1
-			            min: 1
-			            max: 64
-			            step: 11 ]
+	^ max 
 ]
 
 { #category : 'accessing' }
 CountUp >> trig [
 
-	^ trig ifNil: [
-		  trig := PhButton new label: self label , 'Gate' ]
+	^ trig 
 ]
