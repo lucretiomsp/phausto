@@ -24,7 +24,12 @@ Panner >> asBox [
 Panner >> initialize [
 
 	super initialize.
-	processExpression :='process = sp.panner;'.
-	
-	
+	processExpression := 'process = sp.panner;'.
+	input := Wire new.
+	pan :=  PhHSlider new
+				  label: self label , 'Pan'
+				  init: 0.5
+				  min: 0
+				  max: 1
+				  step: 0.001 
 ]

@@ -63,7 +63,7 @@ FreeverbMono >> initialize [
 		       min: 0
 		       max: 1
 		       step: 0.001.
-	
+
 	fb2 := PhHSlider new
 		       label: self label , 'Fb2'
 		       init: 0.3
@@ -77,7 +77,7 @@ FreeverbMono >> initialize [
 		        min: 0
 		        max: 1
 		        step: 0.001.
-	spread := 0 asBox
+	spread := 0 
 ]
 
 { #category : 'connecting' }

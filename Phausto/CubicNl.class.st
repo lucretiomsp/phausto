@@ -45,21 +45,21 @@ CubicNl >> initialize [
 
 	super initialize.
 	processExpression := 'process = ef.cubicnl;'.
-	  drive := PhHSlider new
-			         label: self class name , 'Drive'
-			         init: 0.03
-			         min: 0
-			         max: 1
-			         step: 0.001 .
-			
-		offset := PhHSlider new
-			           label: self class name , 'Offset'
-			           init: 0.81
-			           min: 0
-			           max: 1
-			           step: 0.001 .
-			
-		input := 0 asBox 
+	drive := PhHSlider new
+		         label: self class name , 'Drive'
+		         init: 0.03
+		         min: 0
+		         max: 1
+		         step: 0.001.
+
+	offset := PhHSlider new
+		          label: self class name , 'Offset'
+		          init: 0.81
+		          min: 0
+		          max: 1
+		          step: 0.001.
+
+	input := 0 
 ]
 
 { #category : 'accessing' }

@@ -112,16 +112,16 @@ GreyHole >> initialize [
 
 	super initialize.
 	processExpression := 'process = re.greyhole;'.
-	
-	
-	
-	
-	
-	
-	
 
-	self inputL: Wire new asBox.
-	self inputR: Wire new asBox
+
+
+
+
+
+
+
+	self inputL: Wire new .
+	self inputR: Wire new .
 ]
 
 { #category : 'accessing' }

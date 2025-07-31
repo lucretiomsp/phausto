@@ -17,13 +17,19 @@ Class {
 { #category : 'accessing' }
 ButterworthLPHP >> cutoff [
 
-	^ cutoff ifNil:  [
-		  cutoff  := PhHSlider new
-			          label: self label , 'Cutoff'
-			          init: 300
-			          min: 20
-			          max: 18000
-			          step: 1 ] 
+	^ cutoff
+]
+
+{ #category : 'initialization' }
+ButterworthLPHP >> initialize [ 
+
+super initialize .
+cutoff := PhHSlider new
+				            label: self label , 'Cutoff'
+				            init: 300
+				            min: 20
+				            max: 18000
+				            step: 1
 ]
 
 { #category : 'accessing' }

@@ -16,7 +16,7 @@ Class {
 { #category : 'accessing' }
 Spatials >> input [
 
-	^ input ifNil:  [ input := Wire new ]
+	^ input 
 ]
 
 { #category : 'accessing' }
@@ -28,13 +28,7 @@ Spatials >> input: aPhBox [
 { #category : 'accessing' }
 Spatials >> pan [
 
-	^ pan ifNil: [
-		  PhHSlider new
-			  label: self label , 'Pan'
-			  init: 0.5
-			  min: 0
-			  max: 1
-			  step: 0.001 ]
+	^ pan 
 ]
 
 { #category : 'accessing' }

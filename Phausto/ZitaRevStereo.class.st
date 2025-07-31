@@ -71,11 +71,11 @@ ZitaRevStereo >> fsMax [
 ]
 
 { #category : 'initialization' }
-ZitaRevStereo >> initialize [ 
+ZitaRevStereo >> initialize [
 
-super initialize .
-processExpression := 'process = re.zita_rev1_stereo;'.
-fsmax := 44100 asBox.
+	super initialize.
+	processExpression := 'process = re.zita_rev1_stereo;'.
+	fsmax := 44100 
 ]
 
 { #category : 'accessing' }

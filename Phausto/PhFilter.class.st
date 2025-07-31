@@ -14,16 +14,17 @@ Class {
 	#tag : 'Filters'
 }
 
+{ #category : 'initialization' }
+PhFilter >> initialize [
+
+	super initialize.
+	input := Wire new.
+]
+
 { #category : 'accessing' }
 PhFilter >> input [
 
-	^ input ifNil:  [
-		  input  := PhHSlider new
-			          label: self label , 'Input'
-			          init: 5000
-			          min: 20
-			          max: 18000
-			          step: 1 ] 
+	^ input 
 ]
 
 { #category : 'connecting' }

@@ -277,6 +277,11 @@ PhBox >> asDspWithName: aString [
 							^ finalDsp ] ]
 ]
 
+{ #category : 'converting' }
+PhBox >> asDspWithName: aString source: aUnitGenerator [ 
+	^ (self asDspWithName: aString )
+]
+
 { #category : 'printing' }
 PhBox >> asFaustCode [
 

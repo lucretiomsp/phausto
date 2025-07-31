@@ -23,7 +23,8 @@ Class {
 		'generatedCode',
 		'displayedUI',
 		'parameters',
-		'isMIDI'
+		'isMIDI',
+		'source'
 	],
 	#classVars : [
 		'defaultName',
@@ -149,7 +150,7 @@ DSP class >> create: aStringWithFaustCode [
 	| currentDsp |
 	currentDsp := PhaustoDynamicEngine uniqueInstance createDsp:
 		              aStringWithFaustCode.
-		1halt.
+	
 	currentDsp isNull ifTrue: [
 		self error: PhaustoDynamicEngine uniqueInstance getLastError ].
 	currentDsp name: 'MyApp'.
@@ -748,6 +749,15 @@ DSP >> soundfiles [
 | allItems |
 allItems := (((STONJSON fromString: self getJSON) at: #ui) at: 1) at: #items.
 ^  allItems select: [ :i | i values includes: 'soundfile' ].
+]
+
+{ #category : 'accessing' }
+DSP >> source [
+	^ source.
+]
+
+{ #category : 'accessing' }
+DSP >> source: aUnitGenerator [
 ]
 
 { #category : 'start-stop' }
