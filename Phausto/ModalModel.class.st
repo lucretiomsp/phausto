@@ -32,8 +32,8 @@ ModalModel >> asBox [
 	intermediateBox := super asBox.
 	"finalBox := self freqs asBox , self t60s asBox , self gains asBox
 	            , self input asBox connectTo: intermediateBox."
-	finalBox := 440 asBox , 0.5 asBox , 0.5 asBox , self input connectTo:
-		            intermediateBox.
+	finalBox := 440 asBox , 0.5 asBox , 0.5 asBox , self input asBox
+		            connectTo: intermediateBox.
 	^ intermediateBox
 ]
 
@@ -55,10 +55,10 @@ ModalModel >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.modalModel(1);'.
-	freqs := 440 asBox , 660 asBox.
-	t60s := 0.5 asBox , 0.25 asBox.
-	gains := 0.6 asBox , 0.8 asBox.
-	input := Pulse new period: 0.16 asBox
+	freqs := 440 asBox , 660 .
+	t60s := 0.5 asBox , 0.25 .
+	gains := 0.6 asBox , 0.8 .
+	input := Pulse new period: 0.16. 
 ]
 
 { #category : 'accessing' }

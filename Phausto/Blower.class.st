@@ -26,9 +26,9 @@ Blower >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 	finalBox := self pressure asBox , self breathGain asBox
-	            , self breathCutoff connectTo: intermediateBox.
+	            , self breathCutoff asBox connectTo: intermediateBox.
 
-	^ intermediateBox 
+	^ intermediateBox
 ]
 
 { #category : 'accessing' }

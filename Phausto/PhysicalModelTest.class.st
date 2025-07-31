@@ -73,6 +73,18 @@ PhysicalModelTest >> testPluckStringAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testSFFormantModelBPAsDsp [
+
+	self deny: SFFormantModelBP new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testSFFormantModelFofCycleAsDsp [
+
+	self deny: SFFormantModelFofCycle new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testStrikeAsDsp [
 
 	self assert: Strike new asDsp isNull equals: false
