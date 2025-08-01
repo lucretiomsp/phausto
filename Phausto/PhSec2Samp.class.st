@@ -1,10 +1,10 @@
 "
-Converts a number of samples to a duration in seconds at the current sampling rate . 
+Converts a duration in seconds to a number of samples at the current sampling rate
 ## Parameters
 **duration:** duration in seconds
 "
 Class {
-	#name : 'PhSamp2Sec',
+	#name : 'PhSec2Samp',
 	#superclass : 'PhConversionTool',
 	#instVars : [
 		'duration'
@@ -14,23 +14,22 @@ Class {
 	#tag : 'Basics - ConversionTools'
 }
 
-{ #category : 'converting' }
-PhSamp2Sec >> asBox [
+{ #category : 'accessing' }
+PhSec2Samp >> asBox [ 
 
-	^ self duration asBox connectTo: super asBox
+^ self duration asBox connectTo: super asBox.
 ]
 
 { #category : 'accessing' }
-PhSamp2Sec >> duration [
+PhSec2Samp >> duration [
 
 ^ duration
 ]
 
 { #category : 'initialization' }
-PhSamp2Sec >> initialize [
+PhSec2Samp >> initialize [
 
 	super initialize.
-	duration := 44100.
-
-	processExpression := 'process = ba.samp2sec;'
+	duration := 1.
+	processExpression := 'process = ba.sec2samp;'
 ]

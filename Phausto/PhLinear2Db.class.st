@@ -21,7 +21,7 @@ Class {
 { #category : 'converting' }
 PhLinear2Db >> asBox [ 
 
-^ self gain connectTo: super asBox
+^ self gain asBox  connectTo: super asBox
 ]
 
 { #category : 'accessing' }
