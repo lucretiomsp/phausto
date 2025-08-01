@@ -2,7 +2,7 @@
 I am a Resetter, when triggered,  I set my value to 0. My other input is a Wire, as I am dsigned to be used in a SampleFile or Wavetable reader
 "
 Class {
-	#name : 'Resetter',
+	#name : 'PhResetter',
 	#superclass : 'PhBox',
 	#instVars : [
 		'trigger'
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'converting' }
-Resetter >> asBox [
+PhResetter >> asBox [
 
 	| oneSampleTrig samp |
 	samp := (1 / 48000) asFloat asBox.
@@ -28,20 +28,20 @@ Resetter >> asBox [
 ]
 
 { #category : 'initialization' }
-Resetter >> initialize [ 
+PhResetter >> initialize [ 
 
 super initialize.
 self trigger: 0 
 ]
 
 { #category : 'accessing' }
-Resetter >> trigger [
+PhResetter >> trigger [
 
 	^ trigger
 ]
 
 { #category : 'accessing' }
-Resetter >> trigger: aTrigger [ 
+PhResetter >> trigger: aTrigger [ 
 
 	trigger := aTrigger asBox
 ]

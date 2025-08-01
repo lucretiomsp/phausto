@@ -3,7 +3,7 @@ I am a Phausto counter, I count from 1 to maxValue when triggered.
 By default, I count to 8 and I am triggered by a Button
 "
 Class {
-	#name : 'PhCounter',
+	#name : 'PhTkCounter',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'trigger',
@@ -16,7 +16,7 @@ Class {
 }
 
 { #category : 'converting' }
-PhCounter >> asBox [
+PhTkCounter >> asBox [
 
 	| count finalBox |
 	count := Counter new trig: self trigger.
@@ -26,7 +26,7 @@ PhCounter >> asBox [
 ]
 
 { #category : 'initialization' }
-PhCounter >> initialize [
+PhTkCounter >> initialize [
 
 	super initialize.
 	maxValue := 8.
@@ -40,18 +40,18 @@ PhCounter >> initialize [
 ]
 
 { #category : 'accessing' }
-PhCounter >> max [
+PhTkCounter >> max [
 
 	^ max 
 ]
 
 { #category : 'accessing' }
-PhCounter >> maxValue [
+PhTkCounter >> maxValue [
 ^ maxValue
 ]
 
 { #category : 'accessing' }
-PhCounter >> trigger [
+PhTkCounter >> trigger [
 
 	^ trigger 
 ]

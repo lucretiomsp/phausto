@@ -1,5 +1,5 @@
 Class {
-	#name : 'BasicsCountersTest',
+	#name : 'BasicCountersTest',
 	#superclass : 'TestCase',
 	#category : 'Phausto-Tests',
 	#package : 'Phausto',
@@ -7,31 +7,31 @@ Class {
 }
 
 { #category : 'tests' }
-BasicsCountersTest >> testCountDownAsDsp [
+BasicCountersTest >> testCountDownAsDsp [
 
 	self assert: PhCountDown new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testCountUpAsDsp [
+BasicCountersTest >> testCountUpAsDsp [
 
 	self assert: PhCountUp new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testCounterAsDsp [
+BasicCountersTest >> testCounterAsDsp [
 
 	self assert: Counter new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPhBeatAsDsp [
+BasicCountersTest >> testPhBeatAsDsp [
 
 	self assert: PhBeat new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPhCycleAsDsp [
+BasicCountersTest >> testPhCycleAsDsp [
 	"crash apparently for unexplicable reason"
 
 	self assert: 1 equals: 0
@@ -39,43 +39,43 @@ BasicsCountersTest >> testPhCycleAsDsp [
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPhLineAsDsp [
+BasicCountersTest >> testPhLineAsDsp [
 
 	self assert: PhLine  new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPhPeriodAsDsp [
+BasicCountersTest >> testPhPeriodAsDsp [
 
 	self assert: PhPeriod  new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPhRampAsDsp [
+BasicCountersTest >> testPhRampAsDsp [
 
 	self assert: PhRamp new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPhTempoAsDsp [
+BasicCountersTest >> testPhTempoAsDsp [
 
 	self assert: PhTempo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPhTimeAsDsp [
+BasicCountersTest >> testPhTimeAsDsp [
 
 	self assert: PhTime new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPulseAsDsp [
+BasicCountersTest >> testPulseAsDsp [
 
 	self assert: Pulse new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPulseCountDownAsDsp [
+BasicCountersTest >> testPulseCountDownAsDsp [
 
 "crash apparently for unexplicable reason"
 
@@ -84,13 +84,13 @@ BasicsCountersTest >> testPulseCountDownAsDsp [
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPulseCountDownLoopAsDsp [
+BasicCountersTest >> testPulseCountDownLoopAsDsp [
 
 	self assert: PulseCountDownLoop new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPulseCountUpAsDsp [
+BasicCountersTest >> testPulseCountUpAsDsp [
 
 "crash apparently for unexplicable reason"
 
@@ -99,25 +99,25 @@ BasicsCountersTest >> testPulseCountUpAsDsp [
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPulseCountUpLoopAsDsp [
+BasicCountersTest >> testPulseCountUpLoopAsDsp [
 
 	self assert: PulseCountUpLoop new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testPulsenAsDsp [
+BasicCountersTest >> testPulsenAsDsp [
 
 	self assert: Pulsen new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testResetCtrAsDsp [
+BasicCountersTest >> testResetCtrAsDsp [
 
 	self assert: PhResetCtr new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-BasicsCountersTest >> testSpulsedAsDsp [
+BasicCountersTest >> testSpulsedAsDsp [
 
 "crash apparently for unexplicable reason"
 
