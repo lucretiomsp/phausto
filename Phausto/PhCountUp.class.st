@@ -2,7 +2,7 @@
 Starts counting up from 0 to n included. While trig is 1 the output is 0. The countup starts with the transition of trig from 1 to 0. At the end of the countup the output value will remain at n until the next trig. countup is a standard Faust function.
 "
 Class {
-	#name : 'CountDown',
+	#name : 'PhCountUp',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'max',
@@ -14,38 +14,38 @@ Class {
 }
 
 { #category : 'converting' }
-CountDown >> asBox [
+PhCountUp >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
 
-	finalBox := self max asBox , self trig asBox connectTo: intermediateBox.
+	finalBox := self max asBox  , self trig asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
 { #category : 'initialization' }
-CountDown >> initialize [
+PhCountUp >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.countdown;'.
+	processExpression := 'process = ba.countup;'.
 	max := PhHSlider new
 		       label: self label , 'Max'
 		       init: 1
 		       min: 1
 		       max: 64
 		       step: 1.
-		trig := PhButton new label: self label , 'Gate'
+	trig := PhButton new label: self label , 'Gate'
 ]
 
 { #category : 'as yet unclassified' }
-CountDown >> max [
+PhCountUp >> max [
 
 	^ max 
 ]
 
 { #category : 'accessing' }
-CountDown >> trig [
+PhCountUp >> trig [
 
 	^ trig 
 ]
