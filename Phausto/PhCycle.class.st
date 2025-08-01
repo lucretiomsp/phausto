@@ -11,9 +11,9 @@ Class {
 		'n',
 		'input'
 	],
-	#category : 'Phausto-Basics',
+	#category : 'Phausto-Basics - Counters/TimeTools',
 	#package : 'Phausto',
-	#tag : 'Basics'
+	#tag : 'Basics - Counters/TimeTools'
 }
 
 { #category : 'converting' }
@@ -23,7 +23,7 @@ PhCycle >> asBox [
 	intermediateBox := super asBox.
 
 
-	finalBox := self n , self input  connectTo: intermediateBox.
+	finalBox := self n asBox , self input asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -31,23 +31,24 @@ PhCycle >> asBox [
 PhCycle >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.cycle;'
+	processExpression := 'process = ba.cycle;'.
+	input := SquareOsc new.
+	n := PhHSlider new
+				       label: self label , 'N'
+				       init: 1
+				       min: 1
+				       max: 88200
+				       step: 1 
 ]
 
 { #category : 'accessing' }
 PhCycle >> input [
 
-	^ input ifNil: [ input := SquareOsc new ]
+	^ input 
 ]
 
 { #category : 'as yet unclassified' }
 PhCycle >> n [
 
-	^ n ifNil: [
-		  n := PhHSlider new
-			            label: self label , 'N'
-			            init: 1
-			            min: 1
-			            max: 88200
-			            step: 1 ]
+	^ n 
 ]

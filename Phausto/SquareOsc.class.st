@@ -19,10 +19,9 @@ Class {
 SquareOsc >> asBox [
 
 	| intermediateBox finalBox |
-
 	intermediateBox := super asBox.
-	finalBox := self freq connectTo: intermediateBox.
-	^ finalBox * self uLevel
+	finalBox := self freq asBox connectTo: intermediateBox.
+	^ finalBox * self uLevel asBox
 ]
 
 { #category : 'as yet unclassified' }

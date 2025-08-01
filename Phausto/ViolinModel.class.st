@@ -19,11 +19,10 @@ Class {
 ViolinModel >> asBox [
 
 	| intermediateBox finalBox |
-
 	intermediateBox := super asBox.
 
-	finalBox := 
-	stringLength , bowVelocity , bowPressure , bowPosition connectTo: intermediateBox.
+	finalBox := self stringLength asBox , self bowVelocity asBox  , self bowPressure asBox , self  bowPosition asBox
+		            connectTo: intermediateBox.
 
 	^ finalBox
 ]

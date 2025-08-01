@@ -20,7 +20,7 @@ F2l >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
-	finalBox := self freq  connectTo: intermediateBox.
+	finalBox := self freq asBox connectTo: intermediateBox.
 
 	^ finalBox
 ]
@@ -28,13 +28,7 @@ F2l >> asBox [
 { #category : 'accessing' }
 F2l >> freq [
 
-	^ freq ifNil: [
-		  freq := PhHSlider new
-			          label: self label , 'Freq'
-			          init: 440
-			          min: 20
-			          max: 1200
-			          step: 1 ]
+	^ freq 
 ]
 
 { #category : 'accessing' }
@@ -51,5 +45,11 @@ F2l >> freq: aNumberOrABoxOrASymbol [
 F2l >> initialize [
 
 	super initialize.
-	processExpression := 'process = pm.f2l;'
+	processExpression := 'process = pm.f2l;'.
+	freq := PhHSlider new
+		        label: self label , 'Freq'
+		        init: 440
+		        min: 20
+		        max: 1200
+		        step: 1
 ]

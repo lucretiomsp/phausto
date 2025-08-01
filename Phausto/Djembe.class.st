@@ -17,8 +17,8 @@ Djembe >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
-	finalBox := self freq , self strikePosition , self strikeSharpness , self gain , self trigger
-		            connectTo: intermediateBox.
+	finalBox := self freq asBox , self strikePosition asBox , self strikeSharpness asBox 
+	            , self gain asBox , self trigger asBox  connectTo: intermediateBox.
 
 	^ finalBox
 ]

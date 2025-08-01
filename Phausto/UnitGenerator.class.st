@@ -181,9 +181,8 @@ emptyBox := PhBox new.
 { #category : 'converting' }
 UnitGenerator >> asDsp [
 	" creates a DSP from the Box with the default name MyApp"
-	
-	^ self asDspWithName: 'MyApp'
 
+	^ self asDspWithName: 'MyApp' source: self
 ]
 
 { #category : 'converting' }
@@ -206,18 +205,26 @@ UnitGenerator >> asDspMIDIWithName: aString [
 UnitGenerator >> asDspWithName: aString [
 	" creates a DSP from the Box"
 
-	|  interBox |
-	
-		
-					interBox := self asBox.
-					interBox traceCr.
-					^ interBox asDspWithName: aString.
+	| interBox |
+	interBox := self asBox.
+	interBox traceCr.
+	^ interBox asDspWithName: aString source: self
+]
+
+{ #category : 'converting' }
+UnitGenerator >> asDspWithName: aString source: self [
+	" creates a DSP from the Box"
+
+	| interBox |
+	interBox := self asBox.
+	interBox traceCr.
+	^ interBox asDspWithName: aString source: self
 ]
 
 { #category : 'converting' }
 UnitGenerator >> asParam: aString forUGen: aUGen [
 
-aUGen instVarNamed: aString put: self asBox
+	aUGen instVarNamed: aString put: self 
 ]
 
 { #category : 'accessing' }

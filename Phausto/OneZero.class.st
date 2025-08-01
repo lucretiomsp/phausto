@@ -24,7 +24,7 @@ OneZero >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self zero , self input connectTo: intermdiateBox.
+	finalBox := self zero asBox, self input asBox connectTo: intermdiateBox.
 
 	^ finalBox
 ]

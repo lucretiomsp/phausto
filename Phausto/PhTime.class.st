@@ -7,9 +7,9 @@ Class {
 	#instVars : [
 		'trig'
 	],
-	#category : 'Phausto-Basics',
+	#category : 'Phausto-Basics - Counters/TimeTools',
 	#package : 'Phausto',
-	#tag : 'Basics'
+	#tag : 'Basics - Counters/TimeTools'
 }
 
 { #category : 'initialization' }

@@ -16,7 +16,7 @@ Integrator >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := 1 asBox , self input connectTo: intermdiateBox.
+	finalBox := 1 asBox , self input asBox connectTo: intermdiateBox.
 
 	^ finalBox
 ]

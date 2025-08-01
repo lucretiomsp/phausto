@@ -21,7 +21,7 @@ Hyperbolic >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox :=  self input connectTo: intermediateBox.
+	finalBox := self input asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 

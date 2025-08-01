@@ -23,8 +23,8 @@ LFO >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self freq connectTo: intermediateBox.
-	^ finalBox 
+	finalBox := self freq asBox connectTo: intermediateBox.
+	^ finalBox
 ]
 
 { #category : 'accessing' }

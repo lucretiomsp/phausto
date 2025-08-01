@@ -24,7 +24,7 @@ Pole >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self pole ,self input connectTo: intermdiateBox.
+	finalBox := self pole asBox , self input connectTo: intermdiateBox.
 
 	^ finalBox
 ]

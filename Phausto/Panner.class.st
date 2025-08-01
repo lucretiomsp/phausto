@@ -16,7 +16,7 @@ Panner >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self pan , self input connectTo: intermediateBox.
+	finalBox := self pan asBox , self input asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -24,7 +24,12 @@ Panner >> asBox [
 Panner >> initialize [
 
 	super initialize.
-	processExpression :='process = sp.panner;'.
-	
-	
+	processExpression := 'process = sp.panner;'.
+	input := Wire new.
+	pan :=  PhHSlider new
+				  label: self label , 'Pan'
+				  init: 0.5
+				  min: 0
+				  max: 1
+				  step: 0.001 
 ]

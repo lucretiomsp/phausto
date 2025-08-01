@@ -15,7 +15,7 @@ DcBlocker >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox :=  self input connectTo: intermdiateBox.
+	finalBox := self input asBox connectTo: intermdiateBox.
 
 	^ finalBox
 ]

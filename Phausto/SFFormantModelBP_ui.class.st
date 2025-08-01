@@ -14,6 +14,13 @@ super asBox
 ]
 
 { #category : 'initialization' }
+SFFormantModelBP_ui >> initialize [
+
+	super initialize.
+	processExpression := 'process = pm.SFFormantModelBP_ui;'
+]
+
+{ #category : 'initialization' }
 SFFormantModelBP_ui >> initializeULevel [ 
 super initialize.
 processExpression := 'process = pm.SFFormantModelBP_ui;'

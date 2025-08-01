@@ -11,3 +11,8 @@ Class {
 	#package : 'Phausto',
 	#tag : 'Effects'
 }
+
+{ #category : 'converting' }
+LimiterMono >> asBox [ 
+self shouldBeImplemented 
+]

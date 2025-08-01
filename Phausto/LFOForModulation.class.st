@@ -49,7 +49,7 @@ LFOForModulation >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self freq  connectTo: intermediateBox.
+	finalBox := self freq asBox connectTo: intermediateBox.
 	^ finalBox * self amount asBox + self offset asBox
 ]
 

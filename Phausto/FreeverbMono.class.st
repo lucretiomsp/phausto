@@ -25,10 +25,10 @@ Class {
 { #category : 'converting' }
 FreeverbMono >> asBox [
 
-	| intermediateBox  finalBox |
-		intermediateBox := super asBox.
+	| intermediateBox finalBox |
+	intermediateBox := super asBox.
 	finalBox := self fb1 asBox , self fb2 asBox , self damp asBox
-	            , self spread asBox , self input connectTo:
+	            , self spread asBox , self input asBox connectTo:
 		            intermediateBox.
 
 	^ finalBox
@@ -63,25 +63,21 @@ FreeverbMono >> initialize [
 		       min: 0
 		       max: 1
 		       step: 0.001.
-		self controlParameters add: #fb1 -> (self fb1
-			 asControlParameterOfWidgetType: #knob
-			 description: 'FeedBack 1').
+
 	fb2 := PhHSlider new
 		       label: self label , 'Fb2'
 		       init: 0.3
 		       min: 0
 		       max: 1
 		       step: 0.001.
-		self controlParameters add: #fb2 -> (self fb2
-			 asControlParameterOfWidgetType: #knob
-			 description: 'FeedBack 2').
+
 	damp := PhHSlider new
 		        label: self label , 'Damp'
 		        init: 0.2
 		        min: 0
 		        max: 1
 		        step: 0.001.
-	spread := 0 asBox
+	spread := 0 
 ]
 
 { #category : 'connecting' }

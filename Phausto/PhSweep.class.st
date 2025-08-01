@@ -3,19 +3,19 @@ Counts from 0 to period-1 repeatedly, generating a sawtooth waveform, like os.lf
 Period is expressed in seconds
 "
 Class {
-	#name : 'Sweep',
+	#name : 'PhSweep',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'period',
 		'run'
 	],
-	#category : 'Phausto-Basics',
+	#category : 'Phausto-Basics - Counters/TimeTools',
 	#package : 'Phausto',
-	#tag : 'Basics'
+	#tag : 'Basics - Counters/TimeTools'
 }
 
 { #category : 'converting' }
-Sweep >> asBox [
+PhSweep >> asBox [
 
 	| intermediateBox periodInSamples finalBox |
 	intermediateBox := super asBox.
@@ -27,14 +27,14 @@ Sweep >> asBox [
 ]
 
 { #category : 'initialization' }
-Sweep >> initialize [
+PhSweep >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.sweep;'
 ]
 
 { #category : 'accessing' }
-Sweep >> period [
+PhSweep >> period [
 
 	^ period ifNil: [
 		  period := PhHSlider new
@@ -46,7 +46,7 @@ Sweep >> period [
 ]
 
 { #category : 'as yet unclassified' }
-Sweep >> period: aNumberOrABoxOrASymbol [
+PhSweep >> period: aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector.
@@ -58,7 +58,7 @@ Sweep >> period: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'as yet unclassified' }
-Sweep >> run [
+PhSweep >> run [
 
 	^ run ifNil: [ run := PhButton new label: self label , 'Gate' ]
 ]

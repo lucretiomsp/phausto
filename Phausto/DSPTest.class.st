@@ -27,3 +27,16 @@ dsp := SquareOsc new asDsp.
 self assertCollection: dsp getUIItemsLabeledDictionary keys  equals: #('SquareOscuLevel' 'SquareOscFreq')
 
 ]
+
+{ #category : 'tests' }
+DSPTest >> testSource [
+
+| osc filter inst dsp |
+osc := SineOsc new.
+filter := ResonBp new.
+inst := filter input: osc .
+dsp :=( osc => filter ) asDsp.
+
+self assert: dsp source class equals: ResonBp 
+
+]

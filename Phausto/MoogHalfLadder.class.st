@@ -20,7 +20,8 @@ MoogHalfLadder >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self normFreq , self q , self input connectTo: intermdiateBox.
+	finalBox := self normFreq asBox , self q asBox , self input asBox connectTo:
+		            intermdiateBox.
 
 	^ finalBox
 ]

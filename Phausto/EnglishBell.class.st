@@ -21,8 +21,9 @@ EnglishBell >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
-	finalBox := self strikePosition , self strikeCutoff , self strikeSharpness , self gain
-	            , self trigger connectTo: intermediateBox.
+	finalBox := self strikePosition asBox , self strikeCutoff asBox 
+	            , self strikeSharpness asBox , self gain asBox , self trigger asBox 
+		            connectTo: intermediateBox.
 
 	^ finalBox
 ]

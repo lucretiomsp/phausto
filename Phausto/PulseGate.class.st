@@ -13,7 +13,7 @@ For example, if m = 1 and n = 4, PulseGate will pass through only the first puls
 "
 Class {
 	#name : 'PulseGate',
-	#superclass : 'ResetCtr',
+	#superclass : 'PhResetCtr',
 	#instVars : [
 		'period'
 	],
@@ -27,7 +27,7 @@ PulseGate >> asBox [
 
 | impulseGenerator  resetCtr |
 impulseGenerator := Pulse new period: self period.
-resetCtr := ResetCtr new input: impulseGenerator.
+resetCtr := PhResetCtr new input: impulseGenerator.
 ^ resetCtr asBox 
 
 

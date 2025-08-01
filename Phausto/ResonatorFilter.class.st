@@ -30,8 +30,8 @@ ResonatorFilter >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self frequency smoo , self q , self gain , self input
-		            connectTo: intermdiateBox.
+	finalBox := self frequency asBox smoo , self q asBox , self gain asBox
+	            , self input asBox connectTo: intermdiateBox.
 
 	^ finalBox
 ]

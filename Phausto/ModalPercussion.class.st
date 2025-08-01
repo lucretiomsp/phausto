@@ -29,13 +29,7 @@ ModalPercussion >> freq [
 { #category : 'accessing' }
 ModalPercussion >> gain [
 
-	^ gain ifNil: [
-		  gain := PhHSlider new
-			          label: self label , 'Gain'
-			          init: 0.5
-			          min: 0
-			          max: 1
-			          step: 0.001 ]
+	^ gain 
 ]
 
 { #category : 'initialization' }
@@ -66,7 +60,13 @@ ModalPercussion >> initialize [
 		        min: 20
 		        max: 1200
 		        step: 1.
-self controlParameters add: #freq -> (self freq
+		gain := PhHSlider new
+				          label: self label , 'Gain'
+				          init: 0.5
+				          min: 0
+				          max: 1
+				          step: 0.001 .
+	self controlParameters add: #freq -> (self freq
 			 asControlParameterOfWidgetType: #knob
 			 description: 'Frequency in Hertz').
 	trigger := PhButton new label: self label , 'Trigger'.

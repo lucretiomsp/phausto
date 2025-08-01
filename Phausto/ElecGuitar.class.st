@@ -21,8 +21,8 @@ ElecGuitar >> asBox [
 	| intermediateBox finalBox length |
 	intermediateBox := super asBox.
 	length := self freq f2l.
-	finalBox := length , self pluckPosition , self mute asBox , self gain , self trigger
-		            connectTo: intermediateBox.
+	finalBox := length , self pluckPosition asBox , self mute asBox , self gain asBox
+	            , self trigger asBox connectTo: intermediateBox.
 
 	^ finalBox
 ]
@@ -44,6 +44,12 @@ ElecGuitar >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.elecGuitar;'.
+	pluckPosition := (PhHSlider new
+					   label: self label , 'PluckPos'
+					   init: 0.8
+					   min: 0
+					   max: 1
+					   step: 0.01).
 	mute := 1 asBox.
 	trigger := PhButton new label: self label , 'Trigger'.
 	self controlParameters add: #trigger -> (self trigger
@@ -59,13 +65,7 @@ ElecGuitar >> mute [
 { #category : 'accessing' }
 ElecGuitar >> pluckPosition [
 
-	^ pluckPosition ifNil: [
-		  self pluckPosition: (PhHSlider new
-				   label: self label , 'PluckPos'
-				   init: 0.8
-				   min: 0
-				   max: 1
-				   step: 0.01) ]
+	^ pluckPosition 
 ]
 
 { #category : 'accessing' }

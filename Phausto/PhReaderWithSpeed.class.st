@@ -17,7 +17,7 @@ Class {
 PhReaderWithSpeed >> asBox [
 
 	| sum resetter |
-	resetter := (Resetter new trigger: self trigger) asBox.
+	resetter := (PhResetter new trigger: self trigger) asBox.
 	sum := Wire new asBox + self speed.
 	^ resetter ~ sum
 ]

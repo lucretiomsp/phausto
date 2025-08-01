@@ -18,8 +18,9 @@ Marimba >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
-	finalBox := self freq , self strikePosition , self strikeCutoff , self  strikeSharpness
-	            , self gain , self trigger connectTo: intermediateBox.
+	finalBox := self freq asBox , self strikePosition asBox , self strikeCutoff asBox 
+	            , self strikeSharpness asBox , self gain asBox , self trigger asBox 
+		            connectTo: intermediateBox.
 
 	^ finalBox
 ]
@@ -30,16 +31,4 @@ Marimba >> initialize [
 	super initialize.
 	processExpression := 'process = pm.marimba;'.
 	
-]
-
-{ #category : 'accessing' }
-Marimba >> strikePosition [
-
-	^ strikePosition ifNil: [ 
-		self strikePosition: (PhHSlider new
-			 label: self label , 'StrikePos'
-			 init: 0
-			 min: 0
-			 max: 4
-			 step: 1). ]
 ]

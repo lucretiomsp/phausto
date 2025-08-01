@@ -6,20 +6,20 @@ totalImpulses = the total number of impulses being split.
 impulseIndex =  index of impulse to allow to be output
 "
 Class {
-	#name : 'ResetCtr',
+	#name : 'PhResetCtr',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'totalImpulses',
 		'impulseIndex',
 		'input'
 	],
-	#category : 'Phausto-Basics',
+	#category : 'Phausto-Basics - Counters/TimeTools',
 	#package : 'Phausto',
-	#tag : 'Basics'
+	#tag : 'Basics - Counters/TimeTools'
 }
 
 { #category : 'converting' }
-ResetCtr >> asBox [
+PhResetCtr >> asBox [
 
 	| intermediateBox  finalBox |
 	intermediateBox := super asBox.
@@ -30,7 +30,7 @@ ResetCtr >> asBox [
 ]
 
 { #category : 'initialization' }
-ResetCtr >> impulseIndex [
+PhResetCtr >> impulseIndex [
 
 	^ impulseIndex ifNil: [
 		  impulseIndex := PhHSlider new
@@ -42,7 +42,7 @@ ResetCtr >> impulseIndex [
 ]
 
 { #category : 'initialization' }
-ResetCtr >> initialize [
+PhResetCtr >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.resetCtr;'.
@@ -51,14 +51,14 @@ ResetCtr >> initialize [
 ]
 
 { #category : 'initialization' }
-ResetCtr >> input [
+PhResetCtr >> input [
 
 	^ input ifNil: [
 		  input := 0 asBox ]
 ]
 
 { #category : 'initialization' }
-ResetCtr >> totalImpulses [
+PhResetCtr >> totalImpulses [
 
 	^ totalImpulses ifNil: [
 		  totalImpulses := PhHSlider new

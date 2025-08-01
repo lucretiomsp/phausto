@@ -23,7 +23,7 @@ DcBlockerAt >> asBox [
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
 
-	finalBox := self fb , self input connectTo: intermdiateBox.
+	finalBox := self fb asBox, self input asBox connectTo: intermdiateBox.
 
 	^ finalBox
 ]

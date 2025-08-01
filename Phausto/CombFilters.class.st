@@ -45,36 +45,36 @@ CombFilters >> initialize [
 		                     first asLowercase.
 	super initialize.
 	processExpression := 'process = fi.' , faustFunctionName , ';'.
-	
-del := PhHSlider new
-			         label: self label , 'del'
-			         init: 2
-			         min: 0
-			         max: 32
-			         step: 0.01 .
-			
-		bM := PhHSlider new
-			       label: self label , 'BM'
-			       init: 1
-			       min: 0
-			       max: 1
-			       step: 0.001 .
-			 b0 := PhHSlider new
-			       label: self label , 'B0'
-			       init: 1
-			       min: 0
-			       max: 1
-			       step: 0.001.
-			
-		input := 1 asBox.
-		
+
+	del := PhHSlider new
+		       label: self label , 'del'
+		       init: 2
+		       min: 0
+		       max: 32
+		       step: 0.01.
+
+	bM := PhHSlider new
+		      label: self label , 'BM'
+		      init: 1
+		      min: 0
+		      max: 1
+		      step: 0.001.
+	b0 := PhHSlider new
+		      label: self label , 'B0'
+		      init: 1
+		      min: 0
+		      max: 1
+		      step: 0.001.
+
+	input := 1 .
+
 	intDel := PhHSlider new
-			            label: self label , 'IntDel'
-			            init: 2
-			            min: 0
-			            max: 32
-			            step: 1 .
-			maxDel := 32 asBox.
+		          label: self label , 'IntDel'
+		          init: 2
+		          min: 0
+		          max: 32
+		          step: 1.
+	maxDel := 32 asBox
 ]
 
 { #category : 'accessing' }
