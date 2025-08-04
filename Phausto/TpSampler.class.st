@@ -88,17 +88,19 @@ TpSampler >> changeParamsPrefix [
 { #category : 'as yet unclassified' }
 TpSampler >> createMultiFilesURL [
 
-	| allFiles audioFiles unsortedfileNames  allFilePaths filePathPrefix filePathSuffix allFilesPathsWithoutLastColumn |
+	| allFiles audioFiles unsortedfileNames allFilePaths filePathPrefix filePathSuffix allFilesPathsWithoutLastColumn |
 	allFiles := pathToFolder asFileReference allChildren reject: [ :i |
 		            i isHidden ].
 	"first we select only valid audio files"
 	audioFiles := allFiles select: [ :f | f pathString isAudioFilePath ].
-	unsortedfileNames := (2 to: audioFiles size) collect: [ :i |
+	unsortedfileNames := (2 to: audioFiles size + 1) collect: [ :i |
 		                     (allFiles at: i) asAbsolute pathString
 			                     surroundedByQuotes ].
+	
 	fileNamesSorted := unsortedfileNames sort.
 
 	fileNamesSorted do: [ :f | f traceCr ].
+
 	allFilePaths := ''.
 	fileNamesSorted do: [ :i |
 		allFilePaths := (allFilePaths copyReplaceAll: '\' with: '/') , i
@@ -219,7 +221,7 @@ TpSampler >> pathToFolder: aString [
 	"we set the maximum value for index as the number of samples in the folder"
 	self index max: self numberOfSamples.
 	sampleNamesSorted := self fileNamesSorted collect: [ :i |
-		               (i afterLastSlash findBetweenSubstrings: '.') first ]
+		               (i  afterLastSlash findBetweenSubstrings: '.') first ]
 ]
 
 { #category : 'accessing' }
