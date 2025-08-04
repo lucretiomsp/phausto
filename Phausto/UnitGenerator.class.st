@@ -121,13 +121,13 @@ UnitGenerator class >> withlabel: aString [
 { #category : 'arithmetic' }
 UnitGenerator >> * aUnitGenerator [
 
-^ self asBox * aUnitGenerator 
+	^ PhMultiplicator  new inputL: self; inputR: aUnitGenerator 
 ]
 
 { #category : 'arithmetic' }
 UnitGenerator >> + aUnitGenerator [
 
-	^ self asBox + aUnitGenerator asBox
+	^ PhAdder new inputL: self; inputR: aUnitGenerator 
 ]
 
 { #category : 'arithmetic' }
@@ -139,13 +139,13 @@ UnitGenerator >> , aUnitGenerator [
 { #category : 'arithmetic' }
 UnitGenerator >> - aUnitGenerator [
 
-^ self asBox - aUnitGenerator 
+	^ PhSubtractor  new inputL: self; inputR: aUnitGenerator 
 ]
 
 { #category : 'arithmetic' }
 UnitGenerator >> / aUnitGenerator [
 
-^ self asBox / aUnitGenerator 
+	^ PhDivider  new inputL: self; inputR: aUnitGenerator 
 ]
 
 { #category : 'connecting' }

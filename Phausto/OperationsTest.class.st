@@ -1,0 +1,37 @@
+Class {
+	#name : 'OperationsTest',
+	#superclass : 'TestCase',
+	#category : 'Phausto-Tests',
+	#package : 'Phausto',
+	#tag : 'Tests'
+}
+
+{ #category : 'tests' }
+OperationsTest >> testPhAdderAsDsp [
+
+	self deny: PhAdder new asDsp isNull
+]
+
+{ #category : 'tests' }
+OperationsTest >> testPhDividerAsDsp [
+
+	self deny: PhDivider new asDsp isNull
+]
+
+{ #category : 'tests' }
+OperationsTest >> testPhModulorAsDsp [
+
+	self deny: PhModulor new asDsp isNull
+]
+
+{ #category : 'tests' }
+OperationsTest >> testPhMultiplicatorAsDsp [
+
+	self deny: PhMultiplicator new asDsp isNull
+]
+
+{ #category : 'tests' }
+OperationsTest >> testPhSubtractorAsDsp [
+
+	self deny: PhSubtractor new asDsp isNull
+]

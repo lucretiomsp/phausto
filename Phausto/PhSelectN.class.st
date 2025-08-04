@@ -2,6 +2,15 @@
 Select inputs at index.
 PhSelectN starts counting from 1 coherently with Pharo indexing.
 This is a trick as Fuast selectN start counting from 0. actually PhSelect index 0 will return silence.
+To create a PhSelectN with n number of inputs.
+```language=Pharo
+selector := PhSelectN new: aNumberOfInputs
+```
+or
+```language=Pharo
+selector := PhSelectN new list: aPhList
+```
+
 "
 Class {
 	#name : 'PhSelectN',
