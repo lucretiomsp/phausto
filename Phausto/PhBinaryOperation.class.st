@@ -24,8 +24,8 @@ PhBinaryOperation >> asBox [
 PhBinaryOperation >> initialize [
 
 	super initialize.
-	inputL := 0.
-	inputR := 0
+	inputL := 1.
+	inputR := 1
 ]
 
 { #category : 'as yet unclassified' }

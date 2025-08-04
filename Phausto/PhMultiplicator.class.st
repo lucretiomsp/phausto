@@ -1,5 +1,5 @@
 Class {
-	#name : 'PhAdder',
+	#name : 'PhMultiplicator',
 	#superclass : 'PhBinaryOperation',
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
@@ -7,8 +7,8 @@ Class {
 }
 
 { #category : 'initialization' }
-PhAdder >> initialize [ 
+PhMultiplicator >> initialize [
 
-super initialize.
-processExpression := 'process = +;'
+	super initialize.
+	processExpression := 'process = *;'
 ]

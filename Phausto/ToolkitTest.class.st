@@ -39,6 +39,12 @@ ToolkitTest >> testPhCounterAsDsp [
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhDividerAsDsp [
+
+	self deny: PhDivider new asDsp isNull
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhListAsDsp [
 
 	| list |
@@ -56,9 +62,21 @@ self assert: list size equals: 4.
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhMultiplicatorAsDsp [
+
+	self deny: PhMultiplicator new asDsp isNull
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhSubBeatAsDsp [
 
 	self assert: PhSubBeat new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+ToolkitTest >> testPhSubtractorAsDsp [
+
+	self deny: PhSubtractor new asDsp isNull
 ]
 
 { #category : 'tests' }
