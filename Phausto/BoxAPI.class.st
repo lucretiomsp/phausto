@@ -407,16 +407,14 @@ BoxAPI >> createLibContext [
 
 	| sessionLibContext |
 	sessionLibContext := PhBox libContext.
+
 	sessionLibContext
-		ifFalse: [
-			"Uncomment next lines if you need to debug libCObtext creation"
-			('Created libContext at: ' , DateAndTime now asString) traceCr.
-			self createLibContextFFI.
+		ifFalse: [ "Uncomment next lines if you need to debug libCObtext creation"
+				('Created libContext at: ' , DateAndTime now asString) traceCr.
+				self createLibContextFFI.
 
-			PhBox libContext: true ]
-		ifTrue: [ "'LibContext already exists' traceCr" ].
-
-
+				PhBox libContext: true ]
+		ifTrue: [ "'LibContext already exists' traceCr" ]
 ]
 
 { #category : 'context' }

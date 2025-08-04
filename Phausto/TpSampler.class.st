@@ -38,7 +38,7 @@ TpSampler >> asBox [
 	
 	reader := PhReaderWithSpeed new
 		          trigger: self gate;
-		          speed: self pitch / 261.625 asBox.
+		          speed: self pitch asBox / 261.625 asBox.
 	sp := BoxAPI uniqueInstance
 		      boxSoundFile: filesURL
 		      numChannels: 2 asBox

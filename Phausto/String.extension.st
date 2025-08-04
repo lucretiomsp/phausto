@@ -1,10 +1,49 @@
 Extension { #name : 'String' }
 
 { #category : '*Phausto' }
+String >> afterLastSlash [
+
+
+		^ (self findBetweenSubstrings: '/') last 
+]
+
+{ #category : '*Phausto' }
+String >> afterLastSlashOfPath [
+
+
+Smalltalk os family = #MacOSX ifTrue: 
+	[^ (self findBetweenSubstrings: '/') last].
+Smalltalk os family = #Windows ifTrue: [^ (self findBetweenSubstrings: '
+\') last]
+]
+
+{ #category : '*Phausto' }
 String >> asPhFader [
 	"Create a Phaust fader with slef as label with range: #(0 1) , initiValue: 0.5 and step: 0.001 "
 	
 PhVSlider new label:  self init: 0.5  min: 0.0  max: 1.0  step: 0.001 
+]
+
+{ #category : '*Phausto' }
+String >> asSymbolWithSuffix: aString [
+
+	^ ((WriteStream on: String new)
+		   nextPutAll: self;
+		   nextPutAll: aString;
+		   yourself) contents asSymbol
+]
+
+{ #category : '*Phausto' }
+String >> asTpSampler [
+	"creates a TpSampler loaded with the file or folder with self as path"
+self isAudioFilePath ifTrue: [  
+	^ TpSampler new
+		  pathToFile: self.
+		  "label: self afterLastSlash"]
+	ifFalse: [ 
+			^ TpSampler new
+		  pathToFolder: self;
+		  label: self afterLastSlash ]
 ]
 
 { #category : '*Phausto' }

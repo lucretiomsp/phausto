@@ -3,13 +3,12 @@ The hbargraph primitive implements a vertical bar-graph (typically a meter displ
 "
 Class {
 	#name : 'PhVBarGraph',
-	#superclass : 'PhBox',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'input',
 		'sinput',
 		'min',
-		'max',
-		'label'
+		'max'
 	],
 	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',

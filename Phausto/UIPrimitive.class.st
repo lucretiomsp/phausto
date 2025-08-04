@@ -7,7 +7,7 @@ Discrete and continuous elements are signal generators. For example, a button pr
 "
 Class {
 	#name : 'UIPrimitive',
-	#superclass : 'PhBox',
+	#superclass : 'Object',
 	#instVars : [
 		'label',
 		'init',
@@ -78,7 +78,7 @@ UIPrimitive >> max [
 { #category : 'accessing' }
 UIPrimitive >> max: aNumber [
 
-	max := aNumber asBox
+	max := aNumber 
 ]
 
 { #category : 'accessing' }
@@ -89,7 +89,7 @@ UIPrimitive >> min [
 { #category : 'accessing' }
 UIPrimitive >> min: aNumber [
 
-	min := aNumber asBox
+	min := aNumber 
 ]
 
 { #category : 'accessing' }

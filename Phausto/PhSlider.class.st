@@ -33,13 +33,11 @@ PhSlider >> init: aNumber [
 
 { #category : 'initialization' }
 PhSlider >> initialize [
-
-	super initialize.
-
+super initialize .
 	init := 0.5.
-   step := 0.01.
-   "by default, sliders are knobs"
-   widgetType := #knob.
+	step := 0.01.
+	"by default, sliders are knobs"
+	widgetType := #knob
 ]
 
 { #category : 'initialization' }
