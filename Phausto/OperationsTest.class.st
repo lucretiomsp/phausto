@@ -46,7 +46,15 @@ zeroList := PhZeroList new addAll: {  SineOsc new . SquareOsc new }.
 ]
 
 { #category : 'tests' }
-OperationsTest >> testUGenParalleCompositionAsDsp [
+OperationsTest >> testUGenMultipleParalleCompositionAsDsp [
+
+	| composite |
+	composite := SquareOsc new , SineOsc new , TriOsc  new.
+	self deny: composite asDsp isNull
+]
+
+{ #category : 'tests' }
+OperationsTest >> testUGenSimpleParalleCompositionAsDsp [
 
 	| composite |
 	composite := SquareOsc  new , SineOsc new .

@@ -9,6 +9,14 @@ Class {
 	#tag : 'ToolKit'
 }
 
+{ #category : 'arithmetic' }
+PhZeroList >> , aUnitGenerator [
+
+| oneElementArray |
+oneElementArray := Array with: aUnitGenerator .
+	self addAll: oneElementArray
+]
+
 { #category : 'initialization' }
 PhZeroList >> initialize [
 
