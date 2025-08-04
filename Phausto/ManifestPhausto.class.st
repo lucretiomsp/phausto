@@ -36,3 +36,10 @@ ManifestPhausto class >> ruleStringConcatenationRuleV1FalsePositive [
 	<ignoreForCoverage>
 	^ #(#(#(#RGMethodDefinition #(#PhList #asBox #false)) #'2024-12-23T14:16:08.160049+01:00') )
 ]
+
+{ #category : 'code-critics' }
+ManifestPhausto class >> ruleUsesAddRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#UnitGenerator #, #false)) #'2025-08-04T23:09:24.70091+02:00') )
+]

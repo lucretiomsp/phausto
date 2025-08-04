@@ -5,7 +5,7 @@ This is a trick as Fuast selectN start counting from 0. actually PhSelect index 
 To create a PhSelectN with n number of inputs.
 ```language=Pharo
 selector := PhSelectN new: aNumberOfInputs
-```
+``` 
 or
 ```language=Pharo
 selector := PhSelectN new list: aPhList

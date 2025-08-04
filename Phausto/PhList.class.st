@@ -40,11 +40,11 @@ PhList >> addAll: anArrayofNumbersOrUnitGenerators [
 PhList >> asBox [
 
 	| result |
-	result := (self items at: 1) asBox.
+	result := self items first asBox.
 	self items size > 1
 		ifTrue: [ items allButFirstDo: [ :i | result := result , i asBox ] ]
 		ifFalse: [
-			^ Error new signal: 'B
+				^ Error new signal: 'B
 	Valid PhList needs at least 2 items' ].
 	^ result
 ]

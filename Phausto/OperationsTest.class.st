@@ -35,3 +35,20 @@ OperationsTest >> testPhSubtractorAsDsp [
 
 	self deny: PhSubtractor new asDsp isNull
 ]
+
+{ #category : 'tests' }
+OperationsTest >> testPhZeroListAsDsp [
+
+
+| zeroList |
+zeroList := PhZeroList new addAll: {  SineOsc new . SquareOsc new }.
+	self deny: zeroList asDsp isNull
+]
+
+{ #category : 'tests' }
+OperationsTest >> testUGenParalleCompositionAsDsp [
+
+	| composite |
+	composite := SquareOsc  new , SineOsc new .
+	self deny: composite asDsp isNull
+]

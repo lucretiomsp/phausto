@@ -133,7 +133,7 @@ UnitGenerator >> + aUnitGenerator [
 { #category : 'arithmetic' }
 UnitGenerator >> , aUnitGenerator [
 
-^ self asBox , aUnitGenerator 
+	^ PhZeroList new addAll: { self . aUnitGenerator }
 ]
 
 { #category : 'arithmetic' }
