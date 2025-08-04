@@ -19,6 +19,12 @@ ToolkitTest >> testPHSelectNAsDsp [
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhAdderAsDsp [
+
+	self deny: PhAdder new asDsp isNull
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhCaptureAsDsp [
 
 
