@@ -15,7 +15,7 @@ BasicLibTest >> testDownSamplerAsDsp [
 { #category : 'tests' }
 BasicLibTest >> testPhIfAsDsp [
 
-	self deny: PhInterpolate new asDsp isNull
+	self deny: PhIf new asDsp isNull
 ]
 
 { #category : 'tests' }

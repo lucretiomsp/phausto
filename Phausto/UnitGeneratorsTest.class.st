@@ -193,6 +193,12 @@ UnitGeneratorsTest >> testSineOscAsDsp [
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testSparseNoiseAsDsp [
+
+	self deny: SparseNoise new asDsp isNull
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testSquareOscAsDsp [
 
 	self assert: SquareOsc new asDsp isNull equals: false
