@@ -1,9 +1,9 @@
 Class {
 	#name : 'PhDivider',
 	#superclass : 'PhBinaryOperation',
-	#category : 'Phausto-ToolKit',
+	#category : 'Phausto-Operations',
 	#package : 'Phausto',
-	#tag : 'ToolKit'
+	#tag : 'Operations'
 }
 
 { #category : 'initialization' }

@@ -237,6 +237,18 @@ ParamsSetter >> clockDivider: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> condition: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> crossfade:  aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -370,6 +382,18 @@ ParamsSetter >> duty:  aNumberOrABoxOrASymbol [
 
 { #category : 'accessing' }
 ParamsSetter >> earlyDiff:   aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> else:  aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"
@@ -1268,6 +1292,18 @@ ParamsSetter >> tau: aNumberOrABoxOrASymbol [
 
 { #category : 'accessing' }
 ParamsSetter >> tempo: aNumberOrABoxOrASymbol [
+
+	| methodName |
+	methodName := thisContext selector. "Get the name of this method"
+
+	methodName asString allButLast traceCr.
+	aNumberOrABoxOrASymbol
+		asParam: methodName asString allButLast
+		forUGen: self
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> then:  aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"

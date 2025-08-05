@@ -1,14 +1,14 @@
 Class {
 	#name : 'PhSubtractor',
 	#superclass : 'PhBinaryOperation',
-	#category : 'Phausto-ToolKit',
+	#category : 'Phausto-Operations',
 	#package : 'Phausto',
-	#tag : 'ToolKit'
+	#tag : 'Operations'
 }
 
 { #category : 'initialization' }
 PhSubtractor >> initialize [
 
 	super initialize.
-	processExpression := 'process = -;'
+	processExpression := 'process = ^;'
 ]

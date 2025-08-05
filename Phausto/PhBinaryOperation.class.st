@@ -9,9 +9,9 @@ Class {
 		'inputL',
 		'inputR'
 	],
-	#category : 'Phausto-ToolKit',
+	#category : 'Phausto-Operations',
 	#package : 'Phausto',
-	#tag : 'ToolKit'
+	#tag : 'Operations'
 }
 
 { #category : 'converting' }

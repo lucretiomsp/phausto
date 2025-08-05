@@ -46,6 +46,15 @@ zeroList := PhZeroList new addAll: {  SineOsc new . SquareOsc new }.
 ]
 
 { #category : 'tests' }
+OperationsTest >> testSum3UgensAsDsp [
+
+
+| sum |
+sum := SquareOsc new + TriOsc  new + SineOsc  new.
+	self deny: sum asDsp isNull
+]
+
+{ #category : 'tests' }
 OperationsTest >> testUGenMultipleParalleCompositionAsDsp [
 
 	| composite |

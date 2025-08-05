@@ -13,6 +13,12 @@ BasicLibTest >> testDownSamplerAsDsp [
 ]
 
 { #category : 'tests' }
+BasicLibTest >> testPhIfAsDsp [
+
+	self deny: PhInterpolate new asDsp isNull
+]
+
+{ #category : 'tests' }
 BasicLibTest >> testPulseAsDsp [
 
 	self assert: Pulse new asDsp isNull equals: false
@@ -28,10 +34,4 @@ BasicLibTest >> testPulsenAsDsp [
 BasicLibTest >> testSampleAndHoldAsDsp [
 
 	self assert: SampleAndHold new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
-BasicLibTest >> testSec2Samples [
-
-	self deny: Sec2Samples new asDsp isNull
 ]
