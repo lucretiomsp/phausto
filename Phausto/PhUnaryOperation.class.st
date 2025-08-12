@@ -6,10 +6,20 @@ Class {
 	#name : 'PhUnaryOperation',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'inputL',
-		'inputR'
+		'input'
 	],
 	#category : 'Phausto-Operations',
 	#package : 'Phausto',
 	#tag : 'Operations'
 }
+
+{ #category : 'converting' }
+PhUnaryOperation >> asBox [ 
+^ self input connectTo: super asBox.
+]
+
+{ #category : 'accessing' }
+PhUnaryOperation >> input [ 
+
+^ input
+]
