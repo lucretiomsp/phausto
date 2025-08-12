@@ -2,7 +2,8 @@ Class {
 	#name : 'PhChebychev',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'order'
+		'order',
+		'input'
 	],
 	#category : 'Phausto-Math',
 	#package : 'Phausto',
@@ -23,6 +24,12 @@ PhChebychev >> initialize [
 	super initialize.
 
 	processExpression := 'process = ma.chebycev(1)'
+]
+
+{ #category : 'accessing' }
+PhChebychev >> input [
+
+	^ input 
 ]
 
 { #category : 'accessing' }
