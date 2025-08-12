@@ -10,5 +10,5 @@ Class {
 PhLdExp >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.ldexp'
+	processExpression := 'process = ma.ldexp;'
 ]

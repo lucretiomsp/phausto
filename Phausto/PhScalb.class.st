@@ -10,5 +10,5 @@ Class {
 PhScalb >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.scalb'
+	processExpression := 'process = ma.scalb;'
 ]

@@ -10,5 +10,5 @@ Class {
 PhInverse >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.inv'
+	processExpression := 'process = ma.inv;'
 ]

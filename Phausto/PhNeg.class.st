@@ -7,10 +7,10 @@ Class {
 }
 
 { #category : 'initialization' }
-PhNeg >> initialize [ 
+PhNeg >> initialize [
 
-super initialize .
-processExpression  := 'process = ma.neg'
+	super initialize.
+	processExpression := 'process = ma.neg;'
 ]
 
 { #category : 'accessing' }

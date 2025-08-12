@@ -23,7 +23,8 @@ PhChebychev >> initialize [
 
 	super initialize.
 
-	processExpression := 'process = ma.chebycev(1)'
+	processExpression := 'process = ma.chebychev(2);'.
+	order := 2
 ]
 
 { #category : 'accessing' }

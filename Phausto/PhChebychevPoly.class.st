@@ -1,14 +1,17 @@
 Class {
-	#name : 'PhNot',
+	#name : 'PhChebychevPoly',
 	#superclass : 'UnitGenerator',
+	#instVars : [
+		'order',
+		'input'
+	],
 	#category : 'Phausto-Math',
 	#package : 'Phausto',
 	#tag : 'Math'
 }
 
 { #category : 'initialization' }
-PhNot >> initialize [
+PhChebychevPoly >> initialize [ 
 
-	super initialize.
-	processExpression := 'process= ma.not;'
+self shouldBeImplemented 
 ]

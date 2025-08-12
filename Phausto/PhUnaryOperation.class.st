@@ -14,8 +14,16 @@ Class {
 }
 
 { #category : 'converting' }
-PhUnaryOperation >> asBox [ 
-^ self input connectTo: super asBox.
+PhUnaryOperation >> asBox [
+
+	^ self input asBox connectTo: super asBox
+]
+
+{ #category : 'initialization' }
+PhUnaryOperation >> initialize [
+
+	super initialize.
+	input := 1.
 ]
 
 { #category : 'accessing' }

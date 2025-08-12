@@ -7,7 +7,8 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PhSub >> initialize [ 
-super initialize .
-processExpression := 'process = ma.sub'
+PhSub >> initialize [
+
+	super initialize.
+	processExpression := 'process = ma.sub;'
 ]

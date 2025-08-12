@@ -10,5 +10,5 @@ Class {
 PhCubeRoot >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.cbrt'
+	processExpression := 'process = ma.cbrt;'
 ]

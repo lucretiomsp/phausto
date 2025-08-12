@@ -10,5 +10,5 @@ Class {
 PhLog2 >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.log2'
+	processExpression := 'process = ma.log2;'
 ]

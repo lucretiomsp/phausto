@@ -10,5 +10,5 @@ Class {
 PhHypothenuse >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.hypot'
+	processExpression := 'process = ma.hypot;'
 ]

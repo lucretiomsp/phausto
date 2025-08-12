@@ -16,5 +16,5 @@ Class {
 PhNextPowerOf2 >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.np2'
+	processExpression := 'process = ma.np2;'
 ]

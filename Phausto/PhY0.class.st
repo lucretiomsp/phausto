@@ -10,5 +10,5 @@ Class {
 PhY0 >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.Y0'
+	processExpression := 'process = ma.Y0;'
 ]

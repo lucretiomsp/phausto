@@ -10,5 +10,5 @@ Class {
 PhErfC >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.erfc'
+	processExpression := 'process = ma.erfc;'
 ]

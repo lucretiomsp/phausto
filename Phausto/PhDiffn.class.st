@@ -1,5 +1,5 @@
 Class {
-	#name : 'PhJ0',
+	#name : 'PhDiffn',
 	#superclass : 'PhUnaryOperation',
 	#category : 'Phausto-Math',
 	#package : 'Phausto',
@@ -7,8 +7,8 @@ Class {
 }
 
 { #category : 'initialization' }
-PhJ0 >> initialize [
+PhDiffn >> initialize [ 
 
-	super initialize.
-	processExpression := 'process = ma.j0;'
+super initialize .
+processExpression := 'process = ma.diffn;'
 ]

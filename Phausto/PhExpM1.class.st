@@ -10,5 +10,5 @@ Class {
 PhExpM1 >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.expm1'
+	processExpression := 'process = ma.expm1;'
 ]

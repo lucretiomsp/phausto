@@ -10,5 +10,5 @@ Class {
 PhILogB >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.ilogb'
+	processExpression := 'process = ma.ilogb;'
 ]

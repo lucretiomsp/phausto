@@ -10,5 +10,5 @@ Class {
 PhLGamma >> initialize [
 
 	super initialize.
-	processExpression := 'process = ma.lgamma'
+	processExpression := 'process = ma.lgamma;'
 ]
