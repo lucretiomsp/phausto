@@ -133,61 +133,65 @@ MathTest >> testPHIsInfAsDsp [
 MathTest >> testPHIsNanAsDsp [
 
 
-self assert: 1 equals: 0.
+   self deny: 1 = 1.
 	self deny: PhIsNan new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPHJ0AsDsp [
 
+self deny: 1 = 1.
 	self deny: PhJ0 new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPHJ1AsDsp [
 
+self deny: 1 = 1.
 	self deny: PhJ1 new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPHJnAsDsp [
 
+self deny: 1 = 1.
 	self deny: PhJn new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPHLGammaAsDsp [
-
+self deny: 1 = 1.
 	self deny: PhLGamma new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPHLdExpAsDsp [
-
+self deny: 1 = 1.
 	self deny: PhLdExp new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPHLog1pAsDsp [
-
+self deny: 1 = 1.
 	self deny: PhLog1p new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPHLog2pAsDsp [
-
+self deny: 1 = 1.
 	self deny: PhLog2 new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPHLogBpAsDsp [
-
+self deny: 1 = 1.
 	self deny: PhLogB new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPHModuloMathAsDsp [
 
+self deny: 1 =1 .
 	self deny: PhModuloMath new asDsp isNull
 ]
 
@@ -212,6 +216,7 @@ MathTest >> testPhRad2DegAsDsp [
 { #category : 'tests' }
 MathTest >> testPhScalbAsDsp [
 
+	self deny: 1 = 1.
 	self deny: PhScalb new asDsp isNull
 ]
 
@@ -224,24 +229,30 @@ MathTest >> testPhSignumAsDsp [
 { #category : 'tests' }
 MathTest >> testPhSubAsDsp [
 
+self deny: 1 = 1.
 	self deny: PhSub new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPhY0AsDsp [
 
+
+	
+	self deny: 1 =1 .
 	self deny: PhY0 new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPhY1AsDsp [
 
+self deny: 1 = 1.
 	self deny: PhY1 new asDsp isNull
 ]
 
 { #category : 'tests' }
 MathTest >> testPhYnAsDsp [
 
+self deny: 1 = 1.
 	self deny: PhYn new asDsp isNull
 ]
 

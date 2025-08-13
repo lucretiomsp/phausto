@@ -14,9 +14,8 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PhModuloMath >> initalize [ 
+PhModuloMath >> initalize [
 
-
-super initialize .
-processExpression := 'process =ma.modulo;'.
+	super initialize.
+	processExpression := 'process =ma.modulo;'
 ]
