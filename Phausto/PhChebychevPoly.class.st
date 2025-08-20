@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : 'initialization' }
-PhChebychevPoly >> initialize [ 
+PhChebychevPoly >> initialize [
 
-self shouldBeImplemented 
+	Error new signal: 'This class cannot be created in this compilation mode. Check Faust reference manual'.
 ]

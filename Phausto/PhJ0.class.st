@@ -8,7 +8,7 @@ Class {
 
 { #category : 'initialization' }
 PhJ0 >> initialize [
-
+Error new signal: 'This class cannot be created in this compilation mode. Check Faust reference manual'.
 	super initialize.
 	processExpression := 'process = ma.J0;'
 ]

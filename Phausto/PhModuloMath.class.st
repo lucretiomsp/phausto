@@ -16,6 +16,8 @@ Class {
 { #category : 'as yet unclassified' }
 PhModuloMath >> initalize [
 
+	Error new signal:
+		'This class cannot be created in this compilation mode. Check Faust reference manual'.
 	super initialize.
 	processExpression := 'process =ma.modulo;'
 ]

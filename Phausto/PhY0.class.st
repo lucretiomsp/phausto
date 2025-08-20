@@ -9,6 +9,7 @@ Class {
 { #category : 'as yet unclassified' }
 PhY0 >> initialize [
 
+   Error new signal: 'This class cannot be created in this compilation mode. Check Faust reference manual'.
 	super initialize.
 	processExpression := 'process = ma.Y0;'
 ]
