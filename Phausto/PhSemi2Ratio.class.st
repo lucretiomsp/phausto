@@ -16,9 +16,9 @@ Class {
 }
 
 { #category : 'accessing' }
-PhSemi2Ratio >> asBox [ 
+PhSemi2Ratio >> asBox [
 
-self semitone asBox connectTo: super asBox.
+	^ self semitone asBox connectTo: super asBox
 ]
 
 { #category : 'initialization' }

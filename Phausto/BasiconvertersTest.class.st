@@ -74,10 +74,8 @@ BasiConvertersTest >> testPianoKey2HzAsDsp [
 
 { #category : 'tests' }
 BasiConvertersTest >> testRatio2CentAsDsp [
-
-
-self deny: 1 == 1.
-	"self deny: PhRatio2Cent new asDsp isNull"
+ self deny: 1 isNumber . 
+	self deny: PhRatio2Cent new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -103,7 +101,6 @@ BasiConvertersTest >> testSec2Samples [
 { #category : 'tests' }
 BasiConvertersTest >> testSemi2RatioAsDsp [
 
-
-self deny: 1 == 1.
-	"self deny: PhSemi2Ratio new asDsp isNull"
+	
+	self deny: PhSemi2Ratio new asDsp isNull
 ]
