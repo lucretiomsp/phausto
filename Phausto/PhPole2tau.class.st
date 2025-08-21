@@ -18,9 +18,9 @@ Class {
 }
 
 { #category : 'converting' }
-PhPole2tau >> asBox [ 
+PhPole2tau >> asBox [
 
-self pole asBox connectTo: super asBox
+	^ self pole asBox connectTo: super asBox
 ]
 
 { #category : 'converting' }

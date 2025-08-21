@@ -19,7 +19,7 @@ Class {
 { #category : 'converting' }
 PhLog2LinearGain >> asBox [
 
-	self gain asBox connectTo: super asBox
+	^ self gain asBox connectTo: super asBox
 ]
 
 { #category : 'converting' }

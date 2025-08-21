@@ -16,9 +16,9 @@ Class {
 }
 
 { #category : 'converting' }
-PhLinear2LogGain >> asBox [ 
+PhLinear2LogGain >> asBox [
 
-self gain asBox  connectTo: super asBox
+	^ self gain asBox connectTo: super asBox
 ]
 
 { #category : 'accessing' }

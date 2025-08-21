@@ -19,7 +19,7 @@ Class {
 { #category : 'converting' }
 PhHz2PianoKey >> asBox [
 
-	self freq asBox connectTo: super asBox
+	^ self freq asBox connectTo: super asBox
 ]
 
 { #category : 'converting' }
