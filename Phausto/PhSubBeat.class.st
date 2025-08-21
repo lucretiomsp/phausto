@@ -25,7 +25,7 @@ PhSubBeat >> asBox [
 
 	| subBeat subDivision |
 	subDivision := self tempo asBox * (8 asBox / self clockDivider asBox).
-	subBeat := (PhBeat new tempo: subDivision) * self start asBox.
+	subBeat := (PhBeat new tempo: subDivision) asBox * self start asBox.
 	^ subBeat
 ]
 
