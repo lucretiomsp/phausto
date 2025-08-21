@@ -21,7 +21,7 @@ PhTkCounter >> asBox [
 	| count finalBox |
 	count := Counter new trig: self trigger asBox.
 
-	finalBox := (count asBox  - 1 asBox) % (self max - 1 asBox) + 1.
+	finalBox := (count asBox  - 1 asBox) % (self max asBox - 1 asBox) + 1.
 	^ finalBox
 ]
 

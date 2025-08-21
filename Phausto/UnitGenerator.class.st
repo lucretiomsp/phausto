@@ -285,7 +285,7 @@ UnitGenerator >> initialize [
 	self class addInstance: self.
 
 
-	"by default a Unit Gereator is considere to have 0 inputs and 1 output, every subclass will define different values"
+	"by default a Unit Geneator is considere to have 0 inputs and 1 output, every subclass will define different values"
 	numberOfInputs := 0.
 	numberOfOutputs := 1.
 	self class incrementInstancesInDSPContext.
@@ -294,7 +294,7 @@ UnitGenerator >> initialize [
 
 	self initializeLabel.
 	self initializeULevel.
-	self initializeControlParameters
+	"self initializeControlParameters"
 ]
 
 { #category : 'initialization' }

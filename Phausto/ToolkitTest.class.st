@@ -29,7 +29,7 @@ ToolkitTest >> testPhCaptureAsDsp [
 { #category : 'tests' }
 ToolkitTest >> testPhCounterAsDsp [
 
-	self assert: PhTkCounter new asDsp isNull equals: false
+	self deny: PhTkCounter new asDsp  isNull 
 ]
 
 { #category : 'tests' }

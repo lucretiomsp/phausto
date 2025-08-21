@@ -24,7 +24,7 @@ Class {
 PhSubBeat >> asBox [
 
 	| subBeat subDivision |
-	subDivision := self tempo * 8 asBox / self clockDivider.
+	subDivision := self tempo asBox * (8 asBox / self clockDivider asBox).
 	subBeat := (PhBeat new tempo: subDivision) * self start asBox.
 	^ subBeat
 ]
@@ -32,35 +32,36 @@ PhSubBeat >> asBox [
 { #category : 'accessing' }
 PhSubBeat >> clockDivider [
 
-	^ clockDivider ifNil: [
-		  clockDivider := PhHSlider new
-			           label: self label , 'ClockDivider'
-			           init: 8
-			           min: 1
-			           max: 32
-			           step: 0.01 ]
+	^ clockDivider 
 ]
 
 { #category : 'initialization' }
-PhSubBeat >> initialize [ 
+PhSubBeat >> initialize [
 
-super initialize.
+	super initialize.
+	tempo := PhHSlider new
+		         label: self label , 'Tempo'
+		         init: 120
+		         min: 30
+		         max: 220
+		         step: 0.01.
+	start := PhCheckbox new label: self label , 'Start'.
+	clockDivider := PhHSlider new
+		                label: self label , 'ClockDivider'
+		                init: 8
+		                min: 1
+		                max: 32
+		                step: 0.01
 ]
 
 { #category : 'accessing' }
 PhSubBeat >> start [
 
-	^ start ifNil: [ start := PhCheckbox new label: self label , 'Start' ]
+	^ start 
 ]
 
 { #category : 'accessing' }
 PhSubBeat >> tempo [
 
-	^ tempo ifNil: [
-		  tempo := PhHSlider new
-			           label: self label , 'Tempo'
-			           init: 120
-			           min: 30
-			           max: 220
-			           step: 0.01 ]
+	^ tempo 
 ]
