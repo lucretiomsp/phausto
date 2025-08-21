@@ -148,7 +148,7 @@ AntiAliasedTest >> testParabolicAsDsp [
 AntiAliasedTest >> testSoftClipQuadratic1AsDsp [
 	"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
 
-	self assert: 1 equals: 0.
+	
 	self deny: SoftClipQuadratic1 new asDsp isNull
 ]
 
@@ -156,7 +156,7 @@ AntiAliasedTest >> testSoftClipQuadratic1AsDsp [
 AntiAliasedTest >> testSoftClipQuadratic2AsDsp [
 	"avoid crash"
 
-	self assert: 1 equals: 0.
+	
 	self deny: SoftClipQuadratic2 new asDsp isNull
 ]
 
@@ -164,7 +164,7 @@ AntiAliasedTest >> testSoftClipQuadratic2AsDsp [
 AntiAliasedTest >> testTangentDsp [
 	"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
 
-	self assert: true equals: false.
+
 	self deny: Tangent new asDsp isNull
 ]
 
@@ -172,6 +172,6 @@ AntiAliasedTest >> testTangentDsp [
 AntiAliasedTest >> testTanh1AsDsp [
 	"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
 
-	self assert: true equals: false.
+
 	self deny: Tanh1 new asDsp isNull
 ]
