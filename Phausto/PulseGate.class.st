@@ -26,7 +26,7 @@ Class {
 PulseGate >> asBox [ 
 
 | impulseGenerator  resetCtr |
-impulseGenerator := Pulse new period: self period.
+impulseGenerator := Pulse new period: self period asBox.
 resetCtr := PhResetCtr new input: impulseGenerator.
 ^ resetCtr asBox 
 

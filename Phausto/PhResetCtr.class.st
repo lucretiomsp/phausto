@@ -24,7 +24,7 @@ PhResetCtr >> asBox [
 	| intermediateBox  finalBox |
 	intermediateBox := super asBox.
 	
-	finalBox := self totalImpulses , self impulseIndex, self input connectTo:
+	finalBox := self totalImpulses asBox , self impulseIndex asBox , self input asBox  connectTo:
 		            intermediateBox.
 	^ finalBox
 ]
