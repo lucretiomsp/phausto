@@ -163,8 +163,7 @@ AntiAliasedTest >> testSoftClipQuadratic2AsDsp [
 { #category : 'tests' }
 AntiAliasedTest >> testTangentDsp [
 	"real test charashes image, apparently for no good reason - somethig wrong in the Faaust library??"
-
-
+self deny: 1 isNumber.
 	self deny: Tangent new asDsp isNull
 ]
 

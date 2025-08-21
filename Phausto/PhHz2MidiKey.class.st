@@ -17,9 +17,9 @@ Class {
 }
 
 { #category : 'accessing' }
-PhHz2MidiKey >> asBox [ 
+PhHz2MidiKey >> asBox [
 
-self freq asBox connectTo: super asBox 
+	^ self freq asBox connectTo: super asBox
 ]
 
 { #category : 'accessing' }
