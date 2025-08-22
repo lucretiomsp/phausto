@@ -81,9 +81,8 @@ BasiConvertersTest >> testRatio2CentAsDsp [
 { #category : 'tests' }
 BasiConvertersTest >> testRatio2SemitoneAsDsp [
 
-
-self deny: 1 == 1.
-	"self deny: PhRatio2Semitone new asDsp isNull"
+	
+	self deny: PhRatio2Semitone new asDsp isNull
 ]
 
 { #category : 'tests' }
