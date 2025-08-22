@@ -58,3 +58,11 @@ String >> surroundedByQuotes [
 
 	^ self surroundedBy: ''''
 ]
+
+{ #category : '*Phausto' }
+String >> terminatesWithSemiColon [
+	" valid Faust dsp code always terminates  with semicolon  "
+
+
+self last = $ ifTrue: [ ^ true ] ifFalse: [ Error new signal: 'String does not terminate with semicolon' ]
+]
