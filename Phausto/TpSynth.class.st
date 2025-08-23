@@ -42,11 +42,10 @@ TpSynth >> gate [
 TpSynth >> initialize [
 
 	super initialize.
+	super initializeControlParameters .
 	"by default the name of the TpSynth is the name of the class"
 	gate := PhButton new label: self label , 'Gate'.
-	self controlParameters add: #gate -> (self gate
-			 asControlParameterOfWidgetType: #button
-			 description: 'Trig Synth').
+
 	self uLevel: (self label , 'Level') asSymbol.
 
 	pitch := PhHSlider new

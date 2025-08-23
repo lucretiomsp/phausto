@@ -27,6 +27,7 @@ PhEnvelope >> attack [
 PhEnvelope >> initialize [
 
 	super initialize.
+	super initializeControlParameters .
 	attack := PhHSlider new
 		          label: self label , 'Attack'
 		          init: 0.01
