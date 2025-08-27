@@ -294,7 +294,7 @@ UnitGenerator >> initialize [
 
 	self initializeLabel.
 	self initializeULevel.
-	"self initializeControlParameters"
+	self initializeControlParameters
 ]
 
 { #category : 'initialization' }

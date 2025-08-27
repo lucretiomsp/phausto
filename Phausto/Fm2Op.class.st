@@ -23,11 +23,11 @@ Fm2Op >> asBox [
 		         sustain: 1 asBox;
 		         release: self release;
 		         trigger: self gate) asBox.
-	modulatorPitch := self pitch * self modRatio asBox.
+	modulatorPitch := self pitch asBox * self modRatio asBox.
 	modulator := SineOsc new
 		             freq: modulatorPitch;
 		             uLevel: self modIndex.
-	carrierPitch := self pitch + (modulator * 70).
+	carrierPitch := self pitch asBox + (modulator * 70 asBox).
 	carrier := SineOsc new
 		           freq: carrierPitch asBox;
 		           uLevel: (self label , 'uLevel') asSymbol.

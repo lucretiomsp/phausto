@@ -34,6 +34,12 @@ UIPrimitive >> asControlParameterOfWidgetType: aSymbol description: aString [
 	^ controlParam
 ]
 
+{ #category : 'converting' }
+UIPrimitive >> asParam: aString forUGen: aUGen [
+
+	aUGen instVarNamed: aString put: self
+]
+
 { #category : 'accessing' }
 UIPrimitive >> init [
 

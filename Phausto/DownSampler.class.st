@@ -19,7 +19,7 @@ DownSampler >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self frequency  ,  self input  connectTo: intermediateBox.
+	finalBox := self frequency asBox   ,  self input asBox  connectTo: intermediateBox.
 
 	^ finalBox
 ]

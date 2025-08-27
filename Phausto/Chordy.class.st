@@ -38,7 +38,7 @@ Chordy >> asBox [
 		              min: 0.2
 		              max: 10
 		              step: 0.01.
-	scaledFreq := 202 asBox * freqSlider + (filterEnv * 2000).
+	scaledFreq := 202 asBox * freqSlider + (filterEnv * 2000 asBox).
 
 	filter := ResonLp new
 		          frequency: scaledFreq;
