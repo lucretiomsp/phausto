@@ -37,7 +37,9 @@ CmajorViewTest >> testAddViewToPatch [
     }
 }'.
 
-	self assert: (patchWithoutView addViewPropertyFrom: CmajorView new )equals: patchWithView
+	self
+		assert: (STONJSON  fromString: (patchWithoutView addViewPropertyFrom: CmajorView new))
+		equals: (STONJSON  fromString: patchWithView)
 ]
 
 { #category : 'tests' }
