@@ -9,12 +9,20 @@ Class {
 		'background',
 		'knobs',
 		'buttons',
-		'faders'
+		'faders',
+		'patchView',
+		'size'
 	],
 	#category : 'Phausto-Cmajor',
 	#package : 'Phausto',
 	#tag : 'Cmajor'
 }
+
+{ #category : 'adding' }
+CmajorView >> addToCmajorPatch [
+
+	self shouldBeImplemented 
+]
 
 { #category : 'accessing' }
 CmajorView >> background [
