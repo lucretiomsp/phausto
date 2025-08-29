@@ -11,7 +11,8 @@ Class {
 		'buttons',
 		'faders',
 		'patchView',
-		'size'
+		'size',
+		'isResizable'
 	],
 	#category : 'Phausto-Cmajor',
 	#package : 'Phausto',
@@ -72,6 +73,26 @@ CmajorView >> folder: anObject [
 	folder := anObject
 ]
 
+{ #category : 'initialization' }
+CmajorView >> initialize [
+
+	super initialize.
+   isResizable := true.
+	size := 400 @ 400
+]
+
+{ #category : 'accessing' }
+CmajorView >> isResizable [
+
+^ isResizable 
+]
+
+{ #category : 'accessing' }
+CmajorView >> isResizable: aBoolean [
+
+isResizable := aBoolean 
+]
+
 { #category : 'accessing' }
 CmajorView >> knobs [
 
@@ -82,4 +103,31 @@ CmajorView >> knobs [
 CmajorView >> knobs: anObject [
 
 	knobs := anObject
+]
+
+{ #category : 'accessing' }
+CmajorView >> patchView [
+
+	^ patchView
+]
+
+{ #category : 'as yet unclassified' }
+CmajorView >> patchViewProperty [
+
+	^ 'view' -> {
+		  ('src' -> 'ui/index.js').
+		  ('width' -> self size x).
+		  ('height' -> self size y).
+		  ('resizable' -> self isResizable ) } asDictionary
+]
+
+{ #category : 'accessing' }
+CmajorView >> size [ 
+^ size
+]
+
+{ #category : 'accessing' }
+CmajorView >> size: aPoint [
+"width@height"
+	size := aPoint
 ]
