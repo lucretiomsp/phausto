@@ -1,13 +1,44 @@
 Class {
 	#name : 'CmajorViewTest',
 	#superclass : 'TestCase',
-	#instVars : [
-		'isResizable'
-	],
 	#category : 'Phausto-Tests',
 	#package : 'Phausto',
 	#tag : 'Tests'
 }
+
+{ #category : 'tests' }
+CmajorViewTest >> testAddViewToPatch [
+
+	| patchWithoutView patchWithView |
+	patchWithoutView := '{"CmajorVersion":	1,
+"ID":	"pharo.UITest",
+"version":	"1.0",
+"name":	"UITest",
+"description":	"A CanoTest generated in Pharo using Phausto",
+"manufacturer":	"Pharo Association",
+"isInstrument":	false,
+"source":	[ "UITest.cmajor" ]
+}'.
+	patchWithView := '
+{"CmajorVersion":	1,
+"ID":	"pharo.UITest",
+"version":	"1.0",
+"name":	"UITest",
+"description":	"A CanoTest generated in Pharo using Phausto",
+"manufacturer":	"Pharo Association",
+"isInstrument":	false,
+"source":	[ "UITest.cmajor" ],
+"view":
+    {
+        "src": "ui/index.js",
+        "width": 400,
+        "height": 400,
+        "resizable": false
+    }
+}'.
+
+	self assert: (patchWithoutView addViewPropertyFrom: CmajorView new )equals: patchWithView
+]
 
 { #category : 'tests' }
 CmajorViewTest >> testPatchViewProperty [
