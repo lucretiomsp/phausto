@@ -32,9 +32,9 @@ CmajorView >> background [
 ]
 
 { #category : 'accessing' }
-CmajorView >> background: anObject [
+CmajorView >> background: aDictionary [
 
-	background := anObject
+	background := aDictionary
 ]
 
 { #category : 'accessing' }

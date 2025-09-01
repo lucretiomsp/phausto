@@ -222,8 +222,7 @@ container.appendChild(background);
     return container;
 }
 
-'.
-file close.
+'; close.
 ]
 
 { #category : 'api - exporting' }
