@@ -77,7 +77,8 @@ CmajorView >> folder: aString [
 CmajorView >> initialize [
 
 	super initialize.
-   isResizable := true.
+	knobs := OrderedCollection new.
+	isResizable := true.
 	size := 400 @ 400
 ]
 
@@ -133,11 +134,39 @@ CmajorView >> size: aPoint [
 ]
 
 { #category : 'writing' }
+CmajorView >> uiConfigFileLocator [
+
+| location file |
+location := (FileLocator documents / self folder / 'ui' / 'assets')
+		            ensureCreateDirectory.
+	file := (location / 'uiConfig.js') ensureCreateFile .
+	^ file
+]
+
+{ #category : 'writing' }
 CmajorView >> writeBackgroundVariableToConfig [
 
-| file location|
-location := (FileLocator documents / self folder / 'ui' / 'assets') ensureCreateDirectory. 
-file := location / 'uiConfig.js' .
-file writeStream nextPutAll: 'export const  bgConfig = { '; nextPutAll: self background asJsObjectString ; close
-	
+	self uiConfigFileLocator writeStream
+		nextPutAll: 'export const  bgConfig = { ';
+		nextPutAll: self background asJsObjectString;
+		close
+]
+
+{ #category : 'writing' }
+CmajorView >> writeKnobsVariableToConfig [
+
+	| knobsInsideArray |
+	knobsInsideArray := String new writeStream.
+	self knobs do: [ :i |
+			knobsInsideArray
+				nextPutAll: i asJsObjectString;
+				nextPutAll: ' , ';
+				cr ].
+
+	self uiConfigFileLocator writeStream
+		nextPutAll: 'export const knobConfigs = [ ';
+		cr;
+		nextPutAll: knobsInsideArray contents allButLast;
+		nextPutAll: ' ]XXXXXXXXXXX; ';
+		close 
 ]
