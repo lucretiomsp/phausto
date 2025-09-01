@@ -12,27 +12,28 @@ Class {
 { #category : 'converting' }
 CmajorKnob >> asJsObjectString [
 
-	| result imagePath width height stream |
-	imagePath := String new writeStream.
-	imagePath
-		nextPutAll: ' image: "./';
-		nextPutAll: self image;
-		nextPutAll: '", '.
-	width := String new writeStream.
-	width
-		nextPutAll: 'width: ';
-		nextPutAll: self size x asString;
+	| result left top nameAsString endpoint |
+	nameAsString := String new writeStream.
+	nameAsString nextPutAll: 'name: ';nextPutAll: self name surroundedByQuotes; nextPutAll: ', ' .
+	endpoint := String new writeStream.
+	endpoint nextPutAll: 'endpoint: ';nextPutAll: self name surroundedByQuotes; nextPutAll: ', ' .
+	left := String new writeStream.
+	left
+		nextPutAll: 'left: ';
+		nextPutAll: self position x asString;
 		nextPutAll: ' , '.
-	height := String new writeStream.
-	height
-		nextPutAll: 'height: ';
-		nextPutAll: self size y asString.
+	top := String new writeStream.
+	top
+		nextPutAll: 'top: ';
+		nextPutAll: self position y asString;
+		nextPutAll: ' , '.
+
 	result := String new writeStream.
-	result
-		nextPutAll: 'export const bgConfig = {';
-		nextPutAll: imagePath contents;
-		nextPutAll: width contents;
-		nextPutAll: height contents;
-		nextPutAll: ' } '.
+	result nextPutAll: super asJsObjectString allButLast; nextPutAll: nameAsString; nextPutAll: endpoint; nextPutAll: left ; nextPutAll: top; nextPutAll: ' } '.
 	^ result contents
+]
+
+{ #category : 'accessing' }
+CmajorKnob >> name [ 
+^ name
 ]

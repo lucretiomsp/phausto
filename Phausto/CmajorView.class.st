@@ -68,9 +68,9 @@ CmajorView >> folder [
 ]
 
 { #category : 'accessing' }
-CmajorView >> folder: anObject [
+CmajorView >> folder: aString [
 
-	folder := anObject
+	folder := aString
 ]
 
 { #category : 'initialization' }
@@ -111,7 +111,7 @@ CmajorView >> patchView [
 	^ patchView
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'properties' }
 CmajorView >> patchViewProperty [
 
 	^ 'view' -> {
@@ -130,4 +130,14 @@ CmajorView >> size [
 CmajorView >> size: aPoint [
 "width@height"
 	size := aPoint
+]
+
+{ #category : 'writing' }
+CmajorView >> writeBackgroundVariableToConfig [
+
+| file location|
+location := (FileLocator documents / self folder / 'ui' / 'assets') ensureCreateDirectory. 
+file := location / 'uiConfig.js' .
+file writeStream nextPutAll: 'export const  bgConfig = { '; nextPutAll: self background asJsObjectString ; close
+	
 ]
