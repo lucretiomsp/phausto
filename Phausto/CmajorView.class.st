@@ -174,8 +174,11 @@ CmajorView >> writeKnobsVariableToConfig [
 { #category : 'writing' }
 CmajorView >> writeViewHelperJS [
 
-	self uiConfigFileLocator writeStream
-		nextPutAll: ' 
+| location file |
+location := (FileLocator documents / self folder / 'ui' / 'assets')
+		            ensureCreateDirectory.
+	file := (location / 'viewHelper.js') ensureCreateFile.
+	file	writeStream nextPutAll: ' 
 		// modification of view.js from the Tremolo patch of Cmajor github examples
 
 // needed functions
