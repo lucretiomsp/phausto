@@ -35,6 +35,7 @@ CmajorUIElement >> asJsObjectString [
 		nextPutAll: self size y asString.
 	result := String new writeStream.
 	result
+	   nextPutAll: '{';
 		nextPutAll: imagePath contents;
 		nextPutAll: width contents;
 		nextPutAll: height contents;

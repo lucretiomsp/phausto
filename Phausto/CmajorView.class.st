@@ -164,7 +164,7 @@ CmajorView >> writeBackgroundVariableToConfig [
 { #category : 'writing' }
 CmajorView >> writeKnobsVariableToConfig [
 
-	| knobsInsideArray |
+	| knobsInsideArray  |
 	knobsInsideArray := String new writeStream.
 	self knobs do: [ :i |
 			knobsInsideArray
@@ -175,7 +175,7 @@ CmajorView >> writeKnobsVariableToConfig [
 	self uiConfigFileLocator writeStream
 		nextPutAll: 'export const knobConfigs = [ ';
 		cr;
-		nextPutAll: knobsInsideArray contents allButLast;
+		nextPutAll: (knobsInsideArray contents allButLast: 2);
 		nextPutAll: ' ];';
 		close
 ]
