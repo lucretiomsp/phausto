@@ -3,11 +3,7 @@ Helper class to set a background for a Cmajor GUI
 "
 Class {
 	#name : 'CmajorBackground',
-	#superclass : 'Object',
-	#instVars : [
-		'image',
-		'size'
-	],
+	#superclass : 'CmajorUIElement',
 	#category : 'Phausto-Cmajor',
 	#package : 'Phausto',
 	#tag : 'Cmajor'
@@ -23,25 +19,29 @@ dict := { 'image' -> self image surroundedByQuotes . 'width' -> self size x . 'h
 ^ dict
 ]
 
-{ #category : 'accessing' }
-CmajorBackground >> image [ 
+{ #category : 'converting' }
+CmajorBackground >> asJsObjectString [
 
-^ image
-]
-
-{ #category : 'accessing' }
-CmajorBackground >> image: aString [
-
-image := aString 
-]
-
-{ #category : 'accessing' }
-CmajorBackground >> size [  
-^ size
-]
-
-{ #category : 'accessing' }
-CmajorBackground >> size: aSize [
-
-	size := aSize
+	| result imagePath width height stream |
+	imagePath := String new writeStream.
+	imagePath
+		nextPutAll: ' image: "./';
+		nextPutAll: self image;
+		nextPutAll: '", '.
+	width := String new writeStream.
+	width
+		nextPutAll: 'width: ';
+		nextPutAll: self size x asString; nextPutAll: ' , '.
+	height := String new writeStream.
+	height
+		nextPutAll: 'height: ';
+		nextPutAll: self size y asString.
+	result := String new writeStream.
+	result
+		nextPutAll: 'export const bgConfig = {';
+		nextPutAll: imagePath contents;
+		nextPutAll: width contents;
+		nextPutAll: height contents;
+      nextPutAll: ' } ' .
+	^ result  contents
 ]
