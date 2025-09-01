@@ -44,11 +44,13 @@ CmajorViewTest >> testAddViewToPatch [
 
 { #category : 'tests' }
 CmajorViewTest >> testCmajorPatchFolder [
-	
 
-| patch |
-patch := CmajorPatch new name: 'tespatch'.
-self assert: patch folder equals: (FileLocator documents / 'cmajorPatches' / 'testpatch.camjorpatch')
+	| patch |
+	patch := CmajorPatch new name: 'tespatch'.
+	self
+		assert: patch folder
+		equals:
+		FileLocator documents / 'cmajorPatches' / 'testpatch'
 ]
 
 { #category : 'tests' }
