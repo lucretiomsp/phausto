@@ -20,6 +20,15 @@ Class {
 }
 
 { #category : 'adding' }
+CmajorView >> addTo: aCmajorPatch [
+
+self folder: aCmajorPatch name.
+	aCmajorPatch createIndexJs .
+	self writeViewHelperJS; writeBackgroundVariableToConfig; writeKnobsVariableToConfig. 
+
+]
+
+{ #category : 'adding' }
 CmajorView >> addToCmajorPatch [
 
 	self shouldBeImplemented 
