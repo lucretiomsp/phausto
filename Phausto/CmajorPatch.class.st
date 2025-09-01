@@ -138,6 +138,13 @@ CmajorPatch >> export [
 self subclassResponsibility 
 ]
 
+{ #category : 'accessing' }
+CmajorPatch >> folder [
+
+	^ FileLocator documents / 'cmajorPatches'
+	  / (self name , '.cmajorpatch')
+]
+
 { #category : 'api - exporting' }
 CmajorPatch >> name [ 
 ^ name

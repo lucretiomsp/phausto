@@ -43,6 +43,15 @@ CmajorViewTest >> testAddViewToPatch [
 ]
 
 { #category : 'tests' }
+CmajorViewTest >> testCmajorPatchFolder [
+	
+
+| patch |
+patch := CmajorPatch new name: 'tespatch'.
+self assert: patch folder equals: (FileLocator documents / 'cmajorPatches' / 'testpatch.camjorpatch')
+]
+
+{ #category : 'tests' }
 CmajorViewTest >> testPatchViewProperty [
 
 	| view result propertyDictionary |
