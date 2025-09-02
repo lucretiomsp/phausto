@@ -29,7 +29,8 @@ CmajorView >> addTo: aCmajorPatch [
 	self folder: patchFolder.
 	
 	patchFileWithGUI := (aCmajorPatch folder / patchFilePath) contents addViewPropertyFrom: self .
-   patchFilePath asFileReference writeStream nextPutAll: patchFileWithGUI; close .
+	
+   (CmajorPatch parentFolder  / patchFolder / patchFilePath) writeStream nextPutAll: patchFileWithGUI; close .
 	aCmajorPatch createIndexJs.
 	self
 		writeViewHelperJS;
