@@ -1,5 +1,6 @@
 "
 Super class to create Cmajor patches
+The class variable _parentFolder_ allows to change the destination folder for the created patches
 "
 Class {
 	#name : 'CmajorPatch',
@@ -119,6 +120,12 @@ CmajorPatch class >> asCmajorPatchFileNamed: aName hasMIDI: aBoolean [
 		cr;
 		nextPutAll: '}';
 		close
+]
+
+{ #category : 'as yet unclassified' }
+CmajorPatch class >> parentFolder [
+
+^ FileLocator documents / 'cmajorPatches'
 ]
 
 { #category : 'ui' }

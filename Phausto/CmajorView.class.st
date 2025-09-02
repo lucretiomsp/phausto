@@ -22,16 +22,19 @@ Class {
 { #category : 'adding' }
 CmajorView >> addTo: aCmajorPatch [
 
-self folder: aCmajorPatch name.
-	aCmajorPatch createIndexJs .
-	self writeViewHelperJS; writeBackgroundVariableToConfig; writeKnobsVariableToConfig. 
+	| patchFolder patchFile patchFileWithGUI |
 
-]
-
-{ #category : 'adding' }
-CmajorView >> addToCmajorPatch [
-
-	self shouldBeImplemented 
+	patchFolder := aCmajorPatch name.
+	patchFile := patchFolder , '.cmajorPatch'.
+	self folder: patchFolder.
+	
+	patchFileWithGUI := (aCmajorPatch folder / patchFile) contents addViewPropertyFrom: self .
+   patchFile writeStream nextPutAll: patchFileWithGUI; close .
+	aCmajorPatch createIndexJs.
+	self
+		writeViewHelperJS;
+		writeBackgroundVariableToConfig;
+		writeKnobsVariableToConfig
 ]
 
 { #category : 'accessing' }
@@ -142,11 +145,11 @@ CmajorView >> size: aPoint [
 	size := aPoint
 ]
 
-{ #category : 'writing' }
+{ #category : 'accessing' }
 CmajorView >> uiConfigFileLocator [
 
 | location file |
-location := (FileLocator documents / self folder / 'ui' / 'assets')
+location := (CmajorPatch parentFolder / self folder / 'ui' / 'assets')
 		            ensureCreateDirectory.
 	file := (location / 'uiConfig.js') ensureCreateFile .
 	^ file
