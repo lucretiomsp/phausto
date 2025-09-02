@@ -39,7 +39,7 @@ CmajorUIElement >> asJsObjectString [
 		nextPutAll: imagePath contents;
 		nextPutAll: width contents;
 		nextPutAll: height contents;
-		nextPutAll: ' } '.
+		nextPutAll: ' }; '.
 	^ result contents
 ]
 

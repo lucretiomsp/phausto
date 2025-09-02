@@ -131,8 +131,9 @@ CmajorPatch class >> parentFolder [
 { #category : 'ui' }
 CmajorPatch >> createIndexJs [
 
-	| file |
-	file := self folder / 'index.js'.
+	| file location |
+	location := (self folder / 'ui') ensureCreateDirectory .
+	file := (location / 'index.js' )ensureCreateFile .
 	file writeStream nextPutAll:  '// modification of index.js from the Tremolo patch of Cmajor github examples
 // import { createView } from "./stompbox/minimalView.js";
 import { createBackground, createSmallKnobDiv } from "./assets/viewHelper.js";

@@ -158,8 +158,8 @@ location := (CmajorPatch parentFolder / self folder / 'ui' )
 { #category : 'writing' }
 CmajorView >> writeBackgroundVariableToConfig [
 
-	self uiConfigFileLocator writeStream
-		nextPutAll: 'export const  bgConfig = { ';
+	self uiConfigFileLocator writeStream setToEnd 
+		nextPutAll: ' export const  bgConfig = { ';
 		nextPutAll: self background asJsObjectString;
 		close
 ]
@@ -175,7 +175,7 @@ CmajorView >> writeKnobsVariableToConfig [
 				nextPutAll: ' , ';
 				cr ].
 
-	self uiConfigFileLocator writeStream
+	self uiConfigFileLocator writeStream setToEnd
 		nextPutAll: 'export const knobConfigs = [ ';
 		cr;
 		nextPutAll: (knobsInsideArray contents allButLast: 2);
