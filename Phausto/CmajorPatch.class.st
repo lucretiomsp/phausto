@@ -138,9 +138,9 @@ CmajorPatch >> createIndexJs [
 // import { createView } from "./stompbox/minimalView.js";
 import { createBackground, createSmallKnobDiv } from "./assets/viewHelper.js";
 
-import { knobConfigs} from "./knobConfigs.js";
+import { knobConfigs} from "./uiConfigs.js";
 ;
-import { bgConfig} from "./knobConfigs.js";
+import { bgConfig} from "./uiConfigs.js";
 
 export default function createPatchView (patchConnection)
 {
