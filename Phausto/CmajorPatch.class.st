@@ -134,13 +134,14 @@ CmajorPatch >> createIndexJs [
 	| file location |
 	location := (self folder / 'ui') ensureCreateDirectory .
 	file := (location / 'index.js' )ensureCreateFile .
-	file writeStream nextPutAll:  '// modification of index.js from the Tremolo patch of Cmajor github examples
+	file writeStream nextPutAll:  '
+	// modification of index.js from the Tremolo patch of Cmajor github examples
 // import { createView } from "./stompbox/minimalView.js";
 import { createBackground, createSmallKnobDiv } from "./assets/viewHelper.js";
 
-import { knobConfigs} from "./uiConfigs.js";
-;
-import { bgConfig} from "./uiConfigs.js";
+import { knobConfigs} from "./uiConfig.js";
+
+import { bgConfig} from "./uiConfig.js";
 
 export default function createPatchView (patchConnection)
 {
@@ -208,19 +209,12 @@ container.appendChild(background);
             param.subscribe(skd.update);
         });
     
-
-
-
-        // create knob bound to "rate" parameter
-        // const rateParam = toParameter("rate");
-        // const myKnob = createSmallKnobDiv(rateParam);
-        // container.appendChild(myKnob.elm);
-
-        // subscribe knob to parameter updates (UI follows DSP state)
-        // rateParam.subscribe(myKnob.update);
     
 
 
+
+
+      
 
 
     });
@@ -230,7 +224,9 @@ container.appendChild(background);
     return container;
 }
 
-'; close.
+
+	
+	'; close.
 ]
 
 { #category : 'api - exporting' }

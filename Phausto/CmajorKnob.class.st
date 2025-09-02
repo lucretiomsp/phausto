@@ -20,7 +20,7 @@ CmajorKnob >> asJsObjectString [
 		nextPutAll: ', '.
 	endpoint := String new writeStream.
 	endpoint
-		nextPutAll: 'endpoint: ';
+		nextPutAll: 'endpointID: ';
 		nextPutAll: ('event_' , self name)  surroundedByQuotes;
 		nextPutAll: ', '.
 	left := String new writeStream.
