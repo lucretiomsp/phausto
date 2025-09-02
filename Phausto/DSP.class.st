@@ -205,7 +205,7 @@ DSP >> createCmajorFXPatchNamed: aName [
 	"delete the file if the file already exists and create another one. maybe should we ask for overwrite?"
 	fileToWrite exists ifTrue: [ fileToWrite delete ].
 
-	CmajorPatch class asCmajorPatchFileNamed: aName hasMIDI: false.
+	CmajorPatch  asCmajorPatchFileNamed: aName hasMIDI: false.
 	"self asCmajorPolyWrapperFor: aName."
 	"return true if the .cmajor file has been  generated"
 	LibFaust uniqueInstance

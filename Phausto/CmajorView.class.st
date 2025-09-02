@@ -22,14 +22,14 @@ Class {
 { #category : 'adding' }
 CmajorView >> addTo: aCmajorPatch [
 
-	| patchFolder patchFile patchFileWithGUI |
+	| patchFolder patchFilePath patchFileWithGUI |
 
 	patchFolder := aCmajorPatch name.
-	patchFile := patchFolder , '.cmajorPatch'.
+	patchFilePath := patchFolder , '.cmajorPatch'.
 	self folder: patchFolder.
 	
-	patchFileWithGUI := (aCmajorPatch folder / patchFile) contents addViewPropertyFrom: self .
-   patchFile writeStream nextPutAll: patchFileWithGUI; close .
+	patchFileWithGUI := (aCmajorPatch folder / patchFilePath) contents addViewPropertyFrom: self .
+   patchFilePath asFileReference writeStream nextPutAll: patchFileWithGUI; close .
 	aCmajorPatch createIndexJs.
 	self
 		writeViewHelperJS;
@@ -149,7 +149,7 @@ CmajorView >> size: aPoint [
 CmajorView >> uiConfigFileLocator [
 
 | location file |
-location := (CmajorPatch parentFolder / self folder / 'ui' / 'assets')
+location := (CmajorPatch parentFolder / self folder / 'ui' )
 		            ensureCreateDirectory.
 	file := (location / 'uiConfig.js') ensureCreateFile .
 	^ file

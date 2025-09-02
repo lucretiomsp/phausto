@@ -73,6 +73,7 @@ name := aString
 
 { #category : 'accessing' }
 CmajorUIElement >> position [ 
+
 ^ position
 ]
 
