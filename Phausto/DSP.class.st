@@ -751,8 +751,8 @@ DSP >> traceAllParams [
 
 	self isInitialized
 		ifTrue: [
-			Transcript clear.
-			self allParameters do: [ :i | i traceCr ]. Transcript open ]
+			Transcript open;clear.
+			self allParameters do: [ :i | i traceCr ].  ]
 		ifFalse: [ Error new signal: 'This DSP is not initialized' ]
 ]
 

@@ -187,7 +187,7 @@ CmajorView >> writeKnobsVariableToConfig [
 CmajorView >> writeViewHelperJS [
 
 | location file |
-location := (FileLocator documents / self folder / 'ui' / 'assets')
+location := (CmajorPatch parentFolder / self folder / 'ui' / 'assets')
 		            ensureCreateDirectory.
 	file := (location / 'viewHelper.js') ensureCreateFile.
 	file	writeStream nextPutAll: ' 
