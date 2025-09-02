@@ -35,7 +35,7 @@ CmajorKnob >> asJsObjectString [
 
 	result := String new writeStream.
 	result
-		nextPutAll: (super asJsObjectString allButLast: 2);
+		nextPutAll: (super asJsObjectString allButLast: 3);
 		nextPutAll: ' , ';
 		nextPutAll: nameAsString contents;
 		nextPutAll: endpoint contents;

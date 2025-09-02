@@ -159,7 +159,7 @@ location := (CmajorPatch parentFolder / self folder / 'ui' )
 CmajorView >> writeBackgroundVariableToConfig [
 
 	self uiConfigFileLocator writeStream setToEnd 
-		nextPutAll: ' export const  bgConfig = { ';
+		nextPutAll: ' export const  bgConfig = ';
 		nextPutAll: self background asJsObjectString;
 		close
 ]
