@@ -1,18 +1,23 @@
 "
-Helper class to build kobs for the Cmajor GUIs from image files
+Helper class to build kobs for the Cmajor GUIs from image files.
+Two image fiels are neded, one for the backgrounf and one for the thumb. The fader can be vertical (as default) or horizontal (by setting the _isHorizontal_ variable to **true**)
 "
 Class {
-	#name : 'CmajorKnob',
+	#name : 'CmajorFader',
 	#superclass : 'CmajorUIElement',
+	#instVars : [
+		'thumbImage',
+		'isHorizontal'
+	],
 	#category : 'Phausto-Cmajor',
 	#package : 'Phausto',
 	#tag : 'Cmajor'
 }
 
 { #category : 'converting' }
-CmajorKnob >> asJsObjectString [
+CmajorFader >> asJsObjectString [
 
-	| result left top nameAsString endpoint |
+	| result left top nameAsString endpoint orientation thumbImagePath |
 	nameAsString := String new writeStream.
 	nameAsString
 		nextPutAll: 'name: ';
@@ -32,6 +37,17 @@ CmajorKnob >> asJsObjectString [
 	top
 		nextPutAll: 'top: ';
 		nextPutAll: self position y asString.
+		
+	orientation := String new writeStream.
+	orientation nextPutAll: 'isHorizontal: ';
+	nextPutAll: self isHorizontal asString.
+	
+	thumbImagePath := String new writeStream.
+	thumbImagePath
+		nextPutAll: ' bgthumb: "./';
+		nextPutAll: self thumbImage;
+		nextPutAll: '",'.
+	
 
 	result := String new writeStream.
 	result
@@ -43,4 +59,22 @@ CmajorKnob >> asJsObjectString [
 		nextPutAll: top contents;
 		nextPutAll: ' } '.
 	^ result contents
+]
+
+{ #category : 'accessing' }
+CmajorFader >> isHorizontal [ 
+
+^ isHorizontal
+]
+
+{ #category : 'accessing' }
+CmajorFader >> isHorizontal: aBoolean [ 
+
+isHorizontal := aBoolean.
+]
+
+{ #category : 'accessing' }
+CmajorFader >> thumbImage [
+
+^ thumbImage
 ]

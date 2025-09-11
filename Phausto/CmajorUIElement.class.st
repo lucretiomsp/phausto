@@ -66,6 +66,11 @@ CmajorUIElement >> initialize [
 ]
 
 { #category : 'accessing' }
+CmajorUIElement >> name [ 
+^ name
+]
+
+{ #category : 'accessing' }
 CmajorUIElement >> name: aString [ 
 
 name := aString
