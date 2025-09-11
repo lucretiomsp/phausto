@@ -135,13 +135,17 @@ CmajorPatch >> createIndexJs [
 	location := (self folder / 'ui') ensureCreateDirectory .
 	file := (location / 'index.js' )ensureCreateFile .
 	file writeStream nextPutAll:  '
-	// modification of index.js from the Tremolo patch of Cmajor github examples
+// modification of index.js from the Tremolo patch of Cmajor github examples
 // import { createView } from "./stompbox/minimalView.js";
-import { createBackground, createSmallKnobDiv } from "./assets/viewHelper.js";
+import { createBackground, createSmallKnobDiv , createFaderDiv } from "./assets/viewHelper.js";
 
 import { knobConfigs} from "./uiConfig.js";
 
 import { bgConfig} from "./uiConfig.js";
+
+import { faderConfigs} from "./uiConfig.js";
+
+
 
 export default function createPatchView (patchConnection)
 {
@@ -208,14 +212,25 @@ container.appendChild(background);
             // subscribe knob to backend updates
             param.subscribe(skd.update);
         });
-    
-    
-
-
-
-
       
+    faderConfigs.forEach((cfg) => {
+    const param = toParameter(cfg.endpointID);
 
+    const fdr = createFaderDiv(param, {
+        left: cfg.left,
+        top: cfg.top,
+        width: cfg.width,
+        height: cfg.height,
+        bgimage: cfg.bgimage,
+        bgthumb: cfg.bgthumb,
+        isHorizontal: cfg.isHorizontal,
+    });
+
+    container.appendChild(fdr.elm);
+
+    // subscribe fader to backend updates
+    param.subscribe(fdr.update);
+});
 
     });
 

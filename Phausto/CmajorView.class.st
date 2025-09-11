@@ -35,7 +35,8 @@ CmajorView >> addTo: aCmajorPatch [
 	self
 		writeViewHelperJS;
 		writeBackgroundVariableToConfig;
-		writeKnobsVariableToConfig
+		writeKnobsVariableToConfig;
+		writeFadersVariableToConfig .
 ]
 
 { #category : 'accessing' }
@@ -163,6 +164,28 @@ CmajorView >> writeBackgroundVariableToConfig [
 		nextPutAll: ' export const  bgConfig = ';
 		nextPutAll: self background asJsObjectString;
 		close
+]
+
+{ #category : 'writing' }
+CmajorView >> writeFadersVariableToConfig [
+self uiConfigFileLocator writeStream setToEnd
+		nextPutAll: 'export const faderConfigs = [ ];';
+		close
+"
+	| knobsInsideArray  |
+	knobsInsideArray := String new writeStream.
+	self knobs do: [ :i |
+			knobsInsideArray
+				nextPutAll: i asJsObjectString;
+				nextPutAll: ' , ';
+				cr ].
+
+	self uiConfigFileLocator writeStream setToEnd
+		nextPutAll: 'export const faderConfigs = [ ';
+		cr;
+		nextPutAll: (knobsInsideArray contents allButLast: 2);
+		nextPutAll: ' ];';
+		close "
 ]
 
 { #category : 'writing' }
@@ -384,6 +407,8 @@ export  function createKnobSetup(paramName, knobId) {
 }
 
 
+// #######################         BACKGROUND ###########################
+
 export function createBackground(cfg) {
     const bg = document.createElement("div");
 
@@ -403,6 +428,131 @@ export function createBackground(cfg) {
     bg.style.zIndex = "0"; // ensure it''s behind knobs
 
     return bg;
-}';
+}
+    
+// ###################### CREATE FADER ##########################
+
+export function createFaderDiv(parameter, {
+    left = "0px",
+    top = "0px",
+    width = "40px",
+    height = "100px",
+    image = "./faderbg.png",
+    bgthumb = "./faderthumb.png",
+    isHorizontal = false
+} = {}) {
+    const fader = {};
+    fader.elm = document.createElement("div");
+    fader.elm.style.position = "absolute";
+    fader.elm.style.left = left;
+    fader.elm.style.top = top;
+    fader.elm.style.width = width;
+    fader.elm.style.height = height;
+    fader.elm.style.backgroundImage = `url(''${resolvePath(image)}'')`;
+    fader.elm.style.backgroundSize = "cover";
+    fader.elm.style.backgroundRepeat = "no-repeat";
+
+    // create thumb
+    const thumb = document.createElement("div");
+    thumb.style.position = "absolute";
+    thumb.style.width = isHorizontal ? "20px" : "100%"; // thumb size depends on orientation
+    thumb.style.height = isHorizontal ? "100%" : "20px";
+    thumb.style.backgroundImage = `url(''${resolvePath(bgthumb)}'')`;
+    thumb.style.backgroundRepeat = "no-repeat";
+    thumb.style.backgroundSize = "contain";
+    thumb.style.cursor = "pointer";
+
+    fader.elm.appendChild(thumb);
+
+    // state
+    const state = { value: parameter.initialValue ?? parameter.min };
+
+    // scaling helpers
+    const toPosition = (value) => {
+        const min = parameter.min ?? 0;
+        const max = parameter.max ?? 1;
+        if (isHorizontal) {
+            const range = parseInt(width) - parseInt(thumb.style.width);
+            return ((value - min) / (max - min)) * range;
+        } else {
+            const range = parseInt(height) - parseInt(thumb.style.height);
+            return range - ((value - min) / (max - min)) * range;
+        }
+    };
+
+    const toValue = (pos) => {
+        const min = parameter.min ?? 0;
+        const max = parameter.max ?? 1;
+        if (isHorizontal) {
+            const range = parseInt(width) - parseInt(thumb.style.width);
+            return min + (pos / range) * (max - min);
+        } else {
+            const range = parseInt(height) - parseInt(thumb.style.height);
+            return min + (1 - (pos / range)) * (max - min);
+        }
+    };
+
+    // update UI from value
+    const update = (val, force) => {
+        state.value = val;
+        const pos = toPosition(val);
+        if (isHorizontal) {
+            thumb.style.left = pos + "px";
+            thumb.style.top = "0px";
+        } else {
+            thumb.style.top = pos + "px";
+            thumb.style.left = "0px";
+        }
+    };
+
+    // gesture handling
+    let startCoord, startVal;
+
+    const onMouseMove = (e) => {
+        e.preventDefault();
+        const delta = isHorizontal ? (e.clientX - startCoord) : (e.clientY - startCoord);
+
+        let pos = toPosition(startVal) + delta;
+        if (isHorizontal) {
+            const range = parseInt(width) - parseInt(thumb.style.width);
+            pos = Math.min(Math.max(pos, 0), range);
+        } else {
+            const range = parseInt(height) - parseInt(thumb.style.height);
+            pos = Math.min(Math.max(pos, 0), range);
+        }
+
+        const val = toValue(pos);
+        parameter.onEdit?.(val);
+        update(val, true);
+    };
+
+    const onMouseUp = () => {
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+        parameter.onEndEdit?.();
+    };
+
+    const onMouseDown = (e) => {
+        startCoord = isHorizontal ? e.clientX : e.clientY;
+        startVal = state.value;
+        parameter.onBeginEdit?.();
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+    };
+
+    thumb.addEventListener("mousedown", onMouseDown);
+
+    // initial position
+    update(state.value, true);
+
+    // connect to backend updates
+    parameter.subscribe(update);
+
+    fader.update = update;
+    return fader;
+}
+
+
+	';
 		close
 ]
