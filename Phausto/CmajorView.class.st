@@ -19,6 +19,18 @@ Class {
 	#tag : 'Cmajor'
 }
 
+{ #category : 'accessing - structure variables' }
+CmajorView class >> emptyFaderConfigs [
+
+^ 'export const faderConfigs = []'
+]
+
+{ #category : 'accessing - structure variables' }
+CmajorView class >> emptyKnobConfigs [
+
+^ 'export const knobConfigs = []'
+]
+
 { #category : 'adding' }
 CmajorView >> addTo: aCmajorPatch [
 
