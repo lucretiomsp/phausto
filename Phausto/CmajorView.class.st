@@ -20,13 +20,13 @@ Class {
 }
 
 { #category : 'accessing - structure variables' }
-CmajorView class >> emptyFaderConfigs [
+CmajorView class >> emptyFadersConfig [
 
 ^ 'export const faderConfigs = []'
 ]
 
 { #category : 'accessing - structure variables' }
-CmajorView class >> emptyKnobConfigs [
+CmajorView class >> emptyKnobsConfig [
 
 ^ 'export const knobConfigs = []'
 ]
@@ -180,7 +180,47 @@ CmajorView >> writeBackgroundVariableToConfig [
 ]
 
 { #category : 'writing' }
+CmajorView >> writeEmptyFadersVariableToConfig [
+
+
+	self uiConfigFileLocator writeStream setToEnd
+		nextPutAll: self class emptyFadersConfig ;
+		close
+]
+
+{ #category : 'writing' }
+CmajorView >> writeEmptyKnobsVariableToConfig [
+
+
+	self uiConfigFileLocator writeStream setToEnd
+		nextPutAll: self class emptyKnobsConfig ;
+		close
+]
+
+{ #category : 'writing' }
 CmajorView >> writeFadersVariableToConfig [
+self uiConfigFileLocator writeStream setToEnd
+		nextPutAll: 'export const faderConfigs = [ ];';
+		close
+"
+	| knobsInsideArray  |
+	knobsInsideArray := String new writeStream.
+	self knobs do: [ :i |
+			knobsInsideArray
+				nextPutAll: i asJsObjectString;
+				nextPutAll: ' , ';
+				cr ].
+
+	self uiConfigFileLocator writeStream setToEnd
+		nextPutAll: 'export const faderConfigs = [ ';
+		cr;
+		nextPutAll: (knobsInsideArray contents allButLast: 2);
+		nextPutAll: ' ];';
+		close "
+]
+
+{ #category : 'writing' }
+CmajorView >> writeFilledFadersVariableToConfig [
 self uiConfigFileLocator writeStream setToEnd
 		nextPutAll: 'export const faderConfigs = [ ];';
 		close
