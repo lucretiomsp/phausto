@@ -78,3 +78,9 @@ CmajorFader >> thumbImage [
 
 ^ thumbImage
 ]
+
+{ #category : 'accessing' }
+CmajorFader >> thumbImage: aString [
+
+^ aString
+]
