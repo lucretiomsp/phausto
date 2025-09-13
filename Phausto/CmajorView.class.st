@@ -44,6 +44,7 @@ CmajorView >> addTo: aCmajorPatch [
 	
    (CmajorPatch parentFolder  / patchFolder / patchFilePath) writeStream nextPutAll: patchFileWithGUI; close .
 	aCmajorPatch createIndexJs.
+	self uiConfigFileLocator delete.
 	self
 		writeViewHelperJS;
 		writeBackgroundVariableToConfig;
