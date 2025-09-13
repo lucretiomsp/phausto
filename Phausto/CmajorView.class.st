@@ -199,24 +199,8 @@ CmajorView >> writeEmptyKnobsVariableToConfig [
 
 { #category : 'writing' }
 CmajorView >> writeFadersVariableToConfig [
-self uiConfigFileLocator writeStream setToEnd
-		nextPutAll: 'export const faderConfigs = [ ];';
-		close
-"
-	| knobsInsideArray  |
-	knobsInsideArray := String new writeStream.
-	self knobs do: [ :i |
-			knobsInsideArray
-				nextPutAll: i asJsObjectString;
-				nextPutAll: ' , ';
-				cr ].
 
-	self uiConfigFileLocator writeStream setToEnd
-		nextPutAll: 'export const faderConfigs = [ ';
-		cr;
-		nextPutAll: (knobsInsideArray contents allButLast: 2);
-		nextPutAll: ' ];';
-		close "
+self faders isEmpty ifTrue: [ self writeEmptyFadersVariableToConfig ] ifFalse: [ self writeFilledFadersVariableToConfig ]
 ]
 
 { #category : 'writing' }
@@ -242,7 +226,8 @@ self uiConfigFileLocator writeStream setToEnd
 ]
 
 { #category : 'writing' }
-CmajorView >> writeKnobsVariableToConfig [
+CmajorView >> writeFilledKnobsVariableToConfig [ 
+
 
 	| knobsInsideArray  |
 	knobsInsideArray := String new writeStream.
@@ -258,6 +243,12 @@ CmajorView >> writeKnobsVariableToConfig [
 		nextPutAll: (knobsInsideArray contents allButLast: 2);
 		nextPutAll: ' ];';
 		close
+]
+
+{ #category : 'writing' }
+CmajorView >> writeKnobsVariableToConfig [
+
+self knobs isEmpty ifTrue: [ self writeEmptyKnobsVariableToConfig ] ifFalse: [ self writeFilledKnobsVariableToConfig ]
 ]
 
 { #category : 'writing' }
