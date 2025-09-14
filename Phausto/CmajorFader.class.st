@@ -57,8 +57,17 @@ CmajorFader >> asJsObjectString [
 		nextPutAll: endpoint contents;
 		nextPutAll: left contents;
 		nextPutAll: top contents;
+		nextPutAll: thumbImagePath contents;
+		nextPutAll: orientation contents;
 		nextPutAll: ' } '.
 	^ result contents
+]
+
+{ #category : 'initialization' }
+CmajorFader >> initialize [ 
+
+super initialize.
+isHorizontal := false.
 ]
 
 { #category : 'accessing' }
@@ -82,5 +91,5 @@ CmajorFader >> thumbImage [
 { #category : 'accessing' }
 CmajorFader >> thumbImage: aString [
 
-^ aString
+thumbImage :=  aString
 ]
