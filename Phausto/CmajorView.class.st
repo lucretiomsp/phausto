@@ -105,6 +105,7 @@ CmajorView >> initialize [
 
 	super initialize.
 	knobs := OrderedCollection new.
+	faders := OrderedCollection new.
 	isResizable := true.
 	size := 400 @ 400
 ]
@@ -211,7 +212,7 @@ CmajorView >> writeFilledFadersVariableToConfig [
 "
 	| fadersInsideArray  |
 	fadersInsideArray := String new writeStream.
-	self knobs do: [ :i |
+	self faders do: [ :i |
 			fadersInsideArray 
 				nextPutAll: i asJsObjectString;
 				nextPutAll: ' , ';

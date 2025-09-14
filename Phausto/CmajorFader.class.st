@@ -26,7 +26,7 @@ CmajorFader >> asJsObjectString [
 	endpoint := String new writeStream.
 	endpoint
 		nextPutAll: 'endpointID: ';
-		nextPutAll: ('event_' , self name)  surroundedByQuotes;
+		nextPutAll: ('event_' , self name) surroundedByQuotes;
 		nextPutAll: ', '.
 	left := String new writeStream.
 	left
@@ -36,18 +36,21 @@ CmajorFader >> asJsObjectString [
 	top := String new writeStream.
 	top
 		nextPutAll: 'top: ';
-		nextPutAll: self position y asString.
-		
+		nextPutAll: self position y asString;
+		nextPutAll: ' , '.
+
 	orientation := String new writeStream.
-	orientation nextPutAll: 'isHorizontal: ';
-	nextPutAll: self isHorizontal asString.
-	
+	orientation
+		nextPutAll: 'isHorizontal: ';
+		nextPutAll: self isHorizontal asString;
+		nextPutAll: ','.
+
 	thumbImagePath := String new writeStream.
 	thumbImagePath
 		nextPutAll: ' bgthumb: "./';
 		nextPutAll: self thumbImage;
 		nextPutAll: '",'.
-	
+
 
 	result := String new writeStream.
 	result
