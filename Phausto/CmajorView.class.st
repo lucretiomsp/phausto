@@ -28,7 +28,7 @@ CmajorView class >> emptyFadersConfig [
 { #category : 'accessing - structure variables' }
 CmajorView class >> emptyKnobsConfig [
 
-^ 'export const knobConfigs = []'
+	^ 'export const knobConfigs = []; '
 ]
 
 { #category : 'adding' }

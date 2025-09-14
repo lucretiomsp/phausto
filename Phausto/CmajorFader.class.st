@@ -39,17 +39,16 @@ CmajorFader >> asJsObjectString [
 		nextPutAll: self position y asString;
 		nextPutAll: ' , '.
 
-	orientation := String new writeStream.
-	orientation
-		nextPutAll: 'isHorizontal: ';
-		nextPutAll: self isHorizontal asString;
-		nextPutAll: ','.
 
 	thumbImagePath := String new writeStream.
 	thumbImagePath
 		nextPutAll: ' bgthumb: "./';
 		nextPutAll: self thumbImage;
 		nextPutAll: '",'.
+	orientation := String new writeStream.
+	orientation
+		nextPutAll: 'isHorizontal: ';
+		nextPutAll: self isHorizontal asString.
 
 
 	result := String new writeStream.
