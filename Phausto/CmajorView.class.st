@@ -260,7 +260,7 @@ CmajorView >> writeViewHelperJS [
 		            ensureCreateDirectory.
 	file := (location / 'viewHelper.js') ensureCreateFile.
 	file writeStream
-		nextPutAll: ' 
+		nextPutAll: '
 		// modification of view.js from the Tremolo patch of Cmajor github examples
 
 // needed functions
@@ -490,10 +490,10 @@ export function createFaderDiv(parameter, {
     const fader = {};
     fader.elm = document.createElement("div");
     fader.elm.style.position = "absolute";
-    fader.elm.style.left = left + "px";;
-    fader.elm.style.top = top + "px";;
-    fader.elm.style.width = width + "px";;
-    fader.elm.style.height = height + "px";;
+    fader.elm.style.left = left + "px";
+    fader.elm.style.top = top + "px";
+    fader.elm.style.width = width + "px";
+    fader.elm.style.height = height + "px";
     fader.elm.style.backgroundImage = `url(''${resolvePath(image)}'')`;
     fader.elm.style.backgroundSize = "cover";
     fader.elm.style.backgroundRepeat = "no-repeat";
@@ -599,6 +599,6 @@ export function createFaderDiv(parameter, {
 }
 
 
-	';
+		';
 		close
 ]
