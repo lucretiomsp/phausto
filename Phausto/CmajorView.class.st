@@ -255,11 +255,12 @@ self knobs isEmpty ifTrue: [ self writeEmptyKnobsVariableToConfig ] ifFalse: [ s
 { #category : 'writing' }
 CmajorView >> writeViewHelperJS [
 
-| location file |
-location := (CmajorPatch parentFolder / self folder / 'ui' / 'assets')
+	| location file |
+	location := (CmajorPatch parentFolder / self folder / 'ui' / 'assets')
 		            ensureCreateDirectory.
 	file := (location / 'viewHelper.js') ensureCreateFile.
-	file	writeStream nextPutAll: ' 
+	file writeStream
+		nextPutAll: ' 
 		// modification of view.js from the Tremolo patch of Cmajor github examples
 
 // needed functions
@@ -489,10 +490,10 @@ export function createFaderDiv(parameter, {
     const fader = {};
     fader.elm = document.createElement("div");
     fader.elm.style.position = "absolute";
-    fader.elm.style.left = left;
-    fader.elm.style.top = top;
-    fader.elm.style.width = width;
-    fader.elm.style.height = height;
+    fader.elm.style.left = left + "px";;
+    fader.elm.style.top = top + "px";;
+    fader.elm.style.width = width + "px";;
+    fader.elm.style.height = height + "px";;
     fader.elm.style.backgroundImage = `url(''${resolvePath(image)}'')`;
     fader.elm.style.backgroundSize = "cover";
     fader.elm.style.backgroundRepeat = "no-repeat";
