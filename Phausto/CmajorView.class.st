@@ -53,6 +53,14 @@ CmajorView >> addTo: aCmajorPatch [
 ]
 
 { #category : 'accessing' }
+CmajorView >> assetsPath [
+
+^ (CmajorPatch parentFolder / self folder / 'ui' / 'assets')
+		            ensureCreateDirectory.
+	
+]
+
+{ #category : 'accessing' }
 CmajorView >> backgroundImage [
 
 	^ backgroundImage 
@@ -134,14 +142,15 @@ CmajorView >> knobs: anObject [
 	knobs := anObject
 ]
 
-{ #category : 'instance creation' }
+{ #category : 'ui related' }
 CmajorView >> open [
 
-	| space bg |
-	space := BlSpace new extent:  self size.
-	bg := BlElement new background: (BlImageBackground image: (ImageReadWriter formFromFileNamed: '/Users/domenicocipriani/Documents/cmajorPatches/SaimonMIDI/ui/assets/metalEnclosure.png')); 
+	| space bg bgPath |
+	space := BlSpace new extent: self size.
+	bgPath := self assetsPath / self backgroundImage image.
+	bg :=  BlElement new background: (BlImageBackground image: (ImageReadWriter formFromFileNamed: bgPath )); 
 extent: 400 @ 400.
-	space root addChild: bg. 
+	space root addChild: bg.
 	space show
 ]
 
