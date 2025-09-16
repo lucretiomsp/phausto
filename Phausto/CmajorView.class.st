@@ -6,7 +6,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'folder',
-		'background',
+		'backgroundImage',
 		'knobs',
 		'buttons',
 		'faders',
@@ -53,15 +53,15 @@ CmajorView >> addTo: aCmajorPatch [
 ]
 
 { #category : 'accessing' }
-CmajorView >> background [
+CmajorView >> backgroundImage [
 
-	^ background
+	^ backgroundImage 
 ]
 
 { #category : 'accessing' }
-CmajorView >> background: aDictionary [
+CmajorView >> backgroundImage: aString [
 
-	background := aDictionary
+	backgroundImage := aString
 ]
 
 { #category : 'accessing' }
@@ -134,6 +134,17 @@ CmajorView >> knobs: anObject [
 	knobs := anObject
 ]
 
+{ #category : 'instance creation' }
+CmajorView >> open [
+
+	| space bg |
+	space := BlSpace new extent:  self size.
+	bg := BlElement new background: (BlImageBackground image: (ImageReadWriter formFromFileNamed: '/Users/domenicocipriani/Documents/cmajorPatches/SaimonMIDI/ui/assets/metalEnclosure.png')); 
+extent: 400 @ 400.
+	space root addChild: bg. 
+	space show
+]
+
 { #category : 'accessing' }
 CmajorView >> patchView [
 
@@ -176,7 +187,7 @@ CmajorView >> writeBackgroundVariableToConfig [
 
 	self uiConfigFileLocator writeStream setToEnd 
 		nextPutAll: ' export const  bgConfig = ';
-		nextPutAll: self background asJsObjectString;
+		nextPutAll: self backgroundImage asJsObjectString;
 		close
 ]
 
