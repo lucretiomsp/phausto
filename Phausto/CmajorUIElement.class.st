@@ -85,7 +85,7 @@ CmajorUIElement >> position [
 { #category : 'accessing' }
 CmajorUIElement >> position: aPoint [
 
-	^ aPoint
+	position := aPoint 
 ]
 
 { #category : 'accessing' }
