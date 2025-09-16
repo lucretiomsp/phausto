@@ -6,9 +6,10 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'image',
-		'size',
+		'name',
+		'blElm',
 		'position',
-		'name'
+		'size'
 	],
 	#category : 'Phausto-Cmajor',
 	#package : 'Phausto',
@@ -76,25 +77,26 @@ CmajorUIElement >> name: aString [
 name := aString
 ]
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
 CmajorUIElement >> position [ 
 
-^ position
+^ position 
 ]
 
-{ #category : 'accessing' }
-CmajorUIElement >> position: aPoint [
+{ #category : 'initialization' }
+CmajorUIElement >> position: aPoint [ 
 
-	position := aPoint 
+position := aPoint 
 ]
 
-{ #category : 'accessing' }
-CmajorUIElement >> size [  
+{ #category : 'initialization' }
+CmajorUIElement >> size [
+
 ^ size
 ]
 
-{ #category : 'accessing' }
-CmajorUIElement >> size: aSize [
+{ #category : 'initialization' }
+CmajorUIElement >> size: aPoint [
 
-	size := aSize
+size := aPoint
 ]

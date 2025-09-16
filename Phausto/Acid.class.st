@@ -56,11 +56,11 @@ Acid >> asBox [
 		          fr: envAmount + self cutoffFreq;
 		          res: self resonance.
 	saw := SawOsc new
-		       uLevel: self uLevel * 0.25 asBox;
-		       freq: baseFreq + self tuning.
+		       uLevel: self uLevel asBox * 0.25 asBox;
+		       freq: baseFreq asBox + self tuning asBox.
 	square := SquareOsc new
-		          uLevel: self uLevel * 0.25 asBox;
-		          freq: baseFreq + self tuning.
+		          uLevel: self uLevel asBox * 0.25 asBox;
+		          freq: baseFreq asBox + self tuning asBox .
 	oscillator := Select2 new
 		              label: self label , 'Waveform';
 		              input0: saw;

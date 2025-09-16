@@ -148,8 +148,12 @@ CmajorView >> open [
 	| space bg bgPath |
 	space := BlSpace new extent: self size.
 	bgPath := self assetsPath / self backgroundImage image.
-	bg :=  BlElement new background: (BlImageBackground image: (ImageReadWriter formFromFileNamed: bgPath )); 
-extent: 400 @ 400.
+	bg := BlElement new
+		      background:
+			      (BlImageBackground image:
+					       (ImageReadWriter formFromFileNamed: bgPath));
+		      extent: 400 @ 400.
+
 	space root addChild: bg.
 	space show
 ]
