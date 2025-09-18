@@ -13,17 +13,13 @@ BaselineOfPhausto >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [
-		spec postLoadDoIt: #copyLibraries.
+			spec postLoadDoIt: #copyLibraries.
 
-		spec package: 'Phausto'.
+			spec package: 'Phausto'.
 
-		spec
-			baseline: 'MasterLu'
-			with: [ spec repository: 'github://lucretiomsp/MasterLu:main' ].
+			spec group: 'default' with: #( 'Phausto'  ).
 
-		spec group: 'default' with: #( 'Phausto' 'MasterLu' ).
-
-		spec group: 'ci' with: #( 'Phausto' )]
+			spec group: 'ci' with: #( 'Phausto' ) ]
 ]
 
 { #category : 'utilities' }
