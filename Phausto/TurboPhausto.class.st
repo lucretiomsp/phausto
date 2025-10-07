@@ -433,6 +433,11 @@ TurboPhausto >> playNote: aMidiNN prefix: aString dur: aDuration [
 	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
 ]
 
+{ #category : 'playing' }
+TurboPhausto >> restore [
+	self class tpPerf restore 
+]
+
 { #category : 'API - changes' }
 TurboPhausto >> reverb: anAmount [
 	"aSize maximum is 1 to prevent distortion"
@@ -481,6 +486,11 @@ TurboPhausto >> sweepToValue: aTargetValue parameter: aParamAsString in: aTimeIn
 		parameter: aParamAsString
 		in: aTimeInseconds
 	"  sweep the value of the selected parameter in a TimeInSeconds - the value is update every 10 milliseconds"
+]
+
+{ #category : 'playing' }
+TurboPhausto >> temporarySave [
+	self class tpPerf temporarySave 
 ]
 
 { #category : 'tracing' }
