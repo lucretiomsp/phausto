@@ -1,6 +1,23 @@
 "
 Lighter version of TurboPhausto designed for improved performance on Windows/Linux without audio interface.
-Less instruments, no effects nor filters on output
+Less instruments, no effects nor filters on output.
+
+One sample for: 
+**#kick**
+**#snare**
+**#ch**
+**#oh**
+**#cowbell**
+
+Multiple Samples for 
+**#bongo** (8 samples)
+**conga** (14 samples)
+**#bleep** (6 samples)
+**#speakspell** (28 samples)
+
+And the following synths:
+**#psg**
+**#acid**
 "
 Class {
 	#name : 'EcoPhausto',
@@ -9,6 +26,27 @@ Class {
 	#package : 'Phausto',
 	#tag : 'TurboPhausto'
 }
+
+{ #category : 'tracing' }
+EcoPhausto class >> listOfInstruments [
+
+Transcript open; clear; show: 'One sample for: 
+#kick
+#snare
+#ch
+#oh
+#cowbell
+
+MultiSamples for 
+#bongo 
+#conga (14 samples)
+#bleep (6 samples)
+#speakspell (28 samples)
+
+Synths:
+#psg
+#acid'
+]
 
 { #category : 'accessing' }
 EcoPhausto class >> start [
