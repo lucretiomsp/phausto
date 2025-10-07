@@ -42,9 +42,19 @@ jobs:
         run: |
           mkdir -p "/home/runner/.smalltalkCI/_builds/librariesBundle"
           unzip "/home/runner/work/phausto/phausto/librariesBundle_Linux.zip" -d "/home/runner/.smalltalkCI/_builds/librariesBundle"
-          mv "/home/runner/.smalltalkCI/_builds/librariesBundle/librariesBundle/libdynamic-engine.so" "/home/runner/.smalltalkCI/_builds/librariesBundle/"
-          ls -all "/home/runner/.smalltalkCI/_builds/librariesBundle"
-          nm "/home/runner/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so"
+
+          # Move only top-level .so files one directory up, keep faustLibs intact
+          mv /home/runner/.smalltalkCI/_builds/librariesBundle/librariesBundle/*.so /home/runner/.smalltalkCI/_builds/librariesBundle/ || true
+
+          # Optional: show final structure for debugging
+          echo "=== librariesBundle ==="
+          ls -al /home/runner/.smalltalkCI/_builds/librariesBundle
+          echo "=== faustLibs ==="
+          ls -al /home/runner/.smalltalkCI/_builds/librariesBundle/faustLibs || true
+
+          # Verify dynamic library linkage
+          nm "/home/runner/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so" | head -20
+
 
 
 
