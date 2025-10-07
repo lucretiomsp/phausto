@@ -42,8 +42,10 @@ jobs:
         run: |
           mkdir -p "/home/runner/.smalltalkCI/_builds/librariesBundle"
           unzip "/home/runner/work/phausto/phausto/librariesBundle_Linux.zip" -d "/home/runner/.smalltalkCI/_builds/librariesBundle"
-          ls -all "/home/runner/.smalltalkCI/_builds/librariesBundle/librariesBundle"
-          nm "/home/runner/.smalltalkCI/_builds/librariesBundle/librariesBundle/libdynamic-engine.so"
+          mv "/home/runner/.smalltalkCI/_builds/librariesBundle/librariesBundle/libdynamic-engine.so" "/home/runner/.smalltalkCI/_builds/librariesBundle/"
+          ls -all "/home/runner/.smalltalkCI/_builds/librariesBundle"
+          nm "/home/runner/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so"
+
 
 
 
