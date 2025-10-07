@@ -505,6 +505,12 @@ TurboPhausto >> trig: aString [
 	self class tpDsp trig: aString
 ]
 
+{ #category : 'playing' }
+TurboPhausto >> unmute: aSymbol [
+
+	self class tpPerf unmute: aSymbol 
+]
+
 { #category : 'LiveCoding - Performance' }
 TurboPhausto >> unsolo: aSymbol [
 
