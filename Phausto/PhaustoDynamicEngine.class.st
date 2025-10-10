@@ -186,11 +186,11 @@ PhaustoDynamicEngine >> getNumInputsDsp: aDsp [
 ]
 
 { #category : 'initializing' }
-PhaustoDynamicEngine >> initializeDSP: aDsp [.
+PhaustoDynamicEngine >> initializeDSP: aDsp [
 
 self  ffiCall:
 				  #( bool initDsp #( DSP * aDsp , RendererType 0 , int 44100 , int
-				        512 ) ) 
+				        128 ) ) 
 ]
 
 { #category : 'initializing' }

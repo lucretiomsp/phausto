@@ -103,7 +103,7 @@ Acid >> initialize [
 
 	level := PhHSlider new
 		          label: self label , 'uLevel'
-		          init: 0.5
+		          init: 0.6
 		          min: 0
 		          max: 1
 		          step: 0.01.
