@@ -105,7 +105,7 @@ DSP class >> invalidException [
 
 { #category : 'as yet unclassified' }
 DSP class >> paramException [
-
+1 halt.
 ^ 'Invalid parameter' inspect
 
 "	^ Error new signal:
@@ -763,12 +763,12 @@ DSP >> trig: aString [
 	" parameter must exist"
 
 	(self getParamIndex: aString) = -1
-		ifTrue: [ ^ self class paramException ]
+		ifTrue: [ ^ self class paramException . Performance uniqueInstance stop.]
 		ifFalse: [
-			self setValue: 1 parameter: aString.
-			[
-			10 milliSeconds wait.
-			self setValue: 0 parameter: aString ] forkAt: 70 ]
+				self setValue: 1 parameter: aString.
+				[
+					10 milliSeconds wait.
+					self setValue: 0 parameter: aString ] forkAt: 70 ]
 ]
 
 { #category : 'API - changes' }
@@ -778,10 +778,10 @@ DSP >> trig: aString for: aDurationInSeconds [
 	" parameter must exist"
 
 	(self getParamIndex: aString) = -1
-		ifTrue: [ ^ self class paramException ]
+		ifTrue: [ ^ self class paramException . Performance uniqueInstance  stop.]
 		ifFalse: [
-			[
-			self setValue: 1 parameter: aString.
-			aDurationInSeconds  wait.
-			self setValue: 0 parameter: aString ] forkAt: 70 ]
+				[
+					self setValue: 1 parameter: aString.
+					aDurationInSeconds wait.
+					self setValue: 0 parameter: aString ] forkAt: 70 ]
 ]

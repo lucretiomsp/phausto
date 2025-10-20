@@ -43,7 +43,7 @@ PopFilterDrum >> initialize [
 
 
 	self controlParameters add: #freq -> (self freq asControlParameterOfWidgetType: #knob description: 'Filter Frequency in Hertz').
-	gate := PhButton new label: self label , 'Gate'.
+
 	q := PhHSlider new
 		     label: self label , 'Q'
 		     init: 5

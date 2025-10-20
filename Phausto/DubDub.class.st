@@ -42,13 +42,7 @@ DubDub >> asBox [
 { #category : 'as yet unclassified' }
 DubDub >> ctFreq [
 
-	^ freq ifNil: [
-		  freq := PhHSlider new
-			          label: self label , 'CtFreq'
-			          init: 50
-			          min: 20
-			          max: 1400
-			          step: 0.1 ]
+	^ ctFreq 
 ]
 
 { #category : 'initialization' }
@@ -56,7 +50,12 @@ DubDub >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.dubDub;'.
-
+   ctFreq := PhHSlider new
+				          label: self label , 'CtFreq'
+				          init: 50
+				          min: 20
+				          max: 1400
+				          step: 0.1 .
 
 	self controlParameters add: #freq -> (self freq asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz').
 	uLevel := PhHSlider new
