@@ -150,7 +150,7 @@ DSP >> allParameters [
 			0 to: self getParamCount - 1 do: [ :i |
 			params add: (self getParamAddress: i) afterLastSlash ].
 			^ params asArray ]
-		ifFalse: [ Error new signal: 'This DSP is not initialized' ]
+		ifFalse: [ Error new signal: 'This DSP is not initialized'. Performance uniqueInstance stop. ]
 ]
 
 { #category : 'converting' }

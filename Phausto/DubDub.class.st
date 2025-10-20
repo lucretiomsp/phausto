@@ -56,12 +56,12 @@ DubDub >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.dubDub;'.
-	
+
 
 	self controlParameters add: #freq -> (self freq asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz').
 	uLevel := PhHSlider new
 		          label: self label , 'uLevel'
-		          init: 0.05
+		          init: 0.01
 		          min: 0
 		          max: 1
 		          step: 0.001.
