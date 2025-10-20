@@ -21,10 +21,8 @@ Class {
 	#name : 'DubDub',
 	#superclass : 'Synths',
 	#instVars : [
-		'freq',
 		'ctFreq',
-		'q',
-		'gate'
+		'q'
 	],
 	#category : 'Phausto-Synths',
 	#package : 'Phausto',
@@ -53,41 +51,22 @@ DubDub >> ctFreq [
 			          step: 0.1 ]
 ]
 
-{ #category : 'accessing' }
-DubDub >> freq [
-
-	^ freq 
-]
-
-{ #category : 'accessing' }
-DubDub >> gate [
-
-	^ gate 
-]
-
 { #category : 'initialization' }
 DubDub >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.dubDub;'.
-	freq := PhHSlider new
-		        label: self label , 'Note'
-		        init: 50
-		        min: 20
-		        max: 1400
-		        step: 0.1.
+	
 
-	self controlParameters add: #freq -> (self freq
-			 asControlParameterOfWidgetType: #knob
-			 description: 'Frequency in Hertz').
+	self controlParameters add: #freq -> (self freq asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz').
 	uLevel := PhHSlider new
 		          label: self label , 'uLevel'
 		          init: 0.05
 		          min: 0
 		          max: 1
 		          step: 0.001.
-		gate := PhButton new label: self label , 'Gate'.
-		self controlParameters add: #gate -> (self gate asControlParameterOfWidgetType: #button description: 'Trig the Sund').
+
+	self controlParameters add: #gate -> (self gate asControlParameterOfWidgetType: #button description: 'Trig the Sound')
 ]
 
 { #category : 'as yet unclassified' }

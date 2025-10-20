@@ -29,8 +29,7 @@ Class {
 	#instVars : [
 		'tone',
 		'attack',
-		'decay',
-		'gate'
+		'decay'
 	],
 	#category : 'Phausto-Synths',
 	#package : 'Phausto',
@@ -59,12 +58,6 @@ Clap >> decay [
 	^ decay 
 ]
 
-{ #category : 'accessing' }
-Clap >> gate [
-
-	^ gate 
-]
-
 { #category : 'initialization' }
 Clap >> initialize [
 
@@ -72,7 +65,7 @@ Clap >> initialize [
 	self processExpression: 'process = sy.clap;'.
 
 	attack := 0.
-	gate := PhButton new label: self label , 'Gate'.
+
 	decay := decay := PhHSlider new
 		                  label: self label , 'Decay'
 		                  init: 0.9

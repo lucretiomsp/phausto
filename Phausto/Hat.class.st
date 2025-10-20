@@ -17,7 +17,6 @@ Class {
 		'tone',
 		'attack',
 		'decay',
-		'gate',
 		'pitch'
 	],
 	#category : 'Phausto-Synths',
@@ -46,12 +45,6 @@ Hat >> attack [
 Hat >> decay [
 
 	^ decay 
-]
-
-{ #category : 'accessing' }
-Hat >> gate [
-
-	^ gate ifNil: [ gate := PhButton new label: self label , 'Gate' ]
 ]
 
 { #category : 'initialization' }
@@ -91,12 +84,12 @@ Hat >> initialize [
 Hat >> pitch [
 
 	^ pitch ifNil: [
-		  pitch := PhHSlider new
-			           label: self label , 'Note'
-			           init: 1900
-			           min: 317
-			           max: 3170
-			           step: 1 ]
+			  pitch := PhHSlider new
+				           label: self label , 'Freq'
+				           init: 1900
+				           min: 317
+				           max: 3170
+				           step: 1 ]
 ]
 
 { #category : 'accessing' }

@@ -21,9 +21,7 @@ Class {
 	#name : 'CombString',
 	#superclass : 'Synths',
 	#instVars : [
-		'freq',
 		'gain',
-		'gate',
 		'res'
 	],
 	#category : 'Phausto-Synths',
@@ -41,34 +39,14 @@ CombString >> asBox [
 	^ finalBox *  self uLevel
 ]
 
-{ #category : 'accessing' }
-CombString >> freq [
-
-	^ freq 
-]
-
-{ #category : 'accessing' }
-CombString >> gate [
-
-	^ gate
-]
-
 { #category : 'initialization' }
 CombString >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.combString;'.
-	freq := PhHSlider new
-		        label: self label , 'Freq'
-		        init: 20
-		        min: 2900
-		        max: 1
-		        step: 0.01.
+	
 
-	self controlParameters add: #freq -> (self freq
-			 asControlParameterOfWidgetType: #knob
-			 description: 'Frequency in Hertz').
-	gate := PhButton new label: self label , 'Gate'.
+
 	res := PhHSlider new
 		       label: self label , 'Res'
 		       init: 0.3
