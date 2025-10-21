@@ -42,21 +42,18 @@ TpSynth >> gate [
 TpSynth >> initialize [
 
 	super initialize.
-	super initializeControlParameters .
-	"by default the name of the TpSynth is the name of the class"
-	gate := PhButton new label: self label , 'Gate'.
+	super initializeControlParameters. "by default the name of the TpSynth is the name of the class"
+	gate := PhButton new label: self label , 'Trigger'.
 
 	self uLevel: (self label , 'Level') asSymbol.
 
 	pitch := PhHSlider new
-		         label: self label , 'Note'
+		         label: self label , 'Freq'
 		         init: 440
 		         min: 20
 		         max: 4086
 		         step: 1.
-	self controlParameters add: #pitch -> (self pitch
-			 asControlParameterOfWidgetType: #knob
-			 description: 'Frequency in Hertz').
+	self controlParameters add: #pitch -> (self pitch asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz').
 	attack := PhHSlider new
 		          label: self label , 'Attack'
 		          init: 0.01
@@ -80,8 +77,7 @@ TpSynth >> initialize [
 		           init: 0.1
 		           min: 0.001
 		           max: 2
-		           step: 0.001.
-
+		           step: 0.001
 ]
 
 { #category : 'initialization' }

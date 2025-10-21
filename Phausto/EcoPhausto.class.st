@@ -30,7 +30,10 @@ Class {
 { #category : 'tracing' }
 EcoPhausto class >> listOfInstruments [
 
-Transcript open; clear; show: 'One sample for: 
+	Transcript
+		open;
+		clear;
+		show: 'One sample for: 
 #kick
 #snare
 #ch
