@@ -46,7 +46,7 @@ TpReese >> initialize [
 		         uLevel: 0.3 asBox.
 	osci2 := SineOsc new
 		         uLevel: 0.3 asBox;
-		         freq: self pitch
+		         freq: self pitch asBox 
 			         +
 				         (PhHSlider new label: 'reeseDetune' values: #( 5 0 30 1 )) "+ detune asBox"
 ]
