@@ -32,7 +32,7 @@ Acid >> asBox [
 
 	| saw square baseFreq oscillator filterEnv filter ampEnv instrument envAmount |
 	baseFreq := PhHSlider new
-		            label: self label , 'Note'
+		            label: self label , 'Freq'
 		            init: 440
 		            min: 20
 		            max: 2000
@@ -41,11 +41,11 @@ Acid >> asBox [
 
 
 	filterEnv := AREnv new
-		             trigger: #acidGate;
+		             trigger: #AcidTrigger;
 		             attack: 0.001 asBox;
 		             release: self filterDecay.
 	ampEnv := AREnv new
-		          trigger: #acidGate;
+		          trigger: #AcidTrigger;
 		          attack: 0.001 asBox;
 		          release: 0.2 asBox.
 
@@ -59,7 +59,7 @@ Acid >> asBox [
 		       uLevel: self uLevel asBox * 0.25 asBox;
 		       freq: baseFreq asBox + self tuning.
 	square := SquareOsc new
-		          uLevel: self uLevel asBox  * 0.25 asBox;
+		          uLevel: self uLevel asBox * 0.25 asBox;
 		          freq: baseFreq asBox + self tuning.
 	oscillator := Select2 new
 		              label: self label , 'Waveform';
@@ -67,8 +67,7 @@ Acid >> asBox [
 		              input1: square.
 
 	distortion := Cubic1 new.
-	instrument := oscillator * ampEnv => filter * compensation
-	              => distortion.
+	instrument := oscillator * ampEnv => filter * compensation => distortion.
 	^ instrument asBox
 ]
 
@@ -102,11 +101,11 @@ Acid >> initialize [
 		             step: 0.001.
 
 	level := PhHSlider new
-		          label: self label , 'uLevel'
-		          init: 0.6
-		          min: 0
-		          max: 1
-		          step: 0.01.
+		         label: self label , 'uLevel'
+		         init: 0.6
+		         min: 0
+		         max: 1
+		         step: 0.01.
 	cutoffFreq := PhHSlider new
 		              label: self label , 'CutoffFreq'
 		              init: 0.3
@@ -127,7 +126,7 @@ Acid >> initialize [
 		          max: 100
 		          step: 1.
 	waveform := PhButton new label: self label , 'Waveform'.
-	trigger := PhButton new label: self label , 'Gate'.
+
 	accent := PhHSlider new
 		          label: self label , 'Accent'
 		          init: 0.6

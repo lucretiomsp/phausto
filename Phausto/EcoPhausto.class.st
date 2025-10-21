@@ -58,53 +58,46 @@ EcoPhausto class >> start [
 	perf := Performance uniqueInstance.
 	kick := TpSampler new
 		        pathToFile: self turboSamplesFolder , '/kick/BD_full909.wav';
-		        label: 'kick'.
+		        label: 'Kick'.
 	snare := TpSampler new
-		         pathToFile:
-			         self turboSamplesFolder , '/snare/SD_Drumaxia.wav';
-		         label: 'snare'.
+		         pathToFile: self turboSamplesFolder , '/snare/SD_Drumaxia.wav';
+		         label: 'Snare'.
 	ch := TpSampler new
 		      pathToFile: self turboSamplesFolder , '/ch/CH_Juxtapos.wav';
-		      label: 'ch'.
+		      label: 'Ch'.
 	oh := TpSampler new
 		      pathToFile: self turboSamplesFolder , '/oh/OH_Punchtron.wav';
-		      label: 'oh'.
+		      label: 'Oh'.
 	cowbell := TpSampler new
-		           pathToFile:
-			           self turboSamplesFolder , '/cowbell/Cow1-R50.wav';
-		           label: 'cowbell'.
+		           pathToFile: self turboSamplesFolder , '/cowbell/Cow1-R50.wav';
+		           label: 'Cowbell'.
 	conga := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/conga';
-		         label: 'conga'.
+		         label: 'Conga'.
 	bongo := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/bongo';
-		         label: 'bongo'.
+		         label: 'Bongo'.
 	bleep := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/bleep';
-		         label: 'bleep'.
+		         label: 'Bleep'.
 	speakspell := TpSampler new
 		              pathToFolder: self turboSamplesFolder , '/speakspell';
-		              label: 'speakspell'.
-	psg := PsgPlus new label: 'psg'.
-	acid := Acid new label: 'acid'.
+		              label: 'Speakspell'.
+	psg := PsgPlus new label: 'Psg'.
+	acid := Acid new label: 'Acid'.
 
 
-	self tpDsp ifNotNil: [
-		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	tpDsp := (kick + snare + ch + oh + cowbell + conga + bongo + bleep
-	          + speakspell + acid + psg) stereo asDsp.
-	"tpDsp := self rack stereo asDsp."
-	[
-	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
-		ifNotNil: [ self tpDsp start ] ] fork.
+	self tpDsp ifNotNil: [ self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
+	tpDsp := (kick + snare + ch + oh + cowbell + conga + bongo + bleep + speakspell + acid + psg) stereo asDsp. "tpDsp := self rack stereo asDsp."
+	[ [ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value ifNotNil: [ self tpDsp start ] ] fork.
 
 	tpPerf := perf forDsp: tpDsp
 ]
 
 { #category : 'initialization' }
 EcoPhausto >> initialize [
-
-
-self class tpPerf resetAllSequencers.
+   
+   super initialize.
+	self class tpPerf resetAllSequencers.
 	self muteAll
 ]

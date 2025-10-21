@@ -35,7 +35,7 @@ PhCountUp >> initialize [
 		       min: 1
 		       max: 64
 		       step: 1.
-	trig := PhButton new label: self label , 'Gate'
+	trig := PhButton new label: self label , 'Trigger'
 ]
 
 { #category : 'as yet unclassified' }

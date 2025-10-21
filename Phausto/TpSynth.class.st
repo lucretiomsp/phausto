@@ -43,8 +43,10 @@ TpSynth >> initialize [
 
 	super initialize.
 	super initializeControlParameters. "by default the name of the TpSynth is the name of the class"
+
 	gate := PhButton new label: self label , 'Trigger'.
 
+	trigger := PhButton new label: self label , 'Trigger'.
 	self uLevel: (self label , 'Level') asSymbol.
 
 	pitch := PhHSlider new
@@ -97,10 +99,12 @@ self controlParameters add:
 
 { #category : 'accessing' }
 TpSynth >> label: aString [
+	"to adhere with Cooypu syntax, we change the prefix of the pitch, gate and trigger parameter"
 
-"to adhere with Cooypu syntax, we change the prefix of the pitch parameter"
-super label: aString .
-self pitch: (aString , 'Note') asSymbol 
+	super label: aString.
+	self pitch: (aString , 'Freq') asSymbol.
+	self gate: (aString , 'Trigger') asSymbol.
+	self trigger: (aString , 'Trigger') asSymbol.
 ]
 
 { #category : 'accessing' }
