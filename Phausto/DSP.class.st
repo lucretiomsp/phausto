@@ -481,13 +481,12 @@ DSP >> init [
 	RendererType initialize.
 
 	self isNull
-		ifTrue: [ "mysterious bug on exception"
-		^ self class invalidException ]
+		ifTrue: [ "mysterious bug on exception" ^ self class invalidException ]
 		ifFalse: [
-			'DSP inizialized' traceCr.
-			self isInitialized: true.
-			self class initializedDSP: self.
-			PhaustoDynamicEngine uniqueInstance initializeDSP: self withRenderer: self class rendererType ]
+				'DSP inizialized' traceCr.
+				self isInitialized: true.
+				self class initializedDSP: self.
+				PhaustoDynamicEngine uniqueInstance initializeDSP: self withRenderer: self class rendererType  bufferSize: PhaustoDynamicEngine  bufferSize ]
 ]
 
 { #category : 'accessing' }

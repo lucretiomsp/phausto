@@ -1,6 +1,11 @@
 "
-Faust-Dynamic-Engine
-This Dynamic Engine uses Portaudio for audio and LibSndFile for wavefiles utilitities
+PhaustoDynamicEngine is a bridge to the underlying Faust dynamic engine.
+
+The Renderer type depends on the platform.
+
+The buffer size can be adjusted (e.g., 64, 256, 512) by modifying the corresponding class method.
+
+This class is primarily used for _FFI integration_ with **Faust**.
 "
 Class {
 	#name : 'PhaustoDynamicEngine',
@@ -13,6 +18,19 @@ Class {
 	#package : 'Phausto',
 	#tag : 'DynamicEngine'
 }
+
+{ #category : 'accessing' }
+PhaustoDynamicEngine class >> bufferSize [
+
+
+	| bfSize |
+	
+	bfSize := 512.
+	Smalltalk os family = #MacOSX ifTrue: [ bfSize := 128 ].
+	Smalltalk os family = #Windows ifTrue: [bfSize := 512 ].
+	Smalltalk os family = #Unix ifTrue: [bfSize := 512 ].
+	^ bfSize
+]
 
 { #category : 'accessing' }
 PhaustoDynamicEngine class >> dsp [
@@ -199,6 +217,14 @@ PhaustoDynamicEngine >> initializeDSP: aDsp withRenderer: aType [
 	self ffiCall:
 		#( bool initDsp #( DSP #* aDsp #, int aType #, int 44100 #, int
 		      512 ) )
+]
+
+{ #category : 'initializing' }
+PhaustoDynamicEngine >> initializeDSP: aDsp withRenderer: aType bufferSize: aBufferSize [
+
+	self ffiCall:
+		#( bool initDsp #( DSP #* aDsp #, int aType #, int 44100 #, int
+		      aBufferSize ) )
 ]
 
 { #category : 'accessing - platform' }
