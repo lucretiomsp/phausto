@@ -5,9 +5,9 @@ Creating an instance of this class generates a white noise. Subclasses implement
 Class {
 	#name : 'Noise',
 	#superclass : 'UnitGenerator',
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Noises',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Noises'
 }
 
 { #category : 'initialization' }
