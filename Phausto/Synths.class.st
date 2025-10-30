@@ -7,7 +7,7 @@ Class {
 	#name : 'Synths',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'gate',
+		'trigger',
 		'freq'
 	],
 	#category : 'Phausto-Synths',
@@ -21,20 +21,28 @@ Synths >> freq [
 ]
 
 { #category : 'accessing' }
-Synths >> gate [ 
-^ gate
+Synths >> gate [
+
+	^ trigger
 ]
 
 { #category : 'initialization' }
 Synths >> initialize [
 
 	super initialize.
-	gate := PhButton new label: self label , 'Trigger'.
+
 	freq := PhHSlider new
-			          label: self label , 'Freq'
-			          init: 440
-			          min: 20
-			          max: 1200
-			          step: 1.
-	
+		        label: self label , 'Freq'
+		        init: 440
+		        min: 20
+		        max: 1200
+		        step: 1.
+			trigger := PhButton new
+		         label: self label , 'Trigger'.
+]
+
+{ #category : 'accessing' }
+Synths >> trigger [
+
+	^ trigger
 ]

@@ -23,3 +23,9 @@ NoisesTest >> testPinkNoise [
 
 	self deny: PinkNoise new asDsp isNull
 ]
+
+{ #category : 'tests' }
+NoisesTest >> testSparseNoise [
+
+	self deny: SparseNoise new asDsp isNull
+]

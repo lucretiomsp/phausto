@@ -29,10 +29,8 @@ Hat >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self pitch asBox , self tone asBox , self attack asBox
-	            , self decay asBox , self gate asBox connectTo:
-		            intermediateBox.
-	^ finalBox  * self uLevel
+	finalBox := self pitch asBox , self tone asBox , self attack asBox , self decay asBox , self gate asBox connectTo: intermediateBox.
+	^ finalBox * self uLevel
 ]
 
 { #category : 'accessing' }

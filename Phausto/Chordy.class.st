@@ -23,15 +23,14 @@ Chordy >> asBox [
 		             decay: self decay;
 		             sustain: 0 asBox;
 		             release: self release;
-		             trigger: self gate.
+		             trigger: self trigger.
 
 	ampEnv := ADSREnv new
 		          attack: self attack;
 		          decay: self decay;
 		          sustain: self sustain;
 		          release: self release;
-		          trigger: self gate.
-	"filter"
+		          trigger: self trigger. "filter"
 	freqSlider := PhHSlider new
 		              label: self label , 'Cutoff'
 		              init: 0.2
@@ -42,22 +41,19 @@ Chordy >> asBox [
 
 	filter := ResonLp new
 		          frequency: scaledFreq;
-		          q: 4.8.
+		          q: 4.8. "for the selection of modes the interval is expresed in ratio"
+	secondInterval := self mode asBox , 1.189 asBox , 1.259 asBox , 1.333 asBox , 1.125 asBox connectTo: PhSelect4 new. "voices"
+	voice1 := SawOsc new
+		          freq: self pitch asBox;
+		          uLevel: 0.25 asBox.
 
-	"for the selection of modes the interval is expresed in ratio"
-	secondInterval := self mode asBox , 1.189 asBox , 1.259 asBox
-	                  , 1.333 asBox , 1.125 asBox connectTo:
-		                  PhSelect4 new.
-
-	"voices"
-	voice1 := (SawOsc new freq: self pitch asBox; uLevel: 0.25 asBox) .
-
-	voice2 := (SawOsc new uLevel: 0.25 ;freq: self pitch asBox * secondInterval asBox)
-	          .
-	" a perfect fifth as a  End of statement expected ->1.6 ratio to the root"
-	voice3 := (SawOsc new uLevel ; freq: self pitch asBox * 1.5 asBox) .
-	^ (filter input: voice1 + voice2 + voice3) * ampEnv asBox
-	  * self uLevel asBox
+	voice2 := SawOsc new
+		          uLevel: 0.25;
+		          freq: self pitch asBox * secondInterval asBox. " a perfect fifth as a  End of statement expected ->1.6 ratio to the root"
+	voice3 := SawOsc new
+		          uLevel;
+		          freq: self pitch asBox * 1.5 asBox.
+	^ (filter input: voice1 + voice2 + voice3) * ampEnv asBox * self uLevel asBox
 ]
 
 { #category : 'accessing' }

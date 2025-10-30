@@ -127,15 +127,8 @@ labels := dirs collect:  [:i | i pathString afterLastSlash ].
 { #category : 'accessing' }
 TurboPhausto class >> listOfSynths [
 
-| synths |
-synths := #('Djembe' 
-'Marimba' 'Guitar'
-		'syclap'
-				 
-	'SyKick' 'Hat' 'DubDub' 
-		 'acid' 'chordy'
-				 'TpHoover' 
-	'TpReese' ).
+	| synths |
+	synths := #( 'Djembe' 'Marimba' 'Guitar' 'SyClap' 'SyKick' 'Hat' 'DubDub' 'Acid' 'Chordy' 'TpHoover' 'TpReese' 'Trombone' ).
 	^ synths inspect
 ]
 
@@ -168,43 +161,41 @@ TurboPhausto class >> loadAllSynths [
 	allSynths := OrderedCollection new.
 	allSynths
 		add: (Djembe new
-				 label: 'djembe';
-				 trigger: #djembeGate;
-				 freq: #djembeNote);
+				 label: 'Djembe';
+				 trigger: #DjembeTrigger;
+				 freq: #DjembeFreq);
 		add: (Marimba new
-				 label: 'marimba';
-				 trigger: #marimbaGate;
-				 freq: #marimbaNote);
+				 label: 'Marimba';
+				 trigger: #MarimbaTrigger;
+				 freq: #MarimbaFreq);
 		add: (Guitar new
-				 label: 'guitar';
-				 trigger: #guitarGate;
-				 freq: #guitarNote);
+				 label: 'Guitar';
+				 trigger: #GuitarTrigger;
+				 freq: #GuitarFreq);
 		add: (SawTrombone new
-				 label: 'trombone';
-				 freq: #tromboneNote);
+				 label: 'Trombone';
+				 freq: #TromboneFreq);
 		add: (Clap new
-				 label: 'syclap';
-				 tone: #syclapNote);
+				 label: 'SyClap';
+				 tone: #SyclapFreq);
 		add: (Kick new
-				 label: 'sykick';
-				 pitch: #sykickNote);
-		add: (Hat new
-				 label: 'syhat';
-				 pitch: #syhatNote);
+				 label: 'SyKick';
+				 pitch: #SyKickFreq);
+		add: (Hat new label: 'SyHat'; pitch: #SyFreq);
 		"	add: (CombString new
 				 label: 'combstring';
-				 freq: #combstringNote);"
-		add: (DubDub new
-				 label: 'dubdub';
-				 freq: #dubdubNote);
+				 freq: #combstringNote);"add: (DubDub new
+			 label: 'DubDub';
+			 freq: #DubDubFreq);
 		add: (Acid new
-				 label: 'acid';
-				 pitch: #acidNote);
+				 label: 'Acid';
+				 pitch: #AcidFreq);
 		add: (Chordy new
-				 label: 'chordy';
-				 pitch: #chordyNote);
-		add: (TpHoover new );
-		add: (TpReese new ).
+				 label: 'Chordy';
+				 pitch: #ChordyFreq);
+		add: TpHoover new;
+		add: TpReese new. ";
+				 pitch: #syhatFreq"
 	^ self
 ]
 

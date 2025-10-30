@@ -65,7 +65,7 @@ DubDub >> initialize [
 		          max: 1
 		          step: 0.001.
 
-	self controlParameters add: #gate -> (self gate asControlParameterOfWidgetType: #button description: 'Trig the Sound')
+"	self controlParameters add: #trigger -> (self trigger asControlParameterOfWidgetType: #button description: 'Trig the Sound')"
 ]
 
 { #category : 'as yet unclassified' }

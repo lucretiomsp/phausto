@@ -22,7 +22,7 @@ SawTrombone >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self freq asBox , self gain asBox , self gate asBox
+	finalBox := self freq asBox , self gain asBox , self trigger  asBox
 		            connectTo: intermediateBox.
 	^ finalBox *  self uLevel
 ]

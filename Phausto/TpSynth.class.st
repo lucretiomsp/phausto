@@ -7,7 +7,6 @@ Class {
 	#instVars : [
 		'level',
 		'pitch',
-		'gate',
 		'attack',
 		'decay',
 		'sustain',
@@ -32,19 +31,13 @@ TpSynth >> decay [
 	^ decay 
 ]
 
-{ #category : 'accessing' }
-TpSynth >> gate [
-
-	^ gate 
-]
-
 { #category : 'initialization' }
 TpSynth >> initialize [
 
 	super initialize.
 	super initializeControlParameters. "by default the name of the TpSynth is the name of the class"
 
-	gate := PhButton new label: self label , 'Trigger'.
+	
 
 	trigger := PhButton new label: self label , 'Trigger'.
 	self uLevel: (self label , 'Level') asSymbol.
