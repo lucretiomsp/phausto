@@ -24,7 +24,7 @@ adsr := (ADSREnv new
 		         decay: self decay;
 		         sustain: self sustain;
 		         release: self release;
-		         trigger: self gate) asBox.
+		         trigger: self trigger) asBox.
 	^ osci1 + osci2 * adsr
 ]
 
@@ -33,20 +33,20 @@ TpReese >> initialize [
 
 	| noteSlider |
 	super initialize.
-	label := 'reese'.
-	self pitch: #reeseNote.
-	self gate: #reeseGate.
-	detune := PhHSlider new label: 'reeseDetune' values: #( 5 0 30 1 ).
+	label := 'Reese'.
+	self pitch: #ReeseFreq.
+	self trigger: #reeseTrigger.
+	detune := PhHSlider new label: 'ReeseDetune' values: #( 5 0 30 1 ).
 	noteSlider := PhHSlider new
-		              label: 'reeseNote'
+		              label: 'ReeseFreq'
 		              values: #( 48 1 127 1 ).
 	
 	osci1 := SineOsc new
-		         freq: #reeseNote;
+		         freq: #ReeseFreq;
 		         uLevel: 0.3 asBox.
 	osci2 := SineOsc new
 		         uLevel: 0.3 asBox;
 		         freq: self pitch asBox 
 			         +
-				         (PhHSlider new label: 'reeseDetune' values: #( 5 0 30 1 )) "+ detune asBox"
+				         (PhHSlider new label: 'ReeseDetune' values: #( 5 0 30 1 )) "+ detune asBox"
 ]

@@ -37,7 +37,7 @@ TpSampler >> asBox [
 	partNumber := self index asBox min: self numberOfSamples asBox.
 
 	reader := PhReaderWithSpeed new
-		          trigger: self gate asBox;
+		          trigger: self trigger asBox;
 		          speed: self pitch asBox / 261.625 asBox.
 	sp := BoxAPI uniqueInstance
 		      boxSoundFile: filesURL

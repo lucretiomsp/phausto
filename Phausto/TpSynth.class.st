@@ -96,7 +96,7 @@ TpSynth >> label: aString [
 
 	super label: aString.
 	self pitch: (aString , 'Freq') asSymbol.
-	self gate: (aString , 'Trigger') asSymbol.
+	self trigger: (aString , 'Trigger') asSymbol.
 	self trigger: (aString , 'Trigger') asSymbol.
 ]
 
