@@ -20,7 +20,7 @@ And the following synths:
 **#acid**
 "
 Class {
-	#name : 'EcoPhausto',
+	#name : 'EcoPhausto_old',
 	#superclass : 'TurboPhausto',
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -28,7 +28,7 @@ Class {
 }
 
 { #category : 'tracing' }
-EcoPhausto class >> listOfInstruments [
+EcoPhausto_old class >> listOfInstruments [
 
 	Transcript
 		open;
@@ -52,39 +52,39 @@ Synths:
 ]
 
 { #category : 'accessing' }
-EcoPhausto class >> start [
+EcoPhausto_old class >> start [
 
 	| kick snare ch oh cowbell conga acid perf bongo bleep psg speakspell |
 	perf := Performance uniqueInstance.
 	kick := TpSampler new
 		        pathToFile: self turboSamplesFolder , '/kick/BD_full909.wav';
-		        label: 'kick'.
+		        label: 'Kick'.
 	snare := TpSampler new
 		         pathToFile: self turboSamplesFolder , '/snare/SD_Drumaxia.wav';
-		         label: 'snare'.
+		         label: 'Snare'.
 	ch := TpSampler new
 		      pathToFile: self turboSamplesFolder , '/ch/CH_Juxtapos.wav';
-		      label: 'ch'.
+		      label: 'Ch'.
 	oh := TpSampler new
 		      pathToFile: self turboSamplesFolder , '/oh/OH_Punchtron.wav';
-		      label: 'oh'.
+		      label: 'Oh'.
 	cowbell := TpSampler new
 		           pathToFile: self turboSamplesFolder , '/cowbell/Cow1-R50.wav';
-		           label: 'cowbell'.
+		           label: 'Cowbell'.
 	conga := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/conga';
-		         label: 'conga'.
+		         label: 'Conga'.
 	bongo := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/bongo';
-		         label: 'bongo'.
+		         label: 'Bongo'.
 	bleep := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/bleep';
-		         label: 'bleep'.
+		         label: 'Bleep'.
 	speakspell := TpSampler new
 		              pathToFolder: self turboSamplesFolder , '/speakspell';
-		              label: 'speakspell'.
-	psg := PsgPlus new label: 'psg'.
-	acid := Acid new label: 'acid'.
+		              label: 'Speakspell'.
+	psg := PsgPlus new label: 'Psg'.
+	acid := Acid new label: 'Acid'.
 
 
 	self tpDsp ifNotNil: [ self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
@@ -95,7 +95,7 @@ EcoPhausto class >> start [
 ]
 
 { #category : 'initialization' }
-EcoPhausto >> initialize [
+EcoPhausto_old >> initialize [
    
    super initialize.
 	self class tpPerf resetAllSequencers.

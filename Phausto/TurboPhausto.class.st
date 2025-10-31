@@ -161,38 +161,40 @@ TurboPhausto class >> loadAllSynths [
 	allSynths := OrderedCollection new.
 	allSynths
 		add: (Djembe new
-				 label: 'Djembe';
-				 trigger: #DjembeTrigger;
-				 freq: #DjembeFreq);
+				 label: 'djembe';
+				 trigger: #djembeTrigger;
+				 freq: #djembeFreq);
 		add: (Marimba new
-				 label: 'Marimba';
-				 trigger: #MarimbaTrigger;
-				 freq: #MarimbaFreq);
+				 label: 'marimba';
+				 trigger: #marimbaTrigger;
+				 freq: #marimbaFreq);
 		add: (Guitar new
-				 label: 'Guitar';
-				 trigger: #GuitarTrigger;
-				 freq: #GuitarFreq);
+				 label: 'guitar';
+				 trigger: #guitarTrigger;
+				 freq: #guitarFreq);
 		add: (SawTrombone new
-				 label: 'Trombone';
-				 freq: #TromboneFreq);
+				 label: 'trombone';
+				 freq: #tromboneFreq);
 		add: (Clap new
-				 label: 'SyClap';
-				 tone: #SyclapFreq);
+				 label: 'syclap';
+				 tone: #syclapFreq);
 		add: (Kick new
-				 label: 'SyKick';
+				 label: 'sykick';
 				 pitch: #SyKickFreq);
-		add: (Hat new label: 'SyHat'; pitch: #SyFreq);
+		add: (Hat new
+				 label: 'syhat';
+				 pitch: #SyFreq);
 		"	add: (CombString new
 				 label: 'combstring';
 				 freq: #combstringNote);"add: (DubDub new
-			 label: 'DubDub';
-			 freq: #DubDubFreq);
+			 label: 'dubdub';
+			 freq: #dubdubFreq);
 		add: (Acid new
-				 label: 'Acid';
-				 pitch: #AcidFreq);
+				 label: 'acid';
+				 pitch: #acidFreq);
 		add: (Chordy new
-				 label: 'Chordy';
-				 pitch: #ChordyFreq);
+				 label: 'chordy';
+				 pitch: #chordyFreq);
 		add: TpHoover new;
 		add: TpReese new. ";
 				 pitch: #syhatFreq"
