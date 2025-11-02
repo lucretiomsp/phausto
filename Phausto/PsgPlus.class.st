@@ -71,12 +71,7 @@ PsgPlus >> dsfreq [
 { #category : 'accessing' }
 PsgPlus >> index [
 
-	^ index ifNil: [ index := (PhHSlider new
-			 label: self label , 'Index'
-			 init: 0
-			 min: 0
-			 max: 3
-			 step: 1)]
+	^ index 
 ]
 
 { #category : 'accessing' }
@@ -89,8 +84,14 @@ PsgPlus >> index: anIndex [
 PsgPlus >> initialize [
 
 	super initialize.
-	dsfreq := PhHSlider new label: 'PsgPlusDSFreq' values: #(180 20 16000 1).
-	q := PhHSlider new label: 'PsgPlusQ' values: #(3 1 5 0.01).
+	dsfreq := PhHSlider new label: 'psgPlusDSFreq' values: #( 180 20 16000 1 ).
+	q := PhHSlider new label: 'psgPlusQ' values: #( 3 1 5 0.01 ).
+	index := PhHSlider new
+				           label: self coypuLabel , 'Index'
+				           init: 0
+				           min: 0
+				           max: 3
+				           step: 1 
 ]
 
 { #category : 'accessing' }

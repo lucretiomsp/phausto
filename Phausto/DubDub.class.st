@@ -50,22 +50,20 @@ DubDub >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.dubDub;'.
-   ctFreq := PhHSlider new
-				          label: self label , 'CtFreq'
-				          init: 50
-				          min: 20
-				          max: 1400
-				          step: 0.1 .
+	ctFreq := PhHSlider new
+		          label: self label , 'CtFreq'
+		          init: 50
+		          min: 20
+		          max: 1400
+		          step: 0.1.
 
 	self controlParameters add: #freq -> (self freq asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz').
 	uLevel := PhHSlider new
 		          label: self label , 'uLevel'
-		          init: 0.01
+		          init: 0.4
 		          min: 0
 		          max: 1
-		          step: 0.001.
-
-"	self controlParameters add: #trigger -> (self trigger asControlParameterOfWidgetType: #button description: 'Trig the Sound')"
+		          step: 0.001 "	self controlParameters add: #trigger -> (self trigger asControlParameterOfWidgetType: #button description: 'Trig the Sound')"
 ]
 
 { #category : 'as yet unclassified' }

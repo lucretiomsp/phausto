@@ -77,12 +77,12 @@ Chordy >> initialize [
 	self sustain: 0.9.
 	self release: 0.18.
 	self uLevel: 0.9.
-	mode := (PhHSlider new
-				   label: self label , 'Mode'
-				   init: 0
-				   min: 0
-				   max: 3
-				   step: 1) 
+	mode := PhHSlider new
+		        label: self coypuLabel , 'Mode'
+		        init: 0
+		        min: 0
+		        max: 3
+		        step: 1
 ]
 
 { #category : 'accessing' }

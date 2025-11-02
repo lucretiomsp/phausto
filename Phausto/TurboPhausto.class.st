@@ -127,9 +127,11 @@ labels := dirs collect:  [:i | i pathString afterLastSlash ].
 { #category : 'accessing' }
 TurboPhausto class >> listOfSynths [
 
-	| synths |
-	synths := #( 'Djembe' 'Marimba' 'Guitar' 'SyClap' 'SyKick' 'Hat' 'DubDub' 'Acid' 'Chordy' 'TpHoover' 'TpReese' 'Trombone' ).
-	^ synths inspect
+
+"	synths := #( 'Djembe' 'Marimba' 'Guitar' 'SyClap' 'SyKick' 'Hat' 'DubDub' 'Acid' 'Chordy' 'TpHoover' 'TpReese' 'Trombone' ).
+	^ synths inspect"
+	
+(self allSynths collect: [ :i | i label ]) inspect
 ]
 
 { #category : 'loading' }
@@ -173,17 +175,17 @@ TurboPhausto class >> loadAllSynths [
 				 trigger: #guitarTrigger;
 				 freq: #guitarFreq);
 		add: (SawTrombone new
-				 label: 'trombone';
-				 freq: #tromboneFreq);
+				 label: 'sawTrombone';
+				 freq: #sawTromboneFreq);
 		add: (Clap new
-				 label: 'syclap';
-				 tone: #syclapFreq);
+				 label: 'syClap';
+				 tone: #syClapFreq);
 		add: (Kick new
-				 label: 'sykick';
-				 pitch: #SyKickFreq);
+				 label: 'syKick';
+				 pitch: #syKickFreq);
 		add: (Hat new
-				 label: 'syhat';
-				 pitch: #SyFreq);
+				 label: 'syHat';
+				 pitch: #syHatFreq);
 		"	add: (CombString new
 				 label: 'combstring';
 				 freq: #combstringNote);"add: (DubDub new
@@ -195,8 +197,8 @@ TurboPhausto class >> loadAllSynths [
 		add: (Chordy new
 				 label: 'chordy';
 				 pitch: #chordyFreq);
-		add: TpHoover new;
-		add: TpReese new. ";
+		add: (TpHoover new label: 'tpHoover');
+		add: (TpReese new label: 'tpReese'). ";
 				 pitch: #syhatFreq"
 	^ self
 ]

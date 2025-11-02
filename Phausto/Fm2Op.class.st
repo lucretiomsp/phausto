@@ -22,7 +22,7 @@ Fm2Op >> asBox [
 		         decay: self decay;
 		         sustain: 1 asBox;
 		         release: self release;
-		         trigger: self gate) asBox.
+		         trigger: self trigger) asBox.
 	modulatorPitch := self pitch asBox * self modRatio asBox.
 	modulator := SineOsc new
 		             freq: modulatorPitch;
@@ -30,7 +30,7 @@ Fm2Op >> asBox [
 	carrierPitch := self pitch asBox + (modulator * 70 asBox).
 	carrier := SineOsc new
 		           freq: carrierPitch asBox;
-		           uLevel: (self label , 'uLevel') asSymbol.
+		           uLevel: (self coypuLabel , 'uLevel') asSymbol.
 
 
 	^ carrier asBox * adsr asBox
