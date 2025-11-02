@@ -34,41 +34,43 @@ TpSynth >> decay [
 { #category : 'initialization' }
 TpSynth >> initialize [
 
+|coypuLabel |
+
 	super initialize.
 	super initializeControlParameters. "by default the name of the TpSynth is the name of the class"
 
-	
 
-	trigger := PhButton new label: self label , 'Trigger'.
+   coypuLabel  := self label first asLowercase asString  , self label allButFirst .
+	trigger := PhButton new label: coypuLabel , 'Trigger'.
 	self uLevel: (self label , 'Level') asSymbol.
 
 	pitch := PhHSlider new
-		         label: self label , 'Freq'
+		         label: coypuLabel , 'Freq'
 		         init: 440
 		         min: 20
 		         max: 4086
 		         step: 1.
 	self controlParameters add: #pitch -> (self pitch asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz').
 	attack := PhHSlider new
-		          label: self label , 'Attack'
+		          label: coypuLabel , 'Attack'
 		          init: 0.01
 		          min: 0
 		          max: 4
 		          step: 0.001.
 	decay := PhHSlider new
-		         label: self label , 'Decay'
+		         label: coypuLabel , 'Decay'
 		         init: 0.2
 		         min: 0.001
 		         max: 2
 		         step: 0.001.
 	sustain := PhHSlider new
-		           label: self label , 'Sustain'
+		           label: coypuLabel , 'Sustain'
 		           init: 0.5
 		           min: 0
 		           max: 1
 		           step: 0.001.
 	release := PhHSlider new
-		           label: self label , 'Release'
+		           label: coypuLabel , 'Release'
 		           init: 0.1
 		           min: 0.001
 		           max: 2
@@ -97,7 +99,7 @@ TpSynth >> label: aString [
 	super label: aString.
 	self pitch: (aString , 'Freq') asSymbol.
 	self trigger: (aString , 'Trigger') asSymbol.
-	self trigger: (aString , 'Trigger') asSymbol.
+
 ]
 
 { #category : 'accessing' }
