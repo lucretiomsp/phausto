@@ -101,9 +101,9 @@ self controlParameters add:
 TpSynth >> label: aString [
 	"to adhere with Cooypu syntax, we change the prefix of the pitch, gate and trigger parameter"
 
-	super label: aString.
-	"self pitch: (aString , 'Freq') asSymbol.
-	self trigger: (aString , 'Trigger') asSymbol"
+	super label: aString .
+	self pitch: (aString , 'Freq') asSymbol.
+	self trigger: (aString , 'Trigger') asSymbol.
 ]
 
 { #category : 'accessing' }
