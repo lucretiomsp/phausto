@@ -12,7 +12,8 @@ Class {
 		'sustain',
 		'release',
 		'name',
-		'trigger'
+		'trigger',
+		'coypuLabel'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -26,6 +27,12 @@ TpSynth >> attack [
 ]
 
 { #category : 'accessing' }
+TpSynth >> coypuLabel [
+
+	^ coypuLabel 
+]
+
+{ #category : 'accessing' }
 TpSynth >> decay [
 
 	^ decay 
@@ -34,15 +41,13 @@ TpSynth >> decay [
 { #category : 'initialization' }
 TpSynth >> initialize [
 
-|coypuLabel |
-
 	super initialize.
 	super initializeControlParameters. "by default the name of the TpSynth is the name of the class"
 
 
-   coypuLabel  := self label first asLowercase asString  , self label allButFirst .
+	coypuLabel := self label first asLowercase asString , self label allButFirst.
 	trigger := PhButton new label: coypuLabel , 'Trigger'.
-	self uLevel: (self label , 'Level') asSymbol.
+	self uLevel: (coypuLabel , 'Level') asSymbol.
 
 	pitch := PhHSlider new
 		         label: coypuLabel , 'Freq'
