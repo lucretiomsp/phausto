@@ -18,26 +18,17 @@ Class {
 { #category : 'converting' }
 TpHoover >> asBox [
 
-self uLevel: #hooveruLevel .
-	^ (oscillators => ampEnv) * self uLevel
-]
-
-{ #category : 'initialization' }
-TpHoover >> initialize [
-
 	| pitchEnv pitchEnvAmt |
-	super initialize.
-	trigger := PhButton new label: self coypuLabel , 'Trigger'.
-	self controlParameters add: #trigger -> (self trigger asControlParameterOfWidgetType: #button description: 'Trig Envelopes').
+	self uLevel: #tpHooveruLevel.
 	pitchEnv := ADSREnv new
-		            trigger: #tpHooverGate;
+		            trigger: #tpHooverTrigger;
 		            attack: 0 asBox;
 		            decay: 1 asBox;
 		            release: 0.6 asBox;
 		            sustain: 0 asBox.
 	pitchEnvAmt := 126.
 	pitch := (PhHSlider new label: 'tpHooverFreq' values: #( 200 20 2000 1 )) asBox + (pitchEnv asBox * pitchEnvAmt asBox).
-	oscillators := (SawOsc new freq: pitch) + (SawOsc new
+	oscillators := (SawOsc new freq: pitch ; uLevel: 0.4 asBox) + (SawOsc new
 		                uLevel: 0.3 asBox;
 		                freq: pitch + 3) + (SawOsc new
 		                uLevel: 0.3 asBox;
@@ -49,5 +40,16 @@ TpHoover >> initialize [
 		          attack: 0 asBox;
 		          decay: 0.2 asBox;
 		          sustain: 0.5 asBox;
-		          release: 0.35 asBox
+		          release: 0.35 asBox.
+	^ oscillators => ampEnv * self uLevel
+]
+
+{ #category : 'initialization' }
+TpHoover >> initialize [
+
+
+	super initialize.
+	trigger := PhButton new label: self coypuLabel , 'Trigger'.
+	self controlParameters add: #trigger -> (self trigger asControlParameterOfWidgetType: #button description: 'Trig Envelopes').
+	
 ]
