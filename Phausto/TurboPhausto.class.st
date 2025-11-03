@@ -25,8 +25,7 @@ Class {
 		'lpf',
 		'hpf',
 		'allEffects',
-		'rack',
-		'dummyVariable'
+		'rack'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -107,13 +106,6 @@ tp size: 0.3
 TurboPhausto class >> hpf [
 
 	^ hpf
-]
-
-{ #category : 'class initialization' }
-TurboPhausto class >> initialize [ 
-
-super initialize .
-dummyVariable := 99.
 ]
 
 { #category : 'accessing' }

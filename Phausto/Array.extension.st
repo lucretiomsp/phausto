@@ -1,15 +1,6 @@
 Extension { #name : 'Array' }
 
 { #category : '*Phausto' }
-Array >> asChainOfUGen [
-	"connect Ugen in the Array from first to last"
-
-	| chain |
-	chain := self allButFirst inject: self first into: [ :a :c | a => c ].
-	^ chain
-]
-
-{ #category : '*Phausto' }
 Array >> asParam: aString forUGen: aUnitGenerator [
 	"change init, min, max, step of the UI element to the array value"
 
@@ -36,19 +27,6 @@ Array >> asPhList [
 
 list := PhList new addAll: self.
 ^ list
-]
-
-{ #category : '*Phausto' }
-Array >> asSumOfUGen [
-
-	| sum firstUGen |
-	firstUGen := self first.
-	"sum all the Unit Generator in the collection"
-	"(self allSatisfy: [ :each | each isUGen ]) ifTrue: [
-		sum := self inject: UnitGenerator new into: [ :a :c | a + c ]
-		]."
-	sum := self inject: UnitGenerator new into: [ :a :c | a + c ].
-	^ sum
 ]
 
 { #category : '*Phausto' }
