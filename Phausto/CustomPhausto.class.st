@@ -38,7 +38,7 @@ CustomPhausto class >> start [
 	perf := Performance uniqueInstance .
 	self tpDsp ifNotNil: [ self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
 	self loadAllInstruments .
-	tpDsp := allInstruments asSumOfUGen stereo asDsp. "tpDsp := self rack stereo asDsp."
+	tpDsp := AllInstruments asSumOfUGen stereo asDsp. "tpDsp := self rack stereo asDsp."
 	[ [ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value ifNotNil: [ self tpDsp start ] ] fork.
 
 	tpPerf := perf forDsp: tpDsp
