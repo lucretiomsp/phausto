@@ -5,8 +5,8 @@ Check how **EcoPhausto** is implemented in order to implement your own ensemble 
 Class {
 	#name : 'CustomPhausto',
 	#superclass : 'TurboPhausto',
-	#classInstVars : [
-		'allInstruments'
+	#classVars : [
+		'AllInstruments'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -14,9 +14,9 @@ Class {
 }
 
 { #category : 'class initialization' }
-CustomPhausto class >> initialize [ 
+CustomPhausto class >> initialize [
 
-allInstruments := OrderedCollection new.
+	AllInstruments := OrderedCollection new
 ]
 
 { #category : 'as yet unclassified' }

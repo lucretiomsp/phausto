@@ -60,6 +60,17 @@ EcoPhausto class >> loadAllInstruments [
 		              label: 'speakspell'.
 	psg := PsgPlus new label: 'psg'.
 	acid := Acid new label: 'acid'.
-	
-allInstruments addAll: { kick . snare . ch .oh . cowbell . conga . bongo . bleep . speakspell . psg .acid }
+
+	AllInstruments addAll: {
+			kick.
+			snare.
+			ch.
+			oh.
+			cowbell.
+			conga.
+			bongo.
+			bleep.
+			speakspell.
+			psg.
+			acid }
 ]
