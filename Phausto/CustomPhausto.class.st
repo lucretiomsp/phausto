@@ -20,15 +20,15 @@ CustomPhausto class >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-CustomPhausto class >> listAllInstruments [
+CustomPhausto class >> listOfInstruments [
 
-(allInstruments collect: [ :i | i label ]) inspect
+	(AllInstruments collect: [ :i | i label ]) inspect
 ]
 
 { #category : 'as yet unclassified' }
 CustomPhausto class >> loadAllInstruments [
 
-self subclassResponsibility 
+	self subclassResponsibility 
 ]
 
 { #category : 'accessing' }
