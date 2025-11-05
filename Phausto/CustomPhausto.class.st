@@ -22,7 +22,7 @@ CustomPhausto class >> initialize [
 { #category : 'as yet unclassified' }
 CustomPhausto class >> listAllInstruments [
 
-(allInstruments collect: [ :i | i label ]) inspect
+	(AllInstruments collect: [ :i | i label ]) inspect
 ]
 
 { #category : 'as yet unclassified' }
