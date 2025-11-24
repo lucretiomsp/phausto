@@ -589,6 +589,13 @@ self setValue:  aMidiNN midiNNToFreq   parameter: aString , 'Freq'.
 self trig: aString , 'Trigger' for: aDuration  
 ]
 
+{ #category : 'printing' }
+DSP >> printOn: aStream [
+
+	self getHandle isNull ifTrue: [ aStream nextPutAll: 'an Invalid DSP' ] ifFalse: 
+	[aStream nextPutAll: 'a Valid  DSP']
+]
+
 { #category : 'ui-building' }
 DSP >> requirePianoKeyboard [
 	"if the dsp contains parameter named 'freq' and 'gate' i s considered a Phausto MIDI dsp and hence is UI requires a Piano Keyboard"
