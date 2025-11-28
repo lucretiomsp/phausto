@@ -21,7 +21,15 @@ Class {
 	#tag : 'UIPrimitives'
 }
 
-{ #category : 'copying' }
+{ #category : 'arithmetic' }
+UIPrimitive >> * aUnitGenerator [
+
+	^ PhMultiplicator new
+		  inputL: self;
+		  inputR: aUnitGenerator
+]
+
+{ #category : 'combining' }
 UIPrimitive >> , aUnitGenerator [
 
 	^ PhZeroList new addAll: {
