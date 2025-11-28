@@ -20,9 +20,9 @@ ElecGuitar >> asBox [
 
 	| intermediateBox finalBox length |
 	intermediateBox := super asBox.
-	length := self freq f2l.
-	finalBox := length , self pluckPosition asBox , self mute asBox , self gain asBox
-	            , self trigger asBox connectTo: intermediateBox.
+	length := self freq asBox  f2l.
+	finalBox := (length , self pluckPosition asBox , self mute asBox , self gain asBox
+	            , self trigger asBox) asBox connectTo:  intermediateBox.
 
 	^ finalBox
 ]
