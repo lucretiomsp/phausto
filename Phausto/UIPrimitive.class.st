@@ -21,6 +21,14 @@ Class {
 	#tag : 'UIPrimitives'
 }
 
+{ #category : 'copying' }
+UIPrimitive >> , aUnitGenerator [
+
+	^ PhZeroList new addAll: {
+			  self.
+			  aUnitGenerator }
+]
+
 { #category : 'converting' }
 UIPrimitive >> asControlParameter [
 	self shouldBeImplemented.
