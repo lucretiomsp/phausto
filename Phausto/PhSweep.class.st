@@ -20,9 +20,8 @@ PhSweep >> asBox [
 	| intermediateBox periodInSamples finalBox |
 	intermediateBox := super asBox.
 
-	periodInSamples := (Sec2Samples new value: self period) asBox.
-	finalBox := periodInSamples connectTo:
-		            intermediateBox.
+	periodInSamples := (PhSec2Samp new value: self period) asBox.
+	finalBox := periodInSamples connectTo: intermediateBox.
 	^ finalBox
 ]
 

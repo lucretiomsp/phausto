@@ -7,9 +7,9 @@ Class {
 	#instVars : [
 		'input'
 	],
-	#category : 'Phausto-Math',
+	#category : 'Phausto-Antialiased',
 	#package : 'Phausto',
-	#tag : 'Math'
+	#tag : 'Antialiased'
 }
 
 { #category : 'converting' }

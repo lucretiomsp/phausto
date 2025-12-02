@@ -8,9 +8,9 @@ The domain of this function is ℝ; its theoretical range is ℝ.
 Class {
 	#name : 'AASine',
 	#superclass : 'Trigonometry',
-	#category : 'Phausto-Math',
+	#category : 'Phausto-Antialiased',
 	#package : 'Phausto',
-	#tag : 'Math'
+	#tag : 'Antialiased'
 }
 
 { #category : 'initialization' }

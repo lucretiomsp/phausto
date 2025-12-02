@@ -18,8 +18,8 @@ Pulsen >> asBox [
 
 	| intermediateBox lengthInSamples periodInSamples finalBox |
 	intermediateBox := super asBox.
-	lengthInSamples := (Sec2Samples new value: self length) asBox.
-	periodInSamples := (Sec2Samples new value: self period) asBox.
+	lengthInSamples := (PhSec2Samp new input: self length) asBox.
+	periodInSamples := (PhSec2Samp new input: self period) asBox.
 	finalBox := lengthInSamples , periodInSamples connectTo:
 		            intermediateBox.
 	^ finalBox
