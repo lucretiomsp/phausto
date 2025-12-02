@@ -25,7 +25,7 @@ PhRatio2Cent >> asBox [
 PhRatio2Cent >> initialize [
 
 	super initialize.
-	ratio := 1.
+	ratio := 1 asBox.
 	processExpression := 'ba.ratio2cent;'
 ]
 
