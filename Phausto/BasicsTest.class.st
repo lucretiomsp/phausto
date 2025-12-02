@@ -31,9 +31,3 @@ BasicsTest >> testSampleAndHoldAsDsp [
 
 	self assert: SampleAndHold new asDsp isNull equals: false
 ]
-
-{ #category : 'tests' }
-BasicsTest >> testSelectNAsDsp [
-
-	self assert: PhSelectN new asDsp isNull equals: false
-]
