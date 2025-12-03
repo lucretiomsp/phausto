@@ -39,9 +39,7 @@ EffectsTest >> testDatorroRevDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testDryWetMonoMixerAsDsp [
 
-
-
-	self assert: DryWetMonoMixer new asDsp isNull equals: false
+	self deny: DryWetMonoMixer new asDsp isNull 
 ]
 
 { #category : 'tests' }

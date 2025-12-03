@@ -30,7 +30,7 @@ DryWetMonoMixer >> asBox [
 	| drySignal wetSignal |
 	drySignal := self input asBox * (1 asBox - self wetAmount asBox).
 	wetSignal := self input asBox => self fx * self wetAmount asBox.
-	^ wetSignal + drySignal
+	^ (wetSignal + drySignal) asBox
 ]
 
 { #category : 'accessing' }
