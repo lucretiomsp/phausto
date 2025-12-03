@@ -42,7 +42,9 @@ Chordy >> asBox [
 	filter := ResonLp new
 		          frequency: scaledFreq;
 		          q: 4.8. "for the selection of modes the interval is expresed in ratio"
-	secondInterval := self mode asBox , 1.189 asBox , 1.259 asBox , 1.333 asBox , 1.125 asBox connectTo: PhSelect4 new. "voices"
+	secondInterval := self mode asBox , 1.189 asBox , 1.259 asBox
+	                  , 1.333 asBox , 1.125 asBox connectTo:
+		                  PhSelect4 new. "voices"
 	voice1 := SawOsc new
 		          freq: self pitch asBox;
 		          uLevel: 0.25 asBox.
@@ -53,18 +55,14 @@ Chordy >> asBox [
 	voice3 := SawOsc new
 		          uLevel;
 		          freq: self pitch asBox * 1.5 asBox.
-	^ (filter input: voice1 + voice2 + voice3) * ampEnv asBox * self uLevel asBox
+	^ ((filter input: voice1 + voice2 + voice3) * ampEnv asBox
+	  * self uLevel) asBox
 ]
 
 { #category : 'accessing' }
 Chordy >> cutoff [
 
-	^ cutoff ifNil: [ cutoff := (PhHSlider new
-			 label: self label , 'Cutoff'
-			 init: 20
-			 min: 20
-			 max: 100
-			 step: 1)]
+	^ cutoff 
 ]
 
 { #category : 'initialization' }
@@ -82,7 +80,14 @@ Chordy >> initialize [
 		        init: 0
 		        min: 0
 		        max: 3
-		        step: 1
+		        step: 1.
+
+	cutoff := PhHSlider new
+		          label: self coypuLabel , 'Cutoff'
+		          init: 20
+		          min: 20
+		          max: 100
+		          step: 1
 ]
 
 { #category : 'accessing' }

@@ -30,16 +30,7 @@ Acid >> accent [
 { #category : 'initialization' }
 Acid >> asBox [
 
-	| saw square baseFreq oscillator filterEnv filter ampEnv instrument envAmount |
-	baseFreq := PhHSlider new
-		            label: self coypuLabel , 'Freq'
-		            init: 440
-		            min: 20
-		            max: 2000
-		            step: 1.
-
-
-
+	| saw square oscillator filterEnv filter ampEnv instrument envAmount |
 	filterEnv := AREnv new
 		             trigger: #acidTrigger;
 		             attack: 0.001 asBox;
@@ -57,17 +48,18 @@ Acid >> asBox [
 		          res: self resonance.
 	saw := SawOsc new
 		       uLevel: self uLevel asBox * 0.25 asBox;
-		       freq: baseFreq asBox + self tuning.
+		       freq: self pitch + self tuning.
 	square := SquareOsc new
 		          uLevel: self uLevel asBox * 0.25 asBox;
-		          freq: baseFreq asBox + self tuning.
+		          freq: self pitch + self tuning.
 	oscillator := Select2 new
 		              label: self coypuLabel , 'Waveform';
 		              input0: saw;
 		              input1: square.
 
 	distortion := Cubic1 new.
-	instrument := oscillator * ampEnv => filter * compensation => distortion.
+	instrument := oscillator * ampEnv=> filter * compensation
+	              => distortion.
 	^ instrument asBox
 ]
 
