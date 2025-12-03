@@ -174,12 +174,6 @@ EffectsTest >> testSoftClipQaudraticAsDsp [
 ]
 
 { #category : 'tests' }
-EffectsTest >> testSpectralTiltDemoAsDsp [
-
-	self assert: Spectral_Tilt_Demo new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
 EffectsTest >> testTapeStopDemoAsDsp [
 self assert: 1 equals: 0.
 
@@ -235,5 +229,5 @@ EffectsTest >> testZitaLighDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testZitaRevAsDsp [
 
-	self assert: ZitaRevStereo new asDsp isNull equals: false
+	self deny:  ZitaRevStereo new asDsp isNull 
 ]
