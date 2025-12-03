@@ -59,6 +59,12 @@ UIPrimitive >> asControlParameterOfWidgetType: aSymbol description: aString [
 ]
 
 { #category : 'converting' }
+UIPrimitive >> asDsp [ 
+
+^ self asBox asDsp
+]
+
+{ #category : 'converting' }
 UIPrimitive >> asParam: aString forUGen: aUGen [
 
 	aUGen instVarNamed: aString put: self

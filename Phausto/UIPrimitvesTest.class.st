@@ -1,5 +1,5 @@
 Class {
-	#name : 'PrimitvesTest',
+	#name : 'UIPrimitvesTest',
 	#superclass : 'TestCase',
 	#category : 'Phausto-Tests',
 	#package : 'Phausto',
@@ -7,49 +7,49 @@ Class {
 }
 
 { #category : 'tests' }
-PrimitvesTest >> testPhButtonAsDsp [
+UIPrimitvesTest >> testPhButtonAsDsp [
 
 	self deny: PhButton new asDsp isNull
 ]
 
 { #category : 'tests' }
-PrimitvesTest >> testPhHBargraphAsDsp [
+UIPrimitvesTest >> testPhHBargraphAsDsp [
 
 	self deny: PhHBarGraph new asDsp isNull
 ]
 
 { #category : 'tests' }
-PrimitvesTest >> testPhHSliderAsDsp [
+UIPrimitvesTest >> testPhHSliderAsDsp [
 
 	self deny: PhHSlider new asDsp isNull
 ]
 
 { #category : 'tests' }
-PrimitvesTest >> testPhNumEntryAsDsp [
+UIPrimitvesTest >> testPhNumEntryAsDsp [
 
 	self deny: PhNumEntry new asDsp isNull
 ]
 
 { #category : 'tests' }
-PrimitvesTest >> testPhSliderAsDsp [
+UIPrimitvesTest >> testPhSliderAsDsp [
 
 self deny: PhSlider new asDsp isNull.
 ]
 
 { #category : 'tests' }
-PrimitvesTest >> testPhVBargraphAsDsp [
+UIPrimitvesTest >> testPhVBargraphAsDsp [
 
 	self deny: PhVBarGraph new asDsp isNull
 ]
 
 { #category : 'tests' }
-PrimitvesTest >> testPhVSliderAsDsp [
+UIPrimitvesTest >> testPhVSliderAsDsp [
 
 	self deny: PhVSlider new asDsp isNull
 ]
 
 { #category : 'tests' }
-PrimitvesTest >> testSec2Samples [
+UIPrimitvesTest >> testSec2Samples [
 
 	self assert: Select2  new asDsp isNull equals: false
 ]
