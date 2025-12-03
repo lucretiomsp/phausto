@@ -93,9 +93,9 @@ EffectsTest >> testGreyHoleDemoAsDsp [
 ]
 
 { #category : 'tests' }
-EffectsTest >> testLimiterMonoAsDsp [ 
+EffectsTest >> testLimiterMonoAsDsp [
 
-	self assert: LimiterMono new asDsp isNull equals: false
+	self deny: PhLimiter1176Mono new asDsp isNull 
 ]
 
 { #category : 'tests' }

@@ -27,7 +27,7 @@ BasicCountersTest >> testCounterAsDsp [
 { #category : 'tests' }
 BasicCountersTest >> testPhBeatAsDsp [
 
-	self assert: PhBeat new asDsp isNull equals: false
+	self deny: PhBeat new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -59,7 +59,7 @@ BasicCountersTest >> testPhRampAsDsp [
 { #category : 'tests' }
 BasicCountersTest >> testPhTempoAsDsp [
 
-	self assert: PhTempo new asDsp isNull equals: false
+	self deny: PhTempo new asDsp isNull 
 ]
 
 { #category : 'tests' }
