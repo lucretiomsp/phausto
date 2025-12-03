@@ -29,6 +29,14 @@ UIPrimitive >> * aUnitGenerator [
 		  inputR: aUnitGenerator
 ]
 
+{ #category : 'arithmetic' }
+UIPrimitive >> + aUnitGenerator [
+
+	^ PhAdder new
+		  inputL: self;
+		  inputR: aUnitGenerator
+]
+
 { #category : 'combining' }
 UIPrimitive >> , aUnitGenerator [
 

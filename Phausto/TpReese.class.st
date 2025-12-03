@@ -25,7 +25,7 @@ TpReese >> asBox [
 		         sustain: self sustain;
 		         release: self release;
 		         trigger: self trigger) asBox.
-	^ osci1 + osci2 * adsr
+	^ ((osci1 + osci2) * adsr) asBox "osci1 + osci2 * adsr"
 ]
 
 { #category : 'initialization' }
@@ -36,12 +36,15 @@ TpReese >> initialize [
 	label := 'tpReese'. "self pitch: #ReeseFreq.
 	self trigger: #reeseTrigger."
 	detune := PhHSlider new label: 'tpReeseDetune' values: #( 5 0 30 1 ).
-	noteSlider := PhHSlider new label: 'tpeeseFreq' values: #( 48 1 127 1 ).
-
+	
 	osci1 := SineOsc new
-		         freq: #tpreeseFreq;
+		         freq: self pitch;
 		         uLevel: 0.3 asBox.
 	osci2 := SineOsc new
 		         uLevel: 0.3 asBox;
-		         freq: self pitch asBox + (PhHSlider new label: 'tpReeseDetune' values: #( 5 0 30 1 )) "+ detune asBox"
+		         freq: self pitch 
+			         +
+				         (PhHSlider new
+					          label: 'tpReeseDetune'
+					          values: #( 5 0 30 1 )) "+ detune asBox"
 ]
