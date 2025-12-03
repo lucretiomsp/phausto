@@ -4,10 +4,7 @@ A voltage-controlled filter (VCF) is an electronic filter whose operating charac
 "
 Class {
 	#name : 'Moog_Vcf_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'input'
-	],
+	#superclass : 'PhDemosMono',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -21,11 +18,4 @@ Moog_Vcf_Demo >> asBox [
 	finalBox := self input asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'accessing' }
-Moog_Vcf_Demo >> input [
-
-
-	^ input ifNil: [ input := 0 asBox ]
 ]

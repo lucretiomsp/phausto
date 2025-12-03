@@ -12,11 +12,7 @@ References
 "
 Class {
 	#name : 'ReverbTank_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'inputL',
-		'inputR'
-	],
+	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'

@@ -3,11 +3,7 @@ Light version of Zita Rev1
 "
 Class {
 	#name : 'Zita_Light',
-	#superclass : 'Demos',
-	#instVars : [
-		'inputL',
-		'inputR'
-	],
+	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -21,18 +17,4 @@ Zita_Light >> asBox [
 	finalBox := self inputL , self inputR asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'as yet unclassified' }
-Zita_Light >> inputL [
-
-
-	^ inputL ifNil: [ inputL := 0 asBox ]
-]
-
-{ #category : 'as yet unclassified' }
-Zita_Light >> inputR [
-
-
-	^ inputR ifNil: [ inputR := 0 asBox ]
 ]

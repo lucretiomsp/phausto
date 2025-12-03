@@ -3,11 +3,7 @@ GreyHole Reverb demo
 "
 Class {
 	#name : 'GreyHole_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'inputL',
-		'inputR'
-	],
+	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -21,18 +17,4 @@ GreyHole_Demo >> asBox [
 	finalBox := self inputL , self inputR asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'as yet unclassified' }
-GreyHole_Demo >> inputL [
-
-
-	^ inputL ifNil: [ inputL := 0 asBox ]
-]
-
-{ #category : 'as yet unclassified' }
-GreyHole_Demo >> inputR [
-
-
-	^ inputR ifNil: [ inputR := 0 asBox ]
 ]

@@ -3,11 +3,7 @@ Jp REverb demo
 "
 Class {
 	#name : 'JpRev_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'inputL',
-		'inputR'
-	],
+	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'

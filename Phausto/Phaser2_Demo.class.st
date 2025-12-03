@@ -4,11 +4,7 @@ A phaser is an electronic sound processor used to filter a signal by creating a 
 "
 Class {
 	#name : 'Phaser2_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'inputL',
-		'inputR'
-	],
+	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'

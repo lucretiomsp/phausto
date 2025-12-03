@@ -4,11 +4,7 @@ A noise gate or simply gate is an electronic device or software that is used to 
 "
 Class {
 	#name : 'Gate_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'inputL',
-		'inputR'
-	],
+	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -22,18 +18,4 @@ Gate_Demo >> asBox [
 	finalBox := self inputL , self inputR asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'as yet unclassified' }
-Gate_Demo >> inputL [
-
-
-	^ inputL ifNil: [ inputL := 0 asBox ]
-]
-
-{ #category : 'as yet unclassified' }
-Gate_Demo >> inputR [
-
-
-	^ inputR ifNil: [ inputR := 0 asBox ]
 ]

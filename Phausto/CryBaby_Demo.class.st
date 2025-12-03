@@ -3,10 +3,7 @@ The Dunlop Cry Baby is a popular wah-wah pedal, manufactured by Dunlop Manufactu
 "
 Class {
 	#name : 'CryBaby_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'input'
-	],
+	#superclass : 'PhDemosMono',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -20,11 +17,4 @@ CryBaby_Demo >> asBox [
 	finalBox := self input asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'accessing' }
-CryBaby_Demo >> input [
-
-
-	^ input ifNil: [ input := 0 asBox ]
 ]

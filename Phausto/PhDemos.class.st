@@ -2,7 +2,7 @@
 Subclasses of demo are complex  Unit Generations with a ready-UI coming from Faust examples
 "
 Class {
-	#name : 'Demos',
+	#name : 'PhDemos',
 	#superclass : 'UnitGenerator',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'initialization' }
-Demos >> initialize [ 
+PhDemos >> initialize [ 
 
 | demoName |
 super initialize .

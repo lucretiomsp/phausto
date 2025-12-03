@@ -8,10 +8,7 @@ https://www.researchgate.net/publication/258333577_Modeling_the_Harmonic_Exciter
 "
 Class {
 	#name : 'Exciter_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'input'
-	],
+	#superclass : 'PhDemosMono',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -25,11 +22,4 @@ Exciter_Demo >> asBox [
 	finalBox := self input asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'as yet unclassified' }
-Exciter_Demo >> input [
-
-
-	^ input ifNil: [ input := 0 asBox ]
 ]

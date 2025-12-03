@@ -4,11 +4,7 @@ Flanging /ˈflændʒɪŋ/ is an audio effect produced by mixing two identical si
 "
 Class {
 	#name : 'Flanger_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'inputL',
-		'inputR'
-	],
+	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -22,18 +18,4 @@ Flanger_Demo >> asBox [
 	finalBox := self inputL asBox , self inputR  asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'as yet unclassified' }
-Flanger_Demo >> inputL [
-
-
-	^ inputL ifNil: [ inputL := 0 asBox ]
-]
-
-{ #category : 'as yet unclassified' }
-Flanger_Demo >> inputR [
-
-
-	^ inputR ifNil: [ inputR := 0 asBox ]
 ]

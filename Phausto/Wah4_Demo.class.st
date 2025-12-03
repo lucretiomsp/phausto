@@ -3,10 +3,7 @@ WahWah pedal demo
 "
 Class {
 	#name : 'Wah4_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'input'
-	],
+	#superclass : 'PhDemosMono',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -20,11 +17,4 @@ Wah4_Demo >> asBox [
 	finalBox := self input asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'accessing' }
-Wah4_Demo >> input [
-
-
-	^ input ifNil: [ input := 0 asBox ]
 ]
