@@ -48,10 +48,10 @@ Acid >> asBox [
 		          res: self resonance.
 	saw := SawOsc new
 		       uLevel: self uLevel asBox * 0.25 asBox;
-		       freq: self pitch + self tuning.
+		       freq: baseFreq asBox + self tuning asBox.
 	square := SquareOsc new
 		          uLevel: self uLevel asBox * 0.25 asBox;
-		          freq: self pitch + self tuning.
+		          freq: baseFreq asBox + self tuning asBox .
 	oscillator := Select2 new
 		              label: self coypuLabel , 'Waveform';
 		              input0: saw;

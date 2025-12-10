@@ -425,7 +425,7 @@ UnitGenerator >> stereo [
 	| mono stereo |
 		BoxAPI uniqueInstance createLibContext.
 	mono := self asBox.
-	stereo := mono asBox splitTo: Wire new asBox , Wire new asBox.
+	stereo := mono asBox  splitTo: Wire new asBox , Wire new asBox.
 	^ stereo
 ]
 

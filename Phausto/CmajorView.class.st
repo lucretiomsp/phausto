@@ -6,7 +6,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'folder',
-		'background',
+		'backgroundImage',
 		'knobs',
 		'buttons',
 		'faders',
@@ -53,15 +53,23 @@ CmajorView >> addTo: aCmajorPatch [
 ]
 
 { #category : 'accessing' }
-CmajorView >> background [
+CmajorView >> assetsPath [
 
-	^ background
+^ (CmajorPatch parentFolder / self folder / 'ui' / 'assets')
+		            ensureCreateDirectory.
+	
 ]
 
 { #category : 'accessing' }
-CmajorView >> background: aDictionary [
+CmajorView >> backgroundImage [
 
-	background := aDictionary
+	^ backgroundImage 
+]
+
+{ #category : 'accessing' }
+CmajorView >> backgroundImage: aString [
+
+	backgroundImage := aString
 ]
 
 { #category : 'accessing' }
@@ -134,6 +142,22 @@ CmajorView >> knobs: anObject [
 	knobs := anObject
 ]
 
+{ #category : 'ui related' }
+CmajorView >> open [
+
+	| space bg bgPath |
+	space := BlSpace new extent: self size.
+	bgPath := self assetsPath / self backgroundImage image.
+	bg := BlElement new
+		      background:
+			      (BlImageBackground image:
+					       (ImageReadWriter formFromFileNamed: bgPath));
+		      extent: 400 @ 400.
+
+	space root addChild: bg.
+	space show
+]
+
 { #category : 'accessing' }
 CmajorView >> patchView [
 
@@ -176,7 +200,7 @@ CmajorView >> writeBackgroundVariableToConfig [
 
 	self uiConfigFileLocator writeStream setToEnd 
 		nextPutAll: ' export const  bgConfig = ';
-		nextPutAll: self background asJsObjectString;
+		nextPutAll: self backgroundImage asJsObjectString;
 		close
 ]
 

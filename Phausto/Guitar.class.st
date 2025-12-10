@@ -20,7 +20,8 @@ Guitar >> asBox [
 	| intermediateBox finalBox length |
 	intermediateBox := super asBox.
 	length := self freq asBox f2l.
-	finalBox := length asBox , self pluckPosition asBox , self gain asBox, self trigger asBox connectTo: intermediateBox.
+	finalBox := length asBox , self pluckPosition asBox , self gain asBox, self trigger asBox
+		            connectTo: intermediateBox.
 
 	^ finalBox
 ]
