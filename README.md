@@ -71,7 +71,7 @@ dsp stop.
 ```
 
 ## Explore Phausto's Unit Generator and classes
-If CoypuIDE is [installed](https://github.com/lucretiomsp/phausto/wiki) you can explore all Phausto classes and Unit Generators by evaluating in a Playground
+If [CoypuIDE](https://github.com/lucretiomsp/phausto/wiki)  is installed you can explore all Phausto classes and Unit Generators by evaluating in a Playground:
 ```Smalltalk
 PhaustoClassReference new openInSpace.
 ```
