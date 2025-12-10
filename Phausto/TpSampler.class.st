@@ -35,9 +35,9 @@ TpSampler >> asBox [
 
 	| reader sp output sampler partNumber |
 	partNumber := self index asBox min: self numberOfSamples asBox.
-	
+
 	reader := PhReaderWithSpeed new
-		          trigger: self gate;
+		          trigger: self trigger asBox;
 		          speed: self pitch asBox / 261.625 asBox.
 	sp := BoxAPI uniqueInstance
 		      boxSoundFile: filesURL
@@ -45,8 +45,7 @@ TpSampler >> asBox [
 		      part: partNumber
 		      readIndex: reader asBox.
 
-	output := Cut new asBox , Cut new asBox , Cut new asBox
-	          , Wire new asBox.
+	output := Cut new asBox , Cut new asBox , Cut new asBox , Wire new asBox.
 	sampler := sp connectTo: output asBox.
 
 	^ (sampler asBox * self uLevel) asBox
@@ -72,14 +71,15 @@ TpSampler >> changeParamsPrefix [
 
 	self gate: ((WriteStream on: String new)
 			 nextPutAll: prefix;
-			 nextPutAll: 'Gate'; yourself) contents  asSymbol.
-			
+			 nextPutAll: 'Trigger';
+			 yourself) contents asSymbol.
+
 	self pitch: ((WriteStream on: String new)
 			 nextPutAll: prefix;
-			 nextPutAll: 'Note') yourself asSymbol.
+			 nextPutAll: 'Freq') yourself asSymbol.
 	self index: ((WriteStream on: String new)
 			 nextPutAll: prefix;
-			 nextPutAll: 'Index') yourself  asSymbol.
+			 nextPutAll: 'Index') yourself asSymbol.
 	self uLevel: ((WriteStream on: String new)
 			 nextPutAll: prefix;
 			 nextPutAll: 'uLevel') yourself asSymbol
@@ -154,13 +154,12 @@ TpSampler >> initialize [
 
 	super initialize.
 	index := PhHSlider new
-		         label: self label , 'Index'
+		         label: self coypuLabel , 'Index'
 		         init: 0
 		         min: 0
 		         max: 16
 		         step: 1.
-	self pathToFolder:
-		FileLocator documents asAbsolute pathString , '/TurboSamples/bleep'
+	self pathToFolder: FileLocator documents asAbsolute pathString , '/TurboSamples/bleep'
 ]
 
 { #category : 'accessing' }
@@ -225,14 +224,15 @@ TpSampler >> pathToFolder: aString [
 ]
 
 { #category : 'accessing' }
-TpSampler >> pitch [ 
+TpSampler >> pitch [
 
-	^ pitch ifNil: [ pitch :=  (PhHSlider new
-			 label: self label  , 'Note'
-			 init: 261.625
-			 min: 10
-			 max: 4000
-			 step: 0.1) ]
+	^ pitch "ifNil: [
+			  pitch := PhHSlider new
+				           label: self label , 'Note'
+				           init: 261.625
+				           min: 10
+				           max: 4000
+				           step: 0.1 ]"
 ]
 
 { #category : 'accessing' }

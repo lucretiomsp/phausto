@@ -7,9 +7,9 @@ Class {
 	#instVars : [
 		'input'
 	],
-	#category : 'Phausto-Math',
+	#category : 'Phausto-Antialiased',
 	#package : 'Phausto',
-	#tag : 'Math'
+	#tag : 'Antialiased'
 }
 
 { #category : 'converting' }
@@ -27,18 +27,18 @@ Trigonometry >> asBox [
 { #category : 'initialization' }
 Trigonometry >> initialize [
 
-| faustFunctionName |
-faustFunctionName := (self class name findBetweenSubstrings: ' ' ) first asLowercase .
+	| faustFunctionName |
+	faustFunctionName := (self class name findBetweenSubstrings: ' ')
+		                     first asLowercase.
 	super initialize.
-	processExpression :='process = aa.' , faustFunctionName , ';'.
-	
-	
+	input := 1 asBox .
+	processExpression := 'process = aa.' , faustFunctionName , ';'
 ]
 
 { #category : 'accessing' }
 Trigonometry >> input [
 
-	^ input ifNil: [ input := 1 asBox ]
+	^ input 
 ]
 
 { #category : 'connecting' }

@@ -4,11 +4,7 @@ A COMPRESSOR is an audio signal processing operation that reduces the volume of 
 "
 Class {
 	#name : 'Compressor_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'inputL',
-		'inputR'
-	],
+	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -22,18 +18,4 @@ Compressor_Demo >> asBox [
 	finalBox := self inputL , self inputR asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'as yet unclassified' }
-Compressor_Demo >> inputL [
-
-
-	^ inputL ifNil: [ inputL := 0 asBox ]
-]
-
-{ #category : 'as yet unclassified' }
-Compressor_Demo >> inputR [
-
-
-	^ inputR ifNil: [ inputR := 0 asBox ]
 ]

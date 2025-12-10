@@ -62,10 +62,10 @@ PhSlider >> label: aLabel values: anArray [
 	"initialzie the SLider with ana array of values"
 
 	label := aLabel.
-	init := (anArray at: 1) .
-	min := (anArray at: 2) .
-	max := (anArray at: 3) .
-	step := (anArray at: 4) 
+	init := anArray first.
+	min := anArray at: 2.
+	max := anArray at: 3.
+	step := anArray at: 4
 ]
 
 { #category : 'accessing' }

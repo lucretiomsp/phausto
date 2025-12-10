@@ -17,7 +17,6 @@ Class {
 		'tone',
 		'attack',
 		'decay',
-		'gate',
 		'pitch'
 	],
 	#category : 'Phausto-Synths',
@@ -30,10 +29,8 @@ Hat >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self pitch asBox , self tone asBox , self attack asBox
-	            , self decay asBox , self gate asBox connectTo:
-		            intermediateBox.
-	^ finalBox  * self uLevel
+	finalBox := self pitch asBox , self tone asBox , self attack asBox , self decay asBox , self gate asBox connectTo: intermediateBox.
+	^ finalBox * self uLevel
 ]
 
 { #category : 'accessing' }
@@ -48,12 +45,6 @@ Hat >> decay [
 	^ decay 
 ]
 
-{ #category : 'accessing' }
-Hat >> gate [
-
-	^ gate ifNil: [ gate := PhButton new label: self label , 'Gate' ]
-]
-
 { #category : 'initialization' }
 Hat >> initialize [
 
@@ -62,22 +53,19 @@ Hat >> initialize [
 
 	attack := 0.005.
 	pitch := PhHSlider new
-		         label: self label , 'Note'
+		         label: self label , 'Freq'
 		         init: 440
 		         min: 20
 		         max: 1400
 		         step: 0.1.
-	gate := PhButton new label: self label , 'Gate'.
 	decay := PhHSlider new
 		         label: self label , 'Decay'
 		         init: 0.2
 		         min: 0
 		         max: 4.0
 		         step: 0.01.
-	
-	self controlParameters add: #pitch -> (self pitch
-			 asControlParameterOfWidgetType: #knob
-			 description: 'Frequency in Hertz').
+
+	self controlParameters add: #pitch -> (self pitch asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz').
 
 	tone := PhHSlider new
 		        label: self label , 'Tone'
@@ -90,13 +78,7 @@ Hat >> initialize [
 { #category : 'as yet unclassified' }
 Hat >> pitch [
 
-	^ pitch ifNil: [
-		  pitch := PhHSlider new
-			           label: self label , 'Note'
-			           init: 1900
-			           min: 317
-			           max: 3170
-			           step: 1 ]
+	^ pitch 
 ]
 
 { #category : 'accessing' }

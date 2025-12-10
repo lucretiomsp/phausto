@@ -74,7 +74,7 @@ DelayMonoFB >> initialize [
 			               init: 1
 			               min: 0.001
 			               max: 2
-			               step: 0.0001) smoo.
+			               step: 0.0001) asBox smoo.
 	delayBox := SmoothDelay new label: self label; delayLength: delayTime .
 	mixer := self input + (delayBox * self feedBack).
 

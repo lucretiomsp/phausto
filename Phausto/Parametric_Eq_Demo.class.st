@@ -4,10 +4,7 @@ A parametric equalizer is an audio processing tool that allows precise control o
 "
 Class {
 	#name : 'Parametric_Eq_Demo',
-	#superclass : 'Demos',
-	#instVars : [
-		'input'
-	],
+	#superclass : 'PhDemosMono',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
 	#tag : 'Demo'
@@ -21,11 +18,4 @@ Parametric_Eq_Demo >> asBox [
 	finalBox := self input asBox connectTo: intermediateBox .
 
 	^ finalBox
-]
-
-{ #category : 'accessing' }
-Parametric_Eq_Demo >> input [
-
-
-	^ input ifNil: [ input := 0 asBox ]
 ]

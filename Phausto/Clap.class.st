@@ -29,8 +29,7 @@ Class {
 	#instVars : [
 		'tone',
 		'attack',
-		'decay',
-		'gate'
+		'decay'
 	],
 	#category : 'Phausto-Synths',
 	#package : 'Phausto',
@@ -59,12 +58,6 @@ Clap >> decay [
 	^ decay 
 ]
 
-{ #category : 'accessing' }
-Clap >> gate [
-
-	^ gate 
-]
-
 { #category : 'initialization' }
 Clap >> initialize [
 
@@ -72,23 +65,27 @@ Clap >> initialize [
 	self processExpression: 'process = sy.clap;'.
 
 	attack := 0.
-	gate := PhButton new label: self label , 'Gate'.
-	decay := decay := PhHSlider new
-		                  label: self label , 'Decay'
-		                  init: 0.9
-		                  min: 0
-		                  max: 4.0
-		                  step: 0.01.
+
+	decay := PhHSlider new
+		         label: self label , 'Decay'
+		         init: 0.9
+		         min: 0
+		         max: 4.0
+		         step: 0.01.
 	tone := PhHSlider new
-		        label: self label , 'Note'
+		        label: self label , 'Freq'
 		        init: 3200
 		        min: 400
 		        max: 3500
 		        step: 1.
-	
-	self controlParameters add: #tone -> (self tone
-			 asControlParameterOfWidgetType: #knob
-			 description: 'Filter Frequency')
+	uLevel := PhHSlider new
+		          label: self label , 'uLevel'
+		          init: 0.4
+		          min: 0
+		          max: 1
+		          step: 0.001.
+
+	self controlParameters add: #tone -> (self tone asControlParameterOfWidgetType: #knob description: 'Filter Frequency')
 ]
 
 { #category : 'accessing' }

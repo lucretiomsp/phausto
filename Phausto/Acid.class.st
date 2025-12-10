@@ -30,22 +30,13 @@ Acid >> accent [
 { #category : 'initialization' }
 Acid >> asBox [
 
-	| saw square baseFreq oscillator filterEnv filter ampEnv instrument envAmount |
-	baseFreq := PhHSlider new
-		            label: self label , 'Note'
-		            init: 440
-		            min: 20
-		            max: 2000
-		            step: 1.
-
-
-
+	| saw square oscillator filterEnv filter ampEnv instrument envAmount |
 	filterEnv := AREnv new
-		             trigger: #acidGate;
+		             trigger: #acidTrigger;
 		             attack: 0.001 asBox;
 		             release: self filterDecay.
 	ampEnv := AREnv new
-		          trigger: #acidGate;
+		          trigger: #acidTrigger;
 		          attack: 0.001 asBox;
 		          release: 0.2 asBox.
 
@@ -62,12 +53,12 @@ Acid >> asBox [
 		          uLevel: self uLevel asBox * 0.25 asBox;
 		          freq: baseFreq asBox + self tuning asBox .
 	oscillator := Select2 new
-		              label: self label , 'Waveform';
+		              label: self coypuLabel , 'Waveform';
 		              input0: saw;
 		              input1: square.
 
 	distortion := Cubic1 new.
-	instrument := oscillator * ampEnv => filter * compensation
+	instrument := oscillator * ampEnv=> filter * compensation
 	              => distortion.
 	^ instrument asBox
 ]
@@ -95,47 +86,47 @@ Acid >> initialize [
 
 	super initialize.
 	resonance := PhHSlider new
-		             label: self label , 'Resonance'
+		             label: self coypuLabel , 'Resonance'
 		             init: 4.5
 		             min: 1
 		             max: 7
 		             step: 0.001.
 
 	level := PhHSlider new
-		          label: self label , 'uLevel'
-		          init: 0.5
-		          min: 0
-		          max: 1
-		          step: 0.01.
+		         label: self coypuLabel , 'uLevel'
+		         init: 0.6
+		         min: 0
+		         max: 1
+		         step: 0.01.
 	cutoffFreq := PhHSlider new
-		              label: self label , 'CutoffFreq'
+		              label: self coypuLabel , 'CutoffFreq'
 		              init: 0.3
 		              min: 0.2
 		              max: 1
 		              step: 0.001.
 
 	envMod := PhHSlider new
-		          label: self label , 'EnvMod'
+		          label: self coypuLabel , 'EnvMod'
 		          init: 0.64
 		          min: 0.1
 		          max: 1
 		          step: 0.001.
 	tuning := PhHSlider new
-		          label: self label , 'Tuning'
+		          label: self coypuLabel , 'Tuning'
 		          init: 0
 		          min: -100
 		          max: 100
 		          step: 1.
-	waveform := PhButton new label: self label , 'Waveform'.
-	trigger := PhButton new label: self label , 'Gate'.
+	waveform := PhButton new label: self coypuLabel , 'Waveform'.
+
 	accent := PhHSlider new
-		          label: self label , 'Accent'
+		          label: self coypuLabel , 'Accent'
 		          init: 0.6
 		          min: 0
 		          max: 1
 		          step: 0.001.
 	filterDecay := PhHSlider new
-		               label: self label , 'EnvDecay'
+		               label: self coypuLabel , 'EnvDecay'
 		               init: 0.282
 		               min: 0.01
 		               max: 2

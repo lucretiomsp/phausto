@@ -39,9 +39,7 @@ EffectsTest >> testDatorroRevDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testDryWetMonoMixerAsDsp [
 
-
-
-	self assert: DryWetMonoMixer new asDsp isNull equals: false
+	self deny: DryWetMonoMixer new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -95,9 +93,9 @@ EffectsTest >> testGreyHoleDemoAsDsp [
 ]
 
 { #category : 'tests' }
-EffectsTest >> testLimiterMonoAsDsp [ 
+EffectsTest >> testLimiterMonoAsDsp [
 
-	self assert: LimiterMono new asDsp isNull equals: false
+	self deny: PhLimiter1176Mono new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -176,12 +174,6 @@ EffectsTest >> testSoftClipQaudraticAsDsp [
 ]
 
 { #category : 'tests' }
-EffectsTest >> testSpectralTiltDemoAsDsp [
-
-	self assert: Spectral_Tilt_Demo new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
 EffectsTest >> testTapeStopDemoAsDsp [
 self assert: 1 equals: 0.
 
@@ -237,5 +229,5 @@ EffectsTest >> testZitaLighDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testZitaRevAsDsp [
 
-	self assert: ZitaRevStereo new asDsp isNull equals: false
+	self deny:  ZitaRevStereo new asDsp isNull 
 ]

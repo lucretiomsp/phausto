@@ -34,11 +34,11 @@ PhTempo >> initialize [
 	super initialize.
 	processExpression := 'process = ba.tempo;'.
 	tempo := PhHSlider new
-			           label: self label , 'Tempo'
-			           init: 30
-			           min: 120
-			           max: 220
-			           step: 0.01 
+		         label: self label , 'Tempo'
+		         init: 120
+		         min: 30
+		         max: 220
+		         step: 0.01
 ]
 
 { #category : 'accessing' }

@@ -21,6 +21,30 @@ Class {
 	#tag : 'UIPrimitives'
 }
 
+{ #category : 'arithmetic' }
+UIPrimitive >> * aUnitGenerator [
+
+	^ PhMultiplicator new
+		  inputL: self;
+		  inputR: aUnitGenerator
+]
+
+{ #category : 'arithmetic' }
+UIPrimitive >> + aUnitGenerator [
+
+	^ PhAdder new
+		  inputL: self;
+		  inputR: aUnitGenerator
+]
+
+{ #category : 'combining' }
+UIPrimitive >> , aUnitGenerator [
+
+	^ PhZeroList new addAll: {
+			  self.
+			  aUnitGenerator }
+]
+
 { #category : 'converting' }
 UIPrimitive >> asControlParameter [
 	self shouldBeImplemented.
@@ -32,6 +56,12 @@ UIPrimitive >> asControlParameterOfWidgetType: aSymbol description: aString [
 	
 	controlParam := PhControlParameter new label: self label; min: self min; max: self max; initialValue: self init; step: self step; widgetType: aSymbol; description: aString.
 	^ controlParam
+]
+
+{ #category : 'converting' }
+UIPrimitive >> asDsp [ 
+
+^ self asBox asDsp
 ]
 
 { #category : 'converting' }

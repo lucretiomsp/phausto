@@ -4,6 +4,8 @@ I am a PhReaderWithSpeed, I read audio buffers at a desired speed. I am designed
 Class {
 	#name : 'PhReaderWithSpeed',
 	#superclass : 'PhBox',
+	#traits : 'ParamsSetter',
+	#classTraits : 'ParamsSetter classTrait',
 	#instVars : [
 		'speed',
 		'trigger'
@@ -17,7 +19,7 @@ Class {
 PhReaderWithSpeed >> asBox [
 
 	| sum resetter |
-	resetter := (PhResetter new trigger: self trigger) asBox.
+	resetter := (PhResetter new trigger: self trigger asBox ) asBox.
 	sum := Wire new asBox + self speed.
 	^ resetter ~ sum
 ]
@@ -26,8 +28,8 @@ PhReaderWithSpeed >> asBox [
 PhReaderWithSpeed >> initialize [
 
 	super initialize.
-	self trigger: 0.
-	self speed: 1
+	trigger :=  0 .
+	speed := 1 .
 ]
 
 { #category : 'accessing' }
@@ -46,10 +48,4 @@ PhReaderWithSpeed >> speed: aSpeed [
 PhReaderWithSpeed >> trigger [
 
 	^ trigger
-]
-
-{ #category : 'accessing' }
-PhReaderWithSpeed >> trigger: aTrigger [	
-
-	trigger := aTrigger asBox
 ]

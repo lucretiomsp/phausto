@@ -38,8 +38,50 @@ jobs:
         if: ${{ contains(matrix.os, 'macos') }}
 
       - name: Install Libraries Bundle (ubuntu)
-        run: mkdir -p "/home/runner/.smalltalkCI/_builds/librariesBundle" && unzip "/home/runner/work/phausto/phausto/librariesBundle_Linux.zip" -d "/home/runner/.smalltalkCI/_builds/librariesBundle" && ls -all "/home/runner/.smalltalkCI/_builds/librariesBundle" && nm "/home/runner/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so"
         if: ${{ contains(matrix.os, 'ubuntu') }}
+        run: |
+          set -euo pipefail  # Fail on errors, unset variables, and piped commands
+
+          BUILD_DIR="$HOME/.smalltalkCI/_builds/librariesBundle"
+          ZIP_FILE="$GITHUB_WORKSPACE/librariesBundle_Linux.zip"
+
+          echo "Creating build directory..."
+          mkdir -p "$BUILD_DIR"
+
+          echo "Unzipping libraries bundle..."
+          unzip -q "$ZIP_FILE" -d "$BUILD_DIR"
+
+          echo "Moving top-level .so files to $BUILD_DIR..."
+          shopt -s nullglob
+          SO_FILES=("$BUILD_DIR"/librariesBundle/*.so)
+          if [ ${#SO_FILES[@]} -gt 0 ]; then
+          mv "$BUILD_DIR"/librariesBundle/*.so "$BUILD_DIR"/
+          else
+          echo "No top-level .so files found, skipping move."
+          fi
+
+          echo "Listing final build directory structure..."
+          ls -al "$BUILD_DIR"
+          if [ -d "$BUILD_DIR/faustLibs" ]; then
+          echo "Listing faustLibs directory..."
+          ls -al "$BUILD_DIR/faustLibs"
+          else
+          echo "No faustLibs directory found."
+          fi
+
+          ENGINE_LIB="$BUILD_DIR/libdynamic-engine.so"
+          if [ -f "$ENGINE_LIB" ]; then
+          echo "Checking symbols in libdynamic-engine.so..."
+          nm "$ENGINE_LIB" | head -20
+          else
+          echo "libdynamic-engine.so not found!"
+          exit 1
+          fi
+
+
+
+
+
 
       - name: Install Libraries Bundle (win)
         run: unzip "D:\a\phausto\phausto\librariesBundle_windows_intel.zip" -d "C:\Users\runneradmin\.smalltalkCI\_builds" && dir "C:\Users\runneradmin\.smalltalkCI\_builds\librariesBundle"

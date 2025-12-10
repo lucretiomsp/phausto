@@ -7,13 +7,13 @@ Class {
 	#instVars : [
 		'level',
 		'pitch',
-		'gate',
 		'attack',
 		'decay',
 		'sustain',
 		'release',
 		'name',
-		'trigger'
+		'trigger',
+		'coypuLabel'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -27,61 +27,59 @@ TpSynth >> attack [
 ]
 
 { #category : 'accessing' }
-TpSynth >> decay [
+TpSynth >> coypuLabel [
 
-	^ decay 
+	^ coypuLabel 
 ]
 
 { #category : 'accessing' }
-TpSynth >> gate [
+TpSynth >> decay [
 
-	^ gate 
+	^ decay 
 ]
 
 { #category : 'initialization' }
 TpSynth >> initialize [
 
 	super initialize.
-	super initializeControlParameters .
-	"by default the name of the TpSynth is the name of the class"
-	gate := PhButton new label: self label , 'Gate'.
+	super initializeControlParameters. "by default the name of the TpSynth is the name of the class"
 
-	self uLevel: (self label , 'Level') asSymbol.
+
+	coypuLabel := self label first asLowercase asString , self label allButFirst.
+	trigger := PhButton new label: coypuLabel , 'Trigger'.
+	self uLevel: (coypuLabel , 'Level') asSymbol.
 
 	pitch := PhHSlider new
-		         label: self label , 'Note'
+		         label: coypuLabel , 'Freq'
 		         init: 440
 		         min: 20
 		         max: 4086
 		         step: 1.
-	self controlParameters add: #pitch -> (self pitch
-			 asControlParameterOfWidgetType: #knob
-			 description: 'Frequency in Hertz').
+	self controlParameters add: #pitch -> (self pitch asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz').
 	attack := PhHSlider new
-		          label: self label , 'Attack'
+		          label: coypuLabel , 'Attack'
 		          init: 0.01
 		          min: 0
 		          max: 4
 		          step: 0.001.
 	decay := PhHSlider new
-		         label: self label , 'Decay'
+		         label: coypuLabel , 'Decay'
 		         init: 0.2
 		         min: 0.001
 		         max: 2
 		         step: 0.001.
 	sustain := PhHSlider new
-		           label: self label , 'Sustain'
+		           label: coypuLabel , 'Sustain'
 		           init: 0.5
 		           min: 0
 		           max: 1
 		           step: 0.001.
 	release := PhHSlider new
-		           label: self label , 'Release'
+		           label: coypuLabel , 'Release'
 		           init: 0.1
 		           min: 0.001
 		           max: 2
-		           step: 0.001.
-
+		           step: 0.001
 ]
 
 { #category : 'initialization' }
@@ -101,10 +99,11 @@ self controlParameters add:
 
 { #category : 'accessing' }
 TpSynth >> label: aString [
+	"to adhere with Cooypu syntax, we change the prefix of the pitch, gate and trigger parameter"
 
-"to adhere with Cooypu syntax, we change the prefix of the pitch parameter"
-super label: aString .
-self pitch: (aString , 'Note') asSymbol 
+	super label: aString .
+	self pitch: (aString , 'Freq') asSymbol.
+	self trigger: (aString , 'Trigger') asSymbol.
 ]
 
 { #category : 'accessing' }

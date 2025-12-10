@@ -8,7 +8,7 @@ Note that this function is not accurate for low-amplitude or low-frequency input
 Class {
 	#name : 'ArcCos2',
 	#superclass : 'Trigonometry',
-	#category : 'Phausto-Math',
+	#category : 'Phausto-Antialiased',
 	#package : 'Phausto',
-	#tag : 'Math'
+	#tag : 'Antialiased'
 }

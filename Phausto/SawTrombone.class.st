@@ -10,9 +10,7 @@ Class {
 	#name : 'SawTrombone',
 	#superclass : 'Synths',
 	#instVars : [
-		'freq',
-		'gain',
-		'gate'
+		'gain'
 	],
 	#category : 'Phausto-Synths',
 	#package : 'Phausto',
@@ -24,7 +22,7 @@ SawTrombone >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self freq asBox , self gain asBox , self gate asBox
+	finalBox := self freq asBox , self gain asBox , self trigger  asBox
 		            connectTo: intermediateBox.
 	^ finalBox *  self uLevel
 ]
@@ -41,33 +39,15 @@ SawTrombone >> gain [
 	^ gain 
 ]
 
-{ #category : 'accessing' }
-SawTrombone >> gate [
-
-	^ gate 
-]
-
 { #category : 'initialization' }
 SawTrombone >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.sawTrombone;'.
-	freq := PhHSlider new
-		        label: self label , 'Note'
-		        init: 440
-		        min: 20
-		        max: 1400
-		        step: 0.1.
-		freq := PhHSlider new
-			          label: self label , 'Note'
-			          init: 440
-			          min: 20
-			          max: 1200
-			          step: 1.
-	self controlParameters add: #freq -> (self freq
-			 asControlParameterOfWidgetType: #knob
-			 description: 'Frequency in Hertz').
-	gate := PhButton new label: self label , 'Gate'.
+
+
+	self controlParameters add: #freq -> (self freq asControlParameterOfWidgetType: #knob description: 'Frequency in Hertz').
+
 	gain := PhHSlider new
 		        label: self label , 'Gain'
 		        init: 0.3

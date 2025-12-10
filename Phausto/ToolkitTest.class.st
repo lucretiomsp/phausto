@@ -9,13 +9,7 @@ Class {
 { #category : 'tests' }
 ToolkitTest >> testPHSelectNAsDsp [
 
-	self
-		assert: (PhSelectN new: #( 3 2 1 )) asDsp isNull
-		equals: false.
-		
-		self
-		assert: (PhSelectN new list:  #( 3 2 1 )) asDsp isNull
-		equals: false
+	self deny: (PhSelectN new: { 0.1 asBox . 0.2 asBox . 0.3 asBox}) asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -59,4 +53,10 @@ ToolkitTest >> testPhSubBeatAsDsp [
 ToolkitTest >> testPulseGateAsDsp [
 
 self assert: PulseGate new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+ToolkitTest >> testSelectNAsDsp [
+
+	self deny: PhSelectN new asDsp isNull 
 ]

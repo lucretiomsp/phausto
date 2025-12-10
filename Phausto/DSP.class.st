@@ -105,7 +105,7 @@ DSP class >> invalidException [
 
 { #category : 'as yet unclassified' }
 DSP class >> paramException [
-
+1 halt.
 ^ 'Invalid parameter' inspect
 
 "	^ Error new signal:
@@ -150,7 +150,7 @@ DSP >> allParameters [
 			0 to: self getParamCount - 1 do: [ :i |
 			params add: (self getParamAddress: i) afterLastSlash ].
 			^ params asArray ]
-		ifFalse: [ Error new signal: 'This DSP is not initialized' ]
+		ifFalse: [ Error new signal: 'This DSP is not initialized'. Performance uniqueInstance stop. ]
 ]
 
 { #category : 'converting' }
@@ -481,13 +481,12 @@ DSP >> init [
 	RendererType initialize.
 
 	self isNull
-		ifTrue: [ "mysterious bug on exception"
-		^ self class invalidException ]
+		ifTrue: [ "mysterious bug on exception" ^ self class invalidException ]
 		ifFalse: [
-			'DSP inizialized' traceCr.
-			self isInitialized: true.
-			self class initializedDSP: self.
-			PhaustoDynamicEngine uniqueInstance initializeDSP: self withRenderer: self class rendererType ]
+				'DSP inizialized' traceCr.
+				self isInitialized: true.
+				self class initializedDSP: self.
+				PhaustoDynamicEngine uniqueInstance initializeDSP: self withRenderer: self class rendererType  bufferSize: PhaustoDynamicEngine  bufferSize ]
 ]
 
 { #category : 'accessing' }
@@ -586,8 +585,15 @@ DSP >> play [
 DSP >> playNote: aMidiNN prefix: aString dur: aDuration [
 	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
 	
-self setValue:  aMidiNN midiNNToFreq   parameter: aString , 'Note'.
-self trig: aString , 'Gate' for: aDuration  
+self setValue:  aMidiNN midiNNToFreq   parameter: aString , 'Freq'.
+self trig: aString , 'Trigger' for: aDuration  
+]
+
+{ #category : 'printing' }
+DSP >> printOn: aStream [
+
+	self getHandle isNull ifTrue: [ aStream nextPutAll: 'an Invalid DSP' ] ifFalse: 
+	[aStream nextPutAll: 'a Valid  DSP']
 ]
 
 { #category : 'ui-building' }
@@ -763,12 +769,12 @@ DSP >> trig: aString [
 	" parameter must exist"
 
 	(self getParamIndex: aString) = -1
-		ifTrue: [ ^ self class paramException ]
+		ifTrue: [ ^ self class paramException . Performance uniqueInstance stop.]
 		ifFalse: [
-			self setValue: 1 parameter: aString.
-			[
-			10 milliSeconds wait.
-			self setValue: 0 parameter: aString ] forkAt: 70 ]
+				self setValue: 1 parameter: aString.
+				[
+					10 milliSeconds wait.
+					self setValue: 0 parameter: aString ] forkAt: 70 ]
 ]
 
 { #category : 'API - changes' }
@@ -778,10 +784,10 @@ DSP >> trig: aString for: aDurationInSeconds [
 	" parameter must exist"
 
 	(self getParamIndex: aString) = -1
-		ifTrue: [ ^ self class paramException ]
+		ifTrue: [ ^ self class paramException . Performance uniqueInstance  stop.]
 		ifFalse: [
-			[
-			self setValue: 1 parameter: aString.
-			aDurationInSeconds  wait.
-			self setValue: 0 parameter: aString ] forkAt: 70 ]
+				[
+					self setValue: 1 parameter: aString.
+					aDurationInSeconds wait.
+					self setValue: 0 parameter: aString ] forkAt: 70 ]
 ]

@@ -18,14 +18,14 @@ Class {
 { #category : 'converting' }
 TpReese >> asBox [
 
-adsr := (ADSREnv new
-		         label: 'reese';
+	adsr := (ADSREnv new
+		         label: 'cane';
 		         attack: self attack;
 		         decay: self decay;
 		         sustain: self sustain;
 		         release: self release;
-		         trigger: self gate) asBox.
-	^ osci1 + osci2 * adsr
+		         trigger: self trigger) asBox.
+	^ ((osci1 + osci2) * adsr) asBox "osci1 + osci2 * adsr"
 ]
 
 { #category : 'initialization' }
@@ -33,20 +33,18 @@ TpReese >> initialize [
 
 	| noteSlider |
 	super initialize.
-	label := 'reese'.
-	self pitch: #reeseNote.
-	self gate: #reeseGate.
-	detune := PhHSlider new label: 'reeseDetune' values: #( 5 0 30 1 ).
-	noteSlider := PhHSlider new
-		              label: 'reeseNote'
-		              values: #( 48 1 127 1 ).
+	label := 'tpReese'. "self pitch: #ReeseFreq.
+	self trigger: #reeseTrigger."
+	detune := PhHSlider new label: 'tpReeseDetune' values: #( 5 0 30 1 ).
 	
 	osci1 := SineOsc new
-		         freq: #reeseNote;
+		         freq: self pitch;
 		         uLevel: 0.3 asBox.
 	osci2 := SineOsc new
 		         uLevel: 0.3 asBox;
 		         freq: self pitch asBox
 			         +
-				         (PhHSlider new label: 'reeseDetune' values: #( 5 0 30 1 )) "+ detune asBox"
+				         (PhHSlider new
+					          label: 'tpReeseDetune'
+					          values: #( 5 0 30 1 )) "+ detune asBox"
 ]

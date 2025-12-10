@@ -20,9 +20,7 @@ Class {
 		'click',
 		'attack',
 		'decay',
-		'drive',
-		'gate',
-		'note'
+		'drive'
 	],
 	#category : 'Phausto-Synths',
 	#package : 'Phausto',
@@ -79,12 +77,6 @@ Kick >> drive [
 	^ drive 
 ]
 
-{ #category : 'accessing' }
-Kick >> gate [
-
-	^ gate 
-]
-
 { #category : 'initialization' }
 Kick >> initialize [
 
@@ -95,7 +87,7 @@ Kick >> initialize [
 	attack := 0.005.
 	self uLevel: 0.8.
 	pitch := PhHSlider new
-		         label: self label , 'Note'
+		         label: self label , 'Freq'
 		         init: 220
 		         min: 20
 		         max: 1400
@@ -104,7 +96,7 @@ Kick >> initialize [
 	self controlParameters add: #pitch -> (self pitch
 			 asControlParameterOfWidgetType: #knob
 			 description: 'Frequency in Hertz').
-	gate := PhButton new label: self label , 'Gate'.
+	
 	drive := PhHSlider new
 		         label: self label , 'Drive'
 		         init: 1
@@ -112,12 +104,6 @@ Kick >> initialize [
 		         max: 5
 		         step: 0.001.
 	self uLevel: 0.35
-]
-
-{ #category : 'accessing' }
-Kick >> note [
-
-	^ note
 ]
 
 { #category : 'accessing' }

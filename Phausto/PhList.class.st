@@ -49,6 +49,12 @@ PhList >> asBox [
 	^ result
 ]
 
+{ #category : 'public - line' }
+PhList >> connectTo: aBox [
+
+^ self asBox connectTo: aBox
+]
+
 { #category : 'initialization' }
 PhList >> countingFromZero [
 

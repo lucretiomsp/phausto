@@ -53,11 +53,11 @@ Dx7Op >> asBox [
 
 	| finalBox intermediateBox |
 	intermediateBox := super asBox.
-	finalBox := self freq  , self phaseMod , self outLevel , self egRate1
+	finalBox := (self freq  , self phaseMod , self outLevel , self egRate1
 	            , self egRate2 , self egRate3 , self egRate4
 	            , self egLevel1 , self egLevel2 , self egLevel3
 	            , self egLevel4 , self keyVelocity , self rateScale
-	            , self type , self gain , self gate connectTo: intermediateBox .
+	            , self type , self gain , self gate) asBox connectTo: intermediateBox .
 	^ finalBox .
 ]
 

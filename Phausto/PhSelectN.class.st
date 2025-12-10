@@ -25,13 +25,13 @@ Class {
 }
 
 { #category : 'instance creation' }
-PhSelectN class >> new: anArrayOfNumbersOrUNitGenerators [
+PhSelectN class >> new: anArrayOfNumbersOrUnitGenerators [
 
 	| size |
-	size := (anArrayOfNumbersOrUNitGenerators size + 1) asString.
+	size := (anArrayOfNumbersOrUnitGenerators size + 1) asString.
 	"super initialize."
 	^ self new
-		  list: anArrayOfNumbersOrUNitGenerators;
+		  list: anArrayOfNumbersOrUnitGenerators asPhList;
 		  processExpression: 'process = ba.selectn(' , size asString , ');'
 ]
 
@@ -39,11 +39,11 @@ PhSelectN class >> new: anArrayOfNumbersOrUNitGenerators [
 PhSelectN >> asBox [
 
 	| intermediateBox phList finalBox indexBox |
-	phList := self list asBox.
-   indexBox := self index asBox.
+	phList := self list  .
+	indexBox := self index .
 	intermediateBox := super asBox.
 
-	finalBox :=  indexBox , phList connectTo: intermediateBox.
+	finalBox := indexBox  , phList connectTo: intermediateBox.
 	^ finalBox
 ]
 
@@ -57,19 +57,24 @@ PhSelectN >> index [
 PhSelectN >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.selectn (5);'.
+	processExpression := 'process = ba.selectn(5);'.
 	index := PhHSlider new
-			           label: self label , 'Index'
-			           init: 1
-			           min: 1
-			           max: 8
-			           step: 1
+		         label: self label , 'Index'
+		         init: 0
+		         min: 0
+		         max: 3
+		         step: 1.
+	list := {
+		        0.1 asBox.
+		        0.2 asBox.
+		        0.3 asBox.
+		        0.4 asBox } asPhList
 ]
 
 { #category : 'accessing' }
 PhSelectN >> list [
 
-	^ list asPhList 
+	^ list 
 ]
 
 { #category : 'accessing' }

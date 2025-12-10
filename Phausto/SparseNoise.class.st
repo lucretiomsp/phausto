@@ -13,9 +13,9 @@ Class {
 	#instVars : [
 		'frequency'
 	],
-	#category : 'Phausto-UnitGenerators',
+	#category : 'Phausto-Noises',
 	#package : 'Phausto',
-	#tag : 'UnitGenerators'
+	#tag : 'Noises'
 }
 
 { #category : 'initialization' }

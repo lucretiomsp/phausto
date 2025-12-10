@@ -127,16 +127,11 @@ labels := dirs collect:  [:i | i pathString afterLastSlash ].
 { #category : 'accessing' }
 TurboPhausto class >> listOfSynths [
 
-| synths |
-synths := #('Djembe' 
-'Marimba' 'Guitar'
-		'syclap'
-				 
-	'SyKick' 'Hat' 'DubDub' 
-		 'acid' 'chordy'
-				 'TpHoover' 
-	'TpReese' ).
-	^ synths inspect
+
+"	synths := #( 'Djembe' 'Marimba' 'Guitar' 'SyClap' 'SyKick' 'Hat' 'DubDub' 'Acid' 'Chordy' 'TpHoover' 'TpReese' 'Trombone' ).
+	^ synths inspect"
+	
+(self allSynths collect: [ :i | i label ]) inspect
 ]
 
 { #category : 'loading' }
@@ -169,42 +164,42 @@ TurboPhausto class >> loadAllSynths [
 	allSynths
 		add: (Djembe new
 				 label: 'djembe';
-				 trigger: #djembeGate;
-				 freq: #djembeNote);
+				 trigger: #djembeTrigger;
+				 freq: #djembeFreq);
 		add: (Marimba new
 				 label: 'marimba';
-				 trigger: #marimbaGate;
-				 freq: #marimbaNote);
+				 trigger: #marimbaTrigger;
+				 freq: #marimbaFreq);
 		add: (Guitar new
 				 label: 'guitar';
-				 trigger: #guitarGate;
-				 freq: #guitarNote);
+				 trigger: #guitarTrigger;
+				 freq: #guitarFreq);
 		add: (SawTrombone new
-				 label: 'trombone';
-				 freq: #tromboneNote);
+				 label: 'sawTrombone';
+				 freq: #sawTromboneFreq);
 		add: (Clap new
-				 label: 'syclap';
-				 tone: #syclapNote);
+				 label: 'syClap';
+				 tone: #syClapFreq);
 		add: (Kick new
-				 label: 'sykick';
-				 pitch: #sykickNote);
+				 label: 'syKick';
+				 pitch: #syKickFreq);
 		add: (Hat new
-				 label: 'syhat';
-				 pitch: #syhatNote);
+				 label: 'syHat';
+				 pitch: #syHatFreq);
 		"	add: (CombString new
 				 label: 'combstring';
-				 freq: #combstringNote);"
-		add: (DubDub new
-				 label: 'dubdub';
-				 freq: #dubdubNote);
+				 freq: #combstringNote);"add: (DubDub new
+			 label: 'dubdub';
+			 freq: #dubdubFreq);
 		add: (Acid new
 				 label: 'acid';
-				 pitch: #acidNote);
+				 pitch: #acidFreq);
 		add: (Chordy new
 				 label: 'chordy';
-				 pitch: #chordyNote);
-		add: (TpHoover new );
-		add: (TpReese new ).
+				 pitch: #chordyFreq);
+		add: (TpHoover new label: 'tpHoover');
+		add: (TpReese new label: 'tpReese'). ";
+				 pitch: #syhatFreq"
 	^ self
 ]
 
@@ -433,6 +428,11 @@ TurboPhausto >> playNote: aMidiNN prefix: aString dur: aDuration [
 	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
 ]
 
+{ #category : 'playing' }
+TurboPhausto >> restore [
+	self class tpPerf restore 
+]
+
 { #category : 'API - changes' }
 TurboPhausto >> reverb: anAmount [
 	"aSize maximum is 1 to prevent distortion"
@@ -483,6 +483,11 @@ TurboPhausto >> sweepToValue: aTargetValue parameter: aParamAsString in: aTimeIn
 	"  sweep the value of the selected parameter in a TimeInSeconds - the value is update every 10 milliseconds"
 ]
 
+{ #category : 'playing' }
+TurboPhausto >> temporarySave [
+	self class tpPerf temporarySave 
+]
+
 { #category : 'tracing' }
 TurboPhausto >> traceAllParams [ 
 
@@ -503,6 +508,12 @@ TurboPhausto >> trig: aString [
 	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
 
 	self class tpDsp trig: aString
+]
+
+{ #category : 'playing' }
+TurboPhausto >> unmute: aSymbol [
+
+	self class tpPerf unmute: aSymbol 
 ]
 
 { #category : 'LiveCoding - Performance' }

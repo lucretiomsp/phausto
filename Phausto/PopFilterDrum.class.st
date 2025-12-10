@@ -12,9 +12,7 @@ Class {
 	#name : 'PopFilterDrum',
 	#superclass : 'Synths',
 	#instVars : [
-		'freq',
-		'q',
-		'gate'
+		'q'
 	],
 	#category : 'Phausto-Synths',
 	#package : 'Phausto',
@@ -32,12 +30,6 @@ PopFilterDrum >> asBox [
 ]
 
 { #category : 'accessing' }
-PopFilterDrum >> freq [
-
-	^ freq 
-]
-
-{ #category : 'accessing' }
 PopFilterDrum >> gate [
 
 	^ gate 
@@ -48,22 +40,10 @@ PopFilterDrum >> initialize [
 
 	super initialize.
 	processExpression := 'process = sy.popFilterDrum;'.
-	freq := PhHSlider new
-		        label: self label , 'Note'
-		        init: 440
-		        min: 20
-		        max: 1400
-		        step: 0.1.
-		freq := PhHSlider new
-			          label: self label , 'Note'
-			          init: 440
-			          min: 20
-			          max: 1200
-			          step: 1.
-	self controlParameters add: #freq -> (self freq
-			 asControlParameterOfWidgetType: #knob
-			 description: 'Filter Frequency in Hertz').
-	gate := PhButton new label: self label , 'Gate'.
+
+
+	self controlParameters add: #freq -> (self freq asControlParameterOfWidgetType: #knob description: 'Filter Frequency in Hertz').
+
 	q := PhHSlider new
 		     label: self label , 'Q'
 		     init: 5
