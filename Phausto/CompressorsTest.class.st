@@ -32,3 +32,9 @@ self deny: PhLimiter1176Mono new  asDsp isNull
 CompressorsTest >> testPhLimiter1176StereoAsDsp [
 self deny: PhLimiter1176Stereo new  asDsp isNull
 ]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhPeakCompressionGainMonoAsDsp [
+
+	self deny: PhPeakCompressionGainMono new asDsp isNull
+]

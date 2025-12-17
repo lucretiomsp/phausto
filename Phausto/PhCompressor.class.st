@@ -14,7 +14,10 @@ Class {
 		'release',
 		'input',
 		'inputL',
-		'inputR'
+		'inputR',
+		'strength',
+		'knee',
+		'prePost'
 	],
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
@@ -58,9 +61,20 @@ PhCompressor >> inputR [
 ]
 
 { #category : 'accessing' }
+PhCompressor >> knee [ 
+^ knee
+]
+
+{ #category : 'accessing' }
 PhCompressor >> lad [
 
 	^ lad
+]
+
+{ #category : 'accessing' }
+PhCompressor >> prePost [ 
+
+^ prePost
 ]
 
 { #category : 'accessing' }
@@ -73,6 +87,12 @@ PhCompressor >> ratio [
 PhCompressor >> release [ 
 
 ^ release
+]
+
+{ #category : 'accessing' }
+PhCompressor >> strength [ 
+
+^ strength
 ]
 
 { #category : 'accessing' }
