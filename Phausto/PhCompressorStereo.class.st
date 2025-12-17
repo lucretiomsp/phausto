@@ -1,5 +1,5 @@
 "
-Mono dynamic range compressor from the Faust standard libray
+Stereo dynamic range compressor from the Faust standard libray
 
 ## Parameters: 
 **ratio:** compression ratio (1 = no compression, >1 means compression) Ratios: 4 is moderate compression, 8 is strong compression, 12 is mild limiting, and 20 is pretty hard limiting at the threshold
@@ -8,7 +8,7 @@ Mono dynamic range compressor from the Faust standard libray
 **release:** release time = time constant (sec) coming out of compression
 "
 Class {
-	#name : 'PhCompressorMono',
+	#name : 'PhCompressorStereo',
 	#superclass : 'PhCompressor',
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
@@ -16,15 +16,17 @@ Class {
 }
 
 { #category : 'converting' }
-PhCompressorMono >> asBox [ 
+PhCompressorStereo >> asBox [
 
-^ self input asBox , self ratio asBox , self threshold asBox , self attack asBox , self release asBox connectTo: super asBox 
+	^ self inputL asBox , self inputR asBox ,  ratio asBox , self threshold asBox
+	  , self attack asBox , self release asBox connectTo: super asBox
 ]
 
 { #category : 'initialization' }
-PhCompressorMono >> initialize [
+PhCompressorStereo >> initialize [
 
 	super initialize.
 	processExpression := 'process = co.compressor_mono;'.
-	input := 0 .
+	inputL := 0.
+	inputR := 0.
 ]
