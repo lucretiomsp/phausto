@@ -21,7 +21,7 @@ PhLimiter1176Stereo >> initialize [
 
 	super initialize.
 	processExpression := 'process = co.limiter_1176_R4_stereo;'.
-	inputL := 0 asBox.
-	inputR := 0 asBox.
+	inputL := 0 .
+	inputR := 0 .
 
 ]

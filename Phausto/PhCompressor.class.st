@@ -28,6 +28,21 @@ Class {
 }
 
 { #category : 'accessing' }
+PhCompressor >> attack [ 
+^ attack
+]
+
+{ #category : 'initialization' }
+PhCompressor >> initialize [ 
+
+super initialize.
+ratio := 4.
+threshold := -9.
+attack := 0.01.
+release := 0.2
+]
+
+{ #category : 'accessing' }
 PhCompressor >> input [
 
 
@@ -46,4 +61,21 @@ PhCompressor >> inputR [
 
 
 ^ inputR
+]
+
+{ #category : 'accessing' }
+PhCompressor >> ratio [ 
+
+^ ratio
+]
+
+{ #category : 'accessing' }
+PhCompressor >> release [ 
+
+^ release
+]
+
+{ #category : 'accessing' }
+PhCompressor >> threshold [  
+^ threshold
 ]

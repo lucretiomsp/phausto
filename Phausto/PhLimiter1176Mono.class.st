@@ -13,13 +13,13 @@ Class {
 { #category : 'converting' }
 PhLimiter1176Mono >> asBox [ 
 
-^  self input asBox connectTo: super asBox.
+^  self input asBox , self ratio asBox , self attack asBox , self release connectTo: super asBox.
 ]
 
 { #category : 'initialization' }
 PhLimiter1176Mono >> initialize [
 
 	super initialize.
-	processExpression := 'process = co.limiter_1176_R4_mono;'.
-	input := 0 asBox.
+	processExpression := 'process = co.compressor_mono;'.
+	input := 0 .
 ]
