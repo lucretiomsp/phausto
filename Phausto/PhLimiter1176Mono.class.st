@@ -1,5 +1,6 @@
 "
-Mono Limiter
+Mono Limiter.
+A limiter guards against hard-clipping. It can be implemented as a compressor having a high threshold (near the clipping level), fast attack, and high ratio. Since the compression ratio is so high, some knee smoothing is desirable (for softer limiting). This example is intended to get you started using compressors as limiters, so all parameters are hardwired here to nominal values.
 "
 Class {
 	#name : 'PhLimiter1176Mono',

@@ -30,6 +30,20 @@ Class {
 { #category : 'accessing' }
 PhCompressor >> input [
 
-| inpu |
+
 ^ input
+]
+
+{ #category : 'accessing' }
+PhCompressor >> inputL [
+
+
+^ inputL
+]
+
+{ #category : 'accessing' }
+PhCompressor >> inputR [
+
+
+^ inputR
 ]
