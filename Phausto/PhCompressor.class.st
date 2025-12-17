@@ -1,12 +1,6 @@
 "
 Convenience superclass for Compressors and Limiters
-
-## Parameters
-**lad:** is the lookahead delay in seconds, known at compile-time
-**ceiling:** dB level threshold above which compression kicks in (0 dB = max level)
-**attack:** is the attack time in seconds
-
-**release:** is the release time in seconds
+More about compressors on [Wikipedia](http://en.wikipedia.org/wiki/Dynamic_range_compression) and on [Julius Smith III wewbpage](https://ccrma.stanford.edu/~jos/filters/Nonlinear_Filter_Example_Dynamic.html)
 "
 Class {
 	#name : 'PhCompressor',
@@ -61,6 +55,12 @@ PhCompressor >> inputR [
 
 
 ^ inputR
+]
+
+{ #category : 'accessing' }
+PhCompressor >> lad [
+
+	^ lad
 ]
 
 { #category : 'accessing' }

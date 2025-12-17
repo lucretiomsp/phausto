@@ -16,9 +16,11 @@ Class {
 }
 
 { #category : 'converting' }
-PhCompressorMono >> asBox [ 
+PhCompressorMono >> asBox [
 
-^ self input asBox , self ratio asBox , self threshold asBox , self attack asBox , self release asBox connectTo: super asBox 
+	^ self input asBox , self ratio asBox
+	  , self threshold asBox , self attack asBox , self release asBox
+		  connectTo: super asBox
 ]
 
 { #category : 'initialization' }

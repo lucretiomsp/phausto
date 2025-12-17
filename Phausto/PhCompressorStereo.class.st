@@ -18,15 +18,16 @@ Class {
 { #category : 'converting' }
 PhCompressorStereo >> asBox [
 
-	^ self inputL asBox , self inputR asBox ,  ratio asBox , self threshold asBox
-	  , self attack asBox , self release asBox connectTo: super asBox
+	^ self inputL asBox , self inputR asBox , self ratio asBox
+	  , self threshold asBox , self attack asBox , self release asBox
+		  connectTo: super asBox
 ]
 
 { #category : 'initialization' }
 PhCompressorStereo >> initialize [
 
 	super initialize.
-	processExpression := 'process = co.compressor_mono;'.
+	processExpression := 'process = co.compressor_stereo;'.
 	inputL := 0.
-	inputR := 0.
+	inputR := 0
 ]

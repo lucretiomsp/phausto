@@ -20,6 +20,6 @@ PhLimiter1176Mono >> asBox [
 PhLimiter1176Mono >> initialize [
 
 	super initialize.
-	processExpression := 'process = co.compressor_mono;'.
-	input := 0 .
+	processExpression := 'process = co.limiter_1176_R4_mono;'.
+	input := 0
 ]

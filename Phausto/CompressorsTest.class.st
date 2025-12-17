@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+CompressorsTest >> testPhCompressorLadMonoAsDsp [
+
+	self deny: PhCompressorLadMono new asDsp isNull
+]
+
+{ #category : 'tests' }
 CompressorsTest >> testPhCompressorMonoAsDsp [
 self deny: PhCompressorMono new  asDsp isNull
 ]
