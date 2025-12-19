@@ -38,3 +38,12 @@ CompressorsTest >> testPhPeakCompressionGainMonoAsDsp [
 
 	self deny: PhPeakCompressionGainMono new asDsp isNull
 ]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhPeakCompressionGainMultichannelAsDsp [
+
+
+"crashes apparently for no reason"
+self assert: 1 equals: 0
+	"self deny: PhPeakCompressionGainMultichannel new asDsp isNull"
+]
