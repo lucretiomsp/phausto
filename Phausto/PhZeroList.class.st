@@ -17,6 +17,12 @@ oneElementArray := Array with: aUnitGenerator .
 	self addAll: oneElementArray
 ]
 
+{ #category : 'converting' }
+PhZeroList >> asPhList [
+	
+^ self
+]
+
 { #category : 'initialization' }
 PhZeroList >> initialize [
 

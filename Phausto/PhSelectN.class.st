@@ -28,7 +28,7 @@ Class {
 PhSelectN class >> new: anArrayOfNumbersOrUnitGenerators [
 
 	| size |
-	size := (anArrayOfNumbersOrUnitGenerators size + 1) asString.
+	size := (anArrayOfNumbersOrUnitGenerators size ) asString.
 	"super initialize."
 	^ self new
 		  list: anArrayOfNumbersOrUnitGenerators asPhList;
@@ -84,7 +84,7 @@ PhSelectN >> list: anArrayOfNumbersOrUnitGenerators [
 	list := anArrayOfNumbersOrUnitGenerators.
 
 
-	size := (anArrayOfNumbersOrUnitGenerators size + 1) asString.
+	size := (anArrayOfNumbersOrUnitGenerators size ) asString.
 
 	processExpression := 'process = ba.selectn(' , size asString , ');'
 ]
