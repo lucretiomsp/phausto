@@ -18,7 +18,8 @@ Class {
 	#name : 'DSPParameterStore',
 	#superclass : 'Object',
 	#instVars : [
-		'parameters'
+		'parameters',
+		'dsp'
 	],
 	#category : 'Phausto-DSP',
 	#package : 'Phausto',
@@ -28,11 +29,23 @@ Class {
 { #category : 'instance creation' }
 DSPParameterStore class >> from: aDSP [
 
-|instance |
-instance := self new.
+	| instance |
+	instance := self new.
 	aDSP getUIItemsLabeledDictionary keysAndValuesDo: [ :k :v |
 		instance parameters at: k put: (DSPParameter fromDictionary: v) ].
-	^ instance 
+	instance dsp: aDSP .
+	^ instance
+]
+
+{ #category : 'accessing' }
+DSPParameterStore >> dsp [ 
+^ dsp
+]
+
+{ #category : 'accessing' }
+DSPParameterStore >> dsp: aDsp [
+
+dsp := aDsp
 ]
 
 { #category : 'initialization' }

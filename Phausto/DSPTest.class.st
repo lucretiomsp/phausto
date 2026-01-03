@@ -39,12 +39,13 @@ self assert: param  maxValue equals: 4086.
 { #category : 'tests' }
 DSPTest >> testDSPParameterStoreForSquareOsc [
 
-| store dsp |
-dsp := SquareOsc new asDsp.
-dsp init.
-store := DSPParameterStore from: dsp.
+	| store dsp |
+	dsp := SquareOsc new asDsp.
+	dsp init.
+	store := DSPParameterStore from: dsp.
 
-self assert: store parameters size equals: 2
+	self assert: store parameters size equals: 2.
+	self assert: store dsp equals: dsp.
 ]
 
 { #category : 'tests' }
