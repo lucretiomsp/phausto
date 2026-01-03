@@ -24,7 +24,8 @@ Class {
 		'displayedUI',
 		'parameters',
 		'isMIDI',
-		'source'
+		'source',
+		'parameterStore'
 	],
 	#classVars : [
 		'defaultName',
@@ -551,6 +552,12 @@ DSP >> openSliderFor: aString [
 	
 fader := self sliderFor: aString.
 fader openInWindow.
+]
+
+{ #category : 'accessing' }
+DSP >> parameterStore [
+
+	^ DSPParameterStore from: self
 ]
 
 { #category : 'accessing' }
