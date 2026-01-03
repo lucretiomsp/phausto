@@ -26,6 +26,11 @@ Class {
 	#tag : 'DSP'
 }
 
+{ #category : 'instance creation' }
+DSPParameter class >> fromDictionary: aParameterDictionary [ 
+	^ self new label: (aParameterDictionary at: #label); shortName: (aParameterDictionary at: #shortname) ; minValue: (aParameterDictionary at: #min) ; maxValue: (aParameterDictionary at: #max) ; initValue: (aParameterDictionary at: #init); type: (aParameterDictionary at: #type); stepValue: (aParameterDictionary at: #step)
+]
+
 { #category : 'accessing' }
 DSPParameter >> initValue [
 
