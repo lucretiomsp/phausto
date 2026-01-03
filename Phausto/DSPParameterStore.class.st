@@ -17,7 +17,33 @@ It only stores parameters and their current values.""
 Class {
 	#name : 'DSPParameterStore',
 	#superclass : 'Object',
+	#instVars : [
+		'parameters'
+	],
 	#category : 'Phausto-DSP',
 	#package : 'Phausto',
 	#tag : 'DSP'
 }
+
+{ #category : 'instance creation' }
+DSPParameterStore class >> from: aDSP [
+
+|instance |
+instance := self new.
+	aDSP getUIItemsLabeledDictionary keysAndValuesDo: [ :k :v |
+		instance parameters at: k put: (DSPParameter fromDictionary: v) ].
+	^ instance 
+]
+
+{ #category : 'initialization' }
+DSPParameterStore >> initialize [ 
+super initialize .
+
+parameters  := Dictionary new
+]
+
+{ #category : 'accessing' }
+DSPParameterStore >> parameters [ 
+
+^ parameters
+]
