@@ -52,6 +52,14 @@ jobs:
            echo "✗ Missing: $lib"
            fi
            done
+      - name: List contents of librariesBundle
+        if: ${{ contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu') }}
+        run: |
+            echo "Contents of librariesBundle:"
+            ls -al "$HOME/.smalltalkCI/_builds/librariesBundle"
+            echo "Contents of faustLibs:"
+            ls -al "$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs"
+
         
       - name: Set working directory to librariesBundle
         if: ${{ contains(matrix.os, 'macos') }}
