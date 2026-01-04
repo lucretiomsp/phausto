@@ -46,5 +46,5 @@ CITest >> testDsp [
 { #category : 'tests' }
 CITest >> testSineOscCI [
 
-	self deny: SineOsc new  asDsp isNull
+	self deny: SquareOsc new asDsp isNull
 ]
