@@ -46,5 +46,5 @@ CITest >> testDsp [
 { #category : 'tests' }
 CITest >> testSineOscCI [
 
-	self deny: Wire new asDsp isNull
+	self assert: (BoxAPI uniqueInstance boxButton: 'aButton') class equals: PhBox
 ]
