@@ -41,44 +41,6 @@ jobs:
         if: ${{ contains(matrix.os, 'macos') }}
         run: cd "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      - name: Check Faust all.lib exists (macOS)
-        run: |
-           FILE="/Users/runner/.smalltalkCI/_builds/librariesBundle/faustLibs/all.lib"
-           if [ -f "$FILE" ]; then
-             echo "✅ File exists: $FILE"
-           else
-              echo "❌ File not found: $FILE"
-           exit 1
-           fi
-      - name: List libfaust.2.dylib dependencies and check they exist
-        if: ${{ contains(matrix.os, 'macos') }}
-        run: |
-           BUNDLE="$HOME/.smalltalkCI/_builds/librariesBundle"
-           LIB_FILE="$BUNDLE/libfaust.2.dylib"
-
-           echo "Dependencies of libfaust.2.dylib:"
-           otool -L "$LIB_FILE"
-
-    
-           echo "Checking dependent libraries..."
-           for dep in $(otool -L "$LIB_FILE" | tail -n +2 | awk '{print $1}'); do
-  
-           if [[ "$dep" == /usr/lib/* ]] || [[ "$dep" == /System/* ]]; then
-           continue
-           fi
-
-      
-           dep_path="${dep//@rpath/$BUNDLE}"
-           dep_path="${dep_path//@loader_path/$BUNDLE}"
-
-           if [ -f "$dep_path" ]; then
-           echo "✅ Found dependency: $dep_path"
-           else
-           echo "❌ Missing dependency: $dep_path"
-           fi
-           done
-
-
       - name: Install Libraries Bundle (ubuntu)
         if: ${{ contains(matrix.os, 'ubuntu') }}
         run: |
