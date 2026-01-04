@@ -42,3 +42,9 @@ CITest >> testDsp [
 
 	self deny: 1 asBox asDsp isNull
 ]
+
+{ #category : 'tests' }
+CITest >> testSineOscCI [
+
+	self deny: SineOsc new  asDsp isNull
+]
