@@ -22,9 +22,8 @@ Wire >> asBox [
 	"^ BoxAPI uniqueInstance boxWire "
 
 	| box code |
-	
-	code := 'import("stdfaust.lib"); process = _ ;'.
-
+	"code := 'import(""stdfaust.lib""); process = _ ;'."
+code := 'process = _ ;'.
 	box := BoxAPI uniqueInstance
 		       boxFromString: code
 		       inputs: self inputs
