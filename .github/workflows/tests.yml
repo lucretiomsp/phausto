@@ -115,6 +115,15 @@ jobs:
         run: unzip "D:\a\phausto\phausto\librariesBundle_windows_intel.zip" -d "C:\Users\runneradmin\.smalltalkCI\_builds" && dir "C:\Users\runneradmin\.smalltalkCI\_builds\librariesBundle"
         if: ${{ contains(matrix.os, 'win') }}
 
+      - name: Set library environment
+        if: ${{ contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu') }}
+        run: |
+          echo "Setting library environment for Pharo VM"
+          export DYLD_LIBRARY_PATH="$HOME/.smalltalkCI/_builds/librariesBundle"
+          export LD_LIBRARY_PATH="$HOME/.smalltalkCI/_builds/librariesBundle"
+          export FAUST_LIB_PATH="$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs"
+
+
       - name: Load Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
         shell: bash
