@@ -123,6 +123,13 @@ jobs:
           export LD_LIBRARY_PATH="$HOME/.smalltalkCI/_builds/librariesBundle"
           export FAUST_LIB_PATH="$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs"
 
+      - name: Set Faust environment (macOS / Linux)
+        if: ${{ contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu') }}
+        run: |
+           echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> $GITHUB_ENV
+           echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
+           echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
+
 
       - name: Load Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
