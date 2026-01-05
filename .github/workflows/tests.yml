@@ -36,48 +36,34 @@ jobs:
       - name: Install Libraries Bundle (M1)
         run: (hdiutil attach "/Users/runner/work/phausto/phausto/phaustoLibrariesM1.dmg" -mountpoint /Volumes/phaustoLibrariesM1 -nobrowse -readonly && mkdir -p "/Users/runner/.smalltalkCI/_builds/librariesBundle" && cp -R /Volumes/phaustoLibrariesM1/* "/Users/runner/.smalltalkCI/_builds/librariesBundle"); hdiutil detach /Volumes/phaustoLibrariesM1 && ls -all "/Users/runner/.smalltalkCI/_builds/librariesBundle" && ls -all "/Users/runner/.smalltalkCI/_builds/librariesBundle/faustLibs"
         if: ${{ contains(matrix.os, 'macos') }}
+
+      - name: Debug library dependencies
+        if: contains(matrix.os, 'macos')
+        run: |
+           cd "$HOME/.smalltalkCI/_builds/librariesBundle"
+           echo "=== Library dependencies ==="
+           otool -L libdynamic-engine.dylib
+           echo ""
+           echo "=== Checking if dependencies exist ==="
+           otool -L libdynamic-engine.dylib | tail -n +2 | awk '{print $1}' | while read lib; do
+           if [ -f "$lib" ]; then
+           echo "✓ Found: $lib"
+           else
+           echo "✗ Missing: $lib"
+           fi
+           done
+      - name: List contents of librariesBundle
+        if: ${{ contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu') }}
+        run: |
+            echo "Contents of librariesBundle:"
+            ls -al "$HOME/.smalltalkCI/_builds/librariesBundle"
+            echo "Contents of faustLibs:"
+            ls -al "$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs"
+
         
       - name: Set working directory to librariesBundle
         if: ${{ contains(matrix.os, 'macos') }}
         run: cd "$HOME/.smalltalkCI/_builds/librariesBundle"
-
-      - name: Check Faust all.lib exists (macOS)
-        run: |
-           FILE="/Users/runner/.smalltalkCI/_builds/librariesBundle/faustLibs/all.lib"
-           if [ -f "$FILE" ]; then
-             echo "✅ File exists: $FILE"
-           else
-              echo "❌ File not found: $FILE"
-           exit 1
-           fi
-      - name: List libfaust.2.dylib dependencies and check they exist
-        if: ${{ contains(matrix.os, 'macos') }}
-        run: |
-           BUNDLE="$HOME/.smalltalkCI/_builds/librariesBundle"
-           LIB_FILE="$BUNDLE/libfaust.2.dylib"
-
-           echo "Dependencies of libfaust.2.dylib:"
-           otool -L "$LIB_FILE"
-
-    
-           echo "Checking dependent libraries..."
-           for dep in $(otool -L "$LIB_FILE" | tail -n +2 | awk '{print $1}'); do
-  
-           if [[ "$dep" == /usr/lib/* ]] || [[ "$dep" == /System/* ]]; then
-           continue
-           fi
-
-      
-           dep_path="${dep//@rpath/$BUNDLE}"
-           dep_path="${dep_path//@loader_path/$BUNDLE}"
-
-           if [ -f "$dep_path" ]; then
-           echo "✅ Found dependency: $dep_path"
-           else
-           echo "❌ Missing dependency: $dep_path"
-           fi
-           done
-
 
       - name: Install Libraries Bundle (ubuntu)
         if: ${{ contains(matrix.os, 'ubuntu') }}
@@ -128,6 +114,15 @@ jobs:
       - name: Install Libraries Bundle (win)
         run: unzip "D:\a\phausto\phausto\librariesBundle_windows_intel.zip" -d "C:\Users\runneradmin\.smalltalkCI\_builds" && dir "C:\Users\runneradmin\.smalltalkCI\_builds\librariesBundle"
         if: ${{ contains(matrix.os, 'win') }}
+
+      - name: Set library environment
+        if: ${{ contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu') }}
+        run: |
+          echo "Setting library environment for Pharo VM"
+          export DYLD_LIBRARY_PATH="$HOME/.smalltalkCI/_builds/librariesBundle"
+          export LD_LIBRARY_PATH="$HOME/.smalltalkCI/_builds/librariesBundle"
+          export FAUST_LIB_PATH="$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs"
+
 
       - name: Load Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
