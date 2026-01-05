@@ -11,6 +11,6 @@ SmalltalkCISpec {
     }
   ],
   #testing: {
-    #classes : [ #CITest ]
+    #classes : [ #CITest , #UnitGeneratorTest , #DxTest ,  #ExtensionsTest , #NoisesTest ]
   }
 }
