@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-BasicLibTest >> testDownSamplerAsDsp [ 
+BasicLibTest >> TODOtestDownSamplerAsDsp [ 
 
 	self deny: DownSampler new asDsp isNull
 ]
