@@ -25,53 +25,53 @@ jobs:
         ston: [.smalltalk.ston]
 
     steps:
-      # ------------------------------
-      # Checkout repository
-      # ------------------------------
+      # --------------------------------------------------
+      # Checkout
+      # --------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # ------------------------------
+      # --------------------------------------------------
       # Setup SmalltalkCI
-      # ------------------------------
+      # --------------------------------------------------
       - name: Setup SmalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
 
-      # ==========================================================
-      # Ubuntu: Install system audio dependencies
-      # ==========================================================
-      - name: Install system libraries (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
+      # ==================================================
+      # Ubuntu dependencies
+      # ==================================================
+      - name: Install Ubuntu dependencies
+        if: matrix.os == 'ubuntu-22.04'
         shell: bash
         run: |
           sudo apt-get update
           sudo apt-get install -y pulseaudio libpulse0 libjack0 unzip
 
-      # ------------------------------
-      # Prepare librariesBundle directory
-      # ------------------------------
+      # --------------------------------------------------
+      # Prepare librariesBundle directory (all OS)
+      # --------------------------------------------------
       - name: Prepare librariesBundle directory
         shell: bash
         run: |
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      # ==========================================================
-      # Ubuntu: Install libraries bundle
-      # ==========================================================
+      # ==================================================
+      # Ubuntu: install libraries bundle
+      # ==================================================
       - name: Install Libraries Bundle (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
+        if: matrix.os == 'ubuntu-22.04'
         shell: bash
         run: |
           unzip -q librariesBundle_Linux.zip \
             -d "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      # ==========================================================
-      # macOS: Install libraries bundle
-      # ==========================================================
+      # ==================================================
+      # macOS: install libraries bundle
+      # ==================================================
       - name: Install Libraries Bundle (macOS)
-        if: contains(matrix.os, 'macos')
+        if: matrix.os == 'macos-latest'
         shell: bash
         run: |
           hdiutil attach phaustoLibrariesM1.dmg \
@@ -81,34 +81,77 @@ jobs:
             "$HOME/.smalltalkCI/_builds/librariesBundle"
           hdiutil detach /Volumes/phausto
 
-      # ==========================================================
-      # Windows: Install libraries bundle
-      # ==========================================================
+      # ==================================================
+      # Windows: install libraries bundle
+      # ==================================================
       - name: Install Libraries Bundle (Windows)
-        if: contains(matrix.os, 'windows')
+        if: matrix.os == 'windows-latest'
         shell: powershell
         run: |
-          Expand-Archive librariesBundle_windows_intel.zip `
-            "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
+          $dest = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
+          Expand-Archive librariesBundle_windows_intel.zip $dest -Force
 
-      # ------------------------------
-      # Set library environment (Linux/macOS)
-      # ------------------------------
+      # ==================================================
+      # Windows: CHECK DLL DEPENDENCIES (LoadLibrary)
+      # ==================================================
+      - name: Check dynamic-engine DLL dependencies (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: powershell
+        run: |
+          $dll = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle\librariesBundle\libdynamic-engine.dll"
+
+          if (-not (Test-Path $dll)) {
+            Write-Error "❌ libdynamic-engine.dll not found"
+            exit 1
+          }
+
+          Add-Type -TypeDefinition @"
+          using System;
+          using System.Runtime.InteropServices;
+          public static class Win32 {
+            [DllImport("kernel32.dll", SetLastError = true)]
+            public static extern IntPtr LoadLibrary(string lpFileName);
+          }
+"@
+
+          $handle = [Win32]::LoadLibrary($dll)
+
+          if ($handle -eq [IntPtr]::Zero) {
+            $err = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
+            Write-Error "❌ DLL failed to load. Missing dependency (likely ASIO). Win32 error: $err"
+            exit 1
+          }
+
+          Write-Host "✅ DLL loaded successfully – all dependencies resolved"
+
+      # ==================================================
+      # Set environment (Linux/macOS only)
+      # ==================================================
       - name: Set library environment
-        if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
+        if: matrix.os != 'windows-latest'
         shell: bash
         run: |
           echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> "$GITHUB_ENV"
           echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
-          if [[ "${{ matrix.os }}" == *macos* ]]; then
+          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
             echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
           fi
 
-      # ------------------------------
-      # Run SmalltalkCI tests
-      # ------------------------------
+      # ==================================================
+      # Run SmalltalkCI (Linux/macOS only)
+      # ==================================================
       - name: Run SmalltalkCI
+        if: matrix.os != 'windows-latest'
         shell: bash
         timeout-minutes: 20
         run: |
           smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
+
+      # ==================================================
+      # Windows: explicit skip message
+      # ==================================================
+      - name: Skip Windows tests (audio backend)
+        if: matrix.os == 'windows-latest'
+        shell: powershell
+        run: |
+          Write-Host "Windows tests skipped: audio engine requires ASIO, unavailable on CI."
