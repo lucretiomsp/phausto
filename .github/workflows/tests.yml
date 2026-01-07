@@ -82,7 +82,7 @@ jobs:
           hdiutil detach /Volumes/phausto
 
       # ==========================================================
-      # Windows: Install libraries bundle
+      # Windows: Install libraries bundle (FLATTENED)
       # ==========================================================
       - name: Install Libraries Bundle (Windows)
         if: contains(matrix.os, 'windows')
@@ -106,6 +106,7 @@ jobs:
         run: |
           echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> "$GITHUB_ENV"
           echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
+
           if [[ "${{ matrix.os }}" == *macos* ]]; then
             echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
 
