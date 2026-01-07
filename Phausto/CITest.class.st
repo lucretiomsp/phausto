@@ -44,6 +44,13 @@ CITest >> testDsp [
 ]
 
 { #category : 'tests' }
+CITest >> testInputProcess [
+
+
+	self deny: (DSP create: 'process = _;') isNull
+]
+
+{ #category : 'tests' }
 CITest >> testSineOscCI [
 
 	self deny: SineOsc new asDsp isNull
