@@ -74,11 +74,8 @@ jobs:
         if: matrix.os == 'macos-latest'
         shell: bash
         run: |
-          hdiutil attach phaustoLibrariesM1.dmg \
-            -mountpoint /Volumes/phausto \
-            -nobrowse -readonly
-          cp -R /Volumes/phausto/* \
-            "$HOME/.smalltalkCI/_builds/librariesBundle"
+          hdiutil attach phaustoLibrariesM1.dmg -mountpoint /Volumes/phausto -nobrowse -readonly
+          cp -R /Volumes/phausto/* "$HOME/.smalltalkCI/_builds/librariesBundle"
           hdiutil detach /Volumes/phausto
 
       # ==================================================
@@ -92,7 +89,7 @@ jobs:
           Expand-Archive librariesBundle_windows_intel.zip $dest -Force
 
       # ==================================================
-      # Windows: CHECK DLL DEPENDENCIES (LoadLibrary)
+      # Windows: CHECK DLL DEPENDENCIES (safe LoadLibrary)
       # ==================================================
       - name: Check dynamic-engine DLL dependencies (Windows)
         if: matrix.os == 'windows-latest'
@@ -101,28 +98,30 @@ jobs:
           $dll = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle\librariesBundle\libdynamic-engine.dll"
 
           if (-not (Test-Path $dll)) {
-            Write-Error "❌ libdynamic-engine.dll not found"
+            Write-Error "libdynamic-engine.dll not found"
             exit 1
           }
 
-          Add-Type -TypeDefinition @"
-          using System;
-          using System.Runtime.InteropServices;
-          public static class Win32 {
-            [DllImport("kernel32.dll", SetLastError = true)]
-            public static extern IntPtr LoadLibrary(string lpFileName);
-          }
-"@
+          $source = @'
+using System;
+using System.Runtime.InteropServices;
+public class Loader {
+  [DllImport("kernel32.dll", SetLastError=true)]
+  public static extern IntPtr LoadLibrary(string lpFileName);
+}
+'@
 
-          $handle = [Win32]::LoadLibrary($dll)
+          Add-Type -TypeDefinition $source
+
+          $handle = [Loader]::LoadLibrary($dll)
 
           if ($handle -eq [IntPtr]::Zero) {
             $err = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
-            Write-Error "❌ DLL failed to load. Missing dependency (likely ASIO). Win32 error: $err"
+            Write-Error "DLL failed to load. Missing dependency (likely ASIO). Win32 error: $err"
             exit 1
           }
 
-          Write-Host "✅ DLL loaded successfully – all dependencies resolved"
+          Write-Host "DLL loaded successfully"
 
       # ==================================================
       # Set environment (Linux/macOS only)
@@ -148,10 +147,10 @@ jobs:
           smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
 
       # ==================================================
-      # Windows: explicit skip message
+      # Windows: explicit skip
       # ==================================================
-      - name: Skip Windows tests (audio backend)
+      - name: Skip Windows tests
         if: matrix.os == 'windows-latest'
         shell: powershell
         run: |
-          Write-Host "Windows tests skipped: audio engine requires ASIO, unavailable on CI."
+          Write-Host "Windows tests skipped: audio engine requires ASIO."
