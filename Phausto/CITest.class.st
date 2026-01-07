@@ -48,3 +48,9 @@ CITest >> testSineOscCI [
 
 	self deny: SineOsc new asDsp isNull
 ]
+
+{ #category : 'tests' }
+CITest >> testWireCI [
+
+	self deny: Wire new asDsp isNull
+]
