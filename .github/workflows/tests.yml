@@ -25,22 +25,22 @@ jobs:
         ston: [.smalltalk.ston]
 
     steps:
-      # --------------------------------------------------
+      # ------------------------------
       # Checkout
-      # --------------------------------------------------
+      # ------------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # --------------------------------------------------
+      # ------------------------------
       # Setup SmalltalkCI
-      # --------------------------------------------------
+      # ------------------------------
       - name: Setup SmalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
 
       # ==================================================
-      # Ubuntu system dependencies
+      # Ubuntu: system dependencies
       # ==================================================
       - name: Install system libraries (Ubuntu)
         if: matrix.os == 'ubuntu-22.04'
@@ -52,15 +52,15 @@ jobs:
             libjack0 \
             unzip
 
-      # --------------------------------------------------
+      # ------------------------------
       # Prepare librariesBundle directory
-      # --------------------------------------------------
+      # ------------------------------
       - name: Prepare librariesBundle directory
         run: |
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
       # ==================================================
-      # Ubuntu libraries bundle
+      # Ubuntu: libraries bundle
       # ==================================================
       - name: Install Libraries Bundle (Ubuntu)
         if: matrix.os == 'ubuntu-22.04'
@@ -69,7 +69,7 @@ jobs:
             -d "$HOME/.smalltalkCI/_builds/librariesBundle"
 
       # ==================================================
-      # macOS libraries bundle
+      # macOS: libraries bundle
       # ==================================================
       - name: Install Libraries Bundle (macOS)
         if: matrix.os == 'macos-latest'
@@ -79,7 +79,7 @@ jobs:
           hdiutil detach /Volumes/phausto
 
       # ==================================================
-      # Windows libraries bundle
+      # Windows: libraries bundle
       # ==================================================
       - name: Install Libraries Bundle (Windows)
         if: matrix.os == 'windows-latest'
@@ -90,24 +90,21 @@ jobs:
           Expand-Archive librariesBundle_windows_intel.zip $dest -Force
 
       # ==================================================
-      # Windows: dependency inspection (NO execution)
+      # Windows: sanity check ONLY
       # ==================================================
-      - name: Inspect Windows DLL dependencies
+      - name: Verify DLL presence (Windows)
         if: matrix.os == 'windows-latest'
         shell: powershell
         run: |
           $dll = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle\librariesBundle\libdynamic-engine.dll"
-
           if (-not (Test-Path $dll)) {
             Write-Error "libdynamic-engine.dll not found"
             exit 1
           }
-
-          Write-Host "Found libdynamic-engine.dll"
-          dumpbin /dependents $dll
+          Write-Host "libdynamic-engine.dll found — skipping execution (ASIO)"
 
       # ==================================================
-      # Environment variables (Linux + macOS only)
+      # Environment variables (Linux + macOS)
       # ==================================================
       - name: Set library environment
         if: matrix.os != 'windows-latest'
