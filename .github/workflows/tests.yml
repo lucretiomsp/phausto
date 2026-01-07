@@ -37,7 +37,7 @@ jobs:
           smalltalk-image: ${{ matrix.smalltalk }}
 
       # ==========================================================
-      # UBUNTU: Disable needrestart (CRITICAL)
+      # UBUNTU: Disable needrestart (prevents exit code 1)
       # ==========================================================
       - name: Disable needrestart (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
@@ -47,7 +47,7 @@ jobs:
           echo '$nrconf{restart} = "a";' | sudo tee /etc/needrestart/needrestart.conf
 
       # ==========================================================
-      # UBUNTU: Install system audio dependencies
+      # UBUNTU: Install system audio libraries
       # ==========================================================
       - name: Install system libraries (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
@@ -60,21 +60,29 @@ jobs:
             libjack0
 
       # ==========================================================
-      # UBUNTU: Fix Node 20 PulseAudio ABI mismatch
+      # UBUNTU: Fix Node 20 PulseAudio ABI mismatch (BULLETPROOF)
       # ==========================================================
       - name: Fix libpulsecommon ABI (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
         shell: bash
         run: |
-          REAL_LIB=$(ldconfig -p | grep libpulsecommon.so | awk '{print $4}' | head -n1)
+          set +e
+
+          REAL_LIB=$(find /usr/lib/x86_64-linux-gnu \
+            -name 'libpulsecommon.so*' \
+            | grep -v 13.99 \
+            | head -n1)
 
           if [ -z "$REAL_LIB" ]; then
-            echo "❌ libpulsecommon.so not found"
+            echo "❌ libpulsecommon not found"
+            ls -l /usr/lib/x86_64-linux-gnu | grep pulse || true
             exit 1
           fi
 
-          echo "✔ Using $REAL_LIB"
-          sudo ln -sf "$REAL_LIB" /usr/lib/x86_64-linux-gnu/libpulsecommon-13.99.so
+          echo "✔ Found $REAL_LIB"
+          sudo ln -sf "$REAL_LIB" \
+            /usr/lib/x86_64-linux-gnu/libpulsecommon-13.99.so
+
           sudo ldconfig
 
       # ------------------------------
