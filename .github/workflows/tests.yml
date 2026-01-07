@@ -34,7 +34,7 @@ jobs:
       # ------------------------------
       # Setup SmalltalkCI
       # ------------------------------
-      - name: Setup smalltalkCI
+      - name: Setup SmalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get install -y pulseaudio libpulse0 libjack0
+          sudo apt-get install -y pulseaudio libpulse0 libjack0 unzip
 
       # ------------------------------
       # Prepare librariesBundle directory
@@ -82,20 +82,26 @@ jobs:
           hdiutil detach /Volumes/phausto
 
       # ==========================================================
-      # Windows: Install libraries bundle (flatten nested folder)
+      # Windows: Install libraries bundle
       # ==========================================================
       - name: Install Libraries Bundle (Windows)
         if: contains(matrix.os, 'windows')
         shell: powershell
         run: |
-          $dest = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
-          Expand-Archive librariesBundle_windows_intel.zip $dest -Force
+          Expand-Archive librariesBundle_windows_intel.zip `
+            "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
 
-          # Flatten if nested
-          if (Test-Path "$dest\librariesBundle") {
-            Copy-Item "$dest\librariesBundle\*" $dest -Recurse -Force
-            Remove-Item "$dest\librariesBundle" -Recurse -Force
-          }
+      # ------------------------------
+      # Optional: Windows DLL debug
+      # ------------------------------
+      - name: Inspect Windows DLL (debug)
+        if: contains(matrix.os, 'windows')
+        shell: powershell
+        run: |
+          Write-Host "Listing librariesBundle folder:"
+          Get-ChildItem "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle" -Recurse
+          Write-Host "Checking libdynamic-engine.dll exports:"
+          dumpbin /EXPORTS "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle\librariesBundle\libdynamic-engine.dll" || Write-Host "dumpbin not found"
 
       # ------------------------------
       # Set library environment (Linux/macOS)
