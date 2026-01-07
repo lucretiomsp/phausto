@@ -47,13 +47,13 @@ jobs:
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
       # ==========================================================
-      # Ubuntu: Install Node audio + unzip dependencies
+      # Ubuntu: Install PulseAudio + JACK + unzip dependencies
       # ==========================================================
       - name: Install Ubuntu dependencies
         if: contains(matrix.os, 'ubuntu')
         run: |
           sudo apt-get update
-          sudo apt-get install -y libpulse0 libpulse-mainloop-glib0 libjack0 unzip
+          sudo apt-get install -y pulseaudio libjack0 unzip
 
       # ==========================================================
       # macOS: Install libraries bundle
