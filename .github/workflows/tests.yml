@@ -39,7 +39,7 @@ jobs:
           smalltalk-image: ${{ matrix.smalltalk }}
 
       # ------------------------------
-      # Create librariesBundle directory (ALL OS)
+      # Prepare librariesBundle directory
       # ------------------------------
       - name: Prepare librariesBundle directory
         shell: bash
@@ -76,72 +76,4 @@ jobs:
 
           unzip -q "$ZIP_FILE" -d "$BUILD_DIR"
 
-          # Flatten if needed
-          if [ -d "$BUILD_DIR/librariesBundle" ]; then
-            mv "$BUILD_DIR"/librariesBundle/* "$BUILD_DIR"/
-            rmdir "$BUILD_DIR/librariesBundle"
-          fi
-
-      # ==========================================================
-      # Windows: Install libraries bundle
-      # ==========================================================
-      - name: Install Libraries Bundle (Windows)
-        if: contains(matrix.os, 'windows')
-        shell: powershell
-        run: |
-          Expand-Archive `
-            "$env:GITHUB_WORKSPACE\librariesBundle_windows_intel.zip" `
-            "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
-
-      # ------------------------------
-      # Verify bundle layout (macOS / Linux)
-      # ------------------------------
-      - name: Verify librariesBundle layout
-        if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          echo "📁 librariesBundle:"
-          ls -al "$HOME/.smalltalkCI/_builds/librariesBundle"
-
-          echo "📁 faustLibs:"
-          ls -al "$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs"
-
-      # ------------------------------
-      # Inspect native library dependencies
-      # ------------------------------
-      - name: Inspect native library dependencies
-        if: contains(matrix.os, 'macos')
-        shell: bash
-        run: |
-          cd "$HOME/.smalltalkCI/_builds/librariesBundle"
-          otool -L libdynamic-engine.dylib
-
-      - name: Inspect native library dependencies
-        if: contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          cd "$HOME/.smalltalkCI/_builds/librariesBundle"
-          ldd libdynamic-engine.so || true
-
-      # ------------------------------
-      # Set environment variables
-      # ------------------------------
-      - name: Set library environment (macOS / Linux)
-        if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> $GITHUB_ENV
-          echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
-
-          if [[ "${{ matrix.os }}" == *macos* ]]; then
-            echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
-          fi
-
-      # ------------------------------
-      # Run SmalltalkCI tests
-      # ------------------------------
-      - name: Load Image and Run Tests
-        shell: bash
-        timeout-minutes: 20
-        run: |
-          smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
+          # Flatten if need
