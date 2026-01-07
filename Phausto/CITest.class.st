@@ -1,6 +1,9 @@
 Class {
 	#name : 'CITest',
 	#superclass : 'TestCase',
+	#instVars : [
+		'exp'
+	],
 	#category : 'Phausto-Tests',
 	#package : 'Phausto',
 	#tag : 'Tests'
@@ -35,6 +38,13 @@ CITest >> setUp [
 CITest >> tearDown [
 
 	BoxAPI uniqueInstance destroyLibContext
+]
+
+{ #category : 'tests' }
+CITest >> testCmajorExportCI [
+
+exp :=  LibFaust uniqueInstance createCMajorFileFromString: 'process = 1 ;' withName: 'emptyPatch'.
+	self assert: exp equals: false
 ]
 
 { #category : 'tests' }
