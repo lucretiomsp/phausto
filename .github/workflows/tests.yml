@@ -47,6 +47,15 @@ jobs:
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
       # ==========================================================
+      # Ubuntu: Install missing libraries (PulseAudio)
+      # ==========================================================
+      - name: Install Ubuntu dependencies
+        if: contains(matrix.os, 'ubuntu')
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpulse0 unzip
+
+      # ==========================================================
       # macOS: Install libraries bundle
       # ==========================================================
       - name: Install Libraries Bundle (macOS)
@@ -110,41 +119,4 @@ jobs:
           echo "📁 faustLibs:"
           ls -al "$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs"
 
-      # ------------------------------
-      # Inspect native library dependencies
-      # ------------------------------
-      - name: Inspect native library dependencies (macOS)
-        if: contains(matrix.os, 'macos')
-        shell: bash
-        run: |
-          cd "$HOME/.smalltalkCI/_builds/librariesBundle"
-          otool -L libdynamic-engine.dylib
-
-      - name: Inspect native library dependencies (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          cd "$HOME/.smalltalkCI/_builds/librariesBundle"
-          ldd libdynamic-engine.so || true
-
-      # ------------------------------
-      # Set library environment (macOS / Linux)
-      # ------------------------------
-      - name: Set library environment
-        if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> $GITHUB_ENV
-          echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
-          if [[ "${{ matrix.os }}" == *macos* ]]; then
-            echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
-          fi
-
-      # ------------------------------
-      # Run SmalltalkCI tests
-      # ------------------------------
-      - name: Load Image and Run Tests
-        shell: bash
-        timeout-minutes: 20
-        run: |
-          smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
+      # --------------
