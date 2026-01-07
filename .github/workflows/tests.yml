@@ -63,6 +63,13 @@ jobs:
       # ==========================================================
       # Ubuntu: Install libraries bundle
       # ==========================================================
+      - name: Install Linux dependencies
+        if: contains(matrix.os, 'ubuntu')
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev libpulse-dev libpulse-simple0 unzip
+
       - name: Install Libraries Bundle (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
         shell: bash
@@ -95,7 +102,6 @@ jobs:
         shell: bash
         run: |
           export LD_PRELOAD="$HOME/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so"
-          echo "LD_PRELOAD set to $LD_PRELOAD"
           echo "LD_PRELOAD=$LD_PRELOAD" >> $GITHUB_ENV
 
       # ------------------------------
