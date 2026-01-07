@@ -23,7 +23,7 @@ jobs:
 
     steps:
       # ------------------------------
-      # Checkout repository
+      # Checkout
       # ------------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -46,12 +46,22 @@ jobs:
         run: |
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      - name: Install Ubuntu dependencies
+      # ==========================================================
+      # Ubuntu: Fix Node 20 PulseAudio/JACK runtime dependencies
+      # ==========================================================
+      - name: Install Ubuntu Node audio dependencies
         if: contains(matrix.os, 'ubuntu')
+        shell: bash
         run: |
-            sudo apt-get update
-            sudo apt-get install -y pulseaudio libpulse0 libpulse-mainloop-glib0 libjack0 unzip
-            sudo ln -s /usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-14.99.so /usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-13.99.so || true
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio libpulse0 libpulse-mainloop-glib0 libjack0 unzip
+
+          # Node 20 expects libpulsecommon-13.99.so but Ubuntu provides 14.x
+          PULSE_DIR="/usr/lib/x86_64-linux-gnu/pulseaudio"
+          if [ -f "$PULSE_DIR/libpulsecommon-14.99.so" ] && [ ! -f "$PULSE_DIR/libpulsecommon-13.99.so" ]; then
+            sudo ln -s "$PULSE_DIR/libpulsecommon-14.99.so" \
+                       "$PULSE_DIR/libpulsecommon-13.99.so"
+          fi
 
       # ==========================================================
       # macOS: Install libraries bundle
@@ -95,15 +105,13 @@ jobs:
             "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
 
       # ------------------------------
-      # Preload libdynamic-engine.so on Linux
+      # Preload libdynamic-engine.so (Ubuntu)
       # ------------------------------
       - name: Preload libdynamic-engine.so (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
         shell: bash
         run: |
-          export LD_PRELOAD="$HOME/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so"
-          echo "LD_PRELOAD set to $LD_PRELOAD"
-          echo "LD_PRELOAD=$LD_PRELOAD" >> $GITHUB_ENV
+          echo "LD_PRELOAD=$HOME/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so" >> $GITHUB_ENV
 
       # ------------------------------
       # Verify bundle layout (macOS / Linux)
@@ -112,9 +120,7 @@ jobs:
         if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
         shell: bash
         run: |
-          echo "📁 librariesBundle:"
           ls -al "$HOME/.smalltalkCI/_builds/librariesBundle"
-          echo "📁 faustLibs:"
           ls -al "$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs"
 
       # ------------------------------
