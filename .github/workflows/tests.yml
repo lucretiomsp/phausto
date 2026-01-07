@@ -82,20 +82,15 @@ jobs:
           hdiutil detach /Volumes/phausto
 
       # ==========================================================
-      # Windows: Install libraries bundle (FLATTENED)
+      # Windows: Install libraries bundle
       # ==========================================================
       - name: Install Libraries Bundle (Windows)
         if: contains(matrix.os, 'windows')
         shell: powershell
         run: |
-          $dest = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
-          Expand-Archive librariesBundle_windows_intel.zip $dest -Force
-
-          # Flatten nested directories if needed
-          if (Test-Path "$dest\librariesBundle") {
-            Copy-Item "$dest\librariesBundle\*" $dest -Recurse -Force
-            Remove-Item "$dest\librariesBundle" -Recurse -Force
-          }
+          Expand-Archive `
+            "$env:GITHUB_WORKSPACE\librariesBundle_windows_intel.zip" `
+            "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
 
       # ------------------------------
       # Set library environment
@@ -106,7 +101,6 @@ jobs:
         run: |
           echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> "$GITHUB_ENV"
           echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
-
           if [[ "${{ matrix.os }}" == *macos* ]]; then
             echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
 
