@@ -46,14 +46,13 @@ jobs:
         run: |
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      # ==========================================================
-      # Ubuntu: Install PulseAudio + JACK + unzip dependencies
-      # ==========================================================
       - name: Install Ubuntu dependencies
         if: contains(matrix.os, 'ubuntu')
         run: |
-          sudo apt-get update
-          sudo apt-get install -y pulseaudio libjack0 unzip
+           sudo apt-get update
+           sudo apt-get install -y pulseaudio libpulse0 libpulse-mainloop-glib0 libasound2 libjack0 unzip
+           # Symlink to satisfy Node 20
+           sudo ln -s /usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-14.99.so /usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-13.99.so || true
 
       # ==========================================================
       # macOS: Install libraries bundle
