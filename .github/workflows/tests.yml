@@ -40,17 +40,13 @@ jobs:
           smalltalk-image: ${{ matrix.smalltalk }}
 
       # ==================================================
-      # Ubuntu: system dependencies
+      # Ubuntu system dependencies
       # ==================================================
       - name: Install system libraries (Ubuntu)
         if: matrix.os == 'ubuntu-22.04'
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            pulseaudio \
-            libpulse0 \
-            libjack0 \
-            unzip
+          sudo apt-get install -y pulseaudio libpulse0 libjack0 unzip
 
       # ------------------------------
       # Prepare librariesBundle directory
@@ -101,7 +97,7 @@ jobs:
             Write-Error "libdynamic-engine.dll not found"
             exit 1
           }
-          Write-Host "libdynamic-engine.dll found — skipping execution (ASIO)"
+          Write-Host "libdynamic-engine.dll found - skipping execution (ASIO)"
 
       # ==================================================
       # Environment variables (Linux + macOS)
