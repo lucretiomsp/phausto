@@ -112,7 +112,7 @@ jobs:
           fi
 
       # ==================================================
-      # Run SmalltalkCI (Linux + macOS)
+      # Run SmalltalkCI 
       # ==================================================
       - name: Run SmalltalkCI
         if: matrix.os != 'windows-latest'
@@ -120,10 +120,10 @@ jobs:
         run: |
           smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
 
-      # ==================================================
-      # Windows: explicit skip
-      # ==================================================
-      - name: Skip Windows execution
+      - name: Run SmalltalkCI (Windows)
         if: matrix.os == 'windows-latest'
+        shell: powershell
+        timeout-minutes: 20
         run: |
-          echo "Windows execution skipped (ASIO backend not CI-safe)"
+          smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
+
