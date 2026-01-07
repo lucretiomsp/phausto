@@ -23,7 +23,7 @@ jobs:
 
     steps:
       # ------------------------------
-      # Checkout
+      # Checkout repository
       # ------------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -47,13 +47,13 @@ jobs:
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
       # ==========================================================
-      # Ubuntu: Install audio & unzip dependencies (PulseAudio + JACK)
+      # Ubuntu: Install Node audio + unzip dependencies
       # ==========================================================
       - name: Install Ubuntu dependencies
         if: contains(matrix.os, 'ubuntu')
         run: |
           sudo apt-get update
-          sudo apt-get install -y libpulse0 libjack0 unzip
+          sudo apt-get install -y libpulse0 libpulse-mainloop-glib0 libjack0 unzip
 
       # ==========================================================
       # macOS: Install libraries bundle
@@ -147,6 +147,7 @@ jobs:
           echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
           if [[ "${{ matrix.os }}" == *macos* ]]; then
             echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
+          fi
 
       # ------------------------------
       # Run SmalltalkCI tests
@@ -156,4 +157,3 @@ jobs:
         timeout-minutes: 20
         run: |
           smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
-
