@@ -17,7 +17,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os:
+          - ubuntu-22.04
+          - macos-latest
+          - windows-latest
         smalltalk: [Pharo64-12]
         ston: [.smalltalk.ston]
 
@@ -37,53 +40,17 @@ jobs:
           smalltalk-image: ${{ matrix.smalltalk }}
 
       # ==========================================================
-      # UBUNTU: Disable needrestart (prevents exit code 1)
-      # ==========================================================
-      - name: Disable needrestart (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          sudo mkdir -p /etc/needrestart
-          echo '$nrconf{restart} = "a";' | sudo tee /etc/needrestart/needrestart.conf
-
-      # ==========================================================
-      # UBUNTU: Install system audio libraries
+      # Ubuntu: Install system audio dependencies (22.04)
       # ==========================================================
       - name: Install system libraries (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
         shell: bash
         run: |
           sudo apt-get update
-          sudo NEEDRESTART_MODE=a apt-get install -y \
+          sudo apt-get install -y \
             pulseaudio \
             libpulse0 \
             libjack0
-
-      # ==========================================================
-      # UBUNTU: Fix Node 20 PulseAudio ABI mismatch (BULLETPROOF)
-      # ==========================================================
-      - name: Fix libpulsecommon ABI (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          set +e
-
-          REAL_LIB=$(find /usr/lib/x86_64-linux-gnu \
-            -name 'libpulsecommon.so*' \
-            | grep -v 13.99 \
-            | head -n1)
-
-          if [ -z "$REAL_LIB" ]; then
-            echo "❌ libpulsecommon not found"
-            ls -l /usr/lib/x86_64-linux-gnu | grep pulse || true
-            exit 1
-          fi
-
-          echo "✔ Found $REAL_LIB"
-          sudo ln -sf "$REAL_LIB" \
-            /usr/lib/x86_64-linux-gnu/libpulsecommon-13.99.so
-
-          sudo ldconfig
 
       # ------------------------------
       # Prepare librariesBundle directory
