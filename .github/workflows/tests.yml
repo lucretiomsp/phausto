@@ -22,38 +22,59 @@ jobs:
         ston: [.smalltalk.ston]
 
     steps:
+      # ------------------------------
+      # Checkout
+      # ------------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # ------------------------------
+      # Setup SmalltalkCI
+      # ------------------------------
       - name: Setup smalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
 
       # ==========================================================
-      # UBUNTU: FIX NODE 20 PULSEAUDIO ABI BREAK (ONCE AND FOREVER)
+      # UBUNTU: Disable needrestart (CRITICAL)
       # ==========================================================
-      - name: Fix Node 20 PulseAudio ABI (Ubuntu)
+      - name: Disable needrestart (Ubuntu)
+        if: contains(matrix.os, 'ubuntu')
+        shell: bash
+        run: |
+          sudo mkdir -p /etc/needrestart
+          echo '$nrconf{restart} = "a";' | sudo tee /etc/needrestart/needrestart.conf
+
+      # ==========================================================
+      # UBUNTU: Install system audio dependencies
+      # ==========================================================
+      - name: Install system libraries (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
         shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get install -y pulseaudio libpulse0 libjack0
+          sudo NEEDRESTART_MODE=a apt-get install -y \
+            pulseaudio \
+            libpulse0 \
+            libjack0
 
-          # Find real libpulsecommon
+      # ==========================================================
+      # UBUNTU: Fix Node 20 PulseAudio ABI mismatch
+      # ==========================================================
+      - name: Fix libpulsecommon ABI (Ubuntu)
+        if: contains(matrix.os, 'ubuntu')
+        shell: bash
+        run: |
           REAL_LIB=$(ldconfig -p | grep libpulsecommon.so | awk '{print $4}' | head -n1)
 
           if [ -z "$REAL_LIB" ]; then
-            echo "❌ libpulsecommon not found"
+            echo "❌ libpulsecommon.so not found"
             exit 1
           fi
 
-          echo "✔ Found: $REAL_LIB"
-
-          # Create ABI-compatible symlink where Node actually looks
+          echo "✔ Using $REAL_LIB"
           sudo ln -sf "$REAL_LIB" /usr/lib/x86_64-linux-gnu/libpulsecommon-13.99.so
-
-          # Refresh linker cache (THIS IS CRITICAL)
           sudo ldconfig
 
       # ------------------------------
@@ -64,9 +85,9 @@ jobs:
         run: |
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      # ------------------------------
-      # Install Libraries Bundle (Ubuntu)
-      # ------------------------------
+      # ==========================================================
+      # Ubuntu: Install libraries bundle
+      # ==========================================================
       - name: Install Libraries Bundle (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
         shell: bash
@@ -74,20 +95,23 @@ jobs:
           unzip -q librariesBundle_Linux.zip \
             -d "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      # ------------------------------
-      # Install Libraries Bundle (macOS)
-      # ------------------------------
+      # ==========================================================
+      # macOS: Install libraries bundle
+      # ==========================================================
       - name: Install Libraries Bundle (macOS)
         if: contains(matrix.os, 'macos')
         shell: bash
         run: |
-          hdiutil attach phaustoLibrariesM1.dmg -mountpoint /Volumes/phausto -nobrowse -readonly
-          cp -R /Volumes/phausto/* "$HOME/.smalltalkCI/_builds/librariesBundle"
+          hdiutil attach phaustoLibrariesM1.dmg \
+            -mountpoint /Volumes/phausto \
+            -nobrowse -readonly
+          cp -R /Volumes/phausto/* \
+            "$HOME/.smalltalkCI/_builds/librariesBundle"
           hdiutil detach /Volumes/phausto
 
-      # ------------------------------
-      # Install Libraries Bundle (Windows)
-      # ------------------------------
+      # ==========================================================
+      # Windows: Install libraries bundle
+      # ==========================================================
       - name: Install Libraries Bundle (Windows)
         if: contains(matrix.os, 'windows')
         shell: powershell
@@ -96,21 +120,21 @@ jobs:
             "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
 
       # ------------------------------
-      # Environment (macOS / Linux)
+      # Set library environment
       # ------------------------------
       - name: Set library environment
         if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
         shell: bash
         run: |
-          echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> $GITHUB_ENV
-          echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
+          echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> "$GITHUB_ENV"
+          echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
 
           if [[ "${{ matrix.os }}" == *macos* ]]; then
-            echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
+            echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
           fi
 
       # ------------------------------
-      # Run Tests
+      # Run SmalltalkCI tests
       # ------------------------------
       - name: Run SmalltalkCI
         shell: bash
