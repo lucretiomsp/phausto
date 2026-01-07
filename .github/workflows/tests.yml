@@ -23,7 +23,7 @@ jobs:
 
     steps:
       # ------------------------------
-      # Checkout repository
+      # Checkout
       # ------------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -67,6 +67,7 @@ jobs:
         if: contains(matrix.os, 'ubuntu')
         shell: bash
         run: |
+          set -euo pipefail
           BUILD_DIR="$HOME/.smalltalkCI/_builds/librariesBundle"
           ZIP_FILE="$GITHUB_WORKSPACE/librariesBundle_Linux.zip"
           unzip -q "$ZIP_FILE" -d "$BUILD_DIR"
@@ -85,6 +86,17 @@ jobs:
           Expand-Archive `
             "$env:GITHUB_WORKSPACE\librariesBundle_windows_intel.zip" `
             "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
+
+      # ------------------------------
+      # Preload libdynamic-engine.so on Linux
+      # ------------------------------
+      - name: Preload libdynamic-engine.so (Ubuntu)
+        if: contains(matrix.os, 'ubuntu')
+        shell: bash
+        run: |
+          export LD_PRELOAD="$HOME/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so"
+          echo "LD_PRELOAD set to $LD_PRELOAD"
+          echo "LD_PRELOAD=$LD_PRELOAD" >> $GITHUB_ENV
 
       # ------------------------------
       # Verify bundle layout (macOS / Linux)
@@ -126,6 +138,7 @@ jobs:
           echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
           if [[ "${{ matrix.os }}" == *macos* ]]; then
             echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
+          fi
 
       # ------------------------------
       # Run SmalltalkCI tests
