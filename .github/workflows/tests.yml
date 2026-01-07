@@ -40,7 +40,7 @@ jobs:
           smalltalk-image: ${{ matrix.smalltalk }}
 
       # ------------------------------
-      # Ubuntu: system dependencies
+      # Ubuntu: install system dependencies
       # ------------------------------
       - name: Install system libraries (Ubuntu)
         if: matrix.os == 'ubuntu-22.04'
@@ -86,7 +86,7 @@ jobs:
           Expand-Archive librariesBundle_windows_intel.zip $dest -Force
 
       # ------------------------------
-      # Windows: DLL existence + dependencies
+      # Windows: DLL verification only
       # ------------------------------
       - name: Verify DLL and dependencies (Windows)
         if: matrix.os == 'windows-latest'
@@ -100,23 +100,21 @@ jobs:
           }
 
           Write-Host "libdynamic-engine.dll found"
-
-          # List all DLLs in the same folder
           $folder = Split-Path $dll
-          Write-Host "Listing DLLs in $folder:"
+          Write-Host "DLLs in $folder:"
           Get-ChildItem "$folder\*.dll" | ForEach-Object { Write-Host $_.Name }
 
-          # Try to load DLL in PowerShell to catch missing dependencies
+          # Basic load test (fails if dependent DLLs are missing)
           try {
               Add-Type -Path $dll
-              Write-Host "DLL loaded successfully (basic check)"
+              Write-Host "DLL loaded successfully (basic dependency check)"
           } catch {
               Write-Error "Failed to load DLL. Likely missing dependencies."
               exit 1
           }
 
       # ------------------------------
-      # Linux/macOS: environment variables
+      # Linux/macOS: set library environment
       # ------------------------------
       - name: Set library environment
         if: matrix.os != 'windows-latest'
@@ -142,4 +140,4 @@ jobs:
       - name: Skip Windows execution
         if: matrix.os == 'windows-latest'
         run: |
-          echo "Windows execution skipped (requires ASIO backend for real tests)"
+          echo "Windows execution skipped (requires ASIO backend)"
