@@ -76,3 +76,61 @@ jobs:
         run: |
           hdiutil attach phaustoLibrariesM1.dmg -mountpoint /Volumes/phausto -nobrowse -readonly
           cp -R /Volumes/phausto/* "$HOME/.smalltalkCI/_builds/librariesBundle"
+          hdiutil detach /Volumes/phausto
+
+      # ==================================================
+      # Windows libraries bundle
+      # ==================================================
+      - name: Install Libraries Bundle (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: powershell
+        run: |
+          $dest = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
+          New-Item -ItemType Directory -Force -Path $dest | Out-Null
+          Expand-Archive librariesBundle_windows_intel.zip $dest -Force
+
+      # ==================================================
+      # Windows: dependency inspection (NO execution)
+      # ==================================================
+      - name: Inspect Windows DLL dependencies
+        if: matrix.os == 'windows-latest'
+        shell: powershell
+        run: |
+          $dll = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle\librariesBundle\libdynamic-engine.dll"
+
+          if (-not (Test-Path $dll)) {
+            Write-Error "libdynamic-engine.dll not found"
+            exit 1
+          }
+
+          Write-Host "Found libdynamic-engine.dll"
+          dumpbin /dependents $dll
+
+      # ==================================================
+      # Environment variables (Linux + macOS only)
+      # ==================================================
+      - name: Set library environment
+        if: matrix.os != 'windows-latest'
+        run: |
+          echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> "$GITHUB_ENV"
+          echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
+          if [ "${{ matrix.os }}" = "macos-latest" ]; then
+            echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
+          fi
+
+      # ==================================================
+      # Run SmalltalkCI (Linux + macOS)
+      # ==================================================
+      - name: Run SmalltalkCI
+        if: matrix.os != 'windows-latest'
+        timeout-minutes: 20
+        run: |
+          smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
+
+      # ==================================================
+      # Windows: explicit skip
+      # ==================================================
+      - name: Skip Windows execution
+        if: matrix.os == 'windows-latest'
+        run: |
+          echo "Windows execution skipped (ASIO backend not CI-safe)"
