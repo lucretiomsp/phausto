@@ -22,141 +22,97 @@ jobs:
         ston: [.smalltalk.ston]
 
     steps:
-      # ------------------------------
-      # Checkout
-      # ------------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      # ------------------------------
-      # Setup SmalltalkCI
-      # ------------------------------
       - name: Setup smalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
 
+      # ==========================================================
+      # UBUNTU: FIX NODE 20 PULSEAUDIO ABI BREAK (ONCE AND FOREVER)
+      # ==========================================================
+      - name: Fix Node 20 PulseAudio ABI (Ubuntu)
+        if: contains(matrix.os, 'ubuntu')
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio libpulse0 libjack0
+
+          # Find real libpulsecommon
+          REAL_LIB=$(ldconfig -p | grep libpulsecommon.so | awk '{print $4}' | head -n1)
+
+          if [ -z "$REAL_LIB" ]; then
+            echo "❌ libpulsecommon not found"
+            exit 1
+          fi
+
+          echo "✔ Found: $REAL_LIB"
+
+          # Create ABI-compatible symlink where Node actually looks
+          sudo ln -sf "$REAL_LIB" /usr/lib/x86_64-linux-gnu/libpulsecommon-13.99.so
+
+          # Refresh linker cache (THIS IS CRITICAL)
+          sudo ldconfig
+
       # ------------------------------
-      # Prepare librariesBundle directory (ALL OS)
+      # Prepare librariesBundle directory
       # ------------------------------
       - name: Prepare librariesBundle directory
         shell: bash
         run: |
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      # ==========================================================
-      # Ubuntu: Fix Node 20 PulseAudio/JACK runtime dependencies
-      # ==========================================================
-      - name: Install Ubuntu Node audio dependencies
-        if: contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pulseaudio libpulse0 libpulse-mainloop-glib0 libjack0 unzip
-
-          # Node 20 expects libpulsecommon-13.99.so but Ubuntu provides 14.x
-          PULSE_DIR="/usr/lib/x86_64-linux-gnu/pulseaudio"
-          if [ -f "$PULSE_DIR/libpulsecommon-14.99.so" ] && [ ! -f "$PULSE_DIR/libpulsecommon-13.99.so" ]; then
-            sudo ln -s "$PULSE_DIR/libpulsecommon-14.99.so" \
-                       "$PULSE_DIR/libpulsecommon-13.99.so"
-          fi
-
-      # ==========================================================
-      # macOS: Install libraries bundle
-      # ==========================================================
-      - name: Install Libraries Bundle (macOS)
-        if: contains(matrix.os, 'macos')
-        shell: bash
-        run: |
-          hdiutil attach "$GITHUB_WORKSPACE/phaustoLibrariesM1.dmg" \
-            -mountpoint /Volumes/phaustoLibrariesM1 \
-            -nobrowse -readonly
-          cp -R /Volumes/phaustoLibrariesM1/* \
-            "$HOME/.smalltalkCI/_builds/librariesBundle"
-          hdiutil detach /Volumes/phaustoLibrariesM1
-
-      # ==========================================================
-      # Ubuntu: Install libraries bundle
-      # ==========================================================
+      # ------------------------------
+      # Install Libraries Bundle (Ubuntu)
+      # ------------------------------
       - name: Install Libraries Bundle (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
         shell: bash
         run: |
-          set -euo pipefail
-          BUILD_DIR="$HOME/.smalltalkCI/_builds/librariesBundle"
-          ZIP_FILE="$GITHUB_WORKSPACE/librariesBundle_Linux.zip"
-          unzip -q "$ZIP_FILE" -d "$BUILD_DIR"
-          if [ -d "$BUILD_DIR/librariesBundle" ]; then
-            mv "$BUILD_DIR"/librariesBundle/* "$BUILD_DIR"/
-            rmdir "$BUILD_DIR/librariesBundle"
-          fi
+          unzip -q librariesBundle_Linux.zip \
+            -d "$HOME/.smalltalkCI/_builds/librariesBundle"
 
       # ------------------------------
-      # Windows: Install libraries bundle
+      # Install Libraries Bundle (macOS)
+      # ------------------------------
+      - name: Install Libraries Bundle (macOS)
+        if: contains(matrix.os, 'macos')
+        shell: bash
+        run: |
+          hdiutil attach phaustoLibrariesM1.dmg -mountpoint /Volumes/phausto -nobrowse -readonly
+          cp -R /Volumes/phausto/* "$HOME/.smalltalkCI/_builds/librariesBundle"
+          hdiutil detach /Volumes/phausto
+
+      # ------------------------------
+      # Install Libraries Bundle (Windows)
       # ------------------------------
       - name: Install Libraries Bundle (Windows)
         if: contains(matrix.os, 'windows')
         shell: powershell
         run: |
-          Expand-Archive `
-            "$env:GITHUB_WORKSPACE\librariesBundle_windows_intel.zip" `
+          Expand-Archive librariesBundle_windows_intel.zip `
             "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
 
       # ------------------------------
-      # Preload libdynamic-engine.so (Ubuntu)
-      # ------------------------------
-      - name: Preload libdynamic-engine.so (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          echo "LD_PRELOAD=$HOME/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so" >> $GITHUB_ENV
-
-      # ------------------------------
-      # Verify bundle layout (macOS / Linux)
-      # ------------------------------
-      - name: Verify librariesBundle layout
-        if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          ls -al "$HOME/.smalltalkCI/_builds/librariesBundle"
-          ls -al "$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs"
-
-      # ------------------------------
-      # Inspect native library dependencies
-      # ------------------------------
-      - name: Inspect native library dependencies (macOS)
-        if: contains(matrix.os, 'macos')
-        shell: bash
-        run: |
-          cd "$HOME/.smalltalkCI/_builds/librariesBundle"
-          otool -L libdynamic-engine.dylib
-
-      - name: Inspect native library dependencies (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          cd "$HOME/.smalltalkCI/_builds/librariesBundle"
-          ldd libdynamic-engine.so || true
-
-      # ------------------------------
-      # Set library environment (macOS / Linux)
+      # Environment (macOS / Linux)
       # ------------------------------
       - name: Set library environment
-        if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
+        if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
         shell: bash
         run: |
           echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> $GITHUB_ENV
           echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
+
           if [[ "${{ matrix.os }}" == *macos* ]]; then
             echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
           fi
 
       # ------------------------------
-      # Run SmalltalkCI tests
+      # Run Tests
       # ------------------------------
-      - name: Load Image and Run Tests
+      - name: Run SmalltalkCI
         shell: bash
         timeout-minutes: 20
         run: |
