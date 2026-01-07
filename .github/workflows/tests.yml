@@ -63,18 +63,10 @@ jobs:
       # ==========================================================
       # Ubuntu: Install libraries bundle
       # ==========================================================
-      - name: Install Linux dependencies
-        if: contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libasound2 libpulse0 unzip
-
       - name: Install Libraries Bundle (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
         shell: bash
         run: |
-          set -euo pipefail
           BUILD_DIR="$HOME/.smalltalkCI/_builds/librariesBundle"
           ZIP_FILE="$GITHUB_WORKSPACE/librariesBundle_Linux.zip"
           unzip -q "$ZIP_FILE" -d "$BUILD_DIR"
@@ -93,16 +85,6 @@ jobs:
           Expand-Archive `
             "$env:GITHUB_WORKSPACE\librariesBundle_windows_intel.zip" `
             "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
-
-      # ------------------------------
-      # Preload libdynamic-engine.so on Linux
-      # ------------------------------
-      - name: Preload libdynamic-engine.so (Ubuntu)
-        if: contains(matrix.os, 'ubuntu')
-        shell: bash
-        run: |
-          export LD_PRELOAD="$HOME/.smalltalkCI/_builds/librariesBundle/libdynamic-engine.so"
-          echo "LD_PRELOAD=$LD_PRELOAD" >> $GITHUB_ENV
 
       # ------------------------------
       # Verify bundle layout (macOS / Linux)
