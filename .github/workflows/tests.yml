@@ -92,18 +92,6 @@ jobs:
             "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
 
       # ------------------------------
-      # Optional: Windows DLL debug
-      # ------------------------------
-      - name: Inspect Windows DLL (debug)
-        if: contains(matrix.os, 'windows')
-        shell: powershell
-        run: |
-          Write-Host "Listing librariesBundle folder:"
-          Get-ChildItem "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle" -Recurse
-          Write-Host "Checking libdynamic-engine.dll exports:"
-          dumpbin /EXPORTS "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle\librariesBundle\libdynamic-engine.dll" || Write-Host "dumpbin not found"
-
-      # ------------------------------
       # Set library environment (Linux/macOS)
       # ------------------------------
       - name: Set library environment
@@ -114,6 +102,7 @@ jobs:
           echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
           if [[ "${{ matrix.os }}" == *macos* ]]; then
             echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
+          fi
 
       # ------------------------------
       # Run SmalltalkCI tests
