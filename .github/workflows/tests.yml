@@ -23,7 +23,7 @@ jobs:
 
     steps:
       # ------------------------------
-      # Checkout
+      # Checkout repository
       # ------------------------------
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -68,7 +68,7 @@ jobs:
         shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get install -y libasound2-dev libpulse-dev libpulse-simple0 unzip
+          sudo apt-get install -y libasound2 libpulse0 unzip
 
       - name: Install Libraries Bundle (Ubuntu)
         if: contains(matrix.os, 'ubuntu')
@@ -144,7 +144,6 @@ jobs:
           echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
           if [[ "${{ matrix.os }}" == *macos* ]]; then
             echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> $GITHUB_ENV
-          fi
 
       # ------------------------------
       # Run SmalltalkCI tests
