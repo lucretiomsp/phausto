@@ -39,9 +39,9 @@ jobs:
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
 
-      # ==================================================
-      # Ubuntu system dependencies
-      # ==================================================
+      # ------------------------------
+      # Ubuntu: system dependencies
+      # ------------------------------
       - name: Install system libraries (Ubuntu)
         if: matrix.os == 'ubuntu-22.04'
         run: |
@@ -55,18 +55,18 @@ jobs:
         run: |
           mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      # ==================================================
+      # ------------------------------
       # Ubuntu: libraries bundle
-      # ==================================================
+      # ------------------------------
       - name: Install Libraries Bundle (Ubuntu)
         if: matrix.os == 'ubuntu-22.04'
         run: |
           unzip -q librariesBundle_Linux.zip \
             -d "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-      # ==================================================
+      # ------------------------------
       # macOS: libraries bundle
-      # ==================================================
+      # ------------------------------
       - name: Install Libraries Bundle (macOS)
         if: matrix.os == 'macos-latest'
         run: |
@@ -74,9 +74,9 @@ jobs:
           cp -R /Volumes/phausto/* "$HOME/.smalltalkCI/_builds/librariesBundle"
           hdiutil detach /Volumes/phausto
 
-      # ==================================================
+      # ------------------------------
       # Windows: libraries bundle
-      # ==================================================
+      # ------------------------------
       - name: Install Libraries Bundle (Windows)
         if: matrix.os == 'windows-latest'
         shell: powershell
@@ -85,23 +85,39 @@ jobs:
           New-Item -ItemType Directory -Force -Path $dest | Out-Null
           Expand-Archive librariesBundle_windows_intel.zip $dest -Force
 
-      # ==================================================
-      # Windows: sanity check ONLY
-      # ==================================================
-      - name: Verify DLL presence (Windows)
+      # ------------------------------
+      # Windows: DLL existence + dependencies
+      # ------------------------------
+      - name: Verify DLL and dependencies (Windows)
         if: matrix.os == 'windows-latest'
         shell: powershell
         run: |
           $dll = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle\librariesBundle\libdynamic-engine.dll"
+
           if (-not (Test-Path $dll)) {
             Write-Error "libdynamic-engine.dll not found"
             exit 1
           }
-          Write-Host "libdynamic-engine.dll found - skipping execution (ASIO)"
 
-      # ==================================================
-      # Environment variables (Linux + macOS)
-      # ==================================================
+          Write-Host "libdynamic-engine.dll found"
+
+          # List all DLLs in the same folder
+          $folder = Split-Path $dll
+          Write-Host "Listing DLLs in $folder:"
+          Get-ChildItem "$folder\*.dll" | ForEach-Object { Write-Host $_.Name }
+
+          # Try to load DLL in PowerShell to catch missing dependencies
+          try {
+              Add-Type -Path $dll
+              Write-Host "DLL loaded successfully (basic check)"
+          } catch {
+              Write-Error "Failed to load DLL. Likely missing dependencies."
+              exit 1
+          }
+
+      # ------------------------------
+      # Linux/macOS: environment variables
+      # ------------------------------
       - name: Set library environment
         if: matrix.os != 'windows-latest'
         run: |
@@ -111,19 +127,19 @@ jobs:
             echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
           fi
 
-      # ==================================================
-      # Run SmalltalkCI 
-      # ==================================================
+      # ------------------------------
+      # Linux/macOS: run SmalltalkCI
+      # ------------------------------
       - name: Run SmalltalkCI
         if: matrix.os != 'windows-latest'
         timeout-minutes: 20
         run: |
           smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
 
-      - name: Run SmalltalkCI (Windows)
+      # ------------------------------
+      # Windows: skip SmalltalkCI execution
+      # ------------------------------
+      - name: Skip Windows execution
         if: matrix.os == 'windows-latest'
-        shell: powershell
-        timeout-minutes: 20
         run: |
-          smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
-
+          echo "Windows execution skipped (requires ASIO backend for real tests)"
