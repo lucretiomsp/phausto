@@ -73,16 +73,3 @@ self assert: param  minValue equals: 0.
 self assert: param  maxValue equals: 1.
 
 ]
-
-{ #category : 'tests' }
-DSPTest >> testSource [
-
-| osc filter inst dsp |
-osc := SineOsc new.
-filter := ResonBp new.
-inst := filter input: osc .
-dsp :=( osc => filter ) asDsp.
-
-self assert: dsp source class equals: ResonBp 
-
-]

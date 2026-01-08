@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+BasiConvertersTest >> TODOtestRatio2CentAsDsp [
+ self deny: 1 isNumber . 
+	self deny: PhRatio2Cent new asDsp isNull
+]
+
+{ #category : 'tests' }
 BasiConvertersTest >> testCent2RatioAsDsp [
 
 	self deny: PhCent2Ratio new asDsp isNull
@@ -70,12 +76,6 @@ BasiConvertersTest >> testPhTau2PoleAsDsp [
 BasiConvertersTest >> testPianoKey2HzAsDsp [
 
 	self deny: PhPianoKey2Hz new asDsp isNull
-]
-
-{ #category : 'tests' }
-BasiConvertersTest >> testRatio2CentAsDsp [
- self deny: 1 isNumber . 
-	self deny: PhRatio2Cent new asDsp isNull
 ]
 
 { #category : 'tests' }

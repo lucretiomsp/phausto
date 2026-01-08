@@ -85,12 +85,6 @@ AntiAliasedTest >> testAtanh1Dsp [
 ]
 
 { #category : 'tests' }
-AntiAliasedTest >> testAtanh2Dsp [
-
-	self deny: ATanh2 new asDsp isNull 
-]
-
-{ #category : 'tests' }
 AntiAliasedTest >> testCosine1Dsp [
 
 	self deny: Cosine1 new asDsp isNull

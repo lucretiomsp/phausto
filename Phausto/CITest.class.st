@@ -1,6 +1,9 @@
 Class {
 	#name : 'CITest',
 	#superclass : 'TestCase',
+	#instVars : [
+		'exp'
+	],
 	#category : 'Phausto-Tests',
 	#package : 'Phausto',
 	#tag : 'Tests'
@@ -38,7 +41,33 @@ CITest >> tearDown [
 ]
 
 { #category : 'tests' }
+CITest >> testCmajorExportCI [
+
+exp :=  LibFaust uniqueInstance createCMajorFileFromString: 'process = 1 ;' withName: 'emptyPatch'.
+	self assert: exp equals: false
+]
+
+{ #category : 'tests' }
 CITest >> testDsp [
 
 	self deny: 1 asBox asDsp isNull
+]
+
+{ #category : 'tests' }
+CITest >> testInputProcess [
+
+
+	self deny: (DSP create: 'process = _;') isNull
+]
+
+{ #category : 'tests' }
+CITest >> testSineOscCI [
+
+	self deny: SineOsc new asDsp isNull
+]
+
+{ #category : 'tests' }
+CITest >> testWireCI [
+
+	self deny: Wire new asDsp isNull
 ]

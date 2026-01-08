@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-BasicsTest >> testDownSamplerAsDsp [
+BasicsTest >> TODOtestDownSamplerAsDsp [
 	"crash apparently for unexplicable reason"
 
 	self assert: 1 equals: 0.

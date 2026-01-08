@@ -1,93 +1,111 @@
 name: Run Tests
 
 on:
-  # Run on push and pull requests on any branch, but ignore if change doesn't affect code.
   push:
     paths-ignore:
-    - 'README.md'
+      - README.md
   pull_request:
     paths-ignore:
-    - 'README.md'
-  # Allows you to run this workflow manually from the Actions tab
+      - README.md
   workflow_dispatch:
 
 jobs:
   test:
-    strategy:
-      # Default value means that a failure in one OS cancels all 
-      fail-fast: false
-      matrix:
-        smalltalk: [ Pharo64-12 ]
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
-        ston: [ .smalltalk.ston ]
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
-    steps:
-      - name: Checkout Phausto
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - name: Setup smalltalkCI
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-22.04
+          - macos-latest
+          - windows-latest
+        smalltalk: [Pharo64-12]
+        ston: [.smalltalk.ston]
+
+    steps:
+      # ------------------------------
+      # Checkout
+      # ------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # ------------------------------
+      # Setup SmalltalkCI
+      # ------------------------------
+      - name: Setup SmalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
 
-      - name: Install Libraries Bundle (M1)
-        run: (hdiutil attach "/Users/runner/work/phausto/phausto/phaustoLibrariesM1.dmg" -mountpoint /Volumes/phaustoLibrariesM1 -nobrowse -readonly && mkdir -p "/Users/runner/.smalltalkCI/_builds/librariesBundle" && cp -R /Volumes/phaustoLibrariesM1/* "/Users/runner/.smalltalkCI/_builds/librariesBundle"); hdiutil detach /Volumes/phaustoLibrariesM1 && ls -all "/Users/runner/.smalltalkCI/_builds/librariesBundle" && ls -all "/Users/runner/.smalltalkCI/_builds/librariesBundle/faustLibs"
-        if: ${{ contains(matrix.os, 'macos') }}
-
-      - name: Install Libraries Bundle (ubuntu)
-        if: ${{ contains(matrix.os, 'ubuntu') }}
+      # ------------------------------
+      # Ubuntu: install system dependencies
+      # ------------------------------
+      - name: Install system libraries (Ubuntu)
+        if: matrix.os == 'ubuntu-22.04'
         run: |
-          set -euo pipefail  # Fail on errors, unset variables, and piped commands
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio libpulse0 libjack0 unzip
 
-          BUILD_DIR="$HOME/.smalltalkCI/_builds/librariesBundle"
-          ZIP_FILE="$GITHUB_WORKSPACE/librariesBundle_Linux.zip"
+      # ------------------------------
+      # Prepare librariesBundle directory
+      # ------------------------------
+      - name: Prepare librariesBundle directory
+        run: |
+          mkdir -p "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-          echo "Creating build directory..."
-          mkdir -p "$BUILD_DIR"
+      # ------------------------------
+      # Ubuntu: libraries bundle
+      # ------------------------------
+      - name: Install Libraries Bundle (Ubuntu)
+        if: matrix.os == 'ubuntu-22.04'
+        run: |
+          unzip -q librariesBundle_Linux.zip \
+            -d "$HOME/.smalltalkCI/_builds/librariesBundle"
 
-          echo "Unzipping libraries bundle..."
-          unzip -q "$ZIP_FILE" -d "$BUILD_DIR"
+      # ------------------------------
+      # macOS: libraries bundle
+      # ------------------------------
+      - name: Install Libraries Bundle (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          hdiutil attach phaustoLibrariesM1.dmg -mountpoint /Volumes/phausto -nobrowse -readonly
+          cp -R /Volumes/phausto/* "$HOME/.smalltalkCI/_builds/librariesBundle"
+          hdiutil detach /Volumes/phausto
 
-          echo "Moving top-level .so files to $BUILD_DIR..."
-          shopt -s nullglob
-          SO_FILES=("$BUILD_DIR"/librariesBundle/*.so)
-          if [ ${#SO_FILES[@]} -gt 0 ]; then
-          mv "$BUILD_DIR"/librariesBundle/*.so "$BUILD_DIR"/
-          else
-          echo "No top-level .so files found, skipping move."
-          fi
+      # ------------------------------
+      # Windows: libraries bundle
+      # ------------------------------
+      - name: Install Libraries Bundle (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: powershell
+        run: |
+          $dest = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle"
+          New-Item -ItemType Directory -Force -Path $dest | Out-Null
+          Expand-Archive librariesBundle_windows_intel.zip $dest -Force
 
-          echo "Listing final build directory structure..."
-          ls -al "$BUILD_DIR"
-          if [ -d "$BUILD_DIR/faustLibs" ]; then
-          echo "Listing faustLibs directory..."
-          ls -al "$BUILD_DIR/faustLibs"
-          else
-          echo "No faustLibs directory found."
-          fi
-
-          ENGINE_LIB="$BUILD_DIR/libdynamic-engine.so"
-          if [ -f "$ENGINE_LIB" ]; then
-          echo "Checking symbols in libdynamic-engine.so..."
-          nm "$ENGINE_LIB" | head -20
-          else
-          echo "libdynamic-engine.so not found!"
-          exit 1
-          fi
-
-
-
-
-
-
-      - name: Install Libraries Bundle (win)
-        run: unzip "D:\a\phausto\phausto\librariesBundle_windows_intel.zip" -d "C:\Users\runneradmin\.smalltalkCI\_builds" && dir "C:\Users\runneradmin\.smalltalkCI\_builds\librariesBundle"
-        if: ${{ contains(matrix.os, 'win') }}
-
-      - name: Load Image and Run Tests
-        run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
+      # ------------------------------
+      # Set library environment (ALL OS)
+      # ------------------------------
+      - name: Set library environment
         shell: bash
+        run: |
+          echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> "$GITHUB_ENV"
+
+          if [ "${{ matrix.os }}" != "windows-latest" ]; then
+            echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
+            if [ "${{ matrix.os }}" = "macos-latest" ]; then
+              echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
+            fi
+          else
+            echo "PATH=$HOME/.smalltalkCI/_builds/librariesBundle:$PATH" >> "$GITHUB_ENV"
+          fi
+
+      # ------------------------------
+      # Run SmalltalkCI (ALL OS)
+      # ------------------------------
+      - name: Run SmalltalkCI
         timeout-minutes: 20
+        run: |
+          smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }} --verbose
