@@ -503,11 +503,7 @@ ParamsSetter >> fr: aNumberOrABoxOrASymbol [
 { #category : 'accessing' }
 ParamsSetter >> freq: aNumberOrABoxOrASymbol [
 
-	thisContext selector
-		changeLabelOrInitialValue: aNumberOrABoxOrASymbol
-		forUGen: self.
-		"experimental".
-		
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -976,6 +972,13 @@ ParamsSetter >> pan: aNumberOrABoxOrASymbol [
 	aNumberOrABoxOrASymbol
 		asParam: methodName asString allButLast
 		forUGen: self
+]
+
+{ #category : 'helper' }
+ParamsSetter >> paramSetter [
+    | paramName |
+    paramName := thisContext sender method selector allButLast.
+    ^ [ :value | value asParam: paramName forUGen: self ]
 ]
 
 { #category : 'accessing' }
