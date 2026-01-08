@@ -86,57 +86,26 @@ jobs:
           Expand-Archive librariesBundle_windows_intel.zip $dest -Force
 
       # ------------------------------
-      # Windows: DLL verification only
-      # ------------------------------
-      - name: Verify DLL and dependencies (Windows)
-        if: matrix.os == 'windows-latest'
-        shell: powershell
-        run: |
-          $dll = "$env:USERPROFILE\.smalltalkCI\_builds\librariesBundle\librariesBundle\libdynamic-engine.dll"
-
-          if (-not (Test-Path $dll)) {
-            Write-Error "libdynamic-engine.dll not found"
-            exit 1
-          }
-
-          Write-Host "libdynamic-engine.dll found"
-          $folder = Split-Path $dll
-          Write-Host "DLLs in ${folder}:"
-          Get-ChildItem "$folder\*.dll" | ForEach-Object { Write-Host $_.Name }
-
-          try {
-            Add-Type -Path $dll
-            Write-Host "DLL loaded successfully (basic dependency check)"
-          } catch {
-            Write-Error "Failed to load DLL. Likely missing dependencies."
-            exit 1
-          }
-
-      # ------------------------------
-      # Linux/macOS: set library environment
+      # Set library environment (ALL OS)
       # ------------------------------
       - name: Set library environment
-        if: matrix.os != 'windows-latest'
+        shell: bash
         run: |
           echo "FAUST_LIB_PATH=$HOME/.smalltalkCI/_builds/librariesBundle/faustLibs" >> "$GITHUB_ENV"
-          echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
-          if [ "${{ matrix.os }}" = "macos-latest" ]; then
-            echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
+
+          if [ "${{ matrix.os }}" != "windows-latest" ]; then
+            echo "LD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
+            if [ "${{ matrix.os }}" = "macos-latest" ]; then
+              echo "DYLD_LIBRARY_PATH=$HOME/.smalltalkCI/_builds/librariesBundle" >> "$GITHUB_ENV"
+            fi
+          else
+            echo "PATH=$HOME/.smalltalkCI/_builds/librariesBundle:$PATH" >> "$GITHUB_ENV"
           fi
 
       # ------------------------------
-      # Linux/macOS: run SmalltalkCI
+      # Run SmalltalkCI (ALL OS)
       # ------------------------------
       - name: Run SmalltalkCI
-        if: matrix.os != 'windows-latest'
         timeout-minutes: 20
         run: |
           smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
-
-      # ------------------------------
-      # Windows: skip SmalltalkCI execution
-      # ------------------------------
-      - name: Skip Windows execution
-        if: matrix.os == 'windows-latest'
-        run: |
-          echo "Windows execution skipped (requires ASIO backend)"
