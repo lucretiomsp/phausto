@@ -22,6 +22,14 @@ ParamSetterTest >> testSetAttackWithUGen [
 ]
 
 { #category : 'tests' }
+ParamSetterTest >> testSetDecayWithSymbol [
+
+	| env |
+	env := ADSREnv new decay: #ShortDecay.
+	self assert: env decay label equals: 'ShortDecay'
+]
+
+{ #category : 'tests' }
 ParamSetterTest >> testSetFreqWithNumber [
 
 	| oscillator |
