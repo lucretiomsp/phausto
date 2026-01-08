@@ -101,16 +101,15 @@ jobs:
 
           Write-Host "libdynamic-engine.dll found"
           $folder = Split-Path $dll
-          Write-Host "DLLs in $folder:"
+          Write-Host "DLLs in ${folder}:"
           Get-ChildItem "$folder\*.dll" | ForEach-Object { Write-Host $_.Name }
 
-          # Basic load test (fails if dependent DLLs are missing)
           try {
-              Add-Type -Path $dll
-              Write-Host "DLL loaded successfully (basic dependency check)"
+            Add-Type -Path $dll
+            Write-Host "DLL loaded successfully (basic dependency check)"
           } catch {
-              Write-Error "Failed to load DLL. Likely missing dependencies."
-              exit 1
+            Write-Error "Failed to load DLL. Likely missing dependencies."
+            exit 1
           }
 
       # ------------------------------
