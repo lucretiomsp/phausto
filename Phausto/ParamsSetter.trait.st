@@ -11,73 +11,37 @@ Trait {
 { #category : 'accessing' }
 ParamsSetter >> aN: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> accent: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> amount: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> amplitude: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> ar: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> attack: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }

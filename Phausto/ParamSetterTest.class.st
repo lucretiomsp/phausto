@@ -14,6 +14,14 @@ ParamSetterTest >> setUp [
 ]
 
 { #category : 'tests' }
+ParamSetterTest >> testSetAttackWithUGen [
+
+	| env |
+	env := AREnv new attack: LFOTriPos new.
+	self assert: env attack  class equals: LFOTriPos 
+]
+
+{ #category : 'tests' }
 ParamSetterTest >> testSetFreqWithNumber [
 
 	| oscillator |
