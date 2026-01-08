@@ -108,4 +108,4 @@ jobs:
       - name: Run SmalltalkCI
         timeout-minutes: 20
         run: |
-          smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
+          smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }} --verbose
