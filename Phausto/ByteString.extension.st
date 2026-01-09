@@ -9,3 +9,9 @@ originalCmajorPatch  add: aCmajorView patchViewProperty .
 newCmajorPatch := STONJSON toString: originalCmajorPatch .
 ^ newCmajorPatch 
 ]
+
+{ #category : '*Phausto' }
+ByteString >> asDSPParameter [
+
+	^ DSPParameter new
+]
