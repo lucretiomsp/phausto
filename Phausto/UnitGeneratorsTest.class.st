@@ -180,10 +180,10 @@ UnitGeneratorsTest >> testSetOscillatorParameters [
 	pulse freq: #freq.
 	pulse duty: 0.1.
 
-	self assert: pulse uLevel class = PhBox.
+	self assert: pulse uLevel class equals: PhBox.
 	self assert: pulse uLevel asString trimLineSpaces equals: '0.5f'.
 	self assert: pulse freq label equals: 'freq'.
-	self assert: pulse duty init asString trimLineSpaces equals: '0.1f'
+	self assert: pulse duty init asString trimLineSpaces equals: '0.1'
 ]
 
 { #category : 'tests' }
