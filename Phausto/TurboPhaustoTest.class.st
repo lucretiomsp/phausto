@@ -9,7 +9,7 @@ Class {
 { #category : 'tests' }
 TurboPhaustoTest >> testAcidAsBox [
 
-	self assert: Acid new asDsp isNull equals: false
+	self deny: Acid new asDsp isNull 
 ]
 
 { #category : 'tests' }

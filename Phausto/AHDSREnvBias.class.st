@@ -80,15 +80,15 @@ AHDSREnvBias >> initialize [
 
 	super initialize.
 
-	processExpression := 'process = en.adsrf_bias;'.
+	processExpression := 'process = en.ahdsre;'.
 	self initializeDecayAndSustain.
 	self initializeBias.
-		hold := PhHSlider new
+	hold := PhHSlider new
 		        label: self label , 'Hold'
 		        init: 0.5
 		        min: 0
 		        max: 1
-		        step: 0.001.
+		        step: 0.001
 ]
 
 { #category : 'initialization' }
