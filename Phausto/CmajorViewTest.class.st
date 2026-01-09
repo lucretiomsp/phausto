@@ -57,10 +57,12 @@ CmajorViewTest >> testPatchViewProperty [
 	| view result propertyDictionary |
 	view := CmajorView new size: 400 @ 300.
 	propertyDictionary := {
-		                      ('src' -> 'ui/index.js ').
+		                      ('src' -> 'ui/index.js').
 		                      ('width' -> view size x).
 		                      ('height' -> view size y).
-		                      ('resizable' -> view isResizable ) } asDictionary.
+		                      ('resizable' -> view isResizable) }
+		                      asDictionary.
 	result := 'view' -> propertyDictionary.
-	self assert: view patchViewProperty  equals: result 
+
+	self assert: view patchViewProperty equals: result
 ]
