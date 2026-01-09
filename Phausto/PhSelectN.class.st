@@ -43,7 +43,7 @@ PhSelectN >> asBox [
 	indexBox := self index .
 	intermediateBox := super asBox.
 
-	finalBox := indexBox  , phList connectTo: intermediateBox.
+	finalBox := indexBox  asBox , phList asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 

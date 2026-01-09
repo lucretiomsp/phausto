@@ -9,7 +9,9 @@ Class {
 { #category : 'tests' }
 ToolkitTest >> testPHSelectNAsDsp [
 
-	self deny: (PhSelectN new: { 0.1 asBox . 0.2 asBox . 0.3 asBox}) asDsp isNull 
+| oscillators |
+oscillators := {  SineOsc new . SquareOsc new . PulseOsc new  . TriOsc new . Noise new} asPhList .
+self deny: (PhSelectN new list: oscillators) asDsp isNull
 ]
 
 { #category : 'tests' }
