@@ -13,8 +13,14 @@ Class {
 }
 
 { #category : 'initialization' }
-PhDemosMono >> initialize [ 
+PhDemosMono >> initialize [
 
-super initialize.
-input := 0 asBox 
+	super initialize.
+	input := 0 
+]
+
+{ #category : 'accessing' }
+PhDemosMono >> input [
+
+^ input 
 ]

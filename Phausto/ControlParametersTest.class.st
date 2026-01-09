@@ -21,10 +21,10 @@ ControlParametersTest >> setUp [
 { #category : 'tests' }
 ControlParametersTest >> testChangeControlParameterLabel [
 
-| freqParam |
-osci freq: #OsciFreq.
-freqParam :=  osci controlParameters at: #freq .
-	self assert:   freqParam label  equals: 'OsciFreq'
+	| freqParam |
+
+	freqParam := osci controlParameters at: #freq.
+	self assert: freqParam label equals: 'OsciFreq'
 ]
 
 { #category : 'tests' }

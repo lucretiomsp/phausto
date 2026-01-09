@@ -14,8 +14,21 @@ Class {
 }
 
 { #category : 'initialization' }
-PhDemosStereo >> initialize [ 
-super initialize .
-inputL := 0 asBox .
-inputR := 0 asBox 
+PhDemosStereo >> initialize [
+
+	super initialize.
+	inputL := 0.
+	inputR := 0 
+]
+
+{ #category : 'accessing' }
+PhDemosStereo >> inputL [
+
+^ inputL
+]
+
+{ #category : 'accessing' }
+PhDemosStereo >> inputR [
+
+	^ inputR
 ]

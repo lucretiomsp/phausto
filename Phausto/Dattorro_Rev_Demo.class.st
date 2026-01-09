@@ -17,7 +17,7 @@ Dattorro_Rev_Demo >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self inputL , self inputR asBox connectTo: intermediateBox .
+	finalBox := self inputL asBox , self inputR asBox connectTo: intermediateBox .
 
 	^ finalBox
 ]
