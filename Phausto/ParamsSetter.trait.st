@@ -214,87 +214,44 @@ ParamsSetter >> envMod: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
-ParamsSetter >> excitation:   aNumberOrABoxOrASymbol [
+ParamsSetter >> excitation: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> fb1: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> fb2: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> fb: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
-ParamsSetter >> feedBack:  aNumberOrABoxOrASymbol [
+ParamsSetter >> feedBack: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> finalLevel: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ParamsSetter >> fr: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -348,7 +305,7 @@ ParamsSetter >> impulseIndex: aNumberOrABoxOrASymbol [
 { #category : 'accessing' }
 ParamsSetter >> index: aNumberOrABoxOrASymbol [
 
-	| methodName |
+
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
