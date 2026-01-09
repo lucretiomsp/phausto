@@ -9,7 +9,7 @@ Class {
 { #category : 'tests' }
 CmajorViewTest >> testAddViewToPatch [
 
-	| patchWithoutView patchWithView |
+	| patchWithoutView patchWithView generatedDic expectedDic |
 	patchWithoutView := '{"CmajorVersion":	1,
 "ID":	"pharo.UITest",
 "version":	"1.0",
@@ -20,26 +20,25 @@ CmajorViewTest >> testAddViewToPatch [
 "source":	[ "UITest.cmajor" ]
 }'.
 	patchWithView := '
-{"CmajorVersion":	1,
-"ID":	"pharo.UITest",
-"version":	"1.0",
-"name":	"UITest",
+{"source":	[ "UITest.cmajor" ],
 "description":	"A CanoTest generated in Pharo using Phausto",
-"manufacturer":	"Pharo Association",
+"version":	"1.0",
 "isInstrument":	false,
-"source":	[ "UITest.cmajor" ],
+"manufacturer":	"Pharo Association",
 "view":
     {
         "src": "ui/index.js",
         "width": 400,
         "height": 400,
-        "resizable": false
-    }
+        "resizable": true
+    } ,
+"ID":	"pharo.UITest",
+"CmajorVersion":	1,
+"name":	"UITest"
 }'.
+	
 
-	self
-		assert: (STONJSON  fromString: (patchWithoutView addViewPropertyFrom: CmajorView new))
-		equals: (STONJSON  fromString: patchWithView)
+	self assert: generatedDic equals: expectedDic
 ]
 
 { #category : 'tests' }
