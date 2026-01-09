@@ -45,8 +45,7 @@ EffectsTest >> testDryWetMonoMixerAsDsp [
 { #category : 'tests' }
 EffectsTest >> testExciterDemoAsDsp [
 
-self assert: 1 equals: 0.
-"crashes for no apparent reason"
+
 	self assert: Exciter_Demo new asDsp isNull equals: false
 ]
 
@@ -93,12 +92,6 @@ EffectsTest >> testGreyHoleDemoAsDsp [
 ]
 
 { #category : 'tests' }
-EffectsTest >> testLimiterMonoAsDsp [
-
-	self deny: PhLimiter1176Mono new asDsp isNull 
-]
-
-{ #category : 'tests' }
 EffectsTest >> testOScrsDemoAsDsp [
 
 	self assert: Oscrs_Demo new asDsp isNull equals: false
@@ -126,9 +119,8 @@ EffectsTest >> testPhTranssposeDsp [
 { #category : 'tests' }
 EffectsTest >> testPhVocoderDsp [
 
-self assert: 1 equals: 0.
-"dsp crash apparently for no reason"
-	self assert: PhVocoder new asDsp isNull equals: false
+
+	self assert: Vocoder_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

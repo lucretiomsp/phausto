@@ -14,7 +14,7 @@ Class {
 	#tag : 'Demo'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'converting' }
 Exciter_Demo >> asBox [
 
 	| intermediateBox finalBox |
@@ -22,4 +22,10 @@ Exciter_Demo >> asBox [
 	finalBox := self input asBox connectTo: intermediateBox .
 
 	^ finalBox
+]
+
+{ #category : 'initialization' }
+Exciter_Demo >> initialize [ 
+super initialize.
+processExpression := 'process = dm.exciter;'
 ]

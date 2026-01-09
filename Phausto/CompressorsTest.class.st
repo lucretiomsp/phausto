@@ -21,6 +21,12 @@ self assert: 1 equals: 0
 ]
 
 { #category : 'tests' }
+CompressorsTest >> testLimiterMonoAsDsp [
+
+	self deny: PhLimiter1176Mono new asDsp isNull 
+]
+
+{ #category : 'tests' }
 CompressorsTest >> testPhCompressorLadMonoAsDsp [
 
 	self deny: PhCompressorLadMono new asDsp isNull
