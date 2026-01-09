@@ -14,7 +14,8 @@ Class {
 		'waveform',
 		'compensation',
 		'distortion',
-		'filterDecay'
+		'filterDecay',
+		'baseFreq'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -127,6 +128,12 @@ Acid >> initialize [
 		          step: 0.001.
 	filterDecay := PhHSlider new
 		               label: self coypuLabel , 'EnvDecay'
+		               init: 0.282
+		               min: 0.01
+		               max: 2
+		               step: 0.001.
+	baseFreq := PhHSlider new
+		               label: self coypuLabel , 'AcidFreq'
 		               init: 0.282
 		               min: 0.01
 		               max: 2
