@@ -14,7 +14,7 @@ ControlParametersTest >> setUp [
 
 	super setUp.
 
-	"Put here a common initialization logic for tests"
+	
 	osci := SineOsc new label: 'SineOsc'
 ]
 
@@ -22,9 +22,9 @@ ControlParametersTest >> setUp [
 ControlParametersTest >> testChangeControlParameterLabel [
 
 	| freqParam |
-
+	UnitGenerator resetInstancesInDSPContext.
 	freqParam := osci controlParameters at: #freq.
-	self assert: freqParam label equals: 'OsciFreq'
+	self assert: freqParam label equals: 'SineOscFreq'
 ]
 
 { #category : 'tests' }
