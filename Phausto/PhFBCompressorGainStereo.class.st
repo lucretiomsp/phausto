@@ -1,6 +1,5 @@
 "
-Feed forward N channels dynamic range compressor.
-
+Feed back stereo dynamic range compressor
 ## Parameters:
 
 **strength:** strength of the compression (0 = no compression, 1 means hard limiting, >1 means over-compression)
@@ -27,9 +26,8 @@ Class {
 { #category : 'converting' }
 PhFBCompressorGainStereo >> asBox [
 
-	^ self inputL asBox , self inputR asBox  ,  self strength asBox , self threshold asBox
-	  , self attack asBox , self release asBox , self knee asBox
-	  , self prePost asBox , self link asBox connectTo: super asBox
+	^ self inputL asBox , self inputR asBox , self strength asBox , self threshold asBox , self attack asBox , self release asBox
+	  , self knee asBox , self prePost asBox , self link asBox , Wire new asBox connectTo: super asBox
 ]
 
 { #category : 'initialization' }
@@ -45,9 +43,9 @@ PhFBCompressorGainStereo >> initializeProcessExpression [
 	"this class needs a more complex process expression as Structural parameters in Faust must be integer constant numerical expressions, are evaluated at compile time and cannot flow through wires or be infix"
 
 	^ processExpression := 'import("stdfaust.lib");
-   meter = _;
-   compressor2ch(strength, thresh, att, rel, knee, prePost, linkv) =
-   co.FBcompressor_N_chan(strength, thresh, att, rel, knee, prePost, linkv, meter ,2);
+ 
+   compressor2ch(strength, thresh, att, rel, knee, prePost, linkv , meter) =
+   co.FBcompressor_N_chan(strength, thresh, att, rel, knee, prePost, linkv, _  ,2);
    process = compressor2ch;'
 ]
 

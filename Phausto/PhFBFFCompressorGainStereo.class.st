@@ -1,6 +1,5 @@
 "
-Feed back stereo  dynamic range compressor.
-
+Feed forward / feed back stereo dynamic range compressor. The feedback part has a much higher strength, so they end up sounding similar
 ## Parameters:
 
 **strength:** strength of the compression (0 = no compression, 1 means hard limiting, >1 means over-compression)
@@ -17,40 +16,48 @@ Sometimes even bigger ratios are useful: for example a group recording where one
 
 "
 Class {
-	#name : 'PhFFCompressorGainStereo',
+	#name : 'PhFBFFCompressorGainStereo',
 	#superclass : 'PhCompressor',
+	#instVars : [
+		'fbff'
+	],
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
 	#tag : 'Compressors'
 }
 
 { #category : 'converting' }
-PhFFCompressorGainStereo >> asBox [
+PhFBFFCompressorGainStereo >> asBox [
 
 	^ self inputL asBox , self inputR asBox , self strength asBox , self threshold asBox , self attack asBox , self release asBox
-	  , self knee asBox , self prePost asBox , self link asBox , Wire new asBox  connectTo: super asBox
+	  , self knee asBox , self prePost asBox , self link asBox , self fbff asBox , Wire new asBox connectTo: super asBox
+]
+
+{ #category : 'accessing' }
+PhFBFFCompressorGainStereo >> fbff [ 
+^ fbff
 ]
 
 { #category : 'initialization' }
-PhFFCompressorGainStereo >> initialize [
+PhFBFFCompressorGainStereo >> initialize [
 
 	super initialize.
 	self initializeProcessExpression.
-
+	fbff := PhHSlider new label: 'CompressorFBFF' values: #(0.5 0 1 0.01).
 ]
 
 { #category : 'initialization' }
-PhFFCompressorGainStereo >> initializeProcessExpression [
+PhFBFFCompressorGainStereo >> initializeProcessExpression [
 	"this class needs a more complex process expression as Structural parameters in Faust must be integer constant numerical expressions, are evaluated at compile time and cannot flow through wires or be infix"
 
 	^ processExpression := 'import("stdfaust.lib");
-  
-   compressor2ch(strength, thresh, att, rel, knee, prePost, linkv , meter) =
-   co.FBcompressor_N_chan(strength, thresh, att, rel, knee, prePost, linkv, _ ,2);
+   meter = _;
+   compressor2ch(strength, thresh, att, rel, knee, prePost, linkv , fbff , meter) =
+   co.FBFFcompressor_N_chan(strength, thresh, att, rel, knee, prePost, linkv, fbfff , meter , 2);
    process = compressor2ch;'
 ]
 
 { #category : 'accessing' }
-PhFFCompressorGainStereo >> link [ 
+PhFBFFCompressorGainStereo >> link [ 
 ^ link
 ]

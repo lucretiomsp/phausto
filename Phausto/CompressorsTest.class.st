@@ -41,6 +41,12 @@ CompressorsTest >> testPhFBCompressorGainStereoAsDsp [
 ]
 
 { #category : 'tests' }
+CompressorsTest >> testPhFBFFCompressorGainStereoAsDsp [
+
+	self deny: PhFBFFCompressorGainStereo new asDsp isNull
+]
+
+{ #category : 'tests' }
 CompressorsTest >> testPhFFCompressorGainStereoAsDsp [
 
 	self deny: PhFFCompressorGainStereo new asDsp isNull

@@ -237,6 +237,12 @@ self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> fbff: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> feedBack: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
