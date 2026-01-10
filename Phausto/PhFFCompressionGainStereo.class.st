@@ -1,5 +1,6 @@
 "
-Stereo dynamic range compressor gain computer with linear output.
+Feed forward N channels dynamic range compressor.
+
 ## Parameters:
 
 **strength:** strength of the compression (0 = no compression, 1 means hard limiting, >1 means over-compression)
@@ -16,7 +17,7 @@ Sometimes even bigger ratios are useful: for example a group recording where one
 
 "
 Class {
-	#name : 'PhPeakCompressionGainStereo',
+	#name : 'PhFFCompressionGainStereo',
 	#superclass : 'PhCompressor',
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
@@ -24,7 +25,7 @@ Class {
 }
 
 { #category : 'converting' }
-PhPeakCompressionGainStereo >> asBox [
+PhFFCompressionGainStereo >> asBox [
 
 	^ self inputL asBox , self inputR asBox  ,  self strength asBox , self threshold asBox
 	  , self attack asBox , self release asBox , self knee asBox
@@ -32,7 +33,7 @@ PhPeakCompressionGainStereo >> asBox [
 ]
 
 { #category : 'initialization' }
-PhPeakCompressionGainStereo >> initialize [
+PhFFCompressionGainStereo >> initialize [
 
 	super initialize.
 	self initializeProcessExpression.
@@ -40,18 +41,17 @@ PhPeakCompressionGainStereo >> initialize [
 ]
 
 { #category : 'initialization' }
-PhPeakCompressionGainStereo >> initializeProcessExpression [
+PhFFCompressionGainStereo >> initializeProcessExpression [
 	"this class needs a more complex process expression as Structural parameters in Faust must be integer constant numerical expressions, are evaluated at compile time and cannot flow through wires or be infix"
 
 	^ processExpression := 'import("stdfaust.lib");
-    
-    
-    compressor2ch(strength, thresh, att, rel, knee, prePost, linkv) =
-    co.peak_compression_gain_N_chan(strength, thresh, att, rel, knee, prePost, linkv,  2);
-    process = compressor2ch;'
+   meter = _;
+   compressor2ch(strength, thresh, att, rel, knee, prePost, linkv) =
+   co.FFcompressor_N_chan(strength, thresh, att, rel, knee, prePost, linkv, meter ,2);
+   process = compressor2ch;'
 ]
 
 { #category : 'accessing' }
-PhPeakCompressionGainStereo >> link [ 
+PhFFCompressionGainStereo >> link [ 
 ^ link
 ]
