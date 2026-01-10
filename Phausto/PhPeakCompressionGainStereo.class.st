@@ -1,5 +1,5 @@
 "
-Mono dynamic range compressor gain computer with dB output from Faust standard library
+Stereo dynamic range compressor gain computer with dB output from Faust standard library
 
 ## Parameters:
 
@@ -10,15 +10,14 @@ Mono dynamic range compressor gain computer with dB output from Faust standard l
 **knee:** a gradual increase in gain reduction around the threshold: below thresh-(knee/2) there is no gain reduction, above thresh+(knee/2) there is the same gain reduction as without a knee, and in between there is a gradual increase in gain reduction
 **prePost:** places the level detector either at the input or after the gain computer; this turns it from a linear return-to-zero detector into a log domain return-to-threshold detector.
 **link:** the amount of linkage between the channels: 0 = each channel is independent, 1 = all channels have the same amount of gain reduction
-**numChannels** the number of channels of the compressor, known at compile time.
-It uses a strength parameter instead of the traditional ratio, in order to be able to function as a hard limiter. For that you'd need a ratio of infinity:1, and you cannot express that in Faust.
+
 
 Sometimes even bigger ratios are useful: for example a group recording where one instrument is recorded with both a close microphone and a room microphone, and the instrument is loud enough in the room mic when playing loud, but you want to boost it when it is playing soft.
 
 
 "
 Class {
-	#name : 'PhPeakCompressionGainMultichannel',
+	#name : 'PhPeakCompressionGainStereo',
 	#superclass : 'PhCompressor',
 	#instVars : [
 		'link',
@@ -30,20 +29,20 @@ Class {
 }
 
 { #category : 'converting' }
-PhPeakCompressionGainMultichannel >> asBox [
+PhPeakCompressionGainStereo >> asBox [
 
-	^ self input asBox , self strength asBox , self threshold asBox
+	^ self inputL asBox , self inputR asBox  ,  self strength asBox , self threshold asBox
 	  , self attack asBox , self release asBox , self knee asBox
-	  , self prePost asBox , self link asBox 
-		  connectTo: super asBox
+	  , self prePost asBox , self link asBox connectTo: super asBox
 ]
 
 { #category : 'initialization' }
-PhPeakCompressionGainMultichannel >> initialize [
+PhPeakCompressionGainStereo >> initialize [
 
 	super initialize.
-	processExpression := 'process = co.peak_compression_gain_N_chan_db(2);'.
-	input := 0.
+	self initializeProcessExpression.
+	inputL := 0.
+	inputR := 0.
 	strength := 0.5.
 	threshold := -12.
 	attack := 0.001.
@@ -54,12 +53,26 @@ PhPeakCompressionGainMultichannel >> initialize [
 	numChannels := 2
 ]
 
+{ #category : 'initialization' }
+PhPeakCompressionGainStereo >> initializeProcessExpression [
+	"this class needs a more complex process expression as Structural parameters in Faust must be integer constant numerical expressions, are evaluated at compile time and cannot flow through wires or be infix"
+
+	^ processExpression := 'import("stdfaust.lib");
+
+compressor2ch(strength, thresh, att, rel, knee, prePost, linkv) =
+    co.peak_compression_gain_N_chan_db(
+        strength, thresh, att, rel, knee, prePost, linkv, 2
+    );
+
+process = compressor2ch;'
+]
+
 { #category : 'accessing' }
-PhPeakCompressionGainMultichannel >> link [ 
+PhPeakCompressionGainStereo >> link [ 
 ^ link
 ]
 
 { #category : 'accessing' }
-PhPeakCompressionGainMultichannel >> numChannels [ 
+PhPeakCompressionGainStereo >> numChannels [ 
 ^ numChannels 
 ]

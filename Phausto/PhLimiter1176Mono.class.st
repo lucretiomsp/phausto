@@ -11,9 +11,9 @@ Class {
 }
 
 { #category : 'converting' }
-PhLimiter1176Mono >> asBox [ 
+PhLimiter1176Mono >> asBox [
 
-^  self input asBox , self ratio asBox , self attack asBox , self release connectTo: super asBox.
+	^ self input asBox connectTo: super asBox
 ]
 
 { #category : 'initialization' }

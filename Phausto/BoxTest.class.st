@@ -70,7 +70,7 @@ BoxTest >> testLT [
 { #category : 'tests' }
 BoxTest >> testLibContextIsFalseAtStartup [
 
-	self assert: PhBox libContext equals: false
+	self deny:  PhBox libContext
 ]
 
 { #category : 'tests' }
