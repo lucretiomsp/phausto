@@ -12,15 +12,6 @@ self deny: PhLimiter1176Mono new  asDsp isNull
 ]
 
 { #category : 'tests' }
-CompressorsTest >> TODOtestPhPeakCompressionGainMultichannelAsDsp [
-
-
-"crashes apparently for no reason"
-self assert: 1 equals: 0
-	"self deny: PhPeakCompressionGainMultichannel new asDsp isNull"
-]
-
-{ #category : 'tests' }
 CompressorsTest >> testLimiterMonoAsDsp [
 
 	self deny: PhLimiter1176Mono new asDsp isNull 
@@ -44,9 +35,15 @@ CompressorsTest >> testPhCompressorStereoAsDsp [
 ]
 
 { #category : 'tests' }
+CompressorsTest >> testPhFBCompressorGainStereoAsDsp [
+
+	self deny: PhFBCompressorGainStereo new asDsp isNull
+]
+
+{ #category : 'tests' }
 CompressorsTest >> testPhFFCompressorGainStereoAsDsp [
 
-	self deny: PhFFCompressionGainStereo new asDsp isNull
+	self deny: PhFFCompressorGainStereo new asDsp isNull
 ]
 
 { #category : 'tests' }

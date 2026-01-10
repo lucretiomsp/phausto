@@ -17,7 +17,7 @@ Sometimes even bigger ratios are useful: for example a group recording where one
 
 "
 Class {
-	#name : 'PhFFCompressionGainStereo',
+	#name : 'PhFBCompressorGainStereo',
 	#superclass : 'PhCompressor',
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
@@ -25,7 +25,7 @@ Class {
 }
 
 { #category : 'converting' }
-PhFFCompressionGainStereo >> asBox [
+PhFBCompressorGainStereo >> asBox [
 
 	^ self inputL asBox , self inputR asBox  ,  self strength asBox , self threshold asBox
 	  , self attack asBox , self release asBox , self knee asBox
@@ -33,7 +33,7 @@ PhFFCompressionGainStereo >> asBox [
 ]
 
 { #category : 'initialization' }
-PhFFCompressionGainStereo >> initialize [
+PhFBCompressorGainStereo >> initialize [
 
 	super initialize.
 	self initializeProcessExpression.
@@ -41,17 +41,17 @@ PhFFCompressionGainStereo >> initialize [
 ]
 
 { #category : 'initialization' }
-PhFFCompressionGainStereo >> initializeProcessExpression [
+PhFBCompressorGainStereo >> initializeProcessExpression [
 	"this class needs a more complex process expression as Structural parameters in Faust must be integer constant numerical expressions, are evaluated at compile time and cannot flow through wires or be infix"
 
 	^ processExpression := 'import("stdfaust.lib");
    meter = _;
    compressor2ch(strength, thresh, att, rel, knee, prePost, linkv) =
-   co.FFcompressor_N_chan(strength, thresh, att, rel, knee, prePost, linkv, meter ,2);
+   co.FBcompressor_N_chan(strength, thresh, att, rel, knee, prePost, linkv, meter ,2);
    process = compressor2ch;'
 ]
 
 { #category : 'accessing' }
-PhFFCompressionGainStereo >> link [ 
+PhFBCompressorGainStereo >> link [ 
 ^ link
 ]
