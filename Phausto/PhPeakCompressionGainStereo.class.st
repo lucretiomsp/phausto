@@ -42,14 +42,14 @@ PhPeakCompressionGainStereo >> initialize [
 	self initializeProcessExpression.
 	inputL := 0.
 	inputR := 0.
-	strength := 0.5.
-	threshold := -12.
-	attack := 0.001.
-	release := 0.1.
-	knee := 6.
+	strength := PhHSlider new
+		             label: 'Strength'
+		             values: #( 0.5 0 1 0.01 ).
+	knee :=  PhHSlider new
+		             label: 'Knee'
+		             values: #( 6 1 10 0.01 ).
 	prePost := 0.
-	link := 1.
-
+	link := 1
 ]
 
 { #category : 'initialization' }

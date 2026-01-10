@@ -37,7 +37,12 @@ PhPeakCompressionGainMono >> initialize [
 	super initialize.
 	processExpression := 'process = co.peak_compression_gain_mono_db;'.
 	input := 0.
-	strength := 0.5.
+	strength := PhHSlider new
+		             label: 'Strength'
+		             values: #( 0.5 0 1 0.01 ).
+	knee :=  PhHSlider new
+		             label: 'Knee'
+		             values: #( 6 1 10 0.01 ).
 	knee := 6.
 	prePost := 0
 ]
