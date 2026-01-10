@@ -59,3 +59,15 @@ CompressorsTest >> testPhPeakCompressionGainStereoAsDsp [
 
 	self deny: PhPeakCompressionGainStereo new asDsp isNull
 ]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhRMSCompressionGainMonoAsDsp [
+
+	self deny: PhRMSCompressionGainMono new asDsp isNull
+]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhRMSCompressionGainStereoAsDsp [
+
+	self deny: PhRMSCompressionGainStereo new asDsp isNull
+]
