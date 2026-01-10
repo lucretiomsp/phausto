@@ -49,6 +49,18 @@ self deny: PhLimiter1176Stereo new  asDsp isNull
 ]
 
 { #category : 'tests' }
+CompressorsTest >> testPhPeakCompressionDbGainStereoAsDsp [
+
+	self deny: PhPeakCompressionGainStereo_dB new asDsp isNull
+]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhPeakCompressionGainDbMonoAsDsp [
+
+	self deny: PhPeakCompressionGainMono_dB new asDsp isNull
+]
+
+{ #category : 'tests' }
 CompressorsTest >> testPhPeakCompressionGainMonoAsDsp [
 
 	self deny: PhPeakCompressionGainMono new asDsp isNull
@@ -58,6 +70,18 @@ CompressorsTest >> testPhPeakCompressionGainMonoAsDsp [
 CompressorsTest >> testPhPeakCompressionGainStereoAsDsp [
 
 	self deny: PhPeakCompressionGainStereo new asDsp isNull
+]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhRMSCompressionDbGainMonoAsDsp [
+
+	self deny: PhRMSCompressionGainMono_dB new asDsp isNull
+]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhRMSCompressionGainDbStereoAsDsp [
+
+	self deny: PhRMSCompressionGainStereo_dB new asDsp isNull
 ]
 
 { #category : 'tests' }

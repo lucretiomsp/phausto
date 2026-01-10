@@ -16,7 +16,7 @@ Sometimes even bigger ratios are useful: for example a group recording where one
 
 "
 Class {
-	#name : 'PhPeakCompressionGainMono',
+	#name : 'PhPeakCompressionGainMono_dB',
 	#superclass : 'PhCompressor',
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
@@ -24,7 +24,7 @@ Class {
 }
 
 { #category : 'converting' }
-PhPeakCompressionGainMono >> asBox [
+PhPeakCompressionGainMono_dB >> asBox [
 
 	^ self input asBox , self strength asBox 
 	  , self threshold asBox , self attack asBox , self release asBox , self knee asBox , self prePost  asBox 
@@ -32,10 +32,10 @@ PhPeakCompressionGainMono >> asBox [
 ]
 
 { #category : 'initialization' }
-PhPeakCompressionGainMono >> initialize [
+PhPeakCompressionGainMono_dB >> initialize [
 
 	super initialize.
-	processExpression := 'process = co.RMS_compression_gain_mono;'.
+	processExpression := 'process = co.RMS_compression_gain_mono_db;'.
 	input := 0.
 	strength := PhHSlider new label: 'Strength' values: #( 0.5 0 1 0.01 ).
 	knee := PhHSlider new label: 'Knee' values: #( 6 1 10 0.01 ). "level detector is at the input"

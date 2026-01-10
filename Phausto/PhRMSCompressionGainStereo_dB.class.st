@@ -1,5 +1,5 @@
 "
-Stereo dynamic range compressor gain computer with dB output from Faust standard library
+Stereo  RMS dynamic range compressor gain computer with linear output. 
 
 ## Parameters:
 
@@ -17,7 +17,7 @@ Sometimes even bigger ratios are useful: for example a group recording where one
 
 "
 Class {
-	#name : 'PhPeakCompressionGainStereo',
+	#name : 'PhRMSCompressionGainStereo_dB',
 	#superclass : 'PhCompressor',
 	#instVars : [
 		'link'
@@ -28,7 +28,7 @@ Class {
 }
 
 { #category : 'converting' }
-PhPeakCompressionGainStereo >> asBox [
+PhRMSCompressionGainStereo_dB >> asBox [
 
 	^ self inputL asBox , self inputR asBox  ,  self strength asBox , self threshold asBox
 	  , self attack asBox , self release asBox , self knee asBox
@@ -36,7 +36,7 @@ PhPeakCompressionGainStereo >> asBox [
 ]
 
 { #category : 'initialization' }
-PhPeakCompressionGainStereo >> initialize [
+PhRMSCompressionGainStereo_dB >> initialize [
 
 	super initialize.
 	self initializeProcessExpression.
@@ -51,13 +51,13 @@ PhPeakCompressionGainStereo >> initialize [
 ]
 
 { #category : 'initialization' }
-PhPeakCompressionGainStereo >> initializeProcessExpression [
+PhRMSCompressionGainStereo_dB >> initializeProcessExpression [
 	"this class needs a more complex process expression as Structural parameters in Faust must be integer constant numerical expressions, are evaluated at compile time and cannot flow through wires or be infix"
 
 	^ processExpression := 'import("stdfaust.lib");
 
 compressor2ch(strength, thresh, att, rel, knee, prePost, linkv) =
-    co.peak_compression_gain_N_chan(
+    co.RMS_compression_gain_N_chan_db(
         strength, thresh, att, rel, knee, prePost, linkv, 2
     );
 
@@ -65,6 +65,6 @@ process = compressor2ch;'
 ]
 
 { #category : 'accessing' }
-PhPeakCompressionGainStereo >> link [ 
+PhRMSCompressionGainStereo_dB >> link [ 
 ^ link
 ]

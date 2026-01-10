@@ -57,7 +57,7 @@ PhRMSCompressionGainStereo >> initializeProcessExpression [
 	^ processExpression := 'import("stdfaust.lib");
 
 compressor2ch(strength, thresh, att, rel, knee, prePost, linkv) =
-    co.RMS_compression_gain_N_chan_db(
+    co.RMS_compression_gain_N_chan(
         strength, thresh, att, rel, knee, prePost, linkv, 2
     );
 
