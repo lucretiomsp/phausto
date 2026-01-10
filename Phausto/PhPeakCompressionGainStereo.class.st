@@ -20,8 +20,7 @@ Class {
 	#name : 'PhPeakCompressionGainStereo',
 	#superclass : 'PhCompressor',
 	#instVars : [
-		'link',
-		'numChannels'
+		'link'
 	],
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
@@ -50,7 +49,7 @@ PhPeakCompressionGainStereo >> initialize [
 	knee := 6.
 	prePost := 0.
 	link := 1.
-	numChannels := 2
+
 ]
 
 { #category : 'initialization' }
@@ -70,9 +69,4 @@ process = compressor2ch;'
 { #category : 'accessing' }
 PhPeakCompressionGainStereo >> link [ 
 ^ link
-]
-
-{ #category : 'accessing' }
-PhPeakCompressionGainStereo >> numChannels [ 
-^ numChannels 
 ]

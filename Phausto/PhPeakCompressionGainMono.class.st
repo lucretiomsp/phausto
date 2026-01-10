@@ -38,9 +38,6 @@ PhPeakCompressionGainMono >> initialize [
 	processExpression := 'process = co.peak_compression_gain_mono_db;'.
 	input := 0.
 	strength := 0.5.
-	threshold := -12.
-	attack := 0.001.
-	release := 0.1.
 	knee := 6.
 	prePost := 0
 ]

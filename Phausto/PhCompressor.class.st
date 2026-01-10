@@ -30,13 +30,13 @@ PhCompressor >> attack [
 ]
 
 { #category : 'initialization' }
-PhCompressor >> initialize [ 
+PhCompressor >> initialize [
 
-super initialize.
-ratio := 4.
-threshold := -9.
-attack := 0.01.
-release := 0.2
+	super initialize.
+	ratio := 4.
+	threshold := PhHSlider new label: 'Threshold' values: #(-6  -60  0  0.1).
+	attack := PhHSlider new label: 'Attack' values: #(0.001  0.0001  0.3  0.0001).
+	release := PhHSlider new label: 'Release' values: #(0.001  0.0001  0.3  0.0001)
 ]
 
 { #category : 'accessing' }
