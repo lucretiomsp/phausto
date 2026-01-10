@@ -19,9 +19,6 @@ Sometimes even bigger ratios are useful: for example a group recording where one
 Class {
 	#name : 'PhRMSCompressionGainStereo',
 	#superclass : 'PhCompressor',
-	#instVars : [
-		'link'
-	],
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
 	#tag : 'Compressors'
@@ -40,14 +37,7 @@ PhRMSCompressionGainStereo >> initialize [
 
 	super initialize.
 	self initializeProcessExpression.
-	inputL := 0.
-	inputR := 0.
-	strength := PhHSlider new label: 'CompressorStrength' values: #( 0.5 0 1 0.01 ).
-	knee := PhHSlider new label: 'CompressorKnee' values: #( 6 1 10 0.01 ).
-	"level detector is at the input"
-	prePost := 0.
-	"by default, channels are linked"
-	link := 1
+	
 ]
 
 { #category : 'initialization' }

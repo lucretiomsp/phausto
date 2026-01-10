@@ -17,7 +17,8 @@ Class {
 		'inputR',
 		'strength',
 		'knee',
-		'prePost'
+		'prePost',
+		'link'
 	],
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
@@ -33,10 +34,18 @@ PhCompressor >> attack [
 PhCompressor >> initialize [
 
 	super initialize.
-	ratio := 4.
+	input := 0.
+	inputL := 0.
+	inputR := 0.
+	ratio := PhHSlider new label: 'CompressorRatio' values: #( 4 1 10 0.1 ).
 	threshold := PhHSlider new label: 'CompressorThreshold' values: #( -6 -60 0 0.1 ).
 	attack := PhHSlider new label: 'CompressorAttack' values: #( 0.001 0.0001 0.3 0.0001 ).
-	release := PhHSlider new label: 'CompressorRelease' values: #( 0.001 0.0001 0.3 0.0001 )
+	release := PhHSlider new label: 'CompressorRelease' values: #( 0.001 0.0001 0.3 0.0001 ).
+
+	strength := PhHSlider new label: 'Strength' values: #( 0.5 0 1 0.01 ).
+	knee := PhHSlider new label: 'Knee' values: #( 6 1 10 0.01 ). "level detector is at the input"
+	prePost := 0. "channels are linked by default"
+	link := 1
 ]
 
 { #category : 'accessing' }
