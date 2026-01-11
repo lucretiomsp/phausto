@@ -70,7 +70,7 @@ CompressorsTest >> testPhPeakCompressionGainDbMonoAsDsp [
 ]
 
 { #category : 'tests' }
-CompressorsTest >> testPhPeakCompressionGainMonoAsDsp [
+CompressorsTest >> testPhPeakCompressionGainMonoAsDsp [ 
 
 	self deny: PhPeakCompressionGainMono new asDsp isNull
 ]
