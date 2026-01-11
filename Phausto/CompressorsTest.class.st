@@ -104,3 +104,15 @@ CompressorsTest >> testPhRMSCompressionGainStereoAsDsp [
 
 	self deny: PhRMSCompressionGainStereo new asDsp isNull
 ]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhRMSFBCompressorGainStereoAsDsp [
+
+	self deny: PhRMSFBCompressorGainStereo new asDsp isNull
+]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhRMSFBFFCompressorGainStereoAsDsp [
+
+	self deny: PhRMSFBFFCompressorGainStereo new asDsp isNull
+]
