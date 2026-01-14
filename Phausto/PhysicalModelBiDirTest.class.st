@@ -11,3 +11,9 @@ PhysicalModelBiDirTest >> testBasicBlockAsDsp [
 
 self deny: PhBasicBlock new asDsp isNull.
 ]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testChainAsDsp [
+
+	self deny: PhBasicBlock new asDsp isNull
+]
