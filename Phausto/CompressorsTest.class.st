@@ -82,6 +82,12 @@ CompressorsTest >> testPhPeakCompressionGainStereoAsDsp [
 ]
 
 { #category : 'tests' }
+CompressorsTest >> testPhPeakExpansionGainStereoAsDsp [
+
+	self deny: PhPeakExpansionGainStereo new asDsp isNull
+]
+
+{ #category : 'tests' }
 CompressorsTest >> testPhRMSCompressionDbGainMonoAsDsp [
 
 	self deny: PhRMSCompressionGainMono_dB new asDsp isNull
