@@ -25,6 +25,9 @@ Sometimes even bigger ratios are useful: for example a group recording where one
 Class {
 	#name : 'PhRMSFBCompressorGainStereo',
 	#superclass : 'PhCompressor',
+	#instVars : [
+		'threshLim'
+	],
 	#category : 'Phausto-Compressors',
 	#package : 'Phausto',
 	#tag : 'Compressors'
@@ -33,8 +36,10 @@ Class {
 { #category : 'converting' }
 PhRMSFBCompressorGainStereo >> asBox [
 
-	^ self inputL asBox , self inputR asBox , self strength asBox , self threshold asBox , self attack asBox , self release asBox
-	  , self knee asBox , self prePost asBox , self link asBox , Wire new asBox  connectTo: super asBox
+	^ self inputL asBox , self inputR asBox , self strength asBox
+	  , self threshold asBox , self threshLim asBox , self attack asBox
+	  , self release asBox , self knee asBox 
+	  , self link asBox connectTo: super asBox
 ]
 
 { #category : 'initialization' }
@@ -42,7 +47,9 @@ PhRMSFBCompressorGainStereo >> initialize [
 
 	super initialize.
 	self initializeProcessExpression.
-
+	threshLim := PhHSlider new
+		             label: 'CompressorThreshLimit'
+		             values: #( -3 -60 0 0.1 ).
 ]
 
 { #category : 'initialization' }
@@ -51,12 +58,17 @@ PhRMSFBCompressorGainStereo >> initializeProcessExpression [
 
 	^ processExpression := 'import("stdfaust.lib");
  
-   compressor2ch(strength, thresh, att, rel, knee, prePost, linkv , meter ) =
-   co.RMS_FBcompressor_peak_limiter_N_chan(strength, thresh, att, rel, knee, prePost, linkv, _  , 2);
+   compressor2ch(strength, thresh, trLim , att, rel, knee,  linkv  ) =
+   co.RMS_FBcompressor_peak_limiter_N_chan(strength, thresh, trLim , att, rel, knee, linkv, _  , _ ,  2);
    process = compressor2ch;'
 ]
 
 { #category : 'accessing' }
 PhRMSFBCompressorGainStereo >> link [ 
 ^ link
+]
+
+{ #category : 'accessing' }
+PhRMSFBCompressorGainStereo >> threshLim [ 
+^ threshLim
 ]
