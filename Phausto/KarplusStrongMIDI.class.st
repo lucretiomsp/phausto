@@ -4,9 +4,9 @@ Ready-to-use, MIDI-enabled Karplus-Strong string with buil-in UI.
 Class {
 	#name : 'KarplusStrongMIDI',
 	#superclass : 'StringInstruments',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'initialization' }

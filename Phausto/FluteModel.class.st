@@ -15,9 +15,9 @@ Class {
 		'mouthPosition',
 		'pressure'
 	],
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'initialization' }

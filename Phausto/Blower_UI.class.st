@@ -4,9 +4,9 @@ Same as blower but with default UI and vibrato controls.
 Class {
 	#name : 'Blower_UI',
 	#superclass : 'Exciter',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'initialization' }

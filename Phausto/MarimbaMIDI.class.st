@@ -4,9 +4,9 @@ Simple MIDI controllable djembe physical model with built-in UI.
 Class {
 	#name : 'MarimbaMIDI',
 	#superclass : 'ModalPercussion',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'initialization' }

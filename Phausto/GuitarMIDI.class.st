@@ -4,9 +4,9 @@ Ready-to-use MIDI-enabled steel strings acoustic guitar physical model with buil
 Class {
 	#name : 'GuitarMIDI',
 	#superclass : 'StringInstruments',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'initialization' }

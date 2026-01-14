@@ -1,9 +1,9 @@
 Class {
 	#name : 'SFFormantModelBP_ui',
 	#superclass : 'FormantSynthesis',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'converting' }

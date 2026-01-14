@@ -4,9 +4,9 @@ Simple formant/vocal synthesizer based on a source/filter model. The source is j
 Class {
 	#name : 'SFFormantModelBP',
 	#superclass : 'FormantSynthesis',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'initialization' }

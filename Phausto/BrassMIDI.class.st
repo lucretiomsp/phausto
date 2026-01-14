@@ -4,9 +4,9 @@ Ready-to-use MIDI-controllable brass instrument physical model with built-in UI.
 Class {
 	#name : 'BrassMIDI',
 	#superclass : 'WindInstruments',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'initialization' }

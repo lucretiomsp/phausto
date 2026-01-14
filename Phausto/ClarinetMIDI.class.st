@@ -6,9 +6,9 @@ Ready-to-use MIDI compliant clarinet physical model with built-in UI.
 Class {
 	#name : 'ClarinetMIDI',
 	#superclass : 'WindInstruments',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'initialization' }

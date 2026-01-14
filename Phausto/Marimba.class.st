@@ -7,9 +7,9 @@ The term is of Bantu origin, deriving from the prefix ma- meaning 'many' and -ri
 Class {
 	#name : 'Marimba',
 	#superclass : 'ModalPercussion',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'converting' }

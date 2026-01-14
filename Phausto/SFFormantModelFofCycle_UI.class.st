@@ -11,9 +11,9 @@ Simple formant/vocal synthesizer based on a source/filter model. The source is j
 Class {
 	#name : 'SFFormantModelFofCycle_UI',
 	#superclass : 'FormantSynthesis',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'converting' }

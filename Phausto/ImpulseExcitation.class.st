@@ -8,9 +8,9 @@ Creates an impulse excitation of one sample.
 Class {
 	#name : 'ImpulseExcitation',
 	#superclass : 'Exciter',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'converting' }

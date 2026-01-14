@@ -18,9 +18,9 @@ Class {
 	#instVars : [
 		'gate'
 	],
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'accessing' }

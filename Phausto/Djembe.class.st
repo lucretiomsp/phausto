@@ -6,9 +6,9 @@ This model also implements a virtual ""exciter"".
 Class {
 	#name : 'Djembe',
 	#superclass : 'ModalPercussion',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'converting' }

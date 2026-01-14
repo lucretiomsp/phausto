@@ -4,9 +4,9 @@ Ready-to-use MIDI-enabled electric guitar physical model with built-in UI.
 Class {
 	#name : 'ElecGuitarMIDI',
 	#superclass : 'StringInstruments',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'initialization' }

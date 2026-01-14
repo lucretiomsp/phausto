@@ -10,9 +10,9 @@ This model contains 7 excitation positions going linearly from the bottom to the
 Class {
 	#name : 'RussianBell',
 	#superclass : 'ModalPercussion',
-	#category : 'Phausto-PhysicalModels',
+	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
-	#tag : 'PhysicalModels'
+	#tag : 'PhysModels'
 }
 
 { #category : 'converting' }
