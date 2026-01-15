@@ -146,3 +146,15 @@ CompressorsTest >> testPhRMSFBFFCompressorGainStereoAsDsp [
 
 	self deny: PhRMSFBFFCompressorGainStereo new asDsp isNull
 ]
+
+{ #category : 'tests' }
+CompressorsTest >> testRatio2StrengthAsDsp [
+
+	self deny: Ratio2Strength new asDsp isNull
+]
+
+{ #category : 'tests' }
+CompressorsTest >> testStrength2RatioAsDsp [
+
+	self deny: Strength2Ratio new asDsp isNull
+]
