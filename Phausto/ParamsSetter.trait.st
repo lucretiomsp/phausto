@@ -605,6 +605,18 @@ ParamsSetter >> run: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> scSignal: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> scSwitch: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> semitone: aNumberOrABoxOrASymbol [
 
 self paramSetter value: aNumberOrABoxOrASymbol
