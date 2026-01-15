@@ -70,6 +70,18 @@ self deny: PhLimiter1176Stereo new  asDsp isNull
 ]
 
 { #category : 'tests' }
+CompressorsTest >> testPhLimiterLadMonoAsDsp [
+
+	self deny: PhLimiterLadMono new asDsp isNull
+]
+
+{ #category : 'tests' }
+CompressorsTest >> testPhLimiterLadStereoAsDsp [
+
+	self deny: PhLimiterLadStereo new asDsp isNull
+]
+
+{ #category : 'tests' }
 CompressorsTest >> testPhPeakCompressionDbGainStereoAsDsp [
 
 	self deny: PhPeakCompressionGainStereo_dB new asDsp isNull
