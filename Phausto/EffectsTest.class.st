@@ -194,7 +194,7 @@ EffectsTest >> testVirtualAnalogOscillatorDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testWah4DemoAsDsp [
 
-	self assert: Wah4_Demo new asDsp isNull equals: false
+	self deny:  Wah4_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -212,7 +212,7 @@ EffectsTest >> testWavefoldAsDsp [
 { #category : 'tests' }
 EffectsTest >> testZitaLighDemoAsDsp [
 
-	self assert: Zita_Light new asDsp isNull equals: false
+	self deny: Zita_Light new asDsp isNull 
 ]
 
 { #category : 'tests' }
