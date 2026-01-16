@@ -7,22 +7,15 @@ Class {
 }
 
 { #category : 'tests' }
-EffectsTest >> TODOtestVitalRevDemoAsDsp [
-
-	"new version of faust libs must be bundled to pass this test"
-	self assert: Vital_Rev_Demo new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
 EffectsTest >> testCMoogVCFDemoDemoAsDsp [
 
-	self assert: Moog_Vcf_Demo new asDsp isNull equals: false
+	self deny: Moog_Vcf_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
 EffectsTest >> testCompressorDemoAsDsp [
 
-	self assert: Compressor_Demo new asDsp isNull equals: false
+	self deny: Compressor_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -52,14 +45,13 @@ EffectsTest >> testDryWetMonoMixerAsDsp [
 { #category : 'tests' }
 EffectsTest >> testExciterDemoAsDsp [
 
-
-	self assert: Exciter_Demo new asDsp isNull equals: false
+	self deny: Exciter_Demo new asDsp isNull
 ]
 
 { #category : 'tests' }
 EffectsTest >> testFlangerDemoAsDsp [
 
-	self assert: Flanger_Demo new asDsp isNull equals: false
+	self deny: Flanger_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -71,7 +63,7 @@ EffectsTest >> testFractionalDelayAsDsp [
 { #category : 'tests' }
 EffectsTest >> testFreeverbDemoAsDsp [
 
-	self assert: Freeverb_Demo new asDsp isNull equals: false
+	self deny: Freeverb_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -83,7 +75,7 @@ EffectsTest >> testFreeverbMonoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testGateDemoAsDsp [
 
-	self assert: Gate_Demo new asDsp isNull equals: false
+	self deny: Gate_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -95,7 +87,7 @@ EffectsTest >> testGreyHoleAsDsp [
 { #category : 'tests' }
 EffectsTest >> testGreyHoleDemoAsDsp [
 
-	self assert: GreyHole_Demo new asDsp isNull equals: false
+	self deny: GreyHole_Demo new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -113,7 +105,7 @@ EffectsTest >> testPannerAsDsp [
 { #category : 'tests' }
 EffectsTest >> testParametricEQDemoAsDsp [
 
-	self assert: Parametric_Eq_Demo new asDsp isNull equals: false
+	self deny: Parametric_Eq_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -126,8 +118,7 @@ EffectsTest >> testPhTranssposeDsp [
 { #category : 'tests' }
 EffectsTest >> testPhVocoderDsp [
 
-
-	self assert: Vocoder_Demo new asDsp isNull equals: false
+	self deny: Vocoder_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -189,6 +180,13 @@ EffectsTest >> testVelvetNoiseDemoAsDsp [
 EffectsTest >> testVirtualAnalogOscillatorDemoAsDsp [
 
 	self assert: Virtual_Analog_Oscillator_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testVitalRevDemoAsDsp [
+	"new version of faust libs must be bundled to pass this test"
+
+	self deny: Vital_Rev_Demo new asDsp isNull
 ]
 
 { #category : 'tests' }
