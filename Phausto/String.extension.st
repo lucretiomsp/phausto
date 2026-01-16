@@ -63,6 +63,17 @@ self isAudioFilePath ifTrue: [
 ]
 
 { #category : '*Phausto' }
+String >> betweenParenthesis [
+
+	| result |
+	result := ReadWriteStream on: ''.
+	result << $(.
+	result << self.
+	result << $).
+	^ result contents
+]
+
+{ #category : '*Phausto' }
 String >> isAudioFilePath [
 "return true if string end with .wav or .aif  .aiff , valid files for TpSampler"
 ^ ((self endsWith: '.wav') or: (self endsWith: '.aif')) or: (self endsWith: '.aiff')

@@ -371,3 +371,9 @@ filePath := FileLocator documents asAbsolute pathString , '/TurboSamples/clap'.
 	self assert: filePath asTpSampler label equals: 'clap'.
 	self assert: filePath asTpSampler pathToFolder  equals: filePath 
 ]
+
+{ #category : 'tests' }
+UtilitiesTest >> testStringBetweenParenthesis [ 
+
+self assert: '_,_' betweenParenthesis equals: '(_,_)'
+]
