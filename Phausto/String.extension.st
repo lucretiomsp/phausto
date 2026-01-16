@@ -18,6 +18,22 @@ Smalltalk os family = #Windows ifTrue: [^ (self findBetweenSubstrings: '
 ]
 
 { #category : '*Phausto' }
+String >> asChainBlockString [
+
+
+	| eqIndex result |
+	
+	eqIndex := self indexOf: $= ifAbsent: [ ^ self ].
+	result := self copyFrom: eqIndex + 1 to: self size.
+
+	(result notEmpty and: [ result last = $; ])
+		ifTrue: [ result := result allButLast ].
+
+	^ result
+
+]
+
+{ #category : '*Phausto' }
 String >> asPhFader [
 	"Create a Phaust fader with slef as label with range: #(0 1) , initiValue: 0.5 and step: 0.001 "
 	

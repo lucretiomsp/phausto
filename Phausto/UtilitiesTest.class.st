@@ -357,6 +357,12 @@ self assert: 'test/after/slash' afterLastSlash equals: 'slash'
 ]
 
 { #category : 'tests' }
+UtilitiesTest >> testStringAsChainBlockString [
+
+self assert: 'process=_,_;' asChainBlockString equals: '_,_'.
+]
+
+{ #category : 'tests' }
 UtilitiesTest >> testStringAsTpSampler [
 
 |filePath |
