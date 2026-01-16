@@ -15,8 +15,8 @@ Class {
 
 { #category : 'converting' }
 PhChain >> asBox [
+	self buildProcessExpression.
 
-	"self buildProcessExpression."
 	^ super asBox
 ]
 
@@ -24,10 +24,10 @@ PhChain >> asBox [
 PhChain >> buildProcessExpression [
 
 	| i1 i2 |
-	i1 := self input1 asBox asString.
-	i2 := self input2 asBox asString.
+	i1 := self input1 asBox asString betweenParenthesis .
+	i2 := self input2 asBox asString betweenParenthesis .
 
-	processExpression := self  processExpression , i1 , ' : ' , i2 , ');'
+	processExpression := self processExpression , i1 , ' : ' , i2 , ';'
 ]
 
 { #category : 'initialization' }
@@ -35,7 +35,7 @@ PhChain >> initialize [
 
 	super initialize.
 
-	self processExpression: 'process = pm.chain;'.
+	self processExpression: 'process = pm.chain'.
 	input1 := PhBasicBlock new.
 	input2 := PhBasicBlock new
 ]
