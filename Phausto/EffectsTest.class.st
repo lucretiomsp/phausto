@@ -7,14 +7,6 @@ Class {
 }
 
 { #category : 'tests' }
-EffectsTest >> TODOtestTapeStopDemoAsDsp [
-
-	"new version of faust libs must be bundled to pass this test"
-
-	self assert: TapeStop_Demo new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
 EffectsTest >> TODOtestVitalRevDemoAsDsp [
 
 	"new version of faust libs must be bundled to pass this test"
@@ -178,6 +170,13 @@ EffectsTest >> testSmoothDelayAsDsp [
 EffectsTest >> testSoftClipQaudraticAsDsp [
 
 	self assert: SoftClipQuadratic new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testTapeStopDemoAsDsp [
+	"new version of faust libs must be bundled to pass this test"
+
+	self deny: TapeStop_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }

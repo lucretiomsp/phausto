@@ -7,11 +7,6 @@ Class {
 }
 
 { #category : 'tests' }
-CompressorsTest >> TODOtestPhLimiter1176MonoAsDsp [
-self deny: PhLimiter1176Mono new  asDsp isNull
-]
-
-{ #category : 'tests' }
 CompressorsTest >> testLimiterMonoAsDsp [
 
 	self deny: PhLimiter1176Mono new asDsp isNull 

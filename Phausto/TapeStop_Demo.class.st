@@ -10,7 +10,7 @@ Class {
 	#tag : 'Demo'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'converting' }
 TapeStop_Demo >> asBox [
 
 	| intermediateBox finalBox |
