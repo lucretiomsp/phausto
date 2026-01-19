@@ -5,10 +5,9 @@ Wah-wah (or wa-wa) is an imitative word for the sound of altering the resonance 
 "
 Class {
 	#name : 'AutoWah',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhMonoEffect',
 	#instVars : [
-		'level',
-		'input'
+		'level'
 	],
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
@@ -28,36 +27,13 @@ AutoWah >> asBox [
 AutoWah >> initialize [
 
 	super initialize.
-	processExpression :='process = ve.autowah;'.
-	self input: 0.
-	self level: 0.
-]
+	processExpression := 'process = ve.autowah;'.
 
-{ #category : 'accessing' }
-AutoWah >> input [
-
-	^ input
-]
-
-{ #category : 'as yet unclassified' }
-AutoWah >> input: anInput [
-
-	input := anInput asBox
+	self level: 0
 ]
 
 { #category : 'as yet unclassified' }
 AutoWah >> level [
 
 	^ level
-]
-
-{ #category : 'as yet unclassified' }
-AutoWah >> level: aLevel [
-
-	level := aLevel asBox
-]
-
-{ #category : 'as yet unclassified' }
-AutoWah >> patchedWith: aBox [
-self input: aBox
 ]

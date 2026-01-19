@@ -62,19 +62,8 @@ CubicNl >> initialize [
 	input := 0 
 ]
 
-{ #category : 'accessing' }
-CubicNl >> input [
-
-	^ input 
-]
-
 { #category : 'as yet unclassified' }
 CubicNl >> offset [
 
 	^ offset 
-]
-
-{ #category : 'as yet unclassified' }
-CubicNl >> patchedWith: aBox [
-self input: aBox
 ]

@@ -5,11 +5,10 @@ A collection of delays from Faust delays.lib.
 "
 Class {
 	#name : 'Delays',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'maxDelayLength',
-		'delayLength',
-		'input'
+		'delayLength'
 	],
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
@@ -33,19 +32,13 @@ Delays >> initialize [
 	super initialize.
 	maxDelayLength := 2 asBox * PhSampleRate new. "by default, maximum delay length is 2 second "
 
-	input := Wire new.
-	delayLength := (PhHSlider new
-			 label: self label , 'Length'
-			 init: 1
-			 min: 0.001
-			 max: 2
-			 step: 0.001).
-]
 
-{ #category : 'accessing' }
-Delays >> input [
-
-	^ input
+	delayLength := PhHSlider new
+		               label: self label , 'Length'
+		               init: 1
+		               min: 0.001
+		               max: 2
+		               step: 0.001
 ]
 
 { #category : 'accessing' }
@@ -59,10 +52,4 @@ Delays >> maxDelayLength: aTimeInSeconds [
 
 "must be a constant"
 	maxDelayLength := aTimeInSeconds asBox * PhSampleRate new.
-]
-
-{ #category : 'connecting' }
-Delays >> patchedWith: aUnitGenerator [
-
-self input: aUnitGenerator 
 ]

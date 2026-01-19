@@ -12,14 +12,13 @@ invert: 0 for normal, 1 to invert sign of flanging sum
 "
 Class {
 	#name : 'FlangerMono',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'dmax',
 		'curdel',
 		'depth',
 		'fb',
-		'invert',
-		'input'
+		'invert'
 	],
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
@@ -43,33 +42,15 @@ FlangerMono >> curdel [
 ]
 
 { #category : 'accessing' }
-FlangerMono >> curdel: aTimeInMs [
-
-	curdel := aTimeInMs asBox
-]
-
-{ #category : 'accessing' }
 FlangerMono >> depth [
 
 	^ depth
 ]
 
 { #category : 'accessing' }
-FlangerMono >> depth: aDepth [
-
-	depth := aDepth asBox
-]
-
-{ #category : 'accessing' }
 FlangerMono >> dmax [
 
 	^ dmax
-]
-
-{ #category : 'accessing' }
-FlangerMono >> dmax: aDelayLength [
-"must be constant"
-	dmax := aDelayLength asBox
 ]
 
 { #category : 'accessing' }
@@ -98,25 +79,7 @@ FlangerMono >> initialize [
 ]
 
 { #category : 'accessing' }
-FlangerMono >> input [
-
-	^ input
-]
-
-{ #category : 'accessing' }
-FlangerMono >> input: anInput [ 
-
-	input := anInput asBox
-]
-
-{ #category : 'accessing' }
 FlangerMono >> invert [
 
 	^ invert
-]
-
-{ #category : 'accessing' }
-FlangerMono >> invert: zeroOrOne [
-
-	invert := zeroOrOne asBox
 ]

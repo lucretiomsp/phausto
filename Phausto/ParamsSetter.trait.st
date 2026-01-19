@@ -135,6 +135,12 @@ ParamsSetter >> crossfade: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> curdel: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> cutoff: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
@@ -166,6 +172,18 @@ ParamsSetter >> del: aNumberOrABoxOrASymbol [
 
 { #category : 'accessing' }
 ParamsSetter >> delayLength: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> depth: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> dmax: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -370,6 +388,12 @@ self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> invert: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> legato: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -401,6 +425,12 @@ ParamsSetter >> level3: aNumberOrABoxOrASymbol [
 
 { #category : 'accessing' }
 ParamsSetter >> level4: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+ParamsSetter >> level: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
