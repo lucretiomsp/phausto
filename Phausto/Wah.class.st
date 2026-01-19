@@ -8,10 +8,9 @@ https://ccrma.stanford.edu/~jos/pasp/vegf.html
 "
 Class {
 	#name : 'Wah',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'level',
-		'input',
 		'fr'
 	],
 	#category : 'Phausto-Effects',
@@ -31,7 +30,7 @@ Wah >> asBox [
 { #category : 'as yet unclassified' }
 Wah >> fr [
 
-^ fr ifNil: [  fr := PhHSlider new label: self class name , 'Fr' init: 400 min: 20 max: 9000 step: 1 ]
+	^ fr
 ]
 
 { #category : 'initialization' }
@@ -39,16 +38,10 @@ Wah >> initialize [
 
 	super initialize.
 	processExpression := 'process = ve.wah4;'.
-
-]
-
-{ #category : 'accessing' }
-Wah >> input [
-
-	^ input ifNil: [ input := 0 asBox ]
-]
-
-{ #category : 'as yet unclassified' }
-Wah >> patchedWith: aBox [
-self input: aBox
+	fr := PhHSlider new
+				        label: self class name , 'Fr'
+				        init: 400
+				        min: 20
+				        max: 9000
+				        step: 1
 ]

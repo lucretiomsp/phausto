@@ -9,10 +9,9 @@ https://ccrma.stanford.edu/~jos/pasp/vegf.html
 "
 Class {
 	#name : 'CryBaby',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'level',
-		'input',
 		'fr',
 		'wah'
 	],
@@ -35,12 +34,6 @@ CryBaby >> initialize [
 
 	super initialize.
 	processExpression := 'process = ve.crybaby;'
-]
-
-{ #category : 'accessing' }
-CryBaby >> input [
-
-	^ input ifNil: [ input := 0 asBox ]
 ]
 
 { #category : 'as yet unclassified' }

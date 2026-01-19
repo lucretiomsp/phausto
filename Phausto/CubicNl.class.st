@@ -10,10 +10,9 @@ https://ccrma.stanford.edu/~jos/pasp/Nonlinear_Distortion.html
 "
 Class {
 	#name : 'CubicNl',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'level',
-		'input',
 		'fr',
 		'wah',
 		'drive',

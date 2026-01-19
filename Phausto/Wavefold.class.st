@@ -46,13 +46,3 @@ Wavefold >> width [
 		        max: 1
 		        step: 0.001 ]
 ]
-
-{ #category : 'as yet unclassified' }
-Wavefold >> width: aNumberOrABox [
-
-
-	width := aNumberOrABox isNumber
-		        ifTrue: [ self width init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ].
-
-]

@@ -9,10 +9,9 @@ shift: shift (semitones)
 "
 Class {
 	#name : 'PhTranspose',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'level',
-		'input',
 		'window',
 		'crossfade',
 		'shift'
@@ -38,42 +37,32 @@ PhTranspose >> asBox [
 { #category : 'accessing' }
 PhTranspose >> crossfade [
 
-	^ crossfade ifNil: [ crossfade := 256 asBox ]
+	^ crossfade 
 ]
 
 { #category : 'initialization' }
 PhTranspose >> initialize [
 
 	super initialize.
-	processExpression := 'process = ef.transpose;'
-]
-
-{ #category : 'accessing' }
-PhTranspose >> input [
-
-	^ input ifNil: [ input := 0 asBox ]
-]
-
-{ #category : 'connecting' }
-PhTranspose >> patchedWith: aUnitGenerator [
-
-self input: aUnitGenerator 
+	processExpression := 'process = ef.transpose;'.
+	crossfade := 256.
+	window := 256 asBox.
+	shift := PhHSlider new
+				           label: self class name , 'Shift'
+				           init: 0
+				           min: -24
+				           max: 24
+				           step: 1
 ]
 
 { #category : 'accessing' }
 PhTranspose >> shift [
 
-	^ shift ifNil: [
-		  shift := PhHSlider new
-			             label: self class name , 'Shift'
-			             init: 0
-			             min: -24
-			             max: 24
-			             step: 1 ]
+	^ shift 
 ]
 
 { #category : 'accessing' }
 PhTranspose >> window [
 
-	^ window ifNil: [ window := 256 asBox ]
+	^ window 
 ]
