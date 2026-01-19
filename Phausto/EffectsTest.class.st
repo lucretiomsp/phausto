@@ -33,7 +33,7 @@ EffectsTest >> testCubicNlAsDsp [
 { #category : 'tests' }
 EffectsTest >> testDatorroRevDemoAsDsp [
 
-	self assert: Dattorro_Rev_Demo new asDsp isNull equals: false
+	self deny: Dattorro_Rev_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -106,6 +106,12 @@ EffectsTest >> testPannerAsDsp [
 EffectsTest >> testParametricEQDemoAsDsp [
 
 	self deny: Parametric_Eq_Demo new asDsp isNull 
+]
+
+{ #category : 'tests' }
+EffectsTest >> testPhFibonacciAsDsp [
+
+	self deny: PhFibonacci new asDsp isNull 
 ]
 
 { #category : 'tests' }

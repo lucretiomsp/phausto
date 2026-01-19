@@ -24,6 +24,13 @@ ManifestPhausto class >> ruleCascadedNextPutAllsRuleV1FalsePositive [
 ]
 
 { #category : 'code-critics' }
+ManifestPhausto class >> ruleInconsistentMethodClassificationRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#PhFibonacci #initialize #false)) #'2026-01-19T14:41:05.782901+01:00') )
+]
+
+{ #category : 'code-critics' }
 ManifestPhausto class >> rulePrecedenceRuleV1FalsePositive [
 
 	<ignoreForCoverage>

@@ -13,12 +13,6 @@ Class {
 }
 
 { #category : 'accessing' }
-PhMonoEffect >> asBox [ 
- self subclassResponsibility 
-
-]
-
-{ #category : 'accessing' }
 PhMonoEffect >> initialize [ 
 
 
