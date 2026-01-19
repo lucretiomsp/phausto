@@ -472,6 +472,12 @@ ParamsSetter >> midiNN: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> min: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> modDepth: aNumberOrABoxOrASymbol [
 
 self paramSetter value: aNumberOrABoxOrASymbol

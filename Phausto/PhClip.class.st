@@ -44,16 +44,6 @@ PhClip >> max [
 ]
 
 { #category : 'accessing' }
-PhClip >> max: aNumberOrABox [
-
-
-	max := aNumberOrABox isNumber
-		        ifTrue: [ self max init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ].
-
-]
-
-{ #category : 'accessing' }
 PhClip >> min [
 
 	^ min ifNil: [   PhHSlider new
@@ -62,14 +52,4 @@ PhClip >> min [
 		        min: -1
 		        max: 1
 		        step: 0.001 ]
-]
-
-{ #category : 'accessing' }
-PhClip >> min: aNumberOrABox [
-
-
-	min := aNumberOrABox isNumber
-		        ifTrue: [ self min init: aNumberOrABox ]
-		        ifFalse: [ aNumberOrABox ].
-
 ]

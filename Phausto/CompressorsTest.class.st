@@ -60,6 +60,12 @@ CompressorsTest >> testPhFFCompressorGainStereoAsDsp [
 ]
 
 { #category : 'tests' }
+CompressorsTest >> testPhGateMonoAsDsp [
+
+	self deny: PhGateMono new asDsp isNull
+]
+
+{ #category : 'tests' }
 CompressorsTest >> testPhLimiter1176StereoAsDsp [
 self deny: PhLimiter1176Stereo new  asDsp isNull
 ]
