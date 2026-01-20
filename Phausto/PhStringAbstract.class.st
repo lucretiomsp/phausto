@@ -3,12 +3,11 @@ Abstract super class for string elements
 "
 Class {
 	#name : 'PhStringAbstract',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmElement',
 	#instVars : [
 		'pluckPosition',
 		'excitation',
-		'length',
-		'inputBlock'
+		'length'
 	],
 	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
@@ -32,12 +31,6 @@ PhStringAbstract >> initialize [
 		                 label: 'PluckPosition'
 		                 values: #( 0.3 0 1 0.01 ).
 	excitation := 1
-]
-
-{ #category : 'accessing' }
-PhStringAbstract >> inputBlock [ 
-
-^ inputBlock
 ]
 
 { #category : 'accessing' }

@@ -7,6 +7,18 @@ Class {
 }
 
 { #category : 'tests' }
+PhysicalModelStringTest >> testPhKsReflectionFilterDsp [
+
+	self deny: PhKsReflexionFilter new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelStringTest >> testPhLStringRigidTerminationDsp [
+
+	self deny: PhLooper new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelStringTest >> testPhNylonStringAsDsp [
 
 	self deny: PhNylonString new asDsp isNull.
@@ -31,6 +43,12 @@ PhysicalModelStringTest >> testPhOpenStringPickupAsDsp [
 
 	self deny: PhOpenStringPickup new asDsp isNull.
 	
+]
+
+{ #category : 'tests' }
+PhysicalModelStringTest >> testPhRStringRigidTerminationDsp [
+
+	self deny: PhRStringRigidTermination new asDsp isNull
 ]
 
 { #category : 'tests' }
