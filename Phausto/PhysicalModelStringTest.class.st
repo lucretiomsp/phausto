@@ -7,9 +7,15 @@ Class {
 }
 
 { #category : 'tests' }
-PhysicalModelStringTest >> testPhNylontringAsDsp [
+PhysicalModelStringTest >> testPhNylonStringAsDsp [
 
 	self deny: PhNylonString new asDsp isNull.
 	
 
+]
+
+{ #category : 'tests' }
+PhysicalModelStringTest >> testPhSteelStringAsDsp [
+
+	self deny: PhSteelString new asDsp isNull
 ]

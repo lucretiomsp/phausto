@@ -1,5 +1,6 @@
 "
-A bidirectional block implementing a basic nylon string with selectable excitation position. This element is based on openString and has a fix stiffness corresponding to that of a nylon string.
+A bidirectional block implementing a basic steel string with selectable excitation position. This element is based on openString and has a fix stiffness corresponding to that of a steel string.
+
 ## Parameters:
 
 **length:** the length of the string in meters
@@ -8,7 +9,7 @@ A bidirectional block implementing a basic nylon string with selectable excitati
 
 "
 Class {
-	#name : 'PhNylonString',
+	#name : 'PhSteelString',
 	#superclass : 'PhStringAbstract',
 	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
@@ -16,15 +17,15 @@ Class {
 }
 
 { #category : 'converting' }
-PhNylonString >> asBox [
+PhSteelString >> asBox [
 
 	^ self inputBlock asBox , self length asBox , self pluckPosition , self excitation asBox
 		  connectTo: super asBox
 ]
 
 { #category : 'initialization' }
-PhNylonString >> initialize [ 
+PhSteelString >> initialize [
 
-super initialize .
-processExpression := 'process = pm.nylonString;'
+	super initialize.
+	processExpression := 'process = pm.steelString;'
 ]
