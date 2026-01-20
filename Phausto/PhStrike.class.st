@@ -9,7 +9,7 @@ Strikes generator with controllable excitation position
 - **gate**: a gate button/trigger signal (0-1)
 "
 Class {
-	#name : 'Strike',
+	#name : 'PhStrike',
 	#superclass : 'Exciter',
 	#instVars : [
 		'strikePosition',
@@ -22,7 +22,7 @@ Class {
 }
 
 { #category : 'converting' }
-Strike >> asBox [
+PhStrike >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -35,13 +35,13 @@ Strike >> asBox [
 ]
 
 { #category : 'accessing' }
-Strike >> gain [
+PhStrike >> gain [
 
 	^ gain
 ]
 
 { #category : 'initialization' }
-Strike >> initialize [
+PhStrike >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.strike;'.
@@ -68,12 +68,12 @@ Strike >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-Strike >> strikePosition [
+PhStrike >> strikePosition [
 	^ strikePosition
 ]
 
 { #category : 'accessing' }
-Strike >> strikeSharpness [
+PhStrike >> strikeSharpness [
 
 	^ strikeSharpness
 ]

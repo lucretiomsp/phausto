@@ -8,7 +8,7 @@ A virtual blower creating a _DC signal_ with some breath noise in it.
 - **breathCutoff**: breath cuttoff frequency (Hz) (recommended: 2000)
 "
 Class {
-	#name : 'Blower',
+	#name : 'PhBlower',
 	#superclass : 'Exciter',
 	#instVars : [
 		'breathGain',
@@ -21,7 +21,7 @@ Class {
 }
 
 { #category : 'converting' }
-Blower >> asBox [
+PhBlower >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -32,19 +32,19 @@ Blower >> asBox [
 ]
 
 { #category : 'accessing' }
-Blower >> breathCutoff [
+PhBlower >> breathCutoff [
 
 	^ breathCutoff
 ]
 
 { #category : 'accessing' }
-Blower >> breathGain [
+PhBlower >> breathGain [
 
 	^ breathGain
 ]
 
 { #category : 'initialization' }
-Blower >> initialize [
+PhBlower >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.blower;'.
@@ -66,7 +66,7 @@ Blower >> initialize [
 ]
 
 { #category : 'accessing' }
-Blower >> pressure [
+PhBlower >> pressure [
 
 	^ pressure
 ]

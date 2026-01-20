@@ -11,7 +11,7 @@ Creates a plucking excitation signal.
 - **gate: trigger signal (1 for on, 0 for off)
 "
 Class {
-	#name : 'PluckString',
+	#name : 'PhPluckString',
 	#superclass : 'Exciter',
 	#instVars : [
 		'cutoff',
@@ -26,7 +26,7 @@ Class {
 }
 
 { #category : 'converting' }
-PluckString >> asBox [
+PhPluckString >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -39,19 +39,19 @@ PluckString >> asBox [
 ]
 
 { #category : 'as yet unclassified' }
-PluckString >> cutoff [
+PhPluckString >> cutoff [
 
 	^ cutoff
 ]
 
 { #category : 'accessing' }
-PluckString >> gain [
+PhPluckString >> gain [
 
 	^ gain
 ]
 
 { #category : 'initialization' }
-PluckString >> initialize [
+PhPluckString >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.pluckString;'.
@@ -91,19 +91,19 @@ PluckString >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-PluckString >> maxFreq [
+PhPluckString >> maxFreq [
 
 	^ maxFreq 
 ]
 
 { #category : 'accessing' }
-PluckString >> strikeSharpness [
+PhPluckString >> strikeSharpness [
 
 	^ strikeSharpness
 ]
 
 { #category : 'as yet unclassified' }
-PluckString >> stringLength [ 
+PhPluckString >> stringLength [ 
 
 	^ stringLength
 ]

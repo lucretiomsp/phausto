@@ -2,7 +2,7 @@
 Same as blower but with default UI and vibrato controls.
 "
 Class {
-	#name : 'Blower_UI',
+	#name : 'PhBlower_UI',
 	#superclass : 'Exciter',
 	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'initialization' }
-Blower_UI >> initialize [
+PhBlower_UI >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.blower_ui;'

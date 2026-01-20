@@ -9,13 +9,13 @@ Class {
 { #category : 'tests' }
 PhysicalModelTest >> testBlowerAsDsp [
 
-	self assert: Blower new asDsp isNull equals: false
+	self deny:  PhBlower new asDsp isNull 
 ]
 
 { #category : 'tests' }
 PhysicalModelTest >> testBlowerUIAsDsp [
 
-	self assert: Blower_UI new asDsp isNull equals: false
+	self deny: PhBlower_UI new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -51,7 +51,7 @@ PhysicalModelTest >> testGuitarAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testImpulseExcitationAsDsp [
 
-	self assert: ImpulseExcitation new asDsp isNull equals: false
+	self assert: PhImpulseExcitation new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -81,7 +81,7 @@ PhysicalModelTest >> testPhGuitarNutsAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testPluckStringAsDsp [
 
-	self assert: PluckString new asDsp isNull equals: false
+	self deny: PhPluckString new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -99,13 +99,13 @@ PhysicalModelTest >> testSFFormantModelFofCycleAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testStrikeAsDsp [
 
-	self deny:  Strike new asDsp isNull
+	self deny:  PhStrike new asDsp isNull
 ]
 
 { #category : 'tests' }
 PhysicalModelTest >> testStrikeModelAsDsp [
 
-	self assert: StrikeModel new asDsp isNull equals: false
+	self deny:  PhStrikeModel new asDsp isNull 
 ]
 
 { #category : 'tests' }

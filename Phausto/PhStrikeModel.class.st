@@ -11,7 +11,7 @@ Creates a filtered noise excitation
 - **gate**: a gate button/trigger signal (0/1)
 "
 Class {
-	#name : 'StrikeModel',
+	#name : 'PhStrikeModel',
 	#superclass : 'Exciter',
 	#instVars : [
 		'lpCutoff',
@@ -25,7 +25,7 @@ Class {
 }
 
 { #category : 'converting' }
-StrikeModel >> asBox [ 
+PhStrikeModel >> asBox [ 
 
 | intermediateBox finalBox |
 intermediateBox := super asBox.
@@ -36,19 +36,19 @@ finalBox := self hpCutoff asBox , self lpCutoff asBox , self strikeSharpness asB
 ]
 
 { #category : 'accessing' }
-StrikeModel >> gain [
+PhStrikeModel >> gain [
 
 	^ gain
 ]
 
 { #category : 'as yet unclassified' }
-StrikeModel >> hpCutoff [
+PhStrikeModel >> hpCutoff [
 
 	^ hpCutoff
 ]
 
 { #category : 'initialization' }
-StrikeModel >> initialize [
+PhStrikeModel >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.strikeModel;'.
@@ -82,13 +82,13 @@ StrikeModel >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-StrikeModel >> lpCutoff [
+PhStrikeModel >> lpCutoff [
 
 	^ lpCutoff
 ]
 
 { #category : 'accessing' }
-StrikeModel >> strikeSharpness [
+PhStrikeModel >> strikeSharpness [
 
 	^ strikeSharpness
 ]

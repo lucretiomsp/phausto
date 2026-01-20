@@ -6,7 +6,7 @@ Creates an impulse excitation of one sample.
 - **gate**: Generates an impulse when the gate signal changes from 0 to a value greater than 1
 "
 Class {
-	#name : 'ImpulseExcitation',
+	#name : 'PhImpulseExcitation',
 	#superclass : 'Exciter',
 	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'converting' }
-ImpulseExcitation >> asBox [
+PhImpulseExcitation >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -25,7 +25,7 @@ ImpulseExcitation >> asBox [
 ]
 
 { #category : 'initialization' }
-ImpulseExcitation >> initialize [
+PhImpulseExcitation >> initialize [
 	super initialize.
 	processExpression := 'process = pm.impulseExcitation;'.
 ]
