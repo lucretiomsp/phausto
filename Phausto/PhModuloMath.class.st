@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PhModuloMath >> initalize [
+PhModuloMath >> initialize [
 
 	Error new signal:
 		'This class cannot be created in this compilation mode. Check Faust reference manual'.

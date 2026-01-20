@@ -25,3 +25,9 @@ PhysicalModelStringTest >> testPhSteelStringAsDsp [
 
 	self deny: PhSteelString new asDsp isNull
 ]
+
+{ #category : 'tests' }
+PhysicalModelStringTest >> testPhStirngSegmentAsDsp [
+
+	self deny: PhStringSegment new asDsp isNull
+]
