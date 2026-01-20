@@ -3,7 +3,7 @@ Helper class to contruct chains for physical models
 
 "
 Class {
-	#name : 'PhPostRouting',
+	#name : 'PhEndRouting',
 	#superclass : 'UnitGenerator',
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
@@ -11,13 +11,13 @@ Class {
 }
 
 { #category : 'converting' }
-PhPostRouting >> asBox [
+PhEndRouting >> asBox [ 
 
-	^ Cut new asBox , Wire new asBox , Wire new asBox 
+^ PhCrossnn new asBox , Wire new asBox , Wire new asBox 
 ]
 
 { #category : 'initialization' }
-PhPostRouting >> initialize [ 
+PhEndRouting >> initialize [ 
 
 ^ super initialize
 ]

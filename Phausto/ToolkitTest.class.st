@@ -29,6 +29,12 @@ ToolkitTest >> testPhCounterAsDsp [
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhEndRoutingDsp [
+
+	self deny: PhEndRouting new asDsp isNull
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhListAsDsp [
 
 	| list |
