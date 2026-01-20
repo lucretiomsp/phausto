@@ -22,12 +22,10 @@ InLeftWave >> asBox [
 InLeftWave >> initialize [
 
 	super initialize.
-	processExpression := 'process = pm.inLeftWave;'.
-	signal := 0.25
+	processExpression := 'process = pm.inLeftWave;'
 ]
 
-{ #category : 'converting' }
-InLeftWave >> signal [ 
-
+{ #category : 'as yet unclassified' }
+InLeftWave >> singal [ 
 ^ signal
 ]

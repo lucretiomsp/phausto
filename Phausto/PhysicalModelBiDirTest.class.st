@@ -48,3 +48,21 @@ PhysicalModelBiDirTest >> testInRightWaveAsDsp [
 	
 	self deny: InRightWave new asDsp isNull
 ]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testOutLeftRightWaveAsDsp [
+
+	self deny: OutLeftRightWave new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testOutLeftWaveAsDsp [
+
+	self deny: OutLeftWave new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testOutRightWaveAsDsp [
+
+	self deny: OutRightWave new asDsp isNull
+]

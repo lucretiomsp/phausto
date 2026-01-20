@@ -2,10 +2,10 @@
 Abstract superclass for all Pysical Models blocks with 3 inputs
 "
 Class {
-	#name : 'PhPmElement',
+	#name : 'PhPmOutElement',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'inputBlock'
+		'outputBlock'
 	],
 	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
@@ -13,20 +13,20 @@ Class {
 }
 
 { #category : 'initialization' }
-PhPmElement >> initialize [ 
-	
+PhPmOutElement >> initialize [
+
 	super initialize.
-	inputBlock := PhBasicBlock new.
+	outputBlock := PhBasicBlock new
 ]
 
 { #category : 'accessing' }
-PhPmElement >> inputBlock [ 
+PhPmOutElement >> outputBlock [
 
-^ inputBlock
+^ outputBlock 
 ]
 
 { #category : 'accessing' }
-PhPmElement >> inputBlock: anInputBlock [
+PhPmOutElement >> outputBlock: anOutputBlock [
 
-inputBlock := anInputBlock 
+	outputBlock := anOutputBlock 
 ]
