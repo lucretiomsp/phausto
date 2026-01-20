@@ -46,9 +46,21 @@ self assert: list size equals: 4.
 ]
 
 { #category : 'tests' }
-ToolkitTest >> testPhPostRoutingsDsp [
+ToolkitTest >> testPhMemDsp [
+
+	self deny: PhMem new asDsp isNull
+]
+
+{ #category : 'tests' }
+ToolkitTest >> testPhPostRoutingDsp [
 
 	self deny: PhPostRouting new asDsp isNull
+]
+
+{ #category : 'tests' }
+ToolkitTest >> testPhPreRoutingDsp [
+
+	self deny: PhPreRouting new asDsp isNull
 ]
 
 { #category : 'tests' }
