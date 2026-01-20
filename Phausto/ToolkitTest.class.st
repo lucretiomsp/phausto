@@ -15,6 +15,13 @@ self deny: (PhSelectN new list: oscillators) asDsp isNull
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPh2BlocksChainDsp [
+
+	self deny: Ph2BlocksChain new asDsp isNull.
+	"PhaustoDynamicEngine uniqueInstance getLastError"
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhCaptureAsDsp [
 
 
