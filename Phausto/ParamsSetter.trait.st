@@ -671,6 +671,12 @@ ParamsSetter >> shift: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> signal: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> size: aNumberOrABoxOrASymbol [
 
 self paramSetter value: aNumberOrABoxOrASymbol
