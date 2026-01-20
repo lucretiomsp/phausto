@@ -15,6 +15,12 @@ PhysicalModelStringTest >> testPhNylonStringAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelStringTest >> testPhOpenStringAsDsp [
+
+	self deny: PhOpenString new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelStringTest >> testPhSteelStringAsDsp [
 
 	self deny: PhSteelString new asDsp isNull
