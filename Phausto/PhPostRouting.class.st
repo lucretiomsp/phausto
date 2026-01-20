@@ -1,5 +1,5 @@
 "
-Helper class to contruct chains for physical models
+Helper class to construct chains for physical models
 
 "
 Class {

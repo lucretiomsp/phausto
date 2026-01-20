@@ -67,6 +67,18 @@ PhysicalModelTest >> testModeFilterAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testPhGuitarBridgeAsDsp [
+
+	self deny: PhGuitarBridge new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testPhGuitarNutsAsDsp [
+
+	self deny:  PhGuitarNuts new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testPluckStringAsDsp [
 
 	self assert: PluckString new asDsp isNull equals: false
@@ -87,7 +99,7 @@ PhysicalModelTest >> testSFFormantModelFofCycleAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testStrikeAsDsp [
 
-	self assert: Strike new asDsp isNull equals: false
+	self deny:  Strike new asDsp isNull
 ]
 
 { #category : 'tests' }

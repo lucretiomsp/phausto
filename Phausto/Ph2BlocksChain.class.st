@@ -1,9 +1,9 @@
 "
-Helper class to construct chains for physical models
+Helper class to contruct chains for physical models
 
 "
 Class {
-	#name : 'PhPreRouting',
+	#name : 'Ph2BlocksChain',
 	#superclass : 'UnitGenerator',
 	#category : 'Phausto-ToolKit',
 	#package : 'Phausto',
@@ -11,13 +11,13 @@ Class {
 }
 
 { #category : 'converting' }
-PhPreRouting >> asBox [
+Ph2BlocksChain >> asBox [
 
 	^ PhCrossnn new asBox , PhMem new asBox , Wire new asBox
 ]
 
 { #category : 'initialization' }
-PhPreRouting >> initialize [ 
+Ph2BlocksChain >> initialize [ 
 
 ^ super initialize
 ]
