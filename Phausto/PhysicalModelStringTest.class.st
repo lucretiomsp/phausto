@@ -21,6 +21,12 @@ PhysicalModelStringTest >> testPhOpenStringAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelStringTest >> testPhOpenStringPickdownAsDsp [
+
+	self deny: PhOpenStringPickdown new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelStringTest >> testPhOpenStringPickupAsDsp [
 
 	self deny: PhOpenStringPickup new asDsp isNull.
