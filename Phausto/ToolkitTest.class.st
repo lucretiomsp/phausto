@@ -46,6 +46,12 @@ self assert: list size equals: 4.
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhPostRoutingsDsp [
+
+	self deny: PhPostRouting new asDsp isNull
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhSubBeatAsDsp [
 
 	self assert: PhSubBeat new asDsp isNull equals: false
