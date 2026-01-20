@@ -22,7 +22,7 @@ PhL2s >> asBox [
 PhL2s >> initialize [
 
 	super initialize.
-	processExpression := 'process = pm.f2l;'.
+	processExpression := 'process = pm.l2s;'.
 	length := 1
 ]
 

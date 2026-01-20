@@ -27,3 +27,24 @@ PhysicalModelBiDirTest >> testChainWithInputsAsDsp [
 inputs := 0 asBox , 0 asBox , 0 asBox .
 	self deny: PhBasicBlock new asDsp isNull
 ]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testInLeftRightWaveAsDsp [
+
+	
+	self deny: InLeftRightWave new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testInLeftWaveAsDsp [
+
+	
+	self deny: InLeftWave new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testInRightWaveAsDsp [
+
+	
+	self deny: InRightWave new asDsp isNull
+]
