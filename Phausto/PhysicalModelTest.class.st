@@ -33,7 +33,7 @@ PhysicalModelTest >> testElecGuitarAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testF2lAsDsp [
 
-	self assert: F2l new asDsp isNull equals: false
+	self assert: PhF2l new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -52,6 +52,18 @@ PhysicalModelTest >> testGuitarAsDsp [
 PhysicalModelTest >> testImpulseExcitationAsDsp [
 
 	self assert: PhImpulseExcitation new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testL2fAsDsp [
+
+	self deny: PhL2f new asDsp isNull 
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testL2sAsDsp [
+
+	self deny: PhL2s new asDsp isNull
 ]
 
 { #category : 'tests' }

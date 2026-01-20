@@ -438,7 +438,7 @@ PhBox >> f2l [
 
 "converts a freq in herts to  length in meters"
 
-^ F2l new freq: self
+^ PhF2l new freq: self
 ]
 
 { #category : 'arithmetic' }

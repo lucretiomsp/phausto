@@ -4,7 +4,7 @@ Converts a frequency in hertz to length in meters.
 
 "
 Class {
-	#name : 'F2l',
+	#name : 'PhF2l',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'freq'
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : 'converting' }
-F2l >> asBox [
+PhF2l >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -26,13 +26,13 @@ F2l >> asBox [
 ]
 
 { #category : 'accessing' }
-F2l >> freq [
+PhF2l >> freq [
 
 	^ freq 
 ]
 
 { #category : 'accessing' }
-F2l >> freq: aNumberOrABoxOrASymbol [
+PhF2l >> freq: aNumberOrABoxOrASymbol [
 
 	| methodName |
 	methodName := thisContext selector. "Get the name of this method"
@@ -42,7 +42,7 @@ F2l >> freq: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'initialization' }
-F2l >> initialize [
+PhF2l >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.f2l;'.
