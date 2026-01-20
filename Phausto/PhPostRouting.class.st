@@ -13,7 +13,7 @@ Class {
 { #category : 'converting' }
 PhPostRouting >> asBox [
 
-	^ Cut new asBox , Wire new asBox , Wire new asBox 
+	^ PhCrossnn new asBox , Wire new asBox , Wire new asBox
 ]
 
 { #category : 'initialization' }

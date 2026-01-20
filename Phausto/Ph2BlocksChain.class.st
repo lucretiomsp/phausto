@@ -23,8 +23,8 @@ Ph2BlocksChain >> asBox [
 	secondPart := PhPostRouting new asBox connectTo:
 		              Wire new asBox , self input2 asBox.
 	firstToSecond := firstPart connectTo: secondPart.
-^ firstPart
-	"^ firstToSecond ~ Wire new asBox connectTo: PhEndRouting new asBox"
+
+	^ firstToSecond ~ Wire new asBox connectTo: PhEndRouting new asBox
 ]
 
 { #category : 'initialization' }

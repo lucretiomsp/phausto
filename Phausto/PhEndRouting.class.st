@@ -11,9 +11,9 @@ Class {
 }
 
 { #category : 'converting' }
-PhEndRouting >> asBox [ 
+PhEndRouting >> asBox [
 
-^ PhCrossnn new asBox , Wire new asBox , Wire new asBox 
+	^ Cut new asBox , Wire new asBox , Wire new asBox, Wire new asBox 
 ]
 
 { #category : 'initialization' }
