@@ -78,3 +78,9 @@ PhysicalModelBiDirTest >> testOutRightWaveAsDsp [
 
 	self deny: OutRightWave new asDsp isNull
 ]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testPhEndChainAsDsp [
+
+	self deny: PhEndChain new asDsp isNull
+]
