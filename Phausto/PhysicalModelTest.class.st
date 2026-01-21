@@ -75,7 +75,7 @@ PhysicalModelTest >> testMarimbaAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testModeFilterAsDsp [
 
-	self assert: ModeFilter new asDsp isNull equals: false
+	self assert: PhModeFilter new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

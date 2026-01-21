@@ -4,7 +4,7 @@
 
 "
 Class {
-	#name : 'ModeFilter',
+	#name : 'PhModeFilter',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'freq',
@@ -18,7 +18,7 @@ Class {
 }
 
 { #category : 'converting' }
-ModeFilter >> asBox [
+PhModeFilter >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -28,19 +28,19 @@ ModeFilter >> asBox [
 ]
 
 { #category : 'accessing' }
-ModeFilter >> freq [
+PhModeFilter >> freq [
 
 	^ freq
 ]
 
 { #category : 'accessing' }
-ModeFilter >> gain [
+PhModeFilter >> gain [
 
 	^ gain
 ]
 
 { #category : 'initialization' }
-ModeFilter >> initialize [
+PhModeFilter >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.modeFilter;'.
@@ -66,19 +66,19 @@ ModeFilter >> initialize [
 ]
 
 { #category : 'accessing' }
-ModeFilter >> input [
+PhModeFilter >> input [
 
 	^ input
 ]
 
 { #category : 'connecting' }
-ModeFilter >> patchedWith: aUnitGenerator [
+PhModeFilter >> patchedWith: aUnitGenerator [
 
 self input: aUnitGenerator 
 ]
 
 { #category : 'accessing' }
-ModeFilter >> t60 [
+PhModeFilter >> t60 [
 
 	^ t60
 ]

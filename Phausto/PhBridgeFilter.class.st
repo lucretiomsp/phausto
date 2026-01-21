@@ -26,9 +26,10 @@ PhBridgeFilter >> absorption [
 ]
 
 { #category : 'converting' }
-PhBridgeFilter >> asBox [ 
+PhBridgeFilter >> asBox [
 
-^ self input asBox , self brightness  asBox , self absorption asBox connectTo: super asBox
+	^  self brightness asBox , self absorption, self input asBox  asBox
+		  connectTo: super asBox
 ]
 
 { #category : 'accessing' }
@@ -53,4 +54,10 @@ PhBridgeFilter >> initialize [
 { #category : 'accessing' }
 PhBridgeFilter >> input [ 
 ^ input 
+]
+
+{ #category : 'connecting' }
+PhBridgeFilter >> patchedWith: aUnitGenerator [
+
+	self input: aUnitGenerator
 ]
