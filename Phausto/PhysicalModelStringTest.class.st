@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+PhysicalModelStringTest >> testPhIdealStringPickupAsDsp [
+
+	self deny: PhOpenStringPickup new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelStringTest >> testPhKsReflectionFilterDsp [
 
 	self deny: PhKsReflexionFilter new asDsp isNull
