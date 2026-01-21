@@ -45,7 +45,7 @@ self assert: FrenchBell  new asDsp isNull equals: false
 { #category : 'tests' }
 PhysicalModelTest >> testGuitarAsDsp [
 
-	self assert: Guitar new asDsp isNull equals: false
+	self deny: Guitar new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -76,6 +76,12 @@ PhysicalModelTest >> testMarimbaAsDsp [
 PhysicalModelTest >> testModeFilterAsDsp [
 
 	self assert: ModeFilter new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testPhBridgeFilterAsDsp [
+
+	self deny: PhBridgeFilter new asDsp isNull 
 ]
 
 { #category : 'tests' }

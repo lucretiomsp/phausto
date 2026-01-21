@@ -22,8 +22,7 @@ Class {
 { #category : 'initialization' }
 PhWaveguide >> asBox [
 
-	^ self inputBlock asBox , 512 asBox , 32 asBox connectTo:
-		  super asBox
+	^ self inputBlock asBox , self nMax asBox , self n asBox connectTo: super asBox
 ]
 
 { #category : 'initialization' }
