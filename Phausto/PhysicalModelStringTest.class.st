@@ -13,6 +13,12 @@ PhysicalModelStringTest >> testPhIdealStringPickupAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelStringTest >> testPhKarplusStrongAsDsp [
+
+	self deny: PhKarplusStrong new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelStringTest >> testPhKsReflectionFilterDsp [
 
 	self deny: PhKsReflexionFilter new asDsp isNull
