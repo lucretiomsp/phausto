@@ -29,6 +29,18 @@ inputs := 0 asBox , 0 asBox , 0 asBox .
 ]
 
 { #category : 'tests' }
+PhysicalModelBiDirTest >> testCloseInsAsDsp [
+
+	self deny: CloseIns new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testCloseOutsAsDsp [
+
+	self deny: CloseOuts new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelBiDirTest >> testInLeftRightWaveAsDsp [
 
 	
