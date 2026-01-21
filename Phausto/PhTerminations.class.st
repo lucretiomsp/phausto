@@ -9,6 +9,12 @@ Class {
 	#tag : 'PhysModels - BiDir Utilities'
 }
 
+{ #category : 'converting' }
+PhTerminations >> asBox [ 
+
+self shouldBeImplemented 
+]
+
 { #category : 'initialization' }
 PhTerminations >> initialize [ 
 

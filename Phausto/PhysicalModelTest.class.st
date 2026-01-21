@@ -91,6 +91,12 @@ PhysicalModelTest >> testPhGuitarNutsAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testPhWaveguideAsDsp [
+
+	self deny: PhWaveguide new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testPluckStringAsDsp [
 
 	self deny: PhPluckString new asDsp isNull 

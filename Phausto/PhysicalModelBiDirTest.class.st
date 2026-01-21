@@ -84,3 +84,9 @@ PhysicalModelBiDirTest >> testPhEndChainAsDsp [
 
 	self deny: PhEndChain new asDsp isNull
 ]
+
+{ #category : 'tests' }
+PhysicalModelBiDirTest >> testPhTerminationsDsp [
+
+	self deny: PhTerminations new asDsp isNull
+]
