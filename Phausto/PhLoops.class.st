@@ -11,8 +11,8 @@ I can be chromatically played using MIDI NOte Numbers, where 60 plays at my defu
 I am always mono even if files are stereo. You need to send it the `stereo` message to make it stereo. 
 "
 Class {
-	#name : 'TpSampler',
-	#superclass : 'TpSynth',
+	#name : 'PhLoops',
+	#superclass : 'UnitGenerator',
 	#instVars : [
 		'pathToFile',
 		'pathToFolder',
@@ -25,47 +25,25 @@ Class {
 		'fileNamesSorted',
 		'sampleNamesSorted'
 	],
-	#category : 'Phausto-TurboPhausto',
+	#category : 'Phausto-Synths',
 	#package : 'Phausto',
-	#tag : 'TurboPhausto'
+	#tag : 'Synths'
 }
 
-{ #category : 'converting' }
-TpSampler >> asBox [
-
-	| reader sp output sampler partNumber |
-	partNumber := self index asBox min: self numberOfSamples asBox.
-
-	reader := PhReaderWithSpeed new
-		          trigger: self trigger asBox;
-		          speed: self pitch asBox / 261.625 asBox.
-	sp := BoxAPI uniqueInstance
-		      boxSoundFile: filesURL
-		      numChannels: self numChannels asBox
-		      part: partNumber
-		      readIndex: reader asBox.
-
-	output := Cut new asBox , Cut new asBox , Cut new asBox
-	          , Wire new asBox.
-	sampler := sp connectTo: output asBox.
-
-	^ (sampler asBox * self uLevel) asBox
-]
-
 { #category : 'accessing' }
-TpSampler >> attachedBox [
+PhLoops >> attachedBox [
 
 	^ attachedBox
 ]
 
 { #category : 'accessing' }
-TpSampler >> attachedBox: anObject [
+PhLoops >> attachedBox: anObject [
 
 	attachedBox := anObject
 ]
 
 { #category : 'changing' }
-TpSampler >> changeParamsPrefix [
+PhLoops >> changeParamsPrefix [
 
 	| prefix |
 	prefix := self name.
@@ -87,7 +65,7 @@ TpSampler >> changeParamsPrefix [
 ]
 
 { #category : 'utilities' }
-TpSampler >> createMultiFilesURL [
+PhLoops >> createMultiFilesURL [
 
 	| allFiles audioFiles unsortedfileNames allFilePaths filePathPrefix filePathSuffix allFilesPathsWithoutLastColumn |
 	allFiles := pathToFolder asFileReference allChildren reject: [ :i |
@@ -116,7 +94,7 @@ TpSampler >> createMultiFilesURL [
 ]
 
 { #category : 'initialization' }
-TpSampler >> createSingleFilesURL [
+PhLoops >> createSingleFilesURL [
 
 	| filePathPrefix filePathSuffix filePath |
 	filePathPrefix := '' , self label , '[url:'.
@@ -127,97 +105,75 @@ TpSampler >> createSingleFilesURL [
 ]
 
 { #category : 'accessing' }
-TpSampler >> debugPath [
+PhLoops >> debugPath [
 
 	^ debugPath
 ]
 
 { #category : 'accessing' }
-TpSampler >> debugPath: anObject [
+PhLoops >> debugPath: anObject [
 
 	debugPath := anObject
 ]
 
 { #category : 'accessing' }
-TpSampler >> fileNamesSorted [
+PhLoops >> fileNamesSorted [
 
 	^ fileNamesSorted
 ]
 
 { #category : 'accessing' }
-TpSampler >> index [
+PhLoops >> index [
 
 	^ index 
 ]
 
 { #category : 'initialization' }
-TpSampler >> initialize [
+PhLoops >> initialize [
 
 	super initialize.
-	"Stereo by default"
-	numChannels := 2.
-	index := PhHSlider new
-		         label: self coypuLabel , 'Index'
-		         init: 0
-		         min: 0
-		         max: 16
-		         step: 1.
-	self pathToFolder:
-		FileLocator documents asAbsolute pathString , '/TurboSamples/bleep'
-]
-
-{ #category : 'accessing' }
-TpSampler >> name [
-
-	^ name
-]
-
-{ #category : 'accessing' }
-TpSampler >> name: aString [
-
-	name := aString.
 
 ]
 
 { #category : 'accessing' }
-TpSampler >> numChannels [
+PhLoops >> numChannels [
 
 	^ numChannels
 ]
 
 { #category : 'accessing' }
-TpSampler >> numChannels: aNumOfChannels [
+PhLoops >> numChannels: aNumOfChannels [
 
 	numChannels := aNumOfChannels 
 ]
 
 { #category : 'accessing' }
-TpSampler >> numberOfSamples [
+PhLoops >> numberOfSamples [
 
 ^ self pathToFolder asFileReference children size
 ]
 
 { #category : 'accessing' }
-TpSampler >> pathToFile [
+PhLoops >> pathToFile [
 
 	^ pathToFile
 ]
 
 { #category : 'accessing' }
-TpSampler >> pathToFile: aString [
+PhLoops >> pathToFile: aString [
 
 	pathToFile := aString.
 	self createSingleFilesURL .
 ]
 
 { #category : 'accessing' }
-TpSampler >> pathToFolder [
+PhLoops >> pathToFolder [
 
 	^ pathToFolder 
 ]
 
 { #category : 'accessing' }
-TpSampler >> pathToFolder: aString [
+PhLoops >> pathToFolder: aString [
 
 	pathToFolder := aString.
 	self createMultiFilesURL.
@@ -228,7 +184,7 @@ TpSampler >> pathToFolder: aString [
 ]
 
 { #category : 'accessing' }
-TpSampler >> pitch [
+PhLoops >> pitch [
 
 	^ pitch "ifNil: [
 			  pitch := PhHSlider new
@@ -240,19 +196,19 @@ TpSampler >> pitch [
 ]
 
 { #category : 'accessing' }
-TpSampler >> readIndex [
+PhLoops >> readIndex [
 
 	^ readIndex
 ]
 
 { #category : 'accessing' }
-TpSampler >> readIndex: aReadIndex [
+PhLoops >> readIndex: aReadIndex [
 
 	readIndex := aReadIndex asBox
 ]
 
 { #category : 'accessing' }
-TpSampler >> sampleNamesSorted [
+PhLoops >> sampleNamesSorted [
 
 	
 	^ sampleNamesSorted

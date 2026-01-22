@@ -43,7 +43,13 @@ SynthsTest >> testKickAsBox [
 ]
 
 { #category : 'tests' }
+SynthsTest >> testPhLoopAsBox [
+
+	self deny: PhLoop new asDsp isNull
+]
+
+{ #category : 'tests' }
 SynthsTest >> testSawTromboneAsBox [
 
-	self assert: SawTrombone new asDsp isNull equals: false
+	self deny: SawTrombone new asDsp isNull
 ]
