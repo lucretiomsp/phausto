@@ -4,9 +4,9 @@ Ready-to-use MIDI-enabled violin physical model with built-in UI.
 Class {
 	#name : 'ViolinMIDI',
 	#superclass : 'StringInstruments',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - String Instruments'
 }
 
 { #category : 'initialization' }

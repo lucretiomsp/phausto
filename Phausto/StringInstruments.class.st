@@ -11,9 +11,9 @@ Class {
 	#instVars : [
 		'freq'
 	],
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - String Instruments'
 }
 
 { #category : 'accessing' }

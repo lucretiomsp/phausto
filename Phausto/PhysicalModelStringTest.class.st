@@ -31,6 +31,12 @@ PhysicalModelStringTest >> testPhLStringRigidTerminationDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelStringTest >> testPhNylonGuitarModelAsDsp [
+
+	self deny: PhNylonGuitarModel new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelStringTest >> testPhNylonStringAsDsp [
 
 	self deny: PhNylonString new asDsp isNull.
