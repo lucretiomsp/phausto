@@ -103,17 +103,6 @@ PhysicalModelTest >> testPhModalModelAsDsp [
 ]
 
 { #category : 'tests' }
-PhysicalModelTest >> testPhModalModelWith4Modes [
-
-
-|model |
-model := PhModalModel new numberOfModes: 4.
-
-self assert: model numberOfModes equals: 4.
-	self deny: model asDsp isNull 
-]
-
-{ #category : 'tests' }
 PhysicalModelTest >> testPhWaveguideAsDsp [
 
 	self deny: PhWaveguide new asDsp isNull

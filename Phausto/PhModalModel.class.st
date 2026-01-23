@@ -32,23 +32,16 @@ PhModalModel >> asBox [
 	intermediateBox := super asBox.
 	"finalBox := self freqs asBox , self t60s asBox , self gains asBox
 	            , self input asBox connectTo: intermediateBox."
-	finalBox := self freqs asBox , self t60s asBox , self gains asBox asBox , self input asBox
-		            connectTo: intermediateBox.
-	^ intermediateBox
+	finalBox := self freqs asBox , self t60s asBox
+	            , self gains asBox asBox , self input asBox connectTo:
+		            intermediateBox.
+	^ super asBox
 ]
 
 { #category : 'accessing' }
 PhModalModel >> freqs [
 
 	^ freqs
-]
-
-{ #category : 'accessing' }
-PhModalModel >> freqs: aParamArgumentOrAPhList [
-
-	(aParamArgumentOrAPhList isKindOf: PhList)
-		ifTrue: [ freqs := aParamArgumentOrAPhList ]
-		ifFalse: [ self paramSetter value: aParamArgumentOrAPhList ]
 ]
 
 { #category : 'accessing' }
@@ -60,14 +53,13 @@ PhModalModel >> gains [
 { #category : 'initialization' }
 PhModalModel >> initialize [
 	"default ModalModel comes from the example in the Faust libraries documentation but is triggered with a Pulsen"
-	self shouldBeImplemented 
 
-"	super initialize.
+	super initialize.
 	processExpression := 'process = pm.modalModel(1);'.
-	freqs := #( 440 870 ) asPhZeroList.
-	t60s := #( 0.5 0.25 ) asPhZeroList.
-	gains := #( 0.6 0.8 ) asPhZeroList.
-	input := Pulse new period: 0.16"
+	freqs := 440 .
+	t60s := 0.6 .
+	gains := 0.5.
+	input := Pulse new period: 0.16
 ]
 
 { #category : 'accessing' }
@@ -83,44 +75,7 @@ PhModalModel >> numberOfModes [
 ]
 
 { #category : 'accessing' }
-PhModalModel >> numberOfModes: anInteger [
-
-	numberOfModes := anInteger .
-	self updateProcessExpression
-]
-
-{ #category : 'accessing' }
-PhModalModel >> t60: aParamArgumentOrAPhList [
-   
-   (aParamArgumentOrAPhList isKindOf: PhList) ifTrue: [ t60s := aParamArgumentOrAPhList ] ifFalse:
-	[self paramSetter value: aParamArgumentOrAPhList ]
-]
-
-{ #category : 'accessing' }
 PhModalModel >> t60s [
 
 	^ t60s
-]
-
-{ #category : 'as yet unclassified' }
-PhModalModel >> updateLists [
-
-	t60s := #( 0.5 0.2 0.3 0.1 ) asPhZeroList.
-	freqs := #( 220 330 550 750 ) asPhZeroList.
-	gains := #( 0.5 0.2 0.1 0.1 ) asPhZeroList
-]
-
-{ #category : 'utilities' }
-PhModalModel >> updateProcessExpression [
-
-	"| peStream |
-	peStream := ReadWriteStream on: ''.
-	peStream << 'process = pm.modalModel('.
-	self numberOfModes printOn: peStream.
-	peStream << ');'.
-	processExpression := peStream contents."
-	
-	processExpression := 'process = pm.modalModel(4);'.
-	
-	self updateLists
 ]
