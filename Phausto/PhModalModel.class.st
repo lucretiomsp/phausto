@@ -1,13 +1,15 @@
 "
-Implement multiple resonance modes using **resonant bandpass filters**.
+Implement a single resonance modes using **resonant bandpass filters**.
 Any linear percussion instrument can be implemented using a bank of resonant bandpass filters and an exciter.
-Lear more about [Physical Audio Signals](https://ccrma.stanford.edu/~jos/pasp/).
+Learn more about [Physical Audio Signals](https://ccrma.stanford.edu/~jos/pasp/).
+
+** Be careful, this does not truly correspnd to Faust original ModalModel - if you want multiple resonances you have to create an array of ModalModels in Phausto
 
 ## Parameters
 - **numberOfModes**: number of given modes
-- **freqs** : list of filter center freqencies in Hertz
-- **t60s** : list of mode resonance durations (in seconds)
-- **gains** : list of mode gains (0-1)
+- **freqs** : filter center freqency in Hertz
+- **t60s** :  mode resonance durations (in seconds)
+- **gains** :mode gain (0-1)
 - **input** : the excitation input
 "
 Class {

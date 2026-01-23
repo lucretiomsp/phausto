@@ -79,6 +79,12 @@ PhysicalModelTest >> testModeFilterAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testPhAllpassNLDsp [
+
+	self deny: PhAllpassNL new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testPhBridgeFilterAsDsp [
 
 	self deny: PhBridgeFilter new asDsp isNull 
