@@ -21,12 +21,20 @@ Array >> asParam: aString forUGen: aUnitGenerator [
 
 { #category : '*Phausto' }
 Array >> asPhList [
+	"convert the array into a PhList a.k.a a Faust pseudo list"
 
-"convert the array into a PhList a.k.a a Faust pseudo list"
-| list |
+	| list |
+	list := PhList new addAll: self .
+	^ list
+]
 
-list := PhList new addAll: self.
-^ list
+{ #category : '*Phausto' }
+Array >> asPhZeroList [
+	"convert the array into a PhZeroList a.k.a a Faust list counting from zero"
+
+	| list |
+	list := PhZeroList new addAll: self.
+	^ list
 ]
 
 { #category : '*Phausto' }

@@ -75,7 +75,7 @@ PhysicalModelTest >> testMarimbaAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testModeFilterAsDsp [
 
-	self assert: PhModeFilter new asDsp isNull equals: false
+	self deny: PhModeFilter new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -94,6 +94,23 @@ PhysicalModelTest >> testPhGuitarBridgeAsDsp [
 PhysicalModelTest >> testPhGuitarNutsAsDsp [
 
 	self deny:  PhGuitarNuts new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testPhModalModelAsDsp [
+
+	self deny: PhModalModel new asDsp isNull 
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testPhModalModelWith4Modes [
+
+
+|model |
+model := PhModalModel new numberOfModes: 4.
+
+self assert: model numberOfModes equals: 4.
+	self deny: model asDsp isNull 
 ]
 
 { #category : 'tests' }
