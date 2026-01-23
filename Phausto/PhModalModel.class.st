@@ -60,13 +60,14 @@ PhModalModel >> gains [
 { #category : 'initialization' }
 PhModalModel >> initialize [
 	"default ModalModel comes from the example in the Faust libraries documentation but is triggered with a Pulsen"
+	self shouldBeImplemented 
 
-	super initialize.
+"	super initialize.
 	processExpression := 'process = pm.modalModel(1);'.
 	freqs := #( 440 870 ) asPhZeroList.
-	t60s := #( 0.5 0.25 ) asPhZeroList .
+	t60s := #( 0.5 0.25 ) asPhZeroList.
 	gains := #( 0.6 0.8 ) asPhZeroList.
-	input := Pulse new period: 0.16
+	input := Pulse new period: 0.16"
 ]
 
 { #category : 'accessing' }
