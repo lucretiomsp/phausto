@@ -17,17 +17,23 @@ BasicsTest >> TODOtestDownSamplerAsDsp [
 { #category : 'tests' }
 BasicsTest >> testImpulsifyAsDsp [
 
-	self assert: Impulsify new asDsp isNull equals: false
+	self deny: Impulsify new asDsp isNull 
 ]
 
 { #category : 'tests' }
 BasicsTest >> testPhAutomatAsDsp [
-	
-	self assert: PhAutomat new asDsp isNull equals: false
+
+	self deny: PhAutomat new asDsp isNull 
+]
+
+{ #category : 'tests' }
+BasicsTest >> testPhLatchAsDsp [
+
+	self deny: PhLatch new asDsp isNull
 ]
 
 { #category : 'tests' }
 BasicsTest >> testSampleAndHoldAsDsp [
 
-	self assert: SampleAndHold new asDsp isNull equals: false
+	self deny: SampleAndHold new asDsp isNull 
 ]

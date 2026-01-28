@@ -165,9 +165,11 @@ UnitGenerator >> absolute [
 UnitGenerator >> asBox [
 
 	| box emptyBox |
+	
+	self checkProcessExpression.
 	BoxAPI uniqueInstance createLibContext.
-   
-emptyBox := PhBox new.
+
+	emptyBox := PhBox new.
 	box := BoxAPI uniqueInstance
 		       boxFromString: self code
 		       inputs: emptyBox inputs
@@ -235,6 +237,12 @@ UnitGenerator >> attachedDSP [
 UnitGenerator >> attachedDSP: aDSP [
 
 	attachedDSP := aDSP
+]
+
+{ #category : 'check' }
+UnitGenerator >> checkProcessExpression [
+
+^ self processExpression endsWith: ';'
 ]
 
 { #category : 'accessing' }
