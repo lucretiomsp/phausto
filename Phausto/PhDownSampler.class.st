@@ -4,10 +4,9 @@ Deafult frequency of 1000 Hz
 "
 Class {
 	#name : 'PhDownSampler',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhBasics',
 	#instVars : [
-		'frequency',
-		'input'
+		'frequency'
 	],
 	#category : 'Phausto-Basics',
 	#package : 'Phausto',

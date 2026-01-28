@@ -17,12 +17,11 @@ osci := SawOsc new freq: auto  midikey2hz .
 "
 Class {
 	#name : 'PhAutomat',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhBasics',
 	#instVars : [
 		'tempo',
 		'size',
-		'init',
-		'input'
+		'init'
 	],
 	#category : 'Phausto-Basics',
 	#package : 'Phausto',
@@ -35,11 +34,10 @@ PhAutomat >> asBox [
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
 
-	"finalBox := self tempo asBox , self size asBox , self init  asBox , self input asBox
-		            connectTo: intermediateBox.
-"
-	finalBox := self tempo asBox , self size asBox , self init , self input asBox
-		            connectTo: intermediateBox.
+	
+
+	finalBox := self tempo asBox , self size asBox , self init
+	            , self input asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 

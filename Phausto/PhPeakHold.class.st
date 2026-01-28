@@ -11,10 +11,9 @@ _1_ - Track and hold max value.
 "
 Class {
 	#name : 'PhPeakHold',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhBasics',
 	#instVars : [
-		'mode',
-		'input'
+		'mode'
 	],
 	#category : 'Phausto-Basics',
 	#package : 'Phausto',

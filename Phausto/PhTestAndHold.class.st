@@ -7,10 +7,9 @@ Test And Hold: ""records"" the input when pred(input) is true, outputs a frozen 
 "
 Class {
 	#name : 'PhTestAndHold',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhBasics',
 	#instVars : [
-		'pred',
-		'input'
+		'pred'
 	],
 	#category : 'Phausto-Basics',
 	#package : 'Phausto',

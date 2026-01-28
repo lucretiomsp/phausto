@@ -7,10 +7,9 @@ Latch input on the rising edge of trig. Captures (""records"") the input x whene
 "
 Class {
 	#name : 'PhLatch',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhBasics',
 	#instVars : [
-		'trig',
-		'input'
+		'trig'
 	],
 	#category : 'Phausto-Basics',
 	#package : 'Phausto',

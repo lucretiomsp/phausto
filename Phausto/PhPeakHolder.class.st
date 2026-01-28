@@ -7,10 +7,9 @@ While peak-holder functions are scarcely discussed in the literature (please do 
 "
 Class {
 	#name : 'PhPeakHolder',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhBasics',
 	#instVars : [
-		'holdTime',
-		'input'
+		'holdTime'
 	],
 	#category : 'Phausto-Basics',
 	#package : 'Phausto',

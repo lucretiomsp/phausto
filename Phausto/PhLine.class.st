@@ -11,11 +11,10 @@ n: number of samples to reach the new target received at its input
 "
 Class {
 	#name : 'PhLine',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhBasics',
 	#instVars : [
 		'trig',
-		'n',
-		'input'
+		'n'
 	],
 	#category : 'Phausto-Basics',
 	#package : 'Phausto',

@@ -3,10 +3,9 @@ I am a Sample And Hold. I ""record"" the input when trig is 1, output a frozen v
 "
 Class {
 	#name : 'PhSampleAndHold',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhBasics',
 	#instVars : [
-		'trig',
-		'input'
+		'trig'
 	],
 	#category : 'Phausto-Basics',
 	#package : 'Phausto',

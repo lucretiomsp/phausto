@@ -6,9 +6,8 @@ Down sample a signal. WARNING: this function doesn't change the rate of a signal
 "
 Class {
 	#name : 'PhDownSamplerCV',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhBasics',
 	#instVars : [
-		'input',
 		'amount'
 	],
 	#category : 'Phausto-Basics',
