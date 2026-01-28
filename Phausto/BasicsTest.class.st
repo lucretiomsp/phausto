@@ -25,6 +25,12 @@ BasicsTest >> testPhAutomatAsDsp [
 ]
 
 { #category : 'tests' }
+BasicsTest >> testPhBitCrusherAsDsp [
+
+	self deny: PhBitCrusher new asDsp isNull
+]
+
+{ #category : 'tests' }
 BasicsTest >> testPhDownSamplerCVAsDsp [
 
 	self deny: PhDownSamplerCV new asDsp isNull
@@ -43,6 +49,12 @@ BasicsTest >> testPhLatchAsDsp [
 ]
 
 { #category : 'tests' }
+BasicsTest >> testPhOnAndOffAsDsp [
+
+	self deny: PhOnAndOff new asDsp isNull
+]
+
+{ #category : 'tests' }
 BasicsTest >> testPhPeakHoldAsDsp [
 
 	self deny: PhPeakHold new asDsp isNull
@@ -58,4 +70,10 @@ BasicsTest >> testPhPeakHolderAsDsp [
 BasicsTest >> testPhSampleAndHoldAsDsp [
 
 	self deny: PhSampleAndHold new asDsp isNull 
+]
+
+{ #category : 'tests' }
+BasicsTest >> testPhToggleAsDsp [
+
+	self deny: PhToggle new asDsp isNull
 ]

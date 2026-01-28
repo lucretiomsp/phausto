@@ -242,7 +242,7 @@ UnitGenerator >> attachedDSP: aDSP [
 { #category : 'check' }
 UnitGenerator >> checkProcessExpression [
 
-^ self processExpression endsWith: ';'
+	(self processExpression endsWith: ';') ifFalse: [ ^ Error new signal: 'Missing semicolomn on process expression' ]
 ]
 
 { #category : 'accessing' }
