@@ -45,7 +45,7 @@ PsgPlus >> asBox [
 		       freq: pitchLfo;
 		       uLevel: 0.3 asBox.
 	noise := ResonBp new
-		         input: (DownSampler new frequency: self dsfreq ;input: Noise new);
+		         input: (PhDownSampler new frequency: self dsfreq ;input: Noise new);
 		         frequency: pitchLfo asBox * 3 asBox;
 		         q: self q .
 

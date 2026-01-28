@@ -9,7 +9,7 @@ Class {
 { #category : 'tests' }
 BasicLibTest >> TODOtestDownSamplerAsDsp [ 
 
-	self deny: DownSampler new asDsp isNull
+	self deny: PhDownSampler new asDsp isNull
 ]
 
 { #category : 'tests' }

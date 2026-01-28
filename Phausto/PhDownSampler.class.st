@@ -3,7 +3,7 @@ This UnitGenerator makes the work of the downSample standard Faust function.  Do
 Deafult frequency of 1000 Hz
 "
 Class {
-	#name : 'DownSampler',
+	#name : 'PhDownSampler',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'frequency',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : 'converting' }
-DownSampler >> asBox [
+PhDownSampler >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -25,13 +25,13 @@ DownSampler >> asBox [
 ]
 
 { #category : 'accessing' }
-DownSampler >> frequency [
+PhDownSampler >> frequency [
 
 	^ frequency 
 ]
 
 { #category : 'initialization' }
-DownSampler >> initialize [
+PhDownSampler >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.downSample;'.
@@ -45,13 +45,13 @@ DownSampler >> initialize [
 ]
 
 { #category : 'accessing' }
-DownSampler >> input [
+PhDownSampler >> input [
 
 	^ input
 ]
 
 { #category : 'connecting' }
-DownSampler >> patchedWith: aUnitGenerator [
+PhDownSampler >> patchedWith: aUnitGenerator [
 
 	self input: aUnitGenerator
 ]

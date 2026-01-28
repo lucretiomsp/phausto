@@ -7,7 +7,7 @@ When a UnitGenerator is chucked (=>) into an **Impulsify**, it becomes its gate 
 - **gate** the signal turned into impulse
 "
 Class {
-	#name : 'Impulsify',
+	#name : 'PhImpulsify',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'gate'
@@ -18,7 +18,7 @@ Class {
 }
 
 { #category : 'converting' }
-Impulsify >> asBox [
+PhImpulsify >> asBox [
 
 	| intermediateBox finalBox gateBox |
 	intermediateBox := super asBox.
@@ -28,20 +28,20 @@ Impulsify >> asBox [
 ]
 
 { #category : 'accessing' }
-Impulsify >> gate [
+PhImpulsify >> gate [
 
 	^ gate ifNil: [ gate := PhButton new label: self label ]
 ]
 
 { #category : 'initialization' }
-Impulsify >> initialize [
+PhImpulsify >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.impulsify;'
 ]
 
 { #category : 'accessing' }
-Impulsify >> patchedWith: aUnitGenerator [
+PhImpulsify >> patchedWith: aUnitGenerator [
 
 self gate: aUnitGenerator 
 ]

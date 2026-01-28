@@ -7,23 +7,27 @@ Class {
 }
 
 { #category : 'tests' }
-BasicsTest >> TODOtestDownSamplerAsDsp [
-	"crash apparently for unexplicable reason"
+BasicsTest >> testDownSamplerAsDsp [
 
-	self assert: 1 equals: 0.
-	self assert: DownSampler new asDsp isNull equals: false
+	self deny:  PhDownSampler new asDsp isNull 
 ]
 
 { #category : 'tests' }
 BasicsTest >> testImpulsifyAsDsp [
 
-	self deny: Impulsify new asDsp isNull 
+	self deny: PhImpulsify new asDsp isNull 
 ]
 
 { #category : 'tests' }
 BasicsTest >> testPhAutomatAsDsp [
 
 	self deny: PhAutomat new asDsp isNull 
+]
+
+{ #category : 'tests' }
+BasicsTest >> testPhDownSamplerCVAsDsp [
+
+	self deny: PhDownSamplerCV new asDsp isNull
 ]
 
 { #category : 'tests' }
