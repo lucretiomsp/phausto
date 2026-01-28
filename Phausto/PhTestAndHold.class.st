@@ -32,11 +32,6 @@ PhTestAndHold >> initialize [
 ]
 
 { #category : 'accessing' }
-PhTestAndHold >> input [ 
-^ input 
-]
-
-{ #category : 'accessing' }
 PhTestAndHold >> pred [ 
 
 ^ pred

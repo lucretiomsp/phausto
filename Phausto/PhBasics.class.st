@@ -12,6 +12,18 @@ Class {
 	#tag : 'Basics'
 }
 
+{ #category : 'accessing' }
+PhBasics >> initialize [
+
+super initialize .
+input := 0
+]
+
+{ #category : 'accessing' }
+PhBasics >> input [ 
+^ input 
+]
+
 { #category : 'connecting' }
 PhBasics >> patchedWith: aUnitGenerator [
 

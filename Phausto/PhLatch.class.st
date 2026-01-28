@@ -32,12 +32,6 @@ PhLatch >> initialize [
 ]
 
 { #category : 'accessing' }
-PhLatch >> input [ 
-
-^ input 
-]
-
-{ #category : 'accessing' }
 PhLatch >> trig [ 
 
 ^ trig

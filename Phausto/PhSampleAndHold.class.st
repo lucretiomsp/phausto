@@ -32,12 +32,6 @@ PhSampleAndHold >> initialize [
 ]
 
 { #category : 'accessing' }
-PhSampleAndHold >> input [
-
-	^ input
-]
-
-{ #category : 'accessing' }
 PhSampleAndHold >> trig [
 
 	^ trig

@@ -34,8 +34,3 @@ PhDownSamplerCV >> initialize [
 	input := 0.
 	amount := 1.
 ]
-
-{ #category : 'accessing' }
-PhDownSamplerCV >> input [ 
-^ input
-]

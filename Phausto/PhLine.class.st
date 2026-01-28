@@ -40,18 +40,6 @@ PhLine >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-PhLine >> input [
-
-	^ input ifNil: [
-		  input := PhHSlider new
-			           label: self label , 'Input'
-			           init: 5000
-			           min: 20
-			           max: 18000
-			           step: 1 ]
-]
-
-{ #category : 'as yet unclassified' }
 PhLine >> n [
 
 	^ n ifNil: [

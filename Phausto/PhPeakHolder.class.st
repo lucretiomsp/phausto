@@ -35,9 +35,3 @@ processExpression := 'process = ba.peakhold;'.
 input := 0.
 holdTime := 1
 ]
-
-{ #category : 'accessing' }
-PhPeakHolder >> input [ 
-
-^ input
-]

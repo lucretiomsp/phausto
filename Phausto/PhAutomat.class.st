@@ -59,12 +59,6 @@ PhAutomat >> initialize [
 ]
 
 { #category : 'accessing' }
-PhAutomat >> input [
-
-	^ input
-]
-
-{ #category : 'accessing' }
 PhAutomat >> size [
 
 	^ size

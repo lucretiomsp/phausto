@@ -31,6 +31,12 @@ BasicsTest >> testPhDownSamplerCVAsDsp [
 ]
 
 { #category : 'tests' }
+BasicsTest >> testPhKr2ArAsDsp [
+
+	self deny: PhKr2Ar new asDsp isNull
+]
+
+{ #category : 'tests' }
 BasicsTest >> testPhLatchAsDsp [
 
 	self deny: PhLatch new asDsp isNull

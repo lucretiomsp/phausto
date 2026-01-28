@@ -43,12 +43,6 @@ PhDownSampler >> initialize [
    input := Wire new.
 ]
 
-{ #category : 'accessing' }
-PhDownSampler >> input [
-
-	^ input
-]
-
 { #category : 'connecting' }
 PhDownSampler >> patchedWith: aUnitGenerator [
 
