@@ -37,6 +37,18 @@ BasicsTest >> testPhLatchAsDsp [
 ]
 
 { #category : 'tests' }
+BasicsTest >> testPhPeakHoldAsDsp [
+
+	self deny: PhPeakHold new asDsp isNull
+]
+
+{ #category : 'tests' }
+BasicsTest >> testPhPeakHolderAsDsp [
+
+	self deny: PhPeakHolder new asDsp isNull
+]
+
+{ #category : 'tests' }
 BasicsTest >> testPhSampleAndHoldAsDsp [
 
 	self deny: PhSampleAndHold new asDsp isNull 
