@@ -33,7 +33,7 @@ BasicsTest >> testPhLatchAsDsp [
 ]
 
 { #category : 'tests' }
-BasicsTest >> testSampleAndHoldAsDsp [
+BasicsTest >> testPhSampleAndHoldAsDsp [
 
-	self deny: SampleAndHold new asDsp isNull 
+	self deny: PhSampleAndHold new asDsp isNull 
 ]

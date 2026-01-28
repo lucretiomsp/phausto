@@ -13,7 +13,7 @@ Class {
 LFORandomPos >> asBox [
 
 	| sampleAndHold finalBox |
-	sampleAndHold := SampleAndHold new
+	sampleAndHold := PhSampleAndHold new
 		                 input: Noise new;
 		                 trig: (Pulsen new
 				                  length: (1 / 44100) asBox;

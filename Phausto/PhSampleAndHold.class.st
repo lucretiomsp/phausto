@@ -2,7 +2,7 @@
 I am a Sample And Hold. I ""record"" the input when trig is 1, output a frozen value when trig is 0.
 "
 Class {
-	#name : 'SampleAndHold',
+	#name : 'PhSampleAndHold',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'trig',
@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'converting' }
-SampleAndHold >> asBox [
+PhSampleAndHold >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
@@ -24,34 +24,22 @@ SampleAndHold >> asBox [
 ]
 
 { #category : 'initialization' }
-SampleAndHold >> initialize [
+PhSampleAndHold >> initialize [
 
 	super initialize.
 	self processExpression: 'process =  ba.sAndH;'.
-	self trig: 0.
-	self input: 0.
+	trig := 0.
+	input := 0.
 ]
 
 { #category : 'accessing' }
-SampleAndHold >> input [
+PhSampleAndHold >> input [
 
 	^ input
 ]
 
 { #category : 'accessing' }
-SampleAndHold >> input: anInput [
-
-	input := anInput asBox
-]
-
-{ #category : 'accessing' }
-SampleAndHold >> trig [
+PhSampleAndHold >> trig [
 
 	^ trig
-]
-
-{ #category : 'accessing' }
-SampleAndHold >> trig: aTrigger [
-
-	trig := aTrigger asBox
 ]
