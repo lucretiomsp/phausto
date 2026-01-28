@@ -54,7 +54,7 @@ EnvelopesTest >> testAHDSRExpEnvAsDsp [
 { #category : 'tests' }
 EnvelopesTest >> testAREnvAsDsp [
 
-	self assert: AREnv new asDsp isNull equals: false
+	self deny: AREnv new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -66,11 +66,17 @@ EnvelopesTest >> testARFEexpEnvAsDsp [
 { #category : 'tests' }
 EnvelopesTest >> testASREnvAsDsp [
 
-	self assert: ASREnv new  asDsp isNull equals: false
+	self deny: ASREnv new asDsp isNull 
+]
+
+{ #category : 'tests' }
+EnvelopesTest >> testDx7EnvAsDsp [
+
+	self deny: Dx7Env new asDsp isNull 
 ]
 
 { #category : 'tests' }
 EnvelopesTest >> testSmoothEnvAsDsp [
 
-	self assert: SmoothEnv new asDsp isNull equals: false
+	self deny: SmoothEnv new asDsp isNull 
 ]
