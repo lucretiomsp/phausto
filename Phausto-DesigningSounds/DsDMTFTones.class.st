@@ -5,8 +5,9 @@ On each key press the dialler sends a 200 ms beep corresponding to the CCITT sta
 Class {
 	#name : 'DsDMTFTones',
 	#superclass : 'Object',
-	#category : 'Phausto-DesigningSounds',
-	#package : 'Phausto-DesigningSounds'
+	#category : 'Phausto-DesigningSounds-Practicals',
+	#package : 'Phausto-DesigningSounds',
+	#tag : 'Practicals'
 }
 
 { #category : 'accessing' }

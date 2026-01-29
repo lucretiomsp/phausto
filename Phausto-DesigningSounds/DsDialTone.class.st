@@ -5,8 +5,9 @@ dsdialtone new retruns a box that has to be converted to a DSP to be heard.
 Class {
 	#name : 'DsDialTone',
 	#superclass : 'Object',
-	#category : 'Phausto-DesigningSounds',
-	#package : 'Phausto-DesigningSounds'
+	#category : 'Phausto-DesigningSounds-Practicals',
+	#package : 'Phausto-DesigningSounds',
+	#tag : 'Practicals'
 }
 
 { #category : 'initialization' }
