@@ -37,11 +37,10 @@ AHDSREnvBias >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self attack asBox , self decay asBox , self hold asBox
+	finalBox := self attack asBox , self hold asBox , self decay asBox
 	            , self sustain asBox , self release asBox
-	            , self biasAttack asBox , self biasDecay asBox , self biasRelease
-	            , self legato asBox , self trigger asBox connectTo:
-		            intermediateBox.
+	          
+	            , self trigger asBox connectTo: intermediateBox.
 	^ finalBox
 ]
 

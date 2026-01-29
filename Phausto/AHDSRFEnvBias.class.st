@@ -38,11 +38,12 @@ AHDSRFEnvBias >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	finalBox := self attack asBox , self decay asBox , self hold asBox
+	finalBox := self attack asBox , self hold asBox , self decay asBox
 	            , self sustain asBox , self release asBox
 	            , self finalLevel asBox , self biasAttack asBox
-	            , self biasDecay asBox , self biasRelease ,  self legato asBox
-	            , self trigger asBox connectTo: intermediateBox.
+	            , self biasDecay asBox , self biasRelease
+	            , self legato asBox , self trigger asBox connectTo:
+		            intermediateBox.
 	^ finalBox
 ]
 
@@ -87,7 +88,7 @@ AHDSRFEnvBias >> initialize [
 
 	super initialize.
 
-	processExpression := 'process = en.adsrf_bias;'.
+	processExpression := 'process = en.ahdsrf_bias;'.
 	self initializeDecayAndSustain.
 	self initializeBias.
 	hold := PhHSlider new
@@ -102,12 +103,12 @@ AHDSRFEnvBias >> initialize [
 		              min: 0
 		              max: 1
 		              step: 0.001.
-		legato := PhHSlider new
-			            label: self label , 'Legato'
-			            init: 0
-			            min: 0
-			            max: 1
-			            step: 1 
+	legato := PhHSlider new
+		          label: self label , 'Legato'
+		          init: 0
+		          min: 0
+		          max: 1
+		          step: 1
 ]
 
 { #category : 'initialization' }

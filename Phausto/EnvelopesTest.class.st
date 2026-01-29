@@ -7,36 +7,16 @@ Class {
 }
 
 { #category : 'tests' }
-EnvelopesTest >> TODOtestADSREnvBiasAsDsp [
-	"new version of faust libs must be bundled to pass this test"
-
-	self deny: ADSREnvBias new asDsp isNull 
-]
-
-{ #category : 'tests' }
-EnvelopesTest >> TODOtestADSRFEnvBiasAsDsp [
-
-	self assert: ADSRFEnvBias new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
-EnvelopesTest >> TODOtestAHDSREnvBiasAsDsp [
-"new version of faust libs must be bundled to pass this test"
-
-	self assert: AHDSREnvBias new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
-EnvelopesTest >> TODOtestAHDSRFEnvBiasAsDsp [
-"new version of faust libs must be bundled to pass this test"
-
-		self assert: AHDSRFEnvBias new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
 EnvelopesTest >> testADSREnvAsDsp [
 
 	self assert: ADSREnv new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EnvelopesTest >> testADSREnvBiasAsDsp [
+	"new version of faust libs must be bundled to pass this test"
+
+	self deny: ADSREnvBias new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -46,9 +26,31 @@ EnvelopesTest >> testADSRExpEnvAsDsp [
 ]
 
 { #category : 'tests' }
+EnvelopesTest >> testADSRFEnvBiasAsDsp [
+
+	self deny: ADSRFEnvBias new asDsp isNull 
+]
+
+{ #category : 'tests' }
+EnvelopesTest >> testAHDSREnvBiasAsDsp [
+
+	self deny: AHDSREnvBias new asDsp isNull.
+	
+
+]
+
+{ #category : 'tests' }
 EnvelopesTest >> testAHDSRExpEnvAsDsp [
 
 	self assert: AHDSRExpEnv new  asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EnvelopesTest >> testAHDSRFEnvBiasAsDsp [
+	
+	self deny: AHDSRFEnvBias new asDsp isNull .
+	
+
 ]
 
 { #category : 'tests' }
