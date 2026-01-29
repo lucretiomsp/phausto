@@ -31,6 +31,12 @@ OperationsTest >> testPhMultiplicatorAsDsp [
 ]
 
 { #category : 'tests' }
+OperationsTest >> testPhPowerAsDsp [
+
+	self deny: PhPower new asDsp isNull
+]
+
+{ #category : 'tests' }
 OperationsTest >> testPhSubtractorAsDsp [
 
 	self deny: PhSubtractor new asDsp isNull

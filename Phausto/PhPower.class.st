@@ -1,3 +1,6 @@
+"
+Exponentiation where inputL is base and input R is exponent
+"
 Class {
 	#name : 'PhPower',
 	#superclass : 'PhBinaryOperation',
@@ -5,3 +8,10 @@ Class {
 	#package : 'Phausto',
 	#tag : 'Operations'
 }
+
+{ #category : 'initialization' }
+PhPower >> initialize [ 
+
+super initialize .
+processExpression := 'process = pow;'
+]
