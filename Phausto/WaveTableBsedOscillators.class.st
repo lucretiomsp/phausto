@@ -18,7 +18,7 @@ WaveTableBsedOscillators >> tableSize: anInteger [
 	| trimmedPe peStream |
 	trimmedPe := (processExpression substrings: '1024);') first.
 	peStream := ReadWriteStream on: ''.
-
+	peStream << trimmedPe.
 	anInteger printOn: peStream.
 	peStream << ');'.
 
