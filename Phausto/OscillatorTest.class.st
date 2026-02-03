@@ -13,6 +13,18 @@ OscillatorTest >> testCosWaveformAsDsp [
 ]
 
 { #category : 'tests' }
+OscillatorTest >> testHsOscCosAsDsp [
+
+	self deny: HsOscCos new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
+OscillatorTest >> testHsOscSinAsDsp [
+
+	self deny: HsOscSin new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
 OscillatorTest >> testHsPhasorAsDsp [
 
 	self deny: HsPhasor new stereo asDsp isNull.
@@ -23,6 +35,18 @@ OscillatorTest >> testHsPhasorAsDsp [
 OscillatorTest >> testHspPhasorAsDsp [
 
 	self deny: HspPhasor new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
+OscillatorTest >> testOscCosAsDsp [
+
+	self deny: OscCos new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
+OscillatorTest >> testOscSinAsDsp [
+
+	self deny: OscSin new stereo asDsp isNull
 ]
 
 { #category : 'tests' }
