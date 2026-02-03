@@ -1,8 +1,8 @@
 "
-Wave-Table-Based Cosine wave oscillator 
+Sine Wave-Table-Based oscillator based on the _cos_ mathematical function.
 "
 Class {
-	#name : 'OscSin',
+	#name : 'OscCosM',
 	#superclass : 'Oscillator',
 	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
@@ -10,8 +10,8 @@ Class {
 }
 
 { #category : 'initialization' }
-OscSin >> initialize [
+OscCosM >> initialize [
 
 	super initialize.
-	processExpression := 'process =os.oscsin;'
+	processExpression := 'process =os.m_osccos;'
 ]

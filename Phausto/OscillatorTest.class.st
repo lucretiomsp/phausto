@@ -44,9 +44,33 @@ OscillatorTest >> testOscCosAsDsp [
 ]
 
 { #category : 'tests' }
+OscillatorTest >> testOscCosMAsDsp [
+
+	self deny: OscCosM new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
+OscillatorTest >> testOscIAsDsp [
+
+	self deny: OscI new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
+OscillatorTest >> testOscPAsDsp [
+
+	self deny: OscP new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
 OscillatorTest >> testOscSinAsDsp [
 
 	self deny: OscSin new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
+OscillatorTest >> testOscSinMAsDsp [
+
+	self deny: OscSinM new stereo asDsp isNull
 ]
 
 { #category : 'tests' }

@@ -1,8 +1,12 @@
 "
-Wave-Table-Based Cosine wave oscillator 
+Interpolated phase sine Wave-Table-Based oscillator.
+
+##Parameters
+
+**freq:** the frequency in Hz
 "
 Class {
-	#name : 'OscSin',
+	#name : 'OscI',
 	#superclass : 'Oscillator',
 	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
@@ -10,8 +14,8 @@ Class {
 }
 
 { #category : 'initialization' }
-OscSin >> initialize [
+OscI >> initialize [
 
 	super initialize.
-	processExpression := 'process =os.oscsin;'
+	processExpression := 'process = os.osci;'
 ]

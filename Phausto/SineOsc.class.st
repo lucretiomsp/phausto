@@ -1,5 +1,5 @@
 "
-Default Sine wave oscillator, corresponding to Faust osc standard function
+Default Sine Wave-Table-Based Oscillator
 
 ## Parameters:
 
