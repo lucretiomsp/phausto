@@ -11,6 +11,23 @@ newCmajorPatch := STONJSON toString: originalCmajorPatch .
 ]
 
 { #category : '*Phausto' }
+ByteString >> asBox [
+
+	| box emptyBox |
+	"basic checking"
+	self endsWith: ';'.
+	BoxAPI uniqueInstance createLibContext.
+
+	emptyBox := PhBox new.
+	box := BoxAPI uniqueInstance
+		       boxFromString: self 
+		       inputs: emptyBox inputs
+		       outputs: emptyBox outputs
+		       buffer: emptyBox errorBuffer.
+	^ box
+]
+
+{ #category : '*Phausto' }
 ByteString >> asDSPParameter [
 
 	^ DSPParameter new

@@ -357,6 +357,14 @@ self assert: 'test/after/slash' afterLastSlash equals: 'slash'
 ]
 
 { #category : 'tests' }
+UtilitiesTest >> testStringAsBox [
+
+| string |
+string := 'process = 0.5 + 0.5;'.
+	self deny: string asBox asDsp isNull.
+]
+
+{ #category : 'tests' }
 UtilitiesTest >> testStringAsChainBlockString [
 
 self assert: 'process=_,_;' asChainBlockString equals: '_,_'.

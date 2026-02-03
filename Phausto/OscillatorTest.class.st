@@ -15,7 +15,8 @@ OscillatorTest >> testCosWaveformAsDsp [
 { #category : 'tests' }
 OscillatorTest >> testHsPhasorAsDsp [
 
-	self deny: HsPhasor new stereo asDsp isNull
+	self deny: HsPhasor new stereo asDsp isNull.
+
 ]
 
 { #category : 'tests' }
