@@ -164,17 +164,11 @@ UnitGenerator >> absolute [
 { #category : 'converting' }
 UnitGenerator >> asBox [
 
-	| box emptyBox |
-	
+	| box  |
 	self checkProcessExpression.
 	BoxAPI uniqueInstance createLibContext.
 
-	emptyBox := PhBox new.
-	box := BoxAPI uniqueInstance
-		       boxFromString: self code
-		       inputs: emptyBox inputs
-		       outputs: emptyBox outputs
-		       buffer: emptyBox errorBuffer.
+	box := self code asBox.
 	^ box
 ]
 
