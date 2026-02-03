@@ -20,6 +20,12 @@ OscillatorTest >> testHsPhasorAsDsp [
 ]
 
 { #category : 'tests' }
+OscillatorTest >> testHspPhasorAsDsp [
+
+	self deny: HspPhasor new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
 OscillatorTest >> testPhasorAsDsp [
 
 	self deny: Phasor new stereo asDsp isNull

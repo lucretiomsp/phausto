@@ -6,12 +6,13 @@ Hardsyncing phasor to be used with a rdtable.
 **tablesize: the table size
 **freq:** the frequency in Hz
 **reset:** a reset signal, reset phase to 0 when equal to 1
+**phase:** phase between 0 and 1.
 "
 Class {
-	#name : 'HsPhasor',
-	#superclass : 'Phasor',
+	#name : 'HspPhasor',
+	#superclass : 'HsPhasor',
 	#instVars : [
-		'reset'
+		'phase'
 	],
 	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
@@ -19,26 +20,20 @@ Class {
 }
 
 { #category : 'converting' }
-HsPhasor >> asBox [
+HspPhasor >> asBox [ 
 
-	^ self freq asBox , self reset asBox connectTo: self code asBox
-]
-
-{ #category : 'accessing' }
-HsPhasor >> freq [ 
-^ freq
+^ self freq asBox , self reset asBox , self phase asBox connectTo: self code asBox.
 ]
 
 { #category : 'class initialization' }
-HsPhasor >> initialize [
+HspPhasor >> initialize [
 
 	super initialize.
-
-	reset := PhButton new label: self label , 'Reset'.
-	processExpression := 'process = os.hs_phasor(1024);'
+	phase := (self label , 'Phase') asSymbol asPhHSlider.
+	processExpression := 'process = os.hsp_phasor(1024);'
 ]
 
 { #category : 'accessing' }
-HsPhasor >> reset [ 
-^ reset
+HspPhasor >> phase [ 
+^ phase
 ]
