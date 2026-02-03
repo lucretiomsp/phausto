@@ -11,6 +11,9 @@ Note that tablesize is just a multiplier for the output of a unit-amp phasor so 
 Class {
 	#name : 'Phasor',
 	#superclass : 'WaveTableBasedOscillators',
+	#instVars : [
+		'freq'
+	],
 	#classInstVars : [
 		'freq'
 	],

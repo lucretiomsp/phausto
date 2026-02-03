@@ -4,9 +4,6 @@ Abstract superclass for Wave-Table-Based Oscillators from Faust standard librari
 Class {
 	#name : 'WaveTableBasedOscillators',
 	#superclass : 'UnitGenerator',
-	#instVars : [
-		'freq'
-	],
 	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
 	#tag : 'Oscillators'
