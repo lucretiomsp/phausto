@@ -9,15 +9,6 @@ Class {
 	#tag : 'Oscillators'
 }
 
-{ #category : 'converting' }
-TriOsc >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self freq asBox connectTo: intermediateBox.
-	^ finalBox * self uLevel asBox
-]
-
 { #category : 'initialization' }
 TriOsc >> initialize [
 

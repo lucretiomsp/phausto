@@ -25,7 +25,7 @@ HspPhasor >> asBox [
 ^ self freq asBox , self reset asBox , self phase asBox connectTo: self code asBox.
 ]
 
-{ #category : 'class initialization' }
+{ #category : 'initialization' }
 HspPhasor >> initialize [
 
 	super initialize.

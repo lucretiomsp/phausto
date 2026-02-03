@@ -29,7 +29,7 @@ HsPhasor >> freq [
 ^ freq
 ]
 
-{ #category : 'class initialization' }
+{ #category : 'initialization' }
 HsPhasor >> initialize [
 
 	super initialize.

@@ -15,21 +15,6 @@ Class {
 	#tag : 'Oscillators'
 }
 
-{ #category : 'converting' }
-SquareOsc >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self freq asBox connectTo: intermediateBox.
-	^ finalBox * self uLevel asBox
-]
-
-{ #category : 'as yet unclassified' }
-SquareOsc >> cpx [
-
-	^ cpx
-]
-
 { #category : 'initialization' }
 SquareOsc >> initialize [
 

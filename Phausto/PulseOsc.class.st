@@ -38,10 +38,9 @@ Class {
 { #category : 'converting' }
 PulseOsc >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self freq asBox , self duty asBox connectTo:
-		            intermediateBox.
+	|  finalBox |
+
+	finalBox := self freq asBox , self duty asBox connectTo: self code asBox .
 	^ finalBox * self uLevel asBox
 ]
 

@@ -23,6 +23,14 @@ Class {
 	#tag : 'Oscillators'
 }
 
+{ #category : 'converting' }
+Oscillator >> asBox [
+
+	| finalBox |
+	finalBox := self freq asBox connectTo: self code asBox.
+	^ finalBox * self uLevel asBox
+]
+
 { #category : 'accessing' }
 Oscillator >> freq [
 

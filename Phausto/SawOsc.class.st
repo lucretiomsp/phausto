@@ -13,15 +13,6 @@ Class {
 	#tag : 'Oscillators'
 }
 
-{ #category : 'converting' }
-SawOsc >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self freq asBox connectTo: intermediateBox.
-	^ finalBox * self uLevel asBox
-]
-
 { #category : 'initialization' }
 SawOsc >> initialize [
 

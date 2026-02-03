@@ -14,15 +14,6 @@ Class {
 }
 
 { #category : 'initialization' }
-SineOsc >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self freq asBox connectTo: intermediateBox.
-	^ finalBox * self uLevel asBox
-]
-
-{ #category : 'initialization' }
 SineOsc >> initialize [
 
 	super initialize.
