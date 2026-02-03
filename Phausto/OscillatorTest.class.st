@@ -7,6 +7,18 @@ Class {
 }
 
 { #category : 'tests' }
+OscillatorTest >> testCosWaveformAsDsp [
+
+	self deny: CosWaveform new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
+OscillatorTest >> testPhasorAsDsp [
+
+	self deny: Phasor new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
 OscillatorTest >> testPulseOscAsDsp [
 
 	self deny: PulseOsc new stereo asDsp isNull

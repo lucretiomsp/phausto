@@ -1,12 +1,12 @@
 "
-Sine waveform ready to use with a rdtable.
+Cosine waveform ready to use with a rdtable.
 
 ##Parameters:
 
 **tablesize:** the table size
 "
 Class {
-	#name : 'SinWaveform',
+	#name : 'CosWaveform',
 	#superclass : 'WaveTableBasedOscillators',
 	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
@@ -14,14 +14,14 @@ Class {
 }
 
 { #category : 'converting' }
-SinWaveform >> asBox [
+CosWaveform >> asBox [ 
 
-	^ super asBox
+^ super asBox 
 ]
 
-{ #category : 'initialization' }
-SinWaveform >> initialize [
+{ #category : 'converting' }
+CosWaveform >> initialize [
 
 	super initialize.
-	processExpression := 'process = os.sinwaveform(1024);'
+	processExpression := 'process =os.coswaveform(1024);'
 ]

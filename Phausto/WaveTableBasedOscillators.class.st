@@ -2,7 +2,7 @@
 Abstract superclass for Wave-Table-Based Oscillators from Faust standard libraries
 "
 Class {
-	#name : 'WaveTableBsedOscillators',
+	#name : 'WaveTableBasedOscillators',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'freq'
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'settings' }
-WaveTableBsedOscillators >> tableSize: anInteger [
+WaveTableBasedOscillators >> tableSize: anInteger [
 
 	| trimmedPe peStream |
 	trimmedPe := (processExpression substrings: '1024);') first.
