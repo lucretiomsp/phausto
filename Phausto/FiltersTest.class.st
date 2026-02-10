@@ -105,19 +105,19 @@ FiltersTest >> testIntegrator [
 { #category : 'tests' }
 FiltersTest >> testKorg35HPF [
 
-	self assert: Korg35HPF new asDsp isNull equals: false
+	self deny: Korg35HPF new asDsp isNull 
 ]
 
 { #category : 'tests' }
 FiltersTest >> testKorg35LPF [
 
-	self assert: Korg35LPF new asDsp isNull equals: false
+	self deny: Korg35LPF new asDsp isNull 
 ]
 
 { #category : 'tests' }
 FiltersTest >> testLowPassFilter [
 
-self assert: Lowpass new  asDsp isNull equals: false
+	self deny: Lowpass new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -129,49 +129,49 @@ FiltersTest >> testLptN [
 { #category : 'tests' }
 FiltersTest >> testMoogHalfLadder [
 
-	self assert: MoogHalfLadder new asDsp isNull equals: false
+	self deny: MoogHalfLadder new asDsp isNull
 ]
 
 { #category : 'tests' }
 FiltersTest >> testMoogLadder [
 
-	self assert: MoogLadder new asDsp isNull equals: false
+	self deny: MoogLadder new asDsp isNull
 ]
 
 { #category : 'tests' }
 FiltersTest >> testMoogVcf [
 
-self assert: MoogVcf new asDsp isNull equals: false
+	self deny: MoogVcf new asDsp isNull
 ]
 
 { #category : 'tests' }
 FiltersTest >> testOberheim [
 
-	self assert: Oberheim new asDsp isNull equals: false
+	self deny: Oberheim new asDsp isNull
 ]
 
 { #category : 'tests' }
 FiltersTest >> testOberheimBPF [
 
-	self assert: OberheimBPF new asDsp isNull equals: false
+	self deny: OberheimBPF new asDsp isNull
 ]
 
 { #category : 'tests' }
 FiltersTest >> testOberheimBSF [
 
-	self assert: OberheimBSF new asDsp isNull equals: false
+	self deny: OberheimBSF new asDsp isNull
 ]
 
 { #category : 'tests' }
 FiltersTest >> testOberheimHPF [
 
-	self assert: OberheimHPF new asDsp isNull equals: false
+	self deny: OberheimHPF new asDsp isNull
 ]
 
 { #category : 'tests' }
 FiltersTest >> testOberheimLPF [
 
-	self assert: OberheimLPF new asDsp isNull equals: false
+	self deny: OberheimLPF new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -184,6 +184,12 @@ FiltersTest >> testOneZero [
 FiltersTest >> testPHIntegrator [
 
 	self deny: PhIntegrator new asDsp isNull
+]
+
+{ #category : 'tests' }
+FiltersTest >> testPhLptN [
+
+	self deny: PhLptN new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -207,5 +213,5 @@ FiltersTest >> testResonHp [
 { #category : 'tests' }
 FiltersTest >> testResonLp [
 
-self assert: ResonLp new asDsp isNull equals: false
+	self deny: ResonLp new asDsp isNull
 ]

@@ -743,6 +743,12 @@ ParamsSetter >> t60: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'accessing' }
+ParamsSetter >> tN: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 ParamsSetter >> tau: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
