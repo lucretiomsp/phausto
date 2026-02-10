@@ -37,9 +37,9 @@ FiltersTest >> testDcBlocker [
 ]
 
 { #category : 'tests' }
-FiltersTest >> testDcBlockerAt [
+FiltersTest >> testDcBlockerAt [ 
 
-	self assert: DcBlockerAt new asDsp isNull equals: false
+	self deny: PhDcBlockerAt new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -177,7 +177,7 @@ FiltersTest >> testOberheimLPF [
 { #category : 'tests' }
 FiltersTest >> testOneZero [
 
-	self assert: OneZero new asDsp isNull equals: false
+	self deny: OneZero new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -195,13 +195,13 @@ FiltersTest >> testPole [
 { #category : 'tests' }
 FiltersTest >> testResonBp [
 
-self assert: ResonBp new asDsp isNull equals: false
+	self deny: ResonBp new asDsp isNull 
 ]
 
 { #category : 'tests' }
 FiltersTest >> testResonHp [
 
-self assert: ResonHp new asDsp isNull equals: false
+	self deny: ResonHp new asDsp isNull 
 ]
 
 { #category : 'tests' }
