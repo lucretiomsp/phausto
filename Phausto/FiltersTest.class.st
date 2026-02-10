@@ -181,9 +181,15 @@ FiltersTest >> testOneZero [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testPHIntegrator [
+
+	self deny: PhIntegrator new asDsp isNull
+]
+
+{ #category : 'tests' }
 FiltersTest >> testPole [
 
-	self assert: Pole new asDsp isNull equals: false
+	self deny: Pole new asDsp isNull 
 ]
 
 { #category : 'tests' }
