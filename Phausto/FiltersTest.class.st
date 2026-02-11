@@ -217,6 +217,12 @@ FiltersTest >> testPhLptN [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testPhPeakEq [
+
+	self deny: PhPeakEq new asDsp isNull
+]
+
+{ #category : 'tests' }
 FiltersTest >> testPole [
 
 	self deny: Pole new asDsp isNull 
