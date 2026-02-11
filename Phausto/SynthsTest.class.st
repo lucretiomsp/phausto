@@ -55,6 +55,12 @@ SynthsTest >> testPhLoopSpeedAsBox [
 ]
 
 { #category : 'tests' }
+SynthsTest >> testPhLoopSpeedLevelAsBox [
+
+	self deny: PhLoopSpeedLevel new asDsp isNull
+]
+
+{ #category : 'tests' }
 SynthsTest >> testSawTromboneAsBox [
 
 	self deny: SawTrombone new asDsp isNull
