@@ -224,3 +224,11 @@ EffectsTest >> testZitaRevAsDsp [
 
 	self deny:  ZitaRevStereo new asDsp isNull 
 ]
+
+{ #category : 'tests' }
+EffectsTest >> testZitaRevPatchedWith [
+
+| rev |
+rev := SquareOsc new => ZitaRevStereo new .
+	self deny: rev  asDsp isNull
+]

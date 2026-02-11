@@ -78,6 +78,12 @@ ZitaRevStereo >> initialize [
 	fsmax := 44100 
 ]
 
+{ #category : 'connecting' }
+ZitaRevStereo >> patchedWith: aUnitGenerator [
+
+self inputL: aUnitGenerator; inputR: aUnitGenerator 
+]
+
 { #category : 'accessing' }
 ZitaRevStereo >> rdel [
 
