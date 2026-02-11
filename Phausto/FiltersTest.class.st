@@ -187,6 +187,24 @@ FiltersTest >> testPhAvgRect [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testPhAvgT19 [
+
+	self deny: PhAvgT19 new asDsp isNull
+]
+
+{ #category : 'tests' }
+FiltersTest >> testPhAvgT60 [
+
+	self deny: PhAvgT60 new asDsp isNull
+]
+
+{ #category : 'tests' }
+FiltersTest >> testPhAvgTau [
+
+	self deny: PhAvgTau new asDsp isNull
+]
+
+{ #category : 'tests' }
 FiltersTest >> testPhIntegrator [
 
 	self deny: PhIntegrator new asDsp isNull
