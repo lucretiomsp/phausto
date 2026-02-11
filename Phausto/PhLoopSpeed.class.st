@@ -17,9 +17,10 @@ Class {
 }
 
 { #category : 'converting' }
-PhLoopSpeed >> asBox [ 
+PhLoopSpeed >> asBox [
 
-^ self speed asBox , self part asBox connectTo: self updatedCode asBox
+	^  self part asBox , self speed asBox connectTo:
+		  self updatedCode asBox
 ]
 
 { #category : 'initialization' }
