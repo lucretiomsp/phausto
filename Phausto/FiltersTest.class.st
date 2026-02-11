@@ -187,6 +187,18 @@ FiltersTest >> testPHIntegrator [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testPhLpT19 [
+
+	self deny: PhLpT19 new asDsp isNull
+]
+
+{ #category : 'tests' }
+FiltersTest >> testPhLpT60 [
+
+	self deny: PhLpT60 new asDsp isNull
+]
+
+{ #category : 'tests' }
 FiltersTest >> testPhLpTau [
 
 	self deny: PhLpTau new asDsp isNull

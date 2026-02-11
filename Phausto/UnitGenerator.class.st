@@ -463,3 +463,16 @@ paramDictionary := Dictionary new.
 arrayOfUiParams do: [  :param | paramDictionary at: param name asSymbol put: (self instVarNamed: param name) ].
 ^ paramDictionary 
 ]
+
+{ #category : 'update' }
+UnitGenerator >> updateProcessExpressionWith: aConstant [
+
+	| peStream |
+	peStream := ReadWriteStream on: ''.
+	peStream << (self processExpression findBetweenSubstrings: '(') first.
+	peStream << '('.
+	aConstant printOn: peStream.
+	peStream << ');'.
+
+	processExpression := peStream contents
+]

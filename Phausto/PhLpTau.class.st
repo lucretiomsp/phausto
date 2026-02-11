@@ -34,19 +34,7 @@ PhLpTau >> tN [
 { #category : 'accessing' }
 PhLpTau >> tN: aTimeInSeconds [
 
-tN := aTimeInSeconds.
+	tN := aTimeInSeconds.
 
-self updateProcessExpression .
-]
-
-{ #category : 'as yet unclassified' }
-PhLpTau >> updateProcessExpression [ 
-
-|peStream|
-peStream := ReadWriteStream on: ''.
-peStream << 'process = fi.lptau('.
-self tN printOn: peStream .
-peStream << ');'.
-
-processExpression := peStream contents .
+	self updateProcessExpressionWith: aTimeInSeconds 
 ]
