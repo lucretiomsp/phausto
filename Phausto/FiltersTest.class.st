@@ -123,7 +123,7 @@ FiltersTest >> testLowPassFilter [
 { #category : 'tests' }
 FiltersTest >> testLptN [
 
-	self assert: LptN new asDsp isNull equals: false
+	self deny: LptN new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -205,9 +205,21 @@ FiltersTest >> testPhAvgTau [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testPhHighShelf [
+
+	self deny: PhHighShelf new asDsp isNull
+]
+
+{ #category : 'tests' }
 FiltersTest >> testPhIntegrator [
 
 	self deny: PhIntegrator new asDsp isNull
+]
+
+{ #category : 'tests' }
+FiltersTest >> testPhLowShelf [
+
+	self deny: PhLowShelf new asDsp isNull 
 ]
 
 { #category : 'tests' }
