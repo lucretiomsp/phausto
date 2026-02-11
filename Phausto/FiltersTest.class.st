@@ -229,6 +229,12 @@ FiltersTest >> testPhPeakEqCq [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testPhPeakEqRm [
+
+	self deny: PhPeakEqRm new asDsp isNull
+]
+
+{ #category : 'tests' }
 FiltersTest >> testPole [
 
 	self deny: Pole new asDsp isNull 

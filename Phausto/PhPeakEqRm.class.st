@@ -1,19 +1,19 @@
 "
-Constant-Q second order peaking equalizer section.
+Regalia-Mitra second order peaking equalizer section.
 
-## Parameters
-
+##Parameters
 **lfx:** level (dB) at fx
 **fx:** boost or cut frequency (Hz)
-**q:** ""Quality factor"" = fx/B where B = bandwidth of peak in Hz
+**tanPiBT:** tan(PI*B/SR), where B = -3dB bandwidth (Hz) when 10^(Lfx/20) = 0 ~ PI*B/SR for narrow bandwidths B
+
 "
 Class {
-	#name : 'PhPeakEqCq',
+	#name : 'PhPeakEqRm',
 	#superclass : 'PhFilter',
 	#instVars : [
 		'lfx',
-		'q',
-		'fx'
+		'fx',
+		'tanPiBT'
 	],
 	#category : 'Phausto-Filters',
 	#package : 'Phausto',
@@ -21,38 +21,38 @@ Class {
 }
 
 { #category : 'converting' }
-PhPeakEqCq >> asBox [
+PhPeakEqRm >> asBox [
 
-	^ self lfx asBox , self fx asBox , self q asBox , self input asBox
+	^ self lfx asBox , self fx asBox , self tanPiBT asBox , self input asBox
 		  connectTo: self code asBox
 ]
 
 { #category : 'accessing' }
-PhPeakEqCq >> fx [
+PhPeakEqRm >> fx [
 ^ fx
 ]
 
 { #category : 'initialization' }
-PhPeakEqCq >> initialize [
+PhPeakEqRm >> initialize [
 
 	super initialize.
-	processExpression := 'process = fi.peak_eq_cq;'.
+	processExpression := 'process = fi.peak_eq_rm;'.
 	lfx := PhHSlider new
 		       label: self label , 'Lfx'
 		       values: #( 2 -6 6 0.01 ).
 	fx := PhHSlider new
 		      label: self label , 'Fx'
 		      values: #( 600 20 8000 1 ).
-	q := PhHSlider new label: self label , 'Q' values: #( 3 0.01 8 0.01 )
+	tanPiBT := PhHSlider new label: self label , 'Q' values: #( 3 0.01 8 0.01 )
 ]
 
 { #category : 'accessing' }
-PhPeakEqCq >> lfx [ 
+PhPeakEqRm >> lfx [ 
 ^ lfx
 ]
 
 { #category : 'accessing' }
-PhPeakEqCq >> q [
+PhPeakEqRm >> tanPiBT [
 
-	^ q
+^ tanPiBT
 ]
