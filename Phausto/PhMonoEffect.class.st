@@ -19,11 +19,10 @@ PhMonoEffect >> asBox [
 ]
 
 { #category : 'accessing' }
-PhMonoEffect >> initialize [ 
+PhMonoEffect >> initialize [
 
-
-super initialize .
-input := 0.
+	super initialize.
+	input := Wire new.
 ]
 
 { #category : 'accessing' }
