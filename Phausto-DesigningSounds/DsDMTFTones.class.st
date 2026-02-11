@@ -20,7 +20,7 @@ DsDMTFTones class >> buttonsLabel [
 DsDMTFTones class >> displayUIFromDsp: aDsp [
 	"generates a UI for a DSP (if it exists) generated from an instance of the class"
 
-	"| container btn1 buttons |
+	| container btn1 buttons |
 	buttons := (1 to: 12) collect: [ :i |
 			           (ICLabelButton label: (self buttonsLabel at: i))
 				           callback: [ :k |
@@ -45,8 +45,9 @@ DsDMTFTones class >> displayUIFromDsp: aDsp [
 				             c vertical matchParent ];
 		             background: Color darkGray.
 	container addChildren: buttons.
-	container openInSpace"
-	self shouldBeImplemented 
+	container openInSpace
+
+
 ]
 
 { #category : 'accessing' }

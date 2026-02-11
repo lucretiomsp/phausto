@@ -90,17 +90,17 @@ instancesInDSPContext := 0.
 
 { #category : 'initialization' }
 UnitGenerator class >> resetSelfAndAllSubClasses [
+	self allSubclassesDo: [ :c | c resetInstancesInDSPContext ].
+	self resetInstancesInDSPContext
 
-"	self allSubclassesDo: [ :c | c resetInstancesInDSPContext ].
-	self resetInstancesInDSPContext"
+	
 ]
 
 { #category : 'system startup' }
 UnitGenerator class >> startUp [
+	'Unit Generators start counting from zero' traceCr.
 
-	"'Unit Generators start counting from zero' traceCr.
-
-	self resetSelfAndAllSubClasses"
+	self resetSelfAndAllSubClasses	
 ]
 
 { #category : 'system startup' }

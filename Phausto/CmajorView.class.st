@@ -144,8 +144,7 @@ CmajorView >> knobs: anObject [
 
 { #category : 'ui related' }
 CmajorView >> open [
-
-	"| space bg bgPath |
+	| space bg bgPath |
 	space := BlSpace new extent: self size.
 	bgPath := self assetsPath / self backgroundImage image.
 	bg := BlElement new
@@ -155,8 +154,7 @@ CmajorView >> open [
 		      extent: 400 @ 400.
 
 	space root addChild: bg.
-	space show"
-	self shouldBeImplemented 
+	space show
 ]
 
 { #category : 'accessing' }
