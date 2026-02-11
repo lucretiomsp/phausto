@@ -18,30 +18,35 @@ DsDMTFTones class >> buttonsLabel [
 
 { #category : 'ui building' }
 DsDMTFTones class >> displayUIFromDsp: aDsp [
-"generates a UI for a DSP (if it exists) generated from an instance of the class"
-| container btn1  buttons|
+	"generates a UI for a DSP (if it exists) generated from an instance of the class"
 
-buttons := (1 to: 12) collect: 
-            [ :i | (ICLabelButton label: (self buttonsLabel at: i))
-	         callback: [ :k | 
-		      aDsp setValue: ((self tones at: (self buttonsLabel at: i)) at: 1) parameter: 'Tone1Freq'.
-		      aDsp setValue: ((self tones at: (self buttonsLabel at: i)) at: 2) parameter: 'Tone2Freq'.
-		      aDsp setValue: k parameter: 'TKey']
-	         ].
-btn1 := ICLabelButton label: '1'.
+	"| container btn1 buttons |
+	buttons := (1 to: 12) collect: [ :i |
+			           (ICLabelButton label: (self buttonsLabel at: i))
+				           callback: [ :k |
+						           aDsp
+							           setValue:
+							           ((self tones at: (self buttonsLabel at: i)) at: 1)
+							           parameter: 'Tone1Freq'.
+						           aDsp
+							           setValue:
+							           ((self tones at: (self buttonsLabel at: i)) at: 2)
+							           parameter: 'Tone2Freq'.
+						           aDsp setValue: k parameter: 'TKey' ] ].
+	btn1 := ICLabelButton label: '1'.
 
-container := BlElement new
+	container := BlElement new
 		             geometry: BlRectangleGeometry new;
 		             layout: (BlGridLayout new
 				              columnCount: 3;
 				              cellSpacing: 0);
 		             constraintsDo: [ :c |
-			             c horizontal matchParent.
-			             c vertical matchParent ];
+				             c horizontal matchParent.
+				             c vertical matchParent ];
 		             background: Color darkGray.
-container addChildren: buttons.
-.
-container openInSpace.
+	container addChildren: buttons.
+	container openInSpace"
+	self shouldBeImplemented 
 ]
 
 { #category : 'accessing' }
