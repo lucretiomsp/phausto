@@ -1,6 +1,15 @@
+"
+Play a soundfile in a loop taking into account its sampling rate
+
+##Parameters:
+**part:** the part in the soundfile list of sounds
+"
 Class {
 	#name : 'PhLoop',
-	#superclass : 'PhLoops',
+	#superclass : 'TpSampler',
+	#instVars : [
+		'part'
+	],
 	#category : 'Phausto-Synths',
 	#package : 'Phausto',
 	#tag : 'Synths'
@@ -9,14 +18,8 @@ Class {
 { #category : 'converting' }
 PhLoop >> asBox [
 
-	| peStream newProcessExpression |
-	peStream := ReadWriteStream on: ''.
-	peStream << 'import("stdfaust.lib");'.
-	peStream << 'process = so.loop('.
-	peStream << self soundFileArgument.
-	peStream << ');'.
-	newProcessExpression := peStream contents.
-	^ 0 asBox connectTo: newProcessExpression asBox.
+	self updateCode.
+	^ self part asBox connectTo: self updatedCode asBox
 ]
 
 { #category : 'accessing' }
@@ -32,15 +35,21 @@ PhLoop >> initialize [
 	"by default stereo"
 	numChannels := 2.
 
-	index := PhHSlider new
+	part := PhHSlider new
 		         label: self label , 'Part'
 		         init: 0
 		         min: 0
 		         max: 4
 		         step: 1.
-	processExpression := 'process = so.loop;'.
+	processExpression := 'process = so.loop'.
 	self pathToFolder:
 		FileLocator documents asAbsolute pathString , '/TurboSamples/bongo'
+]
+
+{ #category : 'accessing' }
+PhLoop >> part [ 
+
+^ part
 ]
 
 { #category : 'accessing' }
@@ -56,4 +65,27 @@ sfaStream << '" , '.
 self numChannels printOn: sfaStream .
 sfaStream  << ')'.
 ^ sfaStream contents
+]
+
+{ #category : 'update' }
+PhLoop >> updateCode [
+
+	| peStream |
+	peStream := ReadWriteStream on: ''.
+	peStream << self code.
+	peStream << self soundFileArgument.
+	peStream << ');'.
+	code := peStream contents
+]
+
+{ #category : 'update' }
+PhLoop >> updatedCode [
+
+	| peStream |
+	peStream := ReadWriteStream on: ''.
+	peStream << self code.
+	peStream <<'('.
+	peStream << self soundFileArgument.
+	peStream << ');'.
+	^ peStream contents
 ]
