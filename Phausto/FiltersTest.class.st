@@ -181,7 +181,13 @@ FiltersTest >> testOneZero [
 ]
 
 { #category : 'tests' }
-FiltersTest >> testPHIntegrator [
+FiltersTest >> testPhAvgRect [
+
+	self deny: PhAvgRect new asDsp isNull
+]
+
+{ #category : 'tests' }
+FiltersTest >> testPhIntegrator [
 
 	self deny: PhIntegrator new asDsp isNull
 ]
