@@ -8,560 +8,566 @@ Trait {
 	#tag : 'Traits'
 }
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> aN: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> accent: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> amount: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> amplitude: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> ar: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> attack: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> attenuation: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> b0: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> b: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> bM: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> biasAttack: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> biasDecay: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> biasRelease: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> bowPosition: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> bowPressure: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> bowVelocity: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> breathGain: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> captureButton: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> cent: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> clockDivider: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> condition: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> crossfade: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> curdel: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - cutoff' }
 ParamsSetter >> cutoff: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - cutoff' }
 ParamsSetter >> cutoffFreq: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> damp: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> decay: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> del: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> delayLength: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> depth: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> dmax: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> drive: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> dsfreq: aNumberOrABoxOrASymbol [
 
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> duration: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> duty: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
+ParamsSetter >> dv: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> earlyDiff: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> else: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> envMod: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> excitation: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> fb1: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> fb2: aNumberOrABoxOrASymbol [
 self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> fb: aNumberOrABoxOrASymbol [
 
 self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> fbff: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> feedBack: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> finalLevel: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> fr: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> freq: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - freq' }
 ParamsSetter >> frequency: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> fund: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> fx: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> g: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> gain: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> gate: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - cutoff' }
 ParamsSetter >> hpCutoff: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> impulseIndex: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> index: aNumberOrABoxOrASymbol [
 
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> init: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - inputs' }
 ParamsSetter >> input1: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - inputs' }
 ParamsSetter >> input2: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - inputs' }
 ParamsSetter >> input: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - inputs' }
 ParamsSetter >> inputL: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - inputs' }
 ParamsSetter >> inputR: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> intDel: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> interpControl: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> interpolationTime: aNumberOrABoxOrASymbol [
 
 self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> invert: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> legato: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> length: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> level1: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> level2: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> level3: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> level4: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> level: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> lfx: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> link: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> lpCutoff: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> max: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> maxDel: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> maxFreq: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> midiNN: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> min: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> modDepth: aNumberOrABoxOrASymbol [
 
 self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> modFreq: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> modIndex: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> modRatio: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> mode: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> n: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> nMax: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> nonLinearity: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> normFreq: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> numberOfBands: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> offset: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> pan: aNumberOrABoxOrASymbol [
 
 self paramSetter value: aNumberOrABoxOrASymbol
@@ -574,7 +580,7 @@ ParamsSetter >> paramSetter [
     ^ [ :value | value asParam: paramName forUGen: self ]
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> period: aNumberOrABoxOrASymbol [
 
 	| methodName |
@@ -586,271 +592,283 @@ ParamsSetter >> period: aNumberOrABoxOrASymbol [
 		forUGen: self
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> pickupPosition: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> pitch: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> pluckPosition: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> pole: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> poles: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> pressure: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> q: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> release1: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> release2: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> release3: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> release4: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> release: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> res: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> resonance: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> run: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> scSignal: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> scSwitch: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> semitone: aNumberOrABoxOrASymbol [
 
 self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> shift: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> signal: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> size: aNumberOrABoxOrASymbol [
 
 self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> source: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> spread: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> strikeCutoff: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> strikePosition: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> strikeSharpness: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> stringLength: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> sustain: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> t60: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> tN: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> tau: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> tempo: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> then: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> threshLim: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> threshold: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> tone: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> totalImpulses: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> trig: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> trigger: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> tuning: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait - interpolators' }
+ParamsSetter >> v0: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait - interpolators' }
+ParamsSetter >> v1: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> volume: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> wah: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> waveform: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> wetAmount: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : 'trait' }
 ParamsSetter >> window: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
