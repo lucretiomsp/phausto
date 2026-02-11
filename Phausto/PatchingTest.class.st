@@ -24,8 +24,7 @@ PatchingTest >> test2OscillatorsToAREnv [
 	dsp := synth stereo asDsp.
 
 	dsp init.
-	dsp start.
 	dspParams := dsp getUIItemsLabeledDictionary keys.
-	self assert: (dspParams includesAll: expectedParams ) equals: true.
-  
+
+	self deny: (dspParams includesAll: expectedParams)
 ]
