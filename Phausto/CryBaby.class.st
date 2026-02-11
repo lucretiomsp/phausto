@@ -20,15 +20,6 @@ Class {
 	#tag : 'Effects'
 }
 
-{ #category : 'converting' }
-CryBaby >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self wah asBox, self input asBox connectTo: intermediateBox.
-	^ finalBox
-]
-
 { #category : 'initialization' }
 CryBaby >> initialize [
 

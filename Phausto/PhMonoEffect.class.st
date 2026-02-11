@@ -13,6 +13,12 @@ Class {
 }
 
 { #category : 'accessing' }
+PhMonoEffect >> asBox [ 
+
+^ self input asBox connectTo: self code asBox
+]
+
+{ #category : 'accessing' }
 PhMonoEffect >> initialize [ 
 
 

@@ -16,15 +16,6 @@ Class {
 	#tag : 'Effects'
 }
 
-{ #category : 'converting' }
-Hardclip2 >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self input asBox connectTo: intermediateBox.
-	^ finalBox
-]
-
 { #category : 'initialization' }
 Hardclip2 >> initialize [
 

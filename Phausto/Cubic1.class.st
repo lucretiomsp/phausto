@@ -16,15 +16,6 @@ Class {
 	#tag : 'Effects'
 }
 
-{ #category : 'converting' }
-Cubic1 >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self input asBox connectTo: intermediateBox.
-	^ finalBox
-]
-
 { #category : 'initialization' }
 Cubic1 >> initialize [
 

@@ -8,9 +8,3 @@ Class {
 	#package : 'Phausto',
 	#tag : 'Effects'
 }
-
-{ #category : 'accessing' }
-Saturators >> asBox [
-
-	Error new signal: 'Use a subclass!'
-]

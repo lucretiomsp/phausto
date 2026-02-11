@@ -23,16 +23,6 @@ Class {
 	#tag : 'Effects'
 }
 
-{ #category : 'converting' }
-CubicNl >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self drive asBox , self offset asBox, self input asBox connectTo:
-		            intermediateBox.
-	^ finalBox
-]
-
 { #category : 'as yet unclassified' }
 CubicNl >> drive [
 
