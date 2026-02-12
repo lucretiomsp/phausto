@@ -12,6 +12,12 @@ Class {
 	#tag : 'Demo'
 }
 
+{ #category : 'converting' }
+PhDemosMono >> asBox [ 
+
+^ self input asBox connectTo: self code asBox
+]
+
 { #category : 'initialization' }
 PhDemosMono >> initialize [
 

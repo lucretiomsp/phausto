@@ -9,13 +9,3 @@ Class {
 	#package : 'Phausto',
 	#tag : 'Demo'
 }
-
-{ #category : 'as yet unclassified' }
-Parametric_Eq_Demo >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self input asBox connectTo: intermediateBox .
-
-	^ finalBox
-]

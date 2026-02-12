@@ -81,7 +81,7 @@ EffectsTest >> testGateDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testGreyHoleAsDsp [
 
-	self assert: GreyHole new asDsp isNull equals: false
+	self deny: GreyHole new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -173,6 +173,12 @@ EffectsTest >> testSmoothDelayAsDsp [
 EffectsTest >> testSoftClipQaudraticAsDsp [
 
 	self assert: SoftClipQuadratic new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testSpectralTiltDemoAsDsp [
+
+	self deny: Spectral_Tilt_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }

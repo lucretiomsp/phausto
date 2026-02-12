@@ -8,13 +8,3 @@ Class {
 	#package : 'Phausto',
 	#tag : 'Demo'
 }
-
-{ #category : 'as yet unclassified' }
-CryBaby_Demo >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self input asBox connectTo: intermediateBox .
-
-	^ finalBox
-]
