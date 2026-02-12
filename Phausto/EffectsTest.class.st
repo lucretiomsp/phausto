@@ -9,7 +9,7 @@ Class {
 { #category : 'tests' }
 EffectsTest >> testCMoogVCFDemoDemoAsDsp [
 
-	self deny: Moog_Vcf_Demo new asDsp isNull 
+	self deny: MoogVcf_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -33,7 +33,7 @@ EffectsTest >> testCubicNlAsDsp [
 { #category : 'tests' }
 EffectsTest >> testDatorroRevDemoAsDsp [
 
-	self deny: Dattorro_Rev_Demo new asDsp isNull 
+	self deny: DattorroRev_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -179,20 +179,20 @@ EffectsTest >> testTapeStopDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testVelvetNoiseDemoAsDsp [
 
-	self assert: Velvet_Noise_Demo new asDsp isNull equals: false
+	self assert: VelvetNoise_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
 EffectsTest >> testVirtualAnalogOscillatorDemoAsDsp [
 
-	self assert: Virtual_Analog_Oscillator_Demo new asDsp isNull equals: false
+	self assert: VirtualAnalogOscillator_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
 EffectsTest >> testVitalRevDemoAsDsp [
 	"new version of faust libs must be bundled to pass this test"
 
-	self deny: Vital_Rev_Demo new asDsp isNull
+	self deny: VitalRev_Demo new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -216,7 +216,7 @@ EffectsTest >> testWavefoldAsDsp [
 { #category : 'tests' }
 EffectsTest >> testZitaLighDemoAsDsp [
 
-	self deny: Zita_Light new asDsp isNull 
+	self deny: ZitaLight new asDsp isNull 
 ]
 
 { #category : 'tests' }

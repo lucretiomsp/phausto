@@ -2,7 +2,7 @@
 Light version of Zita Rev1
 "
 Class {
-	#name : 'Zita_Light',
+	#name : 'ZitaLight',
 	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Zita_Light >> asBox [
+ZitaLight >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.

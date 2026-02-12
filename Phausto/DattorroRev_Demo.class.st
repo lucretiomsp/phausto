@@ -5,7 +5,7 @@ see:
 https://ccrma.stanford.edu/~dattorro/EffectDesignPart1.pdf
 "
 Class {
-	#name : 'Dattorro_Rev_Demo',
+	#name : 'DattorroRev_Demo',
 	#superclass : 'PhDemosStereo',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Dattorro_Rev_Demo >> asBox [
+DattorroRev_Demo >> asBox [
 
 	| intermediateBox finalBox |
 	intermediateBox := super asBox.

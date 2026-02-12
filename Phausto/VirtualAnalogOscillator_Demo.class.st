@@ -2,7 +2,7 @@
 Virtual analog oscillator demo application.
 "
 Class {
-	#name : 'Virtual_Analog_Oscillator_Demo',
+	#name : 'VirtualAnalogOscillator_Demo',
 	#superclass : 'PhDemos',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',

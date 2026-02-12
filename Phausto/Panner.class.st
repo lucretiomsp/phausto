@@ -14,10 +14,7 @@ Class {
 { #category : 'converting' }
 Panner >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self pan asBox , self input asBox connectTo: intermediateBox.
-	^ finalBox
+^ self pan asBox , self input asBox connectTo: self code asBox
 ]
 
 { #category : 'initialization' }

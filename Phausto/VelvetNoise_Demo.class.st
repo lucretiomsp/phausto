@@ -1,8 +1,8 @@
 "
-A coloured noise signal generator.
+Simple application demoing filter based oscillators.
 "
 Class {
-	#name : 'Colored_Noise_Demo',
+	#name : 'VelvetNoise_Demo',
 	#superclass : 'PhDemos',
 	#category : 'Phausto-Demo',
 	#package : 'Phausto',
