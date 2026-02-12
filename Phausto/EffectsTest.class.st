@@ -127,6 +127,12 @@ EffectsTest >> testParametricEQDemoAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testPhEchoAsDsp [
+
+	self deny: PhEcho new asDsp isNull 
+]
+
+{ #category : 'tests' }
 EffectsTest >> testPhFibonacciAsDsp [
 
 	self deny: PhFibonacci new asDsp isNull 
@@ -160,7 +166,7 @@ EffectsTest >> testReverseEchoDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testSatRevAsDsp [
 
-	self assert: SatRev new asDsp isNull equals: false
+	self deny: SatRev new asDsp isNull 
 ]
 
 { #category : 'tests' }
