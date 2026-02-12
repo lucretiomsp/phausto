@@ -43,6 +43,12 @@ EffectsTest >> testDryWetMonoMixerAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testEnvelopesDemoAsDsp [
+
+	self deny: Envelopes_Demo new asDsp isNull
+]
+
+{ #category : 'tests' }
 EffectsTest >> testExciterDemoAsDsp [
 
 	self deny: Exciter_Demo new asDsp isNull
@@ -97,6 +103,12 @@ EffectsTest >> testKbRomRev1AsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testLatchDemoAsDsp [
+
+	self deny: Latch_Demo new asDsp isNull 
+]
+
+{ #category : 'tests' }
 EffectsTest >> testOScrsDemoAsDsp [
 
 	self assert: Oscrs_Demo new asDsp isNull equals: false
@@ -137,6 +149,12 @@ EffectsTest >> testPhVocoderDsp [
 EffectsTest >> testPhaser2DemoAsDsp [
 
 	self assert: Phaser2_Demo new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+EffectsTest >> testReverseEchoDemoAsDsp [
+
+	self deny: Reverse_Echo_Demo new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -189,9 +207,15 @@ EffectsTest >> testTapeStopDemoAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testTwinOScDemoAsDsp [
+	
+	self deny: Twin_Osc_Demo new asDsp isNull
+]
+
+{ #category : 'tests' }
 EffectsTest >> testVelvetNoiseDemoAsDsp [
 
-	self assert: Velvet_Noise_Demo new asDsp isNull equals: false
+	self deny: Velvet_Noise_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
