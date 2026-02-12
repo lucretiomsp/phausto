@@ -37,6 +37,12 @@ EffectsTest >> testDatorroRevDemoAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testDopplerShiftAsDsp [
+
+	self deny: DopplerShift new asDsp isNull 
+]
+
+{ #category : 'tests' }
 EffectsTest >> testDryWetMonoMixerAsDsp [
 
 	self deny: DryWetMonoMixer new asDsp isNull 
@@ -172,7 +178,7 @@ EffectsTest >> testSatRevAsDsp [
 { #category : 'tests' }
 EffectsTest >> testSawtoohDemoAsDsp [
 
-	self assert: Sawtooth_Demo new asDsp isNull equals: false
+	self deny: Sawtooth_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }

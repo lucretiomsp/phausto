@@ -484,6 +484,12 @@ ParamsSetter >> maxDel: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
+ParamsSetter >> maxDuration: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> maxFreq: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
