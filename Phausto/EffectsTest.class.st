@@ -140,15 +140,15 @@ EffectsTest >> testPhTranssposeDsp [
 ]
 
 { #category : 'tests' }
-EffectsTest >> testPhVocoderDsp [
+EffectsTest >> testPhaser2DemoAsDsp [
 
-	self deny: Vocoder_Demo new asDsp isNull 
+	self deny: Phaser2_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
-EffectsTest >> testPhaser2DemoAsDsp [
+EffectsTest >> testPosPassemoAsDsp [
 
-	self assert: Phaser2_Demo new asDsp isNull equals: false
+	self deny: PosPass_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -229,6 +229,12 @@ EffectsTest >> testVitalRevDemoAsDsp [
 	"new version of faust libs must be bundled to pass this test"
 
 	self deny: VitalRev_Demo new asDsp isNull
+]
+
+{ #category : 'tests' }
+EffectsTest >> testVocoderDemoAsDsp [
+
+	self deny: Vocoder_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
