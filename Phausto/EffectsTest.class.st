@@ -145,6 +145,12 @@ EffectsTest >> testPhFibonacciAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testPhSpeakerBpDemoAsDsp [
+
+	self deny: PhSpeakerBp new asDsp isNull
+]
+
+{ #category : 'tests' }
 EffectsTest >> testPhTranssposeDsp [
 
 
