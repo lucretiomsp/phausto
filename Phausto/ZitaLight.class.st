@@ -1,5 +1,5 @@
 "
-Light version of Zita Rev1
+Light version of Zita Rev1 with only 2 UI elements.
 "
 Class {
 	#name : 'ZitaLight',
@@ -9,12 +9,8 @@ Class {
 	#tag : 'Demo'
 }
 
-{ #category : 'as yet unclassified' }
-ZitaLight >> asBox [
-
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self inputL asBox , self inputR asBox connectTo: intermediateBox .
-
-	^ finalBox
+{ #category : 'converting' }
+ZitaLight >> initialize [ 
+super initialize .
+processExpression := 'process = dm.zita_light;'
 ]

@@ -13,6 +13,12 @@ Class {
 	#tag : 'Demo'
 }
 
+{ #category : 'converting' }
+PhDemosStereo >> asBox [
+
+	^ self inputL asBox , self inputR asBox connectTo: self code asBox
+]
+
 { #category : 'initialization' }
 PhDemosStereo >> initialize [
 
@@ -31,4 +37,10 @@ PhDemosStereo >> inputL [
 PhDemosStereo >> inputR [
 
 	^ inputR
+]
+
+{ #category : 'connecting' }
+PhDemosStereo >> patchedWith: aUnitGenerator [
+
+self inputL: aUnitGenerator ; inputR: aUnitGenerator 
 ]

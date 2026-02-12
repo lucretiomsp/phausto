@@ -24,3 +24,9 @@ PhDemosMono >> input [
 
 ^ input 
 ]
+
+{ #category : 'connecting' }
+PhDemosMono >> patchedWith: aUnitGenerator [
+
+self input: aUnitGenerator 
+]

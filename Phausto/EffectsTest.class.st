@@ -9,7 +9,7 @@ Class {
 { #category : 'tests' }
 EffectsTest >> testCMoogVCFDemoDemoAsDsp [
 
-	self deny: MoogVcf_Demo new asDsp isNull 
+	self deny: Moog_Vcf_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -88,6 +88,12 @@ EffectsTest >> testGreyHoleAsDsp [
 EffectsTest >> testGreyHoleDemoAsDsp [
 
 	self deny: GreyHole_Demo new asDsp isNull
+]
+
+{ #category : 'tests' }
+EffectsTest >> testKbRomRev1AsDsp [
+
+	self deny: KbRomRev1 new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -179,13 +185,13 @@ EffectsTest >> testTapeStopDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testVelvetNoiseDemoAsDsp [
 
-	self assert: VelvetNoise_Demo new asDsp isNull equals: false
+	self assert: Velvet_Noise_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
 EffectsTest >> testVirtualAnalogOscillatorDemoAsDsp [
 
-	self assert: VirtualAnalogOscillator_Demo new asDsp isNull equals: false
+	self assert: Virtual_Analog_Oscillator_Demo new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -220,9 +226,21 @@ EffectsTest >> testZitaLighDemoAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testZitaRev1AsDsp [
+
+	self deny: ZitaRev1 new asDsp isNull
+]
+
+{ #category : 'tests' }
 EffectsTest >> testZitaRevAsDsp [
 
 	self deny:  ZitaRevStereo new asDsp isNull 
+]
+
+{ #category : 'tests' }
+EffectsTest >> testZitaRevFdnAsDsp [
+
+	self deny: ZitaRevFdn new asDsp isNull
 ]
 
 { #category : 'tests' }
