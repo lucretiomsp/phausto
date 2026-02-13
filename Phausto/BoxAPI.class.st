@@ -43,6 +43,14 @@ BoxAPI >> boxAbs [
 	^ self ffiCall: #( #PhBox * CboxAbs #() )
 ]
 
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxAcos [
+	"return the Acos value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxAcos #() )
+]
+
 { #category : 'arithmetic' }
 BoxAPI >> boxAdd [
 	"   
@@ -62,11 +70,35 @@ self createLibContext.
 		  #( #PhBox * CboxAddAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxAsin [
+	"return the Asin value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxAsin #() )
+]
+
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxAtan [
+	"return the Atan value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxAtan #() )
+]
+
 { #category : 'ui building' }
 BoxAPI >> boxButton: aLabel [
 	"return a Button boxxeqFrom:  to: "
 self  createLibContext.
 	^ self ffiCall: #( #PhBox * CboxButton #( const char * aLabel ) )
+]
+
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxCeil [
+	"return the ceil value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxCeil #() )
 ]
 
 { #category : 'ui building' }
@@ -75,6 +107,14 @@ BoxAPI >> boxCheckbox: aLabel [
 
 	self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxCheckbox #( const char * aLabel ) )
+]
+
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxCos [
+	"return the cos value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxCos #() )
 ]
 
 { #category : 'utility' }
@@ -97,12 +137,28 @@ BoxAPI >> boxEQ: aBox than: anotherBox [
 		  #( #PhBox #* CboxEQAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
 ]
 
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxExp [
+	"return the exp value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxExp #() )
+]
+
 { #category : 'arithmetic' }
 BoxAPI >> boxFModBetween: aBox and: anotherBox [
 	"return the floatModulo  between the to boxes"
 
 	self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxFmodAux #( PhBox * aBox  , PhBox * anotherBox) )
+]
+
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxFloor [
+	"return the floor value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxFloor #() )
 ]
 
 { #category : 'creation' }
@@ -196,6 +252,22 @@ BoxAPI >> boxLT: aBox than: anotherBox [
 	self createLibContext.
 	^ self ffiCall:
 		  #( #PhBox #* CboxLTAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
+]
+
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxLog [
+	"return the Log value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxLog #() )
+]
+
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxLog10 [
+	"return the Log10 value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxLog10 #() )
 ]
 
 { #category : 'arithmetic' }
@@ -313,6 +385,22 @@ rem operator
 		  #( #PhBox * CboxRemAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxRint [
+	"return the Rint value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxRint #() )
+]
+
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxRound [
+	"return the rounded value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxRound #() )
+]
+
 { #category : 'utility' }
 BoxAPI >> boxSelect2Aux: aSelector input0: anInput input1: anotherInput [
 	"   
@@ -388,6 +476,14 @@ Sum binary operator, from CbobAddAuxFunxtion
 	self createLibContext.
 	^ self ffiCall:
 		  #( #PhBox * CboxSubAux #( #PhBox * aBox , #PhBox * anotherBox ) )
+]
+
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxTan [
+	"return the Tan value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxTan #() )
 ]
 
 { #category : 'ui building' }

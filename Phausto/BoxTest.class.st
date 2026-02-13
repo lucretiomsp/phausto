@@ -21,6 +21,24 @@ BoxTest >> testAbs [
 ]
 
 { #category : 'tests' }
+BoxTest >> testAcos [
+
+	self deny: 1 asBox aCos asDsp isNull
+]
+
+{ #category : 'tests' }
+BoxTest >> testAsin [
+
+	self deny: 1 asBox aSin asDsp isNull
+]
+
+{ #category : 'tests' }
+BoxTest >> testAtan [
+
+	self deny: 1 asBox aTan asDsp isNull
+]
+
+{ #category : 'tests' }
 BoxTest >> testBoxAsDsp [
 
 	| s dsp |
@@ -28,6 +46,18 @@ BoxTest >> testBoxAsDsp [
 	dsp := (s * 0.2 asBox) asDsp.
 
 	self deny: dsp isNull
+]
+
+{ #category : 'tests' }
+BoxTest >> testCeil [
+
+	self deny: 1 asBox ceil asDsp isNull
+]
+
+{ #category : 'tests' }
+BoxTest >> testCos [
+
+	self deny: 1 asBox cos asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -47,6 +77,24 @@ BoxTest >> testDb2Linear [
 BoxTest >> testEQ [
 
 	self assert: (2 asBox equalTo: 1 asBox) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testExp [
+
+	self deny: 1 asBox exp asDsp isNull
+]
+
+{ #category : 'tests' }
+BoxTest >> testExp10 [
+
+	self deny: 1 asBox exp10 asDsp isNull
+]
+
+{ #category : 'tests' }
+BoxTest >> testFloor [
+
+	self deny: 1 asBox floor asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -80,6 +128,18 @@ BoxTest >> testLibContextIsFalseAtStartup [
 ]
 
 { #category : 'tests' }
+BoxTest >> testLog [
+
+	self deny: 1 asBox log asDsp isNull
+]
+
+{ #category : 'tests' }
+BoxTest >> testLog10 [
+
+	self deny: 1 asBox log10 asDsp isNull
+]
+
+{ #category : 'tests' }
 BoxTest >> testMax [
 
 	self deny: (1 asBox max: 2 asBox) asDsp isNull 
@@ -101,6 +161,18 @@ BoxTest >> testMin [
 BoxTest >> testNE [
 
 	self assert: (2 asBox notEqualTo: 1 asBox) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testRint [
+
+	self deny: 1 asBox rInt asDsp isNull
+]
+
+{ #category : 'tests' }
+BoxTest >> testRound [
+
+	self deny: 1 asBox round asDsp isNull
 ]
 
 { #category : 'tests' }

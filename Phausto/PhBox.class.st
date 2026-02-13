@@ -141,6 +141,21 @@ PhBox >> >= aPhBox [
 ]
 
 { #category : 'arithmetic' }
+PhBox >> aCos [
+	^ BoxAPI uniqueInstance boxAcos 
+]
+
+{ #category : 'arithmetic' }
+PhBox >> aSin [
+	^ BoxAPI uniqueInstance boxAsin
+]
+
+{ #category : 'arithmetic' }
+PhBox >> aTan [
+	^ BoxAPI uniqueInstance boxAtan
+]
+
+{ #category : 'arithmetic' }
 PhBox >> abs [
 	" return the absolute value of a box"
 
@@ -382,6 +397,11 @@ PhBox >> boxSplit: aBox to: anotherBox [
 	^ BoxAPI uniqueInstance boxSplit: aBox with: anotherBox
 ]
 
+{ #category : 'arithmetic' }
+PhBox >> ceil [
+	^ BoxAPI uniqueInstance boxCeil
+]
+
 { #category : 'connecting' }
 PhBox >> chuckInto: aBox [
 	"patch the box to an another box, if possible as in Modular synthesisers. Returns a Box, the result of the connection - the chuckInto: method is a tribute to the Chuck programming language, and it follows the same rules of Unit Generators connection in Chuck"
@@ -394,6 +414,11 @@ PhBox >> connectTo: aUnitGenerator [
 	" correspond to Faust sequential opeartor : "
 
 	^ BoxAPI uniqueInstance boxSeqFrom: self asBox to: aUnitGenerator asBox
+]
+
+{ #category : 'arithmetic' }
+PhBox >> cos [
+	^ BoxAPI uniqueInstance boxCos
 ]
 
 { #category : 'converting' }
@@ -430,6 +455,11 @@ PhBox >> errorBuffer: anObject [
 	errorBuffer := anObject
 ]
 
+{ #category : 'mathematical functions' }
+PhBox >> exp [
+^ BoxAPI uniqueInstance boxExp
+]
+
 { #category : 'printing' }
 PhBox >> extractUIPrimitivesFromPrint [
 
@@ -454,6 +484,11 @@ PhBox >> fMod: anotherBox [
 
 	
 	^ BoxAPI uniqueInstance boxFModBetween:  self  and: anotherBox asBox
+]
+
+{ #category : 'truncation and round off' }
+PhBox >> floor [
+^ BoxAPI uniqueInstance boxFloor
 ]
 
 { #category : 'instance creation' }
@@ -519,6 +554,16 @@ PhBox >> linear2db [
 		             outputs: emptyBox outputs
 		             buffer: emptyBox errorBuffer.
 	^ self asBox connectTo: converter
+]
+
+{ #category : 'accessing' }
+PhBox >> log [
+	^ BoxAPI uniqueInstance boxLog
+]
+
+{ #category : 'arithmetic' }
+PhBox >> log10 [
+^ BoxAPI uniqueInstance boxLog10
 ]
 
 { #category : 'arithmetic' }
@@ -612,6 +657,16 @@ PhBox >> printOn: aStream [
 
 	self getHandle ifNotNil: [
 		^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString ]
+]
+
+{ #category : 'arithmetic' }
+PhBox >> rInt [
+	^ BoxAPI uniqueInstance boxRint
+]
+
+{ #category : 'predefined instances' }
+PhBox >> round [
+^ BoxAPI uniqueInstance boxRound
 ]
 
 { #category : 'arithmetic' }
