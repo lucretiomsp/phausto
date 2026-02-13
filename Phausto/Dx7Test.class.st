@@ -17,10 +17,15 @@ Dx7Test >> setUp [
 ]
 
 { #category : 'tests' }
+Dx7Test >> testDx7ALgorithm [
+
+	self deny: Dx7Algorithm new asBox isNull
+]
+
+{ #category : 'tests' }
 Dx7Test >> testDx7AlgoNumber [
 
-
-	self assert: dx7 algoNumber asBox isNull equals: false
+	self deny: dx7 algoNumber asBox isNull 
 ]
 
 { #category : 'tests' }

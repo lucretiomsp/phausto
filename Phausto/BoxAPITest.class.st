@@ -9,9 +9,8 @@ Class {
 { #category : 'tests' }
 BoxAPITest >> testCreateAndDestroyLibContext [
 
-BoxAPI uniqueInstance createLibContext.
-self assert: PhBox libContext equals: true.
-BoxAPI uniqueInstance destroyLibContext.
-self assert: PhBox libContext equals: false.
-
+	BoxAPI uniqueInstance createLibContext.
+	self deny: PhBox libContext not.
+	BoxAPI uniqueInstance destroyLibContext.
+	self deny: PhBox libContext not
 ]

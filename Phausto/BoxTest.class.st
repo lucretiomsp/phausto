@@ -15,6 +15,12 @@ self assert: 1 equals: 0.
 ]
 
 { #category : 'tests' }
+BoxTest >> testAbs [
+
+	self deny: (1 asBox abs) asDsp isNull 
+]
+
+{ #category : 'tests' }
 BoxTest >> testBoxAsDsp [
 
 	| s dsp |
@@ -76,7 +82,7 @@ BoxTest >> testLibContextIsFalseAtStartup [
 { #category : 'tests' }
 BoxTest >> testMax [
 
-	self assert: ((1 asBox max: 2 asBox) asDsp) isNull equals: false
+	self deny: (1 asBox max: 2 asBox) asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -95,6 +101,18 @@ BoxTest >> testMin [
 BoxTest >> testNE [
 
 	self assert: (2 asBox notEqualTo: 1 asBox) asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
+BoxTest >> testSin [
+
+	self deny: 1 asBox sin asDsp isNull
+]
+
+{ #category : 'tests' }
+BoxTest >> testSqrt [
+
+	self deny: 1 asBox sqrt asDsp isNull
 ]
 
 { #category : 'tests' }

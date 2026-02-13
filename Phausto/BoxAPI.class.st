@@ -35,12 +35,12 @@ BoxAPI class >> int_ptr [
 ^ INT_PTR 
 ]
 
-{ #category : 'arithmetic' }
-BoxAPI >> boxAbs: aBox [
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxAbs [
 	"return the absolute value of aBox"
 
 	self createLibContext.
-	^ self ffiCall: #( #PhBox * CboxAbsAux #( PhBox * aBox ) )
+	^ self ffiCall: #( #PhBox * CboxAbs #() )
 ]
 
 { #category : 'arithmetic' }
@@ -332,7 +332,15 @@ self createLibContext .
 		  #( #PhBox * CboxSeq #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxSin [
+	"return the sin value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxSin #() )
+]
+
+{ #category : 'ffi - soundfile' }
 BoxAPI >> boxSoundFile: aLabel numChannels: chan [
 	"return a soundfile block"
 
@@ -341,7 +349,7 @@ BoxAPI >> boxSoundFile: aLabel numChannels: chan [
 		  #( #PhBox * CboxSoundfile #( const char * aLabel , #PhBox * chan ) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'ffi - soundfile' }
 BoxAPI >> boxSoundFile: aLabel numChannels: chan part: anInt8 readIndex: anInteger [
 	"return a soundfile block"
 
@@ -361,6 +369,14 @@ For the operation to be valid, the number of inputs of B must be a multiple of t
 
 	^ self ffiCall:
 		  #( #PhBox * CboxSplit #( #PhBox * aBox , #PhBox * anotherBox ) )
+]
+
+{ #category : 'ffi- unary maths' }
+BoxAPI >> boxSqrt [
+	"return the square root  value of aBox"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxSqrt #())
 ]
 
 { #category : 'arithmetic' }

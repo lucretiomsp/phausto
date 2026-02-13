@@ -141,6 +141,13 @@ PhBox >> >= aPhBox [
 ]
 
 { #category : 'arithmetic' }
+PhBox >> abs [
+	" return the absolute value of a box"
+
+	^ BoxAPI uniqueInstance boxAbs 
+]
+
+{ #category : 'arithmetic' }
 PhBox >> absolute [
 	"absolute value of a boox"
 
@@ -607,6 +614,13 @@ PhBox >> printOn: aStream [
 		^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString ]
 ]
 
+{ #category : 'arithmetic' }
+PhBox >> sin [
+	" return the sin value of a box"
+
+	^ BoxAPI uniqueInstance boxSin
+]
+
 { #category : 'smoothing' }
 PhBox >> smoo [
 	"Smoothing function based on smooth ideal to smooth UI signals (sliders, etc.) down. Approximately, this is a 7 Hz one-pole low-pass considering the coefficient calculation: exp(-2pi*CF/SR).
@@ -631,6 +645,13 @@ PhBox >> splitTo: aUnitGenerator [
 	"split omposition of boxes"
 
 	^ self boxSplit: self asBox to: aUnitGenerator asBox
+]
+
+{ #category : 'arithmetic' }
+PhBox >> sqrt [
+	" return the sin value of a box"
+
+	^ BoxAPI uniqueInstance boxSqrt
 ]
 
 { #category : 'converting' }
