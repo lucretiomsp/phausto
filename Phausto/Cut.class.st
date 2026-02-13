@@ -22,3 +22,9 @@ Cut >> asBox [
 
 	^ BoxAPI uniqueInstance boxCut
 ]
+
+{ #category : 'connecting' }
+Cut >> patchedWith: aPhBox [
+
+aPhBox connectTo: self
+]

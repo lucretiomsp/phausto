@@ -16,7 +16,7 @@ Class {
 { #category : 'converting' }
 PhUnaryOperation >> asBox [
 
-	^ self input asBox connectTo: super asBox
+	^ self input asBox connectTo: self code asBox
 ]
 
 { #category : 'initialization' }
