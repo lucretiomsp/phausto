@@ -31,6 +31,12 @@ MathTest >> testPHConstantMinAsDsp [
 ]
 
 { #category : 'tests' }
+MathTest >> testPHConstantTAsDsp [
+
+	self deny: PhConstantT new asDsp isNull
+]
+
+{ #category : 'tests' }
 MathTest >> testPHCopySignAsDsp [
 
 	self deny: PhCopySign new asDsp isNull

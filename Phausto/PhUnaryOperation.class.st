@@ -31,3 +31,9 @@ PhUnaryOperation >> input [
 
 ^ input
 ]
+
+{ #category : 'connecting' }
+PhUnaryOperation >> patchedWith: aUnitGenerator [
+
+self input: aUnitGenerator 
+]

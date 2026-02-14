@@ -1,3 +1,6 @@
+"
+Double-precision Euler's number constant
+"
 Class {
 	#name : 'PhConstantE',
 	#superclass : 'UnitGenerator',
