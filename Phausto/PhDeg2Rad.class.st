@@ -1,3 +1,6 @@
+"
+Convert degrees to radians.
+"
 Class {
 	#name : 'PhDeg2Rad',
 	#superclass : 'PhUnaryOperation',

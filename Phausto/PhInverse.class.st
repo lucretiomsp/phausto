@@ -1,3 +1,6 @@
+"
+Compute the inverse (1/x) of the input signal.
+"
 Class {
 	#name : 'PhInverse',
 	#superclass : 'PhUnaryOperation',

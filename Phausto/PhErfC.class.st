@@ -1,3 +1,6 @@
+"
+Computes the complementary error function of the input signal.
+"
 Class {
 	#name : 'PhErfC',
 	#superclass : 'PhUnaryOperation',

@@ -1,3 +1,6 @@
+"
+Negated first-order difference.
+"
 Class {
 	#name : 'PhDiffn',
 	#superclass : 'PhUnaryOperation',

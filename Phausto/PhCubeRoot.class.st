@@ -1,3 +1,6 @@
+"
+Computes the cube root of of the input signal.
+"
 Class {
 	#name : 'PhCubeRoot',
 	#superclass : 'PhUnaryOperation',

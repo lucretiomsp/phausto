@@ -1,3 +1,6 @@
+"
+Computes the euclidian distance of the two input signals sqrt(xx+yy) without undue overflow or underflow.
+"
 Class {
 	#name : 'PhHypothenuse',
 	#superclass : 'PhBinaryOperation',
@@ -6,7 +9,7 @@ Class {
 	#tag : 'Math'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 PhHypothenuse >> initialize [
 
 	super initialize.

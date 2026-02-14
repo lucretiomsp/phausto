@@ -19,6 +19,12 @@ MathTest >> testPHConstantEAsDsp [
 ]
 
 { #category : 'tests' }
+MathTest >> testPHConstantEpsilonAsDsp [
+
+	self deny: PhConstantEpsilon new asDsp isNull
+]
+
+{ #category : 'tests' }
 MathTest >> testPHConstantMaxAsDsp [
 
 	self deny: PhConstantMax new asDsp isNull
@@ -58,12 +64,6 @@ MathTest >> testPHDeg2RadAsDsp [
 MathTest >> testPHDiffnAsDsp [
 
 	self deny: PhDiffn new asDsp isNull
-]
-
-{ #category : 'tests' }
-MathTest >> testPHEpsilonnAsDsp [
-
-	self deny: PhEpsilon new asDsp isNull
 ]
 
 { #category : 'tests' }

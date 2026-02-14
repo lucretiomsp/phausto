@@ -1,3 +1,6 @@
+"
+Constant MIN available in simple/double/quad precision (minimal positive value).
+"
 Class {
 	#name : 'PhConstantMin',
 	#superclass : 'UnitGenerator',

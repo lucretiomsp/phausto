@@ -1,3 +1,6 @@
+"
+Computes the error function of the input signal.
+"
 Class {
 	#name : 'PhErf',
 	#superclass : 'PhUnaryOperation',

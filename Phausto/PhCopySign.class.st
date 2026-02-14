@@ -1,3 +1,6 @@
+"
+Changes the sign of x (first input) to that of y (second input).
+"
 Class {
 	#name : 'PhCopySign',
 	#superclass : 'PhBinaryOperation',
@@ -11,16 +14,4 @@ PhCopySign >> initialize [
 
 	super initialize.
 	self processExpression: 'process = ma.copysign;'
-]
-
-{ #category : 'accessing' }
-PhCopySign >> inputL [
-
-	^ inputL
-]
-
-{ #category : 'accessing' }
-PhCopySign >> inputR [
-
-	^ inputR
 ]

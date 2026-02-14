@@ -1,3 +1,6 @@
+"
+Constant MAX available in simple/double/quad precision (minimal positive value).
+"
 Class {
 	#name : 'PhConstantMax',
 	#superclass : 'UnitGenerator',

@@ -1,3 +1,6 @@
+"
+Return exponent of the input signal minus 1 with better precision.
+"
 Class {
 	#name : 'PhExpM1',
 	#superclass : 'PhUnaryOperation',
