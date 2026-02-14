@@ -10,3 +10,9 @@ Class {
 	#package : 'Phausto',
 	#tag : 'Math'
 }
+
+{ #category : 'initialization' }
+PhConstantT >> initialize [ 
+super initialize .
+processExpression := 'process = ma.T;'
+]
