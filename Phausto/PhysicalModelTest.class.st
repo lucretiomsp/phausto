@@ -21,7 +21,7 @@ PhysicalModelTest >> testBlowerUIAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testDjembeAsDsp [
 
-self assert: Djembe  new asDsp isNull equals: false
+	self deny: Djembe new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -69,7 +69,7 @@ PhysicalModelTest >> testL2sAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testMarimbaAsDsp [
 
-	self assert: Marimba new asDsp isNull equals: false
+	self deny: Marimba new asDsp isNull 
 ]
 
 { #category : 'tests' }
