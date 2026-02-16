@@ -32,18 +32,12 @@ PhModalModel >> asBox [
 
 	| result |
 	result := OrderedCollection new.
-	1 to: numberOfModes do: [ :i | "| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	""finalBox := self freqs asBox , self t60s asBox , self gains asBox
-	            , self input asBox connectTo: intermediateBox.""
-	finalBox := self freqs asBox , self t60s asBox
-	            , self gains asBox asBox , self input asBox connectTo:
-		            intermediateBox.
-	^ super asBox"
+	1 to: numberOfModes do: [ :i | 
 			result add: (PhModeFilter new
-					 freq: (freqs at: i);
-					 t60: (t60s at: i);
-					 gain: (gains at: i); input: self input ) ].
+					 freq: (freqs atWrap: i);
+					 t60: (t60s atWrap: i);
+					 gain: (gains atWrap: i);
+					 input: self input) ].
 	^ result asSumOfUGen asBox
 ]
 
@@ -94,6 +88,12 @@ PhModalModel >> input [
 PhModalModel >> numberOfModes [
 
 	^ numberOfModes
+]
+
+{ #category : 'connecting' }
+PhModalModel >> numberOfModes: anInteger [
+
+numberOfModes := anInteger 
 ]
 
 { #category : 'accessing' }
