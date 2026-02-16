@@ -369,6 +369,14 @@ BoxAPI >> boxPrint: aBox [
  ) )
 ]
 
+{ #category : 'utility' }
+BoxAPI >> boxReadOnlyTable: n init: aTable index: anIndex [
+	"return the wire / identity box"
+
+	self createLibContext.
+	^ self ffiCall: #( #PhBox * CboxReadOnlyTableAux #(PhBox * n  , PhBox *  aTable , PhBox * anIndex  ) )
+]
+
 { #category : 'arithmetic' }
 BoxAPI >> boxReal: aDouble [
 	"return the float/double box"
@@ -457,7 +465,7 @@ BoxAPI >> boxSoundFile: aLabel numChannels: chan part: anInt8 readIndex: anInteg
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( #PhBox * CoxSoundfileAux #( const char * aLabel , #PhBox * chan, #PhBox * anInt8 , #PhBox * anInteger ) )
+		  #( #PhBox * CboxSoundfileAux #( const char * aLabel , #PhBox * chan, #PhBox * anInt8 , #PhBox * anInteger ) )
 ]
 
 { #category : 'connecting' }
