@@ -1,3 +1,6 @@
+"
+Return non-zero if x is a positive or negative infinity.
+"
 Class {
 	#name : 'PhIsInf',
 	#superclass : 'PhUnaryOperation',

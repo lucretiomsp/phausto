@@ -1,3 +1,6 @@
+"
+Takes two input signals: x and n, and multiplies x by 2 to the power n.
+"
 Class {
 	#name : 'PhScalb',
 	#superclass : 'PhBinaryOperation',

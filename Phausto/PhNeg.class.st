@@ -1,3 +1,6 @@
+"
+Invert the sign (-x) of a signal.
+"
 Class {
 	#name : 'PhNeg',
 	#superclass : 'PhUnaryOperation',

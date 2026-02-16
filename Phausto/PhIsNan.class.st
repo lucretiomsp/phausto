@@ -1,3 +1,6 @@
+"
+Return non-zero if x is a NaN.
+"
 Class {
 	#name : 'PhIsNan',
 	#superclass : 'UnitGenerator',

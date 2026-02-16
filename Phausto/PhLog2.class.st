@@ -1,3 +1,6 @@
+"
+Returns the base 2 logarithm of x.
+"
 Class {
 	#name : 'PhLog2',
 	#superclass : 'PhUnaryOperation',

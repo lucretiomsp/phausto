@@ -1,3 +1,6 @@
+"
+Subtract x and y.
+"
 Class {
 	#name : 'PhSub',
 	#superclass : 'PhUnaryOperation',

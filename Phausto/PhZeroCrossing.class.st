@@ -1,3 +1,6 @@
+"
+Indicator function for zero-crossing: it returns 1 if a zero-crossing occurs, 0 otherwis
+"
 Class {
 	#name : 'PhZeroCrossing',
 	#superclass : 'PhUnaryOperation',

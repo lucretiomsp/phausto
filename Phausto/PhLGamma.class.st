@@ -1,3 +1,8 @@
+"
+Calculates the natural logorithm of the absolute value of the gamma function of the input signal.
+
+
+"
 Class {
 	#name : 'PhLGamma',
 	#superclass : 'PhUnaryOperation',

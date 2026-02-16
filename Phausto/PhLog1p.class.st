@@ -1,3 +1,6 @@
+"
+Computes log(1 + x) without undue loss of accuracy when x is nearly zero.
+"
 Class {
 	#name : 'PhLog1p',
 	#superclass : 'PhUnaryOperation',

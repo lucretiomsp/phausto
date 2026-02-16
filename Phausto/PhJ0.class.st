@@ -1,3 +1,6 @@
+"
+Computes the Bessel function of the first kind of order 0 of the input signal.
+"
 Class {
 	#name : 'PhJ0',
 	#superclass : 'PhUnaryOperation',

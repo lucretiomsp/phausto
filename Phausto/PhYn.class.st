@@ -1,3 +1,6 @@
+"
+Computes the linearly independent Bessel function of the second kind of order n of the input signal.
+"
 Class {
 	#name : 'PhYn',
 	#superclass : 'PhBinaryOperation',
@@ -6,7 +9,7 @@ Class {
 	#tag : 'Math'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 PhYn >> initialize [
 
 	super initialize.

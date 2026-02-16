@@ -1,3 +1,6 @@
+"
+Computes the linearly independent Bessel function of the second kind of order 0 of the input signal.
+"
 Class {
 	#name : 'PhY0',
 	#superclass : 'PhUnaryOperation',

@@ -1,3 +1,6 @@
+"
+Return exponent of the input signal as a floating-point number.
+"
 Class {
 	#name : 'PhLogB',
 	#superclass : 'PhUnaryOperation',
