@@ -78,7 +78,7 @@ PhBox >> * aUnitGeneratorOrANumber [
 	
 	box1 := self asBox.
 	box2 := aUnitGeneratorOrANumber asBox.
-	self ifNotNullDo: [  ^ BoxAPI uniqueInstance multiply: box1 with: box2]
+	self ifNotNullDo: [  ^ BoxAPI uniqueInstance boxMultiply: box1 with: box2]
 ]
 
 { #category : 'composing' }
@@ -110,7 +110,7 @@ PhBox >> / aUnitGeneratorOrANumber [
 	self ifNotNullDo: [  
 	box1 := self asBox.
 	box2 := aUnitGeneratorOrANumber asBox.
-	^ BoxAPI uniqueInstance divide: box1 by: box2]
+	^ BoxAPI uniqueInstance boxDivide: box1 by: box2]
 ]
 
 { #category : 'comparing' }

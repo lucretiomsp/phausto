@@ -70,13 +70,13 @@ self assert: dsp isNull equals: false.
 { #category : 'tests' }
 BoxTest >> testDb2Linear [
 
-	self assert: 60 asBox db2linear isNull equals: false
+	self deny: 60 asBox db2linear isNull 
 ]
 
 { #category : 'tests' }
 BoxTest >> testEQ [
 
-	self assert: (2 asBox equalTo: 1 asBox) asDsp isNull equals: false
+	self deny: (2 asBox equalTo: 1 asBox) asDsp isNull 
 ]
 
 { #category : 'tests' }

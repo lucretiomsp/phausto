@@ -35,7 +35,7 @@ BoxAPI class >> int_ptr [
 ^ INT_PTR 
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxAbs [
 	"return the absolute value of aBox"
 
@@ -43,7 +43,7 @@ BoxAPI >> boxAbs [
 	^ self ffiCall: #( #PhBox * CboxAbs #() )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxAcos [
 	"return the Acos value of aBox"
 
@@ -51,7 +51,7 @@ BoxAPI >> boxAcos [
 	^ self ffiCall: #( #PhBox * CboxAcos #() )
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'ffi binary math' }
 BoxAPI >> boxAdd [
 	"   
 Sum unary operator, from CboxAdd Function
@@ -60,17 +60,15 @@ self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxAdd #(  ) )
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'ffi binary math' }
 BoxAPI >> boxAdd: aBox with: anotherBox [
-	"   
-Sum binary operator, from CbobAddAuxFunxtion
-"
+"Binary division"
 self createLibContext.
 	^ self ffiCall:
 		  #( #PhBox * CboxAddAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxAsin [
 	"return the Asin value of aBox"
 
@@ -78,7 +76,7 @@ BoxAPI >> boxAsin [
 	^ self ffiCall: #( #PhBox * CboxAsin #() )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxAtan [
 	"return the Atan value of aBox"
 
@@ -93,7 +91,7 @@ self  createLibContext.
 	^ self ffiCall: #( #PhBox * CboxButton #( const char * aLabel ) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxCeil [
 	"return the ceil value of aBox"
 
@@ -109,7 +107,7 @@ BoxAPI >> boxCheckbox: aLabel [
 	^ self ffiCall: #( #PhBox * CboxCheckbox #( const char * aLabel ) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxCos [
 	"return the cos value of aBox"
 
@@ -128,6 +126,14 @@ Return the cut box
 	^ self ffiCall: #( #PhBox * CboxCut #(  ) )
 ]
 
+{ #category : 'ffi binary math' }
+BoxAPI >> boxDivide: aBox by: anotherBox [
+	"convenience method to auto convert UnitGenerators into boxes and multiply them"
+
+	^ BoxAPI uniqueInstance ffiCall:
+		  #( #PhBox * CboxDivAux #( #PhBox * aBox , #PhBox * anotherBox ) )
+]
+
 { #category : 'arithmetic' }
 BoxAPI >> boxEQ: aBox than: anotherBox [
 	"return 1 if the output of aBox is equal to the output of anotherBox"
@@ -137,7 +143,7 @@ BoxAPI >> boxEQ: aBox than: anotherBox [
 		  #( #PhBox #* CboxEQAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxExp [
 	"return the exp value of aBox"
 
@@ -153,7 +159,7 @@ BoxAPI >> boxFModBetween: aBox and: anotherBox [
 	^ self ffiCall: #( #PhBox * CboxFmodAux #( PhBox * aBox  , PhBox * anotherBox) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxFloor [
 	"return the floor value of aBox"
 
@@ -254,7 +260,7 @@ BoxAPI >> boxLT: aBox than: anotherBox [
 		  #( #PhBox #* CboxLTAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxLog [
 	"return the Log value of aBox"
 
@@ -262,7 +268,7 @@ BoxAPI >> boxLog [
 	^ self ffiCall: #( #PhBox * CboxLog #() )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxLog10 [
 	"return the Log10 value of aBox"
 
@@ -307,6 +313,14 @@ BoxAPI >> boxMinBetween: aBox and: anotherBox [
 
 	self createLibContext.
 	^ self ffiCall: #( #PhBox * CboxMinAux #( PhBox * aBox  , PhBox * anotherBox) )
+]
+
+{ #category : 'ffi binary math' }
+BoxAPI >> boxMultiply: aBox with: anotherBox [
+	"convenience method to auto convert UnitGenerators into boxes and multiply them"
+
+	^ BoxAPI uniqueInstance ffiCall:
+		  #( #PhBox * CboxMulAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
 { #category : 'arithmetic' }
@@ -385,7 +399,7 @@ rem operator
 		  #( #PhBox * CboxRemAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxRint [
 	"return the Rint value of aBox"
 
@@ -393,7 +407,7 @@ BoxAPI >> boxRint [
 	^ self ffiCall: #( #PhBox * CboxRint #() )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxRound [
 	"return the rounded value of aBox"
 
@@ -420,7 +434,7 @@ self createLibContext .
 		  #( #PhBox * CboxSeq #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxSin [
 	"return the sin value of aBox"
 
@@ -459,7 +473,7 @@ For the operation to be valid, the number of inputs of B must be a multiple of t
 		  #( #PhBox * CboxSplit #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxSqrt [
 	"return the square root  value of aBox"
 
@@ -467,7 +481,7 @@ BoxAPI >> boxSqrt [
 	^ self ffiCall: #( #PhBox * CboxSqrt #())
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'ffi binary math' }
 BoxAPI >> boxSubtract: aBox from: anotherBox [
 	"   
 Sum binary operator, from CbobAddAuxFunxtion
@@ -478,7 +492,7 @@ Sum binary operator, from CbobAddAuxFunxtion
 		  #( #PhBox * CboxSubAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
-{ #category : 'ffi- unary maths' }
+{ #category : 'ffi- unary math' }
 BoxAPI >> boxTan [
 	"return the Tan value of aBox"
 
@@ -555,14 +569,6 @@ BoxAPI >> destroyLibContextFFI [
 	
 ]
 
-{ #category : 'arithmetic' }
-BoxAPI >> divide: aBox by: anotherBox [
-	"convenience method to auto convert UnitGenerators into boxes and multiply them"
-
-	^ BoxAPI uniqueInstance ffiCall:
-		  #( #PhBox * CboxDivAux #( #PhBox * aBox , #PhBox * anotherBox ) )
-]
-
 { #category : 'testing' }
 BoxAPI >> isNil: aBox [
 
@@ -573,14 +579,6 @@ BoxAPI >> isNil: aBox [
 BoxAPI >> macLibraryName [
 
 	^ FFIMacLibraryFinder findLibrary: 'librariesBundle/libfaust.2.dylib'
-]
-
-{ #category : 'arithmetic' }
-BoxAPI >> multiply: aBox with: anotherBox [
-	"convenience method to auto convert UnitGenerators into boxes and multiply them"
-
-	^ BoxAPI uniqueInstance ffiCall:
-		  #( #PhBox * CboxMulAux #( #PhBox * aBox , #PhBox * anotherBox ) )
 ]
 
 { #category : 'accessing - platform' }
