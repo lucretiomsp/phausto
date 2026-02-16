@@ -30,14 +30,21 @@ Class {
 { #category : 'converting' }
 PhModalModel >> asBox [
 
-	| intermediateBox finalBox |
+	| result |
+	result := OrderedCollection new.
+	1 to: numberOfModes do: [ :i | "| intermediateBox finalBox |
 	intermediateBox := super asBox.
-	"finalBox := self freqs asBox , self t60s asBox , self gains asBox
-	            , self input asBox connectTo: intermediateBox."
+	""finalBox := self freqs asBox , self t60s asBox , self gains asBox
+	            , self input asBox connectTo: intermediateBox.""
 	finalBox := self freqs asBox , self t60s asBox
 	            , self gains asBox asBox , self input asBox connectTo:
 		            intermediateBox.
-	^ super asBox
+	^ super asBox"
+			result add: (PhModeFilter new
+					 freq: (freqs at: i);
+					 t60: (t60s at: i);
+					 gain: (gains at: i); input: self input ) ].
+	^ result asSumOfUGen asBox
 ]
 
 { #category : 'accessing' }
@@ -47,9 +54,21 @@ PhModalModel >> freqs [
 ]
 
 { #category : 'accessing' }
+PhModalModel >> freqs: anArrayOfFreq [
+
+	freqs := anArrayOfFreq 
+]
+
+{ #category : 'accessing' }
 PhModalModel >> gains [
 
 	^ gains
+]
+
+{ #category : 'accessing' }
+PhModalModel >> gains: anArrayOfGains [
+
+	gains := anArrayOfGains 
 ]
 
 { #category : 'initialization' }
@@ -58,9 +77,10 @@ PhModalModel >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.modalModel(1);'.
-	freqs := 440 .
-	t60s := 0.6 .
-	gains := 0.5.
+	numberOfModes := 4.
+	freqs := #( 220 440 550 770).
+	t60s := #(0.6 0.3 0.1 0.1).
+	gains := #(0.8 0.5 0.4 0.2).
 	input := Pulse new period: 0.16
 ]
 
@@ -80,4 +100,10 @@ PhModalModel >> numberOfModes [
 PhModalModel >> t60s [
 
 	^ t60s
+]
+
+{ #category : 'accessing' }
+PhModalModel >> t60s: anArrayOfT60 [
+
+	freqs := anArrayOfT60
 ]

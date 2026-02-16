@@ -105,7 +105,7 @@ PhysicalModelTest >> testPhGuitarNutsAsDsp [
 { #category : 'tests' }
 PhysicalModelTest >> testPhModalModelAsDsp [
 
-	self deny: PhModalModel new asDsp isNull 
+	self deny: PhModalModel new asDsp isNull
 ]
 
 { #category : 'tests' }

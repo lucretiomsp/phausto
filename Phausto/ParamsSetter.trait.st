@@ -766,7 +766,7 @@ ParamsSetter >> sustain: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait' }
+{ #category : 'trait - envelopes' }
 ParamsSetter >> t60: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
