@@ -44,12 +44,12 @@ PhModeFilter >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.modeFilter;'.
-	 freq := PhHSlider new
-			          label: self label , 'Freq'
-			          init: 440
-			          min: 20
-			          max: 2000
-			          step: 0.001.
+	freq := PhHSlider new
+		        label: self label , 'Freq'
+		        init: 440
+		        min: 20
+		        max: 5000
+		        step: 0.001.
 	gain := PhHSlider new
 		        label: self label , 'Gain'
 		        init: 0.5
@@ -60,7 +60,7 @@ PhModeFilter >> initialize [
 		       label: self label , 'T60'
 		       init: 0.5
 		       min: 0
-		       max: 2
+		       max: 3
 		       step: 0.001.
 	input := Pulse new period: 0.1
 ]

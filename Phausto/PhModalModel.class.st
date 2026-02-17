@@ -72,9 +72,9 @@ PhModalModel >> initialize [
 	super initialize.
 	processExpression := 'process = pm.modalModel(1);'.
 	numberOfModes := 4.
-	freqs := #( 220 440 550 770).
-	t60s := #(0.6 0.3 0.1 0.1).
-	gains := #(0.8 0.5 0.4 0.2).
+	freqs := #( 220 440 550 770 ).
+	t60s := #( 1.6 0.3 0.1 0.1 ).
+	gains := #( 0.8 0.5 0.4 0.2 ).
 	input := Pulse new period: 0.16
 ]
 
@@ -105,5 +105,5 @@ PhModalModel >> t60s [
 { #category : 'accessing' }
 PhModalModel >> t60s: anArrayOfT60 [
 
-	freqs := anArrayOfT60
+	t60s := anArrayOfT60
 ]
