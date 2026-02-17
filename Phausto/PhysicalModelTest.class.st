@@ -130,6 +130,18 @@ PhysicalModelTest >> testPhSVfLpAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testPhSvfNotchAsDsp [
+
+	self deny: PhSvfNotch new asDsp isNull
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testPhSvfPeakAsDsp [
+
+	self deny: PhSvfPeak new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testPhWaveguideAsDsp [
 
 	self deny: PhWaveguide new asDsp isNull

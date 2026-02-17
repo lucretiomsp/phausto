@@ -1,8 +1,8 @@
 "
-Notch SVF
+Peak  SVF filter
 "
 Class {
-	#name : 'PhSvfBp',
+	#name : 'PhSvfPeak',
 	#superclass : 'PhStateVariableFilter',
 	#category : 'Phausto-Filters',
 	#package : 'Phausto',
@@ -10,8 +10,8 @@ Class {
 }
 
 { #category : 'initialization' }
-PhSvfBp >> initialize [
+PhSvfPeak >> initialize [
 
 	super initialize.
-	processExpression := 'process = fi.svf.notch;'
+	processExpression := 'process = fi.svf.peak;'
 ]

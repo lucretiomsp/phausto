@@ -1,8 +1,8 @@
 "
-Notch SVF
+Bandpass SVF
 "
 Class {
-	#name : 'PhSvfBp',
+	#name : 'PhSvfNotch',
 	#superclass : 'PhStateVariableFilter',
 	#category : 'Phausto-Filters',
 	#package : 'Phausto',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'initialization' }
-PhSvfBp >> initialize [
+PhSvfNotch >> initialize [
 
 	super initialize.
 	processExpression := 'process = fi.svf.notch;'
