@@ -220,10 +220,10 @@ TurboPhausto class >> loadEffects [
 { #category : 'loading' }
 TurboPhausto class >> loadFilters [
 
-	lpf := ResonLp new
+	lpf := PhResonLp new
 		       frequency: #lowpassfreq;
 		       q: #lowpassq.
-	hpf := ResonHp new
+	hpf := PhResonHp new
 		       frequency: #highpassfreq;
 		       q: #highpassq
 ]

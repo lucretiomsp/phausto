@@ -109,6 +109,12 @@ PhysicalModelTest >> testPhModalModelAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testPhSVfLpAsDsp [
+
+	self deny: PhSvfLp new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testPhWaveguideAsDsp [
 
 	self deny: PhWaveguide new asDsp isNull

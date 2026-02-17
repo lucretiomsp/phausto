@@ -1,10 +1,8 @@
 "
-Class: ResonBp
-                                                                                                    
-Simple resonant highpass filters based on tf2s (virtual analog).
+Simple resonant bandpass filters based on tf2s (virtual analog).
 "
 Class {
-	#name : 'ResonHp',
+	#name : 'PhResonBp',
 	#superclass : 'ResonatorFilter',
 	#category : 'Phausto-Filters',
 	#package : 'Phausto',
@@ -12,14 +10,15 @@ Class {
 }
 
 { #category : 'initialization' }
-ResonHp >> initialize [
+PhResonBp >> initialize [
 
 	super initialize.
-	processExpression := 'process = fi.resonhp;'.
+	processExpression := 'process = fi.resonbp;'.	     
 	frequency := PhHSlider new
 		             label: self label , 'Frequency'
-		             init: 25
+		             init: 5000
 		             min: 25
 		             max: 22040
 		             step: 1
+	
 ]

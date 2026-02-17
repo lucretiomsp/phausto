@@ -291,17 +291,17 @@ FiltersTest >> testPhZero [
 { #category : 'tests' }
 FiltersTest >> testResonBp [
 
-	self deny: ResonBp new asDsp isNull 
+	self deny: PhResonBp new asDsp isNull 
 ]
 
 { #category : 'tests' }
 FiltersTest >> testResonHp [
 
-	self deny: ResonHp new asDsp isNull 
+	self deny: PhResonHp new asDsp isNull 
 ]
 
 { #category : 'tests' }
 FiltersTest >> testResonLp [
 
-	self deny: ResonLp new asDsp isNull
+	self deny: PhResonLp new asDsp isNull
 ]

@@ -10,7 +10,7 @@ Class {
 ExtensionsTest >> testArrayAsChainOfUGens [
 
 	| array |
-	array := { SquareOsc new . FreeverbMono new . ResonBp new }.
+	array := { SquareOsc new . FreeverbMono new . PhResonBp new }.
 
 	self deny: array asChainOfUGen asDsp isNull
 ]

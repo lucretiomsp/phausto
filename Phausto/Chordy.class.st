@@ -39,7 +39,7 @@ Chordy >> asBox [
 		              step: 0.01.
 	scaledFreq := 202 asBox * freqSlider + (filterEnv * 2000 asBox).
 
-	filter := ResonLp new
+	filter := PhResonLp new
 		          frequency: scaledFreq;
 		          q: 4.8. "for the selection of modes the interval is expresed in ratio"
 	secondInterval := self mode asBox , 1.189 asBox , 1.259 asBox

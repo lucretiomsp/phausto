@@ -4,7 +4,7 @@ Class: ResonBp
 Simple resonant lowpass filters based on tf2s (virtual analog).
 "
 Class {
-	#name : 'ResonLp',
+	#name : 'PhResonLp',
 	#superclass : 'ResonatorFilter',
 	#category : 'Phausto-Filters',
 	#package : 'Phausto',
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : 'initialization' }
-ResonLp >> initialize [
+PhResonLp >> initialize [
 
 	super initialize.
 	processExpression := 'process = fi.resonlp;'
