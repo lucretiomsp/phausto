@@ -211,6 +211,12 @@ FiltersTest >> testPhHighShelf [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testPhIIR [
+
+	self deny: PhIIR new asDsp isNull
+]
+
+{ #category : 'tests' }
 FiltersTest >> testPhIntegrator [
 
 	self deny: PhIntegrator new asDsp isNull
@@ -271,15 +277,15 @@ FiltersTest >> testPhPeakEqRm [
 ]
 
 { #category : 'tests' }
-FiltersTest >> testPhZero [
+FiltersTest >> testPhPole [
 
-	self deny: PhZero new asDsp isNull
+	self deny: PhPole new asDsp isNull 
 ]
 
 { #category : 'tests' }
-FiltersTest >> testPole [
+FiltersTest >> testPhZero [
 
-	self deny: PhPole new asDsp isNull 
+	self deny: PhZero new asDsp isNull
 ]
 
 { #category : 'tests' }
