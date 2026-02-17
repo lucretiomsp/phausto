@@ -177,7 +177,7 @@ FiltersTest >> testOberheimLPF [
 { #category : 'tests' }
 FiltersTest >> testOneZero [
 
-	self deny: OneZero new asDsp isNull 
+	self deny: PhOneZero new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -271,9 +271,15 @@ FiltersTest >> testPhPeakEqRm [
 ]
 
 { #category : 'tests' }
+FiltersTest >> testPhZero [
+
+	self deny: PhZero new asDsp isNull
+]
+
+{ #category : 'tests' }
 FiltersTest >> testPole [
 
-	self deny: Pole new asDsp isNull 
+	self deny: PhPole new asDsp isNull 
 ]
 
 { #category : 'tests' }

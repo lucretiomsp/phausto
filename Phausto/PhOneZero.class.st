@@ -8,7 +8,7 @@ Parameters
 zero: location of zero along real axis in z-plane
 "
 Class {
-	#name : 'OneZero',
+	#name : 'PhOneZero',
 	#superclass : 'PhFilter',
 	#instVars : [
 		'zero'
@@ -19,7 +19,7 @@ Class {
 }
 
 { #category : 'converting' }
-OneZero >> asBox [
+PhOneZero >> asBox [
 
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
@@ -30,14 +30,14 @@ OneZero >> asBox [
 ]
 
 { #category : 'initialization' }
-OneZero >> initialize [
+PhOneZero >> initialize [
 
 	super initialize.
 	self processExpression: 'process = fi.zero;'
 ]
 
 { #category : 'accessing' }
-OneZero >> zero [
+PhOneZero >> zero [
 
 	^ zero ifNil: [
 		  zero := PhHSlider new

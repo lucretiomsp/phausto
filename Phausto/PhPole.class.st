@@ -8,7 +8,7 @@ pole: pole location = feedback coefficient
 
 "
 Class {
-	#name : 'Pole',
+	#name : 'PhPole',
 	#superclass : 'PhFilter',
 	#instVars : [
 		'pole'
@@ -19,7 +19,7 @@ Class {
 }
 
 { #category : 'converting' }
-Pole >> asBox [
+PhPole >> asBox [
 
 	| intermdiateBox finalBox |
 	intermdiateBox := super asBox.
@@ -30,14 +30,14 @@ Pole >> asBox [
 ]
 
 { #category : 'initialization' }
-Pole >> initialize [
+PhPole >> initialize [
 
 	super initialize.
 	self processExpression: 'process = fi.zero;'
 ]
 
 { #category : 'accessing' }
-Pole >> pole [
+PhPole >> pole [
 
 	^ pole ifNil: [
 		  pole := PhHSlider new
