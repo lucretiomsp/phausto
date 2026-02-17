@@ -109,9 +109,24 @@ PhysicalModelTest >> testPhModalModelAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelTest >> testPhSVfBpAsDsp [
+
+	self deny: PhSvfBp new asDsp isNull.
+
+]
+
+{ #category : 'tests' }
+PhysicalModelTest >> testPhSVfHpAsDsp [
+
+	self deny: PhSvfHp new asDsp isNull.
+
+]
+
+{ #category : 'tests' }
 PhysicalModelTest >> testPhSVfLpAsDsp [
 
-	self deny: PhSvfLp new asDsp isNull
+	self deny: PhSvfLp new asDsp isNull.
+
 ]
 
 { #category : 'tests' }
