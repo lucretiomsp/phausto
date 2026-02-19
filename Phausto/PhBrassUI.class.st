@@ -1,8 +1,8 @@
 "
-Ready-to-use flute physical model with built-in UI based on fluteModel.
+Ready-to-use brass instrument physical model with built-in UI based on brassModel.
 "
 Class {
-	#name : 'PhFluteUI',
+	#name : 'PhBrassUI',
 	#superclass : 'UnitGenerator',
 	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
@@ -10,8 +10,7 @@ Class {
 }
 
 { #category : 'initialization' }
-PhFluteUI >> initialize [
-
-	super initialize.
-	processExpression := 'process = pm.flute_ui;'
+PhBrassUI >> initialize [ 
+super initialize .
+processExpression := 'process = pm.brass_ui;'
 ]

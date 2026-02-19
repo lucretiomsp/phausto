@@ -1,8 +1,8 @@
 "
-Ready-to-use flute physical model with built-in UI based on fluteModel.
+Ready-to-use clarinet physical model with built-in UI based on clarinetModel.
 "
 Class {
-	#name : 'PhFluteUI',
+	#name : 'PhClarinetUI',
 	#superclass : 'UnitGenerator',
 	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
@@ -10,8 +10,8 @@ Class {
 }
 
 { #category : 'initialization' }
-PhFluteUI >> initialize [
+PhClarinetUI >> initialize [
 
 	super initialize.
-	processExpression := 'process = pm.flute_ui;'
+	processExpression := 'process = pm.clarinet_ui;'
 ]
