@@ -466,6 +466,12 @@ ParamsSetter >> link: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
+ParamsSetter >> lipsTension: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> lpCutoff: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol

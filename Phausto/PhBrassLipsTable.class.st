@@ -8,12 +8,12 @@ Extremely basic reed table that can be used to implement a wide range of single 
 
 "
 Class {
-	#name : 'PhReedTable',
+	#name : 'PhBrassLipsTable',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'slope',
-		'offset',
-		'excitation'
+		'excitation',
+		'tubeLength',
+		'lipsTension'
 	],
 	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
@@ -21,38 +21,43 @@ Class {
 }
 
 { #category : 'converting' }
-PhReedTable >> asBox [ 
+PhBrassLipsTable >> asBox [
 
-^  self offset asBox , self slope asBox , self excitation asBox connectTo: self code asBox 
+	^ self tubeLength asBox , self lipsTension asBox , self  excitation asBox connectTo: self code asBox
 ]
 
 { #category : 'accessing' }
-PhReedTable >> excitation [ 
+PhBrassLipsTable >> excitation [ 
 
 ^ excitation
 ]
 
 { #category : 'initialization' }
-PhReedTable >> initialize [
+PhBrassLipsTable >> initialize [
 
 	super initialize.
 	processExpression := 'process = pm.reedTable;'.
-	offset := PhHSlider new
+	tubeLength := PhHSlider new
 		          label: self label , 'Offset'
 		          values: #( 0.4 0 1 0.01 ).
-	slope := PhHSlider new
+	lipsTension := PhHSlider new
 		         label: self label , 'Slope'
 		         values: #( 0.4 0 1 0.01 ).
-	excitation := PhBlower new.
+	excitation := PhBlower new
+]
+
+{ #category : 'as yet unclassified' }
+PhBrassLipsTable >> lipsTensiom [
+
+^ lipsTension
 ]
 
 { #category : 'accessing' }
-PhReedTable >> offset [ 
-^ offset
+PhBrassLipsTable >> lipsTension [
+	^ lipsTension
 ]
 
 { #category : 'accessing' }
-PhReedTable >> slope [ 
-
-^ slope
+PhBrassLipsTable >> tubeLength [
+	^ tubeLength
 ]

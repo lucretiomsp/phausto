@@ -13,6 +13,12 @@ self deny: PhFluteUI new  stereo asDsp isNull.
 ]
 
 { #category : 'tests' }
+PhysicalModelWindTest >> testPhBrassLipsTableasDsp [
+
+	self deny: PhBrassLipsTable new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelWindTest >> testPhBrassUIasDsp [
 
 	self deny: PhBrassUI new stereo asDsp isNull
@@ -27,11 +33,11 @@ PhysicalModelWindTest >> testPhClarinetUIasDsp [
 { #category : 'tests' }
 PhysicalModelWindTest >> testPhFluteJetTableasDsp [
 
-	self deny: PhFluteJetTable new stereo asDsp isNull
+	self deny: PhReedTable new stereo asDsp isNull
 ]
 
 { #category : 'tests' }
 PhysicalModelWindTest >> testPhReedTableasDsp [
 
-	self deny: PhReedTable new stereo asDsp isNull
+	self deny: PhFluteJetTable new stereo asDsp isNull
 ]
