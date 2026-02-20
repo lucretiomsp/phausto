@@ -43,9 +43,9 @@ PhClarinetModel >> initialize [
 	tubeLength := PhHSlider new
 		              label: self label , 'TubeLength'
 		              values: #( 0.5 0.01 2 0.01 ).
-	pressure := Noise new.
-	reedStiffness := (self label , 'ReedStiffnesss') asBox asPhHSlider.
-	bellOpening := (self label , 'BellOpening') asBox asPhHSlider
+	pressure := (self label , 'Pressure') asSymbol asPhHSlider.
+	reedStiffness := (self label , 'ReedStiffnesss') asSymbol asPhHSlider.
+	bellOpening := (self label , 'BellOpening') asSymbol asPhHSlider
 ]
 
 { #category : 'accessing' }
