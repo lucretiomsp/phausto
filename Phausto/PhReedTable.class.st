@@ -11,8 +11,6 @@ Class {
 	#name : 'PhReedTable',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'slope',
-		'offset',
 		'excitation'
 	],
 	#category : 'Phausto-PhysModels - Wind Instruments',
@@ -21,9 +19,10 @@ Class {
 }
 
 { #category : 'converting' }
-PhReedTable >> asBox [ 
+PhReedTable >> asBox [
 
-^  self offset asBox , self slope asBox , self excitation asBox connectTo: self code asBox 
+	^ self excitation asBox
+		  connectTo: self code asBox
 ]
 
 { #category : 'accessing' }
@@ -36,23 +35,7 @@ PhReedTable >> excitation [
 PhReedTable >> initialize [
 
 	super initialize.
-	processExpression := 'process = pm.reedTable;'.
-	offset := PhHSlider new
-		          label: self label , 'Offset'
-		          values: #( 0.4 0 1 0.01 ).
-	slope := PhHSlider new
-		         label: self label , 'Slope'
-		         values: #( 0.4 0 1 0.01 ).
-	excitation := PhBlower new.
-]
+	processExpression := 'process = pm.fluteJetTable;'.
 
-{ #category : 'accessing' }
-PhReedTable >> offset [ 
-^ offset
-]
-
-{ #category : 'accessing' }
-PhReedTable >> slope [ 
-
-^ slope
+	excitation := PhBlower new
 ]

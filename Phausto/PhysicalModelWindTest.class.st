@@ -25,6 +25,12 @@ PhysicalModelWindTest >> testPhClarinetUIasDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelWindTest >> testPhFluteJetTableasDsp [
+
+	self deny: PhFluteJetTable new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelWindTest >> testPhReedTableasDsp [
 
 	self deny: PhReedTable new stereo asDsp isNull
