@@ -725,6 +725,12 @@ self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }
+ParamsSetter >> slope:  aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> source: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
