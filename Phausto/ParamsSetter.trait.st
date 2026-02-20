@@ -68,6 +68,12 @@ ParamsSetter >> bM: aNumberOrABoxOrASymbol [
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
+{ #category : 'trait - physModels' }
+ParamsSetter >> bellOpening: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'trait' }
 ParamsSetter >> biasAttack: aNumberOrABoxOrASymbol [
 
@@ -634,7 +640,7 @@ ParamsSetter >> poles: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait' }
+{ #category : 'trait - physModels' }
 ParamsSetter >> pressure: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -642,6 +648,12 @@ ParamsSetter >> pressure: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 ParamsSetter >> q: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait - physModels' }
+ParamsSetter >> reedStiffness: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -748,6 +760,12 @@ ParamsSetter >> spread: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
+{ #category : 'trait - physModels' }
+ParamsSetter >> stiffness: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'trait' }
 ParamsSetter >> strikeCutoff: aNumberOrABoxOrASymbol [
 
@@ -840,6 +858,12 @@ ParamsSetter >> trig: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 ParamsSetter >> trigger: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait - physModels' }
+ParamsSetter >> tubeLength: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
