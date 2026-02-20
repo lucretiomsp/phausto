@@ -36,13 +36,13 @@ PhBrassLipsTable >> excitation [
 PhBrassLipsTable >> initialize [
 
 	super initialize.
-	processExpression := 'process = pm.reedTable;'.
+	processExpression := 'process = pm.brassLipsTable;'.
 	tubeLength := PhHSlider new
-		          label: self label , 'Offset'
-		          values: #( 0.4 0 1 0.01 ).
+		              label: self label , 'Offset'
+		              values: #( 0.4 0 1 0.01 ).
 	lipsTension := PhHSlider new
-		         label: self label , 'Slope'
-		         values: #( 0.4 0 1 0.01 ).
+		               label: self label , 'Slope'
+		               values: #( 0.4 0 1 0.01 ).
 	excitation := PhBlower new
 ]
 
