@@ -19,6 +19,12 @@ PhysicalModelWindTest >> testPhBrassLipsTableasDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelWindTest >> testPhBrassModelUIasDsp [
+
+	self deny: PhBrassModelUI new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelWindTest >> testPhBrassUIasDsp [
 
 	self deny: PhBrassUI new stereo asDsp isNull
