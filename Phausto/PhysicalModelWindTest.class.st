@@ -61,6 +61,12 @@ PhysicalModelWindTest >> testPhFluteModelUIasDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelWindTest >> testPhOpenTubeAsDsp [
+
+	self deny: PhOpenTube new stereo asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelWindTest >> testPhReedTableasDsp [
 
 	self deny: PhFluteJetTable new stereo asDsp isNull
