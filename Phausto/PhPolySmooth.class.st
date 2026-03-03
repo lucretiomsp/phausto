@@ -38,9 +38,6 @@ PhPolySmooth >> initialize [
 
 	super initialize.
 	processExpression := 'process = si.polySmooth;'.
-
-	gate := #SmGate asPhButton.
-	smoothness := #SmSmoothness asPhHSlider.
 	delay := #SmDelay asPhHSlider
 ]
 

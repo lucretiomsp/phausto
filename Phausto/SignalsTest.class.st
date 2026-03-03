@@ -31,13 +31,19 @@ SignalsTest >> testPhPolySmoothAsDsp [
 ]
 
 { #category : 'tests' }
-SignalsTest >> testPhSmoothAndHAsDsp [
+SignalsTest >> testPhSBmoothAsDsp [
 
-	self deny: PhSmoothAndH new asDsp isNull
+	self deny: PhBSmooth new asDsp isNull
 ]
 
 { #category : 'tests' }
-SignalsTest >> testPhSmoothAsDsp [
+SignalsTest >> testPhSmooAsDsp [
 
 	self deny: PhSmoo new asDsp isNull
+]
+
+{ #category : 'tests' }
+SignalsTest >> testPhSmoothAndHAsDsp [
+
+	self deny: PhSmoothAndH new asDsp isNull
 ]

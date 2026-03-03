@@ -6,10 +6,9 @@ A smoothing function based on smooth that holds its output signal when a trigger
 "
 Class {
 	#name : 'PhSmoothAndH',
-	#superclass : 'PhSmoo',
+	#superclass : 'PhSmooth',
 	#instVars : [
-		'gate',
-		'smoothness'
+		'gate'
 	],
 	#category : 'Phausto-Signals',
 	#package : 'Phausto',
@@ -35,7 +34,7 @@ PhSmoothAndH >> initialize [
 	processExpression := 'process = si.smoothAndH;'.
 
 	gate := #SmGate asPhButton.
-	smoothness := #SmSmoothness asPhHSlider
+	
 ]
 
 { #category : 'accessing' }
