@@ -23,3 +23,9 @@ SignalsTest >> testPhInterpolateAsDsp [
 
 	self assert: PhInterpolate new asDsp isNull equals: false
 ]
+
+{ #category : 'tests' }
+SignalsTest >> testPhSmoothAsDsp [
+
+	self deny: PhSmooth new asDsp isNull
+]
