@@ -25,6 +25,12 @@ SignalsTest >> testPhInterpolateAsDsp [
 ]
 
 { #category : 'tests' }
+SignalsTest >> testPhPolySmoothAsDsp [
+
+	self deny: PhPolySmooth new asDsp isNull
+]
+
+{ #category : 'tests' }
 SignalsTest >> testPhSmoothAsDsp [
 
 	self deny: PhSmooth new asDsp isNull

@@ -749,6 +749,12 @@ ParamsSetter >> slope:  aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
+ParamsSetter >> smoothness: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> source: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
