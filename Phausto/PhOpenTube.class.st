@@ -17,9 +17,9 @@ Class {
 }
 
 { #category : 'converting' }
-PhOpenTube >> asBox [ 
+PhOpenTube >> asBox [
 
-^ self input asBox , self length asBox connectTo: self code asBox 
+	^ self input,  self length asBox connectTo: self code asBox
 ]
 
 { #category : 'initialization' }
