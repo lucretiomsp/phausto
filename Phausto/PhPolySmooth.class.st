@@ -8,12 +8,9 @@ A smoothing function based on smooth that doesn't smooth when a trigger signal i
 "
 Class {
 	#name : 'PhPolySmooth',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhSmoothAndH',
 	#instVars : [
-		'input',
-		'gate',
-		'delay',
-		'smoothness'
+		'delay'
 	],
 	#category : 'Phausto-Signals',
 	#package : 'Phausto',
@@ -41,7 +38,7 @@ PhPolySmooth >> initialize [
 
 	super initialize.
 	processExpression := 'process = si.polySmooth;'.
-	input := #FaderInput asPhHSlider.
+
 	gate := #SmGate asPhButton.
 	smoothness := #SmSmoothness asPhHSlider.
 	delay := #SmDelay asPhHSlider

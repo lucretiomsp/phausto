@@ -2,7 +2,7 @@
 Smoothing function based on smooth ideal to smooth UI signals (sliders, etc.) down. Approximately, this is a 7 Hz one-pole low-pass considering the coefficient calculation: exp(-2pi*CF/SR).
 "
 Class {
-	#name : 'PhSmooth',
+	#name : 'PhSmoo',
 	#superclass : 'UnitGenerator',
 	#instVars : [
 		'input'
@@ -13,13 +13,13 @@ Class {
 }
 
 { #category : 'initialization' }
-PhSmooth >> asBox [ 
+PhSmoo >> asBox [ 
 
 ^ self input asBox connectTo: self code asBox 
 ]
 
 { #category : 'initialization' }
-PhSmooth >> initialize [
+PhSmoo >> initialize [
 
 	super initialize.
 	processExpression := 'process = si.smoo;'.
@@ -27,7 +27,7 @@ PhSmooth >> initialize [
 ]
 
 { #category : 'accessing' }
-PhSmooth >> input [ 
+PhSmoo >> input [ 
 
 ^ input
 ]
