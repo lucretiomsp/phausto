@@ -25,9 +25,21 @@ SignalsTest >> testPhInterpolateAsDsp [
 ]
 
 { #category : 'tests' }
+SignalsTest >> testPhOnePoleSwitchingAsDsp [
+
+	self deny: PhOnePoleSwitching new asDsp isNull
+]
+
+{ #category : 'tests' }
 SignalsTest >> testPhPolySmoothAsDsp [
 
 	self deny: PhPolySmooth new asDsp isNull
+]
+
+{ #category : 'tests' }
+SignalsTest >> testPhRevAsDsp [
+
+	self deny: PhRev new asDsp isNull
 ]
 
 { #category : 'tests' }

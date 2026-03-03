@@ -1,12 +1,13 @@
 "
-Block - terminate N signals. 
+Reverse the input signal by blocks of n>0 samples. rev(1) is the indentity function. rev(n) has a latency of n-1 samples.
+
 Create a new instance of the class with
 ```language=pharo
-PhBlockSignal new: anInteger
+PhRev new: anInteger
 ```
 "
 Class {
-	#name : 'PhBlockSignal',
+	#name : 'PhRev',
 	#superclass : 'UnitGenerator',
 	#category : 'Phausto-Signals',
 	#package : 'Phausto',
@@ -14,15 +15,15 @@ Class {
 }
 
 { #category : 'instance creation' }
-PhBlockSignal class >> new: anInteger [
+PhRev class >> new: anInteger [
 
 	| n |
 	n := anInteger asString.
-	^ self new processExpression: 'process = si.block(' , n , ');'
+	^ self new processExpression: 'process = si.rev(' , n , ');'
 ]
 
 { #category : 'instance creation' }
-PhBlockSignal >> new: anInteger [
+PhRev >> new: anInteger [
 
 	^ self class new: anInteger
 ]
