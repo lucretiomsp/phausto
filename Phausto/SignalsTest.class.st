@@ -7,9 +7,15 @@ Class {
 }
 
 { #category : 'tests' }
+SignalsTest >> testPhBlockSignaalAsDsp [
+
+	self deny: PhBlockSignal new asDsp isNull 
+]
+
+{ #category : 'tests' }
 SignalsTest >> testPhBusAsDsp [
 
-	self assert: PhBus new asDsp isNull equals: false
+	self deny: PhBus new asDsp isNull 
 ]
 
 { #category : 'tests' }

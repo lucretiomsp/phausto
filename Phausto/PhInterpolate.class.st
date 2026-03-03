@@ -1,8 +1,10 @@
 "
 Linear interpolation between two signals.
 
-Parameters:
-interpControl: interpolation control between 0 and 1 (0: first input; 1: second input)
+##Parameters:
+**input1:** first input;
+**input2:** second input;
+**interpControl:** interpolation control between 0 and 1 (0: first input; 1: second input)
 "
 Class {
 	#name : 'PhInterpolate',
