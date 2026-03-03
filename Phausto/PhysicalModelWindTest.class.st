@@ -37,6 +37,12 @@ PhysicalModelWindTest >> testPhClarinetModelAsDsp [
 ]
 
 { #category : 'tests' }
+PhysicalModelWindTest >> testPhClarinetMothPieceAsDsp [
+
+	self deny: PhClarinetMouthPiece new asDsp isNull
+]
+
+{ #category : 'tests' }
 PhysicalModelWindTest >> testPhClarinetReedAsDsp [
 
 	self deny: PhClarinetReed new stereo asDsp isNull
