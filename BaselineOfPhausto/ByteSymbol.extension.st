@@ -1,6 +1,7 @@
 Extension { #name : 'ByteSymbol' }
 
 { #category : '*BaselineOfPhausto' }
-ByteSymbol >> <- aNumber [ 
-	self shouldBeImplemented
+ByteSymbol >> <- aNumber [
+
+	DSP allInstances last setValue: aNumber parameter: self asString
 ]
