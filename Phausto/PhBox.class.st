@@ -56,8 +56,8 @@ PhBox class >> startUp [
 
 { #category : 'system startup' }
 PhBox class >> startUp: aBoolean [
-	super startUp: aBoolean.
-	aBoolean ifTrue: [ libContext := false ]
+
+    aBoolean ifTrue: [ libContext := false ]
 ]
 
 { #category : 'composing' }
