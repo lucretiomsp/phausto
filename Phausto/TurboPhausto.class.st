@@ -488,6 +488,11 @@ TurboPhausto >> temporarySave [
 	self class tpPerf temporarySave 
 ]
 
+{ #category : 'accessing' }
+TurboPhausto >> tpDsp [
+	 ^ TurboPhausto tpDsp 
+]
+
 { #category : 'tracing' }
 TurboPhausto >> traceAllParams [ 
 
