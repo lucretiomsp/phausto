@@ -654,9 +654,12 @@ PhBox >> patchedWith: aBox [
 
 { #category : 'printing' }
 PhBox >> printOn: aStream [
+ 
 
-	self getHandle ifNotNil: [
-		^ aStream << (BoxAPI uniqueInstance boxPrint: self asBox) asString ]
+self getHandle ifNotNil: [
+		 aStream << (BoxAPI uniqueInstance boxPrint: self asBox)  ]
+
+ 
 ]
 
 { #category : 'arithmetic' }
