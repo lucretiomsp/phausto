@@ -14,8 +14,7 @@ Class {
 		'waveform',
 		'compensation',
 		'distortion',
-		'filterDecay',
-		'baseFreq'
+		'filterDecay'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -49,17 +48,17 @@ Acid >> asBox [
 		          res: self resonance.
 	saw := SawOsc new
 		       uLevel: self uLevel asBox * 0.25 asBox;
-		       freq: baseFreq asBox + self tuning asBox.
+		       freq: self pitch asBox + self tuning asBox.
 	square := SquareOsc new
 		          uLevel: self uLevel asBox * 0.25 asBox;
-		          freq: baseFreq asBox + self tuning asBox .
+		          freq: self pitch asBox + self tuning asBox.
 	oscillator := Select2 new
-		              label: self coypuLabel , 'Waveform';
+		              label: 'acidWaveform';
 		              input0: saw;
 		              input1: square.
 
 	distortion := Cubic1 new.
-	instrument := oscillator * ampEnv=> filter * compensation
+	instrument := oscillator * ampEnv => filter * compensation
 	              => distortion.
 	^ instrument asBox
 ]
@@ -132,12 +131,7 @@ Acid >> initialize [
 		               min: 0.01
 		               max: 2
 		               step: 0.001.
-	baseFreq := PhHSlider new
-		               label: self coypuLabel , 'AcidFreq'
-		               init: 0.282
-		               min: 0.01
-		               max: 2
-		               step: 0.001
+
 ]
 
 { #category : 'accessing' }
@@ -150,12 +144,6 @@ Acid >> resonance [
 Acid >> tuning [
 
 	^ tuning
-]
-
-{ #category : 'accessing' }
-Acid >> uLevel [
-
-	^ uLevel
 ]
 
 { #category : 'accessing' }

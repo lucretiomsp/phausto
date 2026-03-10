@@ -188,12 +188,11 @@ TurboPhausto class >> loadAllSynths [
 				 pitch: #syHatFreq);
 		"	add: (CombString new
 				 label: 'combstring';
-				 freq: #combstringNote);"add: (DubDub new
-			 label: 'dubdub';
-			 freq: #dubdubFreq);
-		add: (Acid new
-				 label: 'acid';
-				 pitch: #acidFreq);
+				 freq: #combstringNote);"
+		add: (DubDub new
+				 label: 'dubdub';
+				 freq: #dubdubFreq);
+		add: (Acid new label: 'acid');
 		add: (Chordy new
 				 label: 'chordy';
 				 pitch: #chordyFreq);
