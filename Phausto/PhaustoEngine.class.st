@@ -133,6 +133,11 @@ PhaustoEngine >> initialize [
 ]
 
 { #category : 'playing' }
+PhaustoEngine >> loop: anInteger [
+	self class tpPerf maxStepNumber: anInteger 
+]
+
+{ #category : 'playing' }
 PhaustoEngine >> mute: aSymbol [
 
 	self class tpPerf mute: aSymbol 
@@ -198,6 +203,11 @@ PhaustoEngine >> trig: aString [
 	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
 
 	self class tpDsp trig: aString
+]
+
+{ #category : 'playing' }
+PhaustoEngine >> unloop [
+	self class tpPerf maxStepNumber: SmallInteger maxVal 
 ]
 
 { #category : 'playing' }
