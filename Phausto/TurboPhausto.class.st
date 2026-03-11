@@ -22,30 +22,6 @@ Class {
 	#tag : 'TurboPhausto'
 }
 
-{ #category : 'accessing' }
-TurboPhausto class >> allEffects [
-
-	^ allEffects
-]
-
-{ #category : 'accessing' }
-TurboPhausto class >> allInstruments [
-
-	^ allSamplers , allSynths asArray
-]
-
-{ #category : 'accessing' }
-TurboPhausto class >> allSamplers [
-
-	^ allSamplers 
-]
-
-{ #category : 'accessing' }
-TurboPhausto class >> allSynths [
-
-	^ allSynths 
-]
-
 { #category : 'examples' }
 TurboPhausto class >> example1 [
 
@@ -242,60 +218,10 @@ TurboPhausto class >> samplesFolderExists [
 ]
 
 { #category : 'accessing' }
-TurboPhausto class >> start [
-	"load all the Turbo- Samplers, Synths and Effects. initialize and start a dsp and assign it to a Performance"
-
-	| perf |
-	perf := Performance uniqueInstance.
-	self loadAllSamplers.
-	self loadAllSynths.
-	self loadFilters.
-	self loadEffects.
-	self loadRack.
-
-
-	self tpDsp ifNotNil: [
-		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
-	"tpDsp := self allSamplers asSumOfUGen stereo asDsp."
-	tpDsp := self rack stereo asDsp.
-	[
-	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
-		ifNotNil: [ self tpDsp start ] ] fork.
-	tpPerf := perf forDsp: tpDsp.
-	tpPerf performanceType: PerfType new.
-]
-
-{ #category : 'accessing' }
-TurboPhausto class >> tpDsp [
-
-	^ tpDsp.
-]
-
-{ #category : 'accessing' }
-TurboPhausto class >> tpPerf [
-
-^ tpPerf 
-]
-
-{ #category : 'accessing' }
-TurboPhausto class >> traceAllInstruments [
-
-Transcript clear.
-self listOfSamplesFolder do: [ :i | Transcript  show: i; cr ].
-Transcript open
-]
-
-{ #category : 'accessing' }
 TurboPhausto class >> turboSamplesFolder [
 
 ^ (FileLocator documents asAbsolute pathString
 	                 , '/TurboSamples')
-]
-
-{ #category : 'API - changes' }
-TurboPhausto >> bpm: aNumber [
-
-self class tpPerf freq: aNumber bpm
 ]
 
 { #category : 'playing' }
@@ -314,12 +240,6 @@ self class tpDsp destroy.
 TurboPhausto >> displayUI [
 
 self class tpDsp displayUI
-]
-
-{ #category : 'displaying' }
-TurboPhausto >> displayUIForLevels [ 
-
-	self class tpDsp displayUIForLevels
 ]
 
 { #category : 'API - changes' }
@@ -379,37 +299,6 @@ TurboPhausto >> lowPassSweep: anArrayWithAFrequencyAndATimeInSeconds [
 ]
 
 { #category : 'playing' }
-TurboPhausto >> mute: aSymbol [
-
-	self class tpPerf mute: aSymbol 
-]
-
-{ #category : 'playing' }
-TurboPhausto >> muteAll [
-
-	self class tpPerf muteAll
-]
-
-{ #category : 'playing' }
-TurboPhausto >> play [
-
-	self class tpPerf play
-]
-
-{ #category : 'playing' }
-TurboPhausto >> playFor: aNumberOfBars [
-
-	self class tpPerf playFor: aNumberOfBars
-]
-
-{ #category : 'API - changes' }
-TurboPhausto >> playNote: aMidiNN prefix: aString dur: aDuration [
-	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
-	self class playNote: aMidiNN prefix: aString dur: aDuration
-	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
-]
-
-{ #category : 'playing' }
 TurboPhausto >> restore [
 	self class tpPerf restore 
 ]
@@ -436,18 +325,6 @@ TurboPhausto >> size: aSize [
 	self setValue: (aSize min: 0.99) parameter: 'size'
 ]
 
-{ #category : 'playing' }
-TurboPhausto >> solo: aSymbol [
-
-	self class tpPerf solo: aSymbol
-]
-
-{ #category : 'playing' }
-TurboPhausto >> stop [
-
-	self class tpPerf stop
-]
-
 { #category : 'displaying' }
 TurboPhausto >> stopDsp [
 
@@ -469,18 +346,6 @@ TurboPhausto >> temporarySave [
 	self class tpPerf temporarySave 
 ]
 
-{ #category : 'accessing' }
-TurboPhausto >> tpDsp [
-
-	^ self class tpDsp
-]
-
-{ #category : 'tracing' }
-TurboPhausto >> traceAllParams [ 
-
-self class tpDsp traceAllParams 
-]
-
 { #category : 'printing' }
 TurboPhausto >> traceAllSamples [
 
@@ -488,23 +353,4 @@ TurboPhausto >> traceAllSamples [
 		children do: [ :i |
 		(i pathString afterLastSlash findBetweenSubstrings: '.') first
 			traceCr ]
-]
-
-{ #category : 'API - changes' }
-TurboPhausto >> trig: aString [
-	"send a 10 ms trigger to a Faust parameter, designed to trig envelopes and percussions-like sounds"
-
-	self class tpDsp trig: aString
-]
-
-{ #category : 'playing' }
-TurboPhausto >> unmute: aSymbol [
-
-	self class tpPerf unmute: aSymbol 
-]
-
-{ #category : 'LiveCoding - Performance' }
-TurboPhausto >> unsolo: aSymbol [
-
-	self class tpPerf unsolo: aSymbol
 ]
