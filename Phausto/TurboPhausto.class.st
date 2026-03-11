@@ -16,17 +16,7 @@ Here is some code
 "
 Class {
 	#name : 'TurboPhausto',
-	#superclass : 'Object',
-	#classInstVars : [
-		'allSamplers',
-		'tpDsp',
-		'tpPerf',
-		'allSynths',
-		'lpf',
-		'hpf',
-		'allEffects',
-		'rack'
-	],
+	#superclass : 'PhaustoEngine',
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
 	#tag : 'TurboPhausto'
@@ -489,7 +479,8 @@ TurboPhausto >> temporarySave [
 
 { #category : 'accessing' }
 TurboPhausto >> tpDsp [
-	 ^ TurboPhausto tpDsp 
+
+	^ self class tpDsp
 ]
 
 { #category : 'tracing' }
