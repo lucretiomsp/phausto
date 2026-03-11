@@ -134,7 +134,8 @@ PhaustoEngine >> initialize [
 
 { #category : 'playing' }
 PhaustoEngine >> loop: anInteger [
-	self class tpPerf maxStepNumber: anInteger 
+
+	self class tpPerf loop: anInteger
 ]
 
 { #category : 'playing' }
@@ -207,7 +208,7 @@ PhaustoEngine >> trig: aString [
 
 { #category : 'playing' }
 PhaustoEngine >> unloop [
-	self class tpPerf maxStepNumber: SmallInteger maxVal 
+	self class tpPerf unloop.
 ]
 
 { #category : 'playing' }
