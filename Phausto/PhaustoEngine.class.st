@@ -42,3 +42,18 @@ PhaustoEngine class >> loadFilters [
 
 	self subclassResponsibility
 ]
+
+{ #category : 'initialization' }
+PhaustoEngine >> initialize [
+
+	super initialize.
+	self class tpPerf resetAllSequencers.
+	self class tpPerf maxStepNumber: SmallInteger maxVal .
+	self muteAll
+]
+
+{ #category : 'accessing' }
+PhaustoEngine >> tpPerf [ 
+
+^ self class tpPerf 
+]
