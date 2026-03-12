@@ -232,44 +232,61 @@ LibFaust >> createCMajorMIDIFileFromString: aString withName: aName [
 		  withName: aName
 ]
 
-{ #category : 'export - cmajor' }
+{ #category : 'export - bela' }
 LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg arguments: argv [ 
+
+'chiamato cppexportrt' traceCr.
 
 ^ self ffiCall:
 		   #( bool generateCAuxFilesFromString
         ( const char * 'MyApp', 
           const char * aString, 
-          int 4, 
+          int 6, 
           void * argv, 
           ByteArray errorMsg
         )
     )
 ]
 
-{ #category : 'export - cmajor' }
+{ #category : 'export - bela' }
 LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withName: aName [
 
-	| myArgv fileOutput cmajorPatchesDir patchDir |
+	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
+	"we locate the architecture file"
+	architecturePath := (FileLocator documents / 'architecture/faustMinimal.h')
+		                    asAbsolute pathString.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'faust2Juce')
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
 
-	fileOutput := patchDir asAbsolute pathString , '/' , aName
-	              , '.h'.
-
+	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustSynth.h'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-a'.
+			          architecturePath.
 			          '-lang'.
 			          'cpp'.
-			          ('-cn' , aName , '-o').
+			          '-o'.
 			          fileOutput }.
 
 	^ [
 		  self
-			  createFaustSynthHeaderFileFromString: aString
+			  createBelaCppFileFromString: aString
 			  buffer: errorMsg
 			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'export - bela' }
+LibFaust >> createFaustSynthHeaderFileFromString: aString withName: aName [
+
+	| errorBuffer |
+	errorBuffer := ByteArray new: 4096.
+
+	^ self
+		  createFaustSynthHeaderFileFromString: aString
+		  buffer: errorBuffer
+		  withName: aName
 ]
 
 { #category : 'accessing - platform' }
