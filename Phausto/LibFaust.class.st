@@ -253,8 +253,9 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withN
 
 	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
 	"we locate the architecture file"
-	architecturePath := (FileLocator documents / 'architecture/faustMinimal.h')
-		                    asAbsolute pathString.
+	architecturePath := (FileLocator documents
+	                     / 'architecture/faustMinimalInlined.h') asAbsolute
+		                    pathString.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'faust2Juce')
 		                    ensureCreateDirectory.
