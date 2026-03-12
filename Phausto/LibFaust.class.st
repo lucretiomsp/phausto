@@ -241,7 +241,7 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg argum
 		   #( bool generateCAuxFilesFromString
         ( const char * 'MyApp', 
           const char * aString, 
-          int 6, 
+          int 4, 
           void * argv, 
           ByteArray errorMsg
         )
@@ -264,8 +264,8 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withN
 	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustSynth.h'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
-			          '-a'.
-			          architecturePath.
+			          "'a'.
+			          architecturePath."
 			          '-lang'.
 			          'cpp'.
 			          '-o'.
@@ -273,7 +273,7 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withN
 
 	^ [
 		  self
-			  createBelaCppFileFromString: aString
+			  createFaustSynthHeaderFileFromString: aString
 			  buffer: errorMsg
 			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
