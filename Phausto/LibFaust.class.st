@@ -68,7 +68,8 @@ LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aNam
 
 	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
 	"we locate the architecture file"
-	architecturePath := (FileLocator imageDirectory / 'architecture/bela.cpp')  asAbsolute pathString .
+	architecturePath := (FileLocator documents
+	                     / 'architecture/bela.cpp') asAbsolute pathString.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'belaPatches')
 		                    ensureCreateDirectory.
@@ -78,18 +79,17 @@ LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aNam
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
 			          '-a'.
-			          architecturePath .
+			          architecturePath.
 			          '-lang'.
 			          'cpp'.
 			          '-o'.
-			fileOutput 
-			          }.
+			          fileOutput }.
 
 	^ [
-	  self
-		  createBelaCppFileFromString: aString
-		  buffer: errorMsg
-		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+		  self
+			  createBelaCppFileFromString: aString
+			  buffer: errorMsg
+			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
 { #category : 'export - bela' }
@@ -112,7 +112,7 @@ errorBuffer := ByteArray new: 4096.
 	^  self createCMajorFileFromString: aString buffer: errorBuffer
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - cmajor' }
 LibFaust >> createCMajorFileFromString: aString buffer: errorMsg [
 | myArgv fileOutput |
 
@@ -128,7 +128,7 @@ fileOutput := FileLocator documents asAbsolute pathString .
 		  buffer: errorMsg arguments: myArgv  ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - cmajor' }
 LibFaust >> createCMajorFileFromString: aString buffer: errorMsg arguments: argv [ 
 
 ^ self ffiCall:
@@ -142,7 +142,7 @@ LibFaust >> createCMajorFileFromString: aString buffer: errorMsg arguments: argv
     )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - cmajor' }
 LibFaust >> createCMajorFileFromString: aString buffer: errorMsg withName: aName [
 
 	| myArgv fileOutput cmajorPatchesDir patchDir |
@@ -169,7 +169,7 @@ LibFaust >> createCMajorFileFromString: aString buffer: errorMsg withName: aName
 		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - cmajor' }
 LibFaust >> createCMajorFileFromString: aString withName: aName [
 |errorBuffer|
 
@@ -179,7 +179,7 @@ errorBuffer := ByteArray new: 4096.
 	^  self createCMajorFileFromString: aString buffer: errorBuffer withName: aName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - cmajor' }
 LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg arguments: argv [
 
 	^ self ffiCall:
@@ -188,7 +188,7 @@ LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg arguments: 
 		        errorMsg ) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - cmajor' }
 LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: aName [
 
 	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
@@ -220,7 +220,7 @@ LibFaust >> createCMajorMIDIFileFromString: aString buffer: errorMsg withName: a
 		  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - cmajor' }
 LibFaust >> createCMajorMIDIFileFromString: aString withName: aName [
 
 	| errorBuffer |
@@ -230,6 +230,46 @@ LibFaust >> createCMajorMIDIFileFromString: aString withName: aName [
 		  createCMajorMIDIFileFromString: aString
 		  buffer: errorBuffer
 		  withName: aName
+]
+
+{ #category : 'export - cmajor' }
+LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg arguments: argv [ 
+
+^ self ffiCall:
+		   #( bool generateCAuxFilesFromString
+        ( const char * 'MyApp', 
+          const char * aString, 
+          int 4, 
+          void * argv, 
+          ByteArray errorMsg
+        )
+    )
+]
+
+{ #category : 'export - cmajor' }
+LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withName: aName [
+
+	| myArgv fileOutput cmajorPatchesDir patchDir |
+	"we create the cmajorPatches folder in the documents folder if it not exists"
+	cmajorPatchesDir := (FileLocator documents / 'faust2Juce')
+		                    ensureCreateDirectory.
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+
+	fileOutput := patchDir asAbsolute pathString , '/' , aName
+	              , '.h'.
+
+
+	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-lang'.
+			          'cpp'.
+			          ('-cn' , aName , '-o').
+			          fileOutput }.
+
+	^ [
+		  self
+			  createFaustSynthHeaderFileFromString: aString
+			  buffer: errorMsg
+			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
 { #category : 'accessing - platform' }

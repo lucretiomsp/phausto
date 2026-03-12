@@ -266,6 +266,15 @@ DSP >> createCmajorPatchNamed: aName [
 		  withName: aName
 ]
 
+{ #category : 'converting' }
+DSP >> createFaustSynthHeaderFileNamed: aName [
+
+	^ LibFaust uniqueInstance
+		  createFaustSynthHeaderFileFromString: self generatedCode
+		  withName: aName
+	"return true if the .cpp file has been  generated"
+]
+
 { #category : 'initialize - destroy' }
 DSP >> destroy [
 	"Destory the DSP object"
