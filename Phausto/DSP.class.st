@@ -267,6 +267,16 @@ DSP >> createCmajorPatchNamed: aName [
 ]
 
 { #category : 'converting' }
+DSP >> createFaustPolySynthFileNamed: aName [
+
+	^ LibFaust uniqueInstance
+		  createFaustPolySynthHeaderFileFromString: self generatedCode
+		  withName: aName
+		
+	"return true if the .cpp file has been  generated"
+]
+
+{ #category : 'converting' }
 DSP >> createFaustSynthFileNamed: aName [
 
 	^ LibFaust uniqueInstance

@@ -292,27 +292,98 @@ LibFaust >> createFaustHeaderFileFromString: aString withName: aName architectur
 ]
 
 { #category : 'export - juce' }
-LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withName: aName [
+LibFaust >> createFaustPolySynthHeaderFileFromString: aString buffer: errorMsg arguments: argv [ 
+
+'chiamato cppexportrt' traceCr.
+
+^ self ffiCall:
+		   #( bool generateCAuxFilesFromString
+        ( const char * 'MyApp', 
+          const char * aString, 
+          int 11, 
+          void * argv, 
+          ByteArray errorMsg
+        )
+    )
+]
+
+{ #category : 'export - juce' }
+LibFaust >> createFaustPolySynthHeaderFileFromString: aString buffer: errorMsg withName: aName [
 
 	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
 	"we locate the architecture file"
 	architecturePath := (FileLocator documents
-	                     / 'architecture/faustMinimalInlined.h') asAbsolute
-		                    pathString.
+	                     / 'architecture/juce/juce-plugin.cpp')
+		                    asAbsolute pathString.
+	architecturePath inspect.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'faust2Juce')
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
 
+	fileOutput := patchDir asAbsolute pathString , '/'
+	              , 'FaustPluginProcessor.cpp'.
+
+	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-scn'.
+			          'base_dsp'.
+			          '-uim'.
+			          '-i'.
+			          '-a'.
+			          architecturePath.
+			          '-nvoices'.
+			          '16'.
+			          '-midi'.
+			          '-effect'.
+			          'auto'.
+
+			          '-o'.
+			          fileOutput }.
+	"'a'.
+			          architecturePath."
+
+	^ [
+		  self
+			  createFaustPolySynthHeaderFileFromString: aString
+			  buffer: errorMsg
+			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'export - juce' }
+LibFaust >> createFaustPolySynthHeaderFileFromString: aString withName: aName [
+
+	| errorBuffer |
+	errorBuffer := ByteArray new: 4096.
+
+	^ self
+		  createFaustPolySynthHeaderFileFromString: aString
+		  buffer: errorBuffer
+		  withName: aName
+]
+
+{ #category : 'export - juce' }
+LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withName: aName [
+
+	| myArgv fileOutput faust2JuceDir patchDir architecturePath |
+	"we locate the architecture file"
+	architecturePath := (FileLocator documents
+	                     / 'architecture/faustMinimalPolyInlined.h')
+		                    asAbsolute pathString.
+	
+	"we create the faust2juce folder in the documents folder if it not exists"
+	faust2JuceDir := (FileLocator documents / 'faust2Juce')
+		                    ensureCreateDirectory.
+	patchDir := (faust2JuceDir / aName) ensureCreateDirectory.
+
 	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustSynth.h'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
-			          "'a'.
-			          architecturePath."
 			          '-lang'.
 			          'cpp'.
 			          '-o'.
 			          fileOutput }.
+	"'a'.
+			          architecturePath."
 
 	^ [
 		  self
