@@ -232,8 +232,8 @@ LibFaust >> createCMajorMIDIFileFromString: aString withName: aName [
 		  withName: aName
 ]
 
-{ #category : 'export - bela' }
-LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg arguments: argv [ 
+{ #category : 'export - juce' }
+LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg arguments: argv [ 
 
 'chiamato cppexportrt' traceCr.
 
@@ -248,7 +248,50 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg argum
     )
 ]
 
-{ #category : 'export - bela' }
+{ #category : 'export - juce' }
+LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: aName architecture: anArchitecture [
+
+	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
+	"we locate the architecture file"
+	architecturePath := (FileLocator documents
+	                     / ('architecture/' , anArchitecture ))
+		                    asAbsolute pathString.
+	"we create the cmajorPatches folder in the documents folder if it not exists"
+	cmajorPatchesDir := (FileLocator documents / 'faust2Juce')
+		                    ensureCreateDirectory.
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+
+	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustSynth.h'.
+
+	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-lang'.
+			          'cpp'.
+			          '-o'.
+			          fileOutput }.
+	"'a'.
+			          architecturePath."
+
+	^ [
+		  self
+			  createFaustHeaderFileFromString: aString
+			  buffer: errorMsg
+			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'export - juce' }
+LibFaust >> createFaustHeaderFileFromString: aString withName: aName architecture: anArchitecture [
+
+	| errorBuffer |
+	errorBuffer := ByteArray new: 4096.
+
+	^ self
+		  createFaustHeaderFileFromString: aString
+		  buffer: errorBuffer
+		  withName: aName
+		  architecture: anArchitecture
+]
+
+{ #category : 'export - juce' }
 LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withName: aName [
 
 	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
@@ -273,13 +316,13 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withN
 
 	^ [
 		  self
-			  createFaustSynthHeaderFileFromString: aString
+			  createFaustHeaderFileFromString: aString
 			  buffer: errorMsg
 			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
 ]
 
-{ #category : 'export - bela' }
-LibFaust >> createFaustSynthHeaderFileFromString: aString withName: aName [
+{ #category : 'export - juce' }
+LibFaust >> createFaustSynthHeaderFileFromString: aString withName: aName [ 
 
 	| errorBuffer |
 	errorBuffer := ByteArray new: 4096.

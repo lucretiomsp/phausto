@@ -267,6 +267,16 @@ DSP >> createCmajorPatchNamed: aName [
 ]
 
 { #category : 'converting' }
+DSP >> createFaustSynthFileNamed: aName [
+
+	^ LibFaust uniqueInstance
+		  createFaustHeaderFileFromString: self generatedCode
+		  withName: aName
+		 architecture: 'faustMinimalInlined.h'
+	"return true if the .cpp file has been  generated"
+]
+
+{ #category : 'converting' }
 DSP >> createFaustSynthHeaderFileNamed: aName [
 
 	^ LibFaust uniqueInstance
