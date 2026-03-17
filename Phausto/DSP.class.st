@@ -172,6 +172,18 @@ DSP >> asCmajorPolyWrapperFor: aName [
 		close
 ]
 
+{ #category : 'converting' }
+DSP >> asFileNamed: aString [
+
+	| folder destination stream |
+	folder := (FileLocator documents / 'PhaustoDSPs')
+		          ensureCreateDirectory.
+	destination := folder / (aString , '.dsp').
+	stream := destination writeStream.
+	stream nextPutAll: self generatedCode .
+	stream close.
+]
+
 { #category : 'ui-building' }
 DSP >> buttonFor: aString [
 " creates a new slider for the parameter named aString"
