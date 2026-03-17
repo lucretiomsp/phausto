@@ -154,7 +154,7 @@ DSP >> allParameters [
 		ifFalse: [ Error new signal: 'This DSP is not initialized'. Performance uniqueInstance stop. ]
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> asCmajorPolyWrapperFor: aName [
 	"write the cmajor polyWrapper for the patch / by default 16 voices polyphony"
 
@@ -172,18 +172,6 @@ DSP >> asCmajorPolyWrapperFor: aName [
 		close
 ]
 
-{ #category : 'converting' }
-DSP >> asFileNamed: aString [
-
-	| folder destination stream |
-	folder := (FileLocator documents / 'PhaustoDSPs')
-		          ensureCreateDirectory.
-	destination := folder / (aString , '.dsp').
-	stream := destination writeStream.
-	stream nextPutAll: self generatedCode .
-	stream close.
-]
-
 { #category : 'ui-building' }
 DSP >> buttonFor: aString [
 " creates a new slider for the parameter named aString"
@@ -196,7 +184,7 @@ index := self getParamIndex: aString.
 
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> createBelaCppFileNamed: aName [
 	.
 	"return true if the .cpp file has been  generated"
@@ -205,7 +193,7 @@ DSP >> createBelaCppFileNamed: aName [
 		  withName: aName
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> createCmajorFXPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
 
@@ -236,7 +224,7 @@ DSP >> createCmajorFXPatchNamed: aName [
 		close
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> createCmajorMIDIPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
 
@@ -267,7 +255,7 @@ DSP >> createCmajorMIDIPatchNamed: aName [
 		close
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> createCmajorPatchNamed: aName [
 	"the .cmajorpatch file is always generated "
 
@@ -278,7 +266,7 @@ DSP >> createCmajorPatchNamed: aName [
 		  withName: aName
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> createFaustPolySynthFileNamed: aName [
 
 	^ LibFaust uniqueInstance
@@ -288,7 +276,7 @@ DSP >> createFaustPolySynthFileNamed: aName [
 	"return true if the .cpp file has been  generated"
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> createFaustSynthFileNamed: aName [
 
 	^ LibFaust uniqueInstance
@@ -298,13 +286,25 @@ DSP >> createFaustSynthFileNamed: aName [
 	"return true if the .cpp file has been  generated"
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> createFaustSynthHeaderFileNamed: aName [
 
 	^ LibFaust uniqueInstance
 		  createFaustSynthHeaderFileFromString: self generatedCode
 		  withName: aName
 	"return true if the .cpp file has been  generated"
+]
+
+{ #category : 'exporting' }
+DSP >> createFileNamed: aString [
+
+	| folder destination stream |
+	folder := (FileLocator documents / 'PhaustoDSPs')
+		          ensureCreateDirectory.
+	destination := folder / (aString , '.dsp').
+	stream := destination writeStream.
+	stream nextPutAll: self generatedCode .
+	stream close.
 ]
 
 { #category : 'initialize - destroy' }
