@@ -241,7 +241,7 @@ LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg arguments:
 		   #( bool generateCAuxFilesFromString
         ( const char * 'MyApp', 
           const char * aString, 
-          int 4, 
+          int 24, 
           void * argv, 
           ByteArray errorMsg
         )
@@ -300,7 +300,7 @@ LibFaust >> createFaustPolySynthHeaderFileFromString: aString buffer: errorMsg a
 		   #( bool generateCAuxFilesFromString
         ( const char * 'MyApp', 
           const char * aString, 
-          int 11, 
+          int 5, 
           void * argv, 
           ByteArray errorMsg
         )
@@ -310,33 +310,24 @@ LibFaust >> createFaustPolySynthHeaderFileFromString: aString buffer: errorMsg a
 { #category : 'export - juce' }
 LibFaust >> createFaustPolySynthHeaderFileFromString: aString buffer: errorMsg withName: aName [
 
-	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
+	| myArgv fileOutput faust2JuceDir patchDir architecturePath |
 	"we locate the architecture file"
 	architecturePath := (FileLocator documents
 	                     / 'architecture/juce/juce-plugin.cpp')
 		                    asAbsolute pathString.
 	architecturePath inspect.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
-	cmajorPatchesDir := (FileLocator documents / 'faust2Juce')
+	faust2JuceDir := (FileLocator documents / 'faust2Juce')
 		                    ensureCreateDirectory.
-	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+	patchDir := (faust2JuceDir / aName) ensureCreateDirectory.
 
 	fileOutput := patchDir asAbsolute pathString , '/'
 	              , 'FaustPluginProcessor.cpp'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
-			          '-scn'.
-			          'base_dsp'.
-			          '-uim'.
 			          '-i'.
 			          '-a'.
-			          architecturePath.
-			          '-nvoices'.
-			          '16'.
-			          '-midi'.
-			          '-effect'.
-			          'auto'.
-
+			        '/Users/domenicocipriani/Documents/architecture/juce/juce-plugin.cpp'.
 			          '-o'.
 			          fileOutput }.
 	"'a'.
@@ -367,20 +358,40 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withN
 	| myArgv fileOutput faust2JuceDir patchDir architecturePath |
 	"we locate the architecture file"
 	architecturePath := (FileLocator documents
-	                     / 'architecture/faustMinimalPolyInlined.h')
+	                     / 'architecture/juce/juce-plugin.cpp')
 		                    asAbsolute pathString.
-	
+
 	"we create the faust2juce folder in the documents folder if it not exists"
+
 	faust2JuceDir := (FileLocator documents / 'faust2Juce')
-		                    ensureCreateDirectory.
+		                 ensureCreateDirectory.
 	patchDir := (faust2JuceDir / aName) ensureCreateDirectory.
 
 	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustSynth.h'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-i'.
+			          '-a'.		          '/Users/domenicocipriani/Documents/architecture/juce/juce-plugin.cpp'.
 			          '-lang'.
 			          'cpp'.
-			          '-o'.
+			          '-fpga-mem-th'.
+			          '4'.
+			          '-ct'.
+			          '1'.
+			          '-scn'.
+			          'base_dsp'.
+			          '-es'.
+			          '1'.
+			          '-mcd'.
+			          '16'.
+			          '-mdd'.
+			          '1024'.
+			          '-mdy'.
+			          '33'.
+			          '-uim'.
+			          '-single'.
+			          '-ftz'.
+			          '0'.
 			          fileOutput }.
 	"'a'.
 			          architecturePath."
