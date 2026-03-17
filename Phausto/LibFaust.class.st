@@ -241,7 +241,7 @@ LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg arguments:
 		   #( bool generateCAuxFilesFromString
         ( const char * 'MyApp', 
           const char * aString, 
-          int 24, 
+          int 7, 
           void * argv, 
           ByteArray errorMsg
         )
@@ -371,27 +371,10 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withN
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
 			          '-i'.
-			          '-a'.		          '/Users/domenicocipriani/Documents/architecture/juce/juce-plugin.cpp'.
-			          '-lang'.
-			          'cpp'.
-			          '-fpga-mem-th'.
-			          '4'.
-			          '-ct'.
-			          '1'.
-			          '-scn'.
-			          'base_dsp'.
-			          '-es'.
-			          '1'.
-			          '-mcd'.
-			          '16'.
-			          '-mdd'.
-			          '1024'.
-			          '-mdy'.
-			          '33'.
-			          '-uim'.
-			          '-single'.
-			          '-ftz'.
-			          '0'.
+			          '-a'.
+			 '/Users/domenicocipriani/Documents/architecture/faustMinimal.h'.
+			'-lang'. 'cpp' .
+			          '-o'.
 			          fileOutput }.
 	"'a'.
 			          architecturePath."

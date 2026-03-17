@@ -42,16 +42,17 @@ GreyHoleDW >> dryWet: anAmount [
 
 { #category : 'initialization' }
 GreyHoleDW >> initialize [
-super initialize .
+
+	super initialize.
 	self dryWet: (PhHSlider new
 			 label: self label , 'DryWet'
 			 init: 0.1
 			 min: 0
 			 max: 1
 			 step: 0.001).
-			
-		self inputL: 0.
-		self inputR: 0.
+
+	self inputL: Wire new.
+	self inputR: Wire new.
 ]
 
 { #category : 'accessing' }
