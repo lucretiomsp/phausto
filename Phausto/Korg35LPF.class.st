@@ -34,30 +34,30 @@ Korg35LPF >> asBox [
 { #category : 'accessing' }
 Korg35LPF >> fr [
 
-	^ fr ifNil:  [
-		  fr  := PhHSlider new
-			          label: self label , 'Fr'
-			          init: 0.001
-			          min: 0
-			          max:  1
-			          step: 0.001 ] 
+	^ fr
 ]
 
 { #category : 'initialization' }
 Korg35LPF >> initialize [
 
 	super initialize.
-	self processExpression: 'process = ve.korg35LPF;'
+	self processExpression: 'process = ve.korg35LPF;'.
+	fr := PhHSlider new
+		      label: self label , 'Fr'
+		      init: 0.001
+		      min: 0
+		      max: 1
+		      step: 0.001.
+		 res := PhHSlider new
+				         label: self label , 'Res'
+				         init: 1
+				         min: 1
+				         max: 8
+				         step: 0.001 
 ]
 
 { #category : 'accessing' }
 Korg35LPF >> res [
 
-	^ res ifNil:  [
-		  res  := PhHSlider new
-			          label: self label , 'Res'
-			          init: 1
-			          min: 1
-			          max: 8
-			          step: 0.001 ] 
+	^ res 
 ]
