@@ -676,10 +676,10 @@ DSP >> createCmajorPatchNamed: aName [
 { #category : 'exporting' }
 DSP >> createCppFilesNamed: aString for: aPluginType [
 
-	| folder destinationH destinationCpp streamH streamCpp |
+	| folder destinationH destinationCpp streamH streamCpp destinationEditorCpp streamEditorCpp destinationEditorH streamEditorH |
 	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source')
 		          ensureCreateDirectory.
-
+"processor"
 	destinationH := folder / 'PluginProcessor.h'.
 	streamH := destinationH writeStream.
 	streamH nextPutAll: (self asPluginProcessorHeaderFor: aPluginType).
@@ -688,7 +688,20 @@ DSP >> createCppFilesNamed: aString for: aPluginType [
 	destinationCpp := folder / 'PluginProcessor.cpp'.
 	streamCpp := destinationCpp writeStream.
 	streamCpp nextPutAll: (self asPluginProcessorCppFor: aPluginType).
-	streamCpp close
+	streamCpp close.
+	
+"processor editor"
+
+
+destinationEditorH := folder / 'PluginEditor.h'.
+	streamEditorH := destinationH writeStream.
+	streamEditorH nextPutAll: (self asPluginProcessorHeaderFor: aPluginType).
+	streamEditorH close.
+	
+destinationEditorCpp := folder / 'PluginEditor.cpp'.
+	streamEditorCpp := destinationCpp writeStream.
+	streamEditorCpp nextPutAll: (self asPluginProcessorEditorCppFor: aPluginType).
+	streamEditorCpp close
 ]
 
 { #category : 'exporting' }
