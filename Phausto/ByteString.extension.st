@@ -28,13 +28,7 @@ ByteString >> asBox [
 ]
 
 { #category : '*Phausto' }
-ByteString >> asDSPParameter [
-
-	^ DSPParameter new
-]
-
-{ #category : '*Phausto' }
-ByteString >> asSetValueDefinition [
+ByteString >> asCppSetterDefinition [
 "Generates a C setter declaration for this string"
 
 	| stream argument|
@@ -46,4 +40,35 @@ ByteString >> asSetValueDefinition [
 	stream << argument.
 	stream << ');'.
 	^ stream contents
+]
+
+{ #category : '*Phausto' }
+ByteString >> asCppSetterImplementationFor: aPluginType [
+	"aPluginType can be 'Effect' , 'MonoSynth' or 'PolySynth' "
+
+	| function stream |
+	function := (self asCppSetterDefinition copyAfter: $ ) allButLast.
+	stream := ReadWriteStream on: ''.
+	stream << 'void '.
+	stream << aPluginType.
+	stream << 'AudioProcessor::'.
+	stream << function.
+	stream << ' { fUI->setParamValue('.
+	stream << $".
+	stream << self.
+	stream << $".
+	stream << ','.
+	stream << (self first asLowercase asString , self allButFirst).
+	stream << '); }'.
+
+
+
+
+	^ stream contents
+]
+
+{ #category : '*Phausto' }
+ByteString >> asDSPParameter [
+
+	^ DSPParameter new
 ]
