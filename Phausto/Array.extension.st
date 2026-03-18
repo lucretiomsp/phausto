@@ -1,6 +1,16 @@
 Extension { #name : 'Array' }
 
 { #category : '*Phausto' }
+Array >> asCppSetterDefinitions [
+
+	| stream |
+	stream := ReadWriteStream on: ''.
+	self do: [ :i |
+		stream << '    ' << i asCppSetterDefinition << String cr ].
+	^ stream contents
+]
+
+{ #category : '*Phausto' }
 Array >> asParam: aString forUGen: aUnitGenerator [
 	"change init, min, max, step of the UI element to the array value"
 

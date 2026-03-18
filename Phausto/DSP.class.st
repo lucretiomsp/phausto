@@ -172,6 +172,91 @@ DSP >> asCmajorPolyWrapperFor: aName [
 		close
 ]
 
+{ #category : 'converting' }
+DSP >> asPluginProcessorCppFor: aPluginType [
+	"aPluginTYpe can be 'Effect' . 'MonoSynth or 'PolySynth' "
+
+	| firstPart result lastPart setterDefinitions |
+	firstPart := '/*
+  ==============================================================================
+
+    This file was auto-generated!
+
+    It contains the basic framework code for a JUCE plugin processor.
+
+  ==============================================================================
+*/
+
+#pragma once
+
+#include <JuceHeader.h>
+using namespace juce;
+
+//==============================================================================
+/**
+*/
+
+class dsp;
+class MapUI;
+
+class ' , aPluginType , 'AudioProcessor  : public AudioProcessor
+{
+public:
+    //==============================================================================', 
+String crlf ,
+aPluginType , 'AudioProcessor();
+    ~' , aPluginType , 'AudioProcessor();
+
+    //==============================================================================
+    void prepareToPlay (double sampleRate, int samplesPerBlock) override;
+    void releaseResources() override;
+
+   #ifndef JucePlugin_PreferredChannelConfigurations
+    bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
+   #endif
+
+    void processBlock (AudioBuffer<float>&, MidiBuffer&) override;
+
+    //==============================================================================
+    AudioProcessorEditor* createEditor() override;
+    bool hasEditor() const override;
+
+    //==============================================================================
+    const String getName() const override;
+
+    bool acceptsMidi() const override;
+    bool producesMidi() const override;
+    bool isMidiEffect() const override;
+    double getTailLengthSeconds() const override;
+
+    //==============================================================================
+    int getNumPrograms() override;
+    int getCurrentProgram() override;
+    void setCurrentProgram (int index) override;
+    const String getProgramName (int index) override;
+    void changeProgramName (int index, const String& newName) override;
+
+    //==============================================================================
+    void getStateInformation (MemoryBlock& destData) override;
+    void setStateInformation (const void* data, int sizeInBytes) override;'.
+
+	setterDefinitions := ''.
+
+	lastPart := 'private:
+    MapUI* fUI;
+    dsp* fDSP;
+    float **inputs;
+    float **outputs;
+  
+    //==============================================================================
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EffectAudioProcessor)
+};
+'.
+
+	result := firstPart , setterDefinitions , lastPart.
+	^ result
+]
+
 { #category : 'ui-building' }
 DSP >> buttonFor: aString [
 " creates a new slider for the parameter named aString"
