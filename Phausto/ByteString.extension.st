@@ -32,3 +32,18 @@ ByteString >> asDSPParameter [
 
 	^ DSPParameter new
 ]
+
+{ #category : '*Phausto' }
+ByteString >> asSetValueDefinition [
+"Generates a C setter declaration for this string"
+
+	| stream argument|
+	argument:= self first asLowercase asString , self allButFirst.
+	stream := ReadWriteStream on: ''.
+	stream << 'void set'.
+	stream << self.
+	stream << '(float '.
+	stream << argument.
+	stream << ');'.
+	^ stream contents
+]
