@@ -254,14 +254,14 @@ LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: 
 	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
 	"we locate the architecture file"
 	architecturePath := (FileLocator documents
-	                     / ('architecture/' , anArchitecture ))
-		                    asAbsolute pathString.
+	                     / ('architecture/' , anArchitecture)) asAbsolute
+		                    pathString.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	cmajorPatchesDir := (FileLocator documents / 'faust2Juce')
 		                    ensureCreateDirectory.
 	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
 
-	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustSynth.h'.
+	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustEffect.h'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
 			          '-lang'.

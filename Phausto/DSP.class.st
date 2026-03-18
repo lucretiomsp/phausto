@@ -189,7 +189,7 @@ DSP >> asPluginProcessorCppFor: aPluginType [
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include "FaustEffect.h"
+#include "Faust' , aPluginType , '.h"
 using namespace juce;
 
 //=============================================================================='
@@ -332,7 +332,9 @@ bool ' , aPluginType
 }
 #endif
 
-void ' , aPluginType , 'AudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
+void ' , aPluginType
+	             ,
+		             'AudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
     ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -577,6 +579,42 @@ DSP >> createCmajorPatchNamed: aName [
 ]
 
 { #category : 'exporting' }
+DSP >> createCppFilesNamed: aString [
+
+	| folder destinationH destinationCpp streamH streamCpp |
+	folder := (FileLocator documents / 'faust2Juce' / aString)
+		          ensureCreateDirectory.
+		
+	destinationH := folder / (aString , '.h').
+	streamH := destinationH writeStream.
+	streamH nextPutAll: self generatedCode.
+	streamH close.
+
+	destinationCpp := folder / (aString , '.cpp').
+	streamCpp := destinationCpp writeStream.
+	streamCpp nextPutAll: self generatedCode.
+	streamCpp close
+]
+
+{ #category : 'exporting' }
+DSP >> createCppFilesNamed: aString for: aPluginType [
+
+	| folder destinationH destinationCpp streamH streamCpp |
+	folder := (FileLocator documents / 'faust2Juce' / aString)
+		          ensureCreateDirectory.
+		
+	destinationH := folder / 'PluginProcessor.h'.
+	streamH := destinationH writeStream.
+	streamH nextPutAll:( self asPluginProcessorHeaderFor: aPluginType) .
+	streamH close.
+
+	destinationCpp := folder / 'PluginProcessor.cpp'.
+	streamCpp := destinationCpp writeStream.
+	streamCpp nextPutAll: (self asPluginProcessorCppFor: aPluginType) .
+	streamCpp close
+]
+
+{ #category : 'exporting' }
 DSP >> createFaustPolySynthFileNamed: aName [
 
 	^ LibFaust uniqueInstance
@@ -718,6 +756,11 @@ DSP >> destroy [
 					"return a null pointer"
 					self class initializedDSP: DSP new.
 					 ] ]
+]
+
+{ #category : 'exporting' }
+DSP >> export2JuceWithName: aString type: aPluginType [
+" apluginType can be 'Effect' , MonoSynth' or 'PolySynth' "
 ]
 
 { #category : 'accessing' }
