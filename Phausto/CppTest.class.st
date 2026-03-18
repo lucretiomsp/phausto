@@ -53,7 +53,7 @@ CppTest >> testAsCppSetterImplementationFromArray [
 
 	| array implementations |
 	array := #( 'Cutoff' 'Resonance' ).
-	implementations := '    ' , 'void EffectAudioProcessor::setCutoff(float cutoff) { fUI->setParamValue("Cutoff",cutoff); }' , String cr , '    ' ,   'void EffectAudioProcessor::setResonance(float resonance) { fUI->setParamValue("Resonance",resonance); }' , String cr.
+	implementations := 'void EffectAudioProcessor::setCutoff(float cutoff) { fUI->setParamValue("Cutoff",cutoff); }' , String cr , 'void EffectAudioProcessor::setResonance(float resonance) { fUI->setParamValue("Resonance",resonance); }' , String cr.
  
 	self
 		assert: (array asCppSetterImplementationsFor: 'Effect')

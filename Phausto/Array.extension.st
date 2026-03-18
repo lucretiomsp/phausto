@@ -5,8 +5,7 @@ Array >> asCppSetterDefinitions [
 
 	| stream |
 	stream := ReadWriteStream on: ''.
-	self do: [ :i |
-		stream << '    ' << i asCppSetterDefinition << String cr ].
+	self do: [ :i | stream << '    ' << i asCppSetterDefinition << String cr ].
 	^ stream contents
 ]
 
@@ -16,8 +15,9 @@ Array >> asCppSetterImplementationsFor: aPluginType [
 
 	| stream |
 	stream := ReadWriteStream on: ''.
-		self do: [ :i |
-		stream << '    ' << (i asCppSetterImplementationFor: aPluginType) << String cr ].
+	self do: [ :i |
+			stream << '' << (i asCppSetterImplementationFor: aPluginType)
+			<< String cr ].
 	^ stream contents
 ]
 
