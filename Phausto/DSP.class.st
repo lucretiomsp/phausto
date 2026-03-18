@@ -829,6 +829,16 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
             compile="0"
             resource="0"
             file="Source/FaustEffect.h"/>
+      <FILE id="cpp02"
+            name="PluginEditor.cpp"
+            compile="1"
+            resource="0"
+            file="Source/PluginEditor.cpp"/>
+       <FILE id="hdr03"
+            name="PluginEditor.h"
+            compile="0"
+            resource="0"
+      file="Source/PluginEditor.h"/>
     </GROUP>
   </MAINGROUP>
 
@@ -893,7 +903,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
 
 </JUCERPROJECT>
 '.
-	folder := (FileLocator documents / 'faust2Juce' / aString )
+	folder := (FileLocator documents / 'faust2Juce' / aString)
 		          ensureCreateDirectory.
 
 	destination := folder / (aString , '.jucer').
@@ -1011,7 +1021,7 @@ DSP >> export2JuceWithName: aString type: aPluginType [
 
 	self createCppFilesNamed: aString for: aPluginType.
 	self createJucerFileNamed: aString for: aPluginType.
-	self createFaustEffectHeaderFileNamed: 'Greia4'
+	self createFaustEffectHeaderFileNamed: aString 
 ]
 
 { #category : 'accessing' }
