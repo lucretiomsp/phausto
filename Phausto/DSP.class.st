@@ -579,7 +579,8 @@ DSP >> createCmajorPatchNamed: aName [
 ]
 
 { #category : 'exporting' }
-DSP >> createCppFilesNamed: aString [
+DSP >> createCppFilesNamed: aString for: aPluginType [
+
 
 	| folder destinationH destinationCpp streamH streamCpp |
 	folder := (FileLocator documents / 'faust2Juce' / aString)
@@ -594,24 +595,7 @@ DSP >> createCppFilesNamed: aString [
 	streamCpp := destinationCpp writeStream.
 	streamCpp nextPutAll: self generatedCode.
 	streamCpp close
-]
 
-{ #category : 'exporting' }
-DSP >> createCppFilesNamed: aString for: aPluginType [
-
-	| folder destinationH destinationCpp streamH streamCpp |
-	folder := (FileLocator documents / 'faust2Juce' / aString)
-		          ensureCreateDirectory.
-		
-	destinationH := folder / 'PluginProcessor.h'.
-	streamH := destinationH writeStream.
-	streamH nextPutAll:( self asPluginProcessorHeaderFor: aPluginType) .
-	streamH close.
-
-	destinationCpp := folder / 'PluginProcessor.cpp'.
-	streamCpp := destinationCpp writeStream.
-	streamCpp nextPutAll: (self asPluginProcessorCppFor: aPluginType) .
-	streamCpp close
 ]
 
 { #category : 'exporting' }
@@ -653,6 +637,140 @@ DSP >> createFileNamed: aString [
 	stream := destination writeStream.
 	stream nextPutAll: self generatedCode .
 	stream close.
+]
+
+{ #category : 'exporting' }
+DSP >> createJucerFileNamed: aString for: aPluginType [
+
+	| folder destination stream code pluginIsSynth pluginVSTCategory pluginChannelConfigs |
+	pluginIsSynth := '0'.
+	aPluginType = 'Effect' ifFalse: [ pluginIsSynth := '1' ].
+	pluginVSTCategory := 'kPlugCategEffect'.
+	aPluginType = 'Effect' ifFalse: [
+		pluginVSTCategory := 'kPlugCategSynth' ].
+	pluginChannelConfigs := '{1, 1}, {2, 2}'.
+	aPluginType = 'Effect' ifFalse: [ pluginChannelConfigs := '{0, 2}' ].
+
+	code := '<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="FaustPlugin"
+              name="' , aString , '"
+              projectType="audioplug"
+              version="1.0.0"
+              bundleIdentifier="com.phausto.faustplugin"
+              companyName="Phausto"
+              pluginName="' , aString , '"
+              pluginDesc="A Faust-based audio plugin made with Pharo"
+              pluginManufacturer="Phausto"
+              pluginManufacturerCode="Phau"
+              pluginCode="Fplu"
+              pluginChannelConfigs="' , pluginChannelConfigs , '"
+              pluginIsSynth="' , pluginIsSynth , '"
+              pluginWantsMidiInput="' , pluginIsSynth , '"
+              pluginProducesMidiOut="0"
+              pluginIsMidiEffect="0"
+              pluginEditorRequiresKeys="0"
+              pluginAUExportPrefix="' , aString  ,'pluginAU"
+              pluginRTASCategory=""
+              aaxIdentifier="com.phausto.' , aString , 'plugin"
+              pluginVSTCategory="kPlugCategEffect"
+              buildVST="1"
+              buildVST3="1"
+              buildAU="1"
+              buildAUv3="0"
+              buildRTAS="0"
+              buildAAX="1"
+              buildStandalone="1"
+              enableIAA="0">
+
+  <MAINGROUP id="main" name="',  aString , 'Plugin">
+    <GROUP id="source" name="Source">
+      <FILE id="cpp01"
+            name="PluginProcessor.cpp"
+            compile="1"
+            resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="hdr01"
+            name="PluginProcessor.h"
+            compile="0"
+            resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="hdr02"
+            name="FaustEffect.h"
+            compile="0"
+            resource="0"
+            file="Source/FaustEffect.h"/>
+    </GROUP>
+  </MAINGROUP>
+
+  <MODULES>
+    <MODULE id="juce_audio_basics"          showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices"         showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats"         showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client"   showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors"      showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils"           showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core"                  showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures"       showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events"                showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics"              showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics"            showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra"             showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+
+  <EXPORTFORMATS>
+    <XCODE_MAC
+        targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug"
+                       isDebug="1"
+                       optimisation="1"
+                       targetName="FaustPlugin"/>
+        <CONFIGURATION name="Release"
+                       isDebug="0"
+                       optimisation="3"
+                       targetName="FaustPlugin"/>
+      </CONFIGURATIONS>
+    </XCODE_MAC>
+
+    <VS2022
+        targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug"
+                       isDebug="1"
+                       optimisation="1"
+                       targetName="FaustPlugin"/>
+        <CONFIGURATION name="Release"
+                       isDebug="0"
+                       optimisation="3"
+                       targetName="FaustPlugin"/>
+      </CONFIGURATIONS>
+    </VS2022>
+
+    <LINUX_MAKE
+        targetFolder="Builds/LinuxMakefile">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug"
+                       isDebug="1"
+                       optimisation="1"
+                       targetName="FaustPlugin"/>
+        <CONFIGURATION name="Release"
+                       isDebug="0"
+                       optimisation="3"
+                       targetName="FaustPlugin"/>
+      </CONFIGURATIONS>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+
+</JUCERPROJECT>
+'.
+	folder := (FileLocator documents / 'faust2Juce' / aString)
+		          ensureCreateDirectory.
+
+	destination := folder / (aString , '.jucer').
+	stream := destination writeStream.
+	stream nextPutAll: code.
+	stream close
 ]
 
 { #category : 'exporting' }
