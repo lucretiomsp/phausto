@@ -11,6 +11,17 @@ Array >> asCppSetterDefinitions [
 ]
 
 { #category : '*Phausto' }
+Array >> asCppSetterImplementationsFor: aPluginType [
+	" plugins tyore are 'Effect'  , 'MonoSynth' , 'PolySynth' "
+
+	| stream |
+	stream := ReadWriteStream on: ''.
+		self do: [ :i |
+		stream << '    ' << (i asCppSetterImplementationFor: aPluginType) << String cr ].
+	^ stream contents
+]
+
+{ #category : '*Phausto' }
 Array >> asParam: aString forUGen: aUnitGenerator [
 	"change init, min, max, step of the UI element to the array value"
 
