@@ -25,7 +25,8 @@ Class {
 		'parameters',
 		'isMIDI',
 		'source',
-		'parameterStore'
+		'parameterStore',
+		'template'
 	],
 	#classVars : [
 		'defaultName',
@@ -401,7 +402,55 @@ AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 ]
 
 { #category : 'converting' }
-DSP >> asPluginProcessorEditorCppFor: aPluginType [
+DSP >> asPluginProcessorEditorCppFor: aString [
+
+	template := '/*
+  ==============================================================================
+
+    This file was auto-generated!
+
+    It contains the basic framework code for a JUCE plugin editor.
+
+  ==============================================================================
+*/
+
+#include "PluginProcessor.h"
+#include "PluginEditor.h"
+using namespace juce;
+
+//==============================================================================
+XXXAudioProcessorEditor::XXXAudioProcessorEditor (XXXAudioProcessor& p)
+    : AudioProcessorEditor (&p), processor (p)
+{
+    // Make sure that before the constructor has finished, you''ve set the
+    // editor''s size to whatever you need it to be.
+    setSize (800, 100);
+    
+   
+}
+
+EffectAudioProcessorEditor::~EffectAudioProcessorEditor()
+{
+}
+
+//==============================================================================
+void EffectAudioProcessorEditor::paint (Graphics& g)
+{
+    // (Our component is opaque, so we must completely fill the background with a solid colour)
+    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
+}
+
+void XXXAudioProcessorEditor::resized()
+{
+
+}
+'.
+
+	^ template copyReplaceAll: 'XXX' with: 'Effect'
+]
+
+{ #category : 'converting' }
+DSP >> asPluginProcessorEditorHeaderFor: aPluginType [
 
 	| template |
 	template := '/*
