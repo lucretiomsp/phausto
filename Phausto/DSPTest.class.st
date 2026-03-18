@@ -219,6 +219,57 @@ AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 ]
 
 { #category : 'tests' }
+DSPTest >> testAsEffectPluginProcessorEditorCpp [
+
+	| dsp filter |
+	filter := PhResonLp new
+		          frequency: #Cutoff;
+		          q: #Resonance.
+	dsp := filter stereo asDsp.
+	dsp init.
+	self
+		assert: (dsp asPluginProcessorEditorCppFor: 'Effect')
+		equals: '/*
+  ==============================================================================
+
+    This file was auto-generated!
+
+    It contains the basic framework code for a JUCE plugin editor.
+
+  ==============================================================================
+*/
+
+#pragma once
+
+#include <JuceHeader.h>
+#include "PluginProcessor.h"
+using namespace juce;
+
+//==============================================================================
+/**
+*/
+class EffectAudioProcessorEditor  : public AudioProcessorEditor
+{
+public:
+    EffectAudioProcessorEditor (EffectAudioProcessor&);
+    ~EffectAudioProcessorEditor();
+
+    //==============================================================================
+    void paint (Graphics&) override;
+    void resized() override;
+
+private:
+
+    // This reference is provided as a quick way for your editor to
+    // access the processor object that created it.
+    EffectAudioProcessor& processor;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EffectAudioProcessorEditor)
+};
+'
+]
+
+{ #category : 'tests' }
 DSPTest >> testAsEffectPluginProcessorHeader [
 
 	| dsp filter |

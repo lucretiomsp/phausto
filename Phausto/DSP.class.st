@@ -401,6 +401,52 @@ AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 ]
 
 { #category : 'converting' }
+DSP >> asPluginProcessorEditorCppFor: aPluginType [
+
+	| template |
+	template := '/*
+  ==============================================================================
+
+    This file was auto-generated!
+
+    It contains the basic framework code for a JUCE plugin editor.
+
+  ==============================================================================
+*/
+
+#pragma once
+
+#include <JuceHeader.h>
+#include "PluginProcessor.h"
+using namespace juce;
+
+//==============================================================================
+/**
+*/
+class XXXAudioProcessorEditor  : public AudioProcessorEditor
+{
+public:
+    XXXAudioProcessorEditor (EffectAudioProcessor&);
+    ~XXXAudioProcessorEditor();
+
+    //==============================================================================
+    void paint (Graphics&) override;
+    void resized() override;
+
+private:
+
+    // This reference is provided as a quick way for your editor to
+    // access the processor object that created it.
+    EffectAudioProcessor& processor;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EffectAudioProcessorEditor)
+};
+'.
+
+	^ template copyReplaceAll: 'XXX' with: aPluginType
+]
+
+{ #category : 'converting' }
 DSP >> asPluginProcessorHeaderFor: aPluginType [
 	"aPluginTYpe can be 'Effect' . 'MonoSynth or 'PolySynth' "
 
