@@ -582,17 +582,17 @@ DSP >> createCmajorPatchNamed: aName [
 DSP >> createCppFilesNamed: aString for: aPluginType [
 
 	| folder destinationH destinationCpp streamH streamCpp |
-	folder := (FileLocator documents / 'faust2Juce/Source' /aString)
+	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source')
 		          ensureCreateDirectory.
 
 	destinationH := folder / 'PluginProcessor.h'.
 	streamH := destinationH writeStream.
-	streamH nextPutAll: self generatedCode.
+	streamH nextPutAll: (self asPluginProcessorHeaderFor: aPluginType).
 	streamH close.
 
 	destinationCpp := folder / 'PluginProcessor.cpp'.
 	streamCpp := destinationCpp writeStream.
-	streamCpp nextPutAll: self generatedCode.
+	streamCpp nextPutAll: (self asPluginProcessorCppFor: aPluginType).
 	streamCpp close
 ]
 
@@ -783,7 +783,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
 
 </JUCERPROJECT>
 '.
-	folder := (FileLocator documents / 'faust2Juce/Source' / aString)
+	folder := (FileLocator documents / 'faust2Juce' / aString )
 		          ensureCreateDirectory.
 
 	destination := folder / (aString , '.jucer').

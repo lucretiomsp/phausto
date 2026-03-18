@@ -282,18 +282,20 @@ myArgv := ExternalAddress arrayOfStringsFrom: {
 { #category : 'export - juce' }
 LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: aName architecture: anArchitecture type: aPluginType [
 
-	| myArgv fileOutput faust2JuceDir patchDir architecturePath |
+	| myArgv fileOutput faust2JuceDir patchDir architecturePath sourceDir |
 	"we locate the architecture file"
 	architecturePath := (FileLocator documents
 	                     / ('architecture/' , anArchitecture)) asAbsolute
 		                    pathString.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	faust2JuceDir := (FileLocator documents / 'faust2Juce')
-		                    ensureCreateDirectory.
+		                 ensureCreateDirectory.
 
 	patchDir := (faust2JuceDir / aName) ensureCreateDirectory.
 
-	fileOutput := patchDir asAbsolute pathString , '/' , 'Faust'
+	sourceDir := (patchDir / 'Source') ensureCreateDirectory.
+
+	fileOutput := sourceDir asAbsolute pathString , '/Faust'
 	              , aPluginType , '.h'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
