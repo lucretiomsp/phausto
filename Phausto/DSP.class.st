@@ -597,11 +597,12 @@ DSP >> createCppFilesNamed: aString for: aPluginType [
 ]
 
 { #category : 'exporting' }
-DSP >> createFausEffectHeaderFileNamed: aName [
+DSP >> createFaustEffectHeaderFileNamed: aName [
 
 	^ LibFaust uniqueInstance
-		  createFaustSynthHeaderFileFromString: self generatedCode
+		  createFaustHeaderFileFromString: self generatedCode
 		  withName: aName
+		  architecture: 'faustMinimalInlined.h'
 		  type: 'Effect'
 	"return true if the .cpp file has been  generated"
 ]

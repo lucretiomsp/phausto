@@ -263,13 +263,14 @@ LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: 
 
 	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustEffect.h'.
 
-	myArgv := ExternalAddress arrayOfStringsFrom: {
+myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-i'.
+			          '-a'.
+			          architecturePath .
 			          '-lang'.
 			          'cpp'.
 			          '-o'.
 			          fileOutput }.
-	"'a'.
-			          architecturePath."
 
 	^ [
 		  self
@@ -281,19 +282,24 @@ LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: 
 { #category : 'export - juce' }
 LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: aName architecture: anArchitecture type: aPluginType [
 
-	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
+	| myArgv fileOutput faust2JuceDir patchDir architecturePath |
 	"we locate the architecture file"
 	architecturePath := (FileLocator documents
 	                     / ('architecture/' , anArchitecture)) asAbsolute
 		                    pathString.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
-	cmajorPatchesDir := (FileLocator documents / 'faust2Juce/Source')
+	faust2JuceDir := (FileLocator documents / 'faust2Juce')
 		                    ensureCreateDirectory.
-	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
 
-	fileOutput := patchDir asAbsolute pathString , '/' , 'Faust' , aPluginType ,  '.h'.
+	patchDir := (faust2JuceDir / aName) ensureCreateDirectory.
+
+	fileOutput := patchDir asAbsolute pathString , '/' , 'Faust'
+	              , aPluginType , '.h'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-i'.
+			          '-a'.
+			          architecturePath.
 			          '-lang'.
 			          'cpp'.
 			          '-o'.
@@ -321,13 +327,27 @@ LibFaust >> createFaustHeaderFileFromString: aString withName: aName architectur
 ]
 
 { #category : 'export - juce' }
+LibFaust >> createFaustHeaderFileFromString: aString withName: aName architecture: anArchitecture type: aPluginType [
+
+	| errorBuffer |
+	errorBuffer := ByteArray new: 4096.
+
+	^ self
+		  createFaustHeaderFileFromString: aString
+		  buffer: errorBuffer
+		  withName: aName
+		  architecture: anArchitecture
+		  type: aPluginType
+]
+
+{ #category : 'export - juce' }
 LibFaust >> createFaustHeaderFileFromString: aString withName: aName type: aPluginType [
 
 	| errorBuffer |
 	errorBuffer := ByteArray new: 4096.
 
 	^ self
-		  createFaustSynthHeaderFileFromString: aString
+		  createFaustHeaderFileFromString: aString
 		  buffer: errorBuffer
 		  withName: aName
 		  type: aPluginType 
