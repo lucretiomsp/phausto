@@ -1007,7 +1007,11 @@ DSP >> destroy [
 
 { #category : 'exporting' }
 DSP >> export2JuceWithName: aString type: aPluginType [
-" apluginType can be 'Effect' , MonoSynth' or 'PolySynth' "
+	" apluginType can be 'Effect' , MonoSynth' or 'PolySynth' "
+
+	self createCppFilesNamed: aString for: aPluginType.
+	self createJucerFileNamed: aString for: aPluginType.
+	self createFaustEffectHeaderFileNamed: 'Greia4'
 ]
 
 { #category : 'accessing' }
