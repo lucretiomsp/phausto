@@ -582,7 +582,7 @@ DSP >> createCmajorPatchNamed: aName [
 DSP >> createCppFilesNamed: aString for: aPluginType [
 
 	| folder destinationH destinationCpp streamH streamCpp |
-	folder := (FileLocator documents / 'faust2Juce' / aString)
+	folder := (FileLocator documents / 'faust2Juce/Source' /aString)
 		          ensureCreateDirectory.
 
 	destinationH := folder / 'PluginProcessor.h'.
@@ -594,6 +594,26 @@ DSP >> createCppFilesNamed: aString for: aPluginType [
 	streamCpp := destinationCpp writeStream.
 	streamCpp nextPutAll: self generatedCode.
 	streamCpp close
+]
+
+{ #category : 'exporting' }
+DSP >> createFausEffectHeaderFileNamed: aName [
+
+	^ LibFaust uniqueInstance
+		  createFaustSynthHeaderFileFromString: self generatedCode
+		  withName: aName
+		  type: 'Effect'
+	"return true if the .cpp file has been  generated"
+]
+
+{ #category : 'exporting' }
+DSP >> createFaustHeaderFileNamed: aName [
+
+	^ LibFaust uniqueInstance
+		  createFaustHeaderFileFromString: self generatedCode
+		  withName: aName
+		  architecture: 'faustMinimalInlined.h'
+	"return true if the .cpp file has been  generated"
 ]
 
 { #category : 'exporting' }
@@ -610,9 +630,9 @@ DSP >> createFaustPolySynthFileNamed: aName [
 DSP >> createFaustSynthFileNamed: aName [
 
 	^ LibFaust uniqueInstance
-		  createFaustHeaderFileFromString: self generatedCode
+		  createFaustSynthHeaderFileFromString: self generatedCode
 		  withName: aName
-		 architecture: 'faustMinimalInlined.h'
+		
 	"return true if the .cpp file has been  generated"
 ]
 
@@ -668,7 +688,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
               pluginProducesMidiOut="0"
               pluginIsMidiEffect="0"
               pluginEditorRequiresKeys="0"
-              pluginAUExportPrefix="' , aString  ,'pluginAU"
+              pluginAUExportPrefix="' , aString , 'pluginAU"
               pluginRTASCategory=""
               aaxIdentifier="com.phausto.' , aString , 'plugin"
               pluginVSTCategory="kPlugCategEffect"
@@ -681,7 +701,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
               buildStandalone="1"
               enableIAA="0">
 
-  <MAINGROUP id="main" name="',  aString , 'Plugin">
+  <MAINGROUP id="main" name="' , aString , 'Plugin">
     <GROUP id="source" name="Source">
       <FILE id="cpp01"
             name="PluginProcessor.cpp"
@@ -762,7 +782,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
 
 </JUCERPROJECT>
 '.
-	folder := (FileLocator documents / 'faust2Juce' / aString)
+	folder := (FileLocator documents / 'faust2Juce/Source' / aString)
 		          ensureCreateDirectory.
 
 	destination := folder / (aString , '.jucer').

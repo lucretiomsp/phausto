@@ -279,6 +279,35 @@ LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: 
 ]
 
 { #category : 'export - juce' }
+LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: aName architecture: anArchitecture type: aPluginType [
+
+	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
+	"we locate the architecture file"
+	architecturePath := (FileLocator documents
+	                     / ('architecture/' , anArchitecture)) asAbsolute
+		                    pathString.
+	"we create the cmajorPatches folder in the documents folder if it not exists"
+	cmajorPatchesDir := (FileLocator documents / 'faust2Juce/Source')
+		                    ensureCreateDirectory.
+	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
+
+	fileOutput := patchDir asAbsolute pathString , '/' , 'Faust' , aPluginType ,  '.h'.
+
+	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-lang'.
+			          'cpp'.
+			          '-o'.
+			          fileOutput }.
+
+
+	^ [
+		  self
+			  createFaustHeaderFileFromString: aString
+			  buffer: errorMsg
+			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'export - juce' }
 LibFaust >> createFaustHeaderFileFromString: aString withName: aName architecture: anArchitecture [
 
 	| errorBuffer |
@@ -289,6 +318,20 @@ LibFaust >> createFaustHeaderFileFromString: aString withName: aName architectur
 		  buffer: errorBuffer
 		  withName: aName
 		  architecture: anArchitecture
+]
+
+{ #category : 'export - juce' }
+LibFaust >> createFaustHeaderFileFromString: aString withName: aName type: aPluginType [
+
+	| errorBuffer |
+	errorBuffer := ByteArray new: 4096.
+
+	^ self
+		  createFaustSynthHeaderFileFromString: aString
+		  buffer: errorBuffer
+		  withName: aName
+		  type: aPluginType 
+		   
 ]
 
 { #category : 'export - juce' }
@@ -318,7 +361,7 @@ LibFaust >> createFaustPolySynthHeaderFileFromString: aString buffer: errorMsg w
 	architecturePath inspect.
 	"we create the cmajorPatches folder in the documents folder if it not exists"
 	faust2JuceDir := (FileLocator documents / 'faust2Juce')
-		                    ensureCreateDirectory.
+		                 ensureCreateDirectory.
 	patchDir := (faust2JuceDir / aName) ensureCreateDirectory.
 
 	fileOutput := patchDir asAbsolute pathString , '/'
@@ -327,7 +370,40 @@ LibFaust >> createFaustPolySynthHeaderFileFromString: aString buffer: errorMsg w
 	myArgv := ExternalAddress arrayOfStringsFrom: {
 			          '-i'.
 			          '-a'.
-			        '/Users/domenicocipriani/Documents/architecture/juce/juce-plugin.cpp'.
+			          '/Users/domenicocipriani/Documents/architecture/juce/juce-plugin.cpp'.
+			          '-o'.
+			          fileOutput }.
+	"'a'.
+			          architecturePath."
+
+	^ [
+		  self
+			  createFaustPolySynthHeaderFileFromString: aString
+			  buffer: errorMsg
+			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+]
+
+{ #category : 'export - juce' }
+LibFaust >> createFaustPolySynthHeaderFileFromString: aString buffer: errorMsg withName: aName type: aPluginType [
+
+	| myArgv fileOutput faust2JuceDir patchDir architecturePath |
+	"we locate the architecture file"
+	architecturePath := (FileLocator documents
+	                     / 'architecture/juce/juce-plugin.cpp')
+		                    asAbsolute pathString.
+	architecturePath inspect.
+	"we create the cmajorPatches folder in the documents folder if it not exists"
+	faust2JuceDir := (FileLocator documents / 'faust2Juce')
+		                 ensureCreateDirectory.
+	patchDir := (faust2JuceDir / aName) ensureCreateDirectory.
+
+	fileOutput := patchDir asAbsolute pathString , '/'
+	              , 'FaustPluginProcessor.cpp'.
+
+	myArgv := ExternalAddress arrayOfStringsFrom: {
+			          '-i'.
+			          '-a'.
+			          '/Users/domenicocipriani/Documents/architecture/juce/juce-plugin.cpp'.
 			          '-o'.
 			          fileOutput }.
 	"'a'.
