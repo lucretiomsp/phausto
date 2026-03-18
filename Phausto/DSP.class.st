@@ -202,9 +202,8 @@ class MapUI;
 class ' , aPluginType , 'AudioProcessor  : public AudioProcessor
 {
 public:
-    //==============================================================================', 
-String crlf ,
-aPluginType , 'AudioProcessor();
+    //=============================================================================='
+	             , String cr, '    ' ,  aPluginType , 'AudioProcessor();
     ~' , aPluginType , 'AudioProcessor();
 
     //==============================================================================
@@ -240,7 +239,7 @@ aPluginType , 'AudioProcessor();
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;'.
 
-	setterDefinitions := ''.
+	setterDefinitions := self allParameters asCppSetterDefinitions.
 
 	lastPart := 'private:
     MapUI* fUI;
@@ -253,7 +252,7 @@ aPluginType , 'AudioProcessor();
 };
 '.
 
-	result := firstPart , setterDefinitions , lastPart.
+	result := firstPart , String cr ,  setterDefinitions , String cr , lastPart.
 	^ result
 ]
 
