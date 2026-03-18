@@ -367,13 +367,14 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString buffer: errorMsg withN
 		                 ensureCreateDirectory.
 	patchDir := (faust2JuceDir / aName) ensureCreateDirectory.
 
-	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustSynth.h'.
+	fileOutput := patchDir asAbsolute pathString , '/' , 'FaustEffect.h'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
 			          '-i'.
 			          '-a'.
-			 '/Users/domenicocipriani/Documents/architecture/faustMinimal.h'.
-			'-lang'. 'cpp' .
+			          '/Users/domenicocipriani/Documents/architecture/faustMinimal.h'.
+			          '-lang'.
+			          'cpp'.
 			          '-o'.
 			          fileOutput }.
 	"'a'.

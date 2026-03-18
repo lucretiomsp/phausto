@@ -581,21 +581,19 @@ DSP >> createCmajorPatchNamed: aName [
 { #category : 'exporting' }
 DSP >> createCppFilesNamed: aString for: aPluginType [
 
-
 	| folder destinationH destinationCpp streamH streamCpp |
 	folder := (FileLocator documents / 'faust2Juce' / aString)
 		          ensureCreateDirectory.
-		
-	destinationH := folder / (aString , '.h').
+
+	destinationH := folder / 'PluginProcessor.h'.
 	streamH := destinationH writeStream.
 	streamH nextPutAll: self generatedCode.
 	streamH close.
 
-	destinationCpp := folder / (aString , '.cpp').
+	destinationCpp := folder / 'PluginProcessor.cpp'.
 	streamCpp := destinationCpp writeStream.
 	streamCpp nextPutAll: self generatedCode.
 	streamCpp close
-
 ]
 
 { #category : 'exporting' }
