@@ -23,8 +23,8 @@ PhDemosStereo >> asBox [
 PhDemosStereo >> initialize [
 
 	super initialize.
-	inputL := 0.
-	inputR := 0 
+	inputL := Wire new .
+	inputR := Wire new
 ]
 
 { #category : 'accessing' }

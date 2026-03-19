@@ -280,7 +280,7 @@ myArgv := ExternalAddress arrayOfStringsFrom: {
 ]
 
 { #category : 'export - juce' }
-LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: aName architecture: anArchitecture type: aPluginType [
+LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: aName architecture: anArchitecture type: aPluginType [ 
 
 	| myArgv fileOutput faust2JuceDir patchDir architecturePath sourceDir |
 	"we locate the architecture file"
@@ -312,6 +312,7 @@ LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: 
 			  createFaustHeaderFileFromString: aString
 			  buffer: errorMsg
 			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
+
 ]
 
 { #category : 'export - juce' }
