@@ -114,28 +114,25 @@ void EffectAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void EffectAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-  fDSP = new mydsp();
+  fDSP = std::make_unique<mydsp>();
   fDSP->init(sampleRate);
-  fUI = new MapUI();
+  fUI = std::make_unique<MapUI>();
   fDSP->buildUserInterface(fUI);
   inputs = new float*[2];
   outputs = new float*[2];
-  for (int channel = 0; channel < 2; ++channel){
-    inputs[channel] = new float[samplesPerBlock];
-    outputs[channel] = new float[samplesPerBlock];
-  }
+  // Allocate buffers
+  inputBuffer.setSize(2, samplesPerBlock);
+  outputBuffer.setSize(2, samplesPerBlock);
 }
 
 void EffectAudioProcessor::releaseResources()
 {
-    delete fDSP;
-    delete fUI;
-    for (int channel = 0; channel < 2; ++channel){
-        delete[] inputs[channel];
-        delete[] outputs[channel];
-    }
-    delete [] inputs;
-    delete [] outputs;
+    inputBuffer.setSize(0, 0);
+    outputBuffer.setSize(0, 0);
+
+    // Optional but safe
+    fDSP.reset();
+    fUI.reset();
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -165,22 +162,42 @@ bool EffectAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) c
 void EffectAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
     ScopedNoDenormals noDenormals;
-    auto totalNumInputChannels  = getTotalNumInputChannels();
-    auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-    for (int channel = 0; channel < totalNumInputChannels; ++channel){
-      for(int i=0; i<buffer.getNumSamples(); i++){
-        inputs[channel][i] = *buffer.getWritePointer(channel,i);
-      }
+    const int numSamples = buffer.getNumSamples();
+    const int numChannels = jmin(2, buffer.getNumChannels());
+
+    // Resize buffers if host changes block size (important for VST3)
+    if (inputBuffer.getNumSamples() < numSamples)
+    {
+        inputBuffer.setSize(2, numSamples, false, false, true);
+        outputBuffer.setSize(2, numSamples, false, false, true);
     }
 
-    fDSP->compute(buffer.getNumSamples(),inputs,outputs);
-    
-    for (int channel = 0; channel < totalNumOutputChannels; ++channel){
-      for(int i=0; i<buffer.getNumSamples(); i++){
-        *buffer.getWritePointer(channel,i) = outputs[channel][i];
-      }
+    // Copy input
+    for (int ch = 0; ch < numChannels; ++ch)
+        inputBuffer.copyFrom(ch, 0, buffer, ch, 0, numSamples);
+
+    // Prepare raw pointers for Faust
+    float* inputs[2];
+    float* outputs[2];
+
+    for (int ch = 0; ch < 2; ++ch)
+    {
+        inputs[ch]  = inputBuffer.getWritePointer(ch);
+        outputs[ch] = outputBuffer.getWritePointer(ch);
     }
+
+    // Process
+    if (fDSP)
+        fDSP->compute(numSamples, inputs, outputs);
+
+    // Copy back to output
+    for (int ch = 0; ch < numChannels; ++ch)
+        buffer.copyFrom(ch, 0, outputBuffer, ch, 0, numSamples);
+
+    // Clear extra channels (safety)
+    for (int ch = numChannels; ch < buffer.getNumChannels(); ++ch)
+        buffer.clear(ch, 0, numSamples);
 }
 
 //==============================================================================
