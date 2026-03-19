@@ -241,7 +241,7 @@ LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg arguments:
 		   #( bool generateCAuxFilesFromString
         ( const char * 'MyApp', 
           const char * aString, 
-          int 7, 
+          int 6, 
           void * argv, 
           ByteArray errorMsg
         )
@@ -299,7 +299,6 @@ LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg withName: 
 	              , aPluginType , '.h'.
 
 	myArgv := ExternalAddress arrayOfStringsFrom: {
-			          '-i'.
 			          '-a'.
 			          architecturePath.
 			          '-lang'.

@@ -803,7 +803,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
               pluginRTASCategory=""
               aaxIdentifier="com.phausto.' , aString , 'plugin"
               pluginVSTCategory="kPlugCategEffect"
-              buildVST="1"
+              buildVST="0"
               buildVST3="1"
               buildAU="1"
               buildAUv3="0"
