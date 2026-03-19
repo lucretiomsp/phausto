@@ -397,14 +397,19 @@ public:
     void setResonance(float resonance);
 
 private:
-    MapUI* fUI;
-    dsp* fDSP;
-    float **inputs;
-    float **outputs;
-  
+    //==============================================================================
+    // DSP (RAII safe)
+    std::unique_ptr<mydsp> fDSP;
+    std::unique_ptr<MapUI> fUI;
+
+    // Internal buffers (safe JUCE containers)
+    juce::AudioBuffer<float> inputBuffer;
+    juce::AudioBuffer<float> outputBuffer;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EffectAudioProcessor)
 };
+
 '
 ]
 

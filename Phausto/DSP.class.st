@@ -25,8 +25,7 @@ Class {
 		'parameters',
 		'isMIDI',
 		'source',
-		'parameterStore',
-		'template'
+		'parameterStore'
 	],
 	#classVars : [
 		'defaultName',
@@ -403,7 +402,7 @@ AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 
 { #category : 'converting' }
 DSP >> asPluginProcessorEditorCppFor: aString [
-
+|template |
 	template := '/*
   ==============================================================================
 
@@ -483,13 +482,17 @@ public:
     void resized() override;
 
 private:
+    //==============================================================================
+    // DSP (RAII safe)
+    std::unique_ptr<mydsp> fDSP;
+    std::unique_ptr<MapUI> fUI;
 
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
-    EffectAudioProcessor& processor;
+    // Internal buffers (safe JUCE containers)
+    juce::AudioBuffer<float> inputBuffer;
+    juce::AudioBuffer<float> outputBuffer;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EffectAudioProcessorEditor)
-};
+    //==============================================================================
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (XXXAudioProcessor)
 '.
 
 	^ template copyReplaceAll: 'XXX' with: aPluginType
@@ -526,7 +529,7 @@ class ' , aPluginType , 'AudioProcessor  : public AudioProcessor
 {
 public:
     //=============================================================================='
-	             , String cr, '    ' ,  aPluginType , 'AudioProcessor();
+	             , String cr , '    ' , aPluginType , 'AudioProcessor();
     ~' , aPluginType , 'AudioProcessor();
 
     //==============================================================================
@@ -565,17 +568,23 @@ public:
 	setterDefinitions := self allParameters asCppSetterDefinitions.
 
 	lastPart := 'private:
-    MapUI* fUI;
-    dsp* fDSP;
-    float **inputs;
-    float **outputs;
-  
+    //==============================================================================
+    // DSP (RAII safe)
+    std::unique_ptr<mydsp> fDSP;
+    std::unique_ptr<MapUI> fUI;
+
+    // Internal buffers (safe JUCE containers)
+    juce::AudioBuffer<float> inputBuffer;
+    juce::AudioBuffer<float> outputBuffer;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EffectAudioProcessor)
 };
+
 '.
 
-	result := firstPart , String cr ,  setterDefinitions , String cr , lastPart.
+	result := firstPart , String cr , setterDefinitions , String cr
+	          , lastPart.
 	^ result
 ]
 
