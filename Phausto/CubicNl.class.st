@@ -12,8 +12,6 @@ Class {
 	#name : 'CubicNl',
 	#superclass : 'PhMonoEffect',
 	#instVars : [
-		'level',
-		'fr',
 		'wah',
 		'drive',
 		'offset'

@@ -26,7 +26,12 @@ AutoWah >> initialize [
 	super initialize.
 	processExpression := 'process = ve.autowah;'.
 
-	level :=  0
+	level :=  PhHSlider new
+		         label: self class name , 'Level'
+		         init: 0.5
+		         min: 0
+		         max: 1
+		         step: 0.001.
 ]
 
 { #category : 'accessing' }

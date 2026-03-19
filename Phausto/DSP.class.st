@@ -285,9 +285,7 @@ void ' , aPluginType
   fDSP = std::make_unique<mydsp>();
   fDSP->init(sampleRate);
   fUI = std::make_unique<MapUI>();
-  fDSP->buildUserInterface(.get()));
-  inputs = new float*[2];
-  outputs = new float*[2];
+  fDSP->buildUserInterface(fUI.get());
   // Allocate buffers
   inputBuffer.setSize(2, samplesPerBlock);
   outputBuffer.setSize(2, samplesPerBlock);
