@@ -69,13 +69,13 @@ FlangerMono >> fb: aFeedback [
 FlangerMono >> initialize [
 
 	super initialize.
-	processExpression :='process = pf.flanger_mono;'.
-	self input: 0.
-	self depth: 0.4.
-	self invert: 0.
-	self fb: 0.5.
-	self curdel: 8.
-	self dmax: 16.
+	processExpression := 'process = pf.flanger_mono;'.
+	input := Wire new.
+	depth :=0.4.
+	invert :=  0.
+	fb := 0.5.
+	curdel := 8.
+	dmax := 16
 ]
 
 { #category : 'accessing' }
