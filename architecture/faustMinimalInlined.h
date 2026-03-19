@@ -4,8 +4,8 @@ Code generated with Faust 2.23.4 (https://faust.grame.fr)
 Compilation options: -lang cpp -scal -ftz 0
 ------------------------------------------------------------ */
 
-#ifndef  __mydsp_H__
-#define  __mydsp_H__
+#ifndef  __faustMinimalInlined_H__
+#define  __faustMinimalInlined_H__
 
 #include <cmath>
 #include <cstring>
