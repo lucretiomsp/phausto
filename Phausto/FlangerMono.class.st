@@ -28,11 +28,10 @@ Class {
 { #category : 'converting' }
 FlangerMono >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self dmax asBox, self curdel asBox, self depth asBox, self fb asBox
-	            , self invert asBox, self input asBox connectTo: intermediateBox.
-	^ finalBox
+	^ self dmax asBox , self curdel asBox , self depth asBox
+	            , self fb asBox , self invert asBox , self input asBox
+		            connectTo: self code asBox.
+	
 ]
 
 { #category : 'accessing' }

@@ -285,7 +285,7 @@ void ' , aPluginType
   fDSP = std::make_unique<mydsp>();
   fDSP->init(sampleRate);
   fUI = std::make_unique<MapUI>();
-  fDSP->buildUserInterface(fUI);
+  fDSP->buildUserInterface(.get()));
   inputs = new float*[2];
   outputs = new float*[2];
   // Allocate buffers
@@ -499,17 +499,13 @@ public:
     void resized() override;
 
 private:
-    //==============================================================================
-    // DSP (RAII safe)
-    std::unique_ptr<mydsp> fDSP;
-    std::unique_ptr<MapUI> fUI;
 
-    // Internal buffers (safe JUCE containers)
-    juce::AudioBuffer<float> inputBuffer;
-    juce::AudioBuffer<float> outputBuffer;
+    // This reference is provided as a quick way for your editor to
+    // access the processor object that created it.
+    EffectAudioProcessor& processor;
 
-    //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (XXXAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EffectAudioProcessorEditor)
+};
 '.
 
 	^ template copyReplaceAll: 'XXX' with: aPluginType
@@ -587,7 +583,7 @@ public:
 	lastPart := 'private:
     //==============================================================================
     // DSP (RAII safe)
-    std::unique_ptr<mydsp> fDSP;
+    std::unique_ptr<dsp> fDSP;
     std::unique_ptr<MapUI> fUI;
 
     // Internal buffers (safe JUCE containers)
