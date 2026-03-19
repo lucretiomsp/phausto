@@ -14,6 +14,12 @@ Class {
 	#tag : 'Effects'
 }
 
+{ #category : 'converting' }
+AutoWah >> asBox [ 
+
+^ self level asBox , self input asBox connectTo: self code asBox
+]
+
 { #category : 'initialization' }
 AutoWah >> initialize [
 
@@ -23,7 +29,7 @@ AutoWah >> initialize [
 	level :=  0
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 AutoWah >> level [
 
 	^ level

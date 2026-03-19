@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'tests' }
+EffectsTest >> testAutoWahAsDsp [
+
+	self deny: AutoWah new asDsp isNull
+]
+
+{ #category : 'tests' }
 EffectsTest >> testCMoogVCFDemoDemoAsDsp [
 
 	self deny: Moog_Vcf_Demo new asDsp isNull 
@@ -264,7 +270,7 @@ EffectsTest >> testWah4DemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testWahAsDsp [
 
-	self assert: Wah new asDsp isNull equals: false
+	self deny:  Wah new asDsp isNull 
 ]
 
 { #category : 'tests' }
