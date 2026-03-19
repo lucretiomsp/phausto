@@ -20,26 +20,26 @@ Class {
 	#tag : 'Effects'
 }
 
+{ #category : 'converting' }
+CryBaby >> asBox [ 
+^ self wah asBox , self input asBox connectTo: self code asBox
+]
+
 { #category : 'initialization' }
 CryBaby >> initialize [
 
 	super initialize.
-	processExpression := 'process = ve.crybaby;'
+	processExpression := 'process = ve.crybaby;'.
+	wah := PhHSlider new
+				         label: self class name , 'Wah'
+				         init: 0.5
+				         min: 0
+				         max: 1
+				         step: 0.001 
 ]
 
-{ #category : 'as yet unclassified' }
-CryBaby >> patchedWith: aBox [
-self input: aBox
-]
-
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 CryBaby >> wah [
 
-	^ wah ifNil: [
-		  wah := PhHSlider new
-			        label: self class name , 'Wah'
-			        init: 0.5
-			        min: 0
-			        max: 1
-			        step: 0.001 ]
+	^ wah 
 ]

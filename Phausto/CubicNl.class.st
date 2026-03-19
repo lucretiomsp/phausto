@@ -23,7 +23,13 @@ Class {
 	#tag : 'Effects'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
+CubicNl >> asBox [ 
+
+^ self drive asBox , self offset asBox , self input asBox connectTo: self code asBox
+]
+
+{ #category : 'accessing' }
 CubicNl >> drive [
 
 	^ drive 
@@ -51,7 +57,7 @@ CubicNl >> initialize [
 	input := 0 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 CubicNl >> offset [
 
 	^ offset 
