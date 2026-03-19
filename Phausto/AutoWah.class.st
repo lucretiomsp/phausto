@@ -20,7 +20,7 @@ AutoWah >> initialize [
 	super initialize.
 	processExpression := 'process = ve.autowah;'.
 
-	self level: 0
+	level :=  0
 ]
 
 { #category : 'as yet unclassified' }
