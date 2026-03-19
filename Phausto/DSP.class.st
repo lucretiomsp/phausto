@@ -793,7 +793,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
               pluginManufacturer="Phausto"
               pluginManufacturerCode="Phau"
               pluginCode="Fplu"
-              pluginChannelConfigs="' , pluginChannelConfigs , '"
+              pluginChannelConfigs=""
               pluginIsSynth="' , pluginIsSynth , '"
               pluginWantsMidiInput="' , pluginIsSynth , '"
               pluginProducesMidiOut="0"
