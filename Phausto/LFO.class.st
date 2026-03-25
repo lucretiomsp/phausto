@@ -21,22 +21,15 @@ Class {
 { #category : 'converting' }
 LFO >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self freq asBox connectTo: intermediateBox.
-	^ finalBox
+	
+	^ self freq asBox connectTo: self code asBox.
+ 
 ]
 
 { #category : 'accessing' }
 LFO >> freq [
 
-	^ freq ifNil: [
-		  PhHSlider new
-			  label: self label , 'Freq'
-			  init: 2
-			  min: 0.01
-			  max: 20
-			  step: 0.01 ]
+	^ freq 
 ]
 
 { #category : 'initialization' }
@@ -45,8 +38,10 @@ LFO >> initialize [
 	super initialize.
 	"as LFO are used for modulation, there default level is set to 1"
 	self uLevel: 1.
-	
-
-
-	
+		freq := PhHSlider new
+		        label: self label , 'Freq'
+		        init: 1
+		        min: 0.1
+		        max: 20
+		        step: 0.1.
 ]

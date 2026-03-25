@@ -22,11 +22,7 @@ dsp stop.
 "
 Class {
 	#name : 'LFOForModulation',
-	#superclass : 'Oscillator',
-	#instVars : [
-		'amount',
-		'offset'
-	],
+	#superclass : 'LFO',
 	#category : 'Phausto-Oscillators',
 	#package : 'Phausto',
 	#tag : 'Oscillators'
