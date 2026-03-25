@@ -168,7 +168,7 @@ PhBox >> absolute [
 
 	| boxed |
 	boxed := self asBox.
-	^ BoxAPI uniqueInstance boxAbs: boxed
+	BoxAPI uniqueInstance boxAbs
 ]
 
 { #category : 'arithmetic' }

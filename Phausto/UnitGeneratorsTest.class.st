@@ -99,7 +99,7 @@ UnitGeneratorsTest >> testEmptyUnitGeneratorAsDsp [
 { #category : 'tests' }
 UnitGeneratorsTest >> testLFORandomPosAsDsp [
 
-	self assert: LFORandomPos new asDsp isNull equals: false
+	self deny: LFORandomPos new asDsp isNull
 ]
 
 { #category : 'tests' }
