@@ -47,22 +47,9 @@ LFOForModulation >> amount [
 { #category : 'converting' }
 LFOForModulation >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self freq asBox connectTo: intermediateBox.
+	| finalBox |
+	finalBox := self freq asBox connectTo: self code asBox.
 	^ finalBox * self amount asBox + self offset asBox
-]
-
-{ #category : 'accessing' }
-LFOForModulation >> freq [
-
-	^ freq ifNil: [
-		  PhHSlider new
-			  label: self label , 'Freq'
-			  init: 2
-			  min: 0.01
-			  max: 20
-			  step: 0.01 ]
 ]
 
 { #category : 'initialization' }
@@ -77,7 +64,13 @@ LFOForModulation >> initialize [
 		        init: 1
 		        min: 0.1
 		        max: 20
-		        step: 0.1
+		        step: 0.1.
+	offset := PhHSlider new
+				            label: self label , 'Offset'
+				            init: 0
+				            min: 0
+				            max: 1
+				            step: 0.01 
 ]
 
 { #category : 'initialization' }
@@ -95,10 +88,5 @@ LFOForModulation >> initializeControlParameters [
 { #category : 'as yet unclassified' }
 LFOForModulation >> offset [
 
-	^ offset ifNil: [  	offset := PhHSlider new
-		          label: self label , 'Offset'
-		          init: 0
-		          min: 0
-		          max: 800
-		          step: 0.01. ]
+	^ offset
 ]

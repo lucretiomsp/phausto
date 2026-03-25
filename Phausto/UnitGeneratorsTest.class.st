@@ -129,13 +129,13 @@ UnitGeneratorsTest >> testLFOSquarePosAsDsp [
 { #category : 'tests' }
 UnitGeneratorsTest >> testLFOTriAsDsp [
 
-	self assert: LFOTri  new asDsp isNull equals: false
+	self deny:  LFOTri  new asDsp isNull 
 ]
 
 { #category : 'tests' }
 UnitGeneratorsTest >> testLFOTriPosAsDsp [
 
-	self assert: LFOTriPos  new asDsp isNull equals: false
+	self deny: LFOTriPos new asDsp isNull 
 ]
 
 { #category : 'tests' }

@@ -596,6 +596,7 @@ public:
 
 	result := firstPart , String cr , setterDefinitions , String cr
 	          , lastPart.
+	
 	^ result
 ]
 
