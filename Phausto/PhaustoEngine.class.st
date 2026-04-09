@@ -111,6 +111,14 @@ self listOfSamplesFolder do: [ :i | Transcript  show: i; cr ].
 Transcript open
 ]
 
+{ #category : 'as yet unclassified' }
+PhaustoEngine >> allSamplesFolder [
+
+| list |
+list := self class allSamplers collect: [ :i | i label ].
+	^ list 
+]
+
 { #category : 'API - changes' }
 PhaustoEngine >> bpm: aNumber [
 

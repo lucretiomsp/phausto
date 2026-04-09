@@ -25,7 +25,7 @@ CustomPhausto class >> listAllInstruments [
 	(AllInstruments collect: [ :i | i label ]) inspect
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'loading' }
 CustomPhausto class >> loadAllInstruments [
 
 self subclassResponsibility 
