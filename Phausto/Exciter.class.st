@@ -32,6 +32,6 @@ Exciter >> gate [
 { #category : 'initialization' }
 Exciter >> initialize [
 
-super initialize.
-gate := PhButton new label: self label , 'Gate'
+	super initialize.
+	gate := PhButton new label: self label , 'Trigger'
 ]

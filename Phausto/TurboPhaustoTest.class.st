@@ -78,6 +78,12 @@ TurboPhaustoTest >> testReeseAsBox [
 ]
 
 { #category : 'tests' }
+TurboPhaustoTest >> testTpKarplusAsBox [
+
+	self deny: TpKarplus new asDsp isNull
+]
+
+{ #category : 'tests' }
 TurboPhaustoTest >> testTpSamplerAsBox [
 
 | pathToFolder |
