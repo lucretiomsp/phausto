@@ -8,3 +8,13 @@ Class {
 	#package : 'Phausto',
 	#tag : 'UIPrimitives'
 }
+
+{ #category : 'connecting' }
+PhHSlider >> => aUnitGenerator [ 
+	aUnitGenerator patchedWith: self
+]
+
+{ #category : 'as yet unclassified' }
+PhHSlider >> patchWith: aPhF2l [ 
+	self shouldBeImplemented.
+]

@@ -31,3 +31,9 @@ PhL2f >> length [
 
 ^ length
 ]
+
+{ #category : 'connecting' }
+PhL2f >> patchedWith: aUnitGenerator [
+
+self length: aUnitGenerator 
+]

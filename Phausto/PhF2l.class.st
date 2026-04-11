@@ -53,3 +53,9 @@ PhF2l >> initialize [
 		        max: 1200
 		        step: 1
 ]
+
+{ #category : 'connecting' }
+PhF2l >> patchedWith: aUnitGenerator [
+
+self freq: aUnitGenerator 
+]
