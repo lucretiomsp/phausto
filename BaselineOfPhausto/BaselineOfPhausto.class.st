@@ -15,9 +15,9 @@ BaselineOfPhausto >> baseline: spec [
 	spec for: #common do: [
 			spec postLoadDoIt: #copyLibraries.
 
-			spec package: 'Phausto'.
+			spec package: 'Phausto' with: [ spec postLoadDoIt: #copyTurboSamples ].
 
-			spec group: 'default' with: #( 'Phausto'  ).
+			spec group: 'default' with: #( 'Phausto' ).
 
 			spec group: 'ci' with: #( 'Phausto' ) ]
 ]
@@ -73,6 +73,26 @@ BaselineOfPhausto >> copyLibrariesFrom: repoDirectory [
 	ZipArchive
 		extractFrom: source
 		to: Smalltalk imagePath asFileReference parent
+]
+
+{ #category : 'utilities' }
+BaselineOfPhausto >> copyTurboSamples [ 
+	"Copy the TurboSamples folder from the repo root to the image directory."
+	IceRepository registry
+		detect: [ :each | each includesPackageNamed: self class packageName ]
+		ifFound: [ :registry |
+			| source destination |
+			source := registry subdirectoryReference / 'TurboSamples'.
+			destination := Smalltalk imagePath asFileReference parent / 'TurboSamples'.
+			source exists ifFalse: [
+				('TurboSamples folder not found at: ' , source asString) traceCr.
+				^ self ].
+			('Copying TurboSamples from ' , source asString , ' to ' , destination asString) traceCr.
+			destination exists ifTrue: [ destination ensureDeleteAll ].
+			destination ensureCreateDirectory.
+			source copyAllTo: destination ]
+		ifNone: [ ('Could not find repository to copy TurboSamples') traceCr ]
+
 ]
 
 { #category : 'utilities' }
