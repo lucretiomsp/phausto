@@ -159,11 +159,12 @@ TurboPhausto class >> loadAllSynths [
 				 label: 'dubdub';
 				 freq: #dubdubFreq);
 		add: (Acid new label: 'acid');
+		add: TpKarplus new;
 		add: (Chordy new
 				 label: 'chordy';
 				 pitch: #chordyFreq);
 		add: (TpHoover new label: 'tpHoover');
-		add: (TpReese new label: 'tpReese'). ";
+		add: (TpReese new label: 'tpReese'). "
 				 pitch: #syhatFreq"
 	^ self
 ]

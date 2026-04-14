@@ -24,14 +24,9 @@ Class {
 { #category : 'converting' }
 PhTranspose >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
+^ self window asBox , self crossfade asBox , self shift
+	            , self input asBox asBox connectTo: self code asBox .
 
-	finalBox := self window asBox
-	            , self crossfade asBox , self shift , self input asBox  asBox connectTo:
-		            intermediateBox.
-
-	^ finalBox
 ]
 
 { #category : 'accessing' }
@@ -45,14 +40,14 @@ PhTranspose >> initialize [
 
 	super initialize.
 	processExpression := 'process = ef.transpose;'.
-	crossfade := 256.
-	window := 256 asBox.
+	crossfade := 512.
+	window := 1024.
 	shift := PhHSlider new
-				           label: self class name , 'Shift'
-				           init: 0
-				           min: -24
-				           max: 24
-				           step: 1
+		         label: self class name , 'Shift'
+		         init: 0
+		         min: -24
+		         max: 24
+		         step: 1
 ]
 
 { #category : 'accessing' }
