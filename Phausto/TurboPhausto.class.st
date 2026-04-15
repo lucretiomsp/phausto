@@ -159,7 +159,7 @@ TurboPhausto class >> loadAllSynths [
 				 label: 'dubdub';
 				 freq: #dubdubFreq);
 		add: (Acid new label: 'acid');
-		add: (TpKarplus new );
+		"add: TpKarplus new;"
 		add: (Chordy new
 				 label: 'chordy';
 				 pitch: #chordyFreq);
@@ -172,15 +172,14 @@ TurboPhausto class >> loadAllSynths [
 { #category : 'loading' }
 TurboPhausto class >> loadEffects [
 
-	
 	allEffects := Dictionary new.
 
-	allEffects add: #reverb -> (PhDryWetMixer new
+"	allEffects add: #reverb -> (PhDryWetMixer new
 			 wetAmount: #reverb;
 			 fx: (FreeverbMono new
 					  fb2: 0.5 asBox;
 					  damp: 0.3 asBox;
-					  fb1: #size))
+					  fb1: #size))"
 ]
 
 { #category : 'loading' }
@@ -199,7 +198,7 @@ TurboPhausto class >> loadRack [
 	"load the chain of synthesizers, effects and filter which become the TurboPhausto dsp"
 
 	rack := self allInstruments asSumOfUGen => self lpf => self hpf
-	        => (allEffects at: #reverb)
+	        "=> (allEffects at: #reverb)"
 ]
 
 { #category : 'accessing' }
