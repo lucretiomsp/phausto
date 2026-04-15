@@ -175,7 +175,7 @@ TurboPhausto class >> loadEffects [
 	
 	allEffects := Dictionary new.
 
-	allEffects add: #reverb -> (DryWetMonoMixer new
+	allEffects add: #reverb -> (PhDryWetMixer new
 			 wetAmount: #reverb;
 			 fx: (FreeverbMono new
 					  fb2: 0.5 asBox;

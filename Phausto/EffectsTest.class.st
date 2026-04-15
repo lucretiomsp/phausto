@@ -33,7 +33,7 @@ EffectsTest >> testCryBabyAsDsp [
 { #category : 'tests' }
 EffectsTest >> testCubicNlAsDsp [
 
-	self assert: CubicNl new asDsp isNull equals: false
+	self deny: CubicNl new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -51,7 +51,7 @@ EffectsTest >> testDopplerShiftAsDsp [
 { #category : 'tests' }
 EffectsTest >> testDryWetMonoMixerAsDsp [
 
-	self deny: DryWetMonoMixer new asDsp isNull 
+	self deny: PhDryWetMixer new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -136,6 +136,12 @@ EffectsTest >> testPannerAsDsp [
 EffectsTest >> testParametricEQDemoAsDsp [
 
 	self deny: Parametric_Eq_Demo new asDsp isNull 
+]
+
+{ #category : 'tests' }
+EffectsTest >> testPhDryWetMixerDsp [
+
+	self deny: PhDryWetMixer new asDsp isNull
 ]
 
 { #category : 'tests' }
