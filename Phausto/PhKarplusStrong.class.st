@@ -41,9 +41,9 @@ PhKarplusStrong >> initialize [
 
 	super initialize.
 	processExpression := 'process =pm.ks;'.
-	length := PhSlider new label: 'KSLength' values: #( 0.8 0.01 2 0.01 ).
-	damping := PhHSlider new label: 'KSDamping' values: #( 0.3 0 1 0.01 ).
-	excitation := PhImpulseExcitation new label: self label.
+	length := PhSlider new label: self label ,  'Length' values: #( 0.8 0.01 2 0.01 ).
+	damping := PhHSlider new label: self label , 'Damping' values: #( 0.3 0 1 0.01 ).
+	excitation := PhImpulseExcitation new label: self label
 ]
 
 { #category : 'accessing' }

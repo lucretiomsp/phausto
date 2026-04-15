@@ -159,7 +159,7 @@ TurboPhausto class >> loadAllSynths [
 				 label: 'dubdub';
 				 freq: #dubdubFreq);
 		add: (Acid new label: 'acid');
-		add: TpKarplus new;
+		add: (TpKarplus new );
 		add: (Chordy new
 				 label: 'chordy';
 				 pitch: #chordyFreq);

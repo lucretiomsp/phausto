@@ -20,10 +20,9 @@ TpKarplus >> asBox [
 ]
 
 { #category : 'initialization' }
-TpKarplus >> initialize [ 
+TpKarplus >> initialize [
 
-super initialize .
-noteToLen := PhF2l new label: 'karplusFreq'.
-exciter := PhImpulseExcitation new gate: #karplusTrigger
-
+	super initialize.
+	noteToLen := PhF2l new label: 'tpKarplus'.
+	exciter := PhImpulseExcitation new gate: #tpKarplusTrigger
 ]
