@@ -28,16 +28,10 @@ Class {
 	#tag : 'Oscillators'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 LFOForModulation >> amount [
 
-	^ amount ifNil: [
-		  amount := PhHSlider new
-			            label: self label , 'Amount'
-			            init: 400
-			            min: 0
-			            max: 8000
-			            step: 1 ]
+	^ amount 
 ]
 
 { #category : 'converting' }
@@ -52,13 +46,19 @@ LFOForModulation >> asBox [
 LFOForModulation >> initialize [
 
 	super initialize.
-	
+
 	offset := PhHSlider new
 		          label: self label , 'Offset'
 		          init: 0
 		          min: 0
-		          max: 1
-		          step: 0.01
+		          max: 800
+		          step: 0.01.
+		amount := PhHSlider new
+				            label: self label , 'Amount'
+				            init: 400
+				            min: 0
+				            max: 8000
+				            step: 1 
 ]
 
 { #category : 'initialization' }
@@ -73,7 +73,7 @@ LFOForModulation >> initializeControlParameters [
 			 widgetType: #knob)
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 LFOForModulation >> offset [
 
 	^ offset
