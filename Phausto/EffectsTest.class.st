@@ -39,7 +39,7 @@ EffectsTest >> testCubicNlAsDsp [
 { #category : 'tests' }
 EffectsTest >> testDatorroRevDemoAsDsp [
 
-	self deny: DattorroRev_Demo new asDsp isNull 
+	self deny: Dattorro_Rev_Demo new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -81,7 +81,7 @@ EffectsTest >> testFlangerDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testFractionalDelayAsDsp [
 
-	self assert: FractionalDelay new asDsp isNull equals: false
+	self deny FractionalDelay new asDsp isNull 
 ]
 
 { #category : 'tests' }

@@ -29,10 +29,12 @@ Class {
 DryWetStereoMixer >> asBox [
 
 	| drySignalL wetSignalL drySignalR wetSignalR |
-	drySignalL := self input asBox * (1 asBox - self wetAmount asBox).
-	wetSignalL := (self fx inputL: self inputL asBox )  * self wetAmount asBox.
-	drySignalR := self input asBox * (1 asBox - self wetAmount asBox).
-	wetSignalR := (self fx inputR: self inputR asBox )  * self wetAmount asBox.
+	drySignalL := self inputL asBox * (1 asBox - self wetAmount asBox).
+	wetSignalL := (self fx inputL: self inputL asBox)
+	              * self wetAmount asBox.
+	drySignalR := self inputR asBox * (1 asBox - self wetAmount asBox).
+	wetSignalR := (self fx inputR: self inputR asBox)
+	              * self wetAmount asBox.
 	^ (wetSignalL + drySignalL) asBox , (wetSignalR + drySignalR) asBox
 ]
 
@@ -64,6 +66,18 @@ DryWetStereoMixer >> initialize [
 	self controlParameters add: #wetAmount -> (self wetAmount
 			 asControlParameterOfWidgetType: #knob
 			 description: 'WetAmount')
+]
+
+{ #category : 'accessing' }
+DryWetStereoMixer >> inputL [ 
+
+^ inputL
+]
+
+{ #category : 'accessing' }
+DryWetStereoMixer >> inputR [ 
+
+^ inputR
 ]
 
 { #category : 'connecting' }
