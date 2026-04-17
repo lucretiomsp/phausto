@@ -21,8 +21,7 @@ self assert: Chordy new asDsp isNull equals: false
 { #category : 'tests' }
 TurboPhaustoTest >> testDelayMonoFBAsBox [
 
-
-self assert: DelayMonoFB new asDsp isNull equals: false
+	self deny: DelayMonoFB new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -67,8 +66,7 @@ TurboPhaustoTest >> testLoadAllTurboSamplers [
 { #category : 'tests' }
 TurboPhaustoTest >> testPsgPlusAsBox [
 
-
-self assert: PsgPlus new asDsp isNull equals: false
+	self deny: PsgPlus new asDsp isNull 
 ]
 
 { #category : 'tests' }

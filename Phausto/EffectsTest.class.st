@@ -51,7 +51,7 @@ EffectsTest >> testDopplerShiftAsDsp [
 { #category : 'tests' }
 EffectsTest >> testDryWetMonoMixerAsDsp [
 
-	self deny: PhDryWetMixer new asDsp isNull 
+	self deny: DryWetMonoMixer new asDsp isNull
 ]
 
 { #category : 'tests' }

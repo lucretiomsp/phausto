@@ -67,6 +67,19 @@ PhaustoEngine class >> loadFilters [
 	self subclassResponsibility
 ]
 
+{ #category : 'loading' }
+PhaustoEngine class >> loadRack [
+	"load the chain of synthesizers, effects and filter which become the TurboPhausto dsp"
+
+	rack := self allInstruments asSumOfUGen => self lpf => self hpf
+	=> (allEffects at: #reverb)
+]
+
+{ #category : 'accessing' }
+PhaustoEngine class >> rack [ 
+^ rack
+]
+
 { #category : 'accessing' }
 PhaustoEngine class >> start [
 	"load all the Turbo- Samplers, Synths and Effects. initialize and start a dsp and assign it to a Performance"
@@ -85,10 +98,11 @@ PhaustoEngine class >> start [
 	"tpDsp := self allSamplers asSumOfUGen stereo asDsp."
 	tpDsp := self rack stereo asDsp.
 	[
-	[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
-		ifNotNil: [ self tpDsp start ] ] fork.
+		[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
+			ifNotNil: [ self tpDsp start ] ] fork.
 	tpPerf := perf forDsp: tpDsp.
 	tpPerf performanceType: PerfType new.
+	
 ]
 
 { #category : 'accessing' }

@@ -174,12 +174,12 @@ TurboPhausto class >> loadEffects [
 
 	allEffects := Dictionary new.
 
-"	allEffects add: #reverb -> (PhDryWetMixer new
+		allEffects add: #reverb -> (DryWetMonoMixer new
 			 wetAmount: #reverb;
 			 fx: (FreeverbMono new
 					  fb2: 0.5 asBox;
 					  damp: 0.3 asBox;
-					  fb1: #size))"
+					  fb1: #size))
 ]
 
 { #category : 'loading' }
@@ -193,22 +193,9 @@ TurboPhausto class >> loadFilters [
 		       q: #highpassq
 ]
 
-{ #category : 'loading' }
-TurboPhausto class >> loadRack [
-	"load the chain of synthesizers, effects and filter which become the TurboPhausto dsp"
-
-	rack := self allInstruments asSumOfUGen => self lpf => self hpf
-	        "=> (allEffects at: #reverb)"
-]
-
 { #category : 'accessing' }
 TurboPhausto class >> lpf [
 ^ lpf
-]
-
-{ #category : 'accessing' }
-TurboPhausto class >> rack [ 
-^ rack
 ]
 
 { #category : 'testing' }
