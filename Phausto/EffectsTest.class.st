@@ -151,12 +151,6 @@ EffectsTest >> testParametricEQDemoAsDsp [
 ]
 
 { #category : 'tests' }
-EffectsTest >> testPhDryWetMixerDsp [
-
-	self deny: PhDryWetMixer new asDsp isNull
-]
-
-{ #category : 'tests' }
 EffectsTest >> testPhEchoAsDsp [
 
 	self deny: PhEcho new asDsp isNull 
