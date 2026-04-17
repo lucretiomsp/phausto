@@ -55,6 +55,12 @@ EffectsTest >> testDryWetMonoMixerAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testDryWetStereoMixerAsDsp [
+
+	self deny: DryWetMonoMixer new asDsp isNull
+]
+
+{ #category : 'tests' }
 EffectsTest >> testEnvelopesDemoAsDsp [
 
 	self deny: Envelopes_Demo new asDsp isNull
@@ -106,6 +112,12 @@ EffectsTest >> testGreyHoleAsDsp [
 EffectsTest >> testGreyHoleDemoAsDsp [
 
 	self deny: GreyHole_Demo new asDsp isNull
+]
+
+{ #category : 'tests' }
+EffectsTest >> testJpVerbAsDsp [
+
+	self deny: JpVerb new asDsp isNull
 ]
 
 { #category : 'tests' }
