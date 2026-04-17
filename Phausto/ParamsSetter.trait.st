@@ -214,6 +214,12 @@ ParamsSetter >> dsfreq: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
+ParamsSetter >> dt: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> duration: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
