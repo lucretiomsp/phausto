@@ -14,9 +14,11 @@ Class {
 }
 
 { #category : 'converting' }
-TpKarplus >> asBox [ 
+TpKarplus >> asBox [
 
-^ (PhKarplusStrong new length: noteToLen ; excitation: exciter) asBox
+	^ ((PhKarplusStrong new
+		   length: noteToLen;
+		   excitation: exciter) * uLevel )asBox
 ]
 
 { #category : 'initialization' }
@@ -24,5 +26,7 @@ TpKarplus >> initialize [
 
 	super initialize.
 	noteToLen := PhF2l new label: 'tpKarplus'.
-	exciter := PhImpulseExcitation new gate: #tpKarplusTrigger
+	exciter := PhImpulseExcitation new gate: #tpKarplusTrigger.
+	uLevel := PhHSlider new label: 'tpKarplusLevel' values: #(0.5 0 1 0.01).
+	
 ]
