@@ -341,3 +341,9 @@ TurboPhausto >> traceAllSamples [
 		(i pathString afterLastSlash findBetweenSubstrings: '.') first
 			traceCr ]
 ]
+
+{ #category : 'playing' }
+TurboPhausto >> transpose: anInteger [
+
+self tpPerf transpose: anInteger 
+]
