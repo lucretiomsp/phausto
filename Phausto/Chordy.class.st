@@ -87,7 +87,13 @@ Chordy >> initialize [
 		          init: 20
 		          min: 20
 		          max: 100
-		          step: 1
+		          step: 1.
+		level := PhHSlider new
+		         label: self coypuLabel , 'uLevel'
+		         init: 0.6
+		         min: 0
+		         max: 1
+		         step: 0.01.
 ]
 
 { #category : 'accessing' }

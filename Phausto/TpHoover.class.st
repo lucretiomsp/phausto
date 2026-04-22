@@ -28,8 +28,9 @@ TpHoover >> asBox [
 		            sustain: 0 asBox.
 	pitchEnvAmt := 126.
 	pitch := (PhHSlider new
-		          label: 'hooverNote'
-		          values: #( 200 20 2000 1 )) asBox  + (pitchEnv asBox * pitchEnvAmt asBox).
+		          label: 'hooverFreq'
+		          values: #( 200 20 2000 1 )) asBox
+	         + (pitchEnv asBox * pitchEnvAmt asBox).
 	oscillators := (SawOsc new freq: pitch) + (SawOsc new
 		                uLevel: 0.3 asBox;
 		                freq: pitch + 3) + (SawOsc new

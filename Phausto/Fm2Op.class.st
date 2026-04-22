@@ -33,14 +33,19 @@ Fm2Op >> asBox [
 		           uLevel: (self coypuLabel , 'uLevel') asSymbol.
 
 
-	^ carrier asBox * adsr asBox
+	^ carrier asBox * adsr asBox * self uLevel asBox
 ]
 
 { #category : 'initialization' }
 Fm2Op >> initialize [
 
 	super initialize.
-	
+	level := PhHSlider new
+		         label: self coypuLabel , 'uLevel'
+		         init: 0.6
+		         min: 0
+		         max: 1
+		         step: 0.01.
 ]
 
 { #category : 'as yet unclassified' }

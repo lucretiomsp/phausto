@@ -31,12 +31,12 @@ TpReese >> asBox [
 { #category : 'initialization' }
 TpReese >> initialize [
 
-	| noteSlider |
+
 	super initialize.
 	label := 'tpReese'. "self pitch: #ReeseFreq.
 	self trigger: #reeseTrigger."
 	detune := PhHSlider new label: 'tpReeseDetune' values: #( 5 0 30 1 ).
-	
+
 	osci1 := SineOsc new
 		         freq: self pitch;
 		         uLevel: 0.3 asBox.

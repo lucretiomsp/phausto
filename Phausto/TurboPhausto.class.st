@@ -164,8 +164,9 @@ TurboPhausto class >> loadAllSynths [
 				 label: 'chordy';
 				 pitch: #chordyFreq);
 		add: (TpHoover new label: 'tpHoover');
-		add: (TpReese new label: 'tpReese'). "
-				 pitch: #syhatFreq"
+		add: (TpReese new label: 'tpReese'); 
+		add: (PsgPlus new label: 'psgPlus');
+		add: (Fm2Op new label: 'fm2Op').
 	^ self
 ]
 

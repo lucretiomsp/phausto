@@ -84,14 +84,22 @@ PsgPlus >> index: anIndex [
 PsgPlus >> initialize [
 
 	super initialize.
-	dsfreq := PhHSlider new label: 'psgPlusDSFreq' values: #( 180 20 16000 1 ).
+	dsfreq := PhHSlider new
+		          label: 'psgPlusDSFreq'
+		          values: #( 180 20 16000 1 ).
 	q := PhHSlider new label: 'psgPlusQ' values: #( 3 1 5 0.01 ).
 	index := PhHSlider new
-				           label: self coypuLabel , 'Index'
-				           init: 0
-				           min: 0
-				           max: 3
-				           step: 1 
+		         label: self coypuLabel , 'Index'
+		         init: 0
+		         min: 0
+		         max: 3
+		         step: 1.
+		level := PhHSlider new
+		         label: self coypuLabel , 'uLevel'
+		         init: 0.6
+		         min: 0
+		         max: 1
+		         step: 0.01.
 ]
 
 { #category : 'accessing' }
