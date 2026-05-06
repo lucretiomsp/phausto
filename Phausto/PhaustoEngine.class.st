@@ -150,8 +150,8 @@ PhaustoEngine >> initialize [
 
 	super initialize.
 	self class tpPerf resetAllSequencers.
-	self class tpPerf maxStepNumber: SmallInteger maxVal .
-	self muteAll
+	self class tpPerf maxStepNumber: SmallInteger maxVal.
+	self class tpPerf removeAll.
 ]
 
 { #category : 'playing' }
