@@ -179,6 +179,12 @@ PhaustoEngine >> play [
 ]
 
 { #category : 'playing' }
+PhaustoEngine >> playCyclicFor: aNumberOfBars [
+
+	self class tpPerf playCyclicFor: aNumberOfBars
+]
+
+{ #category : 'playing' }
 PhaustoEngine >> playFor: aNumberOfBars [
 
 	self class tpPerf playFor: aNumberOfBars
