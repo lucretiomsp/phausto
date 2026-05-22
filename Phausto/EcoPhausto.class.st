@@ -27,17 +27,17 @@ Class {
 	#tag : 'TurboPhausto'
 }
 
-{ #category : 'loadi' }
+{ #category : 'loading' }
 EcoPhausto class >> loadAllInstruments [
 
-	| kick snare clap ch oh cowbell conga bongo bleep blip speakspell psg acid |
+	| kick snare clap ch oh rim cowbell conga bongo bleep blip speakspell psg acid |
 	kick := TpSampler new
 		        pathToFile: self turboSamplesFolder , '/kick/BD_full909.wav';
 		        label: 'kick'.
-	clap := 	TpSampler new
-		         pathToFile:
-			         self turboSamplesFolder , '/clap/CLAP_Rubydub.wav';
-		         label: 'clap'.
+	clap := TpSampler new
+		        pathToFile:
+			        self turboSamplesFolder , '/clap/CLAP_Rubydub.wav';
+		        label: 'clap'.
 	snare := TpSampler new
 		         pathToFile:
 			         self turboSamplesFolder , '/snare/SD_Drumaxia.wav';
@@ -45,6 +45,9 @@ EcoPhausto class >> loadAllInstruments [
 	ch := TpSampler new
 		      pathToFile: self turboSamplesFolder , '/ch/CH_Juxtapos.wav';
 		      label: 'ch'.
+	rim := TpSampler new
+		       pathToFile: self turboSamplesFolder , '/rim/RIM_Losimple.wav';
+		       label: 'rim'.
 	oh := TpSampler new
 		      pathToFile: self turboSamplesFolder , '/oh/OH_Punchtron.wav';
 		      label: 'oh'.
@@ -62,8 +65,8 @@ EcoPhausto class >> loadAllInstruments [
 		         pathToFolder: self turboSamplesFolder , '/bleep';
 		         label: 'bleep'.
 	blip := TpSampler new
-		         pathToFolder: self turboSamplesFolder , '/blip';
-		         label: 'blip'.
+		        pathToFolder: self turboSamplesFolder , '/blip';
+		        label: 'blip'.
 	speakspell := TpSampler new
 		              pathToFolder: self turboSamplesFolder , '/speakspell';
 		              label: 'speakspell'.
@@ -73,6 +76,7 @@ EcoPhausto class >> loadAllInstruments [
 	AllInstruments addAll: {
 			kick.
 			snare.
+			clap.
 			ch.
 			oh.
 			cowbell.
@@ -80,7 +84,15 @@ EcoPhausto class >> loadAllInstruments [
 			bongo.
 			bleep.
 			blip.
+			rim.
 			speakspell.
 			psg.
 			acid }
+]
+
+{ #category : 'accessing' }
+EcoPhausto class >> start [ 
+
+AllInstruments := OrderedCollection new.
+super start
 ]

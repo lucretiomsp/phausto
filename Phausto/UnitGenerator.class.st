@@ -418,6 +418,12 @@ UnitGenerator >> processExpression: anObject [
 	processExpression := anObject
 ]
 
+{ #category : 'testing' }
+UnitGenerator >> sampleNamesSorted [
+"if a UGen is not a sampler it has no sampleIndex"
+	^ #()
+]
+
 { #category : 'converting' }
 UnitGenerator >> stereo [
 	"return a stereo version of the box (connect to Left and Right outputs)"
