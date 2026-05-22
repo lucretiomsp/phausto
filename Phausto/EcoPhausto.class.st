@@ -27,15 +27,20 @@ Class {
 	#tag : 'TurboPhausto'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'loadi' }
 EcoPhausto class >> loadAllInstruments [
 
-	| kick snare ch oh cowbell conga bongo bleep speakspell psg acid |
+	| kick snare clap ch oh cowbell conga bongo bleep blip speakspell psg acid |
 	kick := TpSampler new
 		        pathToFile: self turboSamplesFolder , '/kick/BD_full909.wav';
 		        label: 'kick'.
+	clap := 	TpSampler new
+		         pathToFile:
+			         self turboSamplesFolder , '/clap/CLAP_Rubydub.wav';
+		         label: 'clap'.
 	snare := TpSampler new
-		         pathToFile: self turboSamplesFolder , '/snare/SD_Drumaxia.wav';
+		         pathToFile:
+			         self turboSamplesFolder , '/snare/SD_Drumaxia.wav';
 		         label: 'snare'.
 	ch := TpSampler new
 		      pathToFile: self turboSamplesFolder , '/ch/CH_Juxtapos.wav';
@@ -44,7 +49,8 @@ EcoPhausto class >> loadAllInstruments [
 		      pathToFile: self turboSamplesFolder , '/oh/OH_Punchtron.wav';
 		      label: 'oh'.
 	cowbell := TpSampler new
-		           pathToFile: self turboSamplesFolder , '/cowbell/Cow1-R50.wav';
+		           pathToFile:
+			           self turboSamplesFolder , '/cowbell/Cow1-R50.wav';
 		           label: 'cowbell'.
 	conga := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/conga';
@@ -55,6 +61,9 @@ EcoPhausto class >> loadAllInstruments [
 	bleep := TpSampler new
 		         pathToFolder: self turboSamplesFolder , '/bleep';
 		         label: 'bleep'.
+	blip := TpSampler new
+		         pathToFolder: self turboSamplesFolder , '/blip';
+		         label: 'blip'.
 	speakspell := TpSampler new
 		              pathToFolder: self turboSamplesFolder , '/speakspell';
 		              label: 'speakspell'.
@@ -70,6 +79,7 @@ EcoPhausto class >> loadAllInstruments [
 			conga.
 			bongo.
 			bleep.
+			blip.
 			speakspell.
 			psg.
 			acid }
