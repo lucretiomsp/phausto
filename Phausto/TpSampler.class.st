@@ -163,7 +163,7 @@ TpSampler >> initialize [
 		         max: 16
 		         step: 1.
 	self pathToFolder:
-		FileLocator documents asAbsolute pathString , '/TurboSamples/bleep'
+		FileLocator imageDirectory asAbsolute pathString , '/TurboSamples/bleep'
 ]
 
 { #category : 'accessing' }

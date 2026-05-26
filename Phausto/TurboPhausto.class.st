@@ -208,8 +208,8 @@ TurboPhausto class >> samplesFolderExists [
 { #category : 'accessing' }
 TurboPhausto class >> turboSamplesFolder [
 
-^ (FileLocator documents asAbsolute pathString
-	                 , '/TurboSamples')
+^ (FileLocator imageDirectory asAbsolute pathString
+	                 , '/TurboSamples') 
 ]
 
 { #category : 'playing' }
