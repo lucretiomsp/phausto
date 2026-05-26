@@ -92,6 +92,7 @@ DSP class >> initializedDSP: anObject [
 { #category : 'exceptions' }
 DSP class >> invalidException [
 
+
 	"^ 'Invalid DSP' inspect."
 	"Smalltalk
 		at: #Performance
