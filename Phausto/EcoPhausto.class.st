@@ -32,24 +32,24 @@ EcoPhausto class >> loadAllInstruments [
 
 	| kick snare clap ch oh rim cowbell conga bongo bleep blip speakspell psg acid |
 	kick := TpSampler new
-		        pathToFile: self turboSamplesFolder , '/kick/BD_full909.wav';
+		        pathToFolder: self turboSamplesFolder , '/kick';
 		        label: 'kick'.
 	clap := TpSampler new
-		        pathToFile:
-			        self turboSamplesFolder , '/clap/CLAP_Rubydub.wav';
+		        pathToFolder:
+			        self turboSamplesFolder , '/clap';
 		        label: 'clap'.
 	snare := TpSampler new
-		         pathToFile:
-			         self turboSamplesFolder , '/snare/SD_Drumaxia.wav';
+		         pathToFolder:
+			         self turboSamplesFolder , '/snare';
 		         label: 'snare'.
 	ch := TpSampler new
-		      pathToFile: self turboSamplesFolder , '/ch/CH_Juxtapos.wav';
+		      pathToFolder: self turboSamplesFolder , '/ch';
 		      label: 'ch'.
 	rim := TpSampler new
-		       pathToFile: self turboSamplesFolder , '/rim/RIM_Losimple.wav';
+		       pathToFolder: self turboSamplesFolder , '/rim';
 		       label: 'rim'.
 	oh := TpSampler new
-		      pathToFile: self turboSamplesFolder , '/oh/OH_Punchtron.wav';
+		      pathToFolder: self turboSamplesFolder , '/oh';
 		      label: 'oh'.
 	cowbell := TpSampler new
 		           pathToFile:
