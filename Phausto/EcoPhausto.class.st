@@ -117,11 +117,11 @@ Rhythm list.
 "or sending the hexBeat message to a string containing only hexadecimal characters"
 ''020F'' hexBeat to: #snare.
 "sending the index: message to a Sequence with a string of integers as an argument changes the samples indexes(if playing a TpSampler), which by default are all 0s" 
-16 quavers index: ''0 1 2 3 '' to: #bleep.
+16 quavers index: ''0 1 2 3 '' to: #blip.
 "sequencers can be joined with a comma - binary operator for joining collections in Pharo"
 16 quavers , 16 semiquavers to: #oh.
 "we can mute sequencers"
-ep mute: #(#kick #snare #bleep).
+ep mute: #(#kick #snare #blip).
 "and unmute them"
 ep unmute: #(#kick #snare).
 "you can create randomTrigs - and then cascade a string to change the level of the sound"
@@ -148,7 +148,7 @@ ep unmute: #(#kick #snare).
 #(5 16) euclidean offset: 1; to: #cowbell.
 "or backwards"
 "levels can be changed sending a message to the corresponding Performance key"
-#clap level: ''0.3  0.1 0.4''.
+#shiko asRhythm to: #clap ; level: ''0.3  0.1 0.4''.
 
 "we can arpeggiate the notes of a Sequencer"
 #cumbiaClave asRhythm arpeggiate: ''12-sus4 0-min''; to: #psg; level: ''0.4''.
@@ -183,6 +183,27 @@ ep rhythm: ''1312'' hexBeat.
 
 "stop the performance"
 ep stop.
+
+"UZU PLAYBACK"
+
+ep  playCyclicFor: 96 bars.
+
+''<c6 ~ d3 a2>*64'' asMondoNotes to: #acid.
+
+''60*4 ~ 72*2'' asMondoNotes to: #kick.
+''<snare rim  blip cowbell>*8'' asMondoSounds to: #mix.
+''80 70 76 [77*5]'' asMondoNotes to: #clap; 
+
+"but traditional Coypu method can be used also in the cyclic playback, sequencer length will be trimmed to 16 steps"
+16 upbeats to: #ride.
+ep solo: #acid.
+#downbeats asRhythm to: #kick.
+#(3 16) euclidean to: #rim.
+16 randomTrigs to: #blip; index: ''1 2 3 ''; notes: ''40 51''.
+ep mute: #blip.
+
+ep stop.
+
 '.
 
 
