@@ -200,7 +200,7 @@ PhaustoEngine >> playNote: aMidiNN prefix: aString dur: aDuration [
 { #category : 'playing' }
 PhaustoEngine >> rhythm: aRhythm [
 
-	self class tpPerf loop: aRhythm 
+	self class tpPerf rhythm: aRhythm .
 ]
 
 { #category : 'playing' }
