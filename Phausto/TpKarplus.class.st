@@ -16,7 +16,7 @@ Class {
 { #category : 'converting' }
 TpKarplus >> asBox [
 
-	^ ((PhKarplusStrong new
+	^ ((PhKarplusStrong new label: 'tpKarplus';
 		   length: noteToLen;
 		   excitation: exciter) * uLevel )asBox
 ]
