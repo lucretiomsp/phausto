@@ -74,13 +74,30 @@ TurboPhausto class >> hpf [
 	^ hpf
 ]
 
-{ #category : 'accessing' }
-TurboPhausto class >> listOfSamples [ 
-
-self turboSamplesFolder asFileReference inspect.
+{ #category : 'listing' }
+TurboPhausto class >> listAllInstruments [
+ AllInstruments := OrderedCollection new.
+	AllInstruments addAll: allSamplers .
+	AllInstruments addAll: allSynths.
+	(AllInstruments collect: [ :i |
+			 i label , ' / ' , i class asString , ' / '
+			 , i sampleNamesSorted size asString ]) inspect
 ]
 
-{ #category : 'accessing' }
+{ #category : 'listing' }
+TurboPhausto class >> listOfInstruments [
+
+
+(self listOfSamples  , self listOfSynths ) inspect.
+]
+
+{ #category : 'listing' }
+TurboPhausto class >> listOfSamples [ 
+
+^ self turboSamplesFolder asFileReference inspect.
+]
+
+{ #category : 'listing' }
 TurboPhausto class >> listOfSamplesFolder [ 
 
 | dirs labels |
@@ -90,14 +107,14 @@ labels := dirs collect:  [:i | i pathString afterLastSlash ].
 ^ labels  
 ]
 
-{ #category : 'accessing' }
+{ #category : 'listing' }
 TurboPhausto class >> listOfSynths [
 
 
 "	synths := #( 'Djembe' 'Marimba' 'Guitar' 'SyClap' 'SyKick' 'Hat' 'DubDub' 'Acid' 'Chordy' 'TpHoover' 'TpReese' 'Trombone' ).
 	^ synths inspect"
 	
-(self allSynths collect: [ :i | i label ]) inspect
+^ (self allSynths collect: [ :i | i label ]) 
 ]
 
 { #category : 'loading' }

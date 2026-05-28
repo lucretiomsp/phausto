@@ -5,9 +5,6 @@ Check how **EcoPhausto** is implemented in order to implement your own ensemble 
 Class {
 	#name : 'CustomPhausto',
 	#superclass : 'TurboPhausto',
-	#classVars : [
-		'AllInstruments'
-	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
 	#tag : 'TurboPhausto'
@@ -17,15 +14,6 @@ Class {
 CustomPhausto class >> initialize [
 
 	AllInstruments := OrderedCollection new
-]
-
-{ #category : 'as yet unclassified' }
-CustomPhausto class >> listAllInstruments [
-
-	
-	(AllInstruments collect: [ :i |
-			 i label , ' / ' , i class asString , ' / '
-			 , i sampleNamesSorted size asString ]) inspect
 ]
 
 { #category : 'loading' }

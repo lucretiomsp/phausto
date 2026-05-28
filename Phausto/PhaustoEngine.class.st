@@ -4,6 +4,9 @@ An abstract superclass for TurboPhausto engines to be used with Coypu for live c
 Class {
 	#name : 'PhaustoEngine',
 	#superclass : 'Object',
+	#classVars : [
+		'AllInstruments'
+	],
 	#classInstVars : [
 		'allSamplers',
 		'tpDsp',
@@ -41,6 +44,12 @@ PhaustoEngine class >> allSamplers [
 PhaustoEngine class >> allSynths [
 
 	^ allSynths 
+]
+
+{ #category : 'class initialization' }
+PhaustoEngine class >> initialize [ 
+
+AllInstruments := OrderedCollection new.
 ]
 
 { #category : 'loading' }
