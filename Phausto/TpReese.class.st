@@ -33,18 +33,16 @@ TpReese >> initialize [
 
 
 	super initialize.
-	label := 'tpReese'. "self pitch: #ReeseFreq.
-	self trigger: #reeseTrigger."
-	detune := PhHSlider new label: 'tpReeseDetune' values: #( 5 0 30 1 ).
+
 
 	osci1 := SineOsc new
 		         freq: self pitch;
 		         uLevel: 0.3 asBox.
 	osci2 := SineOsc new
 		         uLevel: 0.3 asBox;
-		         freq: self pitch asBox
+		         freq: self pitch 
 			         +
 				         (PhHSlider new
 					          label: 'tpReeseDetune'
-					          values: #( 5 0 30 1 )) "+ detune asBox"
+					          values: #( 2 0 30 1 )) "+ detune asBox"
 ]
