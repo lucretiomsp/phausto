@@ -42,6 +42,18 @@ LFOForModulation >> asBox [
 	^ finalBox * self amount asBox + self offset asBox
 ]
 
+{ #category : 'clip' }
+LFOForModulation >> clampToUnit [
+
+	offset := 0 .
+	amount := PhHSlider new
+				            label: self label , 'Amount'
+				            init: 0.5
+				            min: 0
+				            max: 1
+				            step: 0.001 
+]
+
 { #category : 'initialization' }
 LFOForModulation >> initialize [
 
