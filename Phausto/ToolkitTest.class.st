@@ -36,6 +36,12 @@ ToolkitTest >> testPhCounterAsDsp [
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhDensityGateDsp [
+
+	self deny: PhDensityGate new asDsp isNull
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhEndRoutingDsp [
 
 	self deny: PhEndRouting new asDsp isNull
