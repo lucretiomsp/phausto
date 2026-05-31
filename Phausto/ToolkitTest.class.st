@@ -83,6 +83,12 @@ ToolkitTest >> testPhSubBeatAsDsp [
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhSyncTrig [
+
+	self deny: PhSyncTrig new asDsp isNull
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPulseGateAsDsp [
 
 self assert: PulseGate new asDsp isNull equals: false

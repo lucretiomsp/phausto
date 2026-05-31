@@ -701,6 +701,12 @@ ParamsSetter >> res: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
+ParamsSetter >> reset: aNumberOrABoxOrASymbol [
+
+		self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> resonance: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
