@@ -156,6 +156,7 @@ TpSampler >> initialize [
 	super initialize.
 	"Stereo by default"
 	numChannels := 2.
+	pitch := 261.625. "we suppose is c3"
 	index := PhHSlider new
 		         label: self coypuLabel , 'Index'
 		         init: 0
