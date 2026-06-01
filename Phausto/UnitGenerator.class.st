@@ -30,7 +30,9 @@ Class {
 		'controlParameters'
 	],
 	#classVars : [
-		'activeInstances',
+		'activeInstances'
+	],
+	#classInstVars : [
 		'instancesInDSPContext'
 	],
 	#category : 'Phausto-UnitGenerators',

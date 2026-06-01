@@ -18,7 +18,7 @@ Class {
 { #category : 'accessing' }
 PhMidiKey2Hz >> asBox [ 
 
-^ self midiNN asBox connectTo: super asBox 
+^ self midiNN asBox connectTo: self code asBox 
 ]
 
 { #category : 'accessing' }
@@ -33,4 +33,10 @@ PhMidiKey2Hz >> initialize [
 PhMidiKey2Hz >> midiNN [ 
 
 ^ midiNN
+]
+
+{ #category : 'accessing' }
+PhMidiKey2Hz >> patchedWith: aUnitGenerator [ 
+
+self midiNN: aUnitGenerator 
 ]

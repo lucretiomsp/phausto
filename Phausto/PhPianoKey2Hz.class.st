@@ -18,7 +18,7 @@ Class {
 { #category : 'converting' }
 PhPianoKey2Hz >> asBox [
 
-	^ self midiNN asBox connectTo: super asBox
+	^ self midiNN asBox connectTo: self code asBox
 ]
 
 { #category : 'initialization' }
