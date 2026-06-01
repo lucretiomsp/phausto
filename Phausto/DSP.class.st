@@ -107,7 +107,7 @@ DSP class >> invalidException [
 
 { #category : 'as yet unclassified' }
 DSP class >> paramException [
-1 halt.
+
 ^ 'Invalid parameter' inspect
 
 "	^ Error new signal:
