@@ -16,7 +16,7 @@ Class {
 PhBasics >> initialize [
 
 super initialize .
-input := 0
+input := Wire new.
 ]
 
 { #category : 'accessing' }
