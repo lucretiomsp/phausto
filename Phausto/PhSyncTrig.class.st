@@ -18,7 +18,7 @@ Class {
 PhSyncTrig >> asBox [ 
 
 | impulse |
-impulse := (PhImpulsify new gate: Wire new) asBox .
+impulse := (PhImpulsify new gate: Wire new ; uLevel: 1 asBox ) asBox .
 ^ (((HsOscSin new freq: self freq ; reset: self reset ) asBox > 0 asBox) connectTo: impulse) asBox   .
 
 ]
