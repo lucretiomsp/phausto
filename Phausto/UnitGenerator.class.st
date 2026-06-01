@@ -426,6 +426,13 @@ UnitGenerator >> sampleNamesSorted [
 	^ #()
 ]
 
+{ #category : 'arithmetic' }
+UnitGenerator >> splitTo: aUnitGenerator [
+
+"just for now"
+^ self asBox splitTo: aUnitGenerator 
+]
+
 { #category : 'converting' }
 UnitGenerator >> stereo [
 	"return a stereo version of the box (connect to Left and Right outputs)"
