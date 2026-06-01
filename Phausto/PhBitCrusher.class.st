@@ -22,12 +22,12 @@ PhBitCrusher >> asBox [
 	^ self nbits asBox , self input asBox connectTo: super asBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
 PhBitCrusher >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.bitcrusher;'.
-	nbits := 8.
+	nbits := PhHSlider new label: self label values: #(16 2 16 2)..
 ]
 
 { #category : 'accessing' }

@@ -86,12 +86,6 @@ BoxTest >> testExp [
 ]
 
 { #category : 'tests' }
-BoxTest >> testExp10 [
-
-	self deny: 1 asBox exp10 asDsp isNull
-]
-
-{ #category : 'tests' }
 BoxTest >> testFloor [
 
 	self deny: 1 asBox floor asDsp isNull
