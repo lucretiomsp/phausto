@@ -19,8 +19,8 @@ PhSyncTrig >> asBox [
 
 | impulse |
 impulse := (PhImpulsify new gate: Wire new) asBox .
-^ (HsOscSin new freq: self freq ; reset: self reset ) asBox "> 0 asBox) connectTo: impulse   .
-"
+^ (((HsOscSin new freq: self freq ; reset: self reset ) asBox > 0 asBox) connectTo: impulse) asBox   .
+
 ]
 
 { #category : 'accessing' }
