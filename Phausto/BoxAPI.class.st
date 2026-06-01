@@ -212,7 +212,7 @@ BoxAPI >> boxGt: aBox than: anotherBox [
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( #PhBox #* CboxGTAux #( PhBox #* aBox #, PhBox #* anotherBox ) )
+		  #( #PhBox * CboxGTAux #(#PhBox * aBox , PhBox * anotherBox ) )
 ]
 
 { #category : 'ui building' }

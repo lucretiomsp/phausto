@@ -115,12 +115,15 @@ PhBox >> / aUnitGeneratorOrANumber [
 
 { #category : 'comparing' }
 PhBox >> < aPhBox [ 
-	BoxAPI uniqueInstance boxLE: self  than: aPhBox 
+self ifNotNullDo: [  
+	 ^ BoxAPI uniqueInstance boxLE: self  than: aPhBox ]
 ]
 
 { #category : 'comparing' }
 PhBox >> <= aPhBox [ 
-	BoxAPI uniqueInstance boxLE: self  than: aPhBox 
+
+self ifNotNullDo: [  ^
+	BoxAPI uniqueInstance boxLE: self  than: aPhBox ]
 ]
 
 { #category : 'connecting' }
@@ -132,12 +135,14 @@ PhBox >> => aUnitGenerator [
 
 { #category : 'comparing' }
 PhBox >> > aPhBox [ 
-	BoxAPI uniqueInstance boxGt: self  than: aPhBox 
+self ifNotNullDo: [  
+	^ BoxAPI uniqueInstance boxGt: self  than: aPhBox ]
 ]
 
 { #category : 'comparing' }
 PhBox >> >= aPhBox [ 
-	BoxAPI uniqueInstance boxGE: self  than: aPhBox 
+self ifNotNullDo: [  
+	^ BoxAPI uniqueInstance boxGE: self  than: aPhBox ]
 ]
 
 { #category : 'arithmetic' }

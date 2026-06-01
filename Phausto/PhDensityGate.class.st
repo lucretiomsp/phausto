@@ -18,8 +18,10 @@ PhDensityGate >> asBox [
 "no.noise : >(1 - density*2);  "
 | noiseBox densityBox |
 noiseBox := Noise new asBox.
+noiseBox inspect.
 densityBox := 1 asBox - (self density asBox * 2 asBox).
-^ noiseBox > densityBox 
+"^ noiseBox > densityBox "
+^ noiseBox >  99999999 asBox
 ]
 
 { #category : 'accessing' }

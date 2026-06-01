@@ -30,13 +30,14 @@ PhImpulsify >> asBox [
 { #category : 'accessing' }
 PhImpulsify >> gate [
 
-	^ gate ifNil: [ gate := PhButton new label: self label ]
+	^ gate 
 ]
 
 { #category : 'initialization' }
 PhImpulsify >> initialize [
 
 	super initialize.
+	gate := PhButton new label: self label.
 	processExpression := 'process = ba.impulsify;'
 ]
 
