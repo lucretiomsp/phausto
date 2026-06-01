@@ -19,6 +19,12 @@ OperationsTest >> testPhDividerAsDsp [
 ]
 
 { #category : 'tests' }
+OperationsTest >> testPhMergeOperationAsDsp [
+
+	self deny: PhMergeOperation new asDsp isNull
+]
+
+{ #category : 'tests' }
 OperationsTest >> testPhModulorAsDsp [
 
 	self deny: PhModulor new asDsp isNull
