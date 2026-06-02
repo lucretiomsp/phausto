@@ -1439,6 +1439,17 @@ DSP >> start [
 ]
 
 { #category : 'start-stop' }
+DSP >> startSubBeat [
+
+<flag>
+"black magic to stop and start the PhSubBeat inside the dsp"
+[self  setValue: 0  parameter: 'PhSubBeatStart~checkbox'.
+0.01 seconds wait.
+self  setValue: 1  parameter: 'PhSubBeatStart~checkbox'.
+] fork
+]
+
+{ #category : 'start-stop' }
 DSP >> stop [
 " Stop processing audio."
 self isNull ifTrue: [^ self class invalidException] ifFalse: [  
