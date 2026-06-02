@@ -14,6 +14,14 @@ Class {
 	#tag : 'Effects'
 }
 
+{ #category : 'initialization' }
+Reverbs >> initialize [
+
+	super initialize.
+	numberOfOutputs := 2.
+	numberOfOutputs := 2
+]
+
 { #category : 'accessing' }
 Reverbs >> input [
 

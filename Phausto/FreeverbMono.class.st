@@ -56,6 +56,7 @@ FreeverbMono >> fb2 [
 FreeverbMono >> initialize [
 
 	super initialize.
+    numberOfOutputs := 1.
 	processExpression := 'process = re.mono_freeverb;'.
 	fb1 := PhHSlider new
 		       label: self label , 'Fb1'
@@ -77,7 +78,7 @@ FreeverbMono >> initialize [
 		        min: 0
 		        max: 1
 		        step: 0.001.
-	spread := 0 
+	spread := 0
 ]
 
 { #category : 'connecting' }

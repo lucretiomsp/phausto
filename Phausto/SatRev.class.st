@@ -22,9 +22,11 @@ SatRev >> asBox [
 ]
 
 { #category : 'initialization' }
-SatRev >> initialize [ 
+SatRev >> initialize [
+
 	super initialize.
-	processExpression := 'process = re.satrev;'.
+	
+	processExpression := 'process = re.satrev;'
 ]
 
 { #category : 'accessing - input' }

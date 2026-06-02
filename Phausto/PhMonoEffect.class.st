@@ -22,7 +22,8 @@ PhMonoEffect >> asBox [
 PhMonoEffect >> initialize [
 
 	super initialize.
-	input := Wire new.
+	numberOfInputs := 1.
+	input := Wire new
 ]
 
 { #category : 'accessing' }

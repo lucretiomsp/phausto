@@ -74,8 +74,9 @@ ZitaRevStereo >> fsMax [
 ZitaRevStereo >> initialize [
 
 	super initialize.
+	numberOfInputs := 1.
 	processExpression := 'process = re.zita_rev1_stereo;'.
-	fsmax := 44100 
+	fsmax := 44100
 ]
 
 { #category : 'connecting' }
