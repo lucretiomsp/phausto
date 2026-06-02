@@ -23,12 +23,11 @@ Class {
 { #category : 'converting' }
 Korg35LPF >> asBox [
 
-	| intermdiateBox finalBox |
-	intermdiateBox := super asBox.
 
-	finalBox := self fr asBox, self res asBox, self input asBox connectTo: intermdiateBox.
+	^  self fr asBox , self res asBox , self input asBox
+		            connectTo: self code asBox .
 
-	^ finalBox
+	
 ]
 
 { #category : 'accessing' }

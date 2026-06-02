@@ -16,13 +16,10 @@ Class {
 { #category : 'converting' }
 MoogLadder >> asBox [
 
-	| intermdiateBox finalBox |
-	intermdiateBox := super asBox.
+	
 
-	finalBox := self normFreq asBox, self q asBox, self input asBox connectTo:
-		            intermdiateBox.
-
-	^ finalBox
+	^  self normFreq asBox , self q asBox , self input asBox
+		            connectTo: self code asBox
 ]
 
 { #category : 'initialization' }

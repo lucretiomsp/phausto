@@ -17,13 +17,10 @@ Class {
 { #category : 'converting' }
 MoogHalfLadder >> asBox [
 
-	| intermdiateBox finalBox |
-	intermdiateBox := super asBox.
 
-	finalBox := self normFreq asBox , self q asBox , self input asBox connectTo:
-		            intermdiateBox.
+^  normFreq asBox , self q asBox , self input asBox
+		            connectTo: self code asBox.
 
-	^ finalBox
 ]
 
 { #category : 'initialization' }
