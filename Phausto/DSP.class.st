@@ -1430,8 +1430,8 @@ DSP >> source: aUnitGenerator [
 DSP >> start [
 	" Start processing audio. It also adds the current dsp to the dspPlaying ordered collection of the FaustDynamicEngine class"
 
-	self isInitialized ifNil: [ ^ self class uninitializedException  ]
-		ifNotNil: [
+	self isInitialized ifFalse: [ ^ self class uninitializedException  ]
+		ifTrue: [
 			parameters := self allParameters .
 			PhaustoDynamicEngine dspPlaying: self.
 			^ PhaustoDynamicEngine uniqueInstance ffiCall:
