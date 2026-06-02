@@ -9,7 +9,7 @@ Class {
 { #category : 'tests' }
 UnitGeneratorsTest >> testAbsoluteUGen [
 
-self assert: SineOsc new absolute asDsp isNull equals: false
+self deny: SineOsc new absolute asDsp isNull.
 ]
 
 { #category : 'tests' }
@@ -136,6 +136,17 @@ UnitGeneratorsTest >> testLFOTriAsDsp [
 UnitGeneratorsTest >> testLFOTriPosAsDsp [
 
 	self deny: LFOTriPos new asDsp isNull 
+]
+
+{ #category : 'tests' }
+UnitGeneratorsTest >> testMergeWith [
+
+| mergedUGens |
+mergedUGens := PhLoopSpeed new mergeWith: PhBitCrusher new.
+self assert: mergedUGens  class equals: PhMergeOperation  .
+self assert: mergedUGens input class  equals: PhLoopSpeed.
+self assert: mergedUGens output  class  equals: PhBitCrusher .
+
 ]
 
 { #category : 'tests' }

@@ -36,3 +36,9 @@ PhMergeOperation >> input [
 PhMergeOperation >> output [
 ^ output
 ]
+
+{ #category : 'accessing' }
+PhMergeOperation >> output: aUnitGenerator [
+
+	output := aUnitGenerator
+]

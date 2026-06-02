@@ -358,6 +358,13 @@ UnitGenerator >> label: aString [
 	
 ]
 
+{ #category : 'connecting' }
+UnitGenerator >> mergeWith: aUnitGenerator [
+
+^ PhMergeOperation new input: self; output: aUnitGenerator 
+
+]
+
 { #category : 'converting' }
 UnitGenerator >> midikey2hz [ 
 
