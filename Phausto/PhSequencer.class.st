@@ -19,14 +19,11 @@ Class {
 PhSequencer >> asBox [
 
 	| finalBox |
-	counter max
-		init: pattern size;
-		max: pattern size.
-
-
+	self counter  max: (PhHSlider new label: self label  values: {pattern size . 0 . pattern size .1}).
+	
 	finalBox := self selector
-		            list: self pattern asPhList;
-		            index: (self counter trigger: self trigger).
+		            list: self pattern asPhZeroList;
+		            index: self counter.
 	^ finalBox asBox
 
 	"PhSelectN new list: #(0 1 2 3 1 2 3 12 3) asPhList; index: (PhTkCounter new trigger: PhSubBeat new)."
@@ -38,12 +35,18 @@ PhSequencer >> counter [
 ^ counter
 ]
 
+{ #category : 'accessing' }
+PhSequencer >> counter: aCounter [
+
+	counter := aCounter
+]
+
 { #category : 'initialization' }
 PhSequencer >> initialize [
 
 	super initialize.
 	selector := PhSelectN new.
-	counter := PhTkCounter new.
+	counter := PhTkCounter new trigger: PhSubBeat  new.
 	pattern := #( 0 1 2 3 4 5 6 ).
 	trigger := PhSubBeat new
 ]
