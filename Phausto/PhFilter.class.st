@@ -30,7 +30,6 @@ PhFilter >> input [
 { #category : 'connecting' }
 PhFilter >> patchedWith: aUnitGenerator [
 
-	aUnitGenerator numberOfOutputs = 1
-		ifTrue: [ self input: aUnitGenerator ]
-		ifFalse: [ aUnitGenerator mergeWith: self ]
+	 self input: aUnitGenerator 
+	
 ]
