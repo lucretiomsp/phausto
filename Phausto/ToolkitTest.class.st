@@ -83,6 +83,13 @@ ToolkitTest >> testPhPreRoutingDsp [
 ]
 
 { #category : 'tests' }
+ToolkitTest >> testPhSequencerasDsp [
+
+
+	self deny: PhSequencer new asBox isNull
+]
+
+{ #category : 'tests' }
 ToolkitTest >> testPhSubBeatAsDsp [
 
 	self assert: PhSubBeat new asDsp isNull equals: false
@@ -92,6 +99,12 @@ ToolkitTest >> testPhSubBeatAsDsp [
 ToolkitTest >> testPhSyncTrig [
 
 	self deny: PhSyncTrig new asDsp isNull
+]
+
+{ #category : 'tests' }
+ToolkitTest >> testPhTkCounterAsDsp [
+
+	self deny: PhTkCounter new asDsp isNull  
 ]
 
 { #category : 'tests' }

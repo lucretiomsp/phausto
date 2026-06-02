@@ -15,6 +15,14 @@ Class {
 	#tag : 'ToolKit'
 }
 
+{ #category : 'instance creation' }
+PhTkCounter class >> new: aMaxValue [
+    | inst |
+    inst := self new.
+    inst maxValue: aMaxValue.
+    ^ inst
+]
+
 { #category : 'converting' }
 PhTkCounter >> asBox [
 
@@ -29,14 +37,14 @@ PhTkCounter >> asBox [
 PhTkCounter >> initialize [
 
 	super initialize.
-	maxValue := 8.
+	
 	max := PhHSlider new
-			         label: self label , 'Max'
-			         init: self maxValue
-			         min: 1
-			         max: self maxValue
-			         step: 1 .
-			 trigger := PhButton new label: self label , 'Trigger'
+		       label: self label , 'Max'
+		       init: self maxValue
+		       min: 1
+		       max: self maxValue
+		       step: 1.
+	trigger := PhButton new label: self label , 'Trigger'
 ]
 
 { #category : 'accessing' }
@@ -47,7 +55,8 @@ PhTkCounter >> max [
 
 { #category : 'accessing' }
 PhTkCounter >> maxValue [
-^ maxValue
+
+^ maxValue ifNil: [ maxValue := 8 ]
 ]
 
 { #category : 'accessing' }
