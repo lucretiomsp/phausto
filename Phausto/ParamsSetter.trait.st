@@ -611,6 +611,12 @@ ParamsSetter >> paramSetter [
 ]
 
 { #category : 'trait' }
+ParamsSetter >> part: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> period: aNumberOrABoxOrASymbol [
 
 	| methodName |
