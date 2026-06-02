@@ -433,11 +433,12 @@ UnitGenerator >> sampleNamesSorted [
 	^ #()
 ]
 
-{ #category : 'arithmetic' }
+{ #category : 'connecting' }
 UnitGenerator >> splitTo: aUnitGenerator [
 
-"just for now"
-^ self asBox splitTo: aUnitGenerator 
+	^ PhSplitOperation new
+		  input: self;
+		  output: aUnitGenerator
 ]
 
 { #category : 'converting' }

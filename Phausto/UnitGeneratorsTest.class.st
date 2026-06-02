@@ -210,6 +210,16 @@ UnitGeneratorsTest >> testSparseNoiseAsDsp [
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testSplitTo [
+
+	| mergedUGens |
+	mergedUGens := SineOsc new splitTo: ZitaLight new.
+	self assert: mergedUGens class equals: PhSplitOperation.
+	self assert: mergedUGens input class equals: SineOsc.
+	self assert: mergedUGens output class equals: ZitaLight
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testSquareOscAsDsp [
 
 	self assert: SquareOsc new asDsp isNull equals: false

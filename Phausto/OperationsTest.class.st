@@ -43,6 +43,12 @@ OperationsTest >> testPhPowerAsDsp [
 ]
 
 { #category : 'tests' }
+OperationsTest >> testPhSplitOperationAsDsp [
+
+	self deny: PhSplitOperation new asDsp isNull
+]
+
+{ #category : 'tests' }
 OperationsTest >> testPhSubtractorAsDsp [
 
 	self deny: PhSubtractor new asDsp isNull
