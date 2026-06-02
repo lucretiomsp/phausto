@@ -23,41 +23,41 @@ Class {
 { #category : 'converting' }
 Korg35HPF >> asBox [
 
-	| intermdiateBox finalBox |
-	intermdiateBox := super asBox.
 
-	finalBox := self fr asBox, self res asBox, self input asBox connectTo: intermdiateBox.
 
-	^ finalBox
+^  self fr asBox , self res asBox , self input asBox
+		            connectTo: self code asBox.
+
+	
 ]
 
 { #category : 'accessing' }
 Korg35HPF >> fr [
 
-	^ fr ifNil:  [
-		  fr  := PhHSlider new
-			          label: self label , 'Fr'
-			          init: 1
-			          min: 0.001
-			          max:  1
-			          step: 0.001 ] 
+	^ fr 
 ]
 
 { #category : 'initialization' }
 Korg35HPF >> initialize [
 
 	super initialize.
+	fr := PhHSlider new
+		      label: self label , 'Fr'
+		      init: 1
+		      min: 0.001
+		      max: 1
+		      step: 0.001.
+		  res := PhHSlider new
+				         label: self label , 'Res'
+				         init: 1
+				         min: 1
+				         max: 8
+				         step: 0.001.
 	self processExpression: 'process = ve.korg35HPF;'
 ]
 
 { #category : 'accessing' }
 Korg35HPF >> res [
 
-	^ res ifNil:  [
-		  res  := PhHSlider new
-			          label: self label , 'Res'
-			          init: 1
-			          min: 1
-			          max: 8
-			          step: 0.001 ] 
+	^ res 
 ]
