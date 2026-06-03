@@ -26,11 +26,9 @@ PhTkCounter class >> new: aMaxValue [
 { #category : 'converting' }
 PhTkCounter >> asBox [
 
-	| count finalBox |
+	| count |
 	count := Counter new trig: self trigger asBox.
-
-	finalBox := count asBox - 1 asBox % (self max asBox - 1 asBox) "+ 1".
-	^ finalBox
+	^ count asBox % self max asBox
 ]
 
 { #category : 'initialization' }
