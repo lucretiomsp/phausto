@@ -37,6 +37,38 @@ Class {
 }
 
 { #category : 'exporting - apvts' }
+DSP class >> apvtsEditorSetupBodyFor: aCollectionOfParameters [
+	"Editor constructor body: one control + APVTS attachment + name label per DSPParameter.
+	 Continuous params get a Slider/SliderAttachment, button & checkbox get a ToggleButton/ButtonAttachment."
+
+	^ String streamContents: [ :s |
+		aCollectionOfParameters do: [ :p |
+			(#( 'button' 'checkbox' ) includes: p type)
+				ifTrue: [ s
+					nextPutAll: '    {'; lf;
+					nextPutAll: '        auto* tb = new juce::ToggleButton ();'; lf;
+					nextPutAll: '        addAndMakeVisible (tb);'; lf;
+					nextPutAll: '        buttonAttachments.add (new juce::AudioProcessorValueTreeState::ButtonAttachment (audioProcessor.apvts, "';
+					nextPutAll: p shortName; nextPutAll: '", *tb));'; lf;
+					nextPutAll: '        labels.add (new juce::Label ({}, "'; nextPutAll: p label; nextPutAll: '"));'; lf;
+					nextPutAll: '        addAndMakeVisible (labels.getLast());'; lf;
+					nextPutAll: '        labels.getLast()->setJustificationType (juce::Justification::centredRight);'; lf;
+					nextPutAll: '        controls.add (tb);'; lf;
+					nextPutAll: '    }'; lf ]
+				ifFalse: [ s
+					nextPutAll: '    {'; lf;
+					nextPutAll: '        auto* sl = new juce::Slider (juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow);'; lf;
+					nextPutAll: '        addAndMakeVisible (sl);'; lf;
+					nextPutAll: '        sliderAttachments.add (new juce::AudioProcessorValueTreeState::SliderAttachment (audioProcessor.apvts, "';
+					nextPutAll: p shortName; nextPutAll: '", *sl));'; lf;
+					nextPutAll: '        labels.add (new juce::Label ({}, "'; nextPutAll: p label; nextPutAll: '"));'; lf;
+					nextPutAll: '        addAndMakeVisible (labels.getLast());'; lf;
+					nextPutAll: '        labels.getLast()->setJustificationType (juce::Justification::centredRight);'; lf;
+					nextPutAll: '        controls.add (sl);'; lf;
+					nextPutAll: '    }'; lf ] ] ]
+]
+
+{ #category : 'exporting - apvts' }
 DSP class >> apvtsLayoutBodyFor: aCollectionOfParameters [
 	"C++ body of createParameterLayout(): one RangedAudioParameter per DSPParameter.
 	 Floats for sliders/nentries, bools for buttons/checkboxes."
@@ -948,6 +980,44 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc ,
 	stream close
 ]
 
+{ #category : 'exporting - apvts' }
+DSP >> createCppEditorAPVTSFilesNamed: aString for: aPluginType [
+	| folder stream proc editor |
+	proc := aPluginType , 'AudioProcessor'.
+	editor := proc , 'Editor'.
+	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source') ensureCreateDirectory.
+	stream := (folder / 'PluginEditor.cpp') writeStream.
+	stream nextPutAll: '#include "PluginProcessor.h"
+#include "PluginEditor.h"
+
+' , editor , '::' , editor , ' (' , proc , '& p)
+    : AudioProcessorEditor (&p), audioProcessor (p)
+{
+' , (self class apvtsEditorSetupBodyFor: self apvtsParameters) , '    setSize (380, juce::jmax (1, controls.size()) * 64 + 24);
+}
+
+' , editor , '::~' , editor , '() {}
+
+void ' , editor , '::paint (juce::Graphics& g)
+{
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+}
+
+void ' , editor , '::resized()
+{
+    auto area = getLocalBounds().reduced (12);
+    const int rowH = 64;
+    for (int i = 0; i < controls.size(); ++i)
+    {
+        auto row = area.removeFromTop (rowH);
+        labels[i]->setBounds (row.removeFromLeft (150));
+        controls[i]->setBounds (row.reduced (4));
+    }
+}
+'.
+	stream close
+]
+
 { #category : 'exporting' }
 DSP >> createCppFilesNamed: aString for: aPluginType [
 
@@ -1088,6 +1158,40 @@ private:
     std::unique_ptr<MapUI> fUI;
     void pushParameters();
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , proc , ')
+};
+'.
+	stream close
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> createHeaderEditorAPVTSFilesNamed: aString for: aPluginType [
+	| folder stream proc editor |
+	proc := aPluginType , 'AudioProcessor'.
+	editor := proc , 'Editor'.
+	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source') ensureCreateDirectory.
+	stream := (folder / 'PluginEditor.h') writeStream.
+	stream nextPutAll: '#pragma once
+#include <JuceHeader.h>
+#include "PluginProcessor.h"
+
+class ' , editor , ' : public juce::AudioProcessorEditor
+{
+public:
+    ' , editor , ' (' , proc , '&);
+    ~' , editor , '() override;
+
+    void paint (juce::Graphics&) override;
+    void resized() override;
+
+private:
+    ' , proc , '& audioProcessor;
+
+    juce::OwnedArray<juce::Label> labels;
+    juce::OwnedArray<juce::Component> controls;
+    juce::OwnedArray<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachments;
+    juce::OwnedArray<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachments;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , editor , ')
 };
 '.
 	stream close
@@ -1338,6 +1442,19 @@ DSP >> destroy [
 					"return a null pointer"
 					self class initializedDSP: DSP new.
 					 ] ]
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> export2JuceAPVTSWithName: aString type: aPluginType [
+	" apluginType can be 'Effect' , MonoSynth' or 'PolySynth' "
+
+	"aString becomes the CMake target name, so it needs to be a plain identifier (no spaces)"
+
+	self createCppAPVTSFilesNamed: aString for: aPluginType.
+	self createCppEditorAPVTSFilesNamed: aString for: aPluginType. 
+	self createJucerFileNamed: aString for: aPluginType.
+	self createCMakeFileNamed: aString for: aPluginType.
+	self createFaustEffectHeaderFileNamed: aString
 ]
 
 { #category : 'exporting' }

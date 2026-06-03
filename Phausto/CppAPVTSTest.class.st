@@ -42,6 +42,38 @@ CppAPVTSTest >> testCppFloatFormatsIntegers [
 ]
 
 { #category : 'tests' }
+CppAPVTSTest >> testEditorEmitsButtonAttachmentForBool [
+
+	
+		self assert:
+			((DSP apvtsEditorSetupBodyFor: params) includesSubstring:
+				 'juce::AudioProcessorValueTreeState::ButtonAttachment (audioProcessor.apvts, "Gate", *tb)') 
+]
+
+{ #category : 'tests' }
+CppAPVTSTest >> testEditorEmitsSliderAttachmentForFloat [ 
+	self assert: ((DSP apvtsEditorSetupBodyFor: params) includesSubstring:
+		'juce::AudioProcessorValueTreeState::SliderAttachment (audioProcessor.apvts, "Korg35HPFRes", *sl)')
+
+]
+
+{ #category : 'tests' }
+CppAPVTSTest >> testEditorOneControlPerParameter [ 
+	| added |
+	added := (DSP apvtsEditorSetupBodyFor: params) lines select: [ :l | l includesSubstring: 'controls.add' ].
+	self assert: added size equals: params size
+
+]
+
+{ #category : 'tests' }
+CppAPVTSTest >> testEditorUsesLabelText [ 
+	self assert: ((DSP apvtsEditorSetupBodyFor: params) includesSubstring:
+		'new juce::Label ({}, "Korg35HPFRes")')
+
+
+]
+
+{ #category : 'tests' }
 CppAPVTSTest >> testEveryParamIdMatchesShortname [ 
 	| push |
 	push := DSP apvtsPushBodyFor: params.
@@ -51,15 +83,23 @@ CppAPVTSTest >> testEveryParamIdMatchesShortname [
 ]
 
 { #category : 'tests' }
-CppAPVTSTest >> testFromDictionaryCapturesAddress [ [
-	| dict |
-	dict := Dictionary new
-		at: #label put: 'X'; at: #shortname put: 'X';
-		at: #min put: 0; at: #max put: 1; at: #init put: 0.5;
-		at: #type put: 'hslider'; at: #step put: 0.01;
-		at: #address put: '/MyApp/X'; yourself.
-	self assert: (DSPParameter fromDictionary: dict) address equals: '/MyApp/X'
-]
+CppAPVTSTest >> testFromDictionaryCapturesAddress [
+
+	
+		| dict |
+		dict := Dictionary new
+			        at: #label put: 'X';
+			        at: #shortname put: 'X';
+			        at: #min put: 0;
+			        at: #max put: 1;
+			        at: #init put: 0.5;
+			        at: #type put: 'hslider';
+			        at: #step put: 0.01;
+			        at: #address put: '/MyApp/X';
+			        yourself.
+		self
+			assert: (DSPParameter fromDictionary: dict) address
+			equals: '/MyApp/X' 
 ]
 
 { #category : 'tests' }
@@ -70,10 +110,11 @@ CppAPVTSTest >> testLayoutEmitsBoolForButton [
 ]
 
 { #category : 'tests' }
-CppAPVTSTest >> testLayoutEmitsFloatParameter [ [
-	self assert: ((DSP apvtsLayoutBodyFor: params) includesSubstring:
-		'std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { "Korg35HPFRes", 1 }, "Korg35HPFRes", juce::NormalisableRange<float> (1.0f, 8.0f, 0.001f), 1.0f)')
-]
+CppAPVTSTest >> testLayoutEmitsFloatParameter [
+
+	
+		self assert: ((DSP apvtsLayoutBodyFor: params) includesSubstring:
+				 'std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { "Korg35HPFRes", 1 }, "Korg35HPFRes", juce::NormalisableRange<float> (1.0f, 8.0f, 0.001f), 1.0f)') 
 ]
 
 { #category : 'tests' }
