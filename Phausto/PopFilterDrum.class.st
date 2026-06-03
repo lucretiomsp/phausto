@@ -22,17 +22,11 @@ Class {
 { #category : 'converting' }
 PopFilterDrum >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self freq asBox , self q asBox , self gate asBox
-		            connectTo: intermediateBox.
+
+	| finalBox |
+	finalBox := self freq asBox , self q asBox , self trigger asBox
+		            connectTo: self code asBox.
 	^ finalBox * self uLevel
-]
-
-{ #category : 'accessing' }
-PopFilterDrum >> gate [
-
-	^ gate 
 ]
 
 { #category : 'initialization' }
@@ -49,7 +43,8 @@ PopFilterDrum >> initialize [
 		     init: 5
 		     min: 1
 		     max: 12
-		     step: 0.01
+		     step: 0.01.
+	self uLevel: 1
 ]
 
 { #category : 'accessing' }
