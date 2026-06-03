@@ -93,6 +93,12 @@ ParamsSetter >> biasRelease: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
+ParamsSetter >> blend: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
 ParamsSetter >> bowPosition: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
@@ -239,6 +245,12 @@ ParamsSetter >> duty: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 ParamsSetter >> dv: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
+ParamsSetter >> dwell: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -790,6 +802,12 @@ ParamsSetter >> spread: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
+{ #category : 'trait' }
+ParamsSetter >> springs: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'trait - physModels' }
 ParamsSetter >> stiffness: aNumberOrABoxOrASymbol [
 
@@ -846,6 +864,12 @@ ParamsSetter >> tau: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 ParamsSetter >> tempo: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
+ParamsSetter >> tension: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]

@@ -236,6 +236,12 @@ EffectsTest >> testSpectralTiltDemoAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testSpringReverbAsDsp [
+
+	self deny: SpringReverb new asDsp isNull
+]
+
+{ #category : 'tests' }
 EffectsTest >> testTapeStopDemoAsDsp [
 	"new version of faust libs must be bundled to pass this test"
 
