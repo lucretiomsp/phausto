@@ -1952,6 +1952,13 @@ DSP >> sweepToValue: aTargetValue parameter: aParamAsString in: aTimeInseconds [
 		ifFalse: [ decrementingProcess fork ]
 ]
 
+{ #category : 'start-stop' }
+DSP >> syncTrigReset [
+" reset SyncTrigger, if any"
+
+self trig: 'SyncTrigReset' for:  0.5
+]
+
 { #category : 'API - accessing' }
 DSP >> traceAllParams [
 	"show in transcript alla vailable parameters for this DSP"
