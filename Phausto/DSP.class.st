@@ -36,6 +36,48 @@ Class {
 	#tag : 'DSP'
 }
 
+{ #category : 'exporting - apvts' }
+DSP class >> apvtsLayoutBodyFor: aCollectionOfParameters [
+	"C++ body of createParameterLayout(): one RangedAudioParameter per DSPParameter.
+	 Floats for sliders/nentries, bools for buttons/checkboxes."
+
+	^ String streamContents: [ :s |
+		aCollectionOfParameters do: [ :p |
+			(#( 'button' 'checkbox' ) includes: p type)
+				ifTrue: [ s
+					nextPutAll: '    layout.add (std::make_unique<juce::AudioParameterBool> (juce::ParameterID { "';
+					nextPutAll: p shortName; nextPutAll: '", 1 }, "';
+					nextPutAll: p label; nextPutAll: '", false));'; lf ]
+				ifFalse: [ s
+					nextPutAll: '    layout.add (std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { "';
+					nextPutAll: p shortName; nextPutAll: '", 1 }, "';
+					nextPutAll: p label; nextPutAll: '", juce::NormalisableRange<float> (';
+					nextPutAll: (self cppFloat: p minValue); nextPutAll: ', ';
+					nextPutAll: (self cppFloat: p maxValue); nextPutAll: ', ';
+					nextPutAll: (self cppFloat: p stepValue); nextPutAll: '), ';
+					nextPutAll: (self cppFloat: p initValue); nextPutAll: '));'; lf ] ] ]
+]
+
+{ #category : 'exporting - apvts' }
+DSP class >> apvtsPushBodyFor: aCollectionOfParameters [
+	"C++ lines pushing APVTS values into the Faust DSP by address, via MapUI."
+
+	^ String streamContents: [ :s |
+		aCollectionOfParameters do: [ :p |
+			s nextPutAll: '    fUI->setParamValue ("'; nextPutAll: p address;
+			  nextPutAll: '", apvts.getRawParameterValue ("'; nextPutAll: p shortName;
+			  nextPutAll: '")->load());'; lf ] ]
+]
+
+{ #category : 'exporting - apvts' }
+DSP class >> cppFloat: aNumber [
+	"Format a Faust JSON number as a C++ float literal (1 -> 1.0f, 0.3 -> 0.3f)."
+
+	^ aNumber isInteger
+		ifTrue: [ aNumber printString , '.0f' ]
+		ifFalse: [ aNumber printString , 'f' ]
+]
+
 { #category : 'as yet unclassified' }
 DSP class >> create: aStringWithFaustCode [
 	"create a new dsp from a string with valid Faust code"
@@ -192,6 +234,14 @@ DSP >> apvtsLayoutBody [
 					nextPutAll: (self cppFloat: (c at: #step)); nextPutAll: '), ';
 					nextPutAll: (self cppFloat: (c at: #init)); nextPutAll: '));'; lf ] ] ]
 
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> apvtsParameters [
+	"DSPParameters for this DSP, sorted by shortName so the generated files are stable."
+
+	^ self parameterStore parameters values
+		asSortedCollection: [ :a :b | a shortName < b shortName ]
 ]
 
 { #category : 'exporting - apvts' }

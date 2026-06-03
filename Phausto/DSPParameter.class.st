@@ -19,7 +19,8 @@ Class {
 		'shortName',
 		'label',
 		'stepValue',
-		'type'
+		'type',
+		'address'
 	],
 	#category : 'Phausto-DSP',
 	#package : 'Phausto',
@@ -29,6 +30,16 @@ Class {
 { #category : 'instance creation' }
 DSPParameter class >> fromDictionary: aParameterDictionary [ 
 	^ self new label: (aParameterDictionary at: #label); shortName: (aParameterDictionary at: #shortname) ; minValue: (aParameterDictionary at: #min) ; maxValue: (aParameterDictionary at: #max) ; initValue: (aParameterDictionary at: #init); type: (aParameterDictionary at: #type); stepValue: (aParameterDictionary at: #step)
+]
+
+{ #category : 'accessing' }
+DSPParameter >> address [ 
+^ address
+]
+
+{ #category : 'accessing' }
+DSPParameter >> address: aString [ 
+	address := aString 
 ]
 
 { #category : 'accessing' }
