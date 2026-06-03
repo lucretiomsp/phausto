@@ -63,6 +63,12 @@ SpringReverb >> initialize [
 		           values: #( 2 0 2 1 )
 ]
 
+{ #category : 'connecting' }
+SpringReverb >> patchedWith: aUnitGenerator [
+
+	self input: aUnitGenerator
+]
+
 { #category : 'accessing' }
 SpringReverb >> springs [ 
 ^ springs 
