@@ -48,29 +48,29 @@ CombFilters >> initialize [
 
 	del := PhHSlider new
 		       label: self label , 'del'
-		       init: 2
+		       init: 23
 		       min: 0
 		       max: 32
 		       step: 0.01.
 
 	bM := PhHSlider new
 		      label: self label , 'BM'
-		      init: 1
+		      init: 0.89
 		      min: 0
 		      max: 1
 		      step: 0.001.
 	b0 := PhHSlider new
 		      label: self label , 'B0'
-		      init: 1
+		      init: 0.76
 		      min: 0
 		      max: 1
 		      step: 0.001.
 
-	input := 1 .
+	input := 1.
 
 	intDel := PhHSlider new
 		          label: self label , 'IntDel'
-		          init: 2
+		          init: 23
 		          min: 0
 		          max: 32
 		          step: 1.

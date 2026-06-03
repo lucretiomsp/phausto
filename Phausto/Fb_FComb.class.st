@@ -19,17 +19,10 @@ Class {
 	#tag : 'Filters'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 Fb_FComb >> aN [
 
-
-	^ aN ifNil: [
-		  aN := PhHSlider new
-			        label: self label , 'AN'
-			        init: 1
-			        min: 0
-			        max: 1
-			        step: 0.001 ]
+	^ aN 
 ]
 
 { #category : 'converting' }
@@ -42,4 +35,15 @@ Fb_FComb >> asBox [
 		            connectTo: intermdiateBox.
 
 	^ finalBox
+]
+
+{ #category : 'initialization' }
+Fb_FComb >> initialize [ 
+super initialize.
+	aN := PhHSlider new
+		      label: self label , 'AN'
+		      init: 0.76
+		      min: 0
+		      max: 1
+		      step: 0.001
 ]
