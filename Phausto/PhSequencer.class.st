@@ -20,9 +20,9 @@ PhSequencer >> asBox [
 
 	| finalBox |
 	self counter max: (PhHSlider new label: self label values: {
-				 pattern size + 1.
+				 (pattern size ).
 				 0.
-				 pattern size + 1.
+				 (pattern size ).
 				 1 }).
 
 	finalBox := self selector

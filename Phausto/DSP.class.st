@@ -1771,6 +1771,12 @@ DSP >> play [
 			]
 ]
 
+{ #category : 'start-stop' }
+DSP >> playFor: aDuration [
+
+[  self  start . aDuration . self  stop ] fork
+]
+
 { #category : 'API - changes' }
 DSP >> playNote: aMidiNN prefix: aString dur: aDuration [
 	"Send a gate dur: aDuration in seconds to the parameter named aString, Gate and a MidiNN converted to Hertz to  the parameter named aString , Note"
