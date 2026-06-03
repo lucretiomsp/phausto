@@ -27,7 +27,7 @@ EffectsTest >> testCompressorDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testCryBabyAsDsp [
 
-	self assert: CryBaby new asDsp isNull equals: false
+	self deny: CryBaby new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -40,6 +40,12 @@ EffectsTest >> testCubicNlAsDsp [
 EffectsTest >> testDatorroRevDemoAsDsp [
 
 	self deny: Dattorro_Rev_Demo new asDsp isNull 
+]
+
+{ #category : 'tests' }
+EffectsTest >> testDattorroRevAsDsp [
+
+	self deny: DattorroRev new asDsp isNull 
 ]
 
 { #category : 'tests' }

@@ -18,12 +18,7 @@ Class {
 { #category : 'accessing' }
 Delays >> delayLength [
 
-	^ delayLength ifNil: [ delayLength := (PhHSlider new
-			 label: self label , 'Length'
-			 init: 20050
-			 min: 1
-			 max: 44100
-			 step: 1). ]
+	^ delayLength 
 ]
 
 { #category : 'initialization' }
