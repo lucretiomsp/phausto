@@ -19,8 +19,12 @@ Class {
 PhSequencer >> asBox [
 
 	| finalBox |
-	self counter  max: (PhHSlider new label: self label  values: {pattern size . 0 . pattern size .1}).
-	
+	self counter max: (PhHSlider new label: self label values: {
+				 pattern size + 1.
+				 0.
+				 pattern size + 1.
+				 1 }).
+
 	finalBox := self selector
 		            list: self pattern asPhZeroList;
 		            index: self counter.
@@ -46,7 +50,7 @@ PhSequencer >> initialize [
 
 	super initialize.
 	selector := PhSelectN new.
-	counter := PhTkCounter new trigger: PhSubBeat  new.
+	counter := PhTkCounter new trigger: (PhSubBeat new).
 	pattern := #( 0 1 2 3 4 5 6 ).
 	trigger := PhSubBeat new
 ]

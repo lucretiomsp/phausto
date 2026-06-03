@@ -128,10 +128,10 @@ ParamsSetter >> cent: aNumberOrABoxOrASymbol [
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait' }
+{ #category : 'trait - cutoff' }
 ParamsSetter >> clockDivider: aNumberOrABoxOrASymbol [
 
-		self paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }

@@ -10,7 +10,7 @@ Mono spring-inspired reverb originally designed for the Chaos Audio Stratus, whi
 
 "
 Class {
-	#name : 'SpringVerb',
+	#name : 'SpringReerb',
 	#superclass : 'Reverbs',
 	#instVars : [
 		'dwell',

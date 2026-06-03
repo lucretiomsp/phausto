@@ -29,12 +29,11 @@ PhSyncTrig >> freq [
 ]
 
 { #category : 'initialization' }
-PhSyncTrig >> initialize [ 
+PhSyncTrig >> initialize [
 
-super initialize . 
-freq := PhHSlider new label: 'SyncTrigFreq' values: #(7 0.1 19 0.1).
-reset :=  #SyncTrigReset asPhButton .
-
+	super initialize.
+	freq := PhHSlider new label: 'SyncTrigFreq' values: #( 11 0.1 19 0.1 ).
+	reset := #SyncTrigReset asPhButton
 ]
 
 { #category : 'accessing' }

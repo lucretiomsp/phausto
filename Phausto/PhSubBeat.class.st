@@ -41,17 +41,17 @@ PhSubBeat >> initialize [
 	super initialize.
 	tempo := PhHSlider new
 		         label: self label , 'Tempo'
-		         init: 120
+		         init: 146
 		         min: 30
 		         max: 220
 		         step: 0.01.
 	start := PhCheckbox new label: self label , 'Start'.
 	clockDivider := PhHSlider new
 		                label: self label , 'ClockDivider'
-		                init: 8
-		                min: 1
+		                init: 2
+		                min: 0.5
 		                max: 32
-		                step: 0.01
+		                step: 0.1
 ]
 
 { #category : 'accessing' }

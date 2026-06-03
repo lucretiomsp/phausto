@@ -68,9 +68,9 @@ Clap >> initialize [
 
 	decay := PhHSlider new
 		         label: self label , 'Decay'
-		         init: 0.9
+		         init: 0.02
 		         min: 0
-		         max: 4.0
+		         max: 2.0
 		         step: 0.01.
 	tone := PhHSlider new
 		        label: self label , 'Freq'
@@ -80,12 +80,14 @@ Clap >> initialize [
 		        step: 1.
 	uLevel := PhHSlider new
 		          label: self label , 'uLevel'
-		          init: 0.4
+		          init: 0.24
 		          min: 0
 		          max: 1
 		          step: 0.001.
 
-	self controlParameters add: #tone -> (self tone asControlParameterOfWidgetType: #knob description: 'Filter Frequency')
+	self controlParameters add: #tone -> (self tone
+			 asControlParameterOfWidgetType: #knob
+			 description: 'Filter Frequency')
 ]
 
 { #category : 'accessing' }
