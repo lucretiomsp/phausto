@@ -1,5 +1,8 @@
 "
 I am PhSyncTrig a sin-based resettable trigger generator
+**Parameters:
+**freq:** frequency in hertz;
+**reset:** reset phase
 "
 Class {
 	#name : 'PhSyncTrig',

@@ -1,5 +1,7 @@
 "
-I am PhDensityGate a noise-based random gate
+I am PhDensityGate a noise-based random gate.
+##Parameters:
+**density:** density of 'trigs' (0 - 1 range)
 "
 Class {
 	#name : 'PhDensityGate',

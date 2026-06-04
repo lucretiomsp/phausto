@@ -1774,7 +1774,7 @@ DSP >> play [
 { #category : 'start-stop' }
 DSP >> playFor: aDuration [
 
-[  self  start . aDuration . self  stop ] fork
+[  self  start . aDuration  wait. self  stop ] fork
 ]
 
 { #category : 'API - changes' }
