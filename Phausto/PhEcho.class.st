@@ -13,7 +13,7 @@ Class {
 	#instVars : [
 		'maxDuration',
 		'duration',
-		'feedback'
+		'feedBack'
 	],
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
@@ -34,13 +34,8 @@ PhEcho >> duration [
 
 { #category : 'accessing' }
 PhEcho >> feedBack [
-	^ feedback
-]
 
-{ #category : 'accessing' }
-PhEcho >> feedback [
-
-	^ feedback 
+	^ feedBack
 ]
 
 { #category : 'initialization' }
@@ -48,9 +43,13 @@ PhEcho >> initialize [
 
 	super initialize.
 	processExpression := 'process = ef.echo;'.
-	maxDuration := 4 .
-	duration := PhHSlider new label: self label , 'Duration' values: #(0.5 0.01 4 0.01).
-	feedback := PhHSlider new label: self label , 'Feedback' values: #(0.5 0.01 1 0.01).
+	maxDuration := 4.
+	duration := PhHSlider new
+		            label: self label , 'Duration'
+		            values: #( 0.5 0.01 4 0.01 ).
+	feedBack := PhHSlider new
+		            label: self label , 'Feedback'
+		            values: #( 0.5 0.01 1 0.01 )
 ]
 
 { #category : 'accessing' }

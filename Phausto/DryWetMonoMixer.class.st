@@ -24,12 +24,6 @@ Class {
 	#tag : 'Effects'
 }
 
-{ #category : 'connecting' }
-DryWetMonoMixer >> => aMonoEffect [
-
-self fx: aMonoEffect
-]
-
 { #category : 'converting' }
 DryWetMonoMixer >> asBox [
 
