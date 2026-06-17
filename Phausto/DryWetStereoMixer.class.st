@@ -25,6 +25,12 @@ Class {
 	#tag : 'Effects'
 }
 
+{ #category : 'connecting' }
+DryWetStereoMixer >> => aStereoEffect [
+
+self fx: aStereoEffect 
+]
+
 { #category : 'converting' }
 DryWetStereoMixer >> asBox [
 

@@ -24,6 +24,12 @@ Class {
 	#tag : 'Effects'
 }
 
+{ #category : 'connecting' }
+DryWetMonoMixer >> => aMonoEffect [
+
+self fx: aMonoEffect
+]
+
 { #category : 'converting' }
 DryWetMonoMixer >> asBox [
 
@@ -54,8 +60,8 @@ DryWetMonoMixer >> initialize [
 	fx := FreeverbMono new.
 	wetAmount := PhHSlider new
 		             label: self label , 'WetAmount'
-		             values: #( 0 0 1 0.001 ).
-		self controlParameters add: #wetAmount -> (self wetAmount 
+		             values: #( 0.3 0 1 0.001 ).
+	self controlParameters add: #wetAmount -> (self wetAmount
 			 asControlParameterOfWidgetType: #knob
 			 description: 'WetAmount')
 ]
