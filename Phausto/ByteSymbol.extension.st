@@ -1,6 +1,12 @@
 Extension { #name : 'ByteSymbol' }
 
 { #category : '*Phausto' }
+ByteSymbol >> <- aNumber [
+
+	DSP allInstances last setValue: aNumber parameter: self asString
+]
+
+{ #category : '*Phausto' }
 ByteSymbol >> asParam: aString forUGen: aUnitGenerator [
 	"change the label of the UI element to self"
 
