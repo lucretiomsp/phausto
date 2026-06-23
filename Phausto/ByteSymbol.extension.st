@@ -48,3 +48,13 @@ ByteSymbol >> changeLabelOrInitialValue: aNumberOrABoxOrASymbol forUGen: aUGen [
 		
 	
 ]
+
+{ #category : '*Phausto' }
+ByteSymbol >> setValue: aNumber [
+
+	| validDsps dspWIthParameter |
+	validDsps := DSP allInstances reject: [ :d | d isNull  ].
+	dspWIthParameter := validDsps select: [ :d |
+		                     (d includesParameter: self) ].
+	dspWIthParameter do: [:d | d setValue: aNumber parameter: self]
+]

@@ -1652,6 +1652,12 @@ DSP >> getUIfromJSON [
 		    self getJSON ) at: #ui) at: 1
 ]
 
+{ #category : 'testing' }
+DSP >> includesParameter: aString [
+
+	^ self allParameters includes: aString 
+]
+
 { #category : 'initialize' }
 DSP >> init [
 	"
