@@ -53,8 +53,9 @@ ByteSymbol >> changeLabelOrInitialValue: aNumberOrABoxOrASymbol forUGen: aUGen [
 ByteSymbol >> setValue: aNumber [
 
 	| validDsps dspWIthParameter |
-	validDsps := DSP allInstances reject: [ :d | d isNull  ].
+	validDsps := DSP allInstances reject: [ :d | d isNull ].
 	dspWIthParameter := validDsps select: [ :d |
-		                     (d includesParameter: self) ].
-	dspWIthParameter do: [:d | d setValue: aNumber parameter: self]
+		                    d includesParameter: self ].
+	dspWIthParameter isEmpty ifTrue: [ Error new signal: 'Parameter ' , self asString , ' does not exist'. ] ifFalse: [  
+	dspWIthParameter do: [ :d | d setValue: aNumber parameter: self ]]
 ]

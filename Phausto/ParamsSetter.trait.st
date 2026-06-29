@@ -808,6 +808,12 @@ ParamsSetter >> springs: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
+{ #category : 'trait' }
+ParamsSetter >> start:  aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'trait - physModels' }
 ParamsSetter >> stiffness: aNumberOrABoxOrASymbol [
 
