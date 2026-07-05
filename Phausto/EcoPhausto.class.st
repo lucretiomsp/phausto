@@ -27,6 +27,19 @@ Class {
 	#tag : 'TurboPhausto'
 }
 
+{ #category : 'accessing' }
+EcoPhausto class >> allInstruments [ 
+
+^ AllInstruments 
+]
+
+{ #category : 'listing' }
+EcoPhausto class >> listAllInstruments [ 
+(self allInstruments collect: [ :i |
+			 i label , ' / ' , i class asString , ' / '
+			 , i sampleNamesSorted size asString ]) inspect
+]
+
 { #category : 'loading' }
 EcoPhausto class >> loadAllInstruments [
 
