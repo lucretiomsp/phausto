@@ -11,35 +11,17 @@ Trait {
 { #category : 'trait' }
 PhInterpSetter >> dv: aNumberOrABoxOrASymbol [
 
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - interpolators' }
-PhInterpSetter >> length: aNumberOrABoxOrASymbol [
-
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - interpolators' }
-PhInterpSetter >> step: aNumberOrABoxOrASymbol [
-
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - interpolators' }
-PhInterpSetter >> trig: aNumberOrABoxOrASymbol [
-
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait - interpolators' }
 PhInterpSetter >> v0: aNumberOrABoxOrASymbol [
 
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait - interpolators' }
 PhInterpSetter >> v1: aNumberOrABoxOrASymbol [
 
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

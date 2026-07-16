@@ -29,13 +29,13 @@ PhFilterSetter >> bM: aNumberOrABoxOrASymbol [
 { #category : 'trait - cutoff' }
 PhFilterSetter >> cutoff: aNumberOrABoxOrASymbol [
 
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait - cutoff' }
 PhFilterSetter >> cutoffFreq: aNumberOrABoxOrASymbol [
 
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }
@@ -47,7 +47,7 @@ PhFilterSetter >> fr: aNumberOrABoxOrASymbol [
 { #category : 'trait - freq' }
 PhFilterSetter >> frequency: aNumberOrABoxOrASymbol [
 
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }
@@ -65,5 +65,5 @@ PhFilterSetter >> q: aNumberOrABoxOrASymbol [
 { #category : 'trait' }
 PhFilterSetter >> res: aNumberOrABoxOrASymbol [
 
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

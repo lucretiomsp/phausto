@@ -11,5 +11,5 @@ Trait {
 { #category : 'trait' }
 PhSpeedSetter >> speed: aNumberOrABoxOrASymbol [
 
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

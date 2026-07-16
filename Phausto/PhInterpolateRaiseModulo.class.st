@@ -29,8 +29,8 @@ the mechanism behind Faust's `loop_speed`.
 Class {
 	#name : 'PhInterpolateRaiseModulo',
 	#superclass : 'UnitGenerator',
-	#traits : 'PhInterpSetter',
-	#classTraits : 'PhInterpSetter classTrait',
+	#traits : 'PhTSLSetter',
+	#classTraits : 'PhTSLSetter classTrait',
 	#instVars : [
 		'trig',
 		'step',

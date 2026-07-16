@@ -8,8 +8,20 @@ Trait {
 	#tag : 'Traits'
 }
 
+{ #category : 'trait - interpolators' }
+PhTSLSetter >> length: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait - interpolators' }
+PhTSLSetter >> step: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'trait - trigger' }
 PhTSLSetter >> trig: aNumberOrABoxOrASymbol [
 
-	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
