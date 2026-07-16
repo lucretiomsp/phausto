@@ -37,6 +37,15 @@ SpringReverb >> blend [
 ]
 
 { #category : 'accessing' }
+SpringReverb >> blend:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
+]
+
+{ #category : 'accessing' }
 SpringReverb >> dwell [ 
 ^ dwell
 ]

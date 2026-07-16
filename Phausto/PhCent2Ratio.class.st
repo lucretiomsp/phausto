@@ -27,6 +27,16 @@ PhCent2Ratio >> cent [
 ]
 
 { #category : 'accessing' }
+PhCent2Ratio >> cent: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
+
+]
+
+{ #category : 'initialization' }
 PhCent2Ratio >> initialize [ 
 
 super initialize .

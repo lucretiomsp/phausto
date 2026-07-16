@@ -11,7 +11,7 @@ invert: 0 for normal, 1 to invert sign of flanging sum
 (more about flanging)[https://ccrma.stanford.edu/~jos/pasp/Flanging.html]
 "
 Class {
-	#name : 'FlangerMono',
+	#name : 'PhFlangerMono',
 	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'dmax',
@@ -26,7 +26,7 @@ Class {
 }
 
 { #category : 'converting' }
-FlangerMono >> asBox [
+PhFlangerMono >> asBox [
 
 	^ self dmax asBox , self curdel asBox , self depth asBox
 	            , self fb asBox , self invert asBox , self input asBox
@@ -35,37 +35,58 @@ FlangerMono >> asBox [
 ]
 
 { #category : 'accessing' }
-FlangerMono >> curdel [
+PhFlangerMono >> curdel [
 
 	^ curdel
 ]
 
 { #category : 'accessing' }
-FlangerMono >> depth [
+PhFlangerMono >> curdel: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
+
+]
+
+{ #category : 'accessing' }
+PhFlangerMono >> depth [
 
 	^ depth
 ]
 
 { #category : 'accessing' }
-FlangerMono >> dmax [
+PhFlangerMono >> dmax [
 
 	^ dmax
 ]
 
 { #category : 'accessing' }
-FlangerMono >> fb [
+PhFlangerMono >> dmax: 
+
+	aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
+]
+
+{ #category : 'accessing' }
+PhFlangerMono >> fb [
 
 	^ fb
 ]
 
 { #category : 'accessing' }
-FlangerMono >> fb: aFeedback [
+PhFlangerMono >> fb: aFeedback [
 
 	fb := aFeedback asBox
 ]
 
 { #category : 'initialization' }
-FlangerMono >> initialize [
+PhFlangerMono >> initialize [
 
 	super initialize.
 	processExpression := 'process = pf.flanger_mono;'.
@@ -78,7 +99,7 @@ FlangerMono >> initialize [
 ]
 
 { #category : 'accessing' }
-FlangerMono >> invert [
+PhFlangerMono >> invert [
 
 	^ invert
 ]

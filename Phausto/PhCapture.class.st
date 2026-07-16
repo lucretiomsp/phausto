@@ -47,9 +47,7 @@ dVar := 'D' , aLabel.
 { #category : 'converting' }
 PhCapture >> asBox [
 
-	| intermediateBox |
-	intermediateBox := super asBox.
-	^ intermediateBox 
+^ self code asBox
 ]
 
 { #category : 'initialization' }

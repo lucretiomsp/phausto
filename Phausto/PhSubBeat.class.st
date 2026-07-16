@@ -35,6 +35,16 @@ PhSubBeat >> clockDivider [
 	^ clockDivider 
 ]
 
+{ #category : 'accessing' }
+PhSubBeat >> clockDivider: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
+
+]
+
 { #category : 'initialization' }
 PhSubBeat >> initialize [
 
