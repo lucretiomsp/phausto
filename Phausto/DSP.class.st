@@ -110,7 +110,7 @@ DSP class >> cppFloat: aNumber [
 		ifFalse: [ aNumber printString , 'f' ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'instance creation' }
 DSP class >> create: aStringWithFaustCode [
 	"create a new dsp from a string with valid Faust code"
 
@@ -125,7 +125,7 @@ DSP class >> create: aStringWithFaustCode [
 	^ currentDsp
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'instance creation' }
 DSP class >> create: aStringWithFaustCode withName: aName [
 	"create a new dsp from a string with valid Faust code"
 
@@ -176,7 +176,7 @@ Smalltalk
 		open
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'exceptions' }
 DSP class >> paramException [
 
 ^ 'Invalid parameter' inspect
@@ -201,7 +201,7 @@ DSP class >> rendererType [
 	^ rtype
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'exceptions' }
 DSP class >> uninitializedException [
 
 
