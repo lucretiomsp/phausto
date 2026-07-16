@@ -15,6 +15,8 @@ This collection includes:
 Class {
 	#name : 'Oscillator',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhFrequencySetter',
+	#classTraits : 'PhFrequencySetter classTrait',
 	#instVars : [
 		'freq'
 	],

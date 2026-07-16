@@ -9,73 +9,73 @@ Class {
 { #category : 'tests' }
 OscillatorsTest >> testCZhalfSineAsDsp [
 
-	self assert: CZhalfSine new asDsp isNull equals: false
+	self deny: CZhalfSine new asDsp isNull 
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZhalfSinePAsDsp [
 
-	self assert: CZhalfSineP new asDsp isNull equals: false
+	self deny: CZhalfSineP new asDsp isNull
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZpulseAsDsp [
 
-	self assert: CZpulse new asDsp isNull equals: false
+	self deny: CZpulse new asDsp isNull
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZpulsePAsDsp [
 
-	self assert: CZpulseP new asDsp isNull equals: false
+	self deny: CZpulseP new asDsp isNull 
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZresSawAsDsp [
 
-	self assert: CZresSaw new asDsp isNull equals: false
+	self deny: CZresSaw new asDsp isNull 
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZresTrapAsDsp [
 
-	self assert: CZresTrap new asDsp isNull equals: false
+	self deny: CZresTrap new asDsp isNull 
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZresTriangleAsDsp [
 
-	self assert: CZresTriangle new asDsp isNull equals: false
+	self deny: CZresTriangle new asDsp isNull 
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZsawAsDsp [
 
-	self assert: CZsaw new asDsp isNull equals: false
+	self deny: CZsaw new asDsp isNull 
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZsawPAsDsp [
 
-	self assert: CZsawP new asDsp isNull equals: false
+	self deny: CZsawP new asDsp isNull 
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZsinePulseAsDsp [
 
-	self assert: CZsinePulse new asDsp isNull equals: false
+	self deny: CZsinePulse new asDsp isNull 
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZsinePulsePAsDsp [
 
-	self assert: CZsinePulseP new asDsp isNull equals: false
+	self deny: CZsinePulseP new asDsp isNull 
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testCZsquarePAsDsp [
 
-	self assert: CZsquareP new asDsp isNull equals: false
+	self deny: CZsquareP new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -153,8 +153,9 @@ OscillatorsTest >> testPhasorAsDsp [
 
 { #category : 'tests' }
 OscillatorsTest >> testPulseOscAsDsp [
-
-	self deny: PulseOsc new stereo asDsp isNull
+| case |
+	case := PulseOsc new freq: 200 ; duty: #dty.
+	self deny: case  stereo asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -174,18 +175,22 @@ osc := SinWaveform new tableSize: 512.
 
 { #category : 'tests' }
 OscillatorsTest >> testSineOscAsDsp [
-
-	self deny: SineOsc new stereo asDsp isNull
+| case |
+	case := SineOsc new freq: 200.
+	self deny: case stereo asDsp isNull
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testSquareOscAsDsp [
 
-	self deny: SquareOsc new stereo asDsp isNull
+| case |
+case := SquareOsc new freq: 200.
+	self deny: case asDsp isNull
 ]
 
 { #category : 'tests' }
 OscillatorsTest >> testTriOscAsDsp [
-
-	self deny: TriOsc new stereo asDsp isNull
+| case |
+	case := TriOsc new freq: 200.
+	self deny: case stereo asDsp isNull
 ]
