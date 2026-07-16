@@ -16,8 +16,8 @@ self className asString
 Class {
 	#name : 'UnitGenerator',
 	#superclass : 'Object',
-	#traits : 'ParamsSetter',
-	#classTraits : 'ParamsSetter classTrait',
+	#traits : 'PhParamsSetter',
+	#classTraits : 'PhParamsSetter classTrait',
 	#instVars : [
 		'importStatement',
 		'processExpression',

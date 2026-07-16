@@ -1555,8 +1555,7 @@ self isNull ifTrue: [^ self class invalidException] ifFalse: [
 DSP >> getParamValue: aParamAsString [
 
 	| indexInteger |
-	indexInteger := self getParamIndex: aParamAsString.
-	self isNull
+	indexInteger := self getParamIndex: aParamAsString.self isNull
 		ifTrue: [ ^ self class invalidException ]
 		ifFalse: [ "ask the value for the parameter with the indexInteger"
 			^ self getParamValueIndex: indexInteger ]

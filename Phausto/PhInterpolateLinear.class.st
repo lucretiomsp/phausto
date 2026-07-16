@@ -9,8 +9,8 @@ Linear interpolation between 2 values.
 Class {
 	#name : 'PhInterpolateLinear',
 	#superclass : 'UnitGenerator',
-	#traits : 'ParamsSetter',
-	#classTraits : 'ParamsSetter classTrait',
+	#traits : 'PhParamsSetter',
+	#classTraits : 'PhParamsSetter classTrait',
 	#instVars : [
 		'dv',
 		'v0',

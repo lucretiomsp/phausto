@@ -1,15 +1,16 @@
 "
 Linear mono dry-wet mixer, implemented in Phausto, not coming from Faust standard library
+## Parameters:
+
+**wetAmount**: the wet amount (0-1). 0 produces only the dry signal and 1 produces only the wet signal
+**fx**: a mono effect (ONLY MONO EFFECTS WORK)
+
 
 # Usage
 ```language=Pharo
 Unit Generator => DryWetMixer new fx: anEffect new.
 ```
 
-## Parameters:
-
-**wetAmount**: the wet amount (0-1). 0 produces only the dry signal and 1 produces only the wet signal
-**fx**: a mono effect (ONLY MONO EFFECTS WORK)
 "
 Class {
 	#name : 'DryWetMonoMixer',
