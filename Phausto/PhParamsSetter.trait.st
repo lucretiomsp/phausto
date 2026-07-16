@@ -81,18 +81,6 @@ PhParamsSetter >> captureButton: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> condition: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> crossfade: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> damp: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
@@ -105,24 +93,6 @@ PhParamsSetter >> decay: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> del: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> delayLength: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> density: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> depth: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -130,19 +100,6 @@ PhParamsSetter >> depth: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> drive: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> dsfreq: aNumberOrABoxOrASymbol [
-
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> dt: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -160,25 +117,7 @@ PhParamsSetter >> duty: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> dwell: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> earlyDiff: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> else: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> envMod: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -187,17 +126,6 @@ PhParamsSetter >> envMod: aNumberOrABoxOrASymbol [
 PhParamsSetter >> excitation: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> fb1: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> fb2: aNumberOrABoxOrASymbol [
-self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }
@@ -231,12 +159,6 @@ PhParamsSetter >> freq: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> fund: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> fx: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -256,12 +178,6 @@ PhParamsSetter >> gain: aNumberOrABoxOrASymbol [
 
 { #category : 'trait - envelopes' }
 PhParamsSetter >> gate: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - cutoff' }
-PhParamsSetter >> hpCutoff: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -310,24 +226,6 @@ PhParamsSetter >> inputR: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> intDel: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> interpControl: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> interpolationTime: aNumberOrABoxOrASymbol [
-
-self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> invert: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -353,24 +251,6 @@ PhParamsSetter >> level: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> lfx: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> link: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> lipsTension: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> lpCutoff: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]

@@ -46,15 +46,18 @@ PhBrassLipsTable >> initialize [
 	excitation := PhBlower new
 ]
 
-{ #category : 'as yet unclassified' }
-PhBrassLipsTable >> lipsTensiom [
-
-^ lipsTension
-]
-
 { #category : 'accessing' }
 PhBrassLipsTable >> lipsTension [
 	^ lipsTension
+]
+
+{ #category : 'accessing' }
+PhBrassLipsTable >> lipsTension: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
 ]
 
 { #category : 'accessing' }

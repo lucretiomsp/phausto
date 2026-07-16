@@ -103,3 +103,11 @@ PhFlangerMono >> invert [
 
 	^ invert
 ]
+
+{ #category : 'accessing' }
+PhFlangerMono >> invert: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+]

@@ -25,3 +25,15 @@ PhCombFilterSetter >> bM: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
+
+{ #category : 'trait' }
+PhCombFilterSetter >> del: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait' }
+PhCombFilterSetter >> intDel: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]

@@ -35,6 +35,14 @@ PhTranspose >> crossfade [
 	^ crossfade 
 ]
 
+{ #category : 'accessing' }
+PhTranspose >> crossfade:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 PhTranspose >> initialize [
 

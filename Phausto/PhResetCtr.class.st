@@ -21,12 +21,9 @@ Class {
 { #category : 'converting' }
 PhResetCtr >> asBox [
 
-	| intermediateBox  finalBox |
-	intermediateBox := super asBox.
-	
-	finalBox := self totalImpulses asBox , self impulseIndex asBox , self input asBox  connectTo:
-		            intermediateBox.
-	^ finalBox
+^ self totalImpulses asBox , self impulseIndex asBox
+	            , self input asBox connectTo: self code asBox .
+
 ]
 
 { #category : 'initialization' }
@@ -42,12 +39,25 @@ PhResetCtr >> impulseIndex [
 ]
 
 { #category : 'initialization' }
+PhResetCtr >> impulseIndex:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+]
+
+{ #category : 'initialization' }
 PhResetCtr >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.resetCtr;'.
-
-
+	impulseIndex :=   impulseIndex := PhHSlider new
+				                  label: self label , 'ImpulseIndex'
+				                  init: 4
+				                  min: 1
+				                  max: 64
+				                  step: 1 
 ]
 
 { #category : 'initialization' }

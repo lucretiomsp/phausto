@@ -4,7 +4,7 @@ A collection of delays from Faust delays.lib.
 
 "
 Class {
-	#name : 'Delays',
+	#name : 'PhDelays',
 	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'maxDelayLength',
@@ -16,13 +16,20 @@ Class {
 }
 
 { #category : 'accessing' }
-Delays >> delayLength [
+PhDelays >> delayLength [
 
 	^ delayLength 
 ]
 
+{ #category : 'accessing' }
+PhDelays >> delayLength: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
-Delays >> initialize [
+PhDelays >> initialize [
 
 	super initialize.
 	maxDelayLength := 2 asBox * PhSampleRate new. "by default, maximum delay length is 2 second "
@@ -37,13 +44,13 @@ Delays >> initialize [
 ]
 
 { #category : 'accessing' }
-Delays >> maxDelayLength [
+PhDelays >> maxDelayLength [
 
 	^ maxDelayLength
 ]
 
 { #category : 'accessing' }
-Delays >> maxDelayLength: aTimeInSeconds [
+PhDelays >> maxDelayLength: aTimeInSeconds [
 
 "must be a constant"
 	maxDelayLength := aTimeInSeconds asBox * PhSampleRate new.

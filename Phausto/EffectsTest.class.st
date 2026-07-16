@@ -214,7 +214,7 @@ EffectsTest >> testSawtoohDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testSimpleDelayAsDsp [
 
-	self assert: SimpleDelay new asDsp isNull equals: false
+	self assert: PhSimpleDelay new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
@@ -226,7 +226,7 @@ EffectsTest >> testSineOscAsDsp [
 { #category : 'tests' }
 EffectsTest >> testSmoothDelayAsDsp [
 
-	self assert: SmoothDelay new asDsp isNull equals: false
+	self assert: PhSmoothDelay new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

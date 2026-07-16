@@ -47,9 +47,27 @@ FreeverbMono >> fb1 [
 ]
 
 { #category : 'accessing' }
+FreeverbMono >> fb1:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
+{ #category : 'accessing' }
 FreeverbMono >> fb2 [
 
 	^ fb2 
+]
+
+{ #category : 'accessing' }
+FreeverbMono >> fb2:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }

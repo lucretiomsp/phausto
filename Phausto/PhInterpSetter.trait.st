@@ -15,6 +15,12 @@ PhInterpSetter >> dv: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait - interpolators' }
+PhInterpSetter >> interpControl:  aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait - interpolators' }
 PhInterpSetter >> v0: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol

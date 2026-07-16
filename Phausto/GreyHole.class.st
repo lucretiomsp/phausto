@@ -60,6 +60,14 @@ GreyHole >> dt [
 ]
 
 { #category : 'accessing' }
+GreyHole >> dt:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 GreyHole >> earlyDiff [
 
 	^ earlyDiff

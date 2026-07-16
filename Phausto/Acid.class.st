@@ -76,6 +76,15 @@ Acid >> envMod [
 ]
 
 { #category : 'accessing' }
+Acid >> envMod:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+]
+
+{ #category : 'accessing' }
 Acid >> filterDecay [
 
 	^ filterDecay

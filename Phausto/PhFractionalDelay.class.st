@@ -2,15 +2,15 @@
 Simple d samples fractional delay based on 2 interpolated delay lines where n is the maximum delay length as a number of samples. fdelay is a standard Faust function.
 "
 Class {
-	#name : 'FractionalDelay',
-	#superclass : 'Delays',
+	#name : 'PhFractionalDelay',
+	#superclass : 'PhDelays',
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
 	#tag : 'Effects'
 }
 
 { #category : 'converting' }
-FractionalDelay >> asBox [
+PhFractionalDelay >> asBox [
 
 	| intermediateBox finalBox delayInSamples |
 	intermediateBox := super asBox.
@@ -21,7 +21,7 @@ FractionalDelay >> asBox [
 ]
 
 { #category : 'initialization' }
-FractionalDelay >> initialize [
+PhFractionalDelay >> initialize [
 
 	super initialize.
 	processExpression := 'process = de.fdelay;'

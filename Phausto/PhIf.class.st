@@ -32,9 +32,27 @@ PhIf >> condition [
 ]
 
 { #category : 'accessing' }
+PhIf >> condition:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PhIf >> else [
 
 	^ else 
+]
+
+{ #category : 'accessing' }
+PhIf >> else:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
 ]
 
 { #category : 'initialization' }

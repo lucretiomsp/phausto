@@ -95,6 +95,15 @@ PhCompressor >> link [
 ]
 
 { #category : 'accessing' }
+PhCompressor >> link: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
+]
+
+{ #category : 'accessing' }
 PhCompressor >> prePost [ 
 
 ^ prePost

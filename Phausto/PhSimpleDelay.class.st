@@ -2,15 +2,15 @@
 Simple d samples delay where n is the maximum delay length as a number of samples. Unlike the @ delay operator, here the delay signal d is explicitly bounded to the interval [0..n]. The consequence is that delay will compile even if the interval of d can't be computed by the compiler.
 "
 Class {
-	#name : 'SimpleDelay',
-	#superclass : 'Delays',
+	#name : 'PhSimpleDelay',
+	#superclass : 'PhDelays',
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
 	#tag : 'Effects'
 }
 
 { #category : 'converting' }
-SimpleDelay >> asBox [
+PhSimpleDelay >> asBox [
 
 	| intermediateBox finalBox delayInSamples |
 	intermediateBox := super asBox.
@@ -21,7 +21,7 @@ SimpleDelay >> asBox [
 ]
 
 { #category : 'initialization' }
-SimpleDelay >> initialize [
+PhSimpleDelay >> initialize [
 
 	super initialize.
 	processExpression :='process = de.delay;'

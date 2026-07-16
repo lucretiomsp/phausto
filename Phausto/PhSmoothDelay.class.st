@@ -3,8 +3,8 @@ s(mooth)delay: a mono delay that doesn't click and doesn't transpose when the de
 Interpolation time (in seconds) is by default 0.1 seconds
 "
 Class {
-	#name : 'SmoothDelay',
-	#superclass : 'Delays',
+	#name : 'PhSmoothDelay',
+	#superclass : 'PhDelays',
 	#instVars : [
 		'interpolationTime'
 	],
@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'converting' }
-SmoothDelay >> asBox [
+PhSmoothDelay >> asBox [
 
 	| intermediateBox finalBox delayInSamples interpInSamples sampleRate |
 	sampleRate := PhSampleRate new.
@@ -28,7 +28,7 @@ SmoothDelay >> asBox [
 ]
 
 { #category : 'initialization' }
-SmoothDelay >> initialize [
+PhSmoothDelay >> initialize [
 
 	super initialize.
 	processExpression := 'process = de.sdelay;'.
@@ -42,7 +42,14 @@ SmoothDelay >> initialize [
 ]
 
 { #category : 'accessing' }
-SmoothDelay >> interpolationTime [
+PhSmoothDelay >> interpolationTime [
 
 	^ interpolationTime
+]
+
+{ #category : 'accessing' }
+PhSmoothDelay >> interpolationTime: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

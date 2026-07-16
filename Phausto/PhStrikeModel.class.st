@@ -41,10 +41,20 @@ PhStrikeModel >> gain [
 	^ gain
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhStrikeModel >> hpCutoff [
 
 	^ hpCutoff
+]
+
+{ #category : 'accessing' }
+PhStrikeModel >> hpCutoff:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
 ]
 
 { #category : 'initialization' }
@@ -81,10 +91,18 @@ PhStrikeModel >> initialize [
 		                   step: 1
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhStrikeModel >> lpCutoff [
 
 	^ lpCutoff
+]
+
+{ #category : 'accessing' }
+PhStrikeModel >> lpCutoff: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
 ]
 
 { #category : 'accessing' }

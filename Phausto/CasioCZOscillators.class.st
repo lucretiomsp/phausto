@@ -65,6 +65,14 @@ CasioCZOscillators >> fund [
 ]
 
 { #category : 'accessing' }
+CasioCZOscillators >> fund:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 CasioCZOscillators >> hasResParameter [
 "check if the class name contains res , hence the Oscillator has the res parameter isntead of the index"
 	^ self className includesSubstring: 'res'

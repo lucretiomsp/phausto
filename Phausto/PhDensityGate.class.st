@@ -32,6 +32,14 @@ PhDensityGate >> density [
 ^ density 
 ]
 
+{ #category : 'accessing' }
+PhDensityGate >> density:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 PhDensityGate >> initialize [ 
 super initialize .

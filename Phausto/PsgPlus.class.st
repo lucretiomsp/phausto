@@ -69,6 +69,14 @@ PsgPlus >> dsfreq [
 ]
 
 { #category : 'accessing' }
+PsgPlus >> dsfreq:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PsgPlus >> index [
 
 	^ index 

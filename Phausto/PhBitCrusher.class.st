@@ -36,7 +36,7 @@ PhBitCrusher >> nbits [
 ]
 
 { #category : 'accessing' }
-PhBitCrusher >> nbits:  aNumberOrABoxOrASymbol [
+PhBitCrusher >> nbits: aNumberOrABoxOrASymbol [
 
 <paramSetter>
 

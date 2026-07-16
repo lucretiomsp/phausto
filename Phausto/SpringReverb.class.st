@@ -50,6 +50,16 @@ SpringReverb >> dwell [
 ^ dwell
 ]
 
+{ #category : 'accessing' }
+SpringReverb >> dwell:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
 { #category : 'initialization' }
 SpringReverb >> initialize [
 

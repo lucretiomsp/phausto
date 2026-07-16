@@ -106,7 +106,7 @@ DelayMonoFB_Copy >> initialize [
 	maxDelayTime := 88200.
 	self input: Wire new.
 
-	delayBox := SmoothDelay new.
+	delayBox := PhSmoothDelay new.
 	"delayLength: self delayTime asBox;
 		            input: Wire new self delayTime * PhSampleRate new asBox"
 
