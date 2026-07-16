@@ -72,3 +72,11 @@ PhRMSFBCompressorGainStereo >> link [
 PhRMSFBCompressorGainStereo >> threshLim [ 
 ^ threshLim
 ]
+
+{ #category : 'accessing' }
+PhRMSFBCompressorGainStereo >> threshLim:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+]

@@ -35,3 +35,12 @@ PhTau2Pole >> tau [
 
 ^ tau
 ]
+
+{ #category : 'accessing' }
+PhTau2Pole >> tau:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]

@@ -99,6 +99,15 @@ SpringReverb >> tension [
 ]
 
 { #category : 'accessing' }
+SpringReverb >> tension:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
+{ #category : 'accessing' }
 SpringReverb >> tone [
 ^ tone
 ]

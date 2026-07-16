@@ -131,3 +131,10 @@ PhCompressor >> strength [
 PhCompressor >> threshold [  
 ^ threshold
 ]
+
+{ #category : 'accessing' }
+PhCompressor >> threshold:   aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]

@@ -69,3 +69,12 @@ PhTranspose >> window [
 
 	^ window 
 ]
+
+{ #category : 'accessing' }
+PhTranspose >> window: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]

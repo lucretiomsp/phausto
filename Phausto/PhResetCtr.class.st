@@ -52,12 +52,18 @@ PhResetCtr >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.resetCtr;'.
-	impulseIndex :=   impulseIndex := PhHSlider new
-				                  label: self label , 'ImpulseIndex'
-				                  init: 4
-				                  min: 1
-				                  max: 64
-				                  step: 1 
+	impulseIndex := impulseIndex := PhHSlider new
+		                                label: self label , 'ImpulseIndex'
+		                                init: 4
+		                                min: 1
+		                                max: 64
+		                                step: 1.
+	totalImpulses :=   totalImpulses := PhHSlider new
+				                   label: self label , 'TotalImpulses'
+				                   init: 4
+				                   min: 1
+				                   max: 64
+				                   step: 1 
 ]
 
 { #category : 'initialization' }
@@ -70,11 +76,15 @@ PhResetCtr >> input [
 { #category : 'initialization' }
 PhResetCtr >> totalImpulses [
 
-	^ totalImpulses ifNil: [
-		  totalImpulses := PhHSlider new
-			            label: self label , 'TotalImpulses'
-			            init: 4
-			            min: 1
-			            max: 64
-			            step: 1 ]
+	^ totalImpulses
+]
+
+{ #category : 'initialization' }
+PhResetCtr >> totalImpulses: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+			
 ]

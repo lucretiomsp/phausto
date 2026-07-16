@@ -70,3 +70,11 @@ PhIf >> then [
 
 ^ then 
 ]
+
+{ #category : 'accessing' }
+PhIf >> then:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+]

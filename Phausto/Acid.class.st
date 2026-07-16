@@ -156,6 +156,15 @@ Acid >> tuning [
 ]
 
 { #category : 'accessing' }
+Acid >> tuning: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
+]
+
+{ #category : 'accessing' }
 Acid >> waveform [
 
 	^ waveform 
