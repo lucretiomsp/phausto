@@ -9,12 +9,6 @@ Trait {
 }
 
 { #category : 'trait' }
-PhParamsSetter >> aN: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> accent: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
@@ -39,21 +33,9 @@ PhParamsSetter >> attenuation: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> b0: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> b: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> bM: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait - physModels' }
@@ -144,18 +126,6 @@ PhParamsSetter >> crossfade: aNumberOrABoxOrASymbol [
 PhParamsSetter >> curdel: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - cutoff' }
-PhParamsSetter >> cutoff: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - cutoff' }
-PhParamsSetter >> cutoffFreq: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }
@@ -292,12 +262,6 @@ PhParamsSetter >> feedBack: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> finalLevel: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> fr: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -630,12 +594,6 @@ PhParamsSetter >> poles: aNumberOrABoxOrASymbol [
 
 { #category : 'trait - physModels' }
 PhParamsSetter >> pressure: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> q: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
