@@ -7,8 +7,8 @@ The envelope generator was developed by [Robert Moog](https://en.wikipedia.org/w
 Class {
 	#name : 'PhEnvelope',
 	#superclass : 'UnitGenerator',
-	#traits : 'PhTriggerSetter',
-	#classTraits : 'PhTriggerSetter classTrait',
+	#traits : 'PhTriggerSetter + PhADSRSetter',
+	#classTraits : 'PhTriggerSetter classTrait + PhADSRSetter classTrait',
 	#instVars : [
 		'attack',
 		'release',

@@ -32,18 +32,6 @@ PhParamsSetter >> amplitude: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> ar: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> attack: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
 { #category : 'trait' }
 PhParamsSetter >> attenuation: aNumberOrABoxOrASymbol [
 
@@ -447,30 +435,6 @@ PhParamsSetter >> length: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> level1: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> level2: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> level3: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> level4: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
 { #category : 'trait' }
 PhParamsSetter >> level: aNumberOrABoxOrASymbol [
 
@@ -682,36 +646,6 @@ PhParamsSetter >> reedStiffness: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> release1: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> release2: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> release3: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> release4: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> release: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
 { #category : 'trait' }
 PhParamsSetter >> res: aNumberOrABoxOrASymbol [
 
@@ -834,12 +768,6 @@ PhParamsSetter >> strikeSharpness: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> stringLength: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> sustain: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
