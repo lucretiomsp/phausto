@@ -537,13 +537,6 @@ PhParamsSetter >> pan: aNumberOrABoxOrASymbol [
 self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'helper' }
-PhParamsSetter >> paramSetter [
-    | paramName |
-    paramName := thisContext sender method selector allButLast.
-    ^ [ :value | value asParam: paramName forUGen: self ]
-]
-
 { #category : 'trait' }
 PhParamsSetter >> part: aNumberOrABoxOrASymbol [
 
