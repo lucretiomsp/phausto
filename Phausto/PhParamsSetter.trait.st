@@ -346,12 +346,6 @@ PhParamsSetter >> input2: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait - inputs' }
-PhParamsSetter >> input: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - inputs' }
 PhParamsSetter >> inputL: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol

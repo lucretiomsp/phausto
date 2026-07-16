@@ -9,7 +9,7 @@ Class {
 { #category : 'tests' }
 AntiAliasedTest >> testAASine2Dsp [
 
-	self deny: AASine2 new asDsp isNull
+	self deny: AASine2 new  asDsp isNull
 ]
 
 { #category : 'tests' }

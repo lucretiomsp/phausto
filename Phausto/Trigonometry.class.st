@@ -15,23 +15,21 @@ Class {
 { #category : 'converting' }
 Trigonometry >> asBox [
 
-	| intermediateBox finalBox |
-	self code traceCr.
-	intermediateBox := super asBox.
-	intermediateBox getHandle asInteger traceCr.
-	intermediateBox traceCr.
-	finalBox :=  self input connectTo: intermediateBox.
-	^ finalBox
+
+	^  self input asBox  connectTo: self code asBox .
+
 ]
 
 { #category : 'initialization' }
 Trigonometry >> initialize [
 
 	| faustFunctionName |
+
+super initialize .
 	faustFunctionName := (self class name findBetweenSubstrings: ' ')
 		                     first asLowercase.
 	super initialize.
-	input := 1 asBox .
+	input := 1 .
 	processExpression := 'process = aa.' , faustFunctionName , ';'
 ]
 
@@ -42,11 +40,9 @@ Trigonometry >> input [
 ]
 
 { #category : 'connecting' }
-Trigonometry >> input: aPhBox [
+Trigonometry >> input: aUnitGenerator [
 
-input := aPhBox 
-
-
+	input := aUnitGenerator 
 ]
 
 { #category : 'connecting' }

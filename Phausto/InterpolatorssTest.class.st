@@ -9,7 +9,12 @@ Class {
 { #category : 'tests' }
 InterpolatorssTest >> testPhInterpolateLinearAsDsp [
 
-	self deny: PhInterpolateLinear new asDsp isNull
+	| case |
+	case := PhInterpolateLinear new
+		        dv: 0.5 asBox;
+		        v0: 1 asBox;
+		        v1: 1.8 asBox.
+	self deny: case asDsp isNull
 ]
 
 { #category : 'tests' }
