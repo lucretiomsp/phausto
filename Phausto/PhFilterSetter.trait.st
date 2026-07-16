@@ -32,6 +32,12 @@ PhFilterSetter >> fr: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
+{ #category : 'trait' }
+PhFilterSetter >> freq: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'trait - freq' }
 PhFilterSetter >> frequency: aNumberOrABoxOrASymbol [
 

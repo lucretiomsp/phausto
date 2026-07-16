@@ -9,6 +9,8 @@ They can also have freq > 20 Hz, so they can work at _audio rate_.
 Class {
 	#name : 'LFO',
 	#superclass : 'Oscillator',
+	#traits : 'PhFrequencySetter',
+	#classTraits : 'PhFrequencySetter classTrait',
 	#instVars : [
 		'amount',
 		'offset'

@@ -153,12 +153,6 @@ PhParamsSetter >> finalLevel: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> freq: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> fx: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -166,12 +160,6 @@ PhParamsSetter >> fx: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> g: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> gain: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -413,12 +401,6 @@ PhParamsSetter >> pressure: aNumberOrABoxOrASymbol [
 
 { #category : 'trait - physModels' }
 PhParamsSetter >> reedStiffness: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> res: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]

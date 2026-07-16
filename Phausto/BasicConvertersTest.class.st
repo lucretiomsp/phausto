@@ -1,5 +1,5 @@
 Class {
-	#name : 'BasiConvertersTest',
+	#name : 'BasicConvertersTest',
 	#superclass : 'TestCase',
 	#category : 'Phausto-Tests',
 	#package : 'Phausto',
@@ -7,98 +7,98 @@ Class {
 }
 
 { #category : 'tests' }
-BasiConvertersTest >> TODOtestRatio2CentAsDsp [
+BasicConvertersTest >> TODOtestRatio2CentAsDsp [
  self deny: 1 isNumber . 
 	self deny: PhRatio2Cent new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testCent2RatioAsDsp [
+BasicConvertersTest >> testCent2RatioAsDsp [
 
 	self deny: PhCent2Ratio new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testDb2Linear [
+BasicConvertersTest >> testDb2Linear [
 
 	self deny: PhDb2Linear new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testHz2MidiKeyAsDsp [
+BasicConvertersTest >> testHz2MidiKeyAsDsp [
 
 	self deny: PhHz2MidiKey new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testLinea2LogGainAsDsp [
+BasicConvertersTest >> testLinea2LogGainAsDsp [
 
 	self deny: PhLinear2LogGain new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testLinear2dB [ 
+BasicConvertersTest >> testLinear2dB [ 
 
 	self deny: PhLinear2Db new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testLog2LinearGainAsDsp [
+BasicConvertersTest >> testLog2LinearGainAsDsp [
 
 	self deny: PhLog2LinearGain new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testPhHz2PianoKeyAsDsp [
+BasicConvertersTest >> testPhHz2PianoKeyAsDsp [
 
 	self deny: PhHz2PianoKey new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testPhMidiKey2HzAsDsp [
+BasicConvertersTest >> testPhMidiKey2HzAsDsp [
 
 	self deny: PhMidiKey2Hz new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testPhPole2TaueAsDsp [
+BasicConvertersTest >> testPhPole2TaueAsDsp [
 
 	self deny: PhPole2tau new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testPhTau2PoleAsDsp [
+BasicConvertersTest >> testPhTau2PoleAsDsp [
 
 	self deny: PhTau2Pole new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testPianoKey2HzAsDsp [
+BasicConvertersTest >> testPianoKey2HzAsDsp [
 
 	self deny: PhPianoKey2Hz new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testRatio2SemitoneAsDsp [
+BasicConvertersTest >> testRatio2SemitoneAsDsp [
 
 	
 	self deny: PhRatio2Semitone new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testSamp2Sec [
+BasicConvertersTest >> testSamp2Sec [
 
 self deny: PhSamp2Sec new asDsp isNull.
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testSec2Samples [ 
+BasicConvertersTest >> testSec2Samples [ 
 
 	self deny: PhSec2Samp new asDsp isNull
 ]
 
 { #category : 'tests' }
-BasiConvertersTest >> testSemi2RatioAsDsp [
+BasicConvertersTest >> testSemi2RatioAsDsp [
 
 	
 	self deny: PhSemi2Ratio new asDsp isNull
