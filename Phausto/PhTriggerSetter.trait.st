@@ -11,11 +11,11 @@ Trait {
 { #category : 'trait - trigger' }
 PhTriggerSetter >> trig: aNumberOrABoxOrASymbol [
 
-	self paramSetter value: aNumberOrABoxOrASymbol
+	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait - trigger' }
 PhTriggerSetter >> trigger: aNumberOrABoxOrASymbol [
 
-	self paramSetter value: aNumberOrABoxOrASymbol
+	PhPsImpl paramSetter value: aNumberOrABoxOrASymbol
 ]
