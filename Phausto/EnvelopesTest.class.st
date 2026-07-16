@@ -22,7 +22,7 @@ EnvelopesTest >> testADSREnvBiasAsDsp [
 { #category : 'tests' }
 EnvelopesTest >> testADSRExpEnvAsDsp [
 
-	self assert: ADSRExpEnv new  asDsp isNull equals: false
+	self deny: ADSRExpEnv new asDsp isNull 
 ]
 
 { #category : 'tests' }
