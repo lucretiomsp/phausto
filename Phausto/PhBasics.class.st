@@ -4,6 +4,8 @@ Conveniece abstract super class for basics utilities with one input
 Class {
 	#name : 'PhBasics',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhInputSetter',
+	#classTraits : 'PhInputSetter classTrait',
 	#instVars : [
 		'input'
 	],
@@ -12,7 +14,7 @@ Class {
 	#tag : 'Basics'
 }
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
 PhBasics >> initialize [
 
 super initialize .

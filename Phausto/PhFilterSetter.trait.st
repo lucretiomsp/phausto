@@ -14,18 +14,6 @@ PhFilterSetter >> aN: aNumberOrABoxOrASymbol [
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait' }
-PhFilterSetter >> b0: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhFilterSetter >> bM: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
 { #category : 'trait - cutoff' }
 PhFilterSetter >> cutoff: aNumberOrABoxOrASymbol [
 

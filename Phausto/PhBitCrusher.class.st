@@ -27,10 +27,18 @@ PhBitCrusher >> initialize [
 
 	super initialize.
 	processExpression := 'process = ba.bitcrusher;'.
-	nbits := PhHSlider new label: self label values: #(16 2 16 2)..
+	nbits := PhHSlider new label: self label values: #( 16 2 16 2 ).
 ]
 
 { #category : 'accessing' }
 PhBitCrusher >> nbits [ 
 ^ nbits 
+]
+
+{ #category : 'accessing' }
+PhBitCrusher >> nbits:  aNumberOrABoxOrASymbol [
+
+<paramSetter>
+
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

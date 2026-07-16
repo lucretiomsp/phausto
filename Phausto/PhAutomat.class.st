@@ -31,14 +31,9 @@ Class {
 { #category : 'converting' }
 PhAutomat >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
+	^ self tempo asBox , self size asBox , self init
+	            , self input asBox connectTo: self code asBox .
 
-	
-
-	finalBox := self tempo asBox , self size asBox , self init
-	            , self input asBox connectTo: intermediateBox.
-	^ finalBox
 ]
 
 { #category : 'accessing' }

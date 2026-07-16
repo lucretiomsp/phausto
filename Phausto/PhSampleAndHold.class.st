@@ -4,6 +4,8 @@ I am a Sample And Hold. I ""record"" the input when trig is 1, output a frozen v
 Class {
 	#name : 'PhSampleAndHold',
 	#superclass : 'PhBasics',
+	#traits : 'PhTriggerSetter',
+	#classTraits : 'PhTriggerSetter classTrait',
 	#instVars : [
 		'trig'
 	],

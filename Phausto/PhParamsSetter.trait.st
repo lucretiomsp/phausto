@@ -21,19 +21,7 @@ PhParamsSetter >> amount: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> amplitude: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> attenuation: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> b: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -272,12 +260,6 @@ PhParamsSetter >> freq: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait - freq' }
-PhParamsSetter >> frequency: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
 { #category : 'trait' }
 PhParamsSetter >> fund: aNumberOrABoxOrASymbol [
 
@@ -485,12 +467,6 @@ PhParamsSetter >> modRatio: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> mode: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> n: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]

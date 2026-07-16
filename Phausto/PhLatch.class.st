@@ -8,6 +8,8 @@ Latch input on the rising edge of trig. Captures (""records"") the input x whene
 Class {
 	#name : 'PhLatch',
 	#superclass : 'PhBasics',
+	#traits : 'PhTriggerSetter',
+	#classTraits : 'PhTriggerSetter classTrait',
 	#instVars : [
 		'trig'
 	],

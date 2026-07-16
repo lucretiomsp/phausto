@@ -12,6 +12,8 @@ n: number of samples to reach the new target received at its input
 Class {
 	#name : 'PhLine',
 	#superclass : 'PhBasics',
+	#traits : 'PhNSetter',
+	#classTraits : 'PhNSetter classTrait',
 	#instVars : [
 		'trig',
 		'n'
@@ -24,29 +26,24 @@ Class {
 { #category : 'converting' }
 PhLine >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-
-
-	finalBox := self n , self input connectTo: intermediateBox.
-	^ finalBox
+^ self n , self input connectTo: self code asBox 
 ]
 
 { #category : 'initialization' }
 PhLine >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.line;'
+	processExpression := 'process = ba.line;'.
+	  n := PhHSlider new
+				       label: self label , 'N'
+				       init: 1
+				       min: 1
+				       max: 88200
+				       step: 1 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhLine >> n [
 
-	^ n ifNil: [
-		  n := PhHSlider new
-			            label: self label , 'N'
-			            init: 1
-			            min: 1
-			            max: 88200
-			            step: 1 ]
+	^ n 
 ]

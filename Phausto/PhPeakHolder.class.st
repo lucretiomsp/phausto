@@ -16,15 +16,23 @@ Class {
 	#tag : 'Basics'
 }
 
-{ #category : 'initialization' }
-PhPeakHolder >> asBox [ 
-^ self holdTime asBox , self input asBox connectTo: super asBox
+{ #category : 'converting' }
+PhPeakHolder >> asBox [
+
+	^ self holdTime asBox , self input asBox connectTo: self code  asBox
 ]
 
 { #category : 'accessing' }
 PhPeakHolder >> holdTime [
 
 ^ holdTime
+]
+
+{ #category : 'accessing' }
+PhPeakHolder >> holdTime: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }

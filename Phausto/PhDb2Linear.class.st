@@ -21,6 +21,13 @@ PhDb2Linear >> amplitude [
 ^ amplitude
 ]
 
+{ #category : 'accessing' }
+PhDb2Linear >> amplitude: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'converting' }
 PhDb2Linear >> asBox [
 

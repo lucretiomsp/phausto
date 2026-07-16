@@ -417,9 +417,27 @@ UnitGenerator >> numberOfOutputs: anInteger [
 
 { #category : 'helper' }
 UnitGenerator >> paramSetter [
+
 	| paramName |
 	paramName := thisContext sender method selector allButLast.
 	^ [ :value | value asParam: paramName forUGen: self ]
+	
+"Returns a one-arg block that sets THIS UGen's parameter, deriving the
+	 param name from the calling setter's selector via thisContext.
+
+	 To add a new parameter setter to a UGen, write a one-line method whose
+	 selector is the param name + ':', tag it <paramSetter>, and delegate here:
+
+		holdTime: aNumberOrABoxOrASymbol
+			<paramSetter>
+			self paramSetter value: aNumberOrABoxOrASymbol
+
+	 The selector name MUST match the instVar it sets. The arg may be a Number
+	 (sets value), a Symbol (renames/relabels the param), or a Box/UGen (patches
+	 it as a modulation source) — see asParam:forUGen:.
+	 Do not inline or wrap the setter body: thisContext reads the *sender's*
+	 selector at call time, so anything but a direct one-line delegation breaks
+	 the name derivation."
 ]
 
 { #category : 'accessing' }

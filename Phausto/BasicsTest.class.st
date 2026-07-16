@@ -21,31 +21,59 @@ BasicsTest >> testImpulsifyAsDsp [
 { #category : 'tests' }
 BasicsTest >> testPhAutomatAsDsp [
 
-	self deny: PhAutomat new asDsp isNull 
+| case |
+case := PhAutomat new size: 8 asBox ; input: 1 asBox  ; init: 32 asBox.
+	self deny: PhAutomat new asDsp isNull
 ]
 
 { #category : 'tests' }
 BasicsTest >> testPhBitCrusherAsDsp [
 
-	self deny: PhBitCrusher new asDsp isNull
+| case |
+case := PhBitCrusher new nbits: 4.
+	self deny: case  asDsp isNull
+]
+
+{ #category : 'tests' }
+BasicsTest >> testPhDownSamplerAsDsp [
+
+| case |
+case := PhDownSampler new input: 1 asBox ; frequency: 123 asBox.
+	self deny: case asDsp isNull
 ]
 
 { #category : 'tests' }
 BasicsTest >> testPhDownSamplerCVAsDsp [
 
-	self deny: PhDownSamplerCV new asDsp isNull
+| case |
+case := PhDownSamplerCV new input: 1 asBox ; amount: 0.3 asBox.
+	self deny: case asDsp isNull
 ]
 
 { #category : 'tests' }
 BasicsTest >> testPhKr2ArAsDsp [
 
-	self deny: PhKr2Ar new asDsp isNull
+| case |
+case := PhKr2Ar new input: 1 asBox.
+	self deny: case asDsp isNull
 ]
 
 { #category : 'tests' }
 BasicsTest >> testPhLatchAsDsp [
 
-	self deny: PhLatch new asDsp isNull
+	| case |
+	case := PhLatch new
+		        trig: 1;
+		        input: 0.3 asBox .
+	self deny: case asDsp isNull
+]
+
+{ #category : 'tests' }
+BasicsTest >> testPhLineAsDsp [
+
+| case |
+case := PhLine new input: 1 asBox; n: 321.
+	self deny: case  asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -57,23 +85,30 @@ BasicsTest >> testPhOnAndOffAsDsp [
 { #category : 'tests' }
 BasicsTest >> testPhPeakHoldAsDsp [
 
-	self deny: PhPeakHold new asDsp isNull
+| case |
+case :=  PhPeakHold new mode:  2 asBox.
+	self deny: case asDsp isNull
 ]
 
 { #category : 'tests' }
 BasicsTest >> testPhPeakHolderAsDsp [
-
-	self deny: PhPeakHolder new asDsp isNull
+| case |
+case := PhPeakHolder new holdTime: 1 asBox.
+	self deny: case asDsp isNull
 ]
 
 { #category : 'tests' }
 BasicsTest >> testPhSampleAndHoldAsDsp [
 
-	self deny: PhSampleAndHold new asDsp isNull 
+	| case |
+	case := PhSampleAndHold new trig:  1 asBox.
+	self deny: case asDsp isNull
 ]
 
 { #category : 'tests' }
 BasicsTest >> testPhToggleAsDsp [
 
-	self deny: PhToggle new asDsp isNull
+| case |
+case := PhToggle new input: 1 asBox.
+	self deny: case asDsp isNull
 ]

@@ -19,13 +19,13 @@ Class {
 	#tag : 'Basics'
 }
 
-{ #category : 'accessing' }
-PhPeakHold >> asBox [ 
+{ #category : 'converting' }
+PhPeakHold >> asBox [
 
-^ self mode asBox , self input asBox connectTo: super asBox
+	^ self mode asBox , self input asBox connectTo: self code  asBox
 ]
 
-{ #category : 'accessing' }
+{ #category : 'initialization' }
 PhPeakHold >> initialize [ 
 
 super initialize .
@@ -36,4 +36,11 @@ mode := 0
 { #category : 'accessing' }
 PhPeakHold >> mode [ 
 ^ mode 
+]
+
+{ #category : 'accessing' }
+PhPeakHold >> mode: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

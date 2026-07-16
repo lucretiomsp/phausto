@@ -5,6 +5,8 @@ Deafult frequency of 1000 Hz
 Class {
 	#name : 'PhDownSampler',
 	#superclass : 'PhBasics',
+	#traits : 'PhFilterSetter',
+	#classTraits : 'PhFilterSetter classTrait',
 	#instVars : [
 		'frequency'
 	],
