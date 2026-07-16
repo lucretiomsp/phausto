@@ -11,3 +11,9 @@ InterpolatorssTest >> testPhInterpolateLinearAsDsp [
 
 	self deny: PhInterpolateLinear new asDsp isNull
 ]
+
+{ #category : 'tests' }
+InterpolatorssTest >> testPhInterpolateRaiseModuloAsDsp [
+
+	self deny: PhInterpolateRaiseModulo new asDsp isNull
+]
