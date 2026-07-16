@@ -3,9 +3,9 @@ I am a Resetter, when triggered,  I set my value to 0. My other input is a Wire,
 "
 Class {
 	#name : 'PhResetter',
-	#superclass : 'PhBox',
-	#traits : 'PhParamsSetter',
-	#classTraits : 'PhParamsSetter classTrait',
+	#superclass : 'UnitGenerator',
+	#traits : 'PhTriggerSetter',
+	#classTraits : 'PhTriggerSetter classTrait',
 	#instVars : [
 		'trigger'
 	],

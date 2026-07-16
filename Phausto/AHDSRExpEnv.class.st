@@ -33,7 +33,7 @@ AHDSRExpEnv >> asBox [
 	^ finalBox
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 AHDSRExpEnv >> decay [
 
 	^ decay 
@@ -76,7 +76,7 @@ AHDSRExpEnv >> initializeDecayAndSustain [
 		           step: 0.001
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 AHDSRExpEnv >> sustain [
 
 	^ sustain 

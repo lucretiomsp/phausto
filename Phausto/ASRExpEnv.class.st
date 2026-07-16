@@ -43,7 +43,7 @@ ASRExpEnv >> initialize [
 			             step: 0.001
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 ASRExpEnv >> sustain [
 
 	^ sustain 

@@ -4,8 +4,8 @@ I am a PhReaderWithSpeed, I read audio buffers at a desired speed. I am designed
 Class {
 	#name : 'PhReaderWithSpeed',
 	#superclass : 'PhBox',
-	#traits : 'PhParamsSetter',
-	#classTraits : 'PhParamsSetter classTrait',
+	#traits : 'PhTriggerSetter + PhSpeedSetter',
+	#classTraits : 'PhTriggerSetter classTrait + PhSpeedSetter classTrait',
 	#instVars : [
 		'speed',
 		'trigger'

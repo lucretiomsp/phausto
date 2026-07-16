@@ -35,13 +35,7 @@ ADSRExpEnv >> asBox [
 { #category : 'as yet unclassified' }
 ADSRExpEnv >> decay [
 
-	^ decay ifNil: [
-		  decay := PhHSlider new
-			           label: self label , 'Decay'
-			           init: 0.01
-			           min: 0.001
-			           max: 2
-			           step: 1 ]
+	^ decay 
 ]
 
 { #category : 'initialization' }
@@ -50,6 +44,12 @@ ADSRExpEnv >> initialize [
 	super initialize.
 	self decay: 0.2.
 	self sustain: 0.5.
+	 decay := PhHSlider new
+				           label: self label , 'Decay'
+				           init: 0.01
+				           min: 0.001
+				           max: 2
+				           step: 1 .
 	processExpression := 'process = en.adsre;'
 ]
 

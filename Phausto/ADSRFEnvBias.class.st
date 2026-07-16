@@ -66,13 +66,7 @@ ADSRFEnvBias >> biasRelease [
 { #category : 'accessing' }
 ADSRFEnvBias >> decay [
 
-	^ decay ifNil: [
-		  decay := PhHSlider new
-			           label: self label , 'Decay'
-			           init: 0.01
-			           min: 0.001
-			           max: 2
-			           step: 1 ]
+	^ decay 
 ]
 
 { #category : 'accessing' }
@@ -100,7 +94,13 @@ ADSRFEnvBias >> initialize [
 		          init: 0
 		          min: 0
 		          max: 1
-		          step: 1
+		          step: 1.
+		 decay := PhHSlider new
+				           label: self label , 'Decay'
+				           init: 0.01
+				           min: 0.001
+				           max: 2
+				           step: 1
 ]
 
 { #category : 'initialization' }
