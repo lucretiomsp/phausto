@@ -415,6 +415,13 @@ UnitGenerator >> numberOfOutputs: anInteger [
 	numberOfOutputs := anInteger
 ]
 
+{ #category : 'helper' }
+UnitGenerator >> paramSetter [
+	| paramName |
+	paramName := thisContext sender method selector allButLast.
+	^ [ :value | value asParam: paramName forUGen: self ]
+]
+
 { #category : 'accessing' }
 UnitGenerator >> processExpression [
 

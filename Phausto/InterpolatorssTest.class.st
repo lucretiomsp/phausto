@@ -15,7 +15,10 @@ InterpolatorssTest >> testPhInterpolateLinearAsDsp [
 { #category : 'tests' }
 InterpolatorssTest >> testPhInterpolateRaiseModuloAsDsp [
 
-| case |
-case := PhInterpolateRaiseModulo new trig: 1 ; step: 0.01 ; length: 100.
+	| case |
+	case := PhInterpolateRaiseModulo new
+		        trig: 1 asBox;
+		        step: 0.01 asBox ;
+		        length: 100 asBox.
 	self deny: case asDsp isNull
 ]

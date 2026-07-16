@@ -52,10 +52,10 @@ PhInterpolateRaiseModulo >> asBox [
 PhInterpolateRaiseModulo >> initialize [
 
 	super initialize.
-	trig := 1 asConst.
-    step := 0.001 asConst.
-  length := 1000 asConst.
- 
+	trig := 1 .
+	step := 0.001 .
+	length := 1000 .
+
 	processExpression := 'process = it.raise_modulo;'
 ]
 
