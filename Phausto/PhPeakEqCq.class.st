@@ -52,6 +52,13 @@ PhPeakEqCq >> lfx [
 ]
 
 { #category : 'accessing' }
+PhPeakEqCq >> lfx:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PhPeakEqCq >> q [
 
 	^ q

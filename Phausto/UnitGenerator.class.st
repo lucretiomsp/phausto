@@ -16,8 +16,6 @@ self className asString
 Class {
 	#name : 'UnitGenerator',
 	#superclass : 'Object',
-	#traits : 'PhParamsSetter',
-	#classTraits : 'PhParamsSetter classTrait',
 	#instVars : [
 		'importStatement',
 		'processExpression',
@@ -490,13 +488,8 @@ UnitGenerator >> uLevel [
 ]
 
 { #category : 'accessing' }
-UnitGenerator >> uLevel: aNumberOrABoxOraAymbol [
-
-| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraAymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+UnitGenerator >> uLevel: aNumberOrABoxOrASymbol [
+	self paramSetter value: aNumberOrABoxOrASymbol 
 ]
 
 { #category : 'accessing' }
