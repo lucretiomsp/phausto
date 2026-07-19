@@ -4,6 +4,8 @@ Ggenerator of _pulses_ with **length** and **period** in seconds
 Class {
 	#name : 'Pulsen',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhTSLSetter',
+	#classTraits : 'PhTSLSetter classTrait',
 	#instVars : [
 		'length',
 		'period'

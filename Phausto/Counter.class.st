@@ -7,6 +7,8 @@ trig: the trigger signal, each upfront will move the counter to the next integer
 Class {
 	#name : 'Counter',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhTSLSetter',
+	#classTraits : 'PhTSLSetter classTrait',
 	#instVars : [
 		'trig'
 	],
@@ -34,7 +36,7 @@ Counter >> initialize [
 	trig := PhButton new label: self label , 'Gate' .
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 Counter >> trig [
 
 	^ trig 
