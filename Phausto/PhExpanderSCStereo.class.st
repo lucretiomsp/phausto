@@ -64,6 +64,21 @@ PhExpanderSCStereo >> scSignal [
 ]
 
 { #category : 'accessing' }
+PhExpanderSCStereo >> scSignal: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PhExpanderSCStereo >> scSwitch [ 
 ^ scSwitch
+]
+
+{ #category : 'accessing' }
+PhExpanderSCStereo >> scSwitch: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
 ]

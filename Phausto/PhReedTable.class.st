@@ -56,3 +56,12 @@ PhReedTable >> slope [
 
 ^ slope
 ]
+
+{ #category : 'accessing' }
+PhReedTable >> slope: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]

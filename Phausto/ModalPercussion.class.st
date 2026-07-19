@@ -82,6 +82,15 @@ ModalPercussion >> strikeCutoff [
 ]
 
 { #category : 'accessing' }
+ModalPercussion >> strikeCutoff: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
+{ #category : 'accessing' }
 ModalPercussion >> strikePosition [
 
 	^ strikePosition 

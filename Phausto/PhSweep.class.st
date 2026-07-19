@@ -17,19 +17,18 @@ Class {
 { #category : 'converting' }
 PhSweep >> asBox [
 
-	| intermediateBox periodInSamples finalBox |
-	intermediateBox := super asBox.
-
+	|  periodInSamples  |
 	periodInSamples := (PhSec2Samp new value: self period) asBox.
-	finalBox := periodInSamples connectTo: intermediateBox.
-	^ finalBox
+	^ periodInSamples connectTo: self code asBox.
+	
 ]
 
 { #category : 'initialization' }
 PhSweep >> initialize [
 
 	super initialize.
-	processExpression := 'process = ba.sweep;'
+	processExpression := 'process = ba.sweep;'.
+	run := PhButton new label: self label , 'Gate' .
 ]
 
 { #category : 'accessing' }
@@ -44,20 +43,19 @@ PhSweep >> period [
 			            step: 0.01 ]
 ]
 
-{ #category : 'as yet unclassified' }
-PhSweep >> period: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector.
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhSweep >> run [
 
-	^ run ifNil: [ run := PhButton new label: self label , 'Gate' ]
+	^ run 
+]
+
+{ #category : 'accessing' }
+PhSweep >> run:
+
+	 aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
 ]

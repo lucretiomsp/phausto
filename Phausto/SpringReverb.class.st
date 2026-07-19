@@ -94,6 +94,15 @@ SpringReverb >> springs [
 ]
 
 { #category : 'accessing' }
+SpringReverb >> springs: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
+{ #category : 'accessing' }
 SpringReverb >> tension [ 
 ^ tension
 ]

@@ -2,7 +2,7 @@
 Subclasse of Spatials are tools for sound spatialization. 
 "
 Class {
-	#name : 'Spatials',
+	#name : 'PhSpatials',
 	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'pan'
@@ -13,7 +13,14 @@ Class {
 }
 
 { #category : 'accessing' }
-Spatials >> pan [
+PhSpatials >> pan [
 
 	^ pan 
+]
+
+{ #category : 'accessing' }
+PhSpatials >> pan:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

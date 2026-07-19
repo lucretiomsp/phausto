@@ -43,3 +43,11 @@ ButterworthLPHP >> poles [
 
 	^ poles 
 ]
+
+{ #category : 'accessing' }
+ButterworthLPHP >> poles: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+	
+]

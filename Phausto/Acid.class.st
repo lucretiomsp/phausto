@@ -5,6 +5,8 @@ The Roland TB-303 is a monophonic bass synthesizer from the early 1980s, known f
 Class {
 	#name : 'Acid',
 	#superclass : 'TpSynth',
+	#traits : 'PhFilterSetter',
+	#classTraits : 'PhFilterSetter classTrait',
 	#instVars : [
 		'tuning',
 		'cutoffFreq',

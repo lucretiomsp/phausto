@@ -33,3 +33,12 @@ PhSmooth >> smoothness [
 
 ^ smoothness
 ]
+
+{ #category : 'accessing' }
+PhSmooth >> smoothness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
+]

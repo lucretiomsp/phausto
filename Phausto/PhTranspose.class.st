@@ -65,6 +65,15 @@ PhTranspose >> shift [
 ]
 
 { #category : 'accessing' }
+PhTranspose >> shift: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
+{ #category : 'accessing' }
 PhTranspose >> window [
 
 	^ window 

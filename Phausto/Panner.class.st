@@ -5,7 +5,7 @@ pan = 0 means hard left, 0.5 is the middle, 1 for hard right
 "
 Class {
 	#name : 'Panner',
-	#superclass : 'Spatials',
+	#superclass : 'PhSpatials',
 	#category : 'Phausto-Effects',
 	#package : 'Phausto',
 	#tag : 'Effects'

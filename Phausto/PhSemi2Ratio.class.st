@@ -34,3 +34,11 @@ PhSemi2Ratio >> semitone [
 
 ^ semitone
 ]
+
+{ #category : 'accessing' }
+PhSemi2Ratio >> semitone: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+]
