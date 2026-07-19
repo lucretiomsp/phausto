@@ -19,7 +19,7 @@ Class {
 	#tag : 'Filters'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 MKOFilter >> initialize [
 
 	super initialize.
@@ -42,6 +42,15 @@ MKOFilter >> initialize [
 MKOFilter >> normFreq [
 
 	^ normFreq 
+]
+
+{ #category : 'accessing' }
+MKOFilter >> normFreq: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+
 ]
 
 { #category : 'accessing' }

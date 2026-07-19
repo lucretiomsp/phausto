@@ -45,3 +45,12 @@ PhWaveguide >> nMax [
 
 	^ nMax
 ]
+
+{ #category : 'accessing' }
+PhWaveguide >> nMax: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]

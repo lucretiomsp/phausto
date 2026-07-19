@@ -33,3 +33,12 @@ PhAllpassNL >> nonLinearity [
 
 ^ nonLinearity
 ]
+
+{ #category : 'converting' }
+PhAllpassNL >> nonLinearity: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
