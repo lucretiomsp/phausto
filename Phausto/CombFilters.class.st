@@ -37,6 +37,15 @@ CombFilters >> del [
 	^ del 
 ]
 
+{ #category : 'accessing' }
+CombFilters >> g: aNumberOrABoxOrASymbol [
+
+ <paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
 { #category : 'initialization' }
 CombFilters >> initialize [
 
@@ -84,9 +93,9 @@ CombFilters >> input [
 ]
 
 { #category : 'accessing' }
-CombFilters >> input: aPhBox [
+CombFilters >> input: aUnitGenerator [
 
-	input := aPhBox
+	input := aUnitGenerator
 ]
 
 { #category : 'accessing' }

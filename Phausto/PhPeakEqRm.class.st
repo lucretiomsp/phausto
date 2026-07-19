@@ -52,6 +52,15 @@ PhPeakEqRm >> lfx [
 ]
 
 { #category : 'accessing' }
+PhPeakEqRm >> lfx:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
+{ #category : 'accessing' }
 PhPeakEqRm >> tanPiBT [
 
 ^ tanPiBT

@@ -30,6 +30,13 @@ PhCompressor >> attack [
 ^ attack
 ]
 
+{ #category : 'accessing' }
+PhCompressor >> fbff: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 PhCompressor >> initialize [
 

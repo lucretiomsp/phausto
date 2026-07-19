@@ -135,31 +135,13 @@ self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> fbff: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> feedBack: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> finalLevel: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> fx: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> g: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -233,12 +215,6 @@ PhParamsSetter >> length: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> level: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> lfx: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -337,12 +313,6 @@ PhParamsSetter >> period: aNumberOrABoxOrASymbol [
 	aNumberOrABoxOrASymbol
 		asParam: methodName asString allButLast
 		forUGen: self
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> pickupPosition: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }
@@ -448,12 +418,6 @@ PhParamsSetter >> t60: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> tN: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> tempo: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -473,12 +437,6 @@ PhParamsSetter >> tubeLength: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> volume: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> wah: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]

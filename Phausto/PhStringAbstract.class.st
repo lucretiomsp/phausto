@@ -40,6 +40,15 @@ PhStringAbstract >> length [
 ]
 
 { #category : 'accessing' }
+PhStringAbstract >> pickupPosition: aNumberOrABoxOrASymbol [
+
+ <paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
+{ #category : 'accessing' }
 PhStringAbstract >> pluckPosition [ 
 ^ pluckPosition 
 ]

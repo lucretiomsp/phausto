@@ -35,11 +35,10 @@ Allpass_Comb >> aN [
 { #category : 'converting' }
 Allpass_Comb >> asBox [
 
-	| intermdiateBox finalBox |
-	intermdiateBox := super asBox.
 
-	finalBox := self maxDel asBox , self intDel asBox , self aN asBox
-	            , self input asBox connectTo: intermdiateBox.
 
-	^ finalBox
+	^  self maxDel asBox , self intDel asBox , self aN asBox
+	            , self input asBox connectTo: self code asBox.
+
+
 ]

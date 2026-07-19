@@ -52,3 +52,14 @@ PhPeakEq >> initialize [
 PhPeakEq >> lfx [ 
 ^ lfx
 ]
+
+{ #category : 'accessing' }
+PhPeakEq >> lfx:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+
+
+]

@@ -25,11 +25,21 @@ PhEnvelope >> attack [
 	^ attack 
 ]
 
+{ #category : 'accessing' }
+PhEnvelope >> finalLevel: aNumberOrABoxOrASymbol [
+
+ <paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+
+	
+]
+
 { #category : 'initialization' }
 PhEnvelope >> initialize [
 
 	super initialize.
-	super initializeControlParameters .
+	super initializeControlParameters.
+	  trigger := PhButton new label: self label , 'Gate'.
 	attack := PhHSlider new
 		          label: self label , 'Attack'
 		          init: 0.01
@@ -46,7 +56,7 @@ PhEnvelope >> initialize [
 
 	self controlParameters add: #trigger -> (self trigger
 			 asControlParameterOfWidgetType: #button
-			 description: 'Trig Envelopes').
+			 description: 'Trig Envelopes')
 ]
 
 { #category : 'connecting' }
@@ -65,6 +75,5 @@ PhEnvelope >> release [
 { #category : 'accessing' }
 PhEnvelope >> trigger [
 
-	^ trigger  ifNil: [
-		trigger := PhButton new label: self label , 'Gate' ]
+	^ trigger
 ]

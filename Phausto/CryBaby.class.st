@@ -43,3 +43,10 @@ CryBaby >> wah [
 
 	^ wah 
 ]
+
+{ #category : 'accessing' }
+CryBaby >> wah:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
