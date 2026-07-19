@@ -27,10 +27,10 @@ PhResetter >> asBox [
 ]
 
 { #category : 'initialization' }
-PhResetter >> initialize [ 
+PhResetter >> initialize [
 
-super initialize.
-self trigger: 0 asBox
+	super initialize.
+	self trigger: 0 
 ]
 
 { #category : 'accessing' }
