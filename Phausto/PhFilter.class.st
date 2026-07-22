@@ -6,8 +6,8 @@ In signal processing, a filter is a process or device that removes frequencies f
 Class {
 	#name : 'PhFilter',
 	#superclass : 'UnitGenerator',
-	#traits : 'PhFilterSetter',
-	#classTraits : 'PhFilterSetter classTrait',
+	#traits : 'PhFilterSetter + PhInputSetter',
+	#classTraits : 'PhFilterSetter classTrait + PhInputSetter classTrait',
 	#instVars : [
 		'input'
 	],

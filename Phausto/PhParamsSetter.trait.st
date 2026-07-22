@@ -141,30 +141,6 @@ PhParamsSetter >> init: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait - inputs' }
-PhParamsSetter >> input1: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - inputs' }
-PhParamsSetter >> input2: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - inputs' }
-PhParamsSetter >> inputL: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - inputs' }
-PhParamsSetter >> inputR: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
 { #category : 'trait' }
 PhParamsSetter >> invert: aNumberOrABoxOrASymbol [
 

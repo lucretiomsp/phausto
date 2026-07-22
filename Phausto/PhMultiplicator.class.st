@@ -1,6 +1,8 @@
 Class {
 	#name : 'PhMultiplicator',
 	#superclass : 'PhBinaryOperation',
+	#traits : 'PhInputSetter',
+	#classTraits : 'PhInputSetter classTrait',
 	#category : 'Phausto-Operations',
 	#package : 'Phausto',
 	#tag : 'Operations'

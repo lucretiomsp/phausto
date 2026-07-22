@@ -4,6 +4,8 @@ Abstract superclass for mono effects
 Class {
 	#name : 'PhMonoEffect',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhInputSetter',
+	#classTraits : 'PhInputSetter classTrait',
 	#instVars : [
 		'input'
 	],

@@ -5,6 +5,8 @@ These operations implemented in the toolkit keep the conversion into PhBoxes bef
 Class {
 	#name : 'PhBinaryOperation',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhInputSetter',
+	#classTraits : 'PhInputSetter classTrait',
 	#instVars : [
 		'inputL',
 		'inputR'
