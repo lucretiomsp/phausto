@@ -8,6 +8,8 @@ Bidirectional block implementing a clarinet mouthpiece as well as the various in
 Class {
 	#name : 'PhClarinetMouthPiece',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhPhysModelSetter',
+	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'pressure',
 		'stiffness'

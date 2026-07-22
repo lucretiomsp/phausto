@@ -15,6 +15,8 @@ All exciters are activated when the gate signal changes from 0 to a value greate
 Class {
 	#name : 'Exciter',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhPhysModelSetter',
+	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'gate'
 	],

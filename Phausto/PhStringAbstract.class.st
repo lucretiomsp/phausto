@@ -4,6 +4,8 @@ Abstract super class for string elements
 Class {
 	#name : 'PhStringAbstract',
 	#superclass : 'PhPmElement',
+	#traits : 'PhPhysModelSetter',
+	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'pluckPosition',
 		'excitation',

@@ -10,6 +10,8 @@ Extremely basic reed table that can be used to implement a wide range of single 
 Class {
 	#name : 'PhBrassLipsTable',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhPhysModelSetter',
+	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'excitation',
 		'tubeLength',

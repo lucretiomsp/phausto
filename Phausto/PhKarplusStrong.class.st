@@ -9,6 +9,8 @@ A Karplus-Strong string (in that case, the string is implemented as a one dimens
 Class {
 	#name : 'PhKarplusStrong',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhPhysModelSetter',
+	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'length',
 		'damping',

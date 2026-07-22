@@ -4,6 +4,8 @@ Same as brassModel but with a built-in UI. This function doesn't implement a vir
 Class {
 	#name : 'PhBrassModelUI',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhPhysModelSetter',
+	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'pressure'
 	],

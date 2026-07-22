@@ -12,6 +12,8 @@ A simple clarinet physical model without tone holes (pitch is changed by changin
 Class {
 	#name : 'PhClarinetModel',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhPhysModelSetter',
+	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'tubeLength',
 		'pressure',

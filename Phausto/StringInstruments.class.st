@@ -8,6 +8,8 @@ a fequency in hertz can be converted to a lenght in meters by sending the f2l me
 Class {
 	#name : 'StringInstruments',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhPhysModelSetter',
+	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'freq'
 	],
