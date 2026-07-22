@@ -7,42 +7,6 @@ Class {
 }
 
 { #category : 'tests' }
-BasicCountersTest >> TODOtestPhCycleAsDsp [
-	"crash apparently for unexplicable reason"
-
-	self assert: 1 equals: 0
-	"self assert: PhCycle new asDsp isNull equals: false"
-]
-
-{ #category : 'tests' }
-BasicCountersTest >> TODOtestPulseCountDownAsDsp [
-
-"crash apparently for unexplicable reason"
-
-	self assert: 1 equals: 0
-	"self assert: PulseCountDown new asDsp isNull equals: false"
-]
-
-{ #category : 'tests' }
-BasicCountersTest >> TODOtestPulseCountUpAsDsp [
-
-"crash apparently for unexplicable reason"
-
-	self assert: 1 equals: 0
-	"self assert: PulseCountUp new asDsp isNull equals: false"
-]
-
-{ #category : 'tests' }
-BasicCountersTest >> TODOtestSpulsedAsDsp [
-
-"crash apparently for unexplicable reason"
-
-	self assert: 1 equals: 0
-
-	"self assert: Sweep new asDsp isNull equals: false"
-]
-
-{ #category : 'tests' }
 BasicCountersTest >> testCountDownAsDsp [
 
 	self assert: PhCountDown new asDsp isNull equals: false
@@ -99,7 +63,7 @@ BasicCountersTest >> testPhTimeAsDsp [
 { #category : 'tests' }
 BasicCountersTest >> testPulseAsDsp [
 
-	self assert: Pulse new asDsp isNull equals: false
+	self deny: Pulse new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -117,7 +81,7 @@ BasicCountersTest >> testPulseCountUpLoopAsDsp [
 { #category : 'tests' }
 BasicCountersTest >> testPulsenAsDsp [
 
-	self assert: Pulsen new asDsp isNull equals: false
+	self deny: Pulsen new asDsp isNull 
 ]
 
 { #category : 'tests' }

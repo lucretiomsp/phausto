@@ -6,6 +6,8 @@ Converts a duration in seconds to a number of samples at the current sampling ra
 Class {
 	#name : 'PhSec2Samp',
 	#superclass : 'PhConversionTool',
+	#traits : 'PhInputSetter + PhTSLSetter',
+	#classTraits : 'PhInputSetter classTrait + PhTSLSetter classTrait',
 	#instVars : [
 		'duration'
 	],
@@ -14,7 +16,7 @@ Class {
 	#tag : 'Basics - ConversionTools'
 }
 
-{ #category : 'accessing' }
+{ #category : 'converting' }
 PhSec2Samp >> asBox [ 
 
 ^ self duration asBox connectTo: super asBox.

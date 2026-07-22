@@ -75,12 +75,6 @@ PhParamsSetter >> drive: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> duration: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> duty: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol

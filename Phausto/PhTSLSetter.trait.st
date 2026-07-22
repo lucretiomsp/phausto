@@ -1,5 +1,5 @@
 "
-Trig, Length, Step setters for interpolators
+Trig, Length, Step, Duration setters for interpolators
 "
 Trait {
 	#name : 'PhTSLSetter',
@@ -7,6 +7,12 @@ Trait {
 	#package : 'Phausto',
 	#tag : 'Traits'
 }
+
+{ #category : 'trait' }
+PhTSLSetter >> duration: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
 
 { #category : 'trait - interpolators' }
 PhTSLSetter >> length: aNumberOrABoxOrASymbol [
