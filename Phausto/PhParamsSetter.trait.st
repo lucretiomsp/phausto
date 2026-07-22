@@ -262,12 +262,6 @@ PhParamsSetter >> period: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> pitch: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> pole: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol

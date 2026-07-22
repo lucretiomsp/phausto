@@ -22,6 +22,8 @@ depth ([0..1]) of delay-line modulation. Use in combination with mod_freq to pro
 Class {
 	#name : 'GreyHole',
 	#superclass : 'Reverbs',
+	#traits : 'PhInputSetter',
+	#classTraits : 'PhInputSetter classTrait',
 	#instVars : [
 		'dt',
 		'damp',

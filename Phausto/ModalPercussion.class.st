@@ -7,8 +7,8 @@ High and low level objects for modal synthesis of percussion instruments.
 Class {
 	#name : 'ModalPercussion',
 	#superclass : 'UnitGenerator',
-	#traits : 'PhPhysModelSetter',
-	#classTraits : 'PhPhysModelSetter classTrait',
+	#traits : 'PhPhysModelSetter + PhTriggerSetter + PhFrequencySetter',
+	#classTraits : 'PhPhysModelSetter classTrait + PhTriggerSetter classTrait + PhFrequencySetter classTrait',
 	#instVars : [
 		'freq',
 		'strikePosition',

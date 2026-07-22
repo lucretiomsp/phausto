@@ -4,8 +4,8 @@ TpSynth stands for TurboPhauto Synth. WIll be later moved to the TurboPhausto pa
 Class {
 	#name : 'TpSynth',
 	#superclass : 'UnitGenerator',
-	#traits : 'PhInputSetter',
-	#classTraits : 'PhInputSetter classTrait',
+	#traits : 'PhInputSetter + PhADSRSetter',
+	#classTraits : 'PhInputSetter classTrait + PhADSRSetter classTrait',
 	#instVars : [
 		'level',
 		'pitch',

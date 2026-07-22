@@ -9,6 +9,12 @@ Trait {
 }
 
 { #category : 'trait - trigger' }
+PhTriggerSetter >> gate: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait - trigger' }
 PhTriggerSetter >> trig: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol

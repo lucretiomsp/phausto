@@ -8,6 +8,8 @@ Creates an impulse excitation of one sample.
 Class {
 	#name : 'PhImpulseExcitation',
 	#superclass : 'Exciter',
+	#traits : 'PhTriggerSetter',
+	#classTraits : 'PhTriggerSetter classTrait',
 	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
 	#tag : 'PhysModels'
