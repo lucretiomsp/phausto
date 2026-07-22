@@ -26,12 +26,6 @@ PhParamsSetter >> attenuation: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait - physModels' }
-PhParamsSetter >> bellOpening: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
 { #category : 'trait' }
 PhParamsSetter >> biasAttack: aNumberOrABoxOrASymbol [
 
@@ -46,30 +40,6 @@ PhParamsSetter >> biasDecay: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> biasRelease: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> bowPosition: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> bowPressure: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> bowVelocity: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> breathGain: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -327,12 +297,6 @@ PhParamsSetter >> pole: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait - physModels' }
-PhParamsSetter >> pressure: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
 { #category : 'trait' }
 PhParamsSetter >> reset: aNumberOrABoxOrASymbol [
 
@@ -381,18 +345,6 @@ PhParamsSetter >> source: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'trait - physModels' }
-PhParamsSetter >> stiffness: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> strikeSharpness: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
 { #category : 'trait - envelopes' }
 PhParamsSetter >> t60: aNumberOrABoxOrASymbol [
 
@@ -407,12 +359,6 @@ PhParamsSetter >> tempo: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> tone: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - physModels' }
-PhParamsSetter >> tubeLength: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
