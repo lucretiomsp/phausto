@@ -1,15 +1,18 @@
 "
-PhSubBeat is an object that generates triggers at a specified subdivision of a beat, such as 32nd notes. It acts as a clock divider and can operate at any tempo, aligning with the main beat or clock source.
-Differently from PhBeat, it must be started.
-Paraameter:
-tempo: the tempo in beays per minutes
-clockDivider: the clock divisions, set 2 for 16th notes, 4 to for 8th notes, 8 for beats.
-start: start and stop the Trigger generation
+## Parameters:
+**tempo:** the tempo in beays per minutes
+**clockDivider:** the clock divisions, set 2 for 16th notes, 4 to for 8th notes, 8 for beats.
+**start:** start and stop the Trigger generation
+
+I generate  triggers at a specified subdivision of a beat, such as 32nd notes. It acts as a clock divider and can operate at any tempo, aligning with the main beat or clock source.
+Differently from _PhBeat_, I must be started.
 
 "
 Class {
 	#name : 'PhSubBeat',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhTempoSetter',
+	#classTraits : 'PhTempoSetter classTrait',
 	#instVars : [
 		'clockDivider',
 		'tempo',

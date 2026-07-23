@@ -18,6 +18,8 @@ osci := SawOsc new freq: auto  midikey2hz .
 Class {
 	#name : 'PhAutomat',
 	#superclass : 'PhBasics',
+	#traits : 'PhTempoSetter',
+	#classTraits : 'PhTempoSetter classTrait',
 	#instVars : [
 		'tempo',
 		'size',
@@ -40,6 +42,13 @@ PhAutomat >> asBox [
 PhAutomat >> init [
 
 	^ init
+]
+
+{ #category : 'accessing' }
+PhAutomat >> init:  aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }

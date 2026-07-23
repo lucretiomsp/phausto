@@ -18,6 +18,13 @@ Class {
 	#tag : 'Oscillators'
 }
 
+{ #category : 'accessing' }
+LFO >> amount: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'converting' }
 LFO >> asBox [
 

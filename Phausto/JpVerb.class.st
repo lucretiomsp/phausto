@@ -37,6 +37,13 @@ Class {
 	#tag : 'Effects'
 }
 
+{ #category : 'accessing' }
+JpVerb >> amount: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'converting' }
 JpVerb >> asBox [
 	^ self t60 asBox , self damp asBox , self size asBox

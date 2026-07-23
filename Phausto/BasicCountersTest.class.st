@@ -51,7 +51,7 @@ BasicCountersTest >> testPhRampAsDsp [
 { #category : 'tests' }
 BasicCountersTest >> testPhTempoAsDsp [
 
-	self deny: PhTempo new asDsp isNull 
+	self deny: (PhTempo new tempo: 144) asDsp isNull
 ]
 
 { #category : 'tests' }

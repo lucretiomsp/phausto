@@ -21,8 +21,11 @@ BasicsTest >> testImpulsifyAsDsp [
 { #category : 'tests' }
 BasicsTest >> testPhAutomatAsDsp [
 
-| case |
-case := PhAutomat new size: 8 asBox ; input: 1 asBox  ; init: 32 asBox.
+	| case |
+	case := PhAutomat new
+		        tempo: 128 asBox;
+		        input: 1 asBox;
+		        init: 32 asBox.
 	self deny: PhAutomat new asDsp isNull
 ]
 
@@ -72,7 +75,7 @@ BasicsTest >> testPhLatchAsDsp [
 BasicsTest >> testPhLineAsDsp [
 
 | case |
-case := PhLine new input: 1 asBox; n: 321.
+case := PhLine new input: 1 asBox; amount: 321.
 	self deny: case  asDsp isNull
 ]
 

@@ -38,6 +38,13 @@ Class {
 	#tag : 'Effects'
 }
 
+{ #category : 'accessing' }
+GreyHole >> amount: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'converting' }
 GreyHole >> asBox [
 

@@ -17,6 +17,8 @@ dsp stop.
 Class {
 	#name : 'PhBeat',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhTempoSetter',
+	#classTraits : 'PhTempoSetter classTrait',
 	#instVars : [
 		'tempo'
 	],

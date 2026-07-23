@@ -1,13 +1,15 @@
 "
 Converts a tempo in BPM into a number of samples.
 
-Parameter:
-t: tempo in BPM
+##Parameter:
+**t:** tempo in BPM
 
 "
 Class {
 	#name : 'PhTempo',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhTempoSetter',
+	#classTraits : 'PhTempoSetter classTrait',
 	#instVars : [
 		'trig',
 		'tempo'
@@ -20,12 +22,8 @@ Class {
 { #category : 'converting' }
 PhTempo >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
+	^ self tempo asBox connectTo: self code asBox.
 
-
-	finalBox := self tempo asBox connectTo: intermediateBox.
-	^ finalBox
 ]
 
 { #category : 'initialization' }

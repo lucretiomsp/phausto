@@ -1,5 +1,7 @@
 "
-ADSR related parameter setters
+ADSR-related parameter setters.
+
+Note that only **attack**, **release** and **trigger** are declared on the traits; **decay** and **sustain** are declared by classes, so those setters only work where the matching instVar exists.
 "
 Trait {
 	#name : 'PhADSRSetter',

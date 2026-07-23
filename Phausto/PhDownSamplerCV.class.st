@@ -20,6 +20,13 @@ PhDownSamplerCV >> amount [
 ^ amount
 ]
 
+{ #category : 'accessing' }
+PhDownSamplerCV >> amount: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'converting' }
 PhDownSamplerCV >> asBox [ 
 
