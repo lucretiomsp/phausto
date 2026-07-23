@@ -360,20 +360,31 @@ Dx7Op >> initialize [
 	processExpression := 'process = op.operator;'.
 	self initializeEgLevels.
 	self initializeEgRates.
-	mode := 0 asBox. "PhNumEntry new
-		        label: self label , 'Type'
-		        values: #( 0 0 1 0 )."
+	self initializeMiscParameters.
+	self initializeBreakPoints .
 	baseFreq := PhHSlider new
-		        label: self label , 'Freq'
-		        values: #( 440 20 900 0.1 ).
-	gate := PhButton new label: self label , 'Gate'.
-	gain := PhHSlider new
-		        label: self label , 'Gain'
-		        values: #( 0.5 0 1 0.001 ).
-	keyVelSens := PhHSlider new
-		               label: self label , 'KeyVel'
-		               values: #( 0 0 99 1 ).
-	phaseMod := 0 asBox
+		            label: self label , 'Freq'
+		            values: #( 440 20 900 0.1 )
+]
+
+{ #category : 'initialization' }
+Dx7Op >> initializeBreakPoints [
+
+
+	breakpointLDepth := PhHSlider new
+		           label: self label , 'bPointDepthL'
+		           values: #( 0 0 99 1 ).
+	breakpointRDepth := PhHSlider new
+		           label: self label , 'bPointDepthR'
+		           values: #( 0 0 99 1 ).
+		breakpointLCurve := PhNumEntry new
+		           label: self label , 'bPointCurveL'
+		           values: #( 0 0 3 1 ).
+			breakpointRCurve := PhNumEntry new
+		           label: self label , 'bPointCurveR'
+		           values: #( 0 0 3 1 ).
+	
+	
 ]
 
 { #category : 'initialization' }
@@ -431,6 +442,20 @@ Dx7Op >> initializeEgRates [
 	egRate4 := PhHSlider new
 		           label: self label , 'R4'
 		           values: #( 71 0 99 1 )
+]
+
+{ #category : 'initialization' }
+Dx7Op >> initializeMiscParameters [
+
+mode := PhNumEntry new label: self label , 'Mode' values: #(0 0 1 1).
+gate := PhButton new label: self label , 'Gate'.
+	gain := PhHSlider new
+		        label: self label , 'Gain'
+		        values: #( 0.5 0 1 0.001 ).
+	keyVelSens := PhHSlider new
+		               label: self label , 'KeyVel'
+		               values: #( 0 0 99 1 ).
+	phaseMod := 0 asBox
 ]
 
 { #category : 'accessing' }
