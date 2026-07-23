@@ -24,6 +24,13 @@ ManifestPhausto class >> ruleCascadedNextPutAllsRuleV1FalsePositive [
 ]
 
 { #category : 'code-critics' }
+ManifestPhausto class >> ruleExcessiveVariablesRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGClassDefinition #(#Dx7Op)) #'2026-07-23T09:03:47.984847+02:00') )
+]
+
+{ #category : 'code-critics' }
 ManifestPhausto class >> ruleInconsistentMethodClassificationRuleV1FalsePositive [
 
 	<ignoreForCoverage>
