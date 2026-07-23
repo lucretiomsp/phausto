@@ -68,7 +68,7 @@ PhSlider >> label: aLabel values: anArray [
 	max := anArray third.
 	step := anArray fourth .
 	
-((init > min ) and: (init < max ) and: (max > min)) ifFalse: [ ^ Error new signal: 'Please check initialization values' ]
+(((init >= min ) and: (init <= max ) )and: (max >= min)) ifFalse: [ ^ Error new signal: 'Please check initialization values' ]
 ]
 
 { #category : 'accessing' }

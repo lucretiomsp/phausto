@@ -360,9 +360,11 @@ Dx7Op >> initialize [
 	processExpression := 'process = op.operator;'.
 	self initializeEgLevels.
 	self initializeEgRates.
+	self initializePitchEgLevels .
+	self initializePitchEgRates .
 	self initializeMiscParameters.
 	self initializeBreakPoints.
-	self initializeLfos .
+	self initializeLfos.
 	baseFreq := PhHSlider new
 		            label: self label , 'Freq'
 		            values: #( 440 20 900 0.1 )
@@ -371,7 +373,9 @@ Dx7Op >> initialize [
 { #category : 'initialization' }
 Dx7Op >> initializeBreakPoints [
 
-
+breakpoint := PhHSlider new
+		           label: self label , 'bPointDepthL'
+		           values: #( 0 0 34 1 ).
 	breakpointLDepth := PhHSlider new
 		           label: self label , 'bPointDepthL'
 		           values: #( 0 0 99 1 ).
@@ -482,9 +486,54 @@ Dx7Op >> initializeMiscParameters [
 		              label: self label , 'KeyVel'
 		              values: #( 0 0 99 1 ).
 	phaseMod := 0 asBox.
+		freqCoarse := PhHSlider new
+		              label: self label , 'FreqCoarse'
+		              values: #( 0 0 31 1 ).
+		freqFine := PhHSlider new
+		              label: self label , 'FreqFine'
+		              values: #( 0 0 31 1 ).
+			detune := PhHSlider new
+		              label: self label , 'Detune'
+		              values: #( 0 -7 7 1 ).
 	transpose := PhHSlider new
-		        label: self label , 'Transpose'
-		        values: #( 0 -12 12 1 ).
+		             label: self label , 'Transpose'
+		             values: #( 0 -12 12 1 )
+]
+
+{ #category : 'initialization' }
+Dx7Op >> initializePitchEgLevels [
+
+	
+	pitchEgLevel1 := PhHSlider new
+		            label: self label , 'pitchEGL1'
+		            values: #( 99 0 99 1 ).
+	pitchEgLevel2 := PhHSlider new
+		            label: self label , 'pitchEGL2'
+		            values: #( 88 0 99 1 ).
+	pitchEgLevel3 := PhHSlider new
+		            label: self label , 'pitchEGL3'
+		            values: #( 96 0 99 1 ).
+	pitchEgLevel4 := PhHSlider new
+		            label: self label , 'pitchEGL4'
+		            values: #( 0 0 99 1 )
+]
+
+{ #category : 'initialization' }
+Dx7Op >> initializePitchEgRates [
+
+	
+	pitchEgRate1 := PhHSlider new
+		           label: self label , 'pitchEgR1'
+		           values: #( 72 0 99 1 ).
+	pitchEgRate2 := PhHSlider new
+		           label: self label , 'pitchEgR2'
+		           values: #( 75 0 99 1 ).
+	pitchEgRate3 := PhHSlider new
+		           label: self label , 'pitchEgR3'
+		           values: #( 49 0 99 1 ).
+	pitchEgRate4 := PhHSlider new
+		           label: self label , 'pitchEgR4'
+		           values: #( 71 0 99 1 )
 ]
 
 { #category : 'accessing' }
