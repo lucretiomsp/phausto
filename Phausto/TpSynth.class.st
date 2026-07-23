@@ -40,6 +40,13 @@ TpSynth >> decay [
 	^ decay 
 ]
 
+{ #category : 'accessing' }
+TpSynth >> decay: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 TpSynth >> initialize [
 

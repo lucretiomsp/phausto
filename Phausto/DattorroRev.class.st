@@ -70,6 +70,12 @@ DattorroRev >> decay [
 ]
 
 { #category : 'accessing' }
+DattorroRev >> decay: aNumberOrABoxOrASymbol [
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 DattorroRev >> i_diff1 [
 
 	^ i_diff1

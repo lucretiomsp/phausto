@@ -286,12 +286,6 @@ PhParamsSetter >> signal: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> size: aNumberOrABoxOrASymbol [
-
-self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> slope:  aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -316,19 +310,7 @@ PhParamsSetter >> t60: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> tempo: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> tone: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> volume: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]

@@ -30,12 +30,10 @@ Class {
 { #category : 'converting' }
 Kick >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self pitch asBox * 0.25 asBox , self click asBox
+
+	^ self pitch asBox * 0.25 asBox , self click asBox
 	            , self attack asBox , self decay asBox , self drive asBox
-	            , self gate asBox connectTo: intermediateBox.
-	^ finalBox * self uLevel.
+	            , self gate asBox connectTo: self code asBox 
 ]
 
 { #category : 'accessing' }
@@ -53,22 +51,14 @@ Kick >> click [
 { #category : 'accessing' }
 Kick >> decay [
 
-	^ decay ifNil: [ decay:= (PhHSlider new
-			 label: self label , 'Decay'
-			 init: 2
-			 min: 0.1
-			 max: 2
-			 step: 0.01). ]
+	^ decay 
 ]
 
 { #category : 'accessing' }
-Kick >> decay: aNumberOrABoxOraASymbol [
+Kick >> decay: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOraASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -85,7 +75,6 @@ Kick >> initialize [
 
 	click := 0.116.
 	attack := 0.005.
-	self uLevel: 0.8.
 	pitch := PhHSlider new
 		         label: self label , 'Freq'
 		         init: 220
@@ -103,6 +92,12 @@ Kick >> initialize [
 		         min: 1
 		         max: 5
 		         step: 0.001.
+	decay:= (PhHSlider new
+			 label: self label , 'Decay'
+			 init: 2
+			 min: 0.1
+			 max: 2
+			 step: 0.01).
 	self uLevel: 0.35
 ]
 

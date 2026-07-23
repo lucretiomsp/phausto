@@ -45,6 +45,13 @@ Hat >> decay [
 	^ decay 
 ]
 
+{ #category : 'accessing' }
+Hat >> decay: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 Hat >> initialize [
 

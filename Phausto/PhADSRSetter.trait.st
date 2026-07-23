@@ -21,12 +21,6 @@ PhADSRSetter >> attack: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait - envelopes' }
-PhADSRSetter >> decay: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
 PhADSRSetter >> level1: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol

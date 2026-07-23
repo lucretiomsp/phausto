@@ -39,11 +39,8 @@ Class {
 { #category : 'converting' }
 Clap >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self tone asBox , self attack asBox , self decay asBox
-	            , self gate asBox connectTo: intermediateBox.
-	^ finalBox * self uLevel
+	^ self tone asBox , self attack asBox , self decay asBox
+	  , self gate asBox connectTo: self code asBox
 ]
 
 { #category : 'accessing' }
@@ -56,6 +53,13 @@ Clap >> attack [
 Clap >> decay [
 
 	^ decay 
+]
+
+{ #category : 'accessing' }
+Clap >> decay: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
