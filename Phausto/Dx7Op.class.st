@@ -452,6 +452,9 @@ Dx7Op >> initializeEgRates [
 { #category : 'initialization' }
 Dx7Op >> initializeLfos [
 
+	lfoSync := PhNumEntry new
+		           label: self label , 'LfoSync'
+		           values: #( 0 0 1 1 ).
 	lfoWave := PhNumEntry new
 		           label: self label , 'LfoWave'
 		           values: #( 0 0 5 1 ).
@@ -461,9 +464,12 @@ Dx7Op >> initializeLfos [
 	lfoDelay := PhHSlider new
 		            label: self label , 'LfoDelay'
 		            values: #( 0 0 99 1 ).
-	lfoAMD := lfoSpeed := PhHSlider new
-		                      label: self label , 'LfoAMD'
-		                      values: #( 0 0 99 1 ).
+	lfoAMD := PhHSlider new
+		          label: self label , 'LfoAMD'
+		          values: #( 0 0 99 1 ).
+	lfoPMD := PhHSlider new
+		          label: self label , 'LfoPMD'
+		          values: #( 0 0 99 1 ).
 	lfoPitchModSens := PhNumEntry new
 		                   label: self label , 'LfoWave'
 		                   values: #( 0 0 7 1 )
@@ -497,7 +503,10 @@ Dx7Op >> initializeMiscParameters [
 		              values: #( 0 -7 7 1 ).
 	transpose := PhHSlider new
 		             label: self label , 'Transpose'
-		             values: #( 0 -12 12 1 )
+		             values: #( 0 -12 12 1 ).
+		ampModSens := oscKeySync := PhNumEntry new
+		              label: self label , 'AmpModSens'
+		              values: #( 0 0 3 1 ).
 ]
 
 { #category : 'initialization' }
