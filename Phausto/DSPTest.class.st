@@ -114,7 +114,7 @@ void EffectAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void EffectAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-  fDSP = std::make_unique<mydsp>();
+  fDSP = std::make_unique<dsp>();
   fDSP->init(sampleRate);
   fUI = std::make_unique<MapUI>();
   fDSP->buildUserInterface(fUI);
@@ -416,7 +416,7 @@ public:
 private:
     //==============================================================================
     // DSP (RAII safe)
-    std::unique_ptr<mydsp> fDSP;
+    std::unique_ptr<dsp> fDSP;
     std::unique_ptr<MapUI> fUI;
 
     // Internal buffers (safe JUCE containers)

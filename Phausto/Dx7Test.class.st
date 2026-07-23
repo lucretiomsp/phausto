@@ -147,7 +147,7 @@ Dx7Test >> testDx7LFOSpeed [
 { #category : 'tests' }
 Dx7Test >> testDx7Op [
 
-	self assert: Dx7Op new  asDsp  isNull equals: false
+	self deny: Dx7Op new  asDsp  isNull
 ]
 
 { #category : 'tests' }
