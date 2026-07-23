@@ -75,7 +75,7 @@ BasicsTest >> testPhLatchAsDsp [
 BasicsTest >> testPhLineAsDsp [
 
 | case |
-case := PhLine new input: 1 asBox; amount: 321.
+case := PhLine new input: 1 asBox; n: 4.
 	self deny: case  asDsp isNull
 ]
 
