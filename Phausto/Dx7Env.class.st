@@ -15,9 +15,9 @@ Class {
 		'egLevel3',
 		'egLevel4'
 	],
-	#category : 'Phausto-Envelopes',
+	#category : 'Phausto-Dx7',
 	#package : 'Phausto',
-	#tag : 'Envelopes'
+	#tag : 'Dx7'
 }
 
 { #category : 'converting' }

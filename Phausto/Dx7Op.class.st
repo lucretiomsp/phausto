@@ -26,37 +26,175 @@ Class {
 	#name : 'Dx7Op',
 	#superclass : 'UnitGenerator',
 	#instVars : [
-		'freq',
-		'gain',
-		'egLevel4',
-		'rateScale',
-		'egRate3',
+		'mode',
+		'freqCoarse',
+		'freqFine',
+		'detune',
 		'outLevel',
 		'egRate1',
-		'type',
-		'phaseMod',
+		'egRate2',
+		'egRate3',
 		'egRate4',
-		'gate',
+		'egLevel1',
 		'egLevel2',
 		'egLevel3',
-		'egRate2',
-		'keyVelocity',
-		'egLevel1'
+		'egLevel4',
+		'keyVelSens',
+		'ampModSens',
+		'rateScale',
+		'breakpoint',
+		'breakpointLDepth',
+		'breakpointRDepth',
+		'breakpointLCurve',
+		'breakpointRCurve',
+		'lfoWave',
+		'lfoSpeed',
+		'lfoDelay',
+		'lfoPMD',
+		'lfoAMD',
+		'lfoSync',
+		'lfoPitchModSens',
+		'oscKeySync',
+		'pitchEgRate1',
+		'pitchEgRate2',
+		'pitchEgRate3',
+		'pitchEgRate4',
+		'pitchEgLevel1',
+		'pitchEgLevel2',
+		'pitchEgLevel3',
+		'pitchEgLevel4',
+		'transpose',
+		'phaseMod',
+		'baseFreq',
+		'gain',
+		'gate'
 	],
 	#category : 'Phausto-Dx7',
 	#package : 'Phausto',
 	#tag : 'Dx7'
 }
 
+{ #category : 'accessing' }
+Dx7Op >> ampModSens [
+
+	^ ampModSens
+]
+
+{ #category : 'accessing' }
+Dx7Op >> ampModSens: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 Dx7Op >> asBox [
+^ self mode , self freqCoarse , self freqFine , self detune
+	   , self outLevel
+	   , self egRate1 , self egRate2 , self egRate3 , self egRate4
+	   , self egLevel1 , self egLevel2 , self egLevel3 , self egLevel4
+	   , self keyVelSens , self ampModSens , self rateScale
+	   , self breakpoint , self breakpointLDepth , self breakpointRDepth
+	   , self breakpointLCurve , self breakpointRCurve
+	   , self lfoWave , self lfoSpeed , self lfoDelay
+	   , self lfoPMD , self lfoAMD , self lfoSync , self lfoPitchModSens
+	   , self oscKeySync
+	   , self pitchEgRate1 , self pitchEgRate2 , self pitchEgRate3 , self pitchEgRate4
+	   , self pitchEgLevel1 , self pitchEgLevel2 , self pitchEgLevel3 , self pitchEgLevel4
+	   , self transpose
+	   , self phaseMod , self baseFreq , self gain , self gate	connectTo: self code asBox
+]
 
+{ #category : 'accessing' }
+Dx7Op >> baseFreq [ 
 
-	^ (self freq  , self phaseMod , self outLevel , self egRate1
-	            , self egRate2 , self egRate3 , self egRate4
-	            , self egLevel1 , self egLevel2 , self egLevel3
-	            , self egLevel4 , self keyVelocity , self rateScale
-	            , self type , self gain , self gate) asBox connectTo: self code asBox . .
+^ baseFreq
+]
+
+{ #category : 'accessing' }
+Dx7Op >> baseFreq: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol 
+
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpoint [
+
+	^ breakpoint
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpoint: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpointLCurve [
+
+	^ breakpointLCurve
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpointLCurve: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpointLDepth [
+
+	^ breakpointLDepth
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpointLDepth: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpointRCurve [
+
+	^ breakpointRCurve
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpointRCurve:aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpointRDepth [
+
+	^ breakpointRDepth
+]
+
+{ #category : 'accessing' }
+Dx7Op >> breakpointRDepth: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> detune [
+
+	^ detune
+]
+
+{ #category : 'accessing' }
+Dx7Op >> detune: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -66,9 +204,10 @@ Dx7Op >> egLevel1 [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egLevel1: anObject [
+Dx7Op >> egLevel1: aNumberOrABoxOrASymbol [
 
-	egLevel1 := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -78,9 +217,10 @@ Dx7Op >> egLevel2 [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egLevel2: anObject [
+Dx7Op >> egLevel2:aNumberOrABoxOrASymbol [
 
-	egLevel2 := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -90,9 +230,10 @@ Dx7Op >> egLevel3 [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egLevel3: anObject [
+Dx7Op >> egLevel3: aNumberOrABoxOrASymbol [
 
-	egLevel3 := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -102,9 +243,10 @@ Dx7Op >> egLevel4 [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egLevel4: anObject [
+Dx7Op >> egLevel4: aNumberOrABoxOrASymbol [
 
-	egLevel4 := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -114,9 +256,10 @@ Dx7Op >> egRate1 [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egRate1: anObject [
+Dx7Op >> egRate1: aNumberOrABoxOrASymbol [
 
-	egRate1 := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -126,9 +269,10 @@ Dx7Op >> egRate2 [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egRate2: anObject [
+Dx7Op >> egRate2: aNumberOrABoxOrASymbol [
 
-	egRate2 := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -138,9 +282,10 @@ Dx7Op >> egRate3 [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egRate3: anObject [
+Dx7Op >> egRate3: aNumberOrABoxOrASymbol [
 
-	egRate3 := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -150,15 +295,36 @@ Dx7Op >> egRate4 [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> egRate4: anObject [
+Dx7Op >> egRate4: aNumberOrABoxOrASymbol [
 
-	egRate4 := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
-Dx7Op >> freq [
+Dx7Op >> freqCoarse [
 
-	^ freq
+	^ freqCoarse
+]
+
+{ #category : 'accessing' }
+Dx7Op >> freqCoarse: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> freqFine [
+
+	^ freqFine
+]
+
+{ #category : 'accessing' }
+Dx7Op >> freqFine: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -168,9 +334,22 @@ Dx7Op >> gain [
 ]
 
 { #category : 'accessing' }
+Dx7Op >> gain: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 Dx7Op >> gate [
 
 	^ gate
+]
+
+{ #category : 'accessing' }
+Dx7Op >> gate: anObject [
+
+	gate := anObject
 ]
 
 { #category : 'initialization' }
@@ -181,17 +360,17 @@ Dx7Op >> initialize [
 	processExpression := 'process = op.operator;'.
 	self initializeEgLevels.
 	self initializeEgRates.
-	type := 0 asBox. "PhNumEntry new
+	mode := 0 asBox. "PhNumEntry new
 		        label: self label , 'Type'
 		        values: #( 0 0 1 0 )."
-	freq := PhHSlider new
+	baseFreq := PhHSlider new
 		        label: self label , 'Freq'
 		        values: #( 440 20 900 0.1 ).
 	gate := PhButton new label: self label , 'Gate'.
 	gain := PhHSlider new
 		        label: self label , 'Gain'
 		        values: #( 0.5 0 1 0.001 ).
-	keyVelocity := PhHSlider new
+	keyVelSens := PhHSlider new
 		               label: self label , 'KeyVel'
 		               values: #( 0 0 99 1 ).
 	phaseMod := 0 asBox
@@ -255,15 +434,132 @@ Dx7Op >> initializeEgRates [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> keyVelocity [
+Dx7Op >> keyVelSens [
 
-	^ keyVelocity
+	^ keyVelSens
 ]
 
 { #category : 'accessing' }
-Dx7Op >> keyVelocity: anObject [
+Dx7Op >> keyVelSens: aNumberOrABoxOrASymbol [
 
-	keyVelocity := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoAMD [
+
+	^ lfoAMD
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoAMD: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoDelay [
+
+	^ lfoDelay
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoDelay: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoPMD [
+
+	^ lfoPMD
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoPMD: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoPitchModSens [
+
+	^ lfoPitchModSens
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoPitchModSens: anObject [
+
+	lfoPitchModSens := anObject
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoSpeed [
+
+	^ lfoSpeed
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoSpeed: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoSync [
+
+	^ lfoSync
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoSync: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoWave [
+
+	^ lfoWave
+]
+
+{ #category : 'accessing' }
+Dx7Op >> lfoWave: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> mode [
+
+	^ mode
+]
+
+{ #category : 'accessing' }
+Dx7Op >> mode: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> oscKeySync [
+
+	^ oscKeySync
+]
+
+{ #category : 'accessing' }
+Dx7Op >> oscKeySync: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -285,9 +581,114 @@ Dx7Op >> phaseMod [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> phaseMod: anOscillatorOrANumber [
+Dx7Op >> phaseMod: aNumberOrABoxOrASymbol [
 
-	phaseMod := anOscillatorOrANumber 
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgLevel1 [
+
+	^ pitchEgLevel1
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgLevel1: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgLevel2 [
+
+	^ pitchEgLevel2
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgLevel2: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgLevel3 [
+
+	^ pitchEgLevel3
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgLevel3: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgLevel4 [
+
+	^ pitchEgLevel4
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgLevel4: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgRate1 [
+
+	^ pitchEgRate1
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgRate1: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgRate2 [
+
+	^ pitchEgRate2
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgRate2: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgRate3 [
+
+	^ pitchEgRate3
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgRate3: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgRate4 [
+
+	^ pitchEgRate4
+]
+
+{ #category : 'accessing' }
+Dx7Op >> pitchEgRate4: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -297,19 +698,21 @@ Dx7Op >> rateScale [
 ]
 
 { #category : 'accessing' }
-Dx7Op >> rateScale: anObject [
+Dx7Op >> rateScale: aNumberOrABoxOrASymbol [
 
-	rateScale := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
-Dx7Op >> type [
+Dx7Op >> transpose [
 
-	^ type
+	^ transpose
 ]
 
 { #category : 'accessing' }
-Dx7Op >> type: anObject [
+Dx7Op >> transpose: aNumberOrABoxOrASymbol [
 
-	type := anObject
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
