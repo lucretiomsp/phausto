@@ -361,7 +361,8 @@ Dx7Op >> initialize [
 	self initializeEgLevels.
 	self initializeEgRates.
 	self initializeMiscParameters.
-	self initializeBreakPoints .
+	self initializeBreakPoints.
+	self initializeLfos .
 	baseFreq := PhHSlider new
 		            label: self label , 'Freq'
 		            values: #( 440 20 900 0.1 )
@@ -445,17 +446,45 @@ Dx7Op >> initializeEgRates [
 ]
 
 { #category : 'initialization' }
+Dx7Op >> initializeLfos [
+
+	lfoWave := PhNumEntry new
+		           label: self label , 'LfoWave'
+		           values: #( 0 0 5 1 ).
+	lfoSpeed := PhHSlider new
+		            label: self label , 'LfoSpeed'
+		            values: #( 0 0 99 1 ).
+	lfoDelay := PhHSlider new
+		            label: self label , 'LfoDelay'
+		            values: #( 0 0 99 1 ).
+	lfoAMD := lfoSpeed := PhHSlider new
+		                      label: self label , 'LfoAMD'
+		                      values: #( 0 0 99 1 ).
+	lfoPitchModSens := PhNumEntry new
+		                   label: self label , 'LfoWave'
+		                   values: #( 0 0 7 1 )
+]
+
+{ #category : 'initialization' }
 Dx7Op >> initializeMiscParameters [
 
-mode := PhNumEntry new label: self label , 'Mode' values: #(0 0 1 1).
-gate := PhButton new label: self label , 'Gate'.
+	mode := PhNumEntry new
+		        label: self label , 'Mode'
+		        values: #( 0 0 1 1 ).
+	oscKeySync := PhNumEntry new
+		              label: self label , 'OscKeySync'
+		              values: #( 0 0 1 1 ).
+	gate := PhButton new label: self label , 'Gate'.
 	gain := PhHSlider new
 		        label: self label , 'Gain'
 		        values: #( 0.5 0 1 0.001 ).
 	keyVelSens := PhHSlider new
-		               label: self label , 'KeyVel'
-		               values: #( 0 0 99 1 ).
-	phaseMod := 0 asBox
+		              label: self label , 'KeyVel'
+		              values: #( 0 0 99 1 ).
+	phaseMod := 0 asBox.
+	transpose := PhHSlider new
+		        label: self label , 'Transpose'
+		        values: #( 0 -12 12 1 ).
 ]
 
 { #category : 'accessing' }

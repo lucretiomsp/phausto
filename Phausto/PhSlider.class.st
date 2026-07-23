@@ -47,7 +47,7 @@ PhSlider >> initializeValue: aFloat [
 self init: aFloat
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 PhSlider >> label: aLabel init: initValue min: minValue max: maxValue step: stepValue [
 
 	label := aLabel.
@@ -57,15 +57,18 @@ PhSlider >> label: aLabel init: initValue min: minValue max: maxValue step: step
 	step := stepValue 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'initialization' }
 PhSlider >> label: aLabel values: anArray [
-	"initialzie the SLider with ana array of values"
+	"initialzie the Slider with ana array of values"
+
 
 	label := aLabel.
 	init := anArray first.
-	min := anArray at: 2.
-	max := anArray at: 3.
-	step := anArray at: 4
+	min := anArray second.
+	max := anArray third.
+	step := anArray fourth .
+	
+((init > min ) and: (init < max ) and: (max > min)) ifFalse: [ ^ Error new signal: 'Please check initialization values' ]
 ]
 
 { #category : 'accessing' }

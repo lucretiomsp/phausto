@@ -14,7 +14,7 @@ PhHSlider >> => aUnitGenerator [
 	aUnitGenerator patchedWith: self
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'connecting' }
 PhHSlider >> patchWith: aPhF2l [ 
 	self shouldBeImplemented.
 ]
