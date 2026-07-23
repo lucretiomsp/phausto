@@ -14,7 +14,7 @@ ControlParametersTest >> setUp [
 
 	super setUp.
 
-	
+	UnitGenerator resetSelfAndAllSubClasses.
 	osci := SineOsc new label: 'SineOsc'
 ]
 
