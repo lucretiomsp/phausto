@@ -29,7 +29,8 @@ Class {
 	],
 	#classVars : [
 		'defaultName',
-		'initializedDSP'
+		'initializedDSP',
+		'initializedDSPs'
 	],
 	#category : 'Phausto-DSP',
 	#package : 'Phausto',
@@ -163,6 +164,11 @@ DSP class >> initializedDSP: anObject [
 	initializedDSP := anObject
 ]
 
+{ #category : 'class initialization' }
+DSP class >> initializedDSPs [
+	^ initializedDSPs ifNil: [ initializedDSPs := IdentitySet new ]
+]
+
 { #category : 'exceptions' }
 DSP class >> invalidException [
 
@@ -184,6 +190,12 @@ DSP class >> paramException [
 "	^ Error new signal:
 		  'This parameter does not exist, check the DSP code'
 		  , PhaustoDynamicEngine uniqueInstance getLastError "
+]
+
+{ #category : 'class initialization' }
+DSP class >> register: aDsp [
+	self initializedDSPs add: aDsp
+
 ]
 
 { #category : 'accessing' }
@@ -210,6 +222,11 @@ DSP class >> uninitializedException [
 	"^ Error new signal:
 		  'This DSP is not initialzed, so it cannot be destroyed'
 		  , PhaustoDynamicEngine uniqueInstance getLastError "
+]
+
+{ #category : 'class initialization' }
+DSP class >> unregister: aDsp [
+	self initializedDSPs remove: aDsp ifAbsent: [ ]
 ]
 
 { #category : 'API - accessing' }
@@ -1423,22 +1440,13 @@ private:
 ]
 
 { #category : 'initialize - destroy' }
-DSP >> destroy [
-	"Destory the DSP object"
+DSP >> destroy [ 
+	(self isNull or: [ self isInitialized not ])
+		ifTrue: [ ^ self ].
+	PhaustoDynamicEngine uniqueInstance destroyDSP: self.
+	self isInitialized: false.
+	self class unregister: self
 
-	self isNull
-		ifTrue: [ "Dont do anything"
-			'This is not a DSP, this is a null pointer' traceCr ]
-		ifFalse: [
-			self isInitialized
-				ifNil: [ ^ self class invalidException ]
-				ifNotNil: [
-					'DSP destroyed ' traceCr.
-
-					PhaustoDynamicEngine uniqueInstance destroyDSP: self.
-					"return a null pointer"
-					self class initializedDSP: DSP new.
-					 ] ]
 ]
 
 { #category : 'exporting - apvts' }
@@ -1656,23 +1664,20 @@ DSP >> includesParameter: aString [
 
 { #category : 'initialize' }
 DSP >> init [
-	"
-     * @brief Initialize the DSP object / @param dsp Pointer to the DSP object.
-     * @param renderer Renderer type !!!! for test we use only portAudio.
-     * @param sr Sample rate in Hz. Not used when kJackRenderer is used, since sr will be imposed by the JACK server !!!! just for thet sr is fixed to 44100.
-     * @param bsize Buffer size in samples. Not used when kJackRenderer is used, since bs will be imposed by the JACK server - !!! we test it with 512 samples buffer size.
-     * @return True if initialization is successful, false otherwise. if the Faust code was compiled without errors, we can initialize the DSP"
-
-	'INIT EXECUTED' traceCr.
+	
+	self isNull ifTrue: [ ^ self class invalidException ].
 	RendererType initialize.
-
-	self isNull
-		ifTrue: [ "mysterious bug on exception" ^ self class invalidException ]
+	(PhaustoDynamicEngine uniqueInstance
+		initializeDSP: self
+		withRenderer: self class rendererType
+		bufferSize: PhaustoDynamicEngine bufferSize)
+		ifTrue: [
+			self isInitialized: true.
+			self class register: self ]
 		ifFalse: [
-				'DSP inizialized' traceCr.
-				self isInitialized: true.
-				self class initializedDSP: self.
-				PhaustoDynamicEngine uniqueInstance initializeDSP: self withRenderer: self class rendererType  bufferSize: PhaustoDynamicEngine  bufferSize ]
+			self isInitialized: false.
+			^ self class invalidException ]
+
 ]
 
 { #category : 'accessing' }
