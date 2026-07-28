@@ -1,3 +1,6 @@
+"
+I divide my first input (a UnitGenerator) by a second input (also another UnitGenerator)
+"
 Class {
 	#name : 'PhDivider',
 	#superclass : 'PhBinaryOperation',

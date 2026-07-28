@@ -1,3 +1,6 @@
+"
+I add two UnitGenerators
+"
 Class {
 	#name : 'PhAdder',
 	#superclass : 'PhBinaryOperation',

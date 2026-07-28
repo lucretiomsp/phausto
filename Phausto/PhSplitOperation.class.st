@@ -27,24 +27,24 @@ PhSplitOperation >> initialize [
 	output := ZitaLight new.
 ]
 
-{ #category : 'converting' }
+{ #category : 'accessing' }
 PhSplitOperation >> input [ 
 ^ input
 ]
 
-{ #category : 'trait - inputs' }
-PhSplitOperation >> input: aUnitGenerator [
+{ #category : 'accessing' }
+PhSplitOperation >> input: aNumberOrABoxOrASymbol [
 
-
-input := aUnitGenerator 
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'converting' }
+{ #category : 'accessing' }
 PhSplitOperation >> output [ 
 ^ output
 ]
 
-{ #category : 'trait - inputs' }
+{ #category : 'accessing' }
 PhSplitOperation >> output: aUnitGenerator [
 
 	output := aUnitGenerator

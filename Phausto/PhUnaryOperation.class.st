@@ -32,6 +32,13 @@ PhUnaryOperation >> input [
 ^ input
 ]
 
+{ #category : 'accessing' }
+PhUnaryOperation >> input: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'connecting' }
 PhUnaryOperation >> patchedWith: aUnitGenerator [
 

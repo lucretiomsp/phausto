@@ -1,3 +1,6 @@
+"
+I multiplictae two Unit Generators
+"
 Class {
 	#name : 'PhMultiplicator',
 	#superclass : 'PhBinaryOperation',

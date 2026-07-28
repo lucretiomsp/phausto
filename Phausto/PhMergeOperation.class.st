@@ -33,6 +33,13 @@ PhMergeOperation >> input [
 ]
 
 { #category : 'accessing' }
+PhMergeOperation >> input: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PhMergeOperation >> output [
 ^ output
 ]
