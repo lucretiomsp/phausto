@@ -15,6 +15,8 @@ Learn more about [Physical Audio Signals](https://ccrma.stanford.edu/~jos/pasp/)
 Class {
 	#name : 'PhModalModel',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhFrequencySetter',
+	#classTraits : 'PhFrequencySetter classTrait',
 	#instVars : [
 		'numberOfModes',
 		'freqs',

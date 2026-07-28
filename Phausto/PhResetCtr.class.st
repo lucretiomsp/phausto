@@ -8,6 +8,8 @@ impulseIndex =  index of impulse to allow to be output
 Class {
 	#name : 'PhResetCtr',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhInputSetter',
+	#classTraits : 'PhInputSetter classTrait',
 	#instVars : [
 		'totalImpulses',
 		'impulseIndex',

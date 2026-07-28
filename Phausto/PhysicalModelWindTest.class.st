@@ -37,7 +37,7 @@ PhysicalModelWindTest >> testPhClarinetModelAsDsp [
 ]
 
 { #category : 'tests' }
-PhysicalModelWindTest >> testPhClarinetMothPieceAsDsp [
+PhysicalModelWindTest >> testPhClarinetMouthPieceAsDsp [
 
 	self deny: PhClarinetMouthPiece new asDsp isNull
 ]

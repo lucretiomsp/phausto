@@ -11,6 +11,8 @@ Strikes generator with controllable excitation position
 Class {
 	#name : 'PhStrike',
 	#superclass : 'Exciter',
+	#traits : 'PhPhysModelSetter',
+	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'strikePosition',
 		'strikeSharpness',
@@ -67,9 +69,15 @@ PhStrike >> initialize [
 		                   step: 1
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhStrike >> strikePosition [
 	^ strikePosition
+]
+
+{ #category : 'accessing' }
+PhStrike >> strikePosition: aNumberOrABoxOrASymbol [
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }

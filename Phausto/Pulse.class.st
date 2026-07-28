@@ -4,6 +4,8 @@ Pulses generated at **period** in seconds
 Class {
 	#name : 'Pulse',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhPeriodSetter',
+	#classTraits : 'PhPeriodSetter classTrait',
 	#instVars : [
 		'period'
 	],

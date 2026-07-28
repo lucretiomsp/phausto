@@ -6,6 +6,8 @@
 Class {
 	#name : 'PhModeFilter',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhFrequencySetter',
+	#classTraits : 'PhFrequencySetter classTrait',
 	#instVars : [
 		'freq',
 		't60',
