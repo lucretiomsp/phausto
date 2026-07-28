@@ -4,8 +4,8 @@ A simple acoustic guitar model with steel strings (based on guitarModel) impleme
 Class {
 	#name : 'Guitar',
 	#superclass : 'StringInstruments',
-	#traits : 'PhTriggerSetter',
-	#classTraits : 'PhTriggerSetter classTrait',
+	#traits : 'PhTriggerSetter + PhFrequencySetter',
+	#classTraits : 'PhTriggerSetter classTrait + PhFrequencySetter classTrait',
 	#instVars : [
 		'pluckPosition',
 		'gain',

@@ -50,6 +50,13 @@ PulseOsc >> duty [
 	^ duty 
 ]
 
+{ #category : 'accessing' }
+PulseOsc >> duty: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 PulseOsc >> initialize [
 

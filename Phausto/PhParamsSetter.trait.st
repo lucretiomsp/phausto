@@ -27,24 +27,6 @@ PhParamsSetter >> attenuation: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> biasAttack: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> biasDecay: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> biasRelease: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> captureButton: aNumberOrABoxOrASymbol [
 
 		self paramSetter value: aNumberOrABoxOrASymbol
@@ -183,30 +165,6 @@ PhParamsSetter >> min: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> modDepth: aNumberOrABoxOrASymbol [
-
-self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> modFreq: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> modIndex: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> modRatio: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> mode: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -231,24 +189,6 @@ PhParamsSetter >> part: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> period: aNumberOrABoxOrASymbol [
-
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-
-	methodName asString allButLast traceCr.
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> pole: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> resonance: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -267,12 +207,6 @@ PhParamsSetter >> signal: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> slope:  aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> smoothness: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -280,18 +214,6 @@ PhParamsSetter >> smoothness: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> source: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait - envelopes' }
-PhParamsSetter >> t60: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> tone: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]

@@ -6,6 +6,8 @@ This class contains a collection of synthesizers, including those of Faust synth
 Class {
 	#name : 'Synths',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhFrequencySetter',
+	#classTraits : 'PhFrequencySetter classTrait',
 	#instVars : [
 		'trigger',
 		'freq'

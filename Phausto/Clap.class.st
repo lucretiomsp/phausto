@@ -99,3 +99,10 @@ Clap >> tone [
 
 	^ tone
 ]
+
+{ #category : 'accessing' }
+Clap >> tone: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
