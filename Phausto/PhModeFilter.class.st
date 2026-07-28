@@ -41,6 +41,13 @@ PhModeFilter >> gain [
 	^ gain
 ]
 
+{ #category : 'accessing' }
+PhModeFilter >> gain: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 PhModeFilter >> initialize [
 
@@ -73,6 +80,13 @@ PhModeFilter >> input [
 	^ input
 ]
 
+{ #category : 'accessing' }
+PhModeFilter >> input: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'connecting' }
 PhModeFilter >> patchedWith: aUnitGenerator [
 
@@ -83,4 +97,11 @@ self input: aUnitGenerator
 PhModeFilter >> t60 [
 
 	^ t60
+]
+
+{ #category : 'accessing' }
+PhModeFilter >> t60: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
