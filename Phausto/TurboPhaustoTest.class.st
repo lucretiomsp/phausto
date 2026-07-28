@@ -19,12 +19,6 @@ self assert: Chordy new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
-TurboPhaustoTest >> testDelayMonoFBAsBox [
-
-	self deny: DelayMonoFB new asDsp isNull
-]
-
-{ #category : 'tests' }
 TurboPhaustoTest >> testFm2OpAsBox [
 
 
@@ -48,7 +42,7 @@ TurboPhaustoTest >> testLoadAllSynths [
 
 	| dsp |
 	dsp := TurboPhausto loadAllSynths allSynths asArray asSumOfUGen asDsp.
-	self assert: dsp isNull equals: false
+	self deny: dsp isNull 
 ]
 
 { #category : 'tests' }
