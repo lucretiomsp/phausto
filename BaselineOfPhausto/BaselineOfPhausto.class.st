@@ -77,11 +77,12 @@ BaselineOfPhausto >> copyLibrariesFrom: repoDirectory [
 
 { #category : 'utilities' }
 BaselineOfPhausto >> copyTurboSamples [
-	"Copy the TurboSamples folder to the user documents directory (shared across images)."
+	"Copy the TurboSamples folder next to the current image."
+
 	| destination |
-	destination := FileLocator documents asFileReference / 'TurboSamples'.
+	destination := FileLocator imageDirectory asFileReference / 'TurboSamples'.
 	destination exists ifTrue: [
-		'TurboSamples already present in documents folder, skipping copy.' traceCr.
+		'TurboSamples already present next to the image, skipping copy.' traceCr.
 		^ self ].
 	IceRepository registry
 		detect: [ :each | each includesPackageNamed: self class packageName ]
@@ -91,8 +92,7 @@ BaselineOfPhausto >> copyTurboSamples [
 			source exists ifFalse: [
 				('TurboSamples folder not found at: ' , source asString) traceCr.
 				^ self ].
-			('Copying TurboSamples from ' , source asString , ' to '
-				, destination asString) traceCr.
+			('Copying TurboSamples from ' , source asString , ' to ' , destination asString) traceCr.
 			destination ensureCreateDirectory.
 			source copyAllTo: destination ]
 		ifNone: [ 'Could not find repository to copy TurboSamples' traceCr ]

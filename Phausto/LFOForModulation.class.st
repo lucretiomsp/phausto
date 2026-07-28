@@ -90,3 +90,10 @@ LFOForModulation >> offset [
 
 	^ offset
 ]
+
+{ #category : 'accessing' }
+LFOForModulation >> offset: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]

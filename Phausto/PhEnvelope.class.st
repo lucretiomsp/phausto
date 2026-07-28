@@ -26,6 +26,13 @@ PhEnvelope >> attack [
 ]
 
 { #category : 'accessing' }
+PhEnvelope >> decay: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PhEnvelope >> finalLevel: aNumberOrABoxOrASymbol [
 
  <paramSetter>
