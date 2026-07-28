@@ -15,6 +15,12 @@ PhTriggerSetter >> gate: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait - trigger' }
+PhTriggerSetter >> max: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait - trigger' }
 PhTriggerSetter >> trig: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol

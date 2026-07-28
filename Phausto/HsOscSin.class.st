@@ -4,6 +4,8 @@ Wave-Table-Based Sine wave oscillator with hard syncing phase
 Class {
 	#name : 'HsOscSin',
 	#superclass : 'Oscillator',
+	#traits : 'PhFrequencySetter',
+	#classTraits : 'PhFrequencySetter classTrait',
 	#instVars : [
 		'reset'
 	],

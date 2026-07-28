@@ -9,6 +9,8 @@ When a UnitGenerator is chucked (=>) into an **Impulsify**, it becomes its gate 
 Class {
 	#name : 'PhImpulsify',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhTriggerSetter',
+	#classTraits : 'PhTriggerSetter classTrait',
 	#instVars : [
 		'gate'
 	],

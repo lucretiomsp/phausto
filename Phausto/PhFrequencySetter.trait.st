@@ -25,3 +25,9 @@ PhFrequencySetter >> pitch: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
+
+{ #category : 'trait' }
+PhFrequencySetter >> reset: aNumberOrABoxOrASymbol [
+
+		self paramSetter value: aNumberOrABoxOrASymbol
+]

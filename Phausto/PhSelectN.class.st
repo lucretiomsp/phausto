@@ -53,6 +53,13 @@ PhSelectN >> index [
 	^ index 
 ]
 
+{ #category : 'accessing' }
+PhSelectN >> index: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 PhSelectN >> initialize [
 

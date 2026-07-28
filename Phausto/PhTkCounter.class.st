@@ -5,6 +5,8 @@ By default, I count to 8 and I am triggered by a Button
 Class {
 	#name : 'PhTkCounter',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhTriggerSetter',
+	#classTraits : 'PhTriggerSetter classTrait',
 	#instVars : [
 		'trigger',
 		'max',

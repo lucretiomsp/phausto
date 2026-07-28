@@ -39,7 +39,13 @@ PhPhysModelSetter >> breathGain: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhPhysModelSetter >> exitation: aNumberOrABoxOrASymbol [
+PhPhysModelSetter >> excitation: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'trait - interpolators' }
+PhPhysModelSetter >> length: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]

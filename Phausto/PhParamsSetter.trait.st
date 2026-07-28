@@ -123,13 +123,6 @@ PhParamsSetter >> impulseIndex: aNumberOrABoxOrASymbol [
 ]
 
 { #category : 'trait' }
-PhParamsSetter >> index: aNumberOrABoxOrASymbol [
-
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
 PhParamsSetter >> init: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
@@ -155,12 +148,6 @@ PhParamsSetter >> length: aNumberOrABoxOrASymbol [
 
 { #category : 'trait' }
 PhParamsSetter >> level: aNumberOrABoxOrASymbol [
-
-	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> max: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
@@ -259,12 +246,6 @@ PhParamsSetter >> period: aNumberOrABoxOrASymbol [
 PhParamsSetter >> pole: aNumberOrABoxOrASymbol [
 
 	self paramSetter value: aNumberOrABoxOrASymbol
-]
-
-{ #category : 'trait' }
-PhParamsSetter >> reset: aNumberOrABoxOrASymbol [
-
-		self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'trait' }
