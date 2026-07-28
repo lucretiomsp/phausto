@@ -30,7 +30,7 @@ PhResetter >> asBox [
 PhResetter >> initialize [
 
 	super initialize.
-	self trigger: 0 
+	trigger := 0. 
 ]
 
 { #category : 'accessing' }

@@ -3,7 +3,7 @@ I am a PhReaderWithSpeed, I read audio buffers at a desired speed. I am designed
 "
 Class {
 	#name : 'PhReaderWithSpeed',
-	#superclass : 'PhBox',
+	#superclass : 'UnitGenerator',
 	#traits : 'PhTriggerSetter + PhSpeedSetter',
 	#classTraits : 'PhTriggerSetter classTrait + PhSpeedSetter classTrait',
 	#instVars : [
