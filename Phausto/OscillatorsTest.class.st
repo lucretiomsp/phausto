@@ -146,6 +146,13 @@ OscillatorsTest >> testOscSinMAsDsp [
 ]
 
 { #category : 'tests' }
+OscillatorsTest >> testPhClipAsDsp [
+| case |
+	case := SineOsc new freq: 200.
+	self deny: case stereo asDsp isNull
+]
+
+{ #category : 'tests' }
 OscillatorsTest >> testPhasorAsDsp [
 
 	self deny: Phasor new stereo asDsp isNull
@@ -171,13 +178,6 @@ OscillatorsTest >> testSinWaveformChangeWtSizeDsp [
 | osc |
 osc := SinWaveform new tableSize: 512.
 	self deny: osc  stereo asDsp isNull
-]
-
-{ #category : 'tests' }
-OscillatorsTest >> testSineOscAsDsp [
-| case |
-	case := SineOsc new freq: 200.
-	self deny: case stereo asDsp isNull
 ]
 
 { #category : 'tests' }

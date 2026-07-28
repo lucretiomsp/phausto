@@ -12,6 +12,8 @@ t60m: desired decay time (t60) at midrange frequencies (sec)
 Class {
 	#name : 'ZitaRevStereo',
 	#superclass : 'Reverbs',
+	#traits : 'PhInputSetter',
+	#classTraits : 'PhInputSetter classTrait',
 	#instVars : [
 		'rdel',
 		'f1',

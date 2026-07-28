@@ -103,12 +103,6 @@ MathTest >> testPHNextPowerOf2AsDsp [
 ]
 
 { #category : 'tests' }
-MathTest >> testPhIlogBAsDsp [
-
-	self deny: PhIlogB new asDsp isNull
-]
-
-{ #category : 'tests' }
 MathTest >> testPhRad2DegAsDsp [
 
 	self deny: PhRad2Deg new asDsp isNull

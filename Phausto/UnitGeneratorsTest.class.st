@@ -105,6 +105,12 @@ self assert: (SineOsc new , SquareOsc new) asDsp isNull equals: false
 ]
 
 { #category : 'tests' }
+UnitGeneratorsTest >> testPhClipAsDsp [
+
+	self assert: SineOsc new asDsp isNull equals: false
+]
+
+{ #category : 'tests' }
 UnitGeneratorsTest >> testPulseOscAsDsp [
 
 	self assert: PulseOsc new asDsp isNull equals: false
@@ -123,12 +129,6 @@ UnitGeneratorsTest >> testSetOscillatorParameters [
 	self assert: pulse uLevel asString trimLineSpaces equals: '0.5f'.
 	self assert: pulse freq label equals: 'freq'.
 	self assert: pulse duty init asString trimLineSpaces equals: '0.1'
-]
-
-{ #category : 'tests' }
-UnitGeneratorsTest >> testSineOscAsDsp [
-
-	self assert: SineOsc new asDsp isNull equals: false
 ]
 
 { #category : 'tests' }

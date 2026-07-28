@@ -19,6 +19,8 @@ An algorithmic reverb (stereo in/out), inspired by the lush chorused sound of ce
 Class {
 	#name : 'JpVerb',
 	#superclass : 'Reverbs',
+	#traits : 'PhInputSetter',
+	#classTraits : 'PhInputSetter classTrait',
 	#instVars : [
 		't60',
 		'damp',

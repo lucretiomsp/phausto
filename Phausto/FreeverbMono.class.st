@@ -11,6 +11,8 @@ spread: spatial spread in number of samples (for stereo)
 Class {
 	#name : 'FreeverbMono',
 	#superclass : 'Reverbs',
+	#traits : 'PhInputSetter',
+	#classTraits : 'PhInputSetter classTrait',
 	#instVars : [
 		'fb1',
 		'fb2',

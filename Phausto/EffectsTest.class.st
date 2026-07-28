@@ -87,7 +87,7 @@ EffectsTest >> testFlangerDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testFractionalDelayAsDsp [
 
-	self deny FractionalDelay new asDsp isNull 
+	self deny: PhFractionalDelay new asDsp isNull 
 ]
 
 { #category : 'tests' }
@@ -157,6 +157,12 @@ EffectsTest >> testParametricEQDemoAsDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testPhClipAsDsp [
+
+	self deny: PhClip new asDsp isNull 
+]
+
+{ #category : 'tests' }
 EffectsTest >> testPhEchoAsDsp [
 
 	self deny: PhEcho new asDsp isNull 
@@ -188,7 +194,7 @@ EffectsTest >> testPhaser2DemoAsDsp [
 ]
 
 { #category : 'tests' }
-EffectsTest >> testPosPassemoAsDsp [
+EffectsTest >> testPosPassDemoAsDsp [
 
 	self deny: PosPass_Demo new asDsp isNull 
 ]
@@ -214,19 +220,13 @@ EffectsTest >> testSawtoohDemoAsDsp [
 { #category : 'tests' }
 EffectsTest >> testSimpleDelayAsDsp [
 
-	self assert: PhSimpleDelay new asDsp isNull equals: false
-]
-
-{ #category : 'tests' }
-EffectsTest >> testSineOscAsDsp [
-
-	self assert: PhClip new asDsp isNull equals: false
+	self deny: PhSimpleDelay new asDsp isNull  
 ]
 
 { #category : 'tests' }
 EffectsTest >> testSmoothDelayAsDsp [
 
-	self assert: PhSmoothDelay new asDsp isNull equals: false
+	self deny: PhSmoothDelay new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -276,7 +276,7 @@ EffectsTest >> testVirtualAnalogOscillatorDemoAsDsp [
 EffectsTest >> testVitalRevDemoAsDsp [
 	"new version of faust libs must be bundled to pass this test"
 
-	self deny: VitalRev_Demo new asDsp isNull
+	self deny: PhVitalRev_Demo new asDsp isNull
 ]
 
 { #category : 'tests' }
@@ -300,7 +300,7 @@ EffectsTest >> testWahAsDsp [
 { #category : 'tests' }
 EffectsTest >> testWavefoldAsDsp [
 
-	self assert: Wavefold new asDsp isNull equals: false
+	self deny:  Wavefold new asDsp isNull 
 ]
 
 { #category : 'tests' }
