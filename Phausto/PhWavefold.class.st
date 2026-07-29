@@ -8,7 +8,7 @@ Wavefolding works by applying a threshold to the input signal, inverting the wav
 Here, width, is the width of the folded sectionof the folded section [0..1] (float).
 "
 Class {
-	#name : 'Wavefold',
+	#name : 'PhWavefold',
 	#superclass : 'Saturators',
 	#instVars : [
 		'width'
@@ -19,30 +19,34 @@ Class {
 }
 
 { #category : 'converting' }
-Wavefold >> asBox [
+PhWavefold >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self width asBox , self input asBox connectTo: intermediateBox.
-	^ finalBox
+	^ self width asBox , self input asBox connectTo:
+self code asBox
 ]
 
 { #category : 'initialization' }
-Wavefold >> initialize [
+PhWavefold >> initialize [
 
 	super initialize.
-	processExpression :='process = ef.wavefold;'.
-	
-	
+	processExpression := 'process = ef.wavefold;'.
+	width := PhHSlider new
+				  label: self label , 'Width'
+				  init: 0.5
+				  min: 0
+				  max: 1
+				  step: 0.001 .
 ]
 
-{ #category : 'as yet unclassified' }
-Wavefold >> width [
+{ #category : 'accessing' }
+PhWavefold >> width [
 
-	^ width ifNil: [   PhHSlider new
-		        label: self label , 'Width'
-		        init: 0.5
-		        min: 0
-		        max: 1
-		        step: 0.001 ]
+	^ width 
+]
+
+{ #category : 'accessing' }
+PhWavefold >> width: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

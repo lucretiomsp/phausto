@@ -14,7 +14,7 @@ Class {
 	#tag : 'Effects'
 }
 
-{ #category : 'accessing' }
+{ #category : 'converting' }
 PhMonoEffect >> asBox [ 
 
 ^ self input asBox connectTo: self code asBox

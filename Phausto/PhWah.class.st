@@ -7,7 +7,7 @@ more info :
 https://ccrma.stanford.edu/~jos/pasp/vegf.html
 "
 Class {
-	#name : 'Wah',
+	#name : 'PhWah',
 	#superclass : 'PhMonoEffect',
 	#instVars : [
 		'level',
@@ -19,22 +19,26 @@ Class {
 }
 
 { #category : 'converting' }
-Wah >> asBox [
+PhWah >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self fr asBox, self input asBox connectTo: intermediateBox.
-	^ finalBox
+	^ fr asBox , self input asBox connectTo: self code asBox
 ]
 
-{ #category : 'as yet unclassified' }
-Wah >> fr [
+{ #category : 'accessing' }
+PhWah >> fr [
 
 	^ fr
 ]
 
+{ #category : 'accessing' }
+PhWah >> fr: aNumberOrABoxOrASymbol [
+
+<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
-Wah >> initialize [
+PhWah >> initialize [
 
 	super initialize.
 	processExpression := 'process = ve.wah4;'.

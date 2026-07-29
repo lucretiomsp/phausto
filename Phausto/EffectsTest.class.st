@@ -188,6 +188,18 @@ EffectsTest >> testPhTranssposeDsp [
 ]
 
 { #category : 'tests' }
+EffectsTest >> testPhWahAsDsp [
+
+	self deny:  PhWah new asDsp isNull 
+]
+
+{ #category : 'tests' }
+EffectsTest >> testPhWavefoldAsDsp [
+
+	self deny:  PhWavefold new asDsp isNull 
+]
+
+{ #category : 'tests' }
 EffectsTest >> testPhaser2DemoAsDsp [
 
 	self deny: Phaser2_Demo new asDsp isNull 
@@ -289,18 +301,6 @@ EffectsTest >> testVocoderDemoAsDsp [
 EffectsTest >> testWah4DemoAsDsp [
 
 	self deny:  Wah4_Demo new asDsp isNull 
-]
-
-{ #category : 'tests' }
-EffectsTest >> testWahAsDsp [
-
-	self deny:  Wah new asDsp isNull 
-]
-
-{ #category : 'tests' }
-EffectsTest >> testWavefoldAsDsp [
-
-	self deny:  Wavefold new asDsp isNull 
 ]
 
 { #category : 'tests' }

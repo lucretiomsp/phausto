@@ -4,6 +4,8 @@ Clip the value of the input signal between min and max
 Class {
 	#name : 'PhClip',
 	#superclass : 'Saturators',
+	#traits : 'PhMaxMinSetter',
+	#classTraits : 'PhMaxMinSetter classTrait',
 	#instVars : [
 		'min',
 		'max'
@@ -16,40 +18,37 @@ Class {
 { #category : 'converting' }
 PhClip >> asBox [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self min  asBox, self max asBox , self input asBox connectTo:
-		            intermediateBox.
-	^ finalBox
+	^  self min asBox , self max asBox , self input asBox
+		            connectTo: self code asBox
 ]
 
 { #category : 'initialization' }
 PhClip >> initialize [
 
 	super initialize.
-	processExpression :='process = aa.clip;'.
-	
-	
+	processExpression := 'process = aa.clip;'.
+	max := PhHSlider new
+		       label: self label , 'Max'
+		       init: 1
+		       min: -1
+		       max: 1
+		       step: 0.001.
+	min := PhHSlider new
+				  label: self label , 'Min'
+				  init: -1
+				  min: -1
+				  max: 1
+				  step: 0.001 
 ]
 
 { #category : 'accessing' }
 PhClip >> max [
 
-	^ max ifNil: [   PhHSlider new
-		        label: self label , 'Max'
-		        init: 1
-		        min: -1
-		        max: 1
-		        step: 0.001 ]
+	^ max 
 ]
 
 { #category : 'accessing' }
 PhClip >> min [
 
-	^ min ifNil: [   PhHSlider new
-		        label: self label , 'Min'
-		        init: -1
-		        min: -1
-		        max: 1
-		        step: 0.001 ]
+	^ min 
 ]
