@@ -43,6 +43,43 @@ BaselineOfPhausto >> copyARM64LibrariesFrom: repoDirectory [
 ]
 
 { #category : 'utilities' }
+BaselineOfPhausto >> copyAllResources [
+	"Fetch the phausto-resources release zip and fan out its folders next to the image."
+
+	| imageDir tmp zip extracted |
+	imageDir := FileLocator imageDirectory asFileReference.
+	"Skip if already fetched."
+	(imageDir / 'librariesBundle') exists ifTrue: [ ^ self ].
+
+	[ tmp := FileLocator temp asFileReference.
+	  zip := tmp / 'phausto-resources.zip'.
+	  ZnClient new
+		url: 'https://github.com/lucretiomsp/phausto-resources/releases/download/resources/phausto-resources.zip';
+		downloadTo: zip.
+
+	  extracted := tmp / 'phausto-resources-extracted'.
+	  extracted exists ifTrue: [ extracted deleteAll ].
+	  ZipArchive new
+		readFrom: zip;
+		extractAllTo: extracted.
+
+	  "Fan out — move each folder to its destination."
+	  #( 'librariesBundle' 'TurboSamples' 'architectures' ) do: [ :folder |
+		| src dst |
+		src := extracted / folder.
+		dst := imageDir / folder.
+		src exists ifTrue: [
+			dst exists ifTrue: [ dst deleteAll ].
+			src copyAllTo: dst ] ].
+
+	  zip delete.
+	  extracted deleteAll ]
+		on: Error
+		do: [ :e | self warnCopyFailed  ]
+
+]
+
+{ #category : 'utilities' }
 BaselineOfPhausto >> copyLibraries [
 	"Copy the libraries from the Phausto Git directory to the image directory."
 
