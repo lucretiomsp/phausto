@@ -433,8 +433,6 @@ void ' , aPluginType
   fUI = std::make_unique<MapUI>();
   fDSP->buildUserInterface(fUI.get());
   // Allocate buffers
-  inputBuffer.setSize(2, samplesPerBlock);
-  outputBuffer.setSize(2, samplesPerBlock);
 }
 
 void ' , aPluginType , 'AudioProcessor::releaseResources()

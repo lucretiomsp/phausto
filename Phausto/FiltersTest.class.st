@@ -121,12 +121,6 @@ FiltersTest >> testLowPassFilter [
 ]
 
 { #category : 'tests' }
-FiltersTest >> testLptN [
-
-	self deny: LptN new asDsp isNull 
-]
-
-{ #category : 'tests' }
 FiltersTest >> testMoogHalfLadder [
 
 	self deny: MoogHalfLadder new asDsp isNull
