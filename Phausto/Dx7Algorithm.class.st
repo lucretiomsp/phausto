@@ -29,7 +29,8 @@ Dx7Algorithm >> asBox [
 Dx7Algorithm >> initialize [
 
 	super initialize.
+	numberOfOutputs := 2.
 	algorithm := 1 asString.
-	importStatement := 'dx = library("dx7/dx7.lib");'.
+	importStatement := 'dx = library("dx7.lib");'.
 	processExpression := 'process = dx.algorithm(' , algorithm , ');'
 ]

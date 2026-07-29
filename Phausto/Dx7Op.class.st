@@ -87,7 +87,7 @@ Dx7Op >> ampModSens: aNumberOrABoxOrASymbol [
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'initialization' }
+{ #category : 'converting' }
 Dx7Op >> asBox [
 ^ self mode , self freqCoarse , self freqFine , self detune
 	   , self outLevel

@@ -88,7 +88,7 @@ Dx7Algo >> ampModSensitivities: aPhListCountingfromZero [
 	ampModSensitivities := aPhListCountingfromZero
 ]
 
-{ #category : 'initialization' }
+{ #category : 'converting' }
 Dx7Algo >> asBox [
 
 	| interBox finalBox algN egR1 egR2 egR3 egR4 egL1 egL2 egL3 egL4 outLev keyVel ampMod opMode opFreqs opRateScl fb lfoDel lfoDep lfoSp opDetune fr g gt |
