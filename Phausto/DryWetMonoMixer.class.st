@@ -15,6 +15,8 @@ Unit Generator => DryWetMixer new fx: anEffect new.
 Class {
 	#name : 'DryWetMonoMixer',
 	#superclass : 'UnitGenerator',
+	#traits : 'PhWetAmountSetter + PhInputSetter',
+	#classTraits : 'PhWetAmountSetter classTrait + PhInputSetter classTrait',
 	#instVars : [
 		'input',
 		'fx',

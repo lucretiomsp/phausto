@@ -14,6 +14,12 @@ Class {
 	#tag : 'Effects'
 }
 
+{ #category : 'accessing' }
+Reverbs >> damp: aNumberOrABoxOrASymbol [
+
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
 Reverbs >> initialize [
 
