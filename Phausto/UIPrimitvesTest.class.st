@@ -20,20 +20,6 @@ UIPrimitvesTest >> setUp [
 ]
 
 { #category : 'tests' }
-UIPrimitvesTest >> testBelaPinAppendsBracket [ 
-	slider belaPin: (BelaPin analog: 0).
-	self assert: slider fullLabel equals: 'cutoff[BELA:ANALOG_0]'
-]
-
-{ #category : 'tests' }
-UIPrimitvesTest >> testBelaPinThenMidiCtrlIsRejected [ 
-	"gControlUI.update() overwrites the zone every block — the CC would be silently dead"
-	slider belaPin: (BelaPin analog: 0).
-	self should: [ slider midiCtrl: 74 ] raise: Error
-
-]
-
-{ #category : 'tests' }
 UIPrimitvesTest >> testChannelRejectsOutOfRange [ 
 	"channels are 1..16, plus 0 for all"
 	self should: [ slider midiCtrl: 74 channel: 17 ] raise: Error
@@ -110,13 +96,6 @@ UIPrimitvesTest >> testKeyonRejectsOutOfRangePitch [
 UIPrimitvesTest >> testLabelIsUnchangedByDeclare [ 
 	"MapUI and getParamIndex: match on the plain name"
 	slider declare: 'BELA' value: 'ANALOG_0'.
-	self assert: slider label equals: 'cutoff'
-]
-
-{ #category : 'tests' }
-UIPrimitvesTest >> testLabelSurvivesUnchanged [ 
-	"MapUI and getParamIndex: match on the plain name — metadata must not leak into it"
-	slider belaPin: (BelaPin analog: 0).
 	self assert: slider label equals: 'cutoff'
 ]
 

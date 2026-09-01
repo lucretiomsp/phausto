@@ -106,11 +106,12 @@ UIPrimitive >> initialize [
 
 	super initialize.
 	label := 'label'.
+	metadata := OrderedDictionary new .
 
 	min := 0.
 	max := 1.
 	init := 0.
-	step := 1.
+	step := 1
 ]
 
 { #category : 'accessing' }
@@ -135,6 +136,46 @@ UIPrimitive >> max [
 UIPrimitive >> max: aNumber [
 
 	max := aNumber 
+]
+
+{ #category : 'accessing' }
+UIPrimitive >> metadata [
+
+	^ metadata 
+]
+
+{ #category : 'metadata' }
+UIPrimitive >> midiCtrl: aNumber [
+
+		(aNumber between: 0 and: 127) ifFalse: [
+		^ Error signal: 'MIDI controller number must be 0..127' ].
+	^ self declare: 'midi' value: 'ctrl ' , aNumber asString
+]
+
+{ #category : 'metadata' }
+UIPrimitive >> midiCtrl: aNumber channel: aChannel [ 
+
+	(aNumber between: 0 and: 127) ifFalse: [
+		^ Error signal: 'MIDI controller number must be 0..127' ].
+	(aChannel between: 0 and: 16) ifFalse: [
+		^ Error signal: 'MIDI channel must be 1..16, or 0 for all channels' ].
+	^ self
+		  declare: 'midi'
+		  value: 'ctrl ' , aNumber asString , ' ' , aChannel asString
+]
+
+{ #category : 'metadata' }
+UIPrimitive >> midiKeyon: aPitch [ 
+
+	(aPitch between: 0 and: 127) ifFalse: [
+		^ Error signal: 'MIDI key must be 0..127' ].
+	^ self declare: 'midi' value: 'keyon ' , aPitch asString
+]
+
+{ #category : 'metadata' }
+UIPrimitive >> midiPitchwheel [ 
+
+	^ self declare: 'midi' value: 'pitchwheel'
 ]
 
 { #category : 'accessing' }
