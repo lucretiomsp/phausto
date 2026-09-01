@@ -14,7 +14,8 @@ Class {
 		'min',
 		'max',
 		'step',
-		'widgetType'
+		'widgetType',
+		'metadata'
 	],
 	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
@@ -68,6 +69,25 @@ UIPrimitive >> asDsp [
 UIPrimitive >> asParam: aString forUGen: aUGen [
 
 	aUGen instVarNamed: aString put: self
+]
+
+{ #category : 'metadata' }
+UIPrimitive >> belaPin: aBelaPin [
+	^ self declare: 'BELA' value: aBelaPin faustName
+]
+
+{ #category : 'metadata' }
+UIPrimitive >> declare: aKey value: aValue [
+	self metadata at: aKey put: aValue
+
+]
+
+{ #category : 'accessing' }
+UIPrimitive >> fullLabel [
+	^ String streamContents: [ :s |
+		s << self label.
+		self metadata keysAndValuesDo: [ :k :v |
+			s << '[' << k << ':' << v << ']' ] ]
 ]
 
 { #category : 'accessing' }
