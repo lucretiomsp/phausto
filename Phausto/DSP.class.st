@@ -351,6 +351,89 @@ namespace PhaustoParams
 '; lf ]
 ]
 
+{ #category : 'exporting - apvts' }
+DSP >> asPluginProcessorCppAPVTSFor: aPluginType [ 
+	"The generated PluginProcessor.cpp. Table-driven: static except for the
+	 class name, since every per-parameter detail lives in PhaustoParams.h."
+
+	| proc |
+	proc := aPluginType , 'AudioProcessor'.
+	^ '#include "PluginProcessor.h"
+#include "PluginEditor.h"
+#include "faust/gui/MapUI.h"
+
+juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParameterLayout()
+{
+    return PhaustoParams::createLayout();
+}
+
+' , proc , '::' , proc , '()
+    : AudioProcessor (BusesProperties()
+                          .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
+                          .withOutput ("Output", juce::AudioChannelSet::stereo(), true)),
+      apvts (*this, nullptr, "PARAMETERS", createParameterLayout())
+{
+    fUI = std::make_unique<MapUI>();
+    fDSP.buildUserInterface (fUI.get());
+
+    for (int i = 0; i < PhaustoParams::count; ++i)
+    {
+        raw[i] = apvts.getRawParameterValue (PhaustoParams::table[i].id);
+        jassert (raw[i] != nullptr);
+    }
+}
+
+' , proc , '::~' , proc , '() = default;
+
+bool ' , proc , '::faustHasPath (const char* path) const
+{
+    return fUI != nullptr && fUI->getParamIndex (path) >= 0;
+}
+
+void ' , proc , '::prepareToPlay (double sampleRate, int)
+{
+    fDSP.init ((int) sampleRate);
+}
+
+void ' , proc , '::pushParameters()
+{
+    for (int i = 0; i < PhaustoParams::count; ++i)
+        if (raw[i] != nullptr)
+            fUI->setParamValue (PhaustoParams::table[i].faustPath, raw[i]->load());
+}
+
+void ' , proc , '::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
+{
+    juce::ScopedNoDenormals noDenormals;
+    pushParameters();
+
+    float* chans[2] = { buffer.getWritePointer (0),
+                        buffer.getNumChannels() > 1 ? buffer.getWritePointer (1)
+                                                    : buffer.getWritePointer (0) };
+    fDSP.compute (buffer.getNumSamples(), chans, chans);
+}
+
+juce::AudioProcessorEditor* ' , proc , '::createEditor()
+{
+    return new ' , proc , 'Editor (*this);
+}
+
+void ' , proc , '::getStateInformation (juce::MemoryBlock& destData)
+{
+    if (auto xml = apvts.copyState().createXml()) copyXmlToBinary (*xml, destData);
+}
+
+void ' , proc , '::setStateInformation (const void* data, int size)
+{
+    if (auto xml = getXmlFromBinary (data, size))
+        apvts.replaceState (juce::ValueTree::fromXml (*xml));
+}
+
+juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc , '(); }
+'
+
+]
+
 { #category : 'converting' }
 DSP >> asPluginProcessorCppFor: aPluginType [
 	"aPluginTYpe can be 'Effect' . 'MonoSynth or 'PolySynth' "
