@@ -37,80 +37,6 @@ Class {
 	#tag : 'DSP'
 }
 
-{ #category : 'exporting - apvts' }
-DSP class >> apvtsEditorSetupBodyFor: aCollectionOfParameters [
-	"Editor constructor body: one control + APVTS attachment + name label per DSPParameter.
-	 Continuous params get a Slider/SliderAttachment, button & checkbox get a ToggleButton/ButtonAttachment."
-
-	^ String streamContents: [ :s |
-		aCollectionOfParameters do: [ :p |
-			(#( 'button' 'checkbox' ) includes: p type)
-				ifTrue: [ s
-					nextPutAll: '    {'; lf;
-					nextPutAll: '        auto* tb = new juce::ToggleButton ();'; lf;
-					nextPutAll: '        addAndMakeVisible (tb);'; lf;
-					nextPutAll: '        buttonAttachments.add (new juce::AudioProcessorValueTreeState::ButtonAttachment (audioProcessor.apvts, "';
-					nextPutAll: p shortName; nextPutAll: '", *tb));'; lf;
-					nextPutAll: '        labels.add (new juce::Label ({}, "'; nextPutAll: p label; nextPutAll: '"));'; lf;
-					nextPutAll: '        addAndMakeVisible (labels.getLast());'; lf;
-					nextPutAll: '        labels.getLast()->setJustificationType (juce::Justification::centredRight);'; lf;
-					nextPutAll: '        controls.add (tb);'; lf;
-					nextPutAll: '    }'; lf ]
-				ifFalse: [ s
-					nextPutAll: '    {'; lf;
-					nextPutAll: '        auto* sl = new juce::Slider (juce::Slider::RotaryHorizontalVerticalDrag, juce::Slider::TextBoxBelow);'; lf;
-					nextPutAll: '        addAndMakeVisible (sl);'; lf;
-					nextPutAll: '        sliderAttachments.add (new juce::AudioProcessorValueTreeState::SliderAttachment (audioProcessor.apvts, "';
-					nextPutAll: p shortName; nextPutAll: '", *sl));'; lf;
-					nextPutAll: '        labels.add (new juce::Label ({}, "'; nextPutAll: p label; nextPutAll: '"));'; lf;
-					nextPutAll: '        addAndMakeVisible (labels.getLast());'; lf;
-					nextPutAll: '        labels.getLast()->setJustificationType (juce::Justification::centredRight);'; lf;
-					nextPutAll: '        controls.add (sl);'; lf;
-					nextPutAll: '    }'; lf ] ] ]
-]
-
-{ #category : 'exporting - apvts' }
-DSP class >> apvtsLayoutBodyFor: aCollectionOfParameters [
-	"C++ body of createParameterLayout(): one RangedAudioParameter per DSPParameter.
-	 Floats for sliders/nentries, bools for buttons/checkboxes."
-
-	^ String streamContents: [ :s |
-		aCollectionOfParameters do: [ :p |
-			(#( 'button' 'checkbox' ) includes: p type)
-				ifTrue: [ s
-					nextPutAll: '    layout.add (std::make_unique<juce::AudioParameterBool> (juce::ParameterID { "';
-					nextPutAll: p shortName; nextPutAll: '", 1 }, "';
-					nextPutAll: p label; nextPutAll: '", false));'; lf ]
-				ifFalse: [ s
-					nextPutAll: '    layout.add (std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { "';
-					nextPutAll: p shortName; nextPutAll: '", 1 }, "';
-					nextPutAll: p label; nextPutAll: '", juce::NormalisableRange<float> (';
-					nextPutAll: (self cppFloat: p minValue); nextPutAll: ', ';
-					nextPutAll: (self cppFloat: p maxValue); nextPutAll: ', ';
-					nextPutAll: (self cppFloat: p stepValue); nextPutAll: '), ';
-					nextPutAll: (self cppFloat: p initValue); nextPutAll: '));'; lf ] ] ]
-]
-
-{ #category : 'exporting - apvts' }
-DSP class >> apvtsPushBodyFor: aCollectionOfParameters [
-	"C++ lines pushing APVTS values into the Faust DSP by address, via MapUI."
-
-	^ String streamContents: [ :s |
-		aCollectionOfParameters do: [ :p |
-			s nextPutAll: '    fUI->setParamValue ("'; nextPutAll: p address;
-			  nextPutAll: '", apvts.getRawParameterValue ("'; nextPutAll: p shortName;
-			  nextPutAll: '")->load());'; lf ] ]
-]
-
-{ #category : 'exporting - apvts' }
-DSP class >> cppFloat: aNumber [
-	"Format a Faust JSON number as a C++ float literal (1 -> 1.0f, 0.3 -> 0.3f)."
-
-	^ aNumber isInteger
-		ifTrue: [ aNumber printString , '.0f' ]
-		ifFalse: [ aNumber printString , 'f' ]
-]
-
 { #category : 'instance creation' }
 DSP class >> create: aStringWithFaustCode [
 	"create a new dsp from a string with valid Faust code"
@@ -254,18 +180,44 @@ DSP >> apvtsCollectInto: aCollection from: aSequence [
 
 { #category : 'exporting - apvts' }
 DSP >> apvtsControls [
-	"Flatten getJSON into one descriptor per leaf control (recurses through groups)."
+	^ self apvtsControlsFrom: self getJSON
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> apvtsControlsFrom: aJsonString [
+"Flatten a Faust UI JSON string into one dictionary per leaf control. Seam for testing: no FFI, no initialized DSP."
+
 	| controls |
 	controls := OrderedCollection new.
-	self apvtsCollectInto: controls from: ((STONJSON fromString: self getJSON) at: #ui).
+	self apvtsCollectInto: controls from: ((STONJSON fromString: aJsonString) at: #ui).
 	^ controls
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> apvtsLayoutBody [
-	"C++ body of createParameterLayout(): one RangedAudioParameter per control."
+DSP >> apvtsDescriptorRowFor: aControl [
+	"One Descriptor row. Field order must match the struct in asPhaustoParamsHeader."
+
+	| toggle |
+	toggle := #( 'button' 'checkbox' ) includes: (aControl at: #type).
 	^ String streamContents: [ :s |
-		self apvtsControls do: [ :c |
+		s nextPutAll: '        { "'; nextPutAll: (aControl at: #shortname);
+		  nextPutAll: '", "'; nextPutAll: (aControl at: #address);
+		  nextPutAll: '", "'; nextPutAll: (aControl at: #label);
+		  nextPutAll: '", ';
+		  nextPutAll: (self cppFloatAt: #min in: aControl default: 0); nextPutAll: ', ';
+		  nextPutAll: (self cppFloatAt: #max in: aControl default: 1); nextPutAll: ', ';
+		  nextPutAll: (self cppFloatAt: #init in: aControl default: 0); nextPutAll: ', ';
+		  nextPutAll: (self cppFloatAt: #step in: aControl default: 0.01); nextPutAll: ', ';
+		  nextPutAll: (toggle ifTrue: [ 'true' ] ifFalse: [ 'false' ]);
+		  nextPutAll: ' },' ]
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> apvtsLayoutBodyFrom: aJsonString [
+	"C++ body of createParameterLayout(): one RangedAudioParameter per control."
+
+	^ String streamContents: [ :s |
+		(self apvtsParameterControlsFrom: aJsonString) do: [ :c |
 			(#( 'button' 'checkbox' ) includes: (c at: #type))
 				ifTrue: [ s
 					nextPutAll: '    layout.add (std::make_unique<juce::AudioParameterBool> (juce::ParameterID { "';
@@ -275,26 +227,40 @@ DSP >> apvtsLayoutBody [
 					nextPutAll: '    layout.add (std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { "';
 					nextPutAll: (c at: #shortname); nextPutAll: '", 1 }, "';
 					nextPutAll: (c at: #label); nextPutAll: '", juce::NormalisableRange<float> (';
-					nextPutAll: (self cppFloat: (c at: #min)); nextPutAll: ', ';
-					nextPutAll: (self cppFloat: (c at: #max)); nextPutAll: ', ';
-					nextPutAll: (self cppFloat: (c at: #step)); nextPutAll: '), ';
-					nextPutAll: (self cppFloat: (c at: #init)); nextPutAll: '));'; lf ] ] ]
-
+					nextPutAll: (self cppFloatAt: #min in: c default: 0); nextPutAll: ', ';
+					nextPutAll: (self cppFloatAt: #max in: c default: 1); nextPutAll: ', ';
+					nextPutAll: (self cppFloatAt: #step in: c default: 0.01); nextPutAll: '), ';
+					nextPutAll: (self cppFloatAt: #init in: c default: 0); nextPutAll: '));'; lf ] ] ]
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> apvtsParameters [
-	"DSPParameters for this DSP, sorted by shortName so the generated files are stable."
-
-	^ self parameterStore parameters values
-		asSortedCollection: [ :a :b | a shortName < b shortName ]
+DSP >> apvtsParameterControls [
+	^ self apvtsParameterControlsFrom: self getJSON
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> apvtsPushBody [
+DSP >> apvtsParameterControlsFrom: aJsonString [
+"Leaf controls that become RangedAudioParameters. Bargraphs are outputs and soundfiles are not controls, so both are rejected. Sorted by address so the emitted table is byte-stable across runs. Signals on duplicate shortnames: APVTS keeps only the first, and every later lookup would silently miss."
+
+	| kept names |
+	kept := (self apvtsControlsFrom: aJsonString) reject: [ :c |
+		        #( 'hbargraph' 'vbargraph' 'soundfile' ) includes:
+			        (c at: #type ifAbsent: [ '' ]) ].
+	kept := (kept asSortedCollection: [ :a :b | (a at: #address) <= (b at: #address) ])
+		        asArray.
+	names := (kept collect: [ :c | c at: #shortname ]) asSet.
+	names size = kept size ifFalse: [
+		self error: 'Duplicate APVTS shortnames in ' , self name
+			, ' — the descriptor table would contain unreachable ids' ].
+	^ kept
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> apvtsPushBodyFrom: aJsonString [
 	"C++ lines pushing APVTS values into the Faust DSP by address, via MapUI."
+
 	^ String streamContents: [ :s |
-		self apvtsControls do: [ :c |
+		(self apvtsParameterControlsFrom: aJsonString) do: [ :c |
 			s nextPutAll: '    fUI->setParamValue ("'; nextPutAll: (c at: #address);
 			  nextPutAll: '", apvts.getRawParameterValue ("'; nextPutAll: (c at: #shortname);
 			  nextPutAll: '")->load());'; lf ] ]
@@ -316,6 +282,57 @@ DSP >> asCmajorPolyWrapperFor: aName [
 		nextPutAll:
 			(self getUIItemsLabeledDictionary asCmajorPolyWrapperFor: aName);
 		close
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> asPhaustoParamsHeader [
+	^ self asPhaustoParamsHeaderFrom: self getJSON
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> asPhaustoParamsHeaderFrom: aJsonString [
+	"The single source of truth for the generated plugin: layout, push loop and
+	 editor all iterate this table, so they cannot diverge."
+
+	^ String streamContents: [ :s |
+		s nextPutAll: '#pragma once
+// Generated by Phausto from the Faust DSP JSON. Do not edit.
+#include <JuceHeader.h>
+
+namespace PhaustoParams
+{
+    struct Descriptor {
+        const char* id;
+        const char* faustPath;
+        const char* label;
+        float min, max, def, step;
+        bool isToggle;
+    };
+
+    static const Descriptor table[] = {'; lf.
+		(self apvtsParameterControlsFrom: aJsonString) do: [ :c |
+			s nextPutAll: (self apvtsDescriptorRowFor: c); lf ].
+		s nextPutAll: '    };
+
+    static constexpr int count = (int) (sizeof (table) / sizeof (Descriptor));
+
+    inline juce::AudioProcessorValueTreeState::ParameterLayout createLayout()
+    {
+        juce::AudioProcessorValueTreeState::ParameterLayout layout;
+        for (auto& d : table)
+        {
+            if (d.isToggle)
+                layout.add (std::make_unique<juce::AudioParameterBool> (
+                    juce::ParameterID { d.id, 1 }, d.label, d.def > 0.5f));
+            else
+                layout.add (std::make_unique<juce::AudioParameterFloat> (
+                    juce::ParameterID { d.id, 1 }, d.label,
+                    juce::NormalisableRange<float> (d.min, d.max, d.step), d.def));
+        }
+        return layout;
+    }
+}
+'; lf ]
 ]
 
 { #category : 'converting' }
@@ -764,6 +781,13 @@ DSP >> cppFloat: aNumber [
 		ifFalse: [ aNumber printString , 'f' ]
 ]
 
+{ #category : 'exporting - apvts' }
+DSP >> cppFloatAt: aKey in: aControl default: aNumber [
+	"Faust JSON omits min/max/init/step on buttons and checkboxes."
+
+	^ self cppFloat: (aControl at: aKey ifAbsent: [ aNumber ])
+]
+
 { #category : 'exporting' }
 DSP >> createBelaCppFileNamed: aName [
 	.
@@ -929,18 +953,18 @@ DSP >> createCmajorPatchNamed: aName [
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [
+DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [ 
 	| folder stream proc |
 	proc := aPluginType , 'AudioProcessor'.
 	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source') ensureCreateDirectory.
 	stream := (folder / 'PluginProcessor.cpp') writeStream.
 	stream nextPutAll: '#include "PluginProcessor.h"
+#include "PluginEditor.h"
 #include "faust/gui/MapUI.h"
 
 juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParameterLayout()
 {
-    juce::AudioProcessorValueTreeState::ParameterLayout layout;
-' , self apvtsLayoutBody , '    return layout;
+    return PhaustoParams::createLayout();
 }
 
 ' , proc , '::' , proc , '()
@@ -951,20 +975,41 @@ juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParamete
 {
     fUI = std::make_unique<MapUI>();
     fDSP.buildUserInterface (fUI.get());
+
+    for (int i = 0; i < PhaustoParams::count; ++i)
+    {
+        raw[i] = apvts.getRawParameterValue (PhaustoParams::table[i].id);
+        // Null means the id in the table has no matching parameter in the layout.
+        // Both come from the same descriptor, so this can only fire on a malformed id.
+        jassert (raw[i] != nullptr);
+    }
 }
 
 ' , proc , '::~' , proc , '() = default;
 
-void ' , proc , '::prepareToPlay (double sampleRate, int) { fDSP.init ((int) sampleRate); }
+bool ' , proc , '::faustHasPath (const char* path) const
+{
+    return fUI != nullptr && fUI->getParamIndex (path) >= 0;
+}
+
+void ' , proc , '::prepareToPlay (double sampleRate, int)
+{
+    fDSP.init ((int) sampleRate);
+}
 
 void ' , proc , '::pushParameters()
 {
-' , self apvtsPushBody , '}
+    for (int i = 0; i < PhaustoParams::count; ++i)
+        if (raw[i] != nullptr)
+            fUI->setParamValue (PhaustoParams::table[i].faustPath, raw[i]->load());
+}
 
 void ' , proc , '::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
 {
     juce::ScopedNoDenormals noDenormals;
     pushParameters();
+
+    juce::ScopedNoDenormals denormalGuard;
     float* chans[2] = { buffer.getWritePointer (0),
                         buffer.getNumChannels() > 1 ? buffer.getWritePointer (1)
                                                     : buffer.getWritePointer (0) };
@@ -973,7 +1018,7 @@ void ' , proc , '::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuf
 
 juce::AudioProcessorEditor* ' , proc , '::createEditor()
 {
-    return new juce::GenericAudioProcessorEditor (*this);
+    return new ' , proc , 'Editor (*this);
 }
 
 void ' , proc , '::getStateInformation (juce::MemoryBlock& destData)
@@ -990,6 +1035,7 @@ void ' , proc , '::setStateInformation (const void* data, int size)
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc , '(); }
 '.
 	stream close
+
 ]
 
 { #category : 'exporting - apvts' }
@@ -1127,9 +1173,11 @@ DSP >> createFileNamed: aString [
 
 { #category : 'exporting - apvts' }
 DSP >> createHeaderAPVTSFilesNamed: aString for: aPluginType [
+
 	| folder stream proc |
 	proc := aPluginType , 'AudioProcessor'.
-	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source') ensureCreateDirectory.
+	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source')
+		          ensureCreateDirectory.
 	stream := (folder / 'PluginProcessor.h') writeStream.
 	stream nextPutAll: '#pragma once
 #include <JuceHeader.h>
@@ -1351,6 +1399,15 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
 	stream := destination writeStream.
 	stream nextPutAll: code.
 	stream close
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> createPhaustoParamsHeaderNamed: aString [
+	| folder stream |
+	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source')
+		          ensureCreateDirectory.
+	stream := (folder / 'PhaustoParams.h') writeStream.
+	[ stream nextPutAll: self asPhaustoParamsHeader ] ensure: [ stream close ]
 ]
 
 { #category : 'exporting' }
