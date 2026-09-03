@@ -146,6 +146,20 @@ process = _ * hslider("say \\"hi\\"", 0.5, 0, 1, 0.01);'
 ]
 
 { #category : 'tests' }
+PhJuceAPVTSExportTest >> testLabelWithQuoteSignals [ 
+	"If Faust rejects the escaped label at parse time this never reaches the
+	 gatekeeper, the guard is unreachable, and both can be dropped."
+
+	self
+		should: [
+			self
+				withDsp: 'import("stdfaust.lib");
+process = _ * hslider("say \\"hi\\"", 0.5, 0, 1, 0.01);'
+				do: [ :d | d apvtsParameterControls ] ]
+		raise: Error
+]
+
+{ #category : 'tests' }
 PhJuceAPVTSExportTest >> testOrderIsByAddress [ 
 
 	self
