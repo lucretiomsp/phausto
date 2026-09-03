@@ -240,19 +240,35 @@ DSP >> apvtsParameterControls [
 
 { #category : 'exporting - apvts' }
 DSP >> apvtsParameterControlsFrom: aJsonString [
-"Leaf controls that become RangedAudioParameters. Bargraphs are outputs and soundfiles are not controls, so both are rejected. Sorted by address so the emitted table is byte-stable across runs. Signals on duplicate shortnames: APVTS keeps only the first, and every later lookup would silently miss."
 
-	| kept names |
-	kept := (self apvtsControlsFrom: aJsonString) reject: [ :c |
-		        #( 'hbargraph' 'vbargraph' 'soundfile' ) includes:
-			        (c at: #type ifAbsent: [ '' ]) ].
-	kept := (kept asSortedCollection: [ :a :b | (a at: #address) <= (b at: #address) ])
-		        asArray.
-	names := (kept collect: [ :c | c at: #shortname ]) asSet.
-	names size = kept size ifFalse: [
-		self error: 'Duplicate APVTS shortnames in ' , self name
-			, ' — the descriptor table would contain unreachable ids' ].
-	^ kept
+"Leaf controls that become RangedAudioParameters. Bargraphs are outputs and soundfiles are not controls, so both are rejected. Sorted by address so the emitted table is byte-stable across runs. Signals on duplicate shortnames:
+
+APVTS keeps only the first, and every later lookup would silently miss.
+Signals on labels that would break the generated C++ string literal."
+		| kept names offender |
+		kept := (self apvtsControlsFrom: aJsonString) reject: [ :c |
+				        #( 'hbargraph' 'vbargraph' 'soundfile' ) includes:
+					        (c at: #type ifAbsent: [ '' ]) ].
+		kept := (kept asSortedCollection: [ :a :b |
+			         (a at: #address) <= (b at: #address) ]) asArray.
+
+		names := (kept collect: [ :c | c at: #shortname ]) asSet.
+		names size = kept size ifFalse: [
+				self error: 'Duplicate APVTS shortnames in ' , self name
+					, ': the descriptor table would contain unreachable ids' ].
+
+		"Labels land inside a C++ string literal in PhaustoParams.h. Phausto-generated
+	 labels are safe by construction, but a hand-written Faust source could carry
+	 a quote or backslash. Assert rather than escape: if this never fires, escaping
+	 was never needed; if it does, there is a real case to build against."
+		offender := kept
+			            detect: [ :c | (c at: #label) includesAnyOf: '"\' ]
+			            ifNone: [ nil ].
+		offender ifNotNil: [
+				self error:
+					'Label breaks the C++ string literal: ' , (offender at: #label) ].
+
+		^ kept 
 ]
 
 { #category : 'exporting - apvts' }
