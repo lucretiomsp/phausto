@@ -352,6 +352,69 @@ namespace PhaustoParams
 ]
 
 { #category : 'exporting - apvts' }
+DSP >> asPluginEditorCppAPVTSFor: aPluginType [
+"The generated PluginEditor.cpp. Iterates PhaustoParams::table, so the attachments cannot diverge from the layout that created the parameters."
+
+	| proc editor |
+	proc := aPluginType , 'AudioProcessor'.
+	editor := proc , 'Editor'.
+	^ '#include "PluginProcessor.h"
+#include "PluginEditor.h"
+
+' , editor , '::' , editor , ' (' , proc , '& p)
+    : AudioProcessorEditor (&p), audioProcessor (p)
+{
+    for (auto& d : PhaustoParams::table)
+    {
+        if (d.isToggle)
+        {
+            auto* tb = new juce::ToggleButton ();
+            addAndMakeVisible (tb);
+            buttonAttachments.add (new juce::AudioProcessorValueTreeState::ButtonAttachment (
+                audioProcessor.apvts, d.id, *tb));
+            controls.add (tb);
+        }
+        else
+        {
+            auto* sl = new juce::Slider (juce::Slider::RotaryHorizontalVerticalDrag,
+                                         juce::Slider::TextBoxBelow);
+            addAndMakeVisible (sl);
+            sliderAttachments.add (new juce::AudioProcessorValueTreeState::SliderAttachment (
+                audioProcessor.apvts, d.id, *sl));
+            controls.add (sl);
+        }
+
+        labels.add (new juce::Label ({}, d.label));
+        addAndMakeVisible (labels.getLast());
+        labels.getLast()->setJustificationType (juce::Justification::centredRight);
+    }
+
+    setSize (380, juce::jmax (1, controls.size()) * 64 + 24);
+}
+
+' , editor , '::~' , editor , '() {}
+
+void ' , editor , '::paint (juce::Graphics& g)
+{
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+}
+
+void ' , editor , '::resized()
+{
+    auto area = getLocalBounds().reduced (12);
+    const int rowH = 64;
+    for (int i = 0; i < controls.size(); ++i)
+    {
+        auto row = area.removeFromTop (rowH);
+        labels[i]->setBounds (row.removeFromLeft (150));
+        controls[i]->setBounds (row.reduced (4));
+    }
+}
+'
+
+]
+
+{ #category : 'exporting - apvts' }
 DSP >> asPluginProcessorCppAPVTSFor: aPluginType [ 
 	"The generated PluginProcessor.cpp. Table-driven: static except for the
 	 class name, since every per-parameter detail lives in PhaustoParams.h."
@@ -1139,40 +1202,13 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc ,
 
 { #category : 'exporting - apvts' }
 DSP >> createCppEditorAPVTSFilesNamed: aString for: aPluginType [
-	| folder stream proc editor |
-	proc := aPluginType , 'AudioProcessor'.
-	editor := proc , 'Editor'.
-	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source') ensureCreateDirectory.
+
+	| folder stream |
+	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source')
+		          ensureCreateDirectory.
 	stream := (folder / 'PluginEditor.cpp') writeStream.
-	stream nextPutAll: '#include "PluginProcessor.h"
-#include "PluginEditor.h"
-
-' , editor , '::' , editor , ' (' , proc , '& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
-{
-' , (self class apvtsEditorSetupBodyFor: self apvtsParameters) , '    setSize (380, juce::jmax (1, controls.size()) * 64 + 24);
-}
-
-' , editor , '::~' , editor , '() {}
-
-void ' , editor , '::paint (juce::Graphics& g)
-{
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-}
-
-void ' , editor , '::resized()
-{
-    auto area = getLocalBounds().reduced (12);
-    const int rowH = 64;
-    for (int i = 0; i < controls.size(); ++i)
-    {
-        auto row = area.removeFromTop (rowH);
-        labels[i]->setBounds (row.removeFromLeft (150));
-        controls[i]->setBounds (row.reduced (4));
-    }
-}
-'.
-	stream close
+	[ stream nextPutAll: (self asPluginEditorCppAPVTSFor: aPluginType) ]
+		ensure: [ stream close ]
 ]
 
 { #category : 'exporting' }
@@ -1601,6 +1637,20 @@ DSP >> destroy [
 	self isInitialized: false.
 	self class unregister: self
 
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> export2JuceAPVTSWithName: aString for: aPluginType [
+"aPluginType is 'Effect', 'MonoSynth' or 'PolySynth'. aString becomes the CMake target name: plain identifier, no spaces."
+
+	self createPhaustoParamsHeaderNamed: aString.
+	self createHeaderAPVTSFilesNamed: aString for: aPluginType.
+	self createCppAPVTSFilesNamed: aString for: aPluginType.
+	self createHeaderEditorAPVTSFilesNamed: aString for: aPluginType.
+	self createCppEditorAPVTSFilesNamed: aString for: aPluginType.
+	self createJucerFileNamed: aString for: aPluginType.
+	self createCMakeFileNamed: aString for: aPluginType.
+	self createFaustHeaderFileNamed: aString for: aPluginType
 ]
 
 { #category : 'exporting - apvts' }

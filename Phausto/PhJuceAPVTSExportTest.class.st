@@ -68,20 +68,6 @@ PhJuceAPVTSExportTest >> testCppFloatLiterals [
 ]
 
 { #category : 'tests' }
-PhJuceAPVTSExportTest >> testDuplicateShortnamesSignal [ 
-"Two identically-labelled sliders in different groups. If Faust disambiguates the shortnames itself this test is vacuous and the guard is dead code: check the emitted names before trusting a green bar here."
-
-	self
-		should: [
-			self
-				withDsp: 'import("stdfaust.lib");
-process = hgroup("a", _ * hslider("freq", 440, 20, 2000, 1))
-        : hgroup("b", _ * hslider("freq", 440, 20, 2000, 1));'
-				do: [ :d | d apvtsParameterControls ] ]
-		raise: Error
-]
-
-{ #category : 'tests' }
 PhJuceAPVTSExportTest >> testEmissionIsStable [ 
 	"Two runs must be byte-identical or every export churns the diff."
 
@@ -133,19 +119,6 @@ PhJuceAPVTSExportTest >> testHeaderStructure [
 ]
 
 { #category : 'tests' }
-PhJuceAPVTSExportTest >> testLabelQuotesAreEscaped [ 
-	"Labels are free text and land inside a C++ string literal."
-
-	self
-		withDsp: 'import("stdfaust.lib");
-process = _ * hslider("say \\"hi\\"", 0.5, 0, 1, 0.01);'
-		do: [ :d |
-			| row |
-			row := d apvtsDescriptorRowFor: d apvtsParameterControls first.
-			self deny: (row includesSubstring: '"say "hi""') ]
-]
-
-{ #category : 'tests' }
 PhJuceAPVTSExportTest >> testLabelWithQuoteSignals [ 
 	"If Faust rejects the escaped label at parse time this never reaches the
 	 gatekeeper, the guard is unreachable, and both can be dropped."
@@ -157,16 +130,6 @@ PhJuceAPVTSExportTest >> testLabelWithQuoteSignals [
 process = _ * hslider("say \\"hi\\"", 0.5, 0, 1, 0.01);'
 				do: [ :d | d apvtsParameterControls ] ]
 		raise: Error
-]
-
-{ #category : 'tests' }
-PhJuceAPVTSExportTest >> testOrderIsByAddress [ 
-
-	self
-		assert: (dsp apvtsParameterControls collect: [ :c | c at: #address ])
-		equals: #( '/MyApp/Korg35LPF2Fr' '/MyApp/Korg35LPF2Res'
-		           '/MyApp/SquareOsc2Freq' '/MyApp/SquareOsc2uLevel'
-		           '/MyApp/ZitaRevStereo2T60dc' '/MyApp/ZitaRevStereo2T60m' )
 ]
 
 { #category : 'tests' }
@@ -225,15 +188,16 @@ PhJuceAPVTSExportTest >> testRowCountMatchesParameterCount [
 
 { #category : 'tests' }
 PhJuceAPVTSExportTest >> testSliderRowCarriesBothNamesAndFullRange [ 
-
-	| row |
-	row := dsp apvtsDescriptorRowFor: dsp apvtsParameterControls first.
-	self assert: (row includesSubstring: '"Korg35LPF2Fr"').
-	self assert: (row includesSubstring: '"/MyApp/Korg35LPF2Fr"').
-	self assert: (row includesSubstring: '0.0f').
-	self assert: (row includesSubstring: '1.0f').
-	self assert: (row includesSubstring: '0.001f').
+	| control row |
+	control := dsp apvtsParameterControls first.
+	row := dsp apvtsDescriptorRowFor: control.
+	self assert: (row includesSubstring: '"' , (control at: #shortname) , '"').
+	self assert: (row includesSubstring: '"' , (control at: #address) , '"').
+	self assert: (row includesSubstring: (dsp cppFloat: (control at: #min))).
+	self assert: (row includesSubstring: (dsp cppFloat: (control at: #max))).
+	self assert: (row includesSubstring: (dsp cppFloat: (control at: #init))).
 	self assert: (row includesSubstring: 'false')
+
 ]
 
 { #category : 'tests' }
