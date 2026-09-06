@@ -53,6 +53,20 @@ PhJuceExportTest >> testBargraphsAreNotParameters [
 		noneSatisfy: [ :each | (each at: #type) endsWith: 'bargraph' ])
 ]
 
+{ #category : 'running' }
+PhJuceExportTest >> testCMakeAndJucerAgreeOnSynthFlag [
+
+	#( 'Effect' 'PolySynth' ) do: [ :type |
+		| folder cmake jucer synth |
+		folder := self exportType: type.
+		synth := type = 'Effect' ifTrue: [ 'FALSE' ] ifFalse: [ 'TRUE' ].
+		cmake := (folder / 'CMakeLists.txt') contents.
+		jucer := (folder / ('PhTest' , type , '.jucer')) contents.
+		self assert: (cmake includesSubstring: 'IS_SYNTH ' , synth).
+		self assert: (jucer includesSubstring: 'pluginIsSynth="'
+			, (type = 'Effect' ifTrue: [ '0' ] ifFalse: [ '1' ]) , '"') ]
+]
+
 { #category : 'tests' }
 PhJuceExportTest >> testDescriptorIdsAreUniqueAndSorted [
 	"Ids embed a per-image instance counter, so assert shape, never literals."
