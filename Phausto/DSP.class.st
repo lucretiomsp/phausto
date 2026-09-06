@@ -213,27 +213,6 @@ DSP >> apvtsDescriptorRowFor: aControl [
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> apvtsLayoutBodyFrom: aJsonString [
-	"C++ body of createParameterLayout(): one RangedAudioParameter per control."
-
-	^ String streamContents: [ :s |
-		(self apvtsParameterControlsFrom: aJsonString) do: [ :c |
-			(#( 'button' 'checkbox' ) includes: (c at: #type))
-				ifTrue: [ s
-					nextPutAll: '    layout.add (std::make_unique<juce::AudioParameterBool> (juce::ParameterID { "';
-					nextPutAll: (c at: #shortname); nextPutAll: '", 1 }, "';
-					nextPutAll: (c at: #label); nextPutAll: '", false));'; lf ]
-				ifFalse: [ s
-					nextPutAll: '    layout.add (std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { "';
-					nextPutAll: (c at: #shortname); nextPutAll: '", 1 }, "';
-					nextPutAll: (c at: #label); nextPutAll: '", juce::NormalisableRange<float> (';
-					nextPutAll: (self cppFloatAt: #min in: c default: 0); nextPutAll: ', ';
-					nextPutAll: (self cppFloatAt: #max in: c default: 1); nextPutAll: ', ';
-					nextPutAll: (self cppFloatAt: #step in: c default: 0.01); nextPutAll: '), ';
-					nextPutAll: (self cppFloatAt: #init in: c default: 0); nextPutAll: '));'; lf ] ] ]
-]
-
-{ #category : 'exporting - apvts' }
 DSP >> apvtsParameterControls [
 	^ self apvtsParameterControlsFrom: self getJSON
 ]
@@ -269,17 +248,6 @@ Signals on labels that would break the generated C++ string literal."
 					'Label breaks the C++ string literal: ' , (offender at: #label) ].
 
 		^ kept 
-]
-
-{ #category : 'exporting - apvts' }
-DSP >> apvtsPushBodyFrom: aJsonString [
-	"C++ lines pushing APVTS values into the Faust DSP by address, via MapUI."
-
-	^ String streamContents: [ :s |
-		(self apvtsParameterControlsFrom: aJsonString) do: [ :c |
-			s nextPutAll: '    fUI->setParamValue ("'; nextPutAll: (c at: #address);
-			  nextPutAll: '", apvts.getRawParameterValue ("'; nextPutAll: (c at: #shortname);
-			  nextPutAll: '")->load());'; lf ] ]
 ]
 
 { #category : 'exporting' }
@@ -1209,60 +1177,6 @@ DSP >> createCppEditorAPVTSFilesNamed: aString for: aPluginType [
 	stream := (folder / 'PluginEditor.cpp') writeStream.
 	[ stream nextPutAll: (self asPluginEditorCppAPVTSFor: aPluginType) ]
 		ensure: [ stream close ]
-]
-
-{ #category : 'exporting' }
-DSP >> createCppFilesNamed: aString for: aPluginType [
-
-	| folder destinationH destinationCpp streamH streamCpp destinationEditorCpp streamEditorCpp destinationEditorH streamEditorH |
-	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source')
-		          ensureCreateDirectory.
-	"processor"
-	destinationH := folder / 'PluginProcessor.h'.
-	streamH := destinationH writeStream.
-	streamH nextPutAll: (self asPluginProcessorHeaderFor: aPluginType).
-	streamH close.
-
-	destinationCpp := folder / 'PluginProcessor.cpp'.
-	streamCpp := destinationCpp writeStream.
-	streamCpp nextPutAll: (self asPluginProcessorCppFor: aPluginType).
-	streamCpp close.
-
-	"processor editor"
-
-
-	destinationEditorH := folder / 'PluginEditor.h'.
-	streamEditorH := destinationEditorH writeStream.
-	streamEditorH nextPutAll:
-		(self asPluginProcessorEditorHeaderFor: aPluginType).
-	streamEditorH close.
-
-	destinationEditorCpp := folder / 'PluginEditor.cpp'.
-	streamEditorCpp := destinationEditorCpp writeStream.
-	streamEditorCpp nextPutAll:
-		(self asPluginProcessorEditorCppFor: aPluginType).
-	streamEditorCpp close
-]
-
-{ #category : 'exporting' }
-DSP >> createFaustEffectHeaderFileNamed: aName [
-
-	^ LibFaust uniqueInstance
-		  createFaustHeaderFileFromString: self generatedCode
-		  withName: aName
-		  architecture: 'faustMinimalInlined.h'
-		  type: 'Effect'
-	"return true if the .cpp file has been  generated"
-]
-
-{ #category : 'exporting' }
-DSP >> createFaustHeaderFileNamed: aName [
-
-	^ LibFaust uniqueInstance
-		  createFaustHeaderFileFromString: self generatedCode
-		  withName: aName
-		  architecture: 'faustMinimalInlined.h'
-	"return true if the .cpp file has been  generated"
 ]
 
 { #category : 'exporting' }
