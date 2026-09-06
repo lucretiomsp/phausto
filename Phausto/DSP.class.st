@@ -1266,6 +1266,17 @@ DSP >> createFaustHeaderFileNamed: aName [
 ]
 
 { #category : 'exporting' }
+DSP >> createFaustHeaderFileNamed: aName for: aPluginType [
+	"Writes Source/Faust<Type>.h — the name the processor's #include expects."
+
+	^ LibFaust uniqueInstance
+		createFaustHeaderFileFromString: self generatedCode
+		withName: aName
+		architecture: 'faustMinimalInlined.h'
+		type: aPluginType
+]
+
+{ #category : 'exporting' }
 DSP >> createFaustPolySynthFileNamed: aName [
 
 	^ LibFaust uniqueInstance
@@ -1394,18 +1405,17 @@ private:
 
 { #category : 'exporting' }
 DSP >> createJucerFileNamed: aString for: aPluginType [
-
-	| folder destination stream code pluginIsSynth pluginVSTCategory pluginChannelConfigs |
+"aPluginType is 'Effect', 'MonoSynth' or 'PolySynth'."
+ 
+	| folder destination stream code pluginIsSynth pluginVSTCategory |
 	pluginIsSynth := '0'.
-	aPluginType = 'Effect' ifFalse: [ pluginIsSynth := '1' ].
 	pluginVSTCategory := 'kPlugCategEffect'.
 	aPluginType = 'Effect' ifFalse: [
+		pluginIsSynth := '1'.
 		pluginVSTCategory := 'kPlugCategSynth' ].
-	pluginChannelConfigs := '{1, 1}, {2, 2}'.
-	aPluginType = 'Effect' ifFalse: [ pluginChannelConfigs := '{0, 2}' ].
-
+ 
 	code := '<?xml version="1.0" encoding="UTF-8"?>
-
+ 
 <JUCERPROJECT id="FaustPlugin"
               name="' , aString , '"
               projectType="audioplug"
@@ -1426,7 +1436,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
               pluginAUExportPrefix="' , aString , 'pluginAU"
               pluginRTASCategory=""
               aaxIdentifier="com.phausto.' , aString , 'plugin"
-              pluginVSTCategory="kPlugCategEffect"
+              pluginVSTCategory="' , pluginVSTCategory , '"
               buildVST="0"
               buildVST3="1"
               buildAU="1"
@@ -1435,7 +1445,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
               buildAAX="1"
               buildStandalone="1"
               enableIAA="0">
-
+ 
   <MAINGROUP id="main" name="' , aString , 'Plugin">
     <GROUP id="source" name="Source">
       <FILE id="cpp01"
@@ -1449,23 +1459,28 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
             resource="0"
             file="Source/PluginProcessor.h"/>
       <FILE id="hdr02"
-            name="FaustEffect.h"
+            name="Faust' , aPluginType , '.h"
             compile="0"
             resource="0"
-            file="Source/FaustEffect.h"/>
+            file="Source/Faust' , aPluginType , '.h"/>
       <FILE id="cpp02"
             name="PluginEditor.cpp"
             compile="1"
             resource="0"
             file="Source/PluginEditor.cpp"/>
-       <FILE id="hdr03"
+      <FILE id="hdr03"
             name="PluginEditor.h"
             compile="0"
             resource="0"
-      file="Source/PluginEditor.h"/>
+            file="Source/PluginEditor.h"/>
+      <FILE id="hdr04"
+            name="PhaustoParams.h"
+            compile="0"
+            resource="0"
+            file="Source/PhaustoParams.h"/>
     </GROUP>
   </MAINGROUP>
-
+ 
   <MODULES>
     <MODULE id="juce_audio_basics"          showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_audio_devices"         showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
@@ -1480,7 +1495,7 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
     <MODULE id="juce_gui_basics"            showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra"             showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
-
+ 
   <EXPORTFORMATS>
     <XCODE_MAC
         targetFolder="Builds/MacOSX">
@@ -1488,52 +1503,50 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
         <CONFIGURATION name="Debug"
                        isDebug="1"
                        optimisation="1"
-                       targetName="FaustPlugin"/>
+                       targetName="' , aString , '"/>
         <CONFIGURATION name="Release"
                        isDebug="0"
                        optimisation="3"
-                       targetName="FaustPlugin"/>
+                       targetName="' , aString , '"/>
       </CONFIGURATIONS>
     </XCODE_MAC>
-
+ 
     <VS2022
         targetFolder="Builds/VisualStudio2022">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug"
                        isDebug="1"
                        optimisation="1"
-                       targetName="FaustPlugin"/>
+                       targetName="' , aString , '"/>
         <CONFIGURATION name="Release"
                        isDebug="0"
                        optimisation="3"
-                       targetName="FaustPlugin"/>
+                       targetName="' , aString , '"/>
       </CONFIGURATIONS>
     </VS2022>
-
+ 
     <LINUX_MAKE
         targetFolder="Builds/LinuxMakefile">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug"
                        isDebug="1"
                        optimisation="1"
-                       targetName="FaustPlugin"/>
+                       targetName="' , aString , '"/>
         <CONFIGURATION name="Release"
                        isDebug="0"
                        optimisation="3"
-                       targetName="FaustPlugin"/>
+                       targetName="' , aString , '"/>
       </CONFIGURATIONS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
-
+ 
 </JUCERPROJECT>
 '.
 	folder := (FileLocator documents / 'faust2Juce' / aString)
 		          ensureCreateDirectory.
-
 	destination := folder / (aString , '.jucer').
 	stream := destination writeStream.
-	stream nextPutAll: code.
-	stream close
+	[ stream nextPutAll: code ] ensure: [ stream close ]
 ]
 
 { #category : 'exporting - apvts' }
@@ -1653,28 +1666,27 @@ DSP >> export2JuceAPVTSWithName: aString for: aPluginType [
 	self createFaustHeaderFileNamed: aString for: aPluginType
 ]
 
-{ #category : 'exporting - apvts' }
+{ #category : 'exporting' }
 DSP >> export2JuceAPVTSWithName: aString type: aPluginType [
-	" apluginType can be 'Effect' , MonoSynth' or 'PolySynth' "
+	"Deprecated. APVTS is now the only export path."
 
-	"aString becomes the CMake target name, so it needs to be a plain identifier (no spaces)"
-
-	self createCppAPVTSFilesNamed: aString for: aPluginType.
-	self createCppEditorAPVTSFilesNamed: aString for: aPluginType. 
-	self createJucerFileNamed: aString for: aPluginType.
-	self createCMakeFileNamed: aString for: aPluginType.
-	self createFaustEffectHeaderFileNamed: aString
+	self deprecated: 'Use #export2JuceWithName:type:'.
+	^ self export2JuceWithName: aString type: aPluginType
 ]
 
 { #category : 'exporting' }
 DSP >> export2JuceWithName: aString type: aPluginType [
-	" apluginType can be 'Effect' , MonoSynth' or 'PolySynth' "
-	"aString becomes the CMake target name, so it needs to be a plain identifier (no spaces)"
+	"aPluginType is 'Effect', 'MonoSynth' or 'PolySynth'.
+	 aString becomes the CMake target name: plain identifier, no spaces."
 
-	self createCppFilesNamed: aString for: aPluginType.
+	self createPhaustoParamsHeaderNamed: aString.
+	self createHeaderAPVTSFilesNamed: aString for: aPluginType.
+	self createCppAPVTSFilesNamed: aString for: aPluginType.
+	self createHeaderEditorAPVTSFilesNamed: aString for: aPluginType.
+	self createCppEditorAPVTSFilesNamed: aString for: aPluginType.
 	self createJucerFileNamed: aString for: aPluginType.
-	self createCMakeFileNamed: aString for: aPluginType. 
-	self createFaustEffectHeaderFileNamed: aString
+	self createCMakeFileNamed: aString for: aPluginType.
+	self createFaustHeaderFileNamed: aString for: aPluginType
 ]
 
 { #category : 'accessing' }
