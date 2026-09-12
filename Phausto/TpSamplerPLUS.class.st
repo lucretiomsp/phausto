@@ -23,7 +23,9 @@ Class {
 		'attachedBox',
 		'filesURL',
 		'fileNamesSorted',
-		'sampleNamesSorted'
+		'sampleNamesSorted',
+		'lengthInSamples',
+		'sampleRate'
 	],
 	#category : 'Phausto-TurboPhausto',
 	#package : 'Phausto',
@@ -45,7 +47,7 @@ TpSamplerPLUS >> asBox [
 		      part: partNumber
 		      readIndex: reader asBox.
 
-	output := Cut new asBox , Cut new asBox , Cut new asBox
+	output := lengthInSamples asBox  , sampleRate  asBox , Cut new asBox
 	          , Wire new asBox.
 	sampler := sp connectTo: output asBox.
 
@@ -156,15 +158,17 @@ TpSamplerPLUS >> initialize [
 	super initialize.
 	"Stereo by default"
 	numChannels := 2.
-	self pitch: 261.625. 
+	self pitch: 261.625.
 	index := PhHSlider new
 		         label: self coypuLabel , 'Index'
 		         init: 0
 		         min: 0
 		         max: 16
 		         step: 1.
-	self pathToFolder:
-		FileLocator imageDirectory asAbsolute pathString , '/TurboSamples/bleep'
+	self pathToFolder: FileLocator imageDirectory asAbsolute pathString
+		, '/TurboSamples/bleep'.
+			lengthInSamples := PhHBarGraph new label: self label , 'LNS'.
+	sampleRate := PhHBarGraph new label: self label , 'SR'
 ]
 
 { #category : 'accessing' }

@@ -78,13 +78,27 @@ TurboPhaustoTest >> testTpKarplusAsBox [
 { #category : 'tests' }
 TurboPhaustoTest >> testTpSamplerAsBox [
 
-| pathToFolder |
-pathToFolder:= (FileLocator documents asAbsolute pathString , '/MoofLodSamples') asFileReference.
+	| pathToFolder |
+	pathToFolder := (FileLocator documents asAbsolute pathString
+	                 , '/TurboSamples') asFileReference.
 
-"check if directory exists first"
+	"check if directory exists first"
 
-self assert: pathToFolder exists equals: true.
-self assert: TpSampler new asDsp isNull equals: false
+	self assert: pathToFolder exists .
+	self deny: TpSampler new asDsp isNull 
+]
+
+{ #category : 'tests' }
+TurboPhaustoTest >> testTpSamplerPLUSAsBox [
+
+	| pathToFolder |
+	pathToFolder := (FileLocator documents asAbsolute pathString
+	                 , '/TurboSamples') asFileReference.
+
+	"check if directory exists first"
+
+	self assert: pathToFolder exists.
+	self deny: TpSamplerPLUS new asDsp isNull
 ]
 
 { #category : 'tests' }
