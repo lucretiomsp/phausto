@@ -26,6 +26,29 @@ BoxAPITest >> testCreateAndDestroyLibContext [
 ]
 
 { #category : 'tests' }
+BoxAPITest >> testHBarGraph [
+
+	| testCase |
+	testCase := BoxAPI uniqueInstance
+		            boxHBarGraphAux: 'testcase'
+		            min: -1 asBox 
+		            max: 1 asBox 
+		            input: Wire new asBox.
+	self deny: testCase asBox isNull
+]
+
+{ #category : 'tests' }
+BoxAPITest >> testHBarGraphNoInput [
+
+	| testCase |
+	testCase := BoxAPI uniqueInstance
+		            boxHBargraph: 'testCase'
+		            min: 0 asBox 
+		            max: 2 asBox .
+	self deny: testCase asBox isNull
+]
+
+{ #category : 'tests' }
 BoxAPITest >> testReadOnlyTable [
 
 	| n table index box |
@@ -39,4 +62,15 @@ BoxAPITest >> testReadOnlyTable [
 		       index: index.
 
 	self deny: box  isNull
+]
+
+{ #category : 'tests' }
+BoxAPITest >> testVBarGraphNoInput [
+
+	| testCase |
+	testCase := BoxAPI uniqueInstance
+		            boxVBargraph: 'testCase'
+		            min: 0 asBox 
+		            max: 2 asBox .
+	self deny: testCase asBox isNull
 ]

@@ -47,10 +47,9 @@ TpSamplerPLUS >> asBox [
 		      part: partNumber
 		      readIndex: reader asBox.
 
-	output := (lengthInSamples asBox connectTo: Cut new asBox)
-          , (sampleRate asBox connectTo: Cut new asBox)
-          , Cut new asBox
-          , Wire new asBox.
+	output := (BoxAPI  uniqueInstance boxAttach: Wire new asBox  with: lengthInSamples asBox )
+	          , (BoxAPI  uniqueInstance boxAttach: Wire new asBox  with: sampleRate asBox )
+	          , Cut new asBox , Wire new asBox.
 	sampler := sp connectTo: output asBox.
 
 	^ (sampler asBox * self uLevel) asBox
