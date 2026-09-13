@@ -21,3 +21,9 @@ PhHBarGraphNoInput >> asBox [
 
 	^ sliderBox
 ]
+
+{ #category : 'accessing' }
+PhHBarGraphNoInput >> input: anInput [
+
+^ Error new signal: 'Use PhVBarGraph instead'
+]

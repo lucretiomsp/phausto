@@ -35,7 +35,38 @@ Class {
 { #category : 'converting' }
 TpSamplerPLUS >> asBox [
 
-	| reader sp output sampler partNumber |
+
+
+	| reader sp partNumber audio lns sr signal |
+	partNumber := self index asBox min: self numberOfSamples asBox.
+
+	reader := PhReaderWithSpeed new
+		          trigger: self trigger asBox;
+		          speed: self pitch asBox / 261.625 asBox.
+
+	sp := BoxAPI uniqueInstance
+		      boxSoundFile: filesURL
+		      numChannels: self numChannels asBox
+		      part: partNumber
+		      readIndex: reader asBox.
+
+	"three taps on the same soundfile, one output each"
+	audio := sp connectTo: Cut new asBox , Cut new asBox , Cut new asBox
+		         , Wire new asBox.
+	lns := sp connectTo: Wire new asBox , Cut new asBox , Cut new asBox
+		       , Cut new asBox.
+	sr := sp connectTo: Cut new asBox , Wire new asBox , Cut new asBox
+		      , Cut new asBox.
+
+	"audio carries the meters along so they get compiled"
+	signal := BoxAPI uniqueInstance
+		          boxAttach: audio * self uLevel asBox
+		          with: (lns connectTo: lengthInSamples asBox).
+
+	^ BoxAPI uniqueInstance
+		  boxAttach: signal
+		  with: (sr connectTo: sampleRate asBox)
+	"| reader sp output sampler partNumber |
 	partNumber := self index asBox min: self numberOfSamples asBox.
 
 	reader := PhReaderWithSpeed new
@@ -47,12 +78,11 @@ TpSamplerPLUS >> asBox [
 		      part: partNumber
 		      readIndex: reader asBox.
 
-	output := (BoxAPI  uniqueInstance boxAttach: Wire new asBox  with: lengthInSamples asBox )
-	          , (BoxAPI  uniqueInstance boxAttach: Wire new asBox  with: sampleRate asBox )
-	          , Cut new asBox , Wire new asBox.
+	output := lengthInSamples asBox , sampleRate asBox , Cut new asBox
+	          , Wire new asBox.
 	sampler := sp connectTo: output asBox.
 
-	^ (sampler asBox * self uLevel) asBox
+	^ (sampler asBox * self uLevel) asBox"
 ]
 
 { #category : 'accessing' }
@@ -168,8 +198,14 @@ TpSamplerPLUS >> initialize [
 		         step: 1.
 	self pathToFolder: FileLocator imageDirectory asAbsolute pathString
 		, '/TurboSamples/bleep'.
-	lengthInSamples := PhHBarGraph new input: Wire new asBox ;  label: self label , 'LNS'.
-	sampleRate := PhHBarGraph new input: Wire new asBox ; label: self label , 'SR'
+	lengthInSamples := PhVBarGraphNoInput new
+	                   label: self label , 'LNS';
+	                   min: 0;
+	                   max: 1e7.
+sampleRate := PhVBarGraphNoInput new
+	              label: self label , 'SR';
+	              min: 0;
+	              max: 192000.
 ]
 
 { #category : 'accessing' }
