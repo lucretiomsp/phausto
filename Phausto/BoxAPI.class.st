@@ -223,24 +223,24 @@ BoxAPI >> boxGt: aBox than: anotherBox [
 		  #( #PhBox * CboxGTAux #(#PhBox * aBox , PhBox * anotherBox ) )
 ]
 
-{ #category : 'ui building' }
-BoxAPI >> boxHBarGraphAux: aLabel min: aMin max: aMax input: anInput [
-	"Create a vertical bargraph box."
-
-	self createLibContext.
-	^ self ffiCall:
-		  #( PhBox #* CboxHBargraphAux #( const char #* aLabel #, PhBox
-		        #* aMin #, PhBox #* aMax #, PhBox #* anInput ) )
-]
-
 { #category : 'ffi- unary math' }
-BoxAPI >> boxHBargraph: aLabel min: aMin max: aMax [
+BoxAPI >> boxHBarGraph: aLabel min: aMin max: aMax [
 	"return a HBargraph with no input"
 
 	self createLibContext.
 
 	self ffiCall: #( #PhBox #* CboxVBargraph #( const char #* aLabel #, PhBox #* aMin
 		        #, PhBox #* aMax  ) )
+]
+
+{ #category : 'ui building' }
+BoxAPI >> boxHBarGraphAux: aLabel min: aMin max: aMax input: anInput [
+	"Create an horizontal bargraph box."
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( PhBox #* CboxHBargraphAux #( const char #* aLabel #, PhBox
+		        #* aMin #, PhBox #* aMax #, PhBox #* anInput ) )
 ]
 
 { #category : 'ui building' }
@@ -526,18 +526,8 @@ BoxAPI >> boxTan [
 	^ self ffiCall: #( #PhBox * CboxTan #() )
 ]
 
-{ #category : 'ui building' }
-BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
-	"Create a vertical bargraph box."
-
-	self createLibContext.
-	^ self ffiCall:
-		  #( PhBox #* CboxVBargraphAux #( const char #* aLabel #, PhBox #* aMin
-		        #, PhBox #* aMax #, PhBox #* anInput ) )
-]
-
 { #category : 'ffi- unary math' }
-BoxAPI >> boxVBargraph: aLabel min: aMin max: aMax [
+BoxAPI >> boxVBarGraph: aLabel min: aMin max: aMax [
 	"return a VBargraph with n input"
 
 	self createLibContext.
@@ -545,6 +535,16 @@ BoxAPI >> boxVBargraph: aLabel min: aMin max: aMax [
 	self ffiCall: #( #PhBox #* CboxVBargraph #( const char #* aLabel , PhBox #* aMin ,PhBox #* aMax  ) )
 		
 	  
+]
+
+{ #category : 'ui building' }
+BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
+	"Create a vertical bargraph box."
+
+	self createLibContext.
+	^ self ffiCall:
+		  #( PhBox #* CboxVBargraphAux #( const char #* aLabel #, PhBox
+		        #* aMin #, PhBox #* aMax #, PhBox #* anInput ) )
 ]
 
 { #category : 'ui building' }

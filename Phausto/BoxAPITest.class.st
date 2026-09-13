@@ -42,7 +42,7 @@ BoxAPITest >> testHBarGraphNoInput [
 
 	| testCase |
 	testCase := BoxAPI uniqueInstance
-		            boxHBargraph: 'testCase'
+		            boxHBarGraph: 'testCase'
 		            min: 0 asBox 
 		            max: 2 asBox .
 	self deny: testCase asBox isNull
@@ -65,11 +65,23 @@ BoxAPITest >> testReadOnlyTable [
 ]
 
 { #category : 'tests' }
+BoxAPITest >> testVBarGraph [
+
+	| testCase |
+	testCase := BoxAPI uniqueInstance
+		            boxVBarGraphAux: 'testcase'
+		            min: -1 asBox
+		            max: 1 asBox
+		            input: Wire new asBox.
+	self deny: testCase asBox isNull
+]
+
+{ #category : 'tests' }
 BoxAPITest >> testVBarGraphNoInput [
 
 	| testCase |
 	testCase := BoxAPI uniqueInstance
-		            boxVBargraph: 'testCase'
+		            boxVBarGraph: 'testCase'
 		            min: 0 asBox 
 		            max: 2 asBox .
 	self deny: testCase asBox isNull

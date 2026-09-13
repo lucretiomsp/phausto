@@ -121,6 +121,12 @@ UIPrimitvesTest >> testPhButtonAsDsp [
 ]
 
 { #category : 'tests' }
+UIPrimitvesTest >> testPhHBarGraphNoInput [ 
+
+self deny: PhHBarGraphNoInput new asBox  isNull.
+]
+
+{ #category : 'tests' }
 UIPrimitvesTest >> testPhHBargraphAsDsp [
 
 	self deny: PhHBarGraph new asDsp isNull
@@ -142,6 +148,12 @@ UIPrimitvesTest >> testPhNumEntryAsDsp [
 UIPrimitvesTest >> testPhSliderAsDsp [
 
 self deny: PhSlider new asDsp isNull.
+]
+
+{ #category : 'tests' }
+UIPrimitvesTest >> testPhVBarGraphNoInput [ 
+
+self deny: PhVBarGraphNoInput new asBox  isNull.
 ]
 
 { #category : 'tests' }

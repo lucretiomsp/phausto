@@ -1,8 +1,8 @@
 "
-The hbargraph primitive implements a vertical bar-graph (typically a meter displaying the level of a signal).
+I am a vertical bar graph with no input
 "
 Class {
-	#name : 'PhVBarGraph',
+	#name : 'PhVBarGraphNoInput',
 	#superclass : 'PhBarGraph',
 	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
@@ -10,15 +10,14 @@ Class {
 }
 
 { #category : 'converting' }
-PhVBarGraph >> asBox [
+PhVBarGraphNoInput >> asBox [
 
 	| sliderBox |
 	BoxAPI uniqueInstance createLibContext.
 	sliderBox := BoxAPI uniqueInstance
-		             boxVBarGraphAux: self label
+		             boxVBarGraph: self label
 		             min: self min asBox
-		             max: self max asBox
-		             input: self input asBox.
+		             max: self max asBox.
 
 	^ sliderBox
 ]
