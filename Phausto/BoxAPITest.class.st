@@ -7,6 +7,16 @@ Class {
 }
 
 { #category : 'tests' }
+BoxAPITest >> testBoxAttach [
+
+	| testCase |
+	testCase := BoxAPI uniqueInstance
+		            boxAttach: Wire new asBox 
+		            with: PhHBarGraph  new asBox .
+	self deny: testCase asBox isNull
+]
+
+{ #category : 'tests' }
 BoxAPITest >> testCreateAndDestroyLibContext [
 
 	BoxAPI uniqueInstance createLibContext.

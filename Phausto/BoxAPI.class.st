@@ -84,6 +84,14 @@ BoxAPI >> boxAtan [
 	^ self ffiCall: #( #PhBox * CboxAtan #() )
 ]
 
+{ #category : 'ffi binary math' }
+BoxAPI >> boxAttach: aBox with: anotherBox [
+" the Faust attach primitive takes two input box and produces one output box which is a copy of the first input. The role of attach is to force its second input box to be compiled with the first one."
+self createLibContext.
+	^ self ffiCall:
+	#(#PhBox * CboxAttachAux #( #PhBox * aBox , #PhBox * anotherBox ))
+]
+
 { #category : 'ui building' }
 BoxAPI >> boxButton: aLabel [
 	"return a Button boxxeqFrom:  to: "

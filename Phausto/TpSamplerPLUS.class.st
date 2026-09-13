@@ -47,8 +47,10 @@ TpSamplerPLUS >> asBox [
 		      part: partNumber
 		      readIndex: reader asBox.
 
-	output := lengthInSamples asBox  , sampleRate  asBox , Cut new asBox
-	          , Wire new asBox.
+	output := (lengthInSamples asBox connectTo: Cut new asBox)
+          , (sampleRate asBox connectTo: Cut new asBox)
+          , Cut new asBox
+          , Wire new asBox.
 	sampler := sp connectTo: output asBox.
 
 	^ (sampler asBox * self uLevel) asBox
@@ -167,8 +169,8 @@ TpSamplerPLUS >> initialize [
 		         step: 1.
 	self pathToFolder: FileLocator imageDirectory asAbsolute pathString
 		, '/TurboSamples/bleep'.
-			lengthInSamples := PhHBarGraph new label: self label , 'LNS'.
-	sampleRate := PhHBarGraph new label: self label , 'SR'
+	lengthInSamples := PhHBarGraph new input: Wire new asBox ;  label: self label , 'LNS'.
+	sampleRate := PhHBarGraph new input: Wire new asBox ; label: self label , 'SR'
 ]
 
 { #category : 'accessing' }
