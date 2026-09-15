@@ -1745,20 +1745,20 @@ DSP >> includesParameter: aString [
 
 { #category : 'initialize' }
 DSP >> init [
-	
+
 	self isNull ifTrue: [ ^ self class invalidException ].
 	RendererType initialize.
 	(PhaustoDynamicEngine uniqueInstance
-		initializeDSP: self
-		withRenderer: self class rendererType
-		bufferSize: PhaustoDynamicEngine bufferSize)
+		 initializeDSP: self
+		 withRenderer: self class rendererType
+		 bufferSize: PhaustoDynamicEngine bufferSize
+		 sampleRate: PhaustoDynamicEngine sampleRate )
 		ifTrue: [
-			self isInitialized: true.
-			self class register: self ]
+				self isInitialized: true.
+				self class register: self ]
 		ifFalse: [
-			self isInitialized: false.
-			^ self class invalidException ]
-
+				self isInitialized: false.
+				^ self class invalidException ]
 ]
 
 { #category : 'accessing' }
