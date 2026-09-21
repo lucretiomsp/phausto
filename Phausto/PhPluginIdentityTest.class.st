@@ -15,6 +15,18 @@ PhPluginIdentityTest >> testBundleIdentifier [
 ]
 
 { #category : 'tests' }
+PhPluginIdentityTest >> testCMakeJuceAddPluginUsesIdentity [
+
+	| section |
+	section := DSP new
+		cmakeJuceAddPluginFor: (PhPluginIdentity productName: 'Zitello')
+		type: 'Effect'.
+	self assert: (section includesSubstring: 'PLUGIN_CODE Zite').
+	self assert: (section includesSubstring: 'BUNDLE_ID com.phausto.zitello').
+	self deny: (section includesSubstring: 'Fplu')
+]
+
+{ #category : 'tests' }
 PhPluginIdentityTest >> testPluginCode [
 
 	self assert: (PhPluginIdentity productName: 'Zitello') pluginCode equals: 'Zite'

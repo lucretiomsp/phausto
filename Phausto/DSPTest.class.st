@@ -7,6 +7,21 @@ Class {
 }
 
 { #category : 'tests' }
+DSPTest >> testApvtsProcessorCppIncludesNoFaustSystemHeaders [
+
+	self deny: ((DSP new asPluginProcessorCppAPVTSFor: 'Effect') includesSubstring: 'faust/gui')
+]
+
+{ #category : 'tests' }
+DSPTest >> testApvtsProcessorHeaderDeclaresWhatTheCppUses [
+
+	| header |
+	header := DSP new asPluginProcessorHeaderAPVTSFor: 'Effect'.
+	self assert: (header includesSubstring: '#include "PhaustoParams.h"').
+	self assert: (header includesSubstring: 'raw[PhaustoParams::count]')
+]
+
+{ #category : 'tests' }
 DSPTest >> testAsEffectPluginProcessorCpp [
 
 	| dsp filter |
