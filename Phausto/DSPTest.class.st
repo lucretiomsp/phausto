@@ -114,15 +114,11 @@ void EffectAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void EffectAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-  fDSP = std::make_unique<dsp>();
+  fDSP = std::make_unique<mydsp>();
   fDSP->init(sampleRate);
   fUI = std::make_unique<MapUI>();
-  fDSP->buildUserInterface(fUI);
-  inputs = new float*[2];
-  outputs = new float*[2];
+  fDSP->buildUserInterface(fUI.get());
   // Allocate buffers
-  inputBuffer.setSize(2, samplesPerBlock);
-  outputBuffer.setSize(2, samplesPerBlock);
 }
 
 void EffectAudioProcessor::releaseResources()
