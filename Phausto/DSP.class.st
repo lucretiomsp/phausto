@@ -382,16 +382,46 @@ void ' , editor , '::resized()
 
 ]
 
-{ #category : 'exporting - apvts' }
-DSP >> asPluginProcessorCppAPVTSFor: aPluginType [ 
-	"The generated PluginProcessor.cpp. Table-driven: static except for the
-	 class name, since every per-parameter detail lives in PhaustoParams.h."
+{ #category : 'converting' }
+DSP >> asPluginEditorHeaderAPVTSFor: aPluginType [
+
+	| proc editor |
+	proc := aPluginType , 'AudioProcessor'.
+	editor := proc , 'Editor'.
+	^ '#pragma once
+#include <JuceHeader.h>
+#include "PluginProcessor.h"
+
+class ' , editor , ' : public juce::AudioProcessorEditor
+{
+public:
+    ' , editor , ' (' , proc , '&);
+    ~' , editor , '() override;
+
+    void paint (juce::Graphics&) override;
+    void resized() override;
+
+private:
+    ' , proc , '& audioProcessor;
+
+    juce::OwnedArray<juce::Label> labels;
+    juce::OwnedArray<juce::Component> controls;
+    juce::OwnedArray<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachments;
+    juce::OwnedArray<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachments;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , editor , ')
+};
+'
+]
+
+{ #category : 'converting' }
+DSP >> asPluginProcessorCppAPVTSFor: aPluginType [
+	"The generated PluginProcessor.cpp. Table-driven: every per-parameter detail lives in PhaustoParams.h. No Faust system headers: FaustEffect.h is self-contained."
 
 	| proc |
 	proc := aPluginType , 'AudioProcessor'.
 	^ '#include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include "faust/gui/MapUI.h"
 
 juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParameterLayout()
 {
@@ -415,11 +445,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParamete
 }
 
 ' , proc , '::~' , proc , '() = default;
-
-bool ' , proc , '::faustHasPath (const char* path) const
-{
-    return fUI != nullptr && fUI->getParamIndex (path) >= 0;
-}
 
 void ' , proc , '::prepareToPlay (double sampleRate, int)
 {
@@ -462,7 +487,6 @@ void ' , proc , '::setStateInformation (const void* data, int size)
 
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc , '(); }
 '
-
 ]
 
 { #category : 'converting' }
@@ -801,6 +825,58 @@ private:
 ]
 
 { #category : 'converting' }
+DSP >> asPluginProcessorHeaderAPVTSFor: aPluginType [
+	"The generated PluginProcessor.h. Declares every member the .cpp uses."
+
+	| proc |
+	proc := aPluginType , 'AudioProcessor'.
+	^ '#pragma once
+#include <JuceHeader.h>
+#include "Faust' , aPluginType , '.h"   // self-contained: defines dsp, UI and MapUI
+#include "PhaustoParams.h"
+
+using FaustDsp = mydsp; // Faust default class name from faustMinimalInlined.h
+
+class ' , proc , ' : public juce::AudioProcessor
+{
+public:
+    ' , proc , ' ();
+    ~' , proc , '() override;
+
+    void prepareToPlay (double, int) override;
+    void releaseResources() override {}
+    void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
+
+    juce::AudioProcessorEditor* createEditor() override;
+    bool hasEditor() const override { return true; }
+    const juce::String getName() const override { return JucePlugin_Name; }
+    bool acceptsMidi() const override { return false; }
+    bool producesMidi() const override { return false; }
+    double getTailLengthSeconds() const override { return 0.0; }
+    int getNumPrograms() override { return 1; }
+    int getCurrentProgram() override { return 0; }
+    void setCurrentProgram (int) override {}
+    const juce::String getProgramName (int) override { return {}; }
+    void changeProgramName (int, const juce::String&) override {}
+    void getStateInformation (juce::MemoryBlock&) override;
+    void setStateInformation (const void*, int) override;
+
+    static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    juce::AudioProcessorValueTreeState apvts;
+
+private:
+    FaustDsp fDSP;
+    std::unique_ptr<MapUI> fUI;
+    std::atomic<float>* raw[PhaustoParams::count] {};
+
+    void pushParameters();
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , proc , ')
+};
+'
+]
+
+{ #category : 'converting' }
 DSP >> asPluginProcessorHeaderFor: aPluginType [
 	"aPluginTYpe can be 'Effect' . 'MonoSynth or 'PolySynth' "
 
@@ -931,7 +1007,9 @@ DSP >> createBelaCppFileNamed: aName [
 DSP >> createCMakeFileNamed: aString for: aPluginType [
 	"aPluginType is 'Effect', 'MonoSynth' or 'PolySynth'."
 
-	| folder code isSynth needsMidiIn vst3Category auMainType |
+	| folder identity target code isSynth needsMidiIn vst3Category auMainType |
+	identity := PhPluginIdentity productName: aString.
+	target := identity targetName.
 	isSynth := 'FALSE'.
 	needsMidiIn := 'FALSE'.
 	vst3Category := 'Fx'.
@@ -948,7 +1026,7 @@ DSP >> createCMakeFileNamed: aString for: aPluginType [
 
 cmake_minimum_required(VERSION 3.22)
 
-project(' , aString , ' VERSION 1.0.0)
+project(' , target , ' VERSION 1.0.0)
 
 if(DEFINED JUCE_PATH)
     add_subdirectory(${JUCE_PATH} JUCE)
@@ -960,38 +1038,38 @@ else()
     FetchContent_MakeAvailable(JUCE)
 endif()
 
-juce_add_plugin(' , aString , '
-    COMPANY_NAME "Phausto"
-    BUNDLE_ID com.phausto.faustplugin
+juce_add_plugin(' , target , '
+    COMPANY_NAME "' , identity companyName , '"
+    BUNDLE_ID ' , identity bundleIdentifier , '
     IS_SYNTH ' , isSynth , '
     NEEDS_MIDI_INPUT ' , needsMidiIn , '
     NEEDS_MIDI_OUTPUT FALSE
     IS_MIDI_EFFECT FALSE
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
     COPY_PLUGIN_AFTER_BUILD TRUE
-    PLUGIN_MANUFACTURER_CODE Phau
-    PLUGIN_CODE Fplu
+    PLUGIN_MANUFACTURER_CODE ' , identity manufacturerCode , '
+    PLUGIN_CODE ' , identity pluginCode , '
     FORMATS AU VST3 Standalone
     VST3_CATEGORIES ' , vst3Category , '
     AU_MAIN_TYPE ' , auMainType , '
-    PRODUCT_NAME "' , aString , '")
+    PRODUCT_NAME "' , identity productName , '")
 
-juce_generate_juce_header(' , aString , ')
+juce_generate_juce_header(' , target , ')
 
-target_sources(' , aString , '
+target_sources(' , target , '
     PRIVATE
         Source/PluginProcessor.cpp
         Source/PluginEditor.cpp)
 
-target_compile_features(' , aString , ' PUBLIC cxx_std_17)
+target_compile_features(' , target , ' PUBLIC cxx_std_17)
 
-target_compile_definitions(' , aString , '
+target_compile_definitions(' , target , '
     PUBLIC
         JUCE_WEB_BROWSER=0
         JUCE_USE_CURL=0
         JUCE_VST3_CAN_REPLACE_VST2=0)
 
-target_link_libraries(' , aString , '
+target_link_libraries(' , target , '
     PRIVATE
         juce::juce_audio_utils
         juce::juce_gui_extra
@@ -1001,8 +1079,7 @@ target_link_libraries(' , aString , '
         juce::juce_recommended_warning_flags)
 '.
 
-	folder := (FileLocator documents / 'faust2Juce' / aString)
-		          ensureCreateDirectory.
+	folder := (FileLocator documents / 'faust2Juce' / aString) ensureCreateDirectory.
 	self writeAsPosixText: code to: folder / 'CMakeLists.txt'
 ]
 
@@ -1079,101 +1156,20 @@ DSP >> createCmajorPatchNamed: aName [
 		  withName: aName
 ]
 
-{ #category : 'exporting - apvts' }
-DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [ 
-	| folder stream proc |
-	proc := aPluginType , 'AudioProcessor'.
-	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source') ensureCreateDirectory.
-	stream := (folder / 'PluginProcessor.cpp') writeStream.
-	stream nextPutAll: '#include "PluginProcessor.h"
-#include "PluginEditor.h"
-#include "faust/gui/MapUI.h"
+{ #category : 'converting' }
+DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [
 
-juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParameterLayout()
-{
-    return PhaustoParams::createLayout();
-}
-
-' , proc , '::' , proc , '()
-    : AudioProcessor (BusesProperties()
-                          .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                          .withOutput ("Output", juce::AudioChannelSet::stereo(), true)),
-      apvts (*this, nullptr, "PARAMETERS", createParameterLayout())
-{
-    fUI = std::make_unique<MapUI>();
-    fDSP.buildUserInterface (fUI.get());
-
-    for (int i = 0; i < PhaustoParams::count; ++i)
-    {
-        raw[i] = apvts.getRawParameterValue (PhaustoParams::table[i].id);
-        // Null means the id in the table has no matching parameter in the layout.
-        // Both come from the same descriptor, so this can only fire on a malformed id.
-        jassert (raw[i] != nullptr);
-    }
-}
-
-' , proc , '::~' , proc , '() = default;
-
-bool ' , proc , '::faustHasPath (const char* path) const
-{
-    return fUI != nullptr && fUI->getParamIndex (path) >= 0;
-}
-
-void ' , proc , '::prepareToPlay (double sampleRate, int)
-{
-    fDSP.init ((int) sampleRate);
-}
-
-void ' , proc , '::pushParameters()
-{
-    for (int i = 0; i < PhaustoParams::count; ++i)
-        if (raw[i] != nullptr)
-            fUI->setParamValue (PhaustoParams::table[i].faustPath, raw[i]->load());
-}
-
-void ' , proc , '::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
-{
-    juce::ScopedNoDenormals noDenormals;
-    pushParameters();
-
-    juce::ScopedNoDenormals denormalGuard;
-    float* chans[2] = { buffer.getWritePointer (0),
-                        buffer.getNumChannels() > 1 ? buffer.getWritePointer (1)
-                                                    : buffer.getWritePointer (0) };
-    fDSP.compute (buffer.getNumSamples(), chans, chans);
-}
-
-juce::AudioProcessorEditor* ' , proc , '::createEditor()
-{
-    return new ' , proc , 'Editor (*this);
-}
-
-void ' , proc , '::getStateInformation (juce::MemoryBlock& destData)
-{
-    if (auto xml = apvts.copyState().createXml()) copyXmlToBinary (*xml, destData);
-}
-
-void ' , proc , '::setStateInformation (const void* data, int size)
-{
-    if (auto xml = getXmlFromBinary (data, size))
-        apvts.replaceState (juce::ValueTree::fromXml (*xml));
-}
-
-juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc , '(); }
-'.
-	stream close
-
+	self
+		writeAsPosixText: (self asPluginProcessorCppAPVTSFor: aPluginType)
+		to: (self sourceFolderFor: aString) / 'PluginProcessor.cpp'
 ]
 
 { #category : 'exporting - apvts' }
 DSP >> createCppEditorAPVTSFilesNamed: aString for: aPluginType [
 
-	| folder stream |
-	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source')
-		          ensureCreateDirectory.
-	stream := (folder / 'PluginEditor.cpp') writeStream.
-	[ stream nextPutAll: (self asPluginEditorCppAPVTSFor: aPluginType) ]
-		ensure: [ stream close ]
+	self
+		writeAsPosixText: (self asPluginEditorCppAPVTSFor: aPluginType)
+		to: (self sourceFolderFor: aString) / 'PluginEditor.cpp'
 ]
 
 { #category : 'exporting' }
@@ -1228,90 +1224,20 @@ DSP >> createFileNamed: aString [
 	stream close.
 ]
 
-{ #category : 'exporting - apvts' }
+{ #category : 'converting' }
 DSP >> createHeaderAPVTSFilesNamed: aString for: aPluginType [
 
-	| folder stream proc |
-	proc := aPluginType , 'AudioProcessor'.
-	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source')
-		          ensureCreateDirectory.
-	stream := (folder / 'PluginProcessor.h') writeStream.
-	stream nextPutAll: '#pragma once
-#include <JuceHeader.h>
-#include "Faust' , aPluginType , '.h"
-
-class MapUI; // defined in faust/gui/MapUI.h, included in the .cpp
-using FaustDsp = mydsp; // Faust default class name from faustMinimalInlined.h
-
-class ' , proc , ' : public juce::AudioProcessor
-{
-public:
-    ' , proc , ' ();
-    ~' , proc , '() override;
-
-    void prepareToPlay (double, int) override;
-    void releaseResources() override {}
-    void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
-
-    juce::AudioProcessorEditor* createEditor() override;
-    bool hasEditor() const override { return true; }
-    const juce::String getName() const override { return JucePlugin_Name; }
-    bool acceptsMidi() const override { return false; }
-    bool producesMidi() const override { return false; }
-    double getTailLengthSeconds() const override { return 0.0; }
-    int getNumPrograms() override { return 1; }
-    int getCurrentProgram() override { return 0; }
-    void setCurrentProgram (int) override {}
-    const juce::String getProgramName (int) override { return {}; }
-    void changeProgramName (int, const juce::String&) override {}
-    void getStateInformation (juce::MemoryBlock&) override;
-    void setStateInformation (const void*, int) override;
-
-    static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    juce::AudioProcessorValueTreeState apvts;
-
-private:
-    FaustDsp fDSP;
-    std::unique_ptr<MapUI> fUI;
-    void pushParameters();
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , proc , ')
-};
-'.
-	stream close
+	self
+		writeAsPosixText: (self asPluginProcessorHeaderAPVTSFor: aPluginType)
+		to: (self sourceFolderFor: aString) / 'PluginProcessor.h'
 ]
 
-{ #category : 'exporting - apvts' }
+{ #category : 'converting' }
 DSP >> createHeaderEditorAPVTSFilesNamed: aString for: aPluginType [
-	| folder stream proc editor |
-	proc := aPluginType , 'AudioProcessor'.
-	editor := proc , 'Editor'.
-	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source') ensureCreateDirectory.
-	stream := (folder / 'PluginEditor.h') writeStream.
-	stream nextPutAll: '#pragma once
-#include <JuceHeader.h>
-#include "PluginProcessor.h"
 
-class ' , editor , ' : public juce::AudioProcessorEditor
-{
-public:
-    ' , editor , ' (' , proc , '&);
-    ~' , editor , '() override;
-
-    void paint (juce::Graphics&) override;
-    void resized() override;
-
-private:
-    ' , proc , '& audioProcessor;
-
-    juce::OwnedArray<juce::Label> labels;
-    juce::OwnedArray<juce::Component> controls;
-    juce::OwnedArray<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachments;
-    juce::OwnedArray<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachments;
-
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , editor , ')
-};
-'.
-	stream close
+	self
+		writeAsPosixText: (self asPluginEditorHeaderAPVTSFor: aPluginType)
+		to: (self sourceFolderFor: aString) / 'PluginEditor.h'
 ]
 
 { #category : 'exporting' }
@@ -1416,11 +1342,10 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
 
 { #category : 'exporting - apvts' }
 DSP >> createPhaustoParamsHeaderNamed: aString [
-	| folder stream |
-	folder := (FileLocator documents / 'faust2Juce' / aString / 'Source')
-		          ensureCreateDirectory.
-	stream := (folder / 'PhaustoParams.h') writeStream.
-	[ stream nextPutAll: self asPhaustoParamsHeader ] ensure: [ stream close ]
+
+	self
+		writeAsPosixText: self asPhaustoParamsHeader
+		to: (self sourceFolderFor: aString) / 'PhaustoParams.h'
 ]
 
 { #category : 'exporting' }
@@ -1940,6 +1865,13 @@ DSP >> source [
 
 { #category : 'accessing' }
 DSP >> source: aUnitGenerator [
+]
+
+{ #category : 'exporting - helpers' }
+DSP >> sourceFolderFor: aString [
+	"Source/ folder of the exported JUCE project"
+
+	^ (FileLocator documents / 'faust2Juce' / aString / 'Source') ensureCreateDirectory
 ]
 
 { #category : 'start-stop' }
