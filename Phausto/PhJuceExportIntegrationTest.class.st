@@ -23,6 +23,11 @@ PhJuceExportIntegrationTest >> contentsOf: aFileName [
     ^ (self exportFolder / aFileName) contents
 ]
 
+{ #category : 'accessing' }
+PhJuceExportIntegrationTest >> effect [
+       ^ PhEffectPluginType new
+]
+
 { #category : 'helpers' }
 PhJuceExportIntegrationTest >> effectDsp [
     | d |
@@ -41,9 +46,21 @@ PhJuceExportIntegrationTest >> exportName [
     ^ 'PhExportTestPlugin'
 ]
 
+{ #category : 'running' }
+PhJuceExportIntegrationTest >> setUp [
+    super setUp.
+    dsp := DSP new name: 'MyApp'
+]
+
 { #category : 'helpers' }
 PhJuceExportIntegrationTest >> sourceContentsOf: aFileName [
     ^ (self exportFolder / 'Source' / aFileName) contents
+]
+
+{ #category : 'accessing' }
+PhJuceExportIntegrationTest >> synth [
+
+	^ PhMonoSynthPluginType new
 ]
 
 { #category : 'helpers' }
@@ -55,7 +72,7 @@ PhJuceExportIntegrationTest >> synthDsp [
     ^ d
 ]
 
-{ #category : 'setup' }
+{ #category : 'running' }
 PhJuceExportIntegrationTest >> tearDown [
     dsp ifNotNil: [ dsp destroy ].
     self exportFolder ensureDeleteAll.
@@ -97,4 +114,17 @@ PhJuceExportIntegrationTest >> testExportMonoSynthWritesAllFiles [
     dsp := self synthDsp.
     dsp export2JuceWithName: self exportName type: PhMonoSynthPluginType new.
     self assertProjectFilesFor: PhMonoSynthPluginType new
+]
+
+{ #category : 'helpers' }
+PhJuceExportIntegrationTest >> testProcessorCppNeedsNoFaustIncludePath [
+
+	{
+		self effect.
+		self synth } do: [ :type |
+			self
+				deny:
+					((dsp asPluginProcessorCppAPVTSFor: type) includesSubstring:
+						 'faust/gui/')
+				description: type typeName , ' includes a faust/gui header' ]
 ]

@@ -553,13 +553,15 @@ private:
 '
 ]
 
-{ #category : 'exporting - apvts' }
+{ #category : 'converting' }
 DSP >> asPluginProcessorCppAPVTSFor: aPluginType [
+    "MapUI comes from the Faust header (faustMinimalInlined.h architecture),
+     included through PluginProcessor.h. That MapUI is a reduced version:
+     use only setParamValue."
     | proc |
     proc := aPluginType typeName , 'AudioProcessor'.
     ^ '#include "PluginProcessor.h"
 #include "PluginEditor.h"
-#include "faust/gui/MapUI.h"
 
 juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParameterLayout()
 {
@@ -581,11 +583,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParamete
 }
 
 ' , proc , '::~' , proc , '() = default;
-
-bool ' , proc , '::faustHasPath (const char* path) const
-{
-    return fUI != nullptr && fUI->getParamIndex (path) >= 0;
-}
 
 void ' , proc , '::prepareToPlay (double sampleRate, int)
 {
@@ -968,7 +965,7 @@ private:
 	^ template copyReplaceAll: 'XXX' with: aPluginType
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting - apvts' }
 DSP >> asPluginProcessorHeaderAPVTSFor: aPluginType [
     | proc |
     proc := aPluginType typeName , 'AudioProcessor'.
@@ -1012,7 +1009,6 @@ private:
     std::unique_ptr<MapUI> fUI;
     std::atomic<float>* raw[PhaustoParams::count] = {};
     void pushParameters();
-    bool faustHasPath (const char* path) const;
 ' , aPluginType midiMembersCpp , '
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , proc , ')
 };
@@ -1913,6 +1909,15 @@ DSP >> printOn: aStream [
 { #category : 'helpers' }
 DSP >> projectFolderFor: aString [
     ^ (FileLocator documents / 'faust2Juce' / aString) ensureCreateDirectory
+]
+
+{ #category : 'converting' }
+DSP >> reateJucerFileNamed: aString for: aPluginType [
+    self
+        writeAsPosixText: (self
+            asJucerFor: (self pluginIdentityNamed: aString)
+            type: aPluginType)
+        to: (self projectFolderFor: aString) / (aString , '.jucer')
 ]
 
 { #category : 'ui-building' }
