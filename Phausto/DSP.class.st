@@ -224,6 +224,28 @@ DSP >> apvtsParameterControlsFrom: aJsonString [
 
 ]
 
+{ #category : 'as yet unclassified' }
+DSP >> apvtsParameterControlsFrom: aJsonString for: aPluginType [
+    | kept names offender |
+    kept := (self apvtsControlsFrom: aJsonString) reject: [ :c |
+        (#( 'hbargraph' 'vbargraph' 'soundfile' ) includes:
+            (c at: #type ifAbsent: [ '' ]))
+        or: [ aPluginType excludesControl: c ] ].
+    kept := (kept asSortedCollection: [ :a :b |
+        (a at: #address) <= (b at: #address) ]) asArray.
+    names := (kept collect: [ :c | c at: #shortname ]) asSet.
+    names size = kept size ifFalse: [
+        self error: 'Duplicate APVTS shortnames in ' , self name
+            , ': the descriptor table would contain unreachable ids' ].
+    offender := kept
+        detect: [ :c | (c at: #label) includesAnyOf: '"\' ]
+        ifNone: [ nil ].
+    offender ifNotNil: [
+        self error: 'Label breaks the C++ string literal: '
+            , (offender at: #label) ].
+    ^ kept
+]
+
 { #category : 'exporting' }
 DSP >> asCmajorPolyWrapperFor: aName [
 	"write the cmajor polyWrapper for the patch / by default 16 voices polyphony"
@@ -978,6 +1000,11 @@ index := self getParamIndex: aString.
 (index = -1) ifTrue: [ ^ Error new signal: 'Parameter named ' , aString , ' does not exist!!' ] ifFalse: [^ PhButton  new  label: aString; dsp: self ]
 
 
+]
+
+{ #category : 'as yet unclassified' }
+DSP >> cmakeJuceAddPluginFor: aPhPluginIdentity type: aString [ 
+	self shouldBeImplemented.
 ]
 
 { #category : 'exporting - apvts' }
@@ -2037,6 +2064,11 @@ DSP >> trig: aString for: aDurationInSeconds [
 					self setValue: 1 parameter: aString.
 					aDurationInSeconds wait.
 					self setValue: 0 parameter: aString ] forkAt: 70 ]
+]
+
+{ #category : 'exporting - apvts' }
+DSP >> vtsParameterControlsFrom: aJsonString [
+    ^ self apvtsParameterControlsFrom: aJsonString for: PhEffectPluginType new
 ]
 
 { #category : 'exporting' }
