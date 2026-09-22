@@ -12,6 +12,11 @@ Class {
 	#tag : 'UIPrimitives'
 }
 
+{ #category : 'instance creation' }
+PhUIMetadataBuilder class >> on: aWidget [
+^ self new widget: aWidget
+]
+
 { #category : 'metadata' }
 PhUIMetadataBuilder >> accAxis: axis curve: curve min: minVal center: center max: maxVal [
 	^ self declare: 'acc' value: (String streamContents: [ :s |
@@ -182,11 +187,6 @@ PhUIMetadataBuilder >> midiStop [
 
 ]
 
-{ #category : 'instance creation' }
-PhUIMetadataBuilder >> on: aWidget [
-	^ self new widget: aWidget
-]
-
 { #category : 'metadata' }
 PhUIMetadataBuilder >> scale: aString [
 	^ self declare: 'scale' value: aString
@@ -224,6 +224,11 @@ PhUIMetadataBuilder >> styleRadio: associations [
 { #category : 'metadata' }
 PhUIMetadataBuilder >> tooltip: aString [
 	^ self declare: 'tooltip' value: aString
+]
+
+{ #category : 'accessing' }
+PhUIMetadataBuilder >> unit: aString [ 
+	^ self declare: 'unit' value: aString
 ]
 
 { #category : 'instance creation' }
