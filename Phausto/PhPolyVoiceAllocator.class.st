@@ -37,6 +37,26 @@ PhPolyVoiceAllocator >> compute: count into: outputBuffer [
             self sumBuffer: mixBuffer into: outputBuffer count: count ] ]
 ]
 
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> dateCounter [
+    ^ dateCounter
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> dateCounter: aDateCounter [
+    dateCounter := aDateCounter
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> factory [
+    ^ factory
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> factory: aFactory [
+    factory := aFactory
+]
+
 { #category : 'initialization' }
 PhPolyVoiceAllocator >> initializeWithFactory: aFactory voiceCount: n [
     factory := aFactory.
@@ -61,4 +81,44 @@ PhPolyVoiceAllocator >> keyOnNote: pitch velocity: vel [
     voice := self allocateVoice.
     dateCounter := dateCounter + 1.
     voice keyOnNote: pitch velocity: vel date: dateCounter.
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> mixBuffer [
+    ^ mixBuffer
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> mixBuffer: aMixBuffer [
+    mixBuffer := aMixBuffer
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> stealingPolicy [
+    ^ stealingPolicy
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> stealingPolicy: aStealingPolicy [
+    stealingPolicy := aStealingPolicy
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> voiceCount [
+    ^ voiceCount
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> voiceCount: aVoiceCount [
+    voiceCount := aVoiceCount
+]
+
+{ #category : 'accessing' }
+PhPolyVoiceAllocator >> voices [
+    ^ voices
+]
+
+{ #category : 'as yet unclassified' }
+PhPolyVoiceAllocator >> voices: aVoices [
+    voices := aVoices
 ]
