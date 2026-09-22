@@ -1476,18 +1476,21 @@ DSP >> export2JuceAPVTSWithName: aString type: aPluginType [
 ]
 
 { #category : 'exporting' }
-DSP >> export2JuceWithName: aString type: aPluginType [
-	"aPluginType is 'Effect', 'MonoSynth' or 'PolySynth'.
+DSP >> export2JuceWithName: aString type: aPluginTypeString [ 
+	"aPluginTypeString is 'Effect', 'MonoSynth' or 'PolySynth'.
 	 aString becomes the CMake target name: plain identifier, no spaces."
 
-	self createPhaustoParamsHeaderNamed: aString.
-	self createHeaderAPVTSFilesNamed: aString for: aPluginType.
-	self createCppAPVTSFilesNamed: aString for: aPluginType.
-	self createHeaderEditorAPVTSFilesNamed: aString for: aPluginType.
-	self createCppEditorAPVTSFilesNamed: aString for: aPluginType.
-	self createJucerFileNamed: aString for: aPluginType.
-	self createCMakeFileNamed: aString for: aPluginType.
-	self createFaustHeaderFileNamed: aString for: aPluginType
+	| pluginType |
+	pluginType := PhPluginType fromString: aPluginTypeString.
+	self
+		createPhaustoParamsHeaderNamed: aString for: pluginType;
+		createHeaderAPVTSFilesNamed: aString for: pluginType;
+		createCppAPVTSFilesNamed: aString for: pluginType;
+		createHeaderEditorAPVTSFilesNamed: aString for: pluginType;
+		createCppEditorAPVTSFilesNamed: aString for: pluginType;
+		createJucerFileNamed: aString for: pluginType;
+		createCMakeFileNamed: aString for: pluginType;
+		createFaustHeaderFileNamed: aString for: pluginType typeName
 ]
 
 { #category : 'accessing' }
