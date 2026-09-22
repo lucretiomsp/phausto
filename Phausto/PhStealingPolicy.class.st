@@ -1,3 +1,8 @@
+"
+""Strategy pattern. Swappable voice-stealing logic.
+Subclasses implement #stealFrom: to define which voice gets recycled when all voices are active.
+Default policy: steal the oldest voice.""
+"
 Class {
 	#name : 'PhStealingPolicy',
 	#superclass : 'Object',
