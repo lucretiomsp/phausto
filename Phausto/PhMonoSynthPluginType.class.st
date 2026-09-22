@@ -9,6 +9,12 @@ Class {
 	#tag : 'Exporting'
 }
 
+{ #category : 'defaults' }
+PhMonoSynthPluginType class >> excludesControl: aControl [ 
+	"MIDI drives these directly, they must not appear in APVTS."
+	^ self synthControlNames includes: (aControl at: #shortname)
+]
+
 { #category : 'accessing' }
 PhMonoSynthPluginType >> acceptsMidi [
 	^ true

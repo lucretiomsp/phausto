@@ -462,22 +462,13 @@ namespace PhaustoParams
 
 { #category : 'exporting' }
 DSP >> asPluginEditorCppAPVTSFor: aPluginType [
-"The generated PluginEditor.cpp: the default scene, one row per parameter, horizontal faders with a 200 px track. Iterates PhaustoParams::table, so the attachments cannot diverge from the layout."
-
-	| proc editor |
-	proc := aPluginType , 'AudioProcessor'.
-	editor := proc , 'Editor'.
-	^ '#include "PluginProcessor.h"
+    "Iterates PhaustoParams::table, so the attachments cannot diverge
+     from the layout that created the parameters."
+    | proc editor |
+    proc := aPluginType typeName , 'AudioProcessor'.
+    editor := proc , 'Editor'.
+    ^ '#include "PluginProcessor.h"
 #include "PluginEditor.h"
-
-namespace
-{
-    constexpr int margin = 12;
-    constexpr int rowH   = 36;
-    constexpr int labelW = 120;
-    constexpr int faderW = 200;   // fader track length
-    constexpr int valueW = 70;    // value box right of the fader
-}
 
 ' , editor , '::' , editor , ' (' , proc , '& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
@@ -494,9 +485,8 @@ namespace
         }
         else
         {
-            auto* sl = new juce::Slider (juce::Slider::LinearHorizontal,
-                                         juce::Slider::TextBoxRight);
-            sl->setTextBoxStyle (juce::Slider::TextBoxRight, false, valueW, rowH - 12);
+            auto* sl = new juce::Slider (juce::Slider::RotaryHorizontalVerticalDrag,
+                                         juce::Slider::TextBoxBelow);
             addAndMakeVisible (sl);
             sliderAttachments.add (new juce::AudioProcessorValueTreeState::SliderAttachment (
                 audioProcessor.apvts, d.id, *sl));
@@ -508,8 +498,7 @@ namespace
         labels.getLast()->setJustificationType (juce::Justification::centredRight);
     }
 
-    setSize (margin + labelW + faderW + valueW + margin,
-             margin + juce::jmax (1, controls.size()) * rowH + margin);
+    setSize (380, juce::jmax (1, controls.size()) * 64 + 24);
 }
 
 ' , editor , '::~' , editor , '() {}
@@ -521,25 +510,24 @@ void ' , editor , '::paint (juce::Graphics& g)
 
 void ' , editor , '::resized()
 {
-    auto area = getLocalBounds().reduced (margin);
-
+    auto area = getLocalBounds().reduced (12);
+    const int rowH = 64;
     for (int i = 0; i < controls.size(); ++i)
     {
         auto row = area.removeFromTop (rowH);
-        labels[i]->setBounds (row.removeFromLeft (labelW));
-        controls[i]->setBounds (row.removeFromLeft (faderW + valueW).reduced (0, 4));
+        labels[i]->setBounds (row.removeFromLeft (150));
+        controls[i]->setBounds (row.reduced (4));
     }
 }
 '
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> asPluginEditorHeaderAPVTSFor: aPluginType [
-
-	| proc editor |
-	proc := aPluginType , 'AudioProcessor'.
-	editor := proc , 'Editor'.
-	^ '#pragma once
+    | proc editor |
+    proc := aPluginType typeName , 'AudioProcessor'.
+    editor := proc , 'Editor'.
+    ^ '#pragma once
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
@@ -1268,26 +1256,22 @@ DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [
         to: (self sourceFolderFor: aString) / 'PluginProcessor.cpp'
 ]
 
-{ #category : 'exporting - apvts' }
-DSP >> createCppEditorAPVTSFilesNamed: aString for: aPluginType [ 
-	| folder |
-	folder := self sourceFolderFor: aString.
-	self
-		writeAsPosixText: (self asPluginEditorCppAPVTSFor: aPluginType typeName)
-		to: folder / 'PluginEditor.cpp'
-
+{ #category : 'exporting' }
+DSP >> createCppEditorAPVTSFilesNamed: aString for: aPluginType [
+    self
+        writeAsPosixText: (self asPluginEditorCppAPVTSFor: aPluginType)
+        to: (self sourceFolderFor: aString) / 'PluginEditor.cpp'
 ]
 
 { #category : 'exporting' }
-DSP >> createFaustHeaderFileNamed: aName for: aPluginTypeName [ 
-	"Accepts the raw type name string because LibFaust needs it."
-
-	^ LibFaust uniqueInstance
-		createFaustHeaderFileFromString: self generatedCode
-		withName: aName
-		architecture: 'faustMinimalInlined.h'
-		type: aPluginTypeName
-
+DSP >> createFaustHeaderFileNamed: aName for: aPluginType [
+    "Writes Source/Faust<Type>.h, the name the processor #includes.
+     LibFaust is the FFI boundary, so it gets the type name as a String."
+    ^ LibFaust uniqueInstance
+        createFaustHeaderFileFromString: self generatedCode
+        withName: aName
+        architecture: 'faustMinimalInlined.h'
+        type: aPluginType typeName
 ]
 
 { #category : 'exporting' }
@@ -1338,12 +1322,11 @@ DSP >> createHeaderAPVTSFilesNamed: aString for: aPluginType [
         to: (self sourceFolderFor: aString) / 'PluginProcessor.h'
 ]
 
-{ #category : 'converting' }
+{ #category : 'exporting' }
 DSP >> createHeaderEditorAPVTSFilesNamed: aString for: aPluginType [
-
-	self
-		writeAsPosixText: (self asPluginEditorHeaderAPVTSFor: aPluginType)
-		to: (self sourceFolderFor: aString) / 'PluginEditor.h'
+    self
+        writeAsPosixText: (self asPluginEditorHeaderAPVTSFor: aPluginType)
+        to: (self sourceFolderFor: aString) / 'PluginEditor.h'
 ]
 
 { #category : 'exporting - apvts' }
@@ -1569,17 +1552,18 @@ DSP >> export2JuceAPVTSWithName: aString type: aPluginType [
 ]
 
 { #category : 'exporting' }
-DSP >> export2JuceWithName: aString type: aTypeString [
-    | pluginType |
-    pluginType := PhPluginType fromString: aTypeString.
-    self createPhaustoParamsHeaderNamed: aString for: pluginType.
-    self createHeaderAPVTSFilesNamed: aString for: pluginType.
-    self createCppAPVTSFilesNamed: aString for: pluginType.
-    self createHeaderEditorAPVTSFilesNamed: aString for: pluginType typeName.
-    self createCppEditorAPVTSFilesNamed: aString for: pluginType typeName.
-    self createJucerFileNamed: aString for: pluginType.
-    self createCMakeFileNamed: aString for: pluginType.
-    self createFaustHeaderFileNamed: aString for: pluginType typeName
+DSP >> export2JuceWithName: aString type: aPluginType [
+    "aPluginType is a PhPluginType, e.g. PhMonoSynthPluginType new.
+     aString becomes the CMake target name: plain identifier, no spaces."
+    self
+        createPhaustoParamsHeaderNamed: aString for: aPluginType;
+        createHeaderAPVTSFilesNamed: aString for: aPluginType;
+        createCppAPVTSFilesNamed: aString for: aPluginType;
+        createHeaderEditorAPVTSFilesNamed: aString for: aPluginType;
+        createCppEditorAPVTSFilesNamed: aString for: aPluginType;
+        createJucerFileNamed: aString for: aPluginType;
+        createCMakeFileNamed: aString for: aPluginType;
+        createFaustHeaderFileNamed: aString for: aPluginType
 ]
 
 { #category : 'accessing' }

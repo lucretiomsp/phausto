@@ -18,6 +18,12 @@ PhPluginType class >> fromString: aString [
 		ifNone: [ self error: 'Unknown plugin type: ' , aString ]
 ]
 
+{ #category : 'accessing' }
+PhPluginType class >> synthControlNames [
+
+	^ #( 'freq' 'gate' 'gain' )
+]
+
 { #category : 'defaults' }
 PhPluginType >> acceptsMidi [ 
 
