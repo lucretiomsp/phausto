@@ -1,5 +1,5 @@
 "
-The String becomes an object once, at the export entry point. Every downstream method receives the object. No conditionals anywhere else.
+Abstract Strategy for plugin-type-specific facts and C++ fragments. Each subclass answers the booleans, categories, and code hooks that the DSP exporter templates need. The exporter delegates type-dependent decisions here instead of branching on a String. Subclasses: PhEffectPluginType, PhMonoSynthPluginType (PhPolySynthPluginType planned). Entry point: PhPluginType fromString: ''Effect'' converts the type string once at the export boundary.
 "
 Class {
 	#name : 'PhPluginType',

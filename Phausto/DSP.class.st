@@ -25,7 +25,8 @@ Class {
 		'parameters',
 		'isMIDI',
 		'source',
-		'parameterStore'
+		'parameterStore',
+		'pluginIdentity'
 	],
 	#classVars : [
 		'defaultName',
@@ -218,36 +219,9 @@ DSP >> apvtsParameterControls [
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> apvtsParameterControlsFrom: aJsonString [
+DSP >> apvtsParameterControlsFrom: aJsonString [ 
+	^ self apvtsParameterControlsFrom: aJsonString for: PhEffectPluginType new
 
-"Leaf controls that become RangedAudioParameters. Bargraphs are outputs and soundfiles are not controls, so both are rejected. Sorted by address so the emitted table is byte-stable across runs. Signals on duplicate shortnames:
-
-APVTS keeps only the first, and every later lookup would silently miss.
-Signals on labels that would break the generated C++ string literal."
-		| kept names offender |
-		kept := (self apvtsControlsFrom: aJsonString) reject: [ :c |
-				        #( 'hbargraph' 'vbargraph' 'soundfile' ) includes:
-					        (c at: #type ifAbsent: [ '' ]) ].
-		kept := (kept asSortedCollection: [ :a :b |
-			         (a at: #address) <= (b at: #address) ]) asArray.
-
-		names := (kept collect: [ :c | c at: #shortname ]) asSet.
-		names size = kept size ifFalse: [
-				self error: 'Duplicate APVTS shortnames in ' , self name
-					, ': the descriptor table would contain unreachable ids' ].
-
-		"Labels land inside a C++ string literal in PhaustoParams.h. Phausto-generated
-	 labels are safe by construction, but a hand-written Faust source could carry
-	 a quote or backslash. Assert rather than escape: if this never fires, escaping
-	 was never needed; if it does, there is a real case to build against."
-		offender := kept
-			            detect: [ :c | (c at: #label) includesAnyOf: '"\' ]
-			            ifNone: [ nil ].
-		offender ifNotNil: [
-				self error:
-					'Label breaks the C++ string literal: ' , (offender at: #label) ].
-
-		^ kept 
 ]
 
 { #category : 'exporting' }
@@ -273,10 +247,16 @@ DSP >> asPhaustoParamsHeader [
 	^ self asPhaustoParamsHeaderFrom: self getJSON
 ]
 
-{ #category : 'exporting - apvts' }
-DSP >> asPhaustoParamsHeaderFrom: aJsonString [
-	"The single source of truth for the generated plugin: layout, push loop and
-	 editor all iterate this table, so they cannot diverge."
+{ #category : 'exporting' }
+DSP >> asPhaustoParamsHeaderFrom: aJsonString [ 
+"keep the legacy zero-arg for backward compatibility"
+	^ self asPhaustoParamsHeaderFrom: aJsonString for: PhEffectPluginType new
+
+]
+
+{ #category : 'exporting' }
+DSP >> asPhaustoParamsHeaderFrom: aJsonString for: aPluginType [ 
+	"Single source of truth. Synth types exclude MIDI-driven controls."
 
 	^ String streamContents: [ :s |
 		s nextPutAll: '#pragma once
@@ -294,7 +274,7 @@ namespace PhaustoParams
     };
 
     static const Descriptor table[] = {'; lf.
-		(self apvtsParameterControlsFrom: aJsonString) do: [ :c |
+		(self apvtsParameterControlsFrom: aJsonString for: aPluginType) do: [ :c |
 			s nextPutAll: (self apvtsDescriptorRowFor: c); lf ].
 		s nextPutAll: '    };
 
@@ -317,6 +297,7 @@ namespace PhaustoParams
     }
 }
 '; lf ]
+
 ]
 
 { #category : 'exporting' }
@@ -424,14 +405,19 @@ private:
 '
 ]
 
-{ #category : 'converting' }
-DSP >> asPluginProcessorCppAPVTSFor: aPluginType [
-	"The generated PluginProcessor.cpp. Table-driven: every per-parameter detail lives in PhaustoParams.h. No Faust system headers: FaustEffect.h is self-contained."
+{ #category : 'exporting - apvts' }
+DSP >> asPluginProcessorCppAPVTSFor: aPluginType [ 
+	| proc buses midiCall midiHandler |
+	proc := aPluginType typeName , 'AudioProcessor'.
+	buses := aPluginType busesPropertiesCpp.
+	midiCall := aPluginType processBlockMidiCallCpp.
+	midiHandler := aPluginType midiHandlerCpp
+		copyReplaceAll: '<PROC>' with: proc.
 
-	| proc |
-	proc := aPluginType , 'AudioProcessor'.
-	^ '#include "PluginProcessor.h"
+	^ String streamContents: [ :s |
+		s nextPutAll: '#include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "faust/gui/MapUI.h"
 
 juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParameterLayout()
 {
@@ -439,9 +425,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParamete
 }
 
 ' , proc , '::' , proc , '()
-    : AudioProcessor (BusesProperties()
-                          .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                          .withOutput ("Output", juce::AudioChannelSet::stereo(), true)),
+    : AudioProcessor (' , buses , '),
       apvts (*this, nullptr, "PARAMETERS", createParameterLayout())
 {
     fUI = std::make_unique<MapUI>();
@@ -468,17 +452,20 @@ void ' , proc , '::pushParameters()
             fUI->setParamValue (PhaustoParams::table[i].faustPath, raw[i]->load());
 }
 
-void ' , proc , '::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer&)
+void ' , proc , '::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     pushParameters();
+' , midiCall , '
 
     float* chans[2] = { buffer.getWritePointer (0),
                         buffer.getNumChannels() > 1 ? buffer.getWritePointer (1)
                                                     : buffer.getWritePointer (0) };
     fDSP.compute (buffer.getNumSamples(), chans, chans);
 }
-
+'.
+		midiHandler ifNotEmpty: [ s lf; nextPutAll: midiHandler; lf ].
+		s nextPutAll: '
 juce::AudioProcessorEditor* ' , proc , '::createEditor()
 {
     return new ' , proc , 'Editor (*this);
@@ -496,7 +483,8 @@ void ' , proc , '::setStateInformation (const void* data, int size)
 }
 
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc , '(); }
-'
+' ]
+
 ]
 
 { #category : 'converting' }
@@ -834,18 +822,21 @@ private:
 	^ template copyReplaceAll: 'XXX' with: aPluginType
 ]
 
-{ #category : 'converting' }
-DSP >> asPluginProcessorHeaderAPVTSFor: aPluginType [
-	"The generated PluginProcessor.h. Declares every member the .cpp uses."
+{ #category : 'exporting - apvts' }
+DSP >> asPluginProcessorHeaderAPVTSFor: aPluginType [ 
+	| proc acceptsMidi midiMembers |
+	proc := aPluginType typeName , 'AudioProcessor'.
+	acceptsMidi := aPluginType acceptsMidi
+		ifTrue: [ 'true' ] ifFalse: [ 'false' ].
+	midiMembers := aPluginType midiMembersCpp.
 
-	| proc |
-	proc := aPluginType , 'AudioProcessor'.
 	^ '#pragma once
 #include <JuceHeader.h>
-#include "Faust' , aPluginType , '.h"   // self-contained: defines dsp, UI and MapUI
+#include "Faust' , aPluginType typeName , '.h"
 #include "PhaustoParams.h"
 
-using FaustDsp = mydsp; // Faust default class name from faustMinimalInlined.h
+class MapUI;
+using FaustDsp = mydsp;
 
 class ' , proc , ' : public juce::AudioProcessor
 {
@@ -860,7 +851,7 @@ public:
     juce::AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override { return true; }
     const juce::String getName() const override { return JucePlugin_Name; }
-    bool acceptsMidi() const override { return false; }
+    bool acceptsMidi() const override { return ' , acceptsMidi , '; }
     bool producesMidi() const override { return false; }
     double getTailLengthSeconds() const override { return 0.0; }
     int getNumPrograms() override { return 1; }
@@ -877,13 +868,13 @@ public:
 private:
     FaustDsp fDSP;
     std::unique_ptr<MapUI> fUI;
-    std::atomic<float>* raw[PhaustoParams::count] {};
-
+    std::atomic<float>* raw[PhaustoParams::count];
     void pushParameters();
-
+' , midiMembers , '
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , proc , ')
 };
 '
+
 ]
 
 { #category : 'converting' }
@@ -1014,29 +1005,19 @@ DSP >> createBelaCppFileNamed: aName [
 ]
 
 { #category : 'exporting' }
-DSP >> createCMakeFileNamed: aString for: aPluginType [
-	"aPluginType is 'Effect', 'MonoSynth' or 'PolySynth'."
+DSP >> createCMakeFileNamed: aString for: aPluginType [ 
+	| folder identity isSynth needsMidi |
+	identity := self pluginIdentity ifNil: [
+		PhPluginIdentity new productName: aString ].
+	isSynth := aPluginType isSynth ifTrue: [ 'TRUE' ] ifFalse: [ 'FALSE' ].
+	needsMidi := aPluginType acceptsMidi ifTrue: [ 'TRUE' ] ifFalse: [ 'FALSE' ].
 
-	| folder identity target code isSynth needsMidiIn vst3Category auMainType |
-	identity := PhPluginIdentity productName: aString.
-	target := identity targetName.
-	isSynth := 'FALSE'.
-	needsMidiIn := 'FALSE'.
-	vst3Category := 'Fx'.
-	auMainType := 'kAudioUnitType_Effect'.
-	aPluginType = 'Effect' ifFalse: [
-		isSynth := 'TRUE'.
-		needsMidiIn := 'TRUE'.
-		vst3Category := 'Instrument'.
-		auMainType := 'kAudioUnitType_MusicDevice' ].
-
-	code := '# CMakeLists.txt generated by Phausto for a Faust/JUCE plugin.
-# Configure + build:  cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build
-# Use a local JUCE instead of fetching:  cmake -B build -DJUCE_PATH=/path/to/JUCE
-
+	folder := (FileLocator documents / 'faust2Juce' / aString)
+		ensureCreateDirectory.
+	self writeAsPosixText: ('# CMakeLists.txt generated by Phausto for a Faust/JUCE plugin.
 cmake_minimum_required(VERSION 3.22)
 
-project(' , target , ' VERSION 1.0.0)
+project(' , aString , ' VERSION 1.0.0)
 
 if(DEFINED JUCE_PATH)
     add_subdirectory(${JUCE_PATH} JUCE)
@@ -1048,11 +1029,11 @@ else()
     FetchContent_MakeAvailable(JUCE)
 endif()
 
-juce_add_plugin(' , target , '
+juce_add_plugin(' , aString , '
     COMPANY_NAME "' , identity companyName , '"
     BUNDLE_ID ' , identity bundleIdentifier , '
     IS_SYNTH ' , isSynth , '
-    NEEDS_MIDI_INPUT ' , needsMidiIn , '
+    NEEDS_MIDI_INPUT ' , needsMidi , '
     NEEDS_MIDI_OUTPUT FALSE
     IS_MIDI_EFFECT FALSE
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
@@ -1060,26 +1041,26 @@ juce_add_plugin(' , target , '
     PLUGIN_MANUFACTURER_CODE ' , identity manufacturerCode , '
     PLUGIN_CODE ' , identity pluginCode , '
     FORMATS AU VST3 Standalone
-    VST3_CATEGORIES ' , vst3Category , '
-    AU_MAIN_TYPE ' , auMainType , '
-    PRODUCT_NAME "' , identity productName , '")
+    VST3_CATEGORIES ' , aPluginType vst3Category , '
+    AU_MAIN_TYPE ' , aPluginType auMainType , '
+    PRODUCT_NAME "' , aString , '")
 
-juce_generate_juce_header(' , target , ')
+juce_generate_juce_header(' , aString , ')
 
-target_sources(' , target , '
+target_sources(' , aString , '
     PRIVATE
         Source/PluginProcessor.cpp
         Source/PluginEditor.cpp)
 
-target_compile_features(' , target , ' PUBLIC cxx_std_17)
+target_compile_features(' , aString , ' PUBLIC cxx_std_17)
 
-target_compile_definitions(' , target , '
+target_compile_definitions(' , aString , '
     PUBLIC
         JUCE_WEB_BROWSER=0
         JUCE_USE_CURL=0
         JUCE_VST3_CAN_REPLACE_VST2=0)
 
-target_link_libraries(' , target , '
+target_link_libraries(' , aString , '
     PRIVATE
         juce::juce_audio_utils
         juce::juce_gui_extra
@@ -1087,10 +1068,8 @@ target_link_libraries(' , target , '
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
         juce::juce_recommended_warning_flags)
-'.
+') to: folder / 'CMakeLists.txt'
 
-	folder := (FileLocator documents / 'faust2Juce' / aString) ensureCreateDirectory.
-	self writeAsPosixText: code to: folder / 'CMakeLists.txt'
 ]
 
 { #category : 'exporting' }
@@ -1166,31 +1145,36 @@ DSP >> createCmajorPatchNamed: aName [
 		  withName: aName
 ]
 
-{ #category : 'converting' }
-DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [
-
+{ #category : 'exporting - apvts' }
+DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [ 
+	| folder |
+	folder := self sourceFolderFor: aString.
 	self
 		writeAsPosixText: (self asPluginProcessorCppAPVTSFor: aPluginType)
-		to: (self sourceFolderFor: aString) / 'PluginProcessor.cpp'
+		to: folder / 'PluginProcessor.cpp'
+
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> createCppEditorAPVTSFilesNamed: aString for: aPluginType [
-
+DSP >> createCppEditorAPVTSFilesNamed: aString for: aPluginType [ 
+	| folder |
+	folder := self sourceFolderFor: aString.
 	self
-		writeAsPosixText: (self asPluginEditorCppAPVTSFor: aPluginType)
-		to: (self sourceFolderFor: aString) / 'PluginEditor.cpp'
+		writeAsPosixText: (self asPluginEditorCppAPVTSFor: aPluginType typeName)
+		to: folder / 'PluginEditor.cpp'
+
 ]
 
 { #category : 'exporting' }
-DSP >> createFaustHeaderFileNamed: aName for: aPluginType [
-	"Writes Source/Faust<Type>.h — the name the processor's #include expects."
+DSP >> createFaustHeaderFileNamed: aName for: aPluginTypeName [ 
+	"Accepts the raw type name string because LibFaust needs it."
 
 	^ LibFaust uniqueInstance
 		createFaustHeaderFileFromString: self generatedCode
 		withName: aName
 		architecture: 'faustMinimalInlined.h'
-		type: aPluginType
+		type: aPluginTypeName
+
 ]
 
 { #category : 'exporting' }
@@ -1234,12 +1218,14 @@ DSP >> createFileNamed: aString [
 	stream close.
 ]
 
-{ #category : 'converting' }
-DSP >> createHeaderAPVTSFilesNamed: aString for: aPluginType [
-
+{ #category : 'exporting - apvts' }
+DSP >> createHeaderAPVTSFilesNamed: aString for: aPluginType [ 
+	| folder |
+	folder := self sourceFolderFor: aString.
 	self
 		writeAsPosixText: (self asPluginProcessorHeaderAPVTSFor: aPluginType)
-		to: (self sourceFolderFor: aString) / 'PluginProcessor.h'
+		to: folder / 'PluginProcessor.h'
+
 ]
 
 { #category : 'converting' }
@@ -1251,41 +1237,38 @@ DSP >> createHeaderEditorAPVTSFilesNamed: aString for: aPluginType [
 ]
 
 { #category : 'exporting' }
-DSP >> createJucerFileNamed: aString for: aPluginType [
-"aPluginType is 'Effect', 'MonoSynth' or 'PolySynth'. Names and codes come from PhPluginIdentity, so each export has its own identity in the host."
+DSP >> createJucerFileNamed: aString for: aPluginType [ 
+	| folder identity pluginIsSynth wantsMidi |
+	identity := self pluginIdentity ifNil: [
+		PhPluginIdentity new productName: aString ].
+	pluginIsSynth := aPluginType isSynth ifTrue: [ '1' ] ifFalse: [ '0' ].
+	wantsMidi := aPluginType acceptsMidi ifTrue: [ '1' ] ifFalse: [ '0' ].
 
-	| folder code identity target pluginIsSynth pluginVSTCategory |
-	identity := PhPluginIdentity productName: aString.
-	target := identity targetName.
-	pluginIsSynth := '0'.
-	pluginVSTCategory := 'kPlugCategEffect'.
-	aPluginType = 'Effect' ifFalse: [
-		pluginIsSynth := '1'.
-		pluginVSTCategory := 'kPlugCategSynth' ].
-
-	code := '<?xml version="1.0" encoding="UTF-8"?>
+	folder := (FileLocator documents / 'faust2Juce' / aString)
+		ensureCreateDirectory.
+	self writeAsPosixText: ('<?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="FaustPlugin"
-              name="' , identity productName , '"
+              name="' , aString , '"
               projectType="audioplug"
               version="1.0.0"
               bundleIdentifier="' , identity bundleIdentifier , '"
               companyName="' , identity companyName , '"
-              pluginName="' , identity productName , '"
+              pluginName="' , aString , '"
               pluginDesc="A Faust-based audio plugin made with Pharo"
               pluginManufacturer="' , identity companyName , '"
               pluginManufacturerCode="' , identity manufacturerCode , '"
               pluginCode="' , identity pluginCode , '"
               pluginChannelConfigs=""
               pluginIsSynth="' , pluginIsSynth , '"
-              pluginWantsMidiInput="' , pluginIsSynth , '"
+              pluginWantsMidiInput="' , wantsMidi , '"
               pluginProducesMidiOut="0"
               pluginIsMidiEffect="0"
               pluginEditorRequiresKeys="0"
-              pluginAUExportPrefix="' , target , 'AU"
+              pluginAUExportPrefix="' , aString , 'pluginAU"
               pluginRTASCategory=""
-              aaxIdentifier="' , identity bundleIdentifier , '.aax"
-              pluginVSTCategory="' , pluginVSTCategory , '"
+              aaxIdentifier="com.phausto.' , aString , 'plugin"
+              pluginVSTCategory="' , aPluginType jucerVstCategory , '"
               buildVST="0"
               buildVST3="1"
               buildAU="1"
@@ -1295,11 +1278,11 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
               buildStandalone="1"
               enableIAA="0">
 
-  <MAINGROUP id="main" name="' , target , 'Plugin">
+  <MAINGROUP id="main" name="' , aString , 'Plugin">
     <GROUP id="source" name="Source">
       <FILE id="cpp01" name="PluginProcessor.cpp" compile="1" resource="0" file="Source/PluginProcessor.cpp"/>
       <FILE id="hdr01" name="PluginProcessor.h" compile="0" resource="0" file="Source/PluginProcessor.h"/>
-      <FILE id="hdr02" name="Faust' , aPluginType , '.h" compile="0" resource="0" file="Source/Faust' , aPluginType , '.h"/>
+      <FILE id="hdr02" name="Faust' , aPluginType typeName , '.h" compile="0" resource="0" file="Source/Faust' , aPluginType typeName , '.h"/>
       <FILE id="cpp02" name="PluginEditor.cpp" compile="1" resource="0" file="Source/PluginEditor.cpp"/>
       <FILE id="hdr03" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
       <FILE id="hdr04" name="PhaustoParams.h" compile="0" resource="0" file="Source/PhaustoParams.h"/>
@@ -1324,31 +1307,26 @@ DSP >> createJucerFileNamed: aString for: aPluginType [
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug"   isDebug="1" optimisation="1" targetName="' , target , '"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="' , target , '"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="' , aString , '"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="' , aString , '"/>
       </CONFIGURATIONS>
     </XCODE_MAC>
-
     <VS2022 targetFolder="Builds/VisualStudio2022">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug"   isDebug="1" optimisation="1" targetName="' , target , '"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="' , target , '"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="' , aString , '"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="' , aString , '"/>
       </CONFIGURATIONS>
     </VS2022>
-
     <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug"   isDebug="1" optimisation="1" targetName="' , target , '"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="' , target , '"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="' , aString , '"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="' , aString , '"/>
       </CONFIGURATIONS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
-
 </JUCERPROJECT>
-'.
+') to: folder / (aString , '.jucer')
 
-	folder := (FileLocator documents / 'faust2Juce' / aString) ensureCreateDirectory.
-	self writeAsPosixText: code to: folder / (aString , '.jucer')
 ]
 
 { #category : 'exporting - apvts' }
@@ -1357,6 +1335,15 @@ DSP >> createPhaustoParamsHeaderNamed: aString [
 	self
 		writeAsPosixText: self asPhaustoParamsHeader
 		to: (self sourceFolderFor: aString) / 'PhaustoParams.h'
+]
+
+{ #category : 'exporting' }
+DSP >> createPhaustoParamsHeaderNamed: aString for: aPluginType [ 
+	| folder |
+	folder := self sourceFolderFor: aString.
+	self
+		writeAsPosixText: (self asPhaustoParamsHeaderFrom: self getJSON for: aPluginType)
+		to: folder / 'PhaustoParams.h'
 ]
 
 { #category : 'exporting' }
@@ -1810,6 +1797,18 @@ DSP >> playNote: aMidiNN prefix: aString dur: aDuration [
 	
 self setValue:  aMidiNN midiNNToFreq   parameter: aString , 'Freq'.
 self trig: aString , 'Trigger' for: aDuration  
+]
+
+{ #category : 'accessing' }
+DSP >> pluginIdentity [ 
+
+^ pluginIdentity 
+]
+
+{ #category : 'accessing' }
+DSP >> pluginIdentity: aPhPluginIdentity [
+
+	pluginIdentity := aPhPluginIdentity 
 ]
 
 { #category : 'printing' }
