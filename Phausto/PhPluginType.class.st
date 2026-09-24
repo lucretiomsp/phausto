@@ -18,6 +18,12 @@ PhPluginType class >> fromString: aString [
 		ifNone: [ self error: 'Unknown plugin type: ' , aString ]
 ]
 
+{ #category : 'testing' }
+PhPluginType class >> isAbstract [ 
+
+^ self == PhPluginType 
+]
+
 { #category : 'accessing' }
 PhPluginType class >> synthControlNames [
 
