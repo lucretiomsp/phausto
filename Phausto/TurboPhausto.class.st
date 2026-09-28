@@ -275,6 +275,13 @@ TurboPhausto >> highPassSweep: anArrayWithAFrequencyAndATimeInSeconds [
 	self sweepToValue: freq parameter: #highpassfreq in: duration
 ]
 
+{ #category : 'initialization' }
+TurboPhausto >> initialize [
+
+	super initialize.
+	self setValue: 0.05 parameter: 'reverb'
+]
+
 { #category : 'API - changes' }
 TurboPhausto >> lowPassFreq: aFrequency [
 	"aFrequency value is forced in filter range"
