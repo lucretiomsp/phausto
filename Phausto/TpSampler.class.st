@@ -89,30 +89,18 @@ TpSampler >> changeParamsPrefix [
 { #category : 'utilities' }
 TpSampler >> createMultiFilesURL [
 
-	| allFiles audioFiles unsortedfileNames allFilePaths filePathPrefix filePathSuffix allFilesPathsWithoutLastColumn |
-	allFiles := pathToFolder asFileReference allChildren reject: [ :i |
-		            i isHidden ].
-	"first we select only valid audio files"
-	audioFiles := allFiles select: [ :f | f pathString isAudioFilePath ].
-	unsortedfileNames := (2 to: audioFiles size + 1) collect: [ :i |
-		                     (allFiles at: i) asAbsolute pathString
-			                     surroundedByQuotes ].
-	
-	fileNamesSorted := unsortedfileNames sort.
-
-	fileNamesSorted do: [ :f | f traceCr ].
-
-	allFilePaths := ''.
-	fileNamesSorted do: [ :i |
-		allFilePaths := (allFilePaths copyReplaceAll: '\' with: '/') , i
-		                , ';' ].
-	filePathPrefix := '' , self label , '[url:{'.
-	filePathSuffix := '}]'.
-	allFilesPathsWithoutLastColumn := allFilePaths
-		                                  copyFrom: 1
-		                                  to: allFilePaths size - 1.
-	filesURL := filePathPrefix , allFilesPathsWithoutLastColumn
-	            , filePathSuffix
+	| audioPaths |
+	audioPaths := (pathToFolder asFileReference allChildren select: [ :f |
+		               f isFile and: [
+			               f isHidden not and: [
+				               #( 'wav' 'aif' 'aiff' ) includes: f extension asLowercase ] ] ])
+		              collect: [ :f |
+			              (f asAbsolute pathString copyReplaceAll: '\' with: '/')
+				              surroundedByQuotes ].
+	audioPaths ifEmpty: [
+		^ self error: 'No wav/aif/aiff files in ' , pathToFolder printString ].
+	fileNamesSorted := audioPaths asSortedCollection asArray.
+	filesURL := self label , '[url:{' , (';' join: fileNamesSorted) , '}]'
 ]
 
 { #category : 'initialization' }

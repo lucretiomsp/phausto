@@ -22,13 +22,11 @@ Class {
 { #category : 'accessing' }
 PhaustoDynamicEngine class >> bufferSize [
 
-
 	| bfSize |
-	
 	bfSize := 512.
-	Smalltalk os family = #MacOSX ifTrue: [ bfSize := 128 ].
-	Smalltalk os family = #Windows ifTrue: [bfSize := 512 ].
-	Smalltalk os family = #Unix ifTrue: [bfSize := 512 ].
+	OSPlatform current family = #MacOSX ifTrue: [ bfSize := 128 ].
+	OSPlatform current family = #Windows ifTrue: [ bfSize := 512 ].
+	OSPlatform current family = #Unix ifTrue: [ bfSize := 512 ].
 	^ bfSize
 ]
 
