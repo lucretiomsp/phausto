@@ -728,9 +728,10 @@ DSP >> createCmajorPatchNamed: aName [
 
 { #category : 'exporting - apvts' }
 DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [
-    self
-        writeAsPosixText: (self asPluginProcessorCppAPVTSFor: aPluginType)
-        to: (self sourceFolderFor: aString) / 'PluginProcessor.cpp'
+
+	self
+		writeAsPosixText: (self asPluginProcessorCppAPVTSFor: aPluginType)
+		to: (self sourceFolderFor: aString) / 'PluginProcessor.cpp'
 ]
 
 { #category : 'exporting' }
@@ -783,6 +784,14 @@ DSP >> createFileNamed: aString [
 	stream := destination writeStream.
 	stream nextPutAll: self generatedCode .
 	stream close.
+]
+
+{ #category : 'as yet unclassified' }
+DSP >> createHeaderAPVTSFilesNamed: aString for: aPluginType [
+
+	self
+		writeAsPosixText: (self asPluginProcessorHeaderAPVTSFor: aPluginType)
+		to: (self sourceFolderFor: aString) / 'PluginProcessor.h'
 ]
 
 { #category : 'exporting' }
