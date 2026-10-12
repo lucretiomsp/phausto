@@ -644,6 +644,16 @@ DSP >> createBelaCppFileNamed: aName [
 		  withName: aName
 ]
 
+{ #category : 'exporting' }
+DSP >> createBuildScriptNamed: aString [
+
+	| script |
+	script := PhBuildScript for: (self pluginIdentityNamed: aString).
+	self
+		writeAsPosixText: script contents
+		to: (self projectFolderFor: aString) / script fileName
+]
+
 { #category : 'exporting - apvts' }
 DSP >> createCMakeFileNamed: aString for: aPluginType [
     self
@@ -786,7 +796,7 @@ DSP >> createFileNamed: aString [
 	stream close.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'exporting - apvts' }
 DSP >> createHeaderAPVTSFilesNamed: aString for: aPluginType [
 
 	self
@@ -858,6 +868,7 @@ DSP >> export2JuceWithName: aString type: aPluginType editor: anEditorExport [
 		createCppAPVTSFilesNamed: aString for: aPluginType;
 		createJucerFileNamed: aString for: aPluginType;
 		createCMakeFileNamed: aString for: aPluginType;
+		createBuildScriptNamed: aString;
 		createFaustHeaderFileNamed: aString for: aPluginType.
 	anEditorExport
 		exportInto: (self sourceFolderFor: aString)

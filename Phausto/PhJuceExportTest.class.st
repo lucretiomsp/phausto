@@ -96,6 +96,24 @@ PhJuceExportTest >> testEffectExportWritesEverySourceFile [
 			self assert: (written includes: each) description: each , ' was not written' ]
 ]
 
+{ #category : 'tests' }
+PhJuceExportTest >> testEveryWriterDelegatesToItsQuery [
+	"Each create... must write what its as... query answers. A writer with its own inline template would bypass the tests."
+
+	| stale |
+	stale := {
+		         #createPhaustoParamsHeaderNamed:for: -> #asPhaustoParamsHeaderFrom:for:.
+		         #createHeaderAPVTSFilesNamed:for: -> #asPluginProcessorHeaderAPVTSFor:.
+		         #createCppAPVTSFilesNamed:for: -> #asPluginProcessorCppAPVTSFor:.
+		         #createCMakeFileNamed:for: -> #asCMakeListsFor:type:.
+		         #createJucerFileNamed:for: -> #asJucerFor:type:.
+		         #createBuildScriptNamed: -> #contents } reject: [ :each |
+		         (DSP >> each key) messages includes: each value ].
+	self
+		assert: stale isEmpty
+		description: 'Writers with inline templates: ' , stale printString
+]
+
 { #category : 'running' }
 PhJuceExportTest >> testJucerListsParamsHeader [
 

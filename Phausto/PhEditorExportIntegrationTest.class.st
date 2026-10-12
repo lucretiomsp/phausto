@@ -102,6 +102,16 @@ PhEditorExportIntegrationTest >> testDefaultExportWritesGenericEditor [
 ]
 
 { #category : 'tests' }
+PhEditorExportIntegrationTest >> testExportWritesBuildScript [
+
+	| script |
+	dsp export2JuceWithName: self pluginName type: self pluginType.
+	script := FileLocator documents / 'faust2Juce' / self pluginName / 'build.cmake'.
+	self assert: script exists.
+	self deny: (script contents includes: Character cr)
+]
+
+{ #category : 'tests' }
 PhEditorExportIntegrationTest >> testFaustHeaderIsTheOneTheProcessorIncludes [
 	"The processor includes Faust<Type>.h; LibFaust, across the FFI, must write that exact file."
 
