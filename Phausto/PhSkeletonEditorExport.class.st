@@ -50,7 +50,7 @@ private:
 ]
 
 { #category : 'template method' }
-PhSkeletonEditorExport >> mplementationFor: aPluginType [
+PhSkeletonEditorExport >> implementationFor: aPluginType [
 
 	^ '#include "PluginProcessor.h"
 #include "PluginEditor.h"

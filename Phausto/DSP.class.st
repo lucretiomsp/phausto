@@ -460,99 +460,6 @@ namespace PhaustoParams
 
 ]
 
-{ #category : 'exporting' }
-DSP >> asPluginEditorCppAPVTSFor: aPluginType [
-    "Iterates PhaustoParams::table, so the attachments cannot diverge
-     from the layout that created the parameters."
-    | proc editor |
-    proc := aPluginType typeName , 'AudioProcessor'.
-    editor := proc , 'Editor'.
-    ^ '#include "PluginProcessor.h"
-#include "PluginEditor.h"
-
-' , editor , '::' , editor , ' (' , proc , '& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
-{
-    for (auto& d : PhaustoParams::table)
-    {
-        if (d.isToggle)
-        {
-            auto* tb = new juce::ToggleButton ();
-            addAndMakeVisible (tb);
-            buttonAttachments.add (new juce::AudioProcessorValueTreeState::ButtonAttachment (
-                audioProcessor.apvts, d.id, *tb));
-            controls.add (tb);
-        }
-        else
-        {
-            auto* sl = new juce::Slider (juce::Slider::RotaryHorizontalVerticalDrag,
-                                         juce::Slider::TextBoxBelow);
-            addAndMakeVisible (sl);
-            sliderAttachments.add (new juce::AudioProcessorValueTreeState::SliderAttachment (
-                audioProcessor.apvts, d.id, *sl));
-            controls.add (sl);
-        }
-
-        labels.add (new juce::Label ({}, d.label));
-        addAndMakeVisible (labels.getLast());
-        labels.getLast()->setJustificationType (juce::Justification::centredRight);
-    }
-
-    setSize (380, juce::jmax (1, controls.size()) * 64 + 24);
-}
-
-' , editor , '::~' , editor , '() {}
-
-void ' , editor , '::paint (juce::Graphics& g)
-{
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-}
-
-void ' , editor , '::resized()
-{
-    auto area = getLocalBounds().reduced (12);
-    const int rowH = 64;
-    for (int i = 0; i < controls.size(); ++i)
-    {
-        auto row = area.removeFromTop (rowH);
-        labels[i]->setBounds (row.removeFromLeft (150));
-        controls[i]->setBounds (row.reduced (4));
-    }
-}
-'
-]
-
-{ #category : 'exporting' }
-DSP >> asPluginEditorHeaderAPVTSFor: aPluginType [
-    | proc editor |
-    proc := aPluginType typeName , 'AudioProcessor'.
-    editor := proc , 'Editor'.
-    ^ '#pragma once
-#include <JuceHeader.h>
-#include "PluginProcessor.h"
-
-class ' , editor , ' : public juce::AudioProcessorEditor
-{
-public:
-    ' , editor , ' (' , proc , '&);
-    ~' , editor , '() override;
-
-    void paint (juce::Graphics&) override;
-    void resized() override;
-
-private:
-    ' , proc , '& audioProcessor;
-
-    juce::OwnedArray<juce::Label> labels;
-    juce::OwnedArray<juce::Component> controls;
-    juce::OwnedArray<juce::AudioProcessorValueTreeState::SliderAttachment> sliderAttachments;
-    juce::OwnedArray<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachments;
-
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , editor , ')
-};
-'
-]
-
 { #category : 'converting' }
 DSP >> asPluginProcessorCppAPVTSFor: aPluginType [
     "MapUI comes from the Faust header (faustMinimalInlined.h architecture),
@@ -827,13 +734,6 @@ DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [
 ]
 
 { #category : 'exporting' }
-DSP >> createCppEditorAPVTSFilesNamed: aString for: aPluginType [
-    self
-        writeAsPosixText: (self asPluginEditorCppAPVTSFor: aPluginType)
-        to: (self sourceFolderFor: aString) / 'PluginEditor.cpp'
-]
-
-{ #category : 'exporting' }
 DSP >> createFaustHeaderFileNamed: aName for: aPluginType [
     "Writes Source/Faust<Type>.h, the name the processor #includes.
      LibFaust is the FFI boundary, so it gets the type name as a String."
@@ -885,13 +785,6 @@ DSP >> createFileNamed: aString [
 	stream close.
 ]
 
-{ #category : 'exporting - apvts' }
-DSP >> createHeaderAPVTSFilesNamed: aString for: aPluginType [
-    self
-        writeAsPosixText: (self asPluginProcessorHeaderAPVTSFor: aPluginType)
-        to: (self sourceFolderFor: aString) / 'PluginProcessor.h'
-]
-
 { #category : 'exporting' }
 DSP >> createHeaderEditorAPVTSFilesNamed: aString for: aPluginType [
     self
@@ -901,91 +794,12 @@ DSP >> createHeaderEditorAPVTSFilesNamed: aString for: aPluginType [
 
 { #category : 'exporting - apvts' }
 DSP >> createJucerFileNamed: aString for: aPluginType [
-    | folder code |
-    code := '<?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="FaustPlugin"
-              name="' , aString , '"
-              projectType="audioplug"
-              version="1.0.0"
-              bundleIdentifier="com.phausto.faustplugin"
-              companyName="Phausto"
-              pluginName="' , aString , '"
-              pluginDesc="A Faust-based audio plugin made with Pharo"
-              pluginManufacturer="Phausto"
-              pluginManufacturerCode="Phau"
-              pluginCode="Fplu"
-              pluginChannelConfigs=""
-              pluginIsSynth="' , (aPluginType isSynth ifTrue: [ '1' ] ifFalse: [ '0' ]) , '"
-              pluginWantsMidiInput="' , (aPluginType acceptsMidi ifTrue: [ '1' ] ifFalse: [ '0' ]) , '"
-              pluginProducesMidiOut="0"
-              pluginIsMidiEffect="0"
-              pluginEditorRequiresKeys="0"
-              pluginAUExportPrefix="' , aString , 'pluginAU"
-              pluginRTASCategory=""
-              aaxIdentifier="com.phausto.' , aString , 'plugin"
-              pluginVSTCategory="' , aPluginType jucerVstCategory , '"
-              buildVST="0"
-              buildVST3="1"
-              buildAU="1"
-              buildAUv3="0"
-              buildRTAS="0"
-              buildAAX="1"
-              buildStandalone="1"
-              enableIAA="0">
-
-  <MAINGROUP id="main" name="' , aString , 'Plugin">
-    <GROUP id="source" name="Source">
-      <FILE id="cpp01" name="PluginProcessor.cpp" compile="1" resource="0" file="Source/PluginProcessor.cpp"/>
-      <FILE id="hdr01" name="PluginProcessor.h" compile="0" resource="0" file="Source/PluginProcessor.h"/>
-      <FILE id="hdr02" name="Faust' , aPluginType typeName , '.h" compile="0" resource="0" file="Source/Faust' , aPluginType typeName , '.h"/>
-      <FILE id="cpp02" name="PluginEditor.cpp" compile="1" resource="0" file="Source/PluginEditor.cpp"/>
-      <FILE id="hdr03" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-      <FILE id="hdr04" name="PhaustoParams.h" compile="0" resource="0" file="Source/PhaustoParams.h"/>
-    </GROUP>
-  </MAINGROUP>
-
-  <MODULES>
-    <MODULE id="juce_audio_basics"          showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_audio_devices"         showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_audio_formats"         showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_audio_plugin_client"   showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_audio_processors"      showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_audio_utils"           showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_core"                  showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_data_structures"       showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_events"                showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_graphics"              showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_gui_basics"            showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_gui_extra"             showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-  </MODULES>
-
-  <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX">
-      <CONFIGURATIONS>
-        <CONFIGURATION name="Debug"   isDebug="1" optimisation="1" targetName="' , aString , '"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="' , aString , '"/>
-      </CONFIGURATIONS>
-    </XCODE_MAC>
-    <VS2022 targetFolder="Builds/VisualStudio2022">
-      <CONFIGURATIONS>
-        <CONFIGURATION name="Debug"   isDebug="1" optimisation="1" targetName="' , aString , '"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="' , aString , '"/>
-      </CONFIGURATIONS>
-    </VS2022>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
-      <CONFIGURATIONS>
-        <CONFIGURATION name="Debug"   isDebug="1" optimisation="1" targetName="' , aString , '"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="' , aString , '"/>
-      </CONFIGURATIONS>
-    </LINUX_MAKE>
-  </EXPORTFORMATS>
-
-</JUCERPROJECT>
-'.
-    folder := (FileLocator documents / 'faust2Juce' / aString)
-        ensureCreateDirectory.
-    self writeAsPosixText: code to: folder / (aString , '.jucer')
+	self
+		writeAsPosixText: (self
+				 asJucerFor: (self pluginIdentityNamed: aString)
+				 type: aPluginType)
+		to: (self projectFolderFor: aString) / (aString , '.jucer')
 ]
 
 { #category : 'exporting - apvts' }
@@ -1015,7 +829,7 @@ DSP >> destroy [
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'exporting' }
 DSP >> export2JuceWithName: aString type: aPluginType [
 
 	^ self
@@ -1024,7 +838,7 @@ DSP >> export2JuceWithName: aString type: aPluginType [
 		  editor: PhGenericEditorExport new
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'exporting' }
 DSP >> export2JuceWithName: aString type: aPluginType editor: anEditorExport [
 	"aPluginType is a PhPluginType, anEditorExport a PhEditorExport.
 	 aString becomes the CMake target name: plain identifier, no spaces."
@@ -1388,15 +1202,6 @@ DSP >> printOn: aStream [
 { #category : 'helpers' }
 DSP >> projectFolderFor: aString [
     ^ (FileLocator documents / 'faust2Juce' / aString) ensureCreateDirectory
-]
-
-{ #category : 'converting' }
-DSP >> reateJucerFileNamed: aString for: aPluginType [
-    self
-        writeAsPosixText: (self
-            asJucerFor: (self pluginIdentityNamed: aString)
-            type: aPluginType)
-        to: (self projectFolderFor: aString) / (aString , '.jucer')
 ]
 
 { #category : 'ui-building' }
