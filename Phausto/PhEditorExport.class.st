@@ -1,3 +1,23 @@
+"
+I am the abstract Strategy that writes the JUCE editor files of an exported plugin.
+```language=Pharo
+DSP >> export2JuceWithName:type:editor: generates the processor, PhaustoParams.h, CMakeLists.txt and the .jucer, then hands me the Source folder through exportInto:pluginType:. Those files are identical whatever editor is chosen; only mine differ.
+```
+
+``` language=Pharo
+exportInto:pluginType: 
+```
+is a Template Method. It writes PluginEditor.h and PluginEditor.cpp, names that are a contract with CMakeLists.txt and the .jucer. Subclasses provide:
+	_headerFor:_ and implementationFor:, the C++ content for a PhPluginType
+	_write:to:_, optionally, the write policy (default: overwrite on every export)
+
+The editor class is named <typeName>AudioProcessorEditor and takes the processor as its only constructor argument, because the generated createEditor() calls new <typeName>AudioProcessorEditor (*this). Every subclass must keep that signature.
+
+Subclasses:
+	**PhGenericEditorExport:** table-driven editor, the default
+	**PhSkeletonEditorExport:** empty editor for hand-written C++ UIs
+	**JuSceneEditorExport (_JuBloc package_)**: Bloc-designed editor, not implemented yet
+"
 Class {
 	#name : 'PhEditorExport',
 	#superclass : 'Object',

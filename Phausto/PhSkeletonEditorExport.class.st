@@ -1,3 +1,17 @@
+"
+I export a minimal JUCE editor for users who write their UI by hand in C++.
+
+I am one editor choice for DSP >> export2JuceWithName:type:editor:. My superclass writes PluginEditor.h and PluginEditor.cpp into the Source folder it is given (Template Method); I provide their content and override the write hook.
+
+The content is a constructor taking the processor, an empty paint and resized, and nothing else. Parameters are reached through audioProcessor.apvts; their ids are in PhaustoParams.h.
+
+The user owns these files: I write each one only if it does not exist yet, so re-exporting after a Faust change never erases hand-written code.
+
+Usage:
+```language=Pharo
+	dsp export2JuceWithName: 'Delay' type: PhEffectPluginType new editor: PhSkeletonEditorExport new
+```
+"
 Class {
 	#name : 'PhSkeletonEditorExport',
 	#superclass : 'PhEditorExport',

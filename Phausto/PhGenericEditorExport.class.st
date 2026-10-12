@@ -1,3 +1,18 @@
+"
+I export the default JUCE editor: one labelled control per APVTS parameter, one row each.
+
+The generated C++ iterates PhaustoParams::table at runtime: a rotary Slider with a SliderAttachment for continuous controls, a ToggleButton with a ButtonAttachment for buttons and checkboxes. The editor reads the same table that builds the parameter layout, so widgets and parameters cannot diverge, and adding a control in Faust needs no change here.
+
+The attachment arrays are declared after the controls they listen to, so they are destroyed first. Keep that order if you edit the header template.
+
+My files are generated and overwritten on every export. For a hand-written UI, use PhSkeletonEditorExport.
+
+
+Usage:
+```language=Pharo
+	dsp export2JuceWithName: 'Delay' type: PhEffectPluginType new editor: PhGenericEditorExport new
+```
+"
 Class {
 	#name : 'PhGenericEditorExport',
 	#superclass : 'PhEditorExport',
