@@ -322,6 +322,15 @@ private:
 ]
 
 { #category : 'tests' }
+DSPTest >> testChannelCountsComeFromTheCompiledProgram [
+
+	| monoToStereo |
+	monoToStereo := DSP create: 'process = _ <: _,_;'.
+	self assert: monoToStereo numberOfInputs equals: 1.
+	self assert: monoToStereo numberOfOutputs equals: 2
+]
+
+{ #category : 'tests' }
 DSPTest >> testCreateFromString [
 
 	| dsp |

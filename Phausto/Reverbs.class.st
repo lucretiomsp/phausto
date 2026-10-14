@@ -46,7 +46,7 @@ Reverbs >> inputL [
 { #category : 'accessing' }
 Reverbs >> inputR [
 
-	^ inputR ifNil: [ inputR := Wire new ]
+	^ inputR 
 ]
 
 { #category : 'accessing' }

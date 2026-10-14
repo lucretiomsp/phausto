@@ -1106,6 +1106,13 @@ DSP >> isMIDI: aBoolean [
 	isMIDI := aBoolean
 ]
 
+{ #category : 'accessing' }
+DSP >> jsonDescription [
+	"Faust's description of the compiled program: name, channel counts, ui."
+
+	^ STONJSON fromString: self getJSON
+]
+
 { #category : 'ui-building' }
 DSP >> keyBoardFor: aSynthName [
 
@@ -1128,6 +1135,18 @@ DSP >> name [
 DSP >> name: aString [
 
 	name := aString
+]
+
+{ #category : 'accessing' }
+DSP >> numberOfInputs [
+
+	^ self jsonDescription at: #inputs
+]
+
+{ #category : 'accessing' }
+DSP >> numberOfOutputs [
+
+	^ self jsonDescription at: #outputs
 ]
 
 { #category : 'ui-building' }
@@ -1441,6 +1460,14 @@ DSP >> trig: aString for: aDurationInSeconds [
 					self setValue: 1 parameter: aString.
 					aDurationInSeconds wait.
 					self setValue: 0 parameter: aString ] forkAt: 70 ]
+]
+
+{ #category : 'testing' }
+DSP >> usesSoundfiles [
+	"Exported plugins build their UI with MapUI, whose addSoundfile does nothing,
+	 so a soundfile is never loaded and compute reads through an unset pointer."
+
+	^ self getJSON includesSubstring: '"type": "soundfile"'
 ]
 
 { #category : 'writing' }
