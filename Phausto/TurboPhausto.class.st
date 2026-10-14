@@ -279,7 +279,7 @@ TurboPhausto >> highPassSweep: anArrayWithAFrequencyAndATimeInSeconds [
 TurboPhausto >> initialize [
 
 	super initialize.
-	self setValue: 0.05 parameter: 'reverb'
+	
 ]
 
 { #category : 'API - changes' }
