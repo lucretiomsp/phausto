@@ -72,6 +72,11 @@ message(STATUS "Standalone app: ${build_dir}/<NAME>_artefacts/Release/Standalone
 ' copyReplaceAll: '<NAME>' with: productName
 ]
 
+{ #category : 'accessing' }
+PhBuildScript >> fileName [
+^ 'build.cmake'
+]
+
 { #category : 'initialization' }
 PhBuildScript >> initializeProductName: aString [
 
