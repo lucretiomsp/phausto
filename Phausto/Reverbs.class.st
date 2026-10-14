@@ -24,8 +24,10 @@ Reverbs >> damp: aNumberOrABoxOrASymbol [
 Reverbs >> initialize [
 
 	super initialize.
+   
 	numberOfOutputs := 2.
-	numberOfOutputs := 2
+	inputL := Wire new.
+	inputR := Wire new 
 ]
 
 { #category : 'accessing' }
@@ -37,7 +39,7 @@ Reverbs >> input [
 { #category : 'accessing' }
 Reverbs >> inputL [
 
-	^ inputL ifNil: [ inputL := Wire new ]
+	^ inputL
 ]
 
 { #category : 'accessing' }
