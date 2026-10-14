@@ -34,6 +34,14 @@ PhBuildScriptTest >> testFailsLoudly [
 			 'message(FATAL_ERROR "Building MyPhaustoPlugin failed.")')
 ]
 
+{ #category : 'tests' }
+PhBuildScriptTest >> testFileNameMatchesUsageLine [
+
+	| buildScript |
+	buildScript := PhBuildScript for: (PhPluginIdentity productName: 'MyPhaustoPlugin').
+	self assert: (buildScript contents includesSubstring: 'cmake -P ' , buildScript fileName)
+]
+
 { #category : 'accessing' }
 PhBuildScriptTest >> testHonoursJucePathFromCommandLineOrEnvironment [
 
