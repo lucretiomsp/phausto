@@ -35,6 +35,30 @@ PhPluginTypeTest >> testApvtsFilteringForMonoSynth [
 ]
 
 { #category : 'tests' }
+PhPluginTypeTest >> testChannelErrorNamesTypeAndCounts [
+	"The message is what a workshop attendee reads in the debugger."
+
+	self
+		should: [ PhEffectPluginType new checkInputs: 4 outputs: 2 ]
+		raise: Error
+		withExceptionDo: [ :error |
+			self assert: (error messageText includesSubstring: 'Effect').
+			self assert: (error messageText includesSubstring: '4 and 2') ]
+]
+
+{ #category : 'tests' }
+PhPluginTypeTest >> testEffectAcceptsUpToStereoEachWay [
+
+	| effect |
+	effect := PhEffectPluginType new.
+	#( #( 1 2 ) #( 2 2 ) #( 1 1 ) #( 2 1 ) #( 0 2 ) ) do: [ :counts |
+		self
+			shouldnt: [ effect checkInputs: counts first outputs: counts last ]
+			raise: Error
+			description: 'Effect rejected ' , counts printString ]
+]
+
+{ #category : 'tests' }
 PhPluginTypeTest >> testEffectBusesHasInput [ 
 	| buses |
 	buses := PhEffectPluginType new busesPropertiesCpp.
@@ -58,6 +82,15 @@ PhPluginTypeTest >> testEffectFacts [
 	self deny: t acceptsMidi.
 	self assert: t hasAudioInput.
 	self assert: t vst3Category equals: 'Fx'
+]
+
+{ #category : 'tests' }
+PhPluginTypeTest >> testEffectRejectsMoreThanStereo [
+
+	| effect |
+	effect := PhEffectPluginType new.
+	self should: [ effect checkInputs: 4 outputs: 2 ] raise: Error.
+	self should: [ effect checkInputs: 2 outputs: 4 ] raise: Error
 ]
 
 { #category : 'tests' }
@@ -104,6 +137,15 @@ PhPluginTypeTest >> testMonoSynthKeepsOtherControls [
 	| ctrl |
 	ctrl := Dictionary new at: #shortname put: 'cutoff'; yourself.
 	self deny: (PhMonoSynthPluginType new excludesControl: ctrl)
+]
+
+{ #category : 'tests' }
+PhPluginTypeTest >> testMonoSynthRejectsAudioInputs [
+
+	| synth |
+	synth := PhMonoSynthPluginType new.
+	self should: [ synth checkInputs: 1 outputs: 2 ] raise: Error.
+	synth checkInputs: 0 outputs: 2
 ]
 
 { #category : 'tests' }

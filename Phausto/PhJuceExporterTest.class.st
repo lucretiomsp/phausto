@@ -90,16 +90,24 @@ PhJuceExporterTest >> testCMakeUsesIdentity [
 
 { #category : 'tests' }
 PhJuceExporterTest >> testEveryWriterDelegatesToItsQuery [
-    "Each create... must write what its as... query answers. A writer with its own inline template would bypass the tests."
-    | stale |
-    stale := { #createHeaderAPVTSFilesNamed:for: -> #asPluginProcessorHeaderAPVTSFor:.
-        #createCppAPVTSFilesNamed:for: -> #asPluginProcessorCppAPVTSFor:.
-        #createHeaderEditorAPVTSFilesNamed:for: -> #asPluginEditorHeaderAPVTSFor:.
-        #createCppEditorAPVTSFilesNamed:for: -> #asPluginEditorCppAPVTSFor:.
-        #createCMakeFileNamed:for: -> #asCMakeListsFor:type:.
-        #createJucerFileNamed:for: -> #asJucerFor:type: }
-            reject: [ :each | (DSP >> each key) messages includes: each value ].
-    self assert: stale isEmpty description: 'Writers with inline templates: ' , stale printString
+	"Each create... must write what its query answers. A writer with its own inline template would bypass the tests. Editor files are written by PhEditorExport."
+
+	| pairs missing stale |
+	pairs := {
+		(#createHeaderAPVTSFilesNamed:for: -> #asPluginProcessorHeaderAPVTSFor:).
+		(#createCppAPVTSFilesNamed:for: -> #asPluginProcessorCppAPVTSFor:).
+		(#createCMakeFileNamed:for: -> #asCMakeListsFor:type:).
+		(#createJucerFileNamed:for: -> #asJucerFor:type:).
+		(#createBuildScriptNamed: -> #contents).
+		(#createChannelAdapterNamed: -> #contents) }.
+	missing := pairs reject: [ :each | DSP includesSelector: each key ].
+	self
+		assert: missing isEmpty
+		description: 'Writers missing from DSP: ' , missing printString.
+	stale := pairs reject: [ :each | (DSP >> each key) messages includes: each value ].
+	self
+		assert: stale isEmpty
+		description: 'Writers with inline templates: ' , stale printString
 ]
 
 { #category : 'tests' }
@@ -141,6 +149,18 @@ PhJuceExporterTest >> testParamsHeaderSynthOmitsMidiDrivenControls [
     header := dsp asPhaustoParamsHeaderFrom: self synthJSON for: self synth.
     #( '/MyApp/freq' '/MyApp/gate' '/MyApp/gain' ) do: [ :path |
         self deny: (header includesSubstring: path) description: path , ' leaked into APVTS' ]
+]
+
+{ #category : 'tests' }
+PhJuceExporterTest >> testProcessorAcceptsOnlyMonoOrStereoBuses [
+
+	{ self effect. self synth } do: [ :type |
+		self assert: ((dsp asPluginProcessorHeaderAPVTSFor: type)
+			includesSubstring: 'bool isBusesLayoutSupported (const BusesLayout&) const override;').
+		self assert: ((dsp asPluginProcessorCppAPVTSFor: type)
+			includesSubstring: 'AudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const').
+		self assert: ((dsp asPluginProcessorCppAPVTSFor: type)
+			includesSubstring: 'juce::AudioChannelSet::mono()') ]
 ]
 
 { #category : 'tests' }
@@ -201,6 +221,50 @@ PhJuceExporterTest >> testProcessorHeaderNamesFollowType [
     header := dsp asPluginProcessorHeaderAPVTSFor: self synth.
     self assert: (header includesSubstring: '#include "FaustMonoSynth.h"').
     self assert: (header includesSubstring: 'class MonoSynthAudioProcessor')
+]
+
+{ #category : 'running' }
+PhJuceExporterTest >> testProcessorIncludesTheFaustHeaderThatWasWritten [
+	"The #include is built from aPluginType. If the writer hardcodes 'Effect',
+	 the two disagree and nothing compiles."
+
+	#( 'Effect' 'PolySynth' ) do: [ :type |
+		| folder expected |
+		folder := self exportType: type.
+		expected := 'Faust' , type , '.h'.
+		self
+			assert: (folder / 'Source' / expected) exists
+			description: expected , ' was not written for type ' , type.
+		self
+			assert: ((self contentsOf: folder named: 'PluginProcessor.h')
+				includesSubstring: '#include "' , expected , '"')
+			description: 'processor does not include ' , expected ]
+]
+
+{ #category : 'tests' }
+PhJuceExporterTest >> testProcessorIteratesTheDescriptorTable [
+
+	self assert: ((self contentsOf: (self exportType: 'Effect') named: 'PluginProcessor.cpp')
+		includesSubstring: 'PhaustoParams::table')
+]
+
+{ #category : 'tests' }
+PhJuceExporterTest >> testProcessorProcessesThroughTheChannelAdapter [
+
+	{ self effect. self synth } do: [ :type |
+		| cpp |
+		cpp := dsp asPluginProcessorCppAPVTSFor: type.
+		self assert: (cpp includesSubstring: 'channels.process (fDSP, buffer);').
+		self deny: (cpp includesSubstring: 'fDSP.compute') ]
+]
+
+{ #category : 'running' }
+PhJuceExporterTest >> testProjectFilesWrittenBesideSource [
+
+	| folder |
+	folder := self exportType: 'Effect'.
+	self assert: (folder / 'CMakeLists.txt') exists.
+	self assert: (folder / 'PhTestEffect.jucer') exists
 ]
 
 { #category : 'accessing' }

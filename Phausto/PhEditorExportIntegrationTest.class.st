@@ -102,6 +102,34 @@ PhEditorExportIntegrationTest >> testDefaultExportWritesGenericEditor [
 ]
 
 { #category : 'tests' }
+PhEditorExportIntegrationTest >> testExportRejectsMoreChannelsThanTheBuses [
+	"Four channels fit no plugin type, so the export fails before writing anything."
+
+	| quad |
+	quad := DSP create: 'process = _, _, _, _;'.
+	quad generatedCode: 'process = _, _, _, _;'.
+	self
+		should: [ quad export2JuceWithName: self pluginName type: self pluginType ]
+		raise: Error
+		withExceptionDo: [ :error | self assert: (error messageText includesSubstring: 'inputs') ].
+	self deny: (FileLocator documents / 'faust2Juce' / self pluginName) exists
+]
+
+{ #category : 'tests' }
+PhEditorExportIntegrationTest >> testExportRejectsSoundfiles [
+	"MapUI never loads soundfiles, so compute would read an unset Soundfile pointer."
+
+	| code sampler |
+	code := 'process = 0, 0 : soundfile("sound", 1) : !, !, _;'.
+	sampler := DSP create: code.
+	sampler generatedCode: code.
+	self
+		should: [ sampler export2JuceWithName: self pluginName type: self pluginType ]
+		raise: Error
+		withExceptionDo: [ :error | self assert: (error messageText includesSubstring: 'soundfile') ]
+]
+
+{ #category : 'tests' }
 PhEditorExportIntegrationTest >> testExportWritesBuildScript [
 
 	| script |
@@ -109,6 +137,15 @@ PhEditorExportIntegrationTest >> testExportWritesBuildScript [
 	script := FileLocator documents / 'faust2Juce' / self pluginName / 'build.cmake'.
 	self assert: script exists.
 	self deny: (script contents includes: Character cr)
+]
+
+{ #category : 'tests' }
+PhEditorExportIntegrationTest >> testExportWritesTheChannelAdapter [
+
+	self exportWithSkeleton.
+	self
+		assert: (self sourceFile: 'PhaustoChannelAdapter.h') contents
+		equals: PhChannelAdapter new contents withUnixLineEndings
 ]
 
 { #category : 'tests' }
