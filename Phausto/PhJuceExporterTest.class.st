@@ -216,12 +216,14 @@ PhJuceExporterTest >> testProcessorHeaderEffectRejectsMidi [
     self deny: (header includesSubstring: 'handleMidi')
 ]
 
-{ #category : 'tests' }
+{ #category : 'running' }
 PhJuceExporterTest >> testProcessorHeaderNamesFollowType [
-    | header |
-    header := dsp asPluginProcessorHeaderAPVTSFor: self synth.
-    self assert: (header includesSubstring: '#include "FaustMonoSynth.h"').
-    self assert: (header includesSubstring: 'class MonoSynthAudioProcessor')
+	"The header names the processor; only the .cpp includes the Faust header."
+
+	self assert: ((dsp asPluginProcessorHeaderAPVTSFor: self synth)
+		includesSubstring: 'class MonoSynthAudioProcessor').
+	self assert: ((dsp asPluginProcessorCppAPVTSFor: self synth)
+		includesSubstring: '#include "FaustMonoSynth.h"')
 ]
 
 { #category : 'running' }
@@ -249,14 +251,14 @@ PhJuceExporterTest >> testProcessorIteratesTheDescriptorTable [
 		includesSubstring: 'PhaustoParams::table')
 ]
 
-{ #category : 'tests' }
+{ #category : 'running' }
 PhJuceExporterTest >> testProcessorProcessesThroughTheChannelAdapter [
 
 	{ self effect. self synth } do: [ :type |
 		| cpp |
 		cpp := dsp asPluginProcessorCppAPVTSFor: type.
-		self assert: (cpp includesSubstring: 'channels.process (fDSP, buffer);').
-		self deny: (cpp includesSubstring: 'fDSP.compute') ]
+		self assert: (cpp includesSubstring: 'channels.process (*fDSP, buffer);').
+		self deny: (cpp includesSubstring: 'fDSP->compute') ]
 ]
 
 { #category : 'running' }

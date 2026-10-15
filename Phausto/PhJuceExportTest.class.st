@@ -146,15 +146,16 @@ PhJuceExportTest >> testOneDescriptorRowPerAutomatableControl [
 
 { #category : 'tests' }
 PhJuceExportTest >> testProcessorCppSynthHandlesMidiBeforeCompute [
-    | cpp midi compute |
-    cpp := dsp asPluginProcessorCppAPVTSFor: self synth.
-    midi := cpp indexOfSubCollection: 'handleMidi (midiMessages);'.
-    compute := cpp indexOfSubCollection: 'channels.process (fDSP, buffer);'.
-    self assert: midi > 0.
-    self assert: midi < compute
+
+	| cpp midi compute |
+	cpp := dsp asPluginProcessorCppAPVTSFor: self synth.
+	midi := cpp indexOfSubCollection: 'handleMidi (midiMessages);'.
+	compute := cpp indexOfSubCollection: 'channels.process (*fDSP, buffer);'.
+	self assert: midi > 0.
+	self assert: midi < compute
 ]
 
-{ #category : 'helpers' }
+{ #category : 'tests' }
 PhJuceExportTest >> testProcessorIncludesTheFaustHeaderThatWasWritten [
 	"The #include is built from the plugin type. If the writer hardcoded 'Effect',
 	 the two would disagree and nothing would compile."
@@ -167,7 +168,7 @@ PhJuceExportTest >> testProcessorIncludesTheFaustHeaderThatWasWritten [
 			assert: (folder / 'Source' / expected) exists
 			description: expected , ' was not written for ' , type typeName.
 		self
-			assert: ((self contentsOf: folder named: 'PluginProcessor.h')
+			assert: ((self contentsOf: folder named: 'PluginProcessor.cpp')
 				includesSubstring: '#include "' , expected , '"')
 			description: 'processor does not include ' , expected ]
 ]

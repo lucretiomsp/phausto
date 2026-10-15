@@ -461,13 +461,14 @@ namespace PhaustoParams
 
 { #category : 'converting' }
 DSP >> asPluginProcessorCppAPVTSFor: aPluginType [
-    "MapUI comes from the Faust header (faustMinimalInlined.h architecture),
-     included through PluginProcessor.h. That MapUI is a reduced version:
-     use only setParamValue."
-    | proc |
-    proc := aPluginType typeName , 'AudioProcessor'.
-    ^ '#include "PluginProcessor.h"
+	"The only translation unit that includes the Faust header. The plugin type
+	 supplies how fDSP is built, initialised, fed parameters and chunked."
+
+	| proc |
+	proc := aPluginType typeName , 'AudioProcessor'.
+	^ '#include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "Faust' , aPluginType typeName , '.h"
 
 juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParameterLayout()
 {
@@ -478,8 +479,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParamete
     : AudioProcessor (' , aPluginType busesPropertiesCpp , '),
       apvts (*this, nullptr, "PARAMETERS", createParameterLayout())
 {
+' , aPluginType dspConstructionCpp , '
     fUI = std::make_unique<MapUI>();
-    fDSP.buildUserInterface (fUI.get());
+    fDSP->buildUserInterface (fUI.get());
 
     for (int i = 0; i < PhaustoParams::count; ++i)
     {
@@ -492,10 +494,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParamete
 
 void ' , proc , '::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    fDSP.init ((int) sampleRate);
-    channels.prepare (fDSP.getNumInputs(), fDSP.getNumOutputs(),
+' , aPluginType dspInitCpp , '
+    channels.prepare (fDSP->getNumInputs(), fDSP->getNumOutputs(),
                       getTotalNumInputChannels(), getTotalNumOutputChannels(),
-                      samplesPerBlock);
+                      ' , aPluginType computeBlockSizeCpp , ');
 }
 
 bool ' , proc , '::isBusesLayoutSupported (const BusesLayout& layouts) const
@@ -512,9 +514,7 @@ bool ' , proc , '::isBusesLayoutSupported (const BusesLayout& layouts) const
 
 void ' , proc , '::pushParameters()
 {
-    for (int i = 0; i < PhaustoParams::count; ++i)
-        if (raw[i] != nullptr)
-            fUI->setParamValue (PhaustoParams::table[i].faustPath, raw[i]->load());
+' , aPluginType pushParametersBodyCpp , '
 }
 
 ' , (aPluginType midiHandlerCpp copyReplaceAll: '<PROC>' with: proc) , '
@@ -524,7 +524,7 @@ void ' , proc , '::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuf
     juce::ScopedNoDenormals noDenormals;
 ' , aPluginType processBlockMidiCallCpp , '
     pushParameters();
-    channels.process (fDSP, buffer);
+    channels.process (*fDSP, buffer);
 }
 
 juce::AudioProcessorEditor* ' , proc , '::createEditor()
@@ -549,16 +549,20 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc ,
 
 { #category : 'converting' }
 DSP >> asPluginProcessorHeaderAPVTSFor: aPluginType [
-    | proc |
-    proc := aPluginType typeName , 'AudioProcessor'.
-    ^ '#pragma once
+	"Declares the Faust types instead of including their header: PluginEditor.cpp
+	 includes this file too, and the poly architecture defines symbols. So fDSP
+	 is a pointer, for every type."
+
+	| proc |
+	proc := aPluginType typeName , 'AudioProcessor'.
+	^ '#pragma once
 #include <JuceHeader.h>
-#include "Faust' , aPluginType typeName , '.h"
 #include "PhaustoParams.h"
 #include "' , PhChannelAdapter new fileName , '"
 
+// Faust types, defined in the Faust header that only PluginProcessor.cpp includes.
+class dsp;
 class MapUI;
-using FaustDsp = mydsp;
 
 class ' , proc , ' : public juce::AudioProcessor
 {
@@ -589,11 +593,12 @@ public:
     juce::AudioProcessorValueTreeState apvts;
 
 private:
-    FaustDsp fDSP;
+    std::unique_ptr<::dsp> fDSP;
     PhaustoChannelAdapter channels;
     std::unique_ptr<MapUI> fUI;
     std::atomic<float>* raw[PhaustoParams::count] = {};
     void pushParameters();
+' , aPluginType dspMembersCpp , '
 ' , aPluginType midiMembersCpp , '
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , proc , ')
 };
@@ -767,15 +772,16 @@ DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [
 		to: (self sourceFolderFor: aString) / 'PluginProcessor.cpp'
 ]
 
-{ #category : 'exporting' }
+{ #category : 'converting' }
 DSP >> createFaustHeaderFileNamed: aName for: aPluginType [
-    "Writes Source/Faust<Type>.h, the name the processor #includes.
-     LibFaust is the FFI boundary, so it gets the type name as a String."
-    ^ LibFaust uniqueInstance
-        createFaustHeaderFileFromString: self generatedCode
-        withName: aName
-        architecture: 'faustMinimalInlined.h'
-        type: aPluginType typeName
+	"Writes Source/Faust<Type>.h, the file PluginProcessor.cpp includes.
+	 LibFaust is the FFI boundary, so it gets Strings only."
+
+	^ LibFaust uniqueInstance
+		createFaustHeaderFileFromString: self generatedCode
+		withName: aName
+		architecture: aPluginType faustArchitectureFileName
+		type: aPluginType typeName
 ]
 
 { #category : 'exporting' }

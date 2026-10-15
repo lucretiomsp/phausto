@@ -107,13 +107,6 @@ PhPluginType >> excludesControl: aControl [
 	 ^ false 
 ]
 
-{ #category : 'accessing' }
-PhPluginType >> faustArchitectureFileName [
-	"Architecture file in Documents/architecture that LibFaust wraps around mydsp."
-
-	^ 'faustMinimalInlined.h'
-]
-
 { #category : 'defaults' }
 PhPluginType >> hasAudioInput [ 
 

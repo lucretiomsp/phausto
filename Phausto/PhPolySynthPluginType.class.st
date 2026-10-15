@@ -1,6 +1,6 @@
 Class {
 	#name : 'PhPolySynthPluginType',
-	#superclass : 'PhSynthPluginType',
+	#superclass : 'PhPluginType',
 	#instVars : [
 		'voiceCount'
 	],
@@ -19,15 +19,71 @@ PhPolySynthPluginType class >> voices: anInteger [
 	^ self new initializeWithVoiceCount: anInteger
 ]
 
-{ #category : 'defaults' }
-PhPolySynthPluginType >> dspConstructionCpp [
-	"fDSP owns the poly object. fPoly is a typed, non-owning alias for keyOn/keyOff.
-	control = true: freq/gain/gate are driven by keyOn/keyOff.
-	 group = false: parameter paths stay identical to the mono voice,
-	 so PhaustoParams.h addresses still match."
+{ #category : 'accessing' }
+PhPolySynthPluginType >> computeBlockSizeCpp [
+	"mydsp_poly mixes into buffers of MIX_BUFFER_SIZE frames and does not check in release builds."
 
-	^ '    fPoly = new mydsp_poly (new mydsp(), {1}, true, false);
-    fDSP = fPoly;' format: { voiceCount printString }
+	^ 'juce::jmin (samplesPerBlock, MIX_BUFFER_SIZE)'
+]
+
+{ #category : 'initialization' }
+PhPolySynthPluginType >> dspConstructionCpp [
+	"control = true: keyOn and keyOff allocate the voices. Each voice is a MapUI over
+	 its own mono clone, so each parameter resolves once to one zone per voice, and
+	 pushParameters writes plain floats without GUI::updateAllGuis(), whose GUI list
+	 every plugin instance in the host shares. Concatenation, not format:, which would
+	 read the C++ braces as placeholders."
+
+	^ '    fPoly = new mydsp_poly (new mydsp(), ' , voiceCount printString , ', true);
+    fDSP.reset (fPoly);
+
+    // A voice knows a control as /<program>/<path>. PhaustoParams.h may name the program
+    // differently, and a DSP made with asDspMIDIWithName: adds /Polyphonic/Voices in front.
+    const auto pathBelowProgram = [] (juce::String path)
+    {
+        if (path.startsWith ("/Polyphonic/Voices/"))
+            path = path.fromFirstOccurrenceOf ("/Polyphonic/Voices", false, false);
+        return path.fromFirstOccurrenceOf ("/", false, false)
+                   .fromFirstOccurrenceOf ("/", true, false);
+    };
+
+    for (int i = 0; i < PhaustoParams::count; ++i)
+    {
+        const auto address = pathBelowProgram (PhaustoParams::table[i].faustPath);
+        for (auto* voice : fPoly->fVoiceTable)
+        {
+            float* zone = nullptr;
+            for (auto& [voicePath, candidate] : voice->getMap())
+                if (pathBelowProgram (voicePath) == address)
+                    zone = candidate;
+            jassert (zone != nullptr); // PhaustoParams.h does not match the Faust header
+            voiceZones.push_back (zone);
+        }
+    }'
+]
+
+{ #category : 'initialization' }
+PhPolySynthPluginType >> dspInitCpp [
+	"init resets each voice but leaves a sounding one allocated, so free them first.  Each voice computed fMinRelease (the shortest release before it is freed) at construction, before any sample rate existed. fMinRelease only exists in the 2020 mydsp_poly of faustMinimalPolyInlined.h."
+
+	^ '    fPoly->allNotesOff (true);
+    fDSP->init ((int) sampleRate);
+    for (auto* voice : fPoly->fVoiceTable)
+        voice->fMinRelease = (int) sampleRate / 2;'
+]
+
+{ #category : 'initialization' }
+PhPolySynthPluginType >> dspMembersCpp [
+	"The header must not include the Faust header, so class mydsp_poly* declares the type in place."
+
+	^ '    class mydsp_poly* fPoly = nullptr; // non-owning alias of fDSP
+    std::vector<float*> voiceZones;    // parameter * voices + voice'
+]
+
+{ #category : 'accessing' }
+PhPolySynthPluginType >> excludesControl: aControl [
+
+	^ (super excludesControl: aControl) or: [ self isPolyWrapperControl: aControl ]
 ]
 
 { #category : 'defaults' }
@@ -39,6 +95,26 @@ PhPolySynthPluginType >> faustArchitectureFileName [
 PhPolySynthPluginType >> initialize [
 	super initialize.
 	voiceCount := self class defaultVoiceCount
+]
+
+{ #category : 'initialization' }
+PhPolySynthPluginType >> initializeWithVoiceCount: anInteger [
+	"Fail Fast: a single mydsp_poly voice steals itself on every overlapping note."
+
+	(anInteger isInteger and: [ anInteger >= 2 ]) ifFalse: [
+		^ self error: 'PolySynth needs at least 2 voices; use PhMonoSynthPluginType for one.' ].
+	voiceCount := anInteger
+]
+
+{ #category : 'accessing' }
+PhPolySynthPluginType >> isPolyWrapperControl: aControl [
+	"A DSP made with asDspMIDIWithName: carries Faust's poly UI in its JSON Only /Polyphonic/Voices/<program>/... are voice controls; Panic and  per-voice copies belong to the wrapper."
+
+	| steps |
+	steps := (aControl at: #address ifAbsent: [ '' ]) substrings: '/'.
+	steps isEmpty ifTrue: [ ^ false ].
+	steps first = 'Polyphonic' ifFalse: [ ^ false ].
+	^ steps size < 4 or: [ (steps at: 2) ~= 'Voices' ]
 ]
 
 { #category : 'accessing' }
@@ -70,10 +146,27 @@ PhPolySynthPluginType >> midiHandlerCpp [
 }'
 ]
 
-{ #category : 'defaults' }
+{ #category : 'initialization' }
 PhPolySynthPluginType >> midiMembersCpp [
-	^ '    mydsp_poly* fPoly = nullptr;   // non-owning alias of fDSP
-    void handleMidi (const juce::MidiBuffer& midi);'
+	"fPoly moved to dspMembersCpp."
+
+^ '    void handleMidi (const juce::MidiBuffer& midi);'
+]
+
+{ #category : 'accessing' }
+PhPolySynthPluginType >> pushParametersBodyCpp [
+	"Every block, so the values survive the reset init applies in prepareToPlay."
+
+	^ '    const size_t voices = fPoly->fVoiceTable.size();
+    for (int i = 0; i < PhaustoParams::count; ++i)
+    {
+        if (raw[i] == nullptr)
+            continue;
+        const float value = raw[i]->load();
+        for (size_t k = 0; k < voices; ++k)
+            if (float* zone = voiceZones[(size_t) i * voices + k])
+                *zone = value;
+    }'
 ]
 
 { #category : 'accessing' }

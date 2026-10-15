@@ -3,7 +3,7 @@ PhMonoSynthPluginType comment: 'freq, gate, and gain from the APVTS table becaus
 "
 Class {
 	#name : 'PhMonoSynthPluginType',
-	#superclass : 'PhSynthPluginType',
+	#superclass : 'PhPluginType',
 	#category : 'Phausto-Exporting',
 	#package : 'Phausto',
 	#tag : 'Exporting'
