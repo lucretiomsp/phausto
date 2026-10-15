@@ -48,6 +48,24 @@ PhPluginType >> busesPropertiesCpp [
 	 ^ self subclassResponsibility 
 ]
 
+{ #category : 'as yet unclassified' }
+PhPluginType >> checkChannelsOf: aDSP [
+	"aDSP answers its counts through FFI; the rule is checkInputs:outputs:."
+
+	self checkInputs: aDSP numberOfInputs outputs: aDSP numberOfOutputs
+]
+
+{ #category : 'as yet unclassified' }
+PhPluginType >> checkInputs: inputCount outputs: outputCount [
+	"PhaustoChannelAdapter maps up to two channels each way onto mono or stereo buses.
+	 More is a patching mistake, so fail instead of guessing a mapping."
+
+	(inputCount <= self maxInputs and: [ outputCount <= self maxOutputs ])
+		ifTrue: [ ^ self ].
+	self error: ('{1} export takes at most {2} inputs and {3} outputs; this DSP has {4} and {5}.'
+		format: { self typeName. self maxInputs. self maxOutputs. inputCount. outputCount })
+]
+
 { #category : 'defaults' }
 PhPluginType >> excludesControl: aControl [ 
 
@@ -71,6 +89,19 @@ PhPluginType >> isSynth [
 PhPluginType >> juceVstCategory [ 
 
 	 ^ self subclassResponsibility 
+]
+
+{ #category : 'accessing' }
+PhPluginType >> maxInputs [
+
+	^ self subclassResponsibility
+]
+
+{ #category : 'accessing' }
+PhPluginType >> maxOutputs [
+	"Every type declares a stereo output bus."
+
+	^ 2
 ]
 
 { #category : 'as yet unclassified' }

@@ -491,9 +491,24 @@ juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParamete
 
 ' , proc , '::~' , proc , '() = default;
 
-void ' , proc , '::prepareToPlay (double sampleRate, int)
+void ' , proc , '::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     fDSP.init ((int) sampleRate);
+    channels.prepare (fDSP.getNumInputs(), fDSP.getNumOutputs(),
+                      getTotalNumInputChannels(), getTotalNumOutputChannels(),
+                      samplesPerBlock);
+}
+
+bool ' , proc , '::isBusesLayoutSupported (const BusesLayout& layouts) const
+{
+    // PhaustoChannelAdapter maps any program onto mono or stereo buses.
+    const auto monoOrStereo = [] (const juce::AudioChannelSet& set)
+    {
+        return set == juce::AudioChannelSet::mono() || set == juce::AudioChannelSet::stereo();
+    };
+    const auto input = layouts.getMainInputChannelSet();
+    return monoOrStereo (layouts.getMainOutputChannelSet())
+        && (input.isDisabled() || monoOrStereo (input));
 }
 
 void ' , proc , '::pushParameters()
@@ -510,11 +525,7 @@ void ' , proc , '::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuf
     juce::ScopedNoDenormals noDenormals;
 ' , aPluginType processBlockMidiCallCpp , '
     pushParameters();
-
-    float* chans[2] = { buffer.getWritePointer (0),
-                        buffer.getNumChannels() > 1 ? buffer.getWritePointer (1)
-                                                    : buffer.getWritePointer (0) };
-    fDSP.compute (buffer.getNumSamples(), chans, chans);
+    channels.process (fDSP, buffer);
 }
 
 juce::AudioProcessorEditor* ' , proc , '::createEditor()
@@ -537,7 +548,7 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc ,
 '
 ]
 
-{ #category : 'exporting - apvts' }
+{ #category : 'converting' }
 DSP >> asPluginProcessorHeaderAPVTSFor: aPluginType [
     | proc |
     proc := aPluginType typeName , 'AudioProcessor'.
@@ -545,6 +556,7 @@ DSP >> asPluginProcessorHeaderAPVTSFor: aPluginType [
 #include <JuceHeader.h>
 #include "Faust' , aPluginType typeName , '.h"
 #include "PhaustoParams.h"
+#include "' , PhChannelAdapter new fileName , '"
 
 class MapUI;
 using FaustDsp = mydsp;
@@ -557,6 +569,7 @@ public:
 
     void prepareToPlay (double, int) override;
     void releaseResources() override {}
+    bool isBusesLayoutSupported (const BusesLayout&) const override;
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
 
     juce::AudioProcessorEditor* createEditor() override;
@@ -578,6 +591,7 @@ public:
 
 private:
     FaustDsp fDSP;
+    PhaustoChannelAdapter channels;
     std::unique_ptr<MapUI> fUI;
     std::atomic<float>* raw[PhaustoParams::count] = {};
     void pushParameters();
@@ -661,6 +675,16 @@ DSP >> createCMakeFileNamed: aString for: aPluginType [
             asCMakeListsFor: (self pluginIdentityNamed: aString)
             type: aPluginType)
         to: (self projectFolderFor: aString) / 'CMakeLists.txt'
+]
+
+{ #category : 'exporting' }
+DSP >> createChannelAdapterNamed: aString [
+
+	| adapter |
+	adapter := PhChannelAdapter new.
+	self
+		writeAsPosixText: adapter contents
+		to: (self sourceFolderFor: aString) / adapter fileName
 ]
 
 { #category : 'exporting' }
@@ -860,12 +884,17 @@ DSP >> export2JuceWithName: aString type: aPluginType [
 { #category : 'exporting' }
 DSP >> export2JuceWithName: aString type: aPluginType editor: anEditorExport [
 	"aPluginType is a PhPluginType, anEditorExport a PhEditorExport.
-	 aString becomes the CMake target name: plain identifier, no spaces."
+	 aString becomes the CMake target name: plain identifier, no spaces.
+	 Both checks run before any file is written."
 
+	self usesSoundfiles ifTrue: [
+		self error: 'Exported plugins cannot load soundfiles yet.' ].
+	aPluginType checkChannelsOf: self.
 	self
 		createPhaustoParamsHeaderNamed: aString for: aPluginType;
 		createHeaderAPVTSFilesNamed: aString for: aPluginType;
 		createCppAPVTSFilesNamed: aString for: aPluginType;
+		createChannelAdapterNamed: aString;
 		createJucerFileNamed: aString for: aPluginType;
 		createCMakeFileNamed: aString for: aPluginType;
 		createBuildScriptNamed: aString;

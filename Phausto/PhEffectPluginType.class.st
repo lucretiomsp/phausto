@@ -42,6 +42,12 @@ PhEffectPluginType >> jucerVstCategory [
 	^ 'kPlugCategEffect'
 ]
 
+{ #category : 'accessing' }
+PhEffectPluginType >> maxInputs [
+
+	^ 2
+]
+
 { #category : 'defaults' }
 PhEffectPluginType >> midiMembersCpp [
 "Extra private member declarations for MIDI state."

@@ -14,3 +14,10 @@ PhMonoSynthPluginType class >> excludesControl: aControl [
 	"MIDI drives these directly, they must not appear in APVTS."
 	^ self synthControlNames includes: (aControl at: #shortname)
 ]
+
+{ #category : 'accessing' }
+PhMonoSynthPluginType >> maxInputs [
+	"No input bus, so an input could only ever hear silence."
+
+	^ 0
+]
