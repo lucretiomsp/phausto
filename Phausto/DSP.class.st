@@ -872,6 +872,12 @@ DSP >> destroy [
 ]
 
 { #category : 'exporting' }
+DSP >> export2JuceWithName: aString polyphony: anInteger [
+
+	^ self export2JuceWithName: aString type: (PhPolySynthPluginType voices: anInteger)
+]
+
+{ #category : 'exporting' }
 DSP >> export2JuceWithName: aString type: aPluginType [
 
 	^ self

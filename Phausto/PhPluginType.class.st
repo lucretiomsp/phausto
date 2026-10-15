@@ -36,6 +36,12 @@ PhPluginType >> acceptsMidi [
 	 ^ self subclassResponsibility 
 ]
 
+{ #category : 'converting' }
+PhPluginType >> asPhPluginType [
+
+	^ self
+]
+
 { #category : 'defaults' }
 PhPluginType >> auMainType [ 
 
@@ -48,14 +54,14 @@ PhPluginType >> busesPropertiesCpp [
 	 ^ self subclassResponsibility 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'check' }
 PhPluginType >> checkChannelsOf: aDSP [
 	"aDSP answers its counts through FFI; the rule is checkInputs:outputs:."
 
 	self checkInputs: aDSP numberOfInputs outputs: aDSP numberOfOutputs
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'check' }
 PhPluginType >> checkInputs: inputCount outputs: outputCount [
 	"PhaustoChannelAdapter maps up to two channels each way onto mono or stereo buses.
 	 More is a patching mistake, so fail instead of guessing a mapping."
@@ -66,11 +72,46 @@ PhPluginType >> checkInputs: inputCount outputs: outputCount [
 		format: { self typeName. self maxInputs. self maxOutputs. inputCount. outputCount })
 ]
 
+{ #category : 'accessing' }
+PhPluginType >> computeBlockSizeCpp [
+	"C++ expression: the largest block fDSP computes at once. The channel adapter chunks to it."
+
+	^ 'samplesPerBlock'
+]
+
+{ #category : 'accessing' }
+PhPluginType >> dspConstructionCpp [
+	"Statements in the processor constructor that create fDSP, the owning ::dsp pointer."
+
+	^ '    fDSP = std::make_unique<mydsp>();'
+]
+
+{ #category : 'accessing' }
+PhPluginType >> dspInitCpp [
+	"Statements in prepareToPlay that initialise fDSP at the host sample rate."
+
+	^ '    fDSP->init ((int) sampleRate);'
+]
+
+{ #category : 'accessing' }
+PhPluginType >> dspMembersCpp [
+	"Extra private members the type needs next to fDSP."
+
+	^ ''
+]
+
 { #category : 'defaults' }
 PhPluginType >> excludesControl: aControl [ 
 
 
 	 ^ false 
+]
+
+{ #category : 'accessing' }
+PhPluginType >> faustArchitectureFileName [
+	"Architecture file in Documents/architecture that LibFaust wraps around mydsp."
+
+	^ 'faustMinimalInlined.h'
 ]
 
 { #category : 'defaults' }
@@ -104,21 +145,30 @@ PhPluginType >> maxOutputs [
 	^ 2
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhPluginType >> midiHandlerCpp [ 
 ^ ''
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhPluginType >> midiMemebersCpp [
 
 	^ ''
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhPluginType >> processMidiCallCpp [
 
 	^ ''
+]
+
+{ #category : 'as yet unclassified' }
+PhPluginType >> pushParametersBodyCpp [
+	"Body of pushParameters: APVTS values into the Faust zones, once per block."
+
+	^ '    for (int i = 0; i < PhaustoParams::count; ++i)
+        if (raw[i] != nullptr)
+            fUI->setParamValue (PhaustoParams::table[i].faustPath, raw[i]->load());'
 ]
 
 { #category : 'defaults' }
