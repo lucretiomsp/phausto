@@ -190,12 +190,13 @@ PhJuceExporterTest >> testProcessorCppSynthDefinesHandleMidi [
 
 { #category : 'tests' }
 PhJuceExporterTest >> testProcessorCppSynthHandlesMidiBeforeCompute [
-    | cpp midi compute |
-    cpp := dsp asPluginProcessorCppAPVTSFor: self synth.
-    midi := cpp indexOfSubCollection: 'handleMidi (midiMessages);'.
-    compute := cpp indexOfSubCollection: 'fDSP.compute'.
-    self assert: midi > 0.
-    self assert: midi < compute
+
+	| cpp midi compute |
+	cpp := dsp asPluginProcessorCppAPVTSFor: self synth.
+	midi := cpp indexOfSubCollection: 'handleMidi (midiMessages);'.
+	compute := cpp indexOfSubCollection: 'channels.process (fDSP, buffer);'.
+	self assert: midi > 0.
+	self assert: midi < compute
 ]
 
 { #category : 'tests' }

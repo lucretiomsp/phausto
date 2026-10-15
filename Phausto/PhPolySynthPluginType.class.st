@@ -41,6 +41,13 @@ PhPolySynthPluginType >> initialize [
 	voiceCount := self class defaultVoiceCount
 ]
 
+{ #category : 'accessing' }
+PhPolySynthPluginType >> maxInputs [
+	"No input bus, so an input could only ever hear silence."
+
+	^ 0
+]
+
 { #category : 'defaults' }
 PhPolySynthPluginType >> midiHandlerCpp [
 	"Voice allocation and stealing live in mydsp_poly.

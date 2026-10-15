@@ -21,12 +21,18 @@ PhJuceExportTest >> exportType: aPluginType [
 	"Export into a throwaway folder and answer it. Registered for deletion."
 
 	| name folder |
-	name := 'PhTest' , aPluginType.
+	name := self nameFor: aPluginType.
 	folder := FileLocator documents / 'faust2Juce' / name.
 	folder exists ifTrue: [ folder ensureDeleteAll ].
 	exported add: folder.
 	dsp export2JuceWithName: name type: aPluginType.
 	^ folder
+]
+
+{ #category : 'general' }
+PhJuceExportTest >> nameFor: aPluginType [
+
+	^ 'PhTest' , aPluginType typeName
 ]
 
 { #category : 'running' }
@@ -53,18 +59,16 @@ PhJuceExportTest >> testBargraphsAreNotParameters [
 		noneSatisfy: [ :each | (each at: #type) endsWith: 'bargraph' ])
 ]
 
-{ #category : 'running' }
+{ #category : 'helpers' }
 PhJuceExportTest >> testCMakeAndJucerAgreeOnSynthFlag [
 
-	#( 'Effect' 'PolySynth' ) do: [ :type |
-		| folder cmake jucer synth |
+	{ PhEffectPluginType new. PhPolySynthPluginType new } do: [ :type |
+		| folder cmake jucer |
 		folder := self exportType: type.
-		synth := type = 'Effect' ifTrue: [ 'FALSE' ] ifFalse: [ 'TRUE' ].
 		cmake := (folder / 'CMakeLists.txt') contents.
-		jucer := (folder / ('PhTest' , type , '.jucer')) contents.
-		self assert: (cmake includesSubstring: 'IS_SYNTH ' , synth).
-		self assert: (jucer includesSubstring: 'pluginIsSynth="'
-			, (type = 'Effect' ifTrue: [ '0' ] ifFalse: [ '1' ]) , '"') ]
+		jucer := (folder / ((self nameFor: type) , '.jucer')) contents.
+		self assert: (cmake includesSubstring: 'IS_SYNTH TRUE') equals: type isSynth.
+		self assert: (jucer includesSubstring: 'pluginIsSynth="1"') equals: type isSynth ]
 ]
 
 { #category : 'tests' }
@@ -77,21 +81,21 @@ PhJuceExportTest >> testDescriptorIdsAreUniqueAndSorted [
 	self assert: ids asArray equals: ids asSortedCollection asArray
 ]
 
-{ #category : 'tests' }
+{ #category : 'helpers' }
 PhJuceExportTest >> testEditorIteratesTheDescriptorTable [
 
-	self assert: ((self contentsOf: (self exportType: 'Effect') named: 'PluginEditor.cpp')
+	self assert: ((self contentsOf: (self exportType: PhEffectPluginType new) named: 'PluginEditor.cpp')
 		includesSubstring: 'PhaustoParams::table')
 ]
 
-{ #category : 'running' }
+{ #category : 'helpers' }
 PhJuceExportTest >> testEffectExportWritesEverySourceFile [
 
 	| written |
-	written := ((self exportType: 'Effect') / 'Source') children
+	written := ((self exportType: PhEffectPluginType new) / 'Source') children
 		collect: [ :each | each basename ].
 	#( 'PhaustoParams.h' 'PluginProcessor.h' 'PluginProcessor.cpp'
-	   'PluginEditor.h' 'PluginEditor.cpp' 'FaustEffect.h' )
+	   'PluginEditor.h' 'PluginEditor.cpp' 'FaustEffect.h' 'PhaustoChannelAdapter.h' )
 		do: [ :each |
 			self assert: (written includes: each) description: each , ' was not written' ]
 ]
@@ -112,28 +116,30 @@ PhJuceExportTest >> testEveryWriterDelegatesToItsQuery [
     self assert: stale isEmpty description: 'Writers with inline templates: ' , stale printString
 ]
 
-{ #category : 'running' }
+{ #category : 'helpers' }
 PhJuceExportTest >> testJucerListsParamsHeader [
 
-	self assert: (((self exportType: 'Effect') / 'PhTestEffect.jucer') contents
+	| type |
+	type := PhEffectPluginType new.
+	self assert: (((self exportType: type) / ((self nameFor: type) , '.jucer')) contents
 		includesSubstring: 'Source/PhaustoParams.h')
 ]
 
-{ #category : 'running' }
+{ #category : 'helpers' }
 PhJuceExportTest >> testJucerListsTheFaustHeaderThatWasWritten [
 
-	#( 'Effect' 'PolySynth' ) do: [ :type |
+	{ PhEffectPluginType new. PhPolySynthPluginType new } do: [ :type |
 		| folder |
 		folder := self exportType: type.
-		self assert: ((folder / ('PhTest' , type , '.jucer')) contents
-			includesSubstring: 'Source/Faust' , type , '.h') ]
+		self assert: ((folder / ((self nameFor: type) , '.jucer')) contents
+			includesSubstring: 'Source/Faust' , type typeName , '.h') ]
 ]
 
-{ #category : 'tests' }
+{ #category : 'helpers' }
 PhJuceExportTest >> testOneDescriptorRowPerAutomatableControl [
 
 	| header rows |
-	header := self contentsOf: (self exportType: 'Effect') named: 'PhaustoParams.h'.
+	header := self contentsOf: (self exportType: PhEffectPluginType new) named: 'PhaustoParams.h'.
 	rows := (header lines select: [ :each | each includesSubstring: '{ "' ]) size.
 	self assert: rows equals: dsp apvtsParameterControls size
 ]
@@ -146,4 +152,39 @@ PhJuceExportTest >> testProcessorCppSynthHandlesMidiBeforeCompute [
     compute := cpp indexOfSubCollection: 'channels.process (fDSP, buffer);'.
     self assert: midi > 0.
     self assert: midi < compute
+]
+
+{ #category : 'helpers' }
+PhJuceExportTest >> testProcessorIncludesTheFaustHeaderThatWasWritten [
+	"The #include is built from the plugin type. If the writer hardcoded 'Effect',
+	 the two would disagree and nothing would compile."
+
+	{ PhEffectPluginType new. PhPolySynthPluginType new } do: [ :type |
+		| folder expected |
+		folder := self exportType: type.
+		expected := 'Faust' , type typeName , '.h'.
+		self
+			assert: (folder / 'Source' / expected) exists
+			description: expected , ' was not written for ' , type typeName.
+		self
+			assert: ((self contentsOf: folder named: 'PluginProcessor.h')
+				includesSubstring: '#include "' , expected , '"')
+			description: 'processor does not include ' , expected ]
+]
+
+{ #category : 'helpers' }
+PhJuceExportTest >> testProcessorIteratesTheDescriptorTable [
+
+	self assert: ((self contentsOf: (self exportType: PhEffectPluginType new) named: 'PluginProcessor.cpp')
+		includesSubstring: 'PhaustoParams::table')
+]
+
+{ #category : 'helpers' }
+PhJuceExportTest >> testProjectFilesWrittenBesideSource [
+
+	| type folder |
+	type := PhEffectPluginType new.
+	folder := self exportType: type.
+	self assert: (folder / 'CMakeLists.txt') exists.
+	self assert: (folder / ((self nameFor: type) , '.jucer')) exists
 ]
