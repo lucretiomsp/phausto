@@ -59,7 +59,14 @@ PhaustoDynamicEngine class >> ffiLibrary [
 	^ self class
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
+PhaustoDynamicEngine class >> sampleRate [
+
+
+^ 44100
+]
+
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDsp: aFaustCode [
 
 	| myArgv |
@@ -71,7 +78,7 @@ PhaustoDynamicEngine >> createDsp: aFaustCode [
 		  myArgv freeArrayOfStrings ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDsp: aFaustCode arguments: argv [
 
   ^ self ffiCall: #(DSP* createDsp (const char* 'MyApp',  const char* aFaustCode, int 2, void * argv , const char* '', int -1))
@@ -79,7 +86,7 @@ PhaustoDynamicEngine >> createDsp: aFaustCode arguments: argv [
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDsp: aFaustCode arguments: argv customName: anAppName [
 
 	^ self ffiCall:
@@ -87,7 +94,7 @@ PhaustoDynamicEngine >> createDsp: aFaustCode arguments: argv customName: anAppN
 		        , int 2 , void * argv , const char * '' , int -1 ) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDsp: aFaustCode arguments: argv name: anAppName [
 
 	^ self ffiCall:
@@ -95,12 +102,12 @@ PhaustoDynamicEngine >> createDsp: aFaustCode arguments: argv name: anAppName [
 		        , int 2 , void * argv , const char * '' , int -1 ) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDsp: anAppName content: aFaustCode [ 
 ^ self ffiCall: #(DSP* createDsp (const char* anAppName,  const char* aFaustCode,  int 0, NULL, const char* '', int -1))
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDsp: aFaustCode withName: aName [
 | myArgv |
 
@@ -110,7 +117,7 @@ myArgv := ExternalAddress arrayOfStringsFrom: #('-I' 'librariesBundle/faustLibs'
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox [
 
 	^ self ffiCall:
@@ -118,7 +125,7 @@ PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox [
 		        , int 0 , void* 0 , const char * '' , int -1 ) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox withName: aString [
 
 	^ self ffiCall:
@@ -127,7 +134,7 @@ PhaustoDynamicEngine >> createDspFromBoxes: aFaustBox withName: aString [
 		        -1 , int 0) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDspMIDIFromBoxes: aFaustBox withName: aString [
 
 Error new signal: 'CANE PROBLEMI'.
@@ -137,7 +144,7 @@ Error new signal: 'CANE PROBLEMI'.
 		        -1 #, bool true ) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createDspMIDIFromBoxes: aFaustBox withName: aString isMIDI: anInteger [
 
 "boolean value does not work so we use 1 for ture an 0 for false"
@@ -147,7 +154,7 @@ PhaustoDynamicEngine >> createDspMIDIFromBoxes: aFaustBox withName: aString isMI
 		        -1 #, int anInteger) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'creating' }
 PhaustoDynamicEngine >> createMIIDspFromBoxes: aFaustBox withName: aString [
 
 	^ self ffiCall:
@@ -163,27 +170,27 @@ PhaustoDynamicEngine >> defaultName [
 	^ '/MyApp/'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'destroying' }
 PhaustoDynamicEngine >> destroyDSP: aDsp [
 
 	self ffiCall: #( void destroyDsp #( DSP * aDsp ) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'getter' }
 PhaustoDynamicEngine >> getBuffer [
 
 ^ self ffiCall:
 		   #( float *  getBuffer(DSPStructure* aDsp))
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'getter' }
 PhaustoDynamicEngine >> getBuffer: aDsp [
 
 ^ self ffiCall:
 		   #( float *  getBuffer(DSP * aDsp ))
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'getter' }
 PhaustoDynamicEngine >> getLastError [
 
 	
@@ -191,7 +198,7 @@ PhaustoDynamicEngine >> getLastError [
 		  #( char #* getLastError #(  ) )
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'getter' }
 PhaustoDynamicEngine >> getNumInputsDsp: aDsp [
 "* @brief Get the number of input ports.
      *
@@ -220,8 +227,18 @@ PhaustoDynamicEngine >> initializeDSP: aDsp withRenderer: aType [
 { #category : 'initializing' }
 PhaustoDynamicEngine >> initializeDSP: aDsp withRenderer: aType bufferSize: aBufferSize [
 
+
 	self ffiCall:
-		#( bool initDsp #( DSP #* aDsp #, int aType #, int 44100 #, int
+		#( bool initDsp #( DSP #* aDsp #, int aType #, int 44100  #, int
+		      aBufferSize ) )
+]
+
+{ #category : 'initializing' }
+PhaustoDynamicEngine >> initializeDSP: aDsp withRenderer: aType bufferSize: aBufferSize sampleRate: aSampleRate [
+
+
+	self ffiCall:
+		#( bool initDsp #( DSP #* aDsp #, int aType #, int aSampleRate  #, int
 		      aBufferSize ) )
 ]
 

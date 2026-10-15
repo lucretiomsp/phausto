@@ -3,13 +3,7 @@ The hbargraph primitive implements a vertical bar-graph (typically a meter displ
 "
 Class {
 	#name : 'PhHBarGraph',
-	#superclass : 'UnitGenerator',
-	#instVars : [
-		'input',
-		'sinput',
-		'min',
-		'max'
-	],
+	#superclass : 'PhBarGraph',
 	#category : 'Phausto-UIPrimitives',
 	#package : 'Phausto',
 	#tag : 'UIPrimitives'
@@ -27,67 +21,4 @@ PhHBarGraph >> asBox [
 		             input: self input asBox.
 
 	^ sliderBox
-]
-
-{ #category : 'initialization' }
-PhHBarGraph >> initialize [
-
-	super initialize.
-	label := 'HBarGraph'.
-	input := 1 asBox.
-	min := -1.
-	max := 1
-]
-
-{ #category : 'accessing' }
-PhHBarGraph >> input [
-
-	^ input
-]
-
-{ #category : 'accessing' }
-PhHBarGraph >> input: anInput [
-
-	input := anInput 
-]
-
-{ #category : 'accessing' }
-PhHBarGraph >> label [
-
-	^ label
-]
-
-{ #category : 'accessing' }
-PhHBarGraph >> label: aString [
-
-	label := aString 
-]
-
-{ #category : 'accessing' }
-PhHBarGraph >> max [
-
-	^ max
-]
-
-{ #category : 'accessing' }
-PhHBarGraph >> max: aMax [
-
-	max := aMax
-]
-
-{ #category : 'accessing' }
-PhHBarGraph >> min [ 
-^ min
-]
-
-{ #category : 'accessing' }
-PhHBarGraph >> min: aMin [
-
-	min := aMin
-]
-
-{ #category : 'connecting' }
-PhHBarGraph >> patchedWith: aUnitGenerator [
-
-	self input: aUnitGenerator
 ]

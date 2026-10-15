@@ -84,6 +84,14 @@ BoxAPI >> boxAtan [
 	^ self ffiCall: #( #PhBox * CboxAtan #() )
 ]
 
+{ #category : 'ffi binary math' }
+BoxAPI >> boxAttach: aBox with: anotherBox [
+" the Faust attach primitive takes two input box and produces one output box which is a copy of the first input. The role of attach is to force its second input box to be compiled with the first one."
+self createLibContext.
+	^ self ffiCall:
+	#(#PhBox * CboxAttachAux #( #PhBox * aBox , #PhBox * anotherBox ))
+]
+
 { #category : 'ui building' }
 BoxAPI >> boxButton: aLabel [
 	"return a Button boxxeqFrom:  to: "
@@ -215,9 +223,19 @@ BoxAPI >> boxGt: aBox than: anotherBox [
 		  #( #PhBox * CboxGTAux #(#PhBox * aBox , PhBox * anotherBox ) )
 ]
 
+{ #category : 'ffi- unary math' }
+BoxAPI >> boxHBarGraph: aLabel min: aMin max: aMax [
+	"return a HBargraph with no input"
+
+	self createLibContext.
+
+	self ffiCall: #( #PhBox #* CboxVBargraph #( const char #* aLabel #, PhBox #* aMin
+		        #, PhBox #* aMax  ) )
+]
+
 { #category : 'ui building' }
 BoxAPI >> boxHBarGraphAux: aLabel min: aMin max: aMax input: anInput [
-	"Create a vertical bargraph box."
+	"Create an horizontal bargraph box."
 
 	self createLibContext.
 	^ self ffiCall:
@@ -508,14 +526,25 @@ BoxAPI >> boxTan [
 	^ self ffiCall: #( #PhBox * CboxTan #() )
 ]
 
+{ #category : 'ffi- unary math' }
+BoxAPI >> boxVBarGraph: aLabel min: aMin max: aMax [
+	"return a VBargraph with n input"
+
+	self createLibContext.
+
+	self ffiCall: #( #PhBox #* CboxVBargraph #( const char #* aLabel , PhBox #* aMin ,PhBox #* aMax  ) )
+		
+	  
+]
+
 { #category : 'ui building' }
 BoxAPI >> boxVBarGraphAux: aLabel min: aMin max: aMax input: anInput [
 	"Create a vertical bargraph box."
 
 	self createLibContext.
 	^ self ffiCall:
-		  #( PhBox #* CboxVBargraphAux #( const char #* aLabel #, PhBox #* aMin
-		        #, PhBox #* aMax #, PhBox #* anInput ) )
+		  #( PhBox #* CboxVBargraphAux #( const char #* aLabel #, PhBox
+		        #* aMin #, PhBox #* aMax #, PhBox #* anInput ) )
 ]
 
 { #category : 'ui building' }

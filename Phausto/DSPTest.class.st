@@ -114,15 +114,11 @@ void EffectAudioProcessor::changeProgramName (int index, const String& newName)
 //==============================================================================
 void EffectAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-  fDSP = std::make_unique<dsp>();
+  fDSP = std::make_unique<mydsp>();
   fDSP->init(sampleRate);
   fUI = std::make_unique<MapUI>();
-  fDSP->buildUserInterface(fUI);
-  inputs = new float*[2];
-  outputs = new float*[2];
+  fDSP->buildUserInterface(fUI.get());
   // Allocate buffers
-  inputBuffer.setSize(2, samplesPerBlock);
-  outputBuffer.setSize(2, samplesPerBlock);
 }
 
 void EffectAudioProcessor::releaseResources()
@@ -236,111 +232,6 @@ AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 ]
 
 { #category : 'tests' }
-DSPTest >> testAsEffectPluginProcessorEditorCpp [
-
-	| dsp filter |
-	filter := PhResonLp new
-		          frequency: #Cutoff;
-		          q: #Resonance.
-	dsp := filter stereo asDsp.
-	dsp init.
-	self
-		assert: (dsp asPluginProcessorEditorCppFor: 'Effect')
-		equals: '/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
-#include "PluginProcessor.h"
-#include "PluginEditor.h"
-using namespace juce;
-
-//==============================================================================
-EffectAudioProcessorEditor::EffectAudioProcessorEditor (EffectAudioProcessor& p)
-    : AudioProcessorEditor (&p), processor (p)
-{
-    // Make sure that before the constructor has finished, you''ve set the
-    // editor''s size to whatever you need it to be.
-    setSize (800, 100);
-    
-   
-}
-
-EffectAudioProcessorEditor::~EffectAudioProcessorEditor()
-{
-}
-
-//==============================================================================
-void EffectAudioProcessorEditor::paint (Graphics& g)
-{
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-}
-
-void EffectAudioProcessorEditor::resized()
-{
-
-}
-'
-]
-
-{ #category : 'tests' }
-DSPTest >> testAsEffectPluginProcessorEditorHeader [
-
-	| dsp filter |
-	filter := PhResonLp new
-		          frequency: #Cutoff;
-		          q: #Resonance.
-	dsp := filter stereo asDsp.
-	dsp init.
-	self
-		assert: (dsp asPluginProcessorEditorHeaderFor: 'Effect')
-		equals: '/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
-#pragma once
-
-#include <JuceHeader.h>
-#include "PluginProcessor.h"
-using namespace juce;
-
-//==============================================================================
-/**
-*/
-class EffectAudioProcessorEditor  : public AudioProcessorEditor
-{
-public:
-    EffectAudioProcessorEditor (EffectAudioProcessor&);
-    ~EffectAudioProcessorEditor();
-
-    //==============================================================================
-    void paint (Graphics&) override;
-    void resized() override;
-
-private:
-
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
-    EffectAudioProcessor& processor;
-
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EffectAudioProcessorEditor)
-};
-'
-]
-
-{ #category : 'tests' }
 DSPTest >> testAsEffectPluginProcessorHeader [
 
 	| dsp filter |
@@ -428,6 +319,15 @@ private:
 };
 
 '
+]
+
+{ #category : 'tests' }
+DSPTest >> testChannelCountsComeFromTheCompiledProgram [
+
+	| monoToStereo |
+	monoToStereo := DSP create: 'process = _ <: _,_;'.
+	self assert: monoToStereo numberOfInputs equals: 1.
+	self assert: monoToStereo numberOfOutputs equals: 2
 ]
 
 { #category : 'tests' }
