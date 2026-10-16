@@ -10,12 +10,16 @@ Class {
 }
 
 { #category : 'instance creation' }
-PhPluginType class >> fromString: aString [ 
-	"Lookup: one conversion at the boundary, then polymorphism everywhere."
+PhPluginType class >> fromString: aString [
+	"Converts a type name into its type object. Abstract types have no name of their own."
 
-	^ self allSubclasses
-		detect: [ :cls | cls new typeName = aString ]
-		ifNone: [ self error: 'Unknown plugin type: ' , aString ]
+	| type |
+	type := (self allSubclasses reject: [ :each | each isAbstract ])
+		        detect: [ :each | each new typeName = aString ]
+		        ifNone: [
+		        ^ self error:
+			          ('Unknown plugin type: {1}' format: { aString }) ].
+	^ type new
 ]
 
 { #category : 'testing' }

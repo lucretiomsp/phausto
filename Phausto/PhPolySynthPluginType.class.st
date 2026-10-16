@@ -1,6 +1,6 @@
 Class {
 	#name : 'PhPolySynthPluginType',
-	#superclass : 'PhPluginType',
+	#superclass : 'PhSynthPluginType',
 	#instVars : [
 		'voiceCount'
 	],
@@ -115,13 +115,6 @@ PhPolySynthPluginType >> isPolyWrapperControl: aControl [
 	steps isEmpty ifTrue: [ ^ false ].
 	steps first = 'Polyphonic' ifFalse: [ ^ false ].
 	^ steps size < 4 or: [ (steps at: 2) ~= 'Voices' ]
-]
-
-{ #category : 'accessing' }
-PhPolySynthPluginType >> maxInputs [
-	"No input bus, so an input could only ever hear silence."
-
-	^ 0
 ]
 
 { #category : 'defaults' }
