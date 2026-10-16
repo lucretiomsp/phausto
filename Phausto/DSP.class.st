@@ -33,6 +33,9 @@ Class {
 		'initializedDSP',
 		'initializedDSPs'
 	],
+	#classInstVars : [
+		'juceExportFolder'
+	],
 	#category : 'Phausto-DSP',
 	#package : 'Phausto',
 	#tag : 'DSP'
@@ -107,6 +110,20 @@ Smalltalk
 		show: 'This DSP is not valid - check its creation'
 			, PhaustoDynamicEngine uniqueInstance getLastError;
 		open
+]
+
+{ #category : 'accessing' }
+DSP class >> juceExportFolder [
+	"Where export2JuceWithName: writes one project per plugin."
+
+	^ juceExportFolder ifNil: [ FileLocator documents / 'phausto2juce' ]
+]
+
+{ #category : 'accessing' }
+DSP class >> juceExportFolder: aFileReference [
+	"nil restores the default."
+
+	juceExportFolder := aFileReference
 ]
 
 { #category : 'exceptions' }
@@ -1280,7 +1297,8 @@ DSP >> printOn: aStream [
 
 { #category : 'helpers' }
 DSP >> projectFolderFor: aString [
-    ^ (FileLocator documents / 'faust2Juce' / aString) ensureCreateDirectory
+
+	^ (self class juceExportFolder / aString) ensureCreateDirectory
 ]
 
 { #category : 'ui-building' }
