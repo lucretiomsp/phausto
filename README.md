@@ -5,6 +5,8 @@ Phausto is a library and API that allows to use the [FAUST](https://faust.grame.
 
 Follow the instructions in the [wiki](https://github.com/lucretiomsp/phausto/wiki).
 
+## Documentation
+Welcome to the Phausto wiki! For the full documentation, visit the [Phausto Documentation Site](https://lucretiomsp.github.io/musicwithpharo/phaustoFloss/index.html).
 
 ## Create a DSP from a valid string of FAUST code
 
