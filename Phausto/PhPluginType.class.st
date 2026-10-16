@@ -40,7 +40,7 @@ PhPluginType >> acceptsMidi [
 	 ^ self subclassResponsibility 
 ]
 
-{ #category : 'converting' }
+{ #category : 'as yet unclassified' }
 PhPluginType >> asPhPluginType [
 
 	^ self
@@ -112,6 +112,13 @@ PhPluginType >> excludesControl: aControl [
 ]
 
 { #category : 'defaults' }
+PhPluginType >> faustArchitectureFileName [
+	"Architecture file in Documents/architecture that LibFaust wraps around mydsp."
+
+	^ 'faustMinimalInlined.h'
+]
+
+{ #category : 'defaults' }
 PhPluginType >> hasAudioInput [ 
 
 	 ^ self subclassResponsibility 
@@ -119,12 +126,6 @@ PhPluginType >> hasAudioInput [
 
 { #category : 'defaults' }
 PhPluginType >> isSynth [ 
-
-	 ^ self subclassResponsibility 
-]
-
-{ #category : 'defaults' }
-PhPluginType >> juceVstCategory [ 
 
 	 ^ self subclassResponsibility 
 ]

@@ -27,6 +27,13 @@ PhEffectPluginType >> busesPropertiesCpp [
 
 ]
 
+{ #category : 'defaults' }
+PhEffectPluginType >> faustArchitectureFileName [
+	"Architecture file in Documents/architecture that LibFaust wraps around mydsp."
+
+	^ 'faustMinimalInlined.h'
+]
+
 { #category : 'accessing' }
 PhEffectPluginType >> hasAudioInput [
 	^ true

@@ -20,3 +20,14 @@ PhEffectEditorExportIntegrationTest >> pluginType [
 
 	^ PhEffectPluginType new
 ]
+
+{ #category : 'tests' }
+PhEffectEditorExportIntegrationTest >> testFaustHeaderIsTheOneTheProcessorIncludes [
+	"Only PluginProcessor.cpp includes Faust<Type>.h; LibFaust, across the FFI, must write that exact file."
+
+	| include |
+	self exportWithSkeleton.
+	include := '#include "Faust' , self pluginType typeName , '.h"'.
+	self assert: ((self sourceFile: 'PluginProcessor.cpp') contents includesSubstring: include).
+	self assert: (self sourceFile: 'Faust' , self pluginType typeName , '.h') exists
+]

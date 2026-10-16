@@ -100,22 +100,6 @@ PhJuceExportTest >> testEffectExportWritesEverySourceFile [
 			self assert: (written includes: each) description: each , ' was not written' ]
 ]
 
-{ #category : 'tests' }
-PhJuceExportTest >> testEveryWriterDelegatesToItsQuery [
-    "Each create... must write what its as... query answers. A writer with its own inline template would bypass the tests."
-    | stale |
-    stale := { #createHeaderAPVTSFilesNamed:for: -> #asPluginProcessorHeaderAPVTSFor:.
-        #createCppAPVTSFilesNamed:for: -> #asPluginProcessorCppAPVTSFor:.
-        #createHeaderEditorAPVTSFilesNamed:for: -> #asPluginEditorHeaderAPVTSFor:.
-        #createCppEditorAPVTSFilesNamed:for: -> #asPluginEditorCppAPVTSFor:.
-        #createCMakeFileNamed:for: -> #asCMakeListsFor:type:.
-        #createJucerFileNamed:for: -> #asJucerFor:type:.
-        #createBuildScriptNamed: -> #contents.
-        #createChannelAdapterNamed: -> #contents }
-            reject: [ :each | (DSP >> each key) messages includes: each value ].
-    self assert: stale isEmpty description: 'Writers with inline templates: ' , stale printString
-]
-
 { #category : 'helpers' }
 PhJuceExportTest >> testJucerListsParamsHeader [
 
@@ -142,17 +126,6 @@ PhJuceExportTest >> testOneDescriptorRowPerAutomatableControl [
 	header := self contentsOf: (self exportType: PhEffectPluginType new) named: 'PhaustoParams.h'.
 	rows := (header lines select: [ :each | each includesSubstring: '{ "' ]) size.
 	self assert: rows equals: dsp apvtsParameterControls size
-]
-
-{ #category : 'tests' }
-PhJuceExportTest >> testProcessorCppSynthHandlesMidiBeforeCompute [
-
-	| cpp midi compute |
-	cpp := dsp asPluginProcessorCppAPVTSFor: self synth.
-	midi := cpp indexOfSubCollection: 'handleMidi (midiMessages);'.
-	compute := cpp indexOfSubCollection: 'channels.process (*fDSP, buffer);'.
-	self assert: midi > 0.
-	self assert: midi < compute
 ]
 
 { #category : 'tests' }

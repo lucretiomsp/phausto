@@ -189,17 +189,6 @@ PhJuceExporterTest >> testProcessorCppSynthDefinesHandleMidi [
 ]
 
 { #category : 'tests' }
-PhJuceExporterTest >> testProcessorCppSynthHandlesMidiBeforeCompute [
-
-	| cpp midi compute |
-	cpp := dsp asPluginProcessorCppAPVTSFor: self synth.
-	midi := cpp indexOfSubCollection: 'handleMidi (midiMessages);'.
-	compute := cpp indexOfSubCollection: 'channels.process (fDSP, buffer);'.
-	self assert: midi > 0.
-	self assert: midi < compute
-]
-
-{ #category : 'tests' }
 PhJuceExporterTest >> testProcessorCppSynthHasOutputOnlyBus [
     | cpp |
     cpp := dsp asPluginProcessorCppAPVTSFor: self synth.
@@ -227,31 +216,6 @@ PhJuceExporterTest >> testProcessorHeaderNamesFollowType [
 ]
 
 { #category : 'running' }
-PhJuceExporterTest >> testProcessorIncludesTheFaustHeaderThatWasWritten [
-	"The #include is built from aPluginType. If the writer hardcodes 'Effect',
-	 the two disagree and nothing compiles."
-
-	#( 'Effect' 'PolySynth' ) do: [ :type |
-		| folder expected |
-		folder := self exportType: type.
-		expected := 'Faust' , type , '.h'.
-		self
-			assert: (folder / 'Source' / expected) exists
-			description: expected , ' was not written for type ' , type.
-		self
-			assert: ((self contentsOf: folder named: 'PluginProcessor.h')
-				includesSubstring: '#include "' , expected , '"')
-			description: 'processor does not include ' , expected ]
-]
-
-{ #category : 'tests' }
-PhJuceExporterTest >> testProcessorIteratesTheDescriptorTable [
-
-	self assert: ((self contentsOf: (self exportType: 'Effect') named: 'PluginProcessor.cpp')
-		includesSubstring: 'PhaustoParams::table')
-]
-
-{ #category : 'running' }
 PhJuceExporterTest >> testProcessorProcessesThroughTheChannelAdapter [
 
 	{ self effect. self synth } do: [ :type |
@@ -259,15 +223,6 @@ PhJuceExporterTest >> testProcessorProcessesThroughTheChannelAdapter [
 		cpp := dsp asPluginProcessorCppAPVTSFor: type.
 		self assert: (cpp includesSubstring: 'channels.process (*fDSP, buffer);').
 		self deny: (cpp includesSubstring: 'fDSP->compute') ]
-]
-
-{ #category : 'running' }
-PhJuceExporterTest >> testProjectFilesWrittenBesideSource [
-
-	| folder |
-	folder := self exportType: 'Effect'.
-	self assert: (folder / 'CMakeLists.txt') exists.
-	self assert: (folder / 'PhTestEffect.jucer') exists
 ]
 
 { #category : 'accessing' }

@@ -1,3 +1,14 @@
+"
+Polyphonic synth plugin type. A Strategy that carries configuration: voiceCount (default 8, at least 2). Create it with PhPolySynthPluginType voices: 12, or export with DSP >> export2JuceWithName:polyphony:. The synth facts (MIDI in, no input bus, Instrument categories) come from PhSynthPluginType.
+
+The voices live in Faust. faustMinimalPolyInlined.h provides mydsp_poly, which allocates, steals, frees and mixes the voices. The generated handleMidi only routes note on, note off and all notes off to keyOn, keyOff and allNotesOff.
+
+Parameters bypass the wrapper's UI: its paths gain a /Polyphonic/Voices prefix, and its group control relies on GUI::updateAllGuis(), whose static list every plugin instance in a host shares. Instead, the constructor resolves each APVTS parameter to one zone per voice, and pushParameters writes them all once per block.
+
+The APVTS table leaves out freq, gate and gain (keyOn drives them) and the wrapper's own controls (Panic, per-voice copies). compute runs in chunks of at most MIX_BUFFER_SIZE (4096) frames, the size of mydsp_poly's mix buffers.
+
+Limits: MIDI is applied once per block, not sample-accurately. The 2020 mydsp_poly restarts a stolen voice without a crossfade and prints each steal to std::cout.
+"
 Class {
 	#name : 'PhPolySynthPluginType',
 	#superclass : 'PhSynthPluginType',

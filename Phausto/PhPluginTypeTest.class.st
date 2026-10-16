@@ -103,14 +103,14 @@ PhPluginTypeTest >> testEveryTypeNamesItsArchitecture [
 
 { #category : 'tests' }
 PhPluginTypeTest >> testFromStringEffect [ 
-	self assert: (PhPluginType fromString: 'Effect') class equals: PhEffectPluginType class
+	self assert: (PhPluginType fromString: 'Effect') class equals: PhEffectPluginType 
 
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testFromStringMonoSynth [ 
-	self assert: (PhPluginType fromString: 'MonoSynth') class equals: PhMonoSynthPluginType class
+PhPluginTypeTest >> testFromStringMonoSynth [
 
+	self assert: (PhPluginType fromString: 'MonoSynth') class equals: PhMonoSynthPluginType
 ]
 
 { #category : 'tests' }
