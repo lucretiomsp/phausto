@@ -211,21 +211,19 @@ DSP >> apvtsControlsFrom: aJsonString [
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> apvtsDescriptorRowFor: aControl [
+DSP >> apvtsDescriptorRowFor: aParameter [
 	"One Descriptor row. Field order must match the struct in asPhaustoParamsHeader."
 
-	| toggle |
-	toggle := #( 'button' 'checkbox' ) includes: (aControl at: #type).
 	^ String streamContents: [ :s |
-		s nextPutAll: '        { "'; nextPutAll: (aControl at: #shortname);
-		  nextPutAll: '", "'; nextPutAll: (aControl at: #address);
-		  nextPutAll: '", "'; nextPutAll: (aControl at: #label);
+		s nextPutAll: '        { "'; nextPutAll: aParameter parameterID;
+		  nextPutAll: '", "'; nextPutAll: aParameter address;
+		  nextPutAll: '", "'; nextPutAll: aParameter label;
 		  nextPutAll: '", ';
-		  nextPutAll: (self cppFloatAt: #min in: aControl default: 0); nextPutAll: ', ';
-		  nextPutAll: (self cppFloatAt: #max in: aControl default: 1); nextPutAll: ', ';
-		  nextPutAll: (self cppFloatAt: #init in: aControl default: 0); nextPutAll: ', ';
-		  nextPutAll: (self cppFloatAt: #step in: aControl default: 0.01); nextPutAll: ', ';
-		  nextPutAll: (toggle ifTrue: [ 'true' ] ifFalse: [ 'false' ]);
+		  nextPutAll: (self cppFloat: aParameter minValue); nextPutAll: ', ';
+		  nextPutAll: (self cppFloat: aParameter maxValue); nextPutAll: ', ';
+		  nextPutAll: (self cppFloat: aParameter initValue); nextPutAll: ', ';
+		  nextPutAll: (self cppFloat: aParameter stepValue); nextPutAll: ', ';
+		  nextPutAll: aParameter isToggle printString;
 		  nextPutAll: ' },' ]
 ]
 
@@ -242,24 +240,14 @@ DSP >> apvtsParameterControlsFrom: aJsonString [
 
 { #category : 'exporting - apvts' }
 DSP >> apvtsParameterControlsFrom: aJsonString for: aPluginType [
-    | kept names offender |
-    kept := (self apvtsControlsFrom: aJsonString) reject: [ :c |
-        (#( 'hbargraph' 'vbargraph' 'soundfile' ) includes:
-            (c at: #type ifAbsent: [ '' ]))
-        or: [ aPluginType excludesControl: c ] ].
-    kept := (kept asSortedCollection: [ :a :b |
-        (a at: #address) <= (b at: #address) ]) asArray.
-    names := (kept collect: [ :c | c at: #shortname ]) asSet.
-    names size = kept size ifFalse: [
-        self error: 'Duplicate APVTS shortnames in ' , self name
-            , ': the descriptor table would contain unreachable ids' ].
-    offender := kept
-        detect: [ :c | (c at: #label) includesAnyOf: '"\' ]
-        ifNone: [ nil ].
-    offender ifNotNil: [
-        self error: 'Label breaks the C++ string literal: '
-            , (offender at: #label) ].
-    ^ kept
+	"Host parameters sorted by address. PhParameterSet checks the IDs; the label check is C++'s."
+
+	| kept |
+	kept := (PhParameterSet fromJSON: aJsonString) hostParametersFor: aPluginType.
+	kept
+		detect: [ :each | each label includesAnyOf: '"\' ]
+		ifFound: [ :each | self error: 'Label breaks the C++ string literal: ' , each label ].
+	^ kept
 ]
 
 { #category : 'exporting - apvts' }
@@ -1220,6 +1208,13 @@ DSP >> openSliderFor: aString [
 	
 fader := self sliderFor: aString.
 fader openInWindow.
+]
+
+{ #category : 'as yet unclassified' }
+DSP >> parameterSet [
+	"Every parameter of this DSP, parsed once from its Faust JSON."
+
+	^ PhParameterSet fromJSON: self getJSON
 ]
 
 { #category : 'accessing' }

@@ -30,19 +30,18 @@ DSPTest >> testCreateFromString [
 { #category : 'tests' }
 DSPTest >> testDSPParameterFromDictionary [
 
-| param dsp |
-
-dsp := SquareOsc new asDsp.
-dsp init .
-param := PhParameter fromDictionary: (dsp getUIItemsLabeledDictionary  at: 'SquareOscFreq').
-self assert: param label equals: 'SquareOscFreq'.
-self assert: param shortName equals: 'SquareOscFreq'.
-self assert: param type equals: 'hslider'.
-self assert: param initValue equals: 440.
-self assert: param  stepValue equals: 1.
-self assert: param  minValue equals: 20.
-self assert: param  maxValue equals: 4086.
-
+	| param dsp |
+	dsp := SquareOsc new asDsp.
+	dsp init.
+	param := PhParameter fromFaustItem:
+		         (dsp getUIItemsLabeledDictionary at: 'SquareOscFreq').
+	self assert: param label equals: 'SquareOscFreq'.
+	self assert: param shortName equals: 'SquareOscFreq'.
+	self assert: param type equals: 'hslider'.
+	self assert: param initValue equals: 440.
+	self assert: param stepValue equals: 1.
+	self assert: param minValue equals: 20.
+	self assert: param maxValue equals: 4086
 ]
 
 { #category : 'tests' }
@@ -81,4 +80,13 @@ self assert: param  stepValue equals: 0.1.
 self assert: param  minValue equals: 0.
 self assert: param  maxValue equals: 1.
 
+]
+
+{ #category : 'tests' }
+DSPTest >> testParameterSetReadsRealFaustJSON [
+	"The hand-written fixtures cannot show what libfaust really emits."
+
+	self
+		assert: (SquareOsc new asDsp parameterSet parameters collect: [ :each | each label ]) asSet
+		equals: #( 'SquareOscFreq' 'SquareOscuLevel' ) asSet
 ]

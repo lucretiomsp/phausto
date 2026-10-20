@@ -45,13 +45,21 @@ PhParameterSet >> ensureUniqueIDs [
 		ifFalse: [ self error: 'Duplicate parameter IDs: the descriptor table would contain unreachable ids' ]
 ]
 
-{ #category : 'initialization' }
-PhParameterSet >> initializeFromUI: aSequence [
+{ #category : 'as yet unclassified' }
+PhParameterSet >> hostParametersFor: aPluginType [
+	"What the APVTS exposes, so also what the JuBloc glue may attach to."
 
+	^ parameters select: [ :each |
+		each isHostParameter and: [ (aPluginType excludesParameter: each) not ] ]
+
+]
+
+{ #category : 'initialization' }
+PhParameterSet >> initializeFromUI: aSequence [ 
 	| leaves |
 	leaves := OrderedCollection new.
 	self collectLeavesFrom: aSequence into: leaves.
-	parameters := (((leaves select: [ :each | PhControlKind isParameterItem: each ])
+	parameters := (((leaves select: [ :each | PhParameter isParameterItem: each ])
 		collect: [ :each | PhParameter fromFaustItem: each ])
 		sorted: [ :a :b | a address <= b address ]) asArray.
 	self ensureUniqueIDs

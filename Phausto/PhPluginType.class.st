@@ -111,6 +111,13 @@ PhPluginType >> excludesControl: aControl [
 	 ^ false 
 ]
 
+{ #category : 'accessing' }
+PhPluginType >> excludesParameter: aParameter [
+	"testing. MIDI drives these controls, so the APVTS leaves them out. Matched on the Faust name."
+
+	^ self synthControlNames includes: aParameter shortName
+]
+
 { #category : 'defaults' }
 PhPluginType >> faustArchitectureFileName [
 	"Architecture file in Documents/architecture that LibFaust wraps around mydsp."
@@ -167,6 +174,13 @@ PhPluginType >> pushParametersBodyCpp [
 	^ '    for (int i = 0; i < PhaustoParams::count; ++i)
         if (raw[i] != nullptr)
             fUI->setParamValue (PhaustoParams::table[i].faustPath, raw[i]->load());'
+]
+
+{ #category : 'accessing' }
+PhPluginType >> synthControlNames [
+	"accessing. Hook: the Faust names MIDI drives directly. Effects have none."
+
+	^ #()
 ]
 
 { #category : 'defaults' }
