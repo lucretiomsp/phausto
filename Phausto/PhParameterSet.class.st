@@ -18,6 +18,33 @@ Class {
 	#tag : 'Parameters'
 }
 
+{ #category : 'instance creation' }
+PhParameterSet class >> fromJSON: aJsonString [
+	"No FFI, no initialized DSP: tests pass a JSON string."
+
+	^ self new
+		initializeFromUI: ((STONJSON fromString: aJsonString) at: #ui);
+		yourself
+]
+
+{ #category : 'as yet unclassified' }
+PhParameterSet >> collectLeavesFrom: aSequence into: aCollection [
+	"Moved from DSP >> apvtsCollectInto:from:. Groups have #items, leaves an #address."
+
+	aSequence do: [ :node |
+		(node includesKey: #items)
+			ifTrue: [ self collectLeavesFrom: (node at: #items) into: aCollection ]
+			ifFalse: [ (node includesKey: #address) ifTrue: [ aCollection add: node ] ] ]
+]
+
+{ #category : 'as yet unclassified' }
+PhParameterSet >> ensureUniqueIDs [
+	"APVTS keeps the first parameter with an id: a duplicate makes every later lookup wrong."
+
+	(parameters collect: [ :each | each parameterID ]) asSet size = parameters size
+		ifFalse: [ self error: 'Duplicate parameter IDs: the descriptor table would contain unreachable ids' ]
+]
+
 { #category : 'initialization' }
 PhParameterSet >> initializeFromUI: aSequence [
 
@@ -28,4 +55,9 @@ PhParameterSet >> initializeFromUI: aSequence [
 		collect: [ :each | PhParameter fromFaustItem: each ])
 		sorted: [ :a :b | a address <= b address ]) asArray.
 	self ensureUniqueIDs
+]
+
+{ #category : 'accessing' }
+PhParameterSet >> parameters [
+	^ parameters
 ]
