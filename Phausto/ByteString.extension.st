@@ -70,5 +70,5 @@ ByteString >> asCppSetterImplementationFor: aPluginType [
 { #category : '*Phausto' }
 ByteString >> asDSPParameter [
 
-	^ DSPParameter new
+	^ PhParameter new
 ]

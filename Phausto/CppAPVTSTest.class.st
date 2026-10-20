@@ -17,11 +17,11 @@ Class {
 { #category : 'running' }
 CppAPVTSTest >> setUp [ 
 super setUp.
-	floatParam := DSPParameter new
+	floatParam := PhParameter new
 		shortName: 'Korg35HPFRes'; label: 'Korg35HPFRes';
 		minValue: 1; maxValue: 8; stepValue: 0.001; initValue: 1;
 		type: 'hslider'; address: '/MyApp/Korg35HPFRes'; yourself.
-	boolParam := DSPParameter new
+	boolParam := PhParameter new
 		shortName: 'Gate'; label: 'Gate';
 		minValue: 0; maxValue: 1; stepValue: 1; initValue: 0;
 		type: 'button'; address: '/MyApp/Gate'; yourself.
@@ -98,7 +98,7 @@ CppAPVTSTest >> testFromDictionaryCapturesAddress [
 			        at: #address put: '/MyApp/X';
 			        yourself.
 		self
-			assert: (DSPParameter fromDictionary: dict) address
+			assert: (PhParameter fromDictionary: dict) address
 			equals: '/MyApp/X' 
 ]
 

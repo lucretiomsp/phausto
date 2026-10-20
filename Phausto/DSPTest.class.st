@@ -34,7 +34,7 @@ DSPTest >> testDSPParameterFromDictionary [
 
 dsp := SquareOsc new asDsp.
 dsp init .
-param := DSPParameter fromDictionary: (dsp getUIItemsLabeledDictionary  at: 'SquareOscFreq').
+param := PhParameter fromDictionary: (dsp getUIItemsLabeledDictionary  at: 'SquareOscFreq').
 self assert: param label equals: 'SquareOscFreq'.
 self assert: param shortName equals: 'SquareOscFreq'.
 self assert: param type equals: 'hslider'.
@@ -71,7 +71,7 @@ self assertCollection: dsp getUIItemsLabeledDictionary keys  equals: #('SquareOs
 DSPTest >> testNewDSPParameter [
 
 | param |
-param := DSPParameter new label: 'TestParam'; shortName: 'TestParam' ; initValue: 0.5 ; minValue: 0; maxValue: 1; stepValue: 0.1; type: 'hslider' .
+param := PhParameter new label: 'TestParam'; shortName: 'TestParam' ; initValue: 0.5 ; minValue: 0; maxValue: 1; stepValue: 0.1; type: 'hslider' .
 
 self assert: param label equals: 'TestParam'.
 self assert: param shortName equals: 'TestParam'.
