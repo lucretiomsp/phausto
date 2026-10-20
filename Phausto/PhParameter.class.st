@@ -1,13 +1,11 @@
 "
-DSPParameter represents a single adjustable value of a DSP unit.
+I am one control of a Faust DSP, as its source declares it: address, short name, label, range, default, step, and my PhControlKind. I was DSPParameter.
 
-It holds the current value of the parameter and knows its valid range.
-A DSPParameter may convert between a normalized control value (0–1)
-and the value used by the DSP (e.g. Hz, dB).
+I am built from one leaf of the Faust UI JSON (fromFaustItem:), with no FFI and no initialized DSP. I have no setters: what Faust declared does not change.
 
-DSPParameter is independent of UI, DSP code, and presets.
-It only represents what the parameter is and what its value is.
+I hold no current value and no view. The JUCE exporter reads me to write PhaustoParams.h, and CoypuIDE visits me to build widgets (acceptVisitor:).
 
+parameterID is the single ID derivation. The APVTS header and the JuBloc glue both send it, so they cannot disagree.
 "
 Class {
 	#name : 'PhParameter',
