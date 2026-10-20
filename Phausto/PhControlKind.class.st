@@ -1,11 +1,13 @@
 "
-I am the control a Faust item declares: hslider, vslider, nentry, knob ([style:knob]), checkbox, button, hbargraph or vbargraph. Every PhParameter holds an instance of one of my subclasses, resolved once by forFaustItem:.
+PhControlKind comment: 'I am the control a Faust item declares: **hslider**, **vslider**, **nentry**, **knob ([style:knob])**, **checkbox**, **button**, **hbargraph** or **vbargraph**. Every _PhParameter_ holds an instance of one of my subclasses, resolved once by forFaustItem:.
 
-I answer what the exporter needs (isToggle, isHostParameter) and dispatch visitors: acceptVisitor:for: sends one of visitHorizontalSlider:, visitVerticalSlider:, visitNumEntry:, visitKnob:, visitCheckbox:, visitButton:, visitHorizontalBargraph:, visitVerticalBargraph:.
+I answer what the exporter needs (_isToggle_, _isHostParameter_) and dispatch  _visitors:_ _acceptVisitor:for:_
+
+sends one of _visitHorizontalSlider:_, _visitVerticalSlider:_, _visitNumEntry:_, _visitKnob:_, _visitCheckbox:_, _visitButton:_, _visitHorizontalBargraph:_, _visitVerticalBargraph:_.
 
 I describe controls, I never draw them: widgets live in CoypuIDE.
-Pattern: Replace Type Code with Subclasses, and the element side of a Visitor. forFaustItem: is the only place a Faust type string is read; nothing downstream tests a type.'.
 
+Pattern: Replace Type Code with Subclasses, and the element side of a Visitor. My class side (forFaustItem:, isParameterItem:) is where Faust type strings become objects; nothing that uses a PhParameter tests a type.'
 "
 Class {
 	#name : 'PhControlKind',
