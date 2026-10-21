@@ -748,21 +748,18 @@ DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [
 
 { #category : 'export - juce' }
 DSP >> createFaustHeaderFileNamed: aName for: aPluginType [
-	"Writes Source/Faust<Type>.h, the file PluginProcessor.cpp includes. LibFaust is the FFI boundary, so it gets Strings only. The C side still writes into its own folder, so the header is moved into the project. Fails loudly: a missing header would only show up later, as a C++ compile error."
+	"Writes Source/Faust<Type>.h, the file PluginProcessor.cpp includes. The export
+	 decides both paths; LibFaust, the FFI boundary, only passes them to libfaust.
+	 Fails loudly: libfaust can answer true without writing anything."
 
-	| fileName header written |
-	fileName := 'Faust' , aPluginType typeName , '.h'.
-	header := (self sourceFolderFor: aName) / fileName.
-	written := (LibFaust uniqueInstance headerFolderFor: aName) / fileName.
+	| header message |
+	header := (self sourceFolderFor: aName) / ('Faust' , aPluginType typeName , '.h').
 	header ensureDelete.
-	written ensureDelete.
-	LibFaust uniqueInstance
+	message := LibFaust uniqueInstance
 		createFaustHeaderFileFromString: self generatedCode
-		withName: aName
-		architecture: aPluginType faustArchitectureFileName
-		type: aPluginType typeName.
-	written exists ifFalse: [ self error: 'libfaust did not write ' , written fullName ].
-	written = header ifFalse: [ written moveTo: header ].
+		architecturePath: aPluginType faustArchitecturePath
+		outputPath: header fullName.
+	header exists ifFalse: [ self error: 'libfaust did not write ' , header fullName , ': ' , message ].
 	^ header
 ]
 
@@ -857,12 +854,6 @@ DSP >> destroy [
 	self isInitialized: false.
 	self class unregister: self
 
-]
-
-{ #category : 'exporting' }
-DSP >> export2JuceWithName: aString polyphony: anInteger [
-
-	^ self export2JuceWithName: aString type: (PhPolySynthPluginType voices: anInteger)
 ]
 
 { #category : 'exporting' }
@@ -1187,7 +1178,7 @@ fader := self sliderFor: aString.
 fader openInWindow.
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 DSP >> parameterSet [
 	"Every parameter of this DSP, parsed once from its Faust JSON."
 

@@ -9,6 +9,27 @@ Class {
 	#tag : 'Exporting'
 }
 
+{ #category : 'accessing' }
+PhPluginType class >> architectureFolder [
+	"Next to the image in a distributed image such as the Music Image; Phausto's
+	 repository clone in a development image."
+
+	| beside |
+	beside := FileLocator imageDirectory / 'architecture'.
+	beside exists ifTrue: [ ^ beside ].
+	^ (IceRepository registry
+		detect: [ :each | each name asLowercase = 'phausto' ]
+		ifNone: [ self error: 'No architecture folder next to the image, and no phausto repository in Iceberg' ]) location
+		/ 'architecture'
+]
+
+{ #category : 'accessing' }
+PhPluginType class >> faustArchitecturePath [
+	"Full path, so libfaust reads exactly this file."
+
+	^ (self class architectureFolder / self faustArchitectureFileName) fullName
+]
+
 { #category : 'instance creation' }
 PhPluginType class >> fromString: aString [
 	"Converts a type name into its type object. Abstract types have no name of their own."
@@ -26,12 +47,6 @@ PhPluginType class >> fromString: aString [
 PhPluginType class >> isAbstract [ 
 
 ^ self == PhPluginType 
-]
-
-{ #category : 'accessing' }
-PhPluginType class >> synthControlNames [
-
-	^ #( 'freq' 'gate' 'gain' )
 ]
 
 { #category : 'defaults' }
@@ -104,13 +119,6 @@ PhPluginType >> dspMembersCpp [
 	^ ''
 ]
 
-{ #category : 'defaults' }
-PhPluginType >> excludesControl: aControl [ 
-
-
-	 ^ false 
-]
-
 { #category : 'accessing' }
 PhPluginType >> excludesParameter: aParameter [
 	"testing. MIDI drives these controls, so the APVTS leaves them out. Matched on the Faust name."
@@ -120,9 +128,17 @@ PhPluginType >> excludesParameter: aParameter [
 
 { #category : 'defaults' }
 PhPluginType >> faustArchitectureFileName [
-	"Architecture file in Documents/architecture that LibFaust wraps around mydsp."
+	"The architecture file, by name, that libfaust wraps around the generated class.
+	 Default: the mono one, shared by effects and the mono synth. Looked up in architectureFolder."
 
 	^ 'faustMinimalInlined.h'
+]
+
+{ #category : 'accessing' }
+PhPluginType >> faustArchitecturePath [
+	"Full path, so libfaust reads exactly this file."
+
+	^ (self class architectureFolder / self faustArchitectureFileName) fullName
 ]
 
 { #category : 'defaults' }
@@ -155,14 +171,16 @@ PhPluginType >> midiHandlerCpp [
 ^ ''
 ]
 
-{ #category : 'accessing' }
-PhPluginType >> midiMemebersCpp [
+{ #category : 'emitting' }
+PhPluginType >> midiMembersCpp [
+	"Extra private member declarations for MIDI state. None by default."
 
 	^ ''
 ]
 
-{ #category : 'accessing' }
-PhPluginType >> processMidiCallCpp [
+{ #category : 'emitting' }
+PhPluginType >> processBlockMidiCallCpp [
+	"The MIDI handling call inside processBlock, before compute. None by default."
 
 	^ ''
 ]

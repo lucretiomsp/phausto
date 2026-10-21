@@ -34,13 +34,6 @@ PhSynthPluginType >> busesPropertiesCpp [
 ]
 
 { #category : 'defaults' }
-PhSynthPluginType >> excludesControl: aControl [
-	"MIDI drives these, so they must not become APVTS parameters."
-
-	^ self synthControlNames includes: (aControl at: #shortname)
-]
-
-{ #category : 'defaults' }
 PhSynthPluginType >> hasAudioInput [
 
 	^ false

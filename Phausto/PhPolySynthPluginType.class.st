@@ -25,11 +25,6 @@ PhPolySynthPluginType class >> defaultVoiceCount [
 	^ 8
 ]
 
-{ #category : 'defaults' }
-PhPolySynthPluginType class >> voices: anInteger [
-	^ self new initializeWithVoiceCount: anInteger
-]
-
 { #category : 'accessing' }
 PhPolySynthPluginType >> computeBlockSizeCpp [
 	"mydsp_poly mixes into buffers of MIX_BUFFER_SIZE frames and does not check in release builds."
@@ -92,12 +87,6 @@ PhPolySynthPluginType >> dspMembersCpp [
 ]
 
 { #category : 'accessing' }
-PhPolySynthPluginType >> excludesControl: aControl [
-
-	^ (super excludesControl: aControl) or: [ self isPolyWrapperControl: aControl ]
-]
-
-{ #category : 'accessing' }
 PhPolySynthPluginType >> excludesParameter: aParameter [
 	"The poly wrapper's own controls are not the synth's: the APVTS leaves them out too."
 
@@ -122,17 +111,6 @@ PhPolySynthPluginType >> initializeWithVoiceCount: anInteger [
 	(anInteger isInteger and: [ anInteger >= 2 ]) ifFalse: [
 		^ self error: 'PolySynth needs at least 2 voices; use PhMonoSynthPluginType for one.' ].
 	voiceCount := anInteger
-]
-
-{ #category : 'accessing' }
-PhPolySynthPluginType >> isPolyWrapperControl: aControl [
-	"A DSP made with asDspMIDIWithName: carries Faust's poly UI in its JSON Only /Polyphonic/Voices/<program>/... are voice controls; Panic and  per-voice copies belong to the wrapper."
-
-	| steps |
-	steps := (aControl at: #address ifAbsent: [ '' ]) substrings: '/'.
-	steps isEmpty ifTrue: [ ^ false ].
-	steps first = 'Polyphonic' ifFalse: [ ^ false ].
-	^ steps size < 4 or: [ (steps at: 2) ~= 'Voices' ]
 ]
 
 { #category : 'accessing' }
@@ -199,4 +177,13 @@ PhPolySynthPluginType >> typeName [
 { #category : 'accessing' }
 PhPolySynthPluginType >> voiceCount [
 	^ voiceCount
+]
+
+{ #category : 'accessing' }
+PhPolySynthPluginType >> voices: anInteger [
+	"Fail Fast: a single mydsp_poly voice steals itself on every overlapping note."
+
+	(anInteger isInteger and: [ anInteger >= 2 ]) ifFalse: [
+		^ self error: 'PolySynth needs at least 2 voices; use PhMonoSynthPluginType for one.' ].
+	voiceCount := anInteger
 ]

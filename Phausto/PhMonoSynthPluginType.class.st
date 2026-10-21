@@ -1,5 +1,6 @@
 "
-PhMonoSynthPluginType comment: 'freq, gate, and gain from the APVTS table because MIDI drives them directly via handleMidi (last-note-priority, per-block). The three excluded names follow the Faust standard convention that Phausto uses by construction.
+Monophonic synth plugin type: one voice, last-note priority, handled in the processor by handleMidi. **freq**, **gate** and **gain** stay out of the APVTS table because MIDI drives them (synthControlNames, from _PhSynthPluginType_). Parameters reach the DSP once per block, so a retriggered note starts one block late, in a block that runs with gate 0.
+
 "
 Class {
 	#name : 'PhMonoSynthPluginType',

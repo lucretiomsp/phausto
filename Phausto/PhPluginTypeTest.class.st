@@ -211,6 +211,15 @@ PhPluginTypeTest >> testPolyVoicesConfiguresTheType [
 ]
 
 { #category : 'tests' }
+PhPluginTypeTest >> testPolyVoicesDefaultAndMinimum [
+
+	self
+		assert: PhPolySynthPluginType new voiceCount equals: 8;
+		assert: (PhPolySynthPluginType new voices: 4) voiceCount equals: 4;
+		should: [ PhPolySynthPluginType new voices: 1 ] raise: Error
+]
+
+{ #category : 'tests' }
 PhPluginTypeTest >> testProcessorCppEffectHasNoMidi [ 
 	| dsp cpp |
 	dsp := DSP new name: 'MyApp'.
