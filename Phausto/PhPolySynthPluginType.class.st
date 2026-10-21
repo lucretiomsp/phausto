@@ -97,6 +97,13 @@ PhPolySynthPluginType >> excludesControl: aControl [
 	^ (super excludesControl: aControl) or: [ self isPolyWrapperControl: aControl ]
 ]
 
+{ #category : 'accessing' }
+PhPolySynthPluginType >> excludesParameter: aParameter [
+	"The poly wrapper's own controls are not the synth's: the APVTS leaves them out too."
+
+	^ (super excludesParameter: aParameter) or: [ self isPolyWrapperParameter: aParameter ]
+]
+
 { #category : 'defaults' }
 PhPolySynthPluginType >> faustArchitectureFileName [
 	^ 'faustMinimalPolyInlined.h'
@@ -123,6 +130,17 @@ PhPolySynthPluginType >> isPolyWrapperControl: aControl [
 
 	| steps |
 	steps := (aControl at: #address ifAbsent: [ '' ]) substrings: '/'.
+	steps isEmpty ifTrue: [ ^ false ].
+	steps first = 'Polyphonic' ifFalse: [ ^ false ].
+	^ steps size < 4 or: [ (steps at: 2) ~= 'Voices' ]
+]
+
+{ #category : 'accessing' }
+PhPolySynthPluginType >> isPolyWrapperParameter: aParameter [
+	"A DSP made with asDspMIDIWithName: carries Faust's poly UI in its JSON. Only _/Polyphonic/Voices/<program>/..._ are voice controls; Panic and theper-voice copies belong to the wrapper."
+
+	| steps |
+	steps := aParameter address substrings: '/'.
 	steps isEmpty ifTrue: [ ^ false ].
 	steps first = 'Polyphonic' ifFalse: [ ^ false ].
 	^ steps size < 4 or: [ (steps at: 2) ~= 'Voices' ]

@@ -34,14 +34,15 @@ PhPluginTypeTest >> testApvtsFilteringForEffect [
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testApvtsFilteringForMonoSynth [ 
+PhPluginTypeTest >> testApvtsFilteringForMonoSynth [
 	"MonoSynth keeps only the 3 non-MIDI controls."
+
 	| dsp kept |
 	dsp := DSP new name: 'MyApp'.
 	kept := dsp apvtsParameterControlsFrom: self synthJSON for: PhMonoSynthPluginType new.
 	self assert: kept size equals: 3.
 	self
-		assertCollection: (kept collect: [ :c | c at: #shortname ])
+		assertCollection: (kept collect: [ :each | each shortName ])
 		hasSameElements: #( 'AREnvAttack' 'AREnvRelease' 'SquareOsc2uLevel' )
 ]
 
@@ -175,18 +176,17 @@ PhPluginTypeTest >> testMonoSynthRejectsAudioInputs [
 	synth checkInputs: 0 outputs: 2
 ]
 
-{ #category : 'tests' }
+{ #category : 'private' }
 PhPluginTypeTest >> testPolyExcludesThePolyWrapperControls [
 
-	| poly control |
+	| poly |
 	poly := PhPolySynthPluginType new.
-	control := [ :address :shortname |
-		Dictionary new at: #address put: address; at: #shortname put: shortname; yourself ].
-	self assert: (poly excludesControl: (control value: '/Polyphonic/Voices/Panic' value: 'Panic')).
-	self assert: (poly excludesControl: (control value: '/Polyphonic/V1/MyApp/cutoff' value: 'V1/cutoff')).
-	self assert: (poly excludesControl: (control value: '/MyApp/freq' value: 'freq')).
-	self deny: (poly excludesControl: (control value: '/Polyphonic/Voices/MyApp/cutoff' value: 'cutoff')).
-	self deny: (poly excludesControl: (control value: '/MyApp/cutoff' value: 'cutoff'))
+	self
+		assert: (poly excludesParameter: (self parameterNamed: 'Panic' at: '/Polyphonic/Voices/Panic'));
+		assert: (poly excludesParameter: (self parameterNamed: 'V1/cutoff' at: '/Polyphonic/V1/MyApp/cutoff'));
+		assert: (poly excludesParameter: (self parameterNamed: 'freq' at: '/MyApp/freq'));
+		deny: (poly excludesParameter: (self parameterNamed: 'cutoff' at: '/Polyphonic/Voices/MyApp/cutoff'));
+		deny: (poly excludesParameter: (self parameterNamed: 'cutoff' at: '/MyApp/cutoff'))
 ]
 
 { #category : 'tests' }
