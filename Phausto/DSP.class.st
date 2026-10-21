@@ -187,30 +187,6 @@ DSP >> allParameters [
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> apvtsCollectInto: aCollection from: aSequence [
-	aSequence do: [ :node |
-		(node includesKey: #items)
-			ifTrue: [ self apvtsCollectInto: aCollection from: (node at: #items) ]
-			ifFalse: [ (node includesKey: #address) ifTrue: [ aCollection add: node ] ] ]
-
-]
-
-{ #category : 'exporting - apvts' }
-DSP >> apvtsControls [
-	^ self apvtsControlsFrom: self getJSON
-]
-
-{ #category : 'exporting - apvts' }
-DSP >> apvtsControlsFrom: aJsonString [
-"Flatten a Faust UI JSON string into one dictionary per leaf control. Seam for testing: no FFI, no initialized DSP."
-
-	| controls |
-	controls := OrderedCollection new.
-	self apvtsCollectInto: controls from: ((STONJSON fromString: aJsonString) at: #ui).
-	^ controls
-]
-
-{ #category : 'exporting - apvts' }
 DSP >> apvtsDescriptorRowFor: aParameter [
 	"One Descriptor row. Field order must match the struct in asPhaustoParamsHeader."
 
@@ -649,13 +625,6 @@ DSP >> cppFloat: aNumber [
 	^ aNumber isInteger
 		ifTrue: [ aNumber printString , '.0f' ]
 		ifFalse: [ aNumber printString , 'f' ]
-]
-
-{ #category : 'exporting - apvts' }
-DSP >> cppFloatAt: aKey in: aControl default: aNumber [
-	"Faust JSON omits min/max/init/step on buttons and checkboxes."
-
-	^ self cppFloat: (aControl at: aKey ifAbsent: [ aNumber ])
 ]
 
 { #category : 'exporting' }

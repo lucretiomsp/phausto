@@ -1,9 +1,11 @@
 "
-I am one control of a Faust DSP, as its source declares it: address, short name, label, range, default, step, and my PhControlKind. I was DSPParameter.
+I am one control of a Faust DSP, as its source declares it: address, short name, label, range, default, step, Faust type and metadata. I was DSPParameter.
 
-I am built from one leaf of the Faust UI JSON (fromFaustItem:), with no FFI and no initialized DSP. I have no setters: what Faust declared does not change.
+I am built from one leaf of the Faust UI JSON (fromFaustItem:), with no FFI and no initialized DSP, and I fail loudly on a type I do not know. I have no setters: what Faust declared does not change.
 
-I hold no current value and no view. The JUCE exporter reads me to write PhaustoParams.h, and CoypuIDE visits me to build widgets (acceptVisitor:).
+I answer the two questions the JUCE exporter asks: isToggle (AudioParameterBool or AudioParameterFloat) and isHostParameter (meters are outputs). My class side is where Phausto keeps the Faust type names.
+
+I hold no current value and no view. CoypuIDE chooses widgets from my type and style.
 
 parameterID is the single ID derivation. The APVTS header and the JuBloc glue both send it, so they cannot disagree.
 "
@@ -36,7 +38,7 @@ PhParameter class >> fromDictionary: aDictionary [
 
 ]
 
-{ #category : 'testing' }
+{ #category : 'instance creation' }
 PhParameter class >> fromFaustItem: anItem [
 	"anItem: one leaf of the Faust UI JSON, a Dictionary with an #address."
 
@@ -53,13 +55,13 @@ PhParameter class >> isParameterItem: anItem [
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhParameter class >> knownTypes [
 
 	^ #( 'hslider' 'vslider' 'nentry' ) , self toggleTypes , self meterTypes
 ]
 
-{ #category : 'accessing' }
+{ #category : 'private' }
 PhParameter class >> metaOf: anItem [
 	"Faust meta is an Array of one-key Dictionaries. I merge them into one."
 
@@ -96,7 +98,8 @@ PhParameter >> initValue [
 
 { #category : 'initialization' }
 PhParameter >> initializeFromFaustItem: anItem [
-	"Same defaults as cppFloatAt:in:default:, so PhaustoParams.h stays byte-identical."
+	"Faust declares buttons and checkboxes without min, max, init or step.
+	 The defaults are what PhaustoParams.h has always written for them."
 
 	type := anItem at: #type.
 	(self class knownTypes includes: type) ifFalse: [
@@ -111,13 +114,13 @@ PhParameter >> initializeFromFaustItem: anItem [
 	stepValue := anItem at: #step ifAbsent: [ 0.01 ]
 ]
 
-{ #category : 'visiting' }
+{ #category : 'testing' }
 PhParameter >> isHostParameter [
 
 	^ (self class meterTypes includes: type) not
 ]
 
-{ #category : 'visiting' }
+{ #category : 'testing' }
 PhParameter >> isToggle [
 
 ^ self class toggleTypes includes: type
@@ -127,6 +130,11 @@ PhParameter >> isToggle [
 PhParameter >> label [
 
 	^ label
+]
+
+{ #category : 'accessing' }
+PhParameter >> label: aString [ 
+	label := aString
 ]
 
 { #category : 'accessing' }
@@ -159,6 +167,11 @@ PhParameter >> printOn: aStream [
 PhParameter >> shortName [
 
 	^ shortName
+]
+
+{ #category : 'accessing' }
+PhParameter >> shortName: aString [ 
+	shortName := aString
 ]
 
 { #category : 'accessing' }

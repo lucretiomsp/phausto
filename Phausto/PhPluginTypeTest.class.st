@@ -6,6 +6,17 @@ Class {
 	#tag : 'Tests'
 }
 
+{ #category : 'private' }
+PhPluginTypeTest >> parameterNamed: aShortName at: anAddress [
+	"A plain hslider, as Faust would declare it."
+
+	^ PhParameter fromFaustItem: (Dictionary newFrom: {
+		#type -> 'hslider'.
+		#label -> aShortName.
+		#shortname -> aShortName.
+		#address -> anAddress })
+]
+
 { #category : 'tests' }
 PhPluginTypeTest >> synthJSON [ 
 	"The actual JSON from: SquareOsc new freq: #freq => AREnv new trigger: #gate * gain"
@@ -67,10 +78,10 @@ PhPluginTypeTest >> testEffectBusesHasInput [
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testEffectExcludesNothing [ 
-	| ctrl |
-	ctrl := Dictionary new at: #shortname put: 'freq'; yourself.
-	self deny: (PhEffectPluginType new excludesControl: ctrl)
+PhPluginTypeTest >> testEffectExcludesNothing [
+
+	self deny: (PhEffectPluginType new excludesParameter: (self parameterNamed: 'freq' at: '/fx/freq'))
+
 ]
 
 { #category : 'tests' }
@@ -131,11 +142,11 @@ PhPluginTypeTest >> testMonoSynthBusesHasNoInput [
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testMonoSynthExcludesFreqGateGain [ 
-	#( 'freq' 'gate' 'gain' ) do: [ :name |
-		| ctrl |
-		ctrl := Dictionary new at: #shortname put: name; yourself.
-		self assert: (PhMonoSynthPluginType new excludesControl: ctrl) ]
+PhPluginTypeTest >> testMonoSynthExcludesFreqGateGain [
+
+	#( 'freq' 'gate' 'gain' ) do: [ :each |
+		self assert: (PhMonoSynthPluginType new excludesParameter: (self parameterNamed: each at: '/synth/' , each)) ]
+
 ]
 
 { #category : 'tests' }
@@ -150,10 +161,9 @@ PhPluginTypeTest >> testMonoSynthFacts [
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testMonoSynthKeepsOtherControls [ 
-	| ctrl |
-	ctrl := Dictionary new at: #shortname put: 'cutoff'; yourself.
-	self deny: (PhMonoSynthPluginType new excludesControl: ctrl)
+PhPluginTypeTest >> testMonoSynthKeepsOtherControls [
+
+	self deny: (PhMonoSynthPluginType new excludesParameter: (self parameterNamed: 'cutoff' at: '/synth/cutoff'))
 ]
 
 { #category : 'tests' }

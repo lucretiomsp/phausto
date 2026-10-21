@@ -69,6 +69,18 @@ PhParameterSetTest >> testEffectHostsEverythingButMeters [
 ]
 
 { #category : 'tests' }
+PhParameterSetTest >> testLeavesInNestedGroupsAreFound [
+
+	self
+		assert: ((PhParameterSet fromJSON: '{ "ui": [ { "type": "vgroup", "label": "a", "items": [
+			{ "type": "hgroup", "label": "b", "items": [
+				{ "type": "hslider", "label": "deep", "shortname": "deep", "address": "/a/b/deep" } ] },
+			{ "type": "hslider", "label": "flat", "shortname": "flat", "address": "/a/flat" } ] } ] }')
+				parameters collect: [ :each | each address ])
+		equals: #( '/a/b/deep' '/a/flat' )
+]
+
+{ #category : 'tests' }
 PhParameterSetTest >> testMonoSynthLeavesMidiDrivenParametersOut [
 
 	self

@@ -1,8 +1,10 @@
+"
+I test the C++ float literals the *APVTS* export writes, and that a _PhParameter_ keeps its Faust address. The per-parameter C++ generators I used to test were replaced by the _PhaustoParams.h_ descriptor table; PhParameterSetTest covers its rows.
+"
 Class {
 	#name : 'CppAPVTSTest',
 	#superclass : 'TestCase',
 	#instVars : [
-		'exp',
 		'json',
 		'controls',
 		'floatParam',
@@ -14,121 +16,69 @@ Class {
 	#tag : 'Tests'
 }
 
-{ #category : 'running' }
-CppAPVTSTest >> setUp [ 
-super setUp.
-	floatParam := PhParameter new
-		shortName: 'Korg35HPFRes'; label: 'Korg35HPFRes';
-		minValue: 1; maxValue: 8; stepValue: 0.001; initValue: 1;
-		type: 'hslider'; address: '/MyApp/Korg35HPFRes'; yourself.
-	boolParam := PhParameter new
-		shortName: 'Gate'; label: 'Gate';
-		minValue: 0; maxValue: 1; stepValue: 1; initValue: 0;
-		type: 'button'; address: '/MyApp/Gate'; yourself.
-	params := { floatParam. boolParam }
+{ #category : 'accessing' }
+CppAPVTSTest >> json [
+	"A slider whose label differs from its short name, a button, a MIDI-driven control and a meter."
+
+	^ '{ "ui": [ { "type": "vgroup", "label": "synth", "items": [
+		{ "type": "hslider", "label": "Cutoff", "shortname": "fxCutoff", "address": "/synth/fx/Cutoff", "init": 1000, "min": 20, "max": 20000, "step": 1 },
+		{ "type": "button", "label": "gate", "shortname": "gate", "address": "/synth/gate" },
+		{ "type": "hslider", "label": "freq", "shortname": "freq", "address": "/synth/freq", "init": 440, "min": 20, "max": 2000, "step": 1 },
+		{ "type": "hbargraph", "label": "level", "shortname": "level", "address": "/synth/level", "min": 0, "max": 1 } ] } ] }'
+
+]
+
+{ #category : 'private' }
+CppAPVTSTest >> rowsFor: aPluginType [
+	"The Descriptor rows of the PhaustoParams.h the export writes for aPluginType."
+
+	^ (DSP new asPhaustoParamsHeaderFrom: self json for: aPluginType) lines
+		select: [ :each | each beginsWith: '        { "' ]
 ]
 
 { #category : 'tests' }
-CppAPVTSTest >> testCppFloatFormatsFloats [ 
-	self assert: (DSP cppFloat: 0.3) equals: '0.3f'.
-	self assert: (DSP cppFloat: 0.001) equals: '0.001f'
-]
+CppAPVTSTest >> testCppFloatFormatsFloats [
 
-{ #category : 'tests' }
-CppAPVTSTest >> testCppFloatFormatsIntegers [ 
-	self assert: (DSP cppFloat: 1) equals: '1.0f'.
-	self assert: (DSP cppFloat: 8) equals: '8.0f'.
-	self assert: (DSP cppFloat: 0) equals: '0.0f'
-]
-
-{ #category : 'tests' }
-CppAPVTSTest >> testEditorEmitsButtonAttachmentForBool [
-
-	
-		self assert:
-			((DSP apvtsEditorSetupBodyFor: params) includesSubstring:
-				 'juce::AudioProcessorValueTreeState::ButtonAttachment (audioProcessor.apvts, "Gate", *tb)') 
-]
-
-{ #category : 'tests' }
-CppAPVTSTest >> testEditorEmitsSliderAttachmentForFloat [ 
-	self assert: ((DSP apvtsEditorSetupBodyFor: params) includesSubstring:
-		'juce::AudioProcessorValueTreeState::SliderAttachment (audioProcessor.apvts, "Korg35HPFRes", *sl)')
+	self
+		assert: (DSP new cppFloat: 0.3) equals: '0.3f';
+		assert: (DSP new cppFloat: 0.001) equals: '0.001f'
 
 ]
 
 { #category : 'tests' }
-CppAPVTSTest >> testEditorOneControlPerParameter [ 
-	| added |
-	added := (DSP apvtsEditorSetupBodyFor: params) lines select: [ :l | l includesSubstring: 'controls.add' ].
-	self assert: added size equals: params size
+CppAPVTSTest >> testCppFloatFormatsIntegers [
 
+	self
+		assert: (DSP new cppFloat: 1) equals: '1.0f';
+		assert: (DSP new cppFloat: 8) equals: '8.0f';
+		assert: (DSP new cppFloat: 0) equals: '0.0f'
 ]
 
 { #category : 'tests' }
-CppAPVTSTest >> testEditorUsesLabelText [ 
-	self assert: ((DSP apvtsEditorSetupBodyFor: params) includesSubstring:
-		'new juce::Label ({}, "Korg35HPFRes")')
+CppAPVTSTest >> testFromFaustItemCapturesAddress [
 
-
+	self
+		assert: (PhParameter fromFaustItem: (Dictionary newFrom: {
+			#type -> 'hslider'. #label -> 'X'. #shortname -> 'X'. #address -> '/MyApp/X'.
+			#min -> 0. #max -> 1. #init -> 0.5. #step -> 0.01 })) address
+		equals: '/MyApp/X'
 ]
 
 { #category : 'tests' }
-CppAPVTSTest >> testEveryParamIdMatchesShortname [ 
-	| push |
-	push := DSP apvtsPushBodyFor: params.
-	params do: [ :p |
-		self assert: (push includesSubstring: 'getRawParameterValue ("' , p shortName , '")') ]
+CppAPVTSTest >> testHeaderHasOneRowPerHostParameter [
+	"Meters never get a row; a MonoSynth also drops freq, gate and gain."
 
+	self
+		assert: (self rowsFor: PhEffectPluginType new) size equals: 3;
+		assert: (self rowsFor: PhMonoSynthPluginType new) size equals: 1
 ]
 
 { #category : 'tests' }
-CppAPVTSTest >> testFromDictionaryCapturesAddress [
+CppAPVTSTest >> testRowFieldsAreIdPathThenLabel [
+	"Label and short name differ here, so swapped fields would show."
 
-	
-		| dict |
-		dict := Dictionary new
-			        at: #label put: 'X';
-			        at: #shortname put: 'X';
-			        at: #min put: 0;
-			        at: #max put: 1;
-			        at: #init put: 0.5;
-			        at: #type put: 'hslider';
-			        at: #step put: 0.01;
-			        at: #address put: '/MyApp/X';
-			        yourself.
-		self
-			assert: (PhParameter fromDictionary: dict) address
-			equals: '/MyApp/X' 
-]
-
-{ #category : 'tests' }
-CppAPVTSTest >> testLayoutEmitsBoolForButton [ 
-	self assert: ((DSP apvtsLayoutBodyFor: params) includesSubstring:
-		'std::make_unique<juce::AudioParameterBool> (juce::ParameterID { "Gate", 1 }, "Gate", false)')
-
-]
-
-{ #category : 'tests' }
-CppAPVTSTest >> testLayoutEmitsFloatParameter [
-
-	
-		self assert: ((DSP apvtsLayoutBodyFor: params) includesSubstring:
-				 'std::make_unique<juce::AudioParameterFloat> (juce::ParameterID { "Korg35HPFRes", 1 }, "Korg35HPFRes", juce::NormalisableRange<float> (1.0f, 8.0f, 0.001f), 1.0f)') 
-]
-
-{ #category : 'tests' }
-CppAPVTSTest >> testOneLinePerParameter [ 
-	| layout push |
-	layout := (DSP apvtsLayoutBodyFor: params) lines select: [ :l | l includesSubstring: 'layout.add' ].
-	push := (DSP apvtsPushBodyFor: params) lines select: [ :l | l includesSubstring: 'setParamValue' ].
-	self assert: layout size equals: params size.
-	self assert: push size equals: params size
-]
-
-{ #category : 'tests' }
-CppAPVTSTest >> testPushUsesAddressAndId [ 
-	self assert: ((DSP apvtsPushBodyFor: params) includesSubstring:
-		'fUI->setParamValue ("/MyApp/Korg35HPFRes", apvts.getRawParameterValue ("Korg35HPFRes")->load())')
+	self
+		assert: ((self rowsFor: PhEffectPluginType new) detect: [ :each | each includesSubstring: '"fxCutoff"' ])
+		equals: '        { "fxCutoff", "/synth/fx/Cutoff", "Cutoff", 20.0f, 20000.0f, 1000.0f, 1.0f, false },'
 
 ]
