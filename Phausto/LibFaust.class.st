@@ -356,6 +356,29 @@ LibFaust >> createFaustHeaderFileFromString: aString withName: aName type: aPlug
 		   
 ]
 
+{ #category : 'as yet unclassified' }
+LibFaust >> createFaustHeaderFileNamed: aName for: aPluginType [
+	"Writes Source/Faust<Type>.h, the file PluginProcessor.cpp includes. LibFaust is the
+	 FFI boundary, so it gets Strings only. The C side still writes into its own folder,
+	 so the header is moved into the project. Fails loudly: a missing header would only
+	 show up later, as a C++ compile error."
+
+	| fileName header written |
+	fileName := 'Faust' , aPluginType typeName , '.h'.
+	header := (self sourceFolderFor: aName) / fileName.
+	written := (LibFaust uniqueInstance headerFolderFor: aName) / fileName.
+	header ensureDelete.
+	written ensureDelete.
+	LibFaust uniqueInstance
+		createFaustHeaderFileFromString: self generatedCode
+		withName: aName
+		architecture: aPluginType faustArchitectureFileName
+		type: aPluginType typeName.
+	written exists ifFalse: [ self error: 'libfaust did not write ' , written fullName ].
+	written = header ifFalse: [ written moveTo: header ].
+	^ header
+]
+
 { #category : 'export - juce' }
 LibFaust >> createFaustPolySynthHeaderFileFromString: aString buffer: errorMsg arguments: argv [ 
 
@@ -495,6 +518,14 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString withName: aName [
 		  createFaustSynthHeaderFileFromString: aString
 		  buffer: errorBuffer
 		  withName: aName
+]
+
+{ #category : 'as yet unclassified' }
+LibFaust >> headerFolderFor: aName [
+	"Where the C function writes the Faust header: a folder it picks itself.
+	 Remove once the destination path is passed to it."
+
+	^ FileLocator documents / 'faust2Juce' / aName / 'Source'
 ]
 
 { #category : 'accessing - platform' }
