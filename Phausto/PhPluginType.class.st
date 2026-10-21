@@ -11,16 +11,19 @@ Class {
 
 { #category : 'accessing' }
 PhPluginType class >> architectureFolder [
-	"Next to the image in a distributed image such as the Music Image; Phausto's
-	 repository clone in a development image."
+	"Phausto's repository clone when it exists on this machine, so an Iceberg pull takes effect at once; otherwise the copy the baseline put next to the image, as in a distributed image such as the Music Image."
 
 	| beside |
-	beside := FileLocator imageDirectory / 'architecture'.
-	beside exists ifTrue: [ ^ beside ].
-	^ (IceRepository registry
-		detect: [ :each | each name asLowercase = 'phausto' ]
-		ifNone: [ self error: 'No architecture folder next to the image, and no phausto repository in Iceberg' ]) location
-		/ 'architecture'
+	IceRepository registry
+		detect: [ :each | each includesPackageNamed: 'Phausto' ]
+		ifFound: [ :repository |
+			| inClone |
+			inClone := repository location ifNotNil: [ :location | location / 'architecture' ].
+			(inClone notNil and: [ inClone exists ]) ifTrue: [ ^ inClone ] ].
+	beside := FileLocator imageDirectory asFileReference / 'architecture'.
+	beside exists ifFalse: [
+		self error: 'No architecture folder in the Phausto repository clone or next to the image' ].
+	^ beside
 ]
 
 { #category : 'accessing' }
@@ -55,7 +58,7 @@ PhPluginType >> acceptsMidi [
 	 ^ self subclassResponsibility 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'emitting' }
 PhPluginType >> asPhPluginType [
 
 	^ self
@@ -185,7 +188,7 @@ PhPluginType >> processBlockMidiCallCpp [
 	^ ''
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'emitting' }
 PhPluginType >> pushParametersBodyCpp [
 	"Body of pushParameters: APVTS values into the Faust zones, once per block."
 

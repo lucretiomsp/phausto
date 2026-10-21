@@ -80,6 +80,25 @@ BaselineOfPhausto >> copyAllResources [
 ]
 
 { #category : 'utilities' }
+BaselineOfPhausto >> copyArchitecture [
+
+	| destination |
+	destination := FileLocator imageDirectory asFileReference / 'architecture'.
+	IceRepository registry
+		detect: [ :each | each includesPackageNamed: self class packageName ]
+		ifFound: [ :repository |
+			| source |
+			source := repository location / 'architecture'.
+			source exists ifFalse: [
+				('architecture folder not found at: ' , source asString) traceCr.
+				^ self ].
+			('Copying architecture from ' , source asString , ' to ' , destination asString) traceCr.
+			destination exists ifTrue: [ destination deleteAll ].
+			source copyAllTo: destination ]
+		ifNone: [ 'Could not find repository to copy the architecture folder' traceCr ]
+]
+
+{ #category : 'utilities' }
 BaselineOfPhausto >> copyLibraries [
 	"Copy the libraries from the Phausto Git directory to the image directory."
 
@@ -110,6 +129,15 @@ BaselineOfPhausto >> copyLibrariesFrom: repoDirectory [
 	ZipArchive
 		extractFrom: source
 		to: Smalltalk imagePath asFileReference parent
+]
+
+{ #category : 'utilities' }
+BaselineOfPhausto >> copyPackageResources [
+	"Everything the Phausto package needs next to the image."
+
+	self
+		copyTurboSamples;
+		copyArchitecture
 ]
 
 { #category : 'utilities' }
