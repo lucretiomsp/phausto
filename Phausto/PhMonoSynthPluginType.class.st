@@ -11,26 +11,58 @@ Class {
 
 { #category : 'initialization' }
 PhMonoSynthPluginType >> midiHandlerCpp [
-	"Last-note priority, once per block (not sample-accurate). MapUI::setParamValue
-	 falls back to the label map, so bare names reach the zones."
+	"Last-note-priority mono handler. Parameters reach the DSP once per block, so a retriggered note is deferred by one block that runs with gate 0: that gives the envelope its rising edge, as Faust's poly architecture does for stolen voices.
+	 A note-off at the same position as the last note-on ends the previous instance of a repeated pitch, so it is ignored."
 
-	^ 'void <PROC>::handleMidi (const juce::MidiBuffer& midi)
+	^ 'void <PROC>::startNote (int note, float velocity)
 {
+    currentNote = note;
+    fUI->setParamValue ("freq", (float) juce::MidiMessage::getMidiNoteInHertz (note));
+    fUI->setParamValue ("gain", velocity);
+    fUI->setParamValue ("gate", 1.0f);
+    gateOpen = true;
+}
+
+void <PROC>::handleMidi (const juce::MidiBuffer& midi)
+{
+    const bool openAtStart = gateOpen;   // the gate the DSP saw during the previous block
+
+    if (pendingNote >= 0)
+    {
+        startNote (pendingNote, pendingVelocity);
+        pendingNote = -1;
+    }
+
+    int lastNoteOnPosition = -1;
+
     for (const auto metadata : midi)
     {
         const auto m = metadata.getMessage();
 
         if (m.isNoteOn())
         {
-            currentNote = m.getNoteNumber();
-            fUI->setParamValue ("freq", (float) juce::MidiMessage::getMidiNoteInHertz (currentNote));
-            fUI->setParamValue ("gain", m.getFloatVelocity());
-            fUI->setParamValue ("gate", 1.0f);
+            lastNoteOnPosition = metadata.samplePosition;
+
+            if (openAtStart)
+            {
+                fUI->setParamValue ("gate", 0.0f);
+                gateOpen = false;
+                currentNote = m.getNoteNumber();
+                pendingNote = currentNote;
+                pendingVelocity = m.getFloatVelocity();
+            }
+            else
+            {
+                startNote (m.getNoteNumber(), m.getFloatVelocity());
+            }
         }
-        else if (m.isNoteOff() && m.getNoteNumber() == currentNote)
+        else if (m.isNoteOff() && m.getNoteNumber() == currentNote
+                 && metadata.samplePosition != lastNoteOnPosition)
         {
             fUI->setParamValue ("gate", 0.0f);
+            gateOpen = false;
             currentNote = -1;
+            pendingNote = -1;
         }
     }
 }'
@@ -40,6 +72,10 @@ PhMonoSynthPluginType >> midiHandlerCpp [
 PhMonoSynthPluginType >> midiMembersCpp [
 
 	^ '    int currentNote = -1;
+    int pendingNote = -1;
+    float pendingVelocity = 0.0f;
+    bool gateOpen = false;
+    void startNote (int note, float velocity);
     void handleMidi (const juce::MidiBuffer& midi);'
 ]
 

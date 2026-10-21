@@ -356,7 +356,7 @@ LibFaust >> createFaustHeaderFileFromString: aString withName: aName type: aPlug
 		   
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - juce' }
 LibFaust >> createFaustHeaderFileNamed: aName for: aPluginType [
 	"Writes Source/Faust<Type>.h, the file PluginProcessor.cpp includes. LibFaust is the
 	 FFI boundary, so it gets Strings only. The C side still writes into its own folder,
@@ -520,7 +520,7 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString withName: aName [
 		  withName: aName
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'export - juce' }
 LibFaust >> headerFolderFor: aName [
 	"Where the C function writes the Faust header: a folder it picks itself.
 	 Remove once the destination path is passed to it."
