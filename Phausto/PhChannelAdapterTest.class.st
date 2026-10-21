@@ -23,9 +23,9 @@ PhChannelAdapterTest >> testProcessorCallsTheAdapterApi [
 	| cpp adapter |
 	cpp := (DSP new name: 'MyApp') asPluginProcessorCppAPVTSFor: PhEffectPluginType new.
 	adapter := PhChannelAdapter new contents.
-	self assert: (cpp includesSubstring: 'channels.prepare (fDSP.getNumInputs(), fDSP.getNumOutputs(),').
+	self assert: (cpp includesSubstring: 'channels.prepare (fDSP->getNumInputs(), fDSP->getNumOutputs(),').
 	self assert: (adapter includesSubstring: 'void prepare (int numFaustInputs, int numFaustOutputs,').
-	self assert: (cpp includesSubstring: 'channels.process (fDSP, buffer);').
+	self assert: (cpp includesSubstring: 'channels.process (*fDSP, buffer);').
 	self assert: (adapter includesSubstring: 'void process (DspType& faust, juce::AudioBuffer<float>& bus)')
 ]
 

@@ -9,13 +9,38 @@ Class {
 	#tag : 'Exporting'
 }
 
-{ #category : 'instance creation' }
-PhPluginType class >> fromString: aString [ 
-	"Lookup: one conversion at the boundary, then polymorphism everywhere."
+{ #category : 'accessing' }
+PhPluginType class >> architectureFolder [
+	"Next to the image in a distributed image such as the Music Image; Phausto's
+	 repository clone in a development image."
 
-	^ self allSubclasses
-		detect: [ :cls | cls new typeName = aString ]
-		ifNone: [ self error: 'Unknown plugin type: ' , aString ]
+	| beside |
+	beside := FileLocator imageDirectory / 'architecture'.
+	beside exists ifTrue: [ ^ beside ].
+	^ (IceRepository registry
+		detect: [ :each | each name asLowercase = 'phausto' ]
+		ifNone: [ self error: 'No architecture folder next to the image, and no phausto repository in Iceberg' ]) location
+		/ 'architecture'
+]
+
+{ #category : 'accessing' }
+PhPluginType class >> faustArchitecturePath [
+	"Full path, so libfaust reads exactly this file."
+
+	^ (self class architectureFolder / self faustArchitectureFileName) fullName
+]
+
+{ #category : 'instance creation' }
+PhPluginType class >> fromString: aString [
+	"Converts a type name into its type object. Abstract types have no name of their own."
+
+	| type |
+	type := (self allSubclasses reject: [ :each | each isAbstract ])
+		        detect: [ :each | each new typeName = aString ]
+		        ifNone: [
+		        ^ self error:
+			          ('Unknown plugin type: {1}' format: { aString }) ].
+	^ type new
 ]
 
 { #category : 'testing' }
@@ -24,16 +49,16 @@ PhPluginType class >> isAbstract [
 ^ self == PhPluginType 
 ]
 
-{ #category : 'accessing' }
-PhPluginType class >> synthControlNames [
-
-	^ #( 'freq' 'gate' 'gain' )
-]
-
 { #category : 'defaults' }
 PhPluginType >> acceptsMidi [ 
 
 	 ^ self subclassResponsibility 
+]
+
+{ #category : 'as yet unclassified' }
+PhPluginType >> asPhPluginType [
+
+	^ self
 ]
 
 { #category : 'defaults' }
@@ -48,14 +73,14 @@ PhPluginType >> busesPropertiesCpp [
 	 ^ self subclassResponsibility 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'check' }
 PhPluginType >> checkChannelsOf: aDSP [
 	"aDSP answers its counts through FFI; the rule is checkInputs:outputs:."
 
 	self checkInputs: aDSP numberOfInputs outputs: aDSP numberOfOutputs
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'check' }
 PhPluginType >> checkInputs: inputCount outputs: outputCount [
 	"PhaustoChannelAdapter maps up to two channels each way onto mono or stereo buses.
 	 More is a patching mistake, so fail instead of guessing a mapping."
@@ -66,11 +91,54 @@ PhPluginType >> checkInputs: inputCount outputs: outputCount [
 		format: { self typeName. self maxInputs. self maxOutputs. inputCount. outputCount })
 ]
 
+{ #category : 'accessing' }
+PhPluginType >> computeBlockSizeCpp [
+	"C++ expression: the largest block fDSP computes at once. The channel adapter chunks to it."
+
+	^ 'samplesPerBlock'
+]
+
+{ #category : 'accessing' }
+PhPluginType >> dspConstructionCpp [
+	"Statements in the processor constructor that create fDSP, the owning ::dsp pointer."
+
+	^ '    fDSP = std::make_unique<mydsp>();'
+]
+
+{ #category : 'accessing' }
+PhPluginType >> dspInitCpp [
+	"Statements in prepareToPlay that initialise fDSP at the host sample rate."
+
+	^ '    fDSP->init ((int) sampleRate);'
+]
+
+{ #category : 'accessing' }
+PhPluginType >> dspMembersCpp [
+	"Extra private members the type needs next to fDSP."
+
+	^ ''
+]
+
+{ #category : 'accessing' }
+PhPluginType >> excludesParameter: aParameter [
+	"testing. MIDI drives these controls, so the APVTS leaves them out. Matched on the Faust name."
+
+	^ self synthControlNames includes: aParameter shortName
+]
+
 { #category : 'defaults' }
-PhPluginType >> excludesControl: aControl [ 
+PhPluginType >> faustArchitectureFileName [
+	"The architecture file, by name, that libfaust wraps around the generated class.
+	 Default: the mono one, shared by effects and the mono synth. Looked up in architectureFolder."
 
+	^ 'faustMinimalInlined.h'
+]
 
-	 ^ false 
+{ #category : 'accessing' }
+PhPluginType >> faustArchitecturePath [
+	"Full path, so libfaust reads exactly this file."
+
+	^ (self class architectureFolder / self faustArchitectureFileName) fullName
 ]
 
 { #category : 'defaults' }
@@ -81,12 +149,6 @@ PhPluginType >> hasAudioInput [
 
 { #category : 'defaults' }
 PhPluginType >> isSynth [ 
-
-	 ^ self subclassResponsibility 
-]
-
-{ #category : 'defaults' }
-PhPluginType >> juceVstCategory [ 
 
 	 ^ self subclassResponsibility 
 ]
@@ -104,21 +166,39 @@ PhPluginType >> maxOutputs [
 	^ 2
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
 PhPluginType >> midiHandlerCpp [ 
 ^ ''
 ]
 
-{ #category : 'as yet unclassified' }
-PhPluginType >> midiMemebersCpp [
+{ #category : 'emitting' }
+PhPluginType >> midiMembersCpp [
+	"Extra private member declarations for MIDI state. None by default."
+
+	^ ''
+]
+
+{ #category : 'emitting' }
+PhPluginType >> processBlockMidiCallCpp [
+	"The MIDI handling call inside processBlock, before compute. None by default."
 
 	^ ''
 ]
 
 { #category : 'as yet unclassified' }
-PhPluginType >> processMidiCallCpp [
+PhPluginType >> pushParametersBodyCpp [
+	"Body of pushParameters: APVTS values into the Faust zones, once per block."
 
-	^ ''
+	^ '    for (int i = 0; i < PhaustoParams::count; ++i)
+        if (raw[i] != nullptr)
+            fUI->setParamValue (PhaustoParams::table[i].faustPath, raw[i]->load());'
+]
+
+{ #category : 'accessing' }
+PhPluginType >> synthControlNames [
+	"accessing. Hook: the Faust names MIDI drives directly. Effects have none."
+
+	^ #()
 ]
 
 { #category : 'defaults' }

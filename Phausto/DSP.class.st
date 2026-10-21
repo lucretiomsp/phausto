@@ -33,6 +33,9 @@ Class {
 		'initializedDSP',
 		'initializedDSPs'
 	],
+	#classInstVars : [
+		'juceExportFolder'
+	],
 	#category : 'Phausto-DSP',
 	#package : 'Phausto',
 	#tag : 'DSP'
@@ -109,6 +112,20 @@ Smalltalk
 		open
 ]
 
+{ #category : 'accessing' }
+DSP class >> juceExportFolder [
+	"Where export2JuceWithName: writes one project per plugin."
+
+	^ juceExportFolder ifNil: [ FileLocator documents / 'phausto2juce' ]
+]
+
+{ #category : 'accessing' }
+DSP class >> juceExportFolder: aFileReference [
+	"nil restores the default."
+
+	juceExportFolder := aFileReference
+]
+
 { #category : 'exceptions' }
 DSP class >> paramException [
 
@@ -170,45 +187,19 @@ DSP >> allParameters [
 ]
 
 { #category : 'exporting - apvts' }
-DSP >> apvtsCollectInto: aCollection from: aSequence [
-	aSequence do: [ :node |
-		(node includesKey: #items)
-			ifTrue: [ self apvtsCollectInto: aCollection from: (node at: #items) ]
-			ifFalse: [ (node includesKey: #address) ifTrue: [ aCollection add: node ] ] ]
-
-]
-
-{ #category : 'exporting - apvts' }
-DSP >> apvtsControls [
-	^ self apvtsControlsFrom: self getJSON
-]
-
-{ #category : 'exporting - apvts' }
-DSP >> apvtsControlsFrom: aJsonString [
-"Flatten a Faust UI JSON string into one dictionary per leaf control. Seam for testing: no FFI, no initialized DSP."
-
-	| controls |
-	controls := OrderedCollection new.
-	self apvtsCollectInto: controls from: ((STONJSON fromString: aJsonString) at: #ui).
-	^ controls
-]
-
-{ #category : 'exporting - apvts' }
-DSP >> apvtsDescriptorRowFor: aControl [
+DSP >> apvtsDescriptorRowFor: aParameter [
 	"One Descriptor row. Field order must match the struct in asPhaustoParamsHeader."
 
-	| toggle |
-	toggle := #( 'button' 'checkbox' ) includes: (aControl at: #type).
 	^ String streamContents: [ :s |
-		s nextPutAll: '        { "'; nextPutAll: (aControl at: #shortname);
-		  nextPutAll: '", "'; nextPutAll: (aControl at: #address);
-		  nextPutAll: '", "'; nextPutAll: (aControl at: #label);
+		s nextPutAll: '        { "'; nextPutAll: aParameter parameterID;
+		  nextPutAll: '", "'; nextPutAll: aParameter address;
+		  nextPutAll: '", "'; nextPutAll: aParameter label;
 		  nextPutAll: '", ';
-		  nextPutAll: (self cppFloatAt: #min in: aControl default: 0); nextPutAll: ', ';
-		  nextPutAll: (self cppFloatAt: #max in: aControl default: 1); nextPutAll: ', ';
-		  nextPutAll: (self cppFloatAt: #init in: aControl default: 0); nextPutAll: ', ';
-		  nextPutAll: (self cppFloatAt: #step in: aControl default: 0.01); nextPutAll: ', ';
-		  nextPutAll: (toggle ifTrue: [ 'true' ] ifFalse: [ 'false' ]);
+		  nextPutAll: (self cppFloat: aParameter minValue); nextPutAll: ', ';
+		  nextPutAll: (self cppFloat: aParameter maxValue); nextPutAll: ', ';
+		  nextPutAll: (self cppFloat: aParameter initValue); nextPutAll: ', ';
+		  nextPutAll: (self cppFloat: aParameter stepValue); nextPutAll: ', ';
+		  nextPutAll: aParameter isToggle printString;
 		  nextPutAll: ' },' ]
 ]
 
@@ -225,24 +216,14 @@ DSP >> apvtsParameterControlsFrom: aJsonString [
 
 { #category : 'exporting - apvts' }
 DSP >> apvtsParameterControlsFrom: aJsonString for: aPluginType [
-    | kept names offender |
-    kept := (self apvtsControlsFrom: aJsonString) reject: [ :c |
-        (#( 'hbargraph' 'vbargraph' 'soundfile' ) includes:
-            (c at: #type ifAbsent: [ '' ]))
-        or: [ aPluginType excludesControl: c ] ].
-    kept := (kept asSortedCollection: [ :a :b |
-        (a at: #address) <= (b at: #address) ]) asArray.
-    names := (kept collect: [ :c | c at: #shortname ]) asSet.
-    names size = kept size ifFalse: [
-        self error: 'Duplicate APVTS shortnames in ' , self name
-            , ': the descriptor table would contain unreachable ids' ].
-    offender := kept
-        detect: [ :c | (c at: #label) includesAnyOf: '"\' ]
-        ifNone: [ nil ].
-    offender ifNotNil: [
-        self error: 'Label breaks the C++ string literal: '
-            , (offender at: #label) ].
-    ^ kept
+	"Host parameters sorted by address. PhParameterSet checks the IDs; the label check is C++'s."
+
+	| kept |
+	kept := (PhParameterSet fromJSON: aJsonString) hostParametersFor: aPluginType.
+	kept
+		detect: [ :each | each label includesAnyOf: '"\' ]
+		ifFound: [ :each | self error: 'Label breaks the C++ string literal: ' , each label ].
+	^ kept
 ]
 
 { #category : 'exporting - apvts' }
@@ -461,13 +442,14 @@ namespace PhaustoParams
 
 { #category : 'converting' }
 DSP >> asPluginProcessorCppAPVTSFor: aPluginType [
-    "MapUI comes from the Faust header (faustMinimalInlined.h architecture),
-     included through PluginProcessor.h. That MapUI is a reduced version:
-     use only setParamValue."
-    | proc |
-    proc := aPluginType typeName , 'AudioProcessor'.
-    ^ '#include "PluginProcessor.h"
+	"The only translation unit that includes the Faust header. The plugin type
+	 supplies how fDSP is built, initialised, fed parameters and chunked."
+
+	| proc |
+	proc := aPluginType typeName , 'AudioProcessor'.
+	^ '#include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "Faust' , aPluginType typeName , '.h"
 
 juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParameterLayout()
 {
@@ -478,8 +460,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParamete
     : AudioProcessor (' , aPluginType busesPropertiesCpp , '),
       apvts (*this, nullptr, "PARAMETERS", createParameterLayout())
 {
+' , aPluginType dspConstructionCpp , '
     fUI = std::make_unique<MapUI>();
-    fDSP.buildUserInterface (fUI.get());
+    fDSP->buildUserInterface (fUI.get());
 
     for (int i = 0; i < PhaustoParams::count; ++i)
     {
@@ -492,10 +475,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout ' , proc , '::createParamete
 
 void ' , proc , '::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    fDSP.init ((int) sampleRate);
-    channels.prepare (fDSP.getNumInputs(), fDSP.getNumOutputs(),
+' , aPluginType dspInitCpp , '
+    channels.prepare (fDSP->getNumInputs(), fDSP->getNumOutputs(),
                       getTotalNumInputChannels(), getTotalNumOutputChannels(),
-                      samplesPerBlock);
+                      ' , aPluginType computeBlockSizeCpp , ');
 }
 
 bool ' , proc , '::isBusesLayoutSupported (const BusesLayout& layouts) const
@@ -512,9 +495,7 @@ bool ' , proc , '::isBusesLayoutSupported (const BusesLayout& layouts) const
 
 void ' , proc , '::pushParameters()
 {
-    for (int i = 0; i < PhaustoParams::count; ++i)
-        if (raw[i] != nullptr)
-            fUI->setParamValue (PhaustoParams::table[i].faustPath, raw[i]->load());
+' , aPluginType pushParametersBodyCpp , '
 }
 
 ' , (aPluginType midiHandlerCpp copyReplaceAll: '<PROC>' with: proc) , '
@@ -524,7 +505,7 @@ void ' , proc , '::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuf
     juce::ScopedNoDenormals noDenormals;
 ' , aPluginType processBlockMidiCallCpp , '
     pushParameters();
-    channels.process (fDSP, buffer);
+    channels.process (*fDSP, buffer);
 }
 
 juce::AudioProcessorEditor* ' , proc , '::createEditor()
@@ -549,16 +530,20 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter() { return new ' , proc ,
 
 { #category : 'converting' }
 DSP >> asPluginProcessorHeaderAPVTSFor: aPluginType [
-    | proc |
-    proc := aPluginType typeName , 'AudioProcessor'.
-    ^ '#pragma once
+	"Declares the Faust types instead of including their header: PluginEditor.cpp
+	 includes this file too, and the poly architecture defines symbols. So fDSP
+	 is a pointer, for every type."
+
+	| proc |
+	proc := aPluginType typeName , 'AudioProcessor'.
+	^ '#pragma once
 #include <JuceHeader.h>
-#include "Faust' , aPluginType typeName , '.h"
 #include "PhaustoParams.h"
 #include "' , PhChannelAdapter new fileName , '"
 
+// Faust types, defined in the Faust header that only PluginProcessor.cpp includes.
+class dsp;
 class MapUI;
-using FaustDsp = mydsp;
 
 class ' , proc , ' : public juce::AudioProcessor
 {
@@ -589,11 +574,12 @@ public:
     juce::AudioProcessorValueTreeState apvts;
 
 private:
-    FaustDsp fDSP;
+    std::unique_ptr<::dsp> fDSP;
     PhaustoChannelAdapter channels;
     std::unique_ptr<MapUI> fUI;
     std::atomic<float>* raw[PhaustoParams::count] = {};
     void pushParameters();
+' , aPluginType dspMembersCpp , '
 ' , aPluginType midiMembersCpp , '
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (' , proc , ')
 };
@@ -639,13 +625,6 @@ DSP >> cppFloat: aNumber [
 	^ aNumber isInteger
 		ifTrue: [ aNumber printString , '.0f' ]
 		ifFalse: [ aNumber printString , 'f' ]
-]
-
-{ #category : 'exporting - apvts' }
-DSP >> cppFloatAt: aKey in: aControl default: aNumber [
-	"Faust JSON omits min/max/init/step on buttons and checkboxes."
-
-	^ self cppFloat: (aControl at: aKey ifAbsent: [ aNumber ])
 ]
 
 { #category : 'exporting' }
@@ -767,15 +746,21 @@ DSP >> createCppAPVTSFilesNamed: aString for: aPluginType [
 		to: (self sourceFolderFor: aString) / 'PluginProcessor.cpp'
 ]
 
-{ #category : 'exporting' }
+{ #category : 'export - juce' }
 DSP >> createFaustHeaderFileNamed: aName for: aPluginType [
-    "Writes Source/Faust<Type>.h, the name the processor #includes.
-     LibFaust is the FFI boundary, so it gets the type name as a String."
-    ^ LibFaust uniqueInstance
-        createFaustHeaderFileFromString: self generatedCode
-        withName: aName
-        architecture: 'faustMinimalInlined.h'
-        type: aPluginType typeName
+	"Writes Source/Faust<Type>.h, the file PluginProcessor.cpp includes. The export
+	 decides both paths; LibFaust, the FFI boundary, only passes them to libfaust.
+	 Fails loudly: libfaust can answer true without writing anything."
+
+	| header message |
+	header := (self sourceFolderFor: aName) / ('Faust' , aPluginType typeName , '.h').
+	header ensureDelete.
+	message := LibFaust uniqueInstance
+		createFaustHeaderFileFromString: self generatedCode
+		architecturePath: aPluginType faustArchitecturePath
+		outputPath: header fullName.
+	header exists ifFalse: [ self error: 'libfaust did not write ' , header fullName , ': ' , message ].
+	^ header
 ]
 
 { #category : 'exporting' }
@@ -1194,6 +1179,13 @@ fader openInWindow.
 ]
 
 { #category : 'accessing' }
+DSP >> parameterSet [
+	"Every parameter of this DSP, parsed once from its Faust JSON."
+
+	^ PhParameterSet fromJSON: self getJSON
+]
+
+{ #category : 'accessing' }
 DSP >> parameterStore [
 
 	^ DSPParameterStore from: self
@@ -1268,7 +1260,8 @@ DSP >> printOn: aStream [
 
 { #category : 'helpers' }
 DSP >> projectFolderFor: aString [
-    ^ (FileLocator documents / 'faust2Juce' / aString) ensureCreateDirectory
+
+	^ (self class juceExportFolder / aString) ensureCreateDirectory
 ]
 
 { #category : 'ui-building' }

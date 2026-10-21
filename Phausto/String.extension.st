@@ -41,6 +41,12 @@ PhVSlider new label:  self init: 0.5  min: 0.0  max: 1.0  step: 0.001
 ]
 
 { #category : '*Phausto' }
+String >> asPhPluginType [
+
+^ PhPluginType fromString: self
+]
+
+{ #category : '*Phausto' }
 String >> asSymbolWithSuffix: aString [
 
 	^ ((WriteStream on: String new)

@@ -48,18 +48,6 @@ PhEffectPluginType >> maxInputs [
 	^ 2
 ]
 
-{ #category : 'defaults' }
-PhEffectPluginType >> midiMembersCpp [
-"Extra private member declarations for MIDI state."
-    ^ ''
-]
-
-{ #category : 'defaults' }
-PhEffectPluginType >> processBlockMidiCallCpp [
-	 "The MIDI handling call inside processBlock, before compute. Empty for effects."
-    ^ ''
-]
-
 { #category : 'accessing' }
 PhEffectPluginType >> typeName [
 	^ 'Effect'

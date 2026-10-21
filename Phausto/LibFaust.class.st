@@ -233,6 +233,24 @@ LibFaust >> createCMajorMIDIFileFromString: aString withName: aName [
 ]
 
 { #category : 'export - juce' }
+LibFaust >> createFaustHeaderFileFromString: aFaustProgram architecturePath: anArchitecturePath outputPath: anOutputPath [
+	"libfaust writes aFaustProgram as C++, wrapped in the architecture file, to anOutputPath.
+	 The caller decides both absolute paths. No -i: the architectures are already inlined.
+	 Answers libfaust's message, empty when it had nothing to say."
+
+	| arguments argv errorBuffer |
+	arguments := { '-a'. anArchitecturePath. '-lang'. 'cpp'. '-o'. anOutputPath }.
+	errorBuffer := ByteArray new: 4096.
+	argv := ExternalAddress arrayOfStringsFrom: arguments.
+	[ self
+		generateAuxFilesFromString: aFaustProgram
+		argc: arguments size
+		argv: argv
+		buffer: errorBuffer ] ensure: [ argv freeArrayOfStrings ].
+	^ (errorBuffer asString copyUpTo: Character null) trimBoth
+]
+
+{ #category : 'export - juce' }
 LibFaust >> createFaustHeaderFileFromString: aString buffer: errorMsg arguments: argv [ 
 
 'chiamato cppexportrt' traceCr.
@@ -495,6 +513,23 @@ LibFaust >> createFaustSynthHeaderFileFromString: aString withName: aName [
 		  createFaustSynthHeaderFileFromString: aString
 		  buffer: errorBuffer
 		  withName: aName
+]
+
+{ #category : 'generate' }
+LibFaust >> generateAuxFilesFromString: aFaustProgram argc: anInteger argv: argv buffer: errorMsg [
+	"FFI. Unlike the older calls with a hardcoded int 5 or int 6, argc is passed in,
+	 so it can never disagree with the argument array."
+
+	^ self ffiCall: #( bool generateCAuxFilesFromString ( const char * 'MyApp', const char * aFaustProgram, int anInteger, void * argv, ByteArray errorMsg ) )
+
+]
+
+{ #category : 'export - juce' }
+LibFaust >> headerFolderFor: aName [
+	"Where the C function writes the Faust header: a folder it picks itself.
+	 Remove once the destination path is passed to it."
+
+	^ FileLocator documents / 'faust2Juce' / aName / 'Source'
 ]
 
 { #category : 'accessing - platform' }

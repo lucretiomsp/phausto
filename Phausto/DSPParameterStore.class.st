@@ -32,8 +32,8 @@ DSPParameterStore class >> from: aDSP [
 	| instance |
 	instance := self new.
 	aDSP getUIItemsLabeledDictionary keysAndValuesDo: [ :k :v |
-		instance parameters at: k put: (DSPParameter fromDictionary: v) ].
-	instance dsp: aDSP .
+		instance parameters at: k put: (PhParameter fromFaustItem: v) ].
+	instance dsp: aDSP.
 	^ instance
 ]
 

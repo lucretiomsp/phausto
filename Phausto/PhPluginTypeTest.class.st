@@ -6,6 +6,17 @@ Class {
 	#tag : 'Tests'
 }
 
+{ #category : 'private' }
+PhPluginTypeTest >> parameterNamed: aShortName at: anAddress [
+	"A plain hslider, as Faust would declare it."
+
+	^ PhParameter fromFaustItem: (Dictionary newFrom: {
+		#type -> 'hslider'.
+		#label -> aShortName.
+		#shortname -> aShortName.
+		#address -> anAddress })
+]
+
 { #category : 'tests' }
 PhPluginTypeTest >> synthJSON [ 
 	"The actual JSON from: SquareOsc new freq: #freq => AREnv new trigger: #gate * gain"
@@ -23,14 +34,15 @@ PhPluginTypeTest >> testApvtsFilteringForEffect [
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testApvtsFilteringForMonoSynth [ 
+PhPluginTypeTest >> testApvtsFilteringForMonoSynth [
 	"MonoSynth keeps only the 3 non-MIDI controls."
+
 	| dsp kept |
 	dsp := DSP new name: 'MyApp'.
 	kept := dsp apvtsParameterControlsFrom: self synthJSON for: PhMonoSynthPluginType new.
 	self assert: kept size equals: 3.
 	self
-		assertCollection: (kept collect: [ :c | c at: #shortname ])
+		assertCollection: (kept collect: [ :each | each shortName ])
 		hasSameElements: #( 'AREnvAttack' 'AREnvRelease' 'SquareOsc2uLevel' )
 ]
 
@@ -67,10 +79,10 @@ PhPluginTypeTest >> testEffectBusesHasInput [
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testEffectExcludesNothing [ 
-	| ctrl |
-	ctrl := Dictionary new at: #shortname put: 'freq'; yourself.
-	self deny: (PhEffectPluginType new excludesControl: ctrl)
+PhPluginTypeTest >> testEffectExcludesNothing [
+
+	self deny: (PhEffectPluginType new excludesParameter: (self parameterNamed: 'freq' at: '/fx/freq'))
+
 ]
 
 { #category : 'tests' }
@@ -94,15 +106,32 @@ PhPluginTypeTest >> testEffectRejectsMoreThanStereo [
 ]
 
 { #category : 'tests' }
+PhPluginTypeTest >> testEveryTypeNamesItsArchitecture [
+
+	self assert: PhEffectPluginType new faustArchitectureFileName equals: 'faustMinimalInlined.h'.
+	self assert: PhMonoSynthPluginType new faustArchitectureFileName equals: 'faustMinimalInlined.h'.
+	self assert: PhPolySynthPluginType new faustArchitectureFileName equals: 'faustMinimalPolyInlined.h'
+]
+
+{ #category : 'tests' }
 PhPluginTypeTest >> testFromStringEffect [ 
-	self assert: (PhPluginType fromString: 'Effect') class equals: PhEffectPluginType class
+	self assert: (PhPluginType fromString: 'Effect') class equals: PhEffectPluginType 
 
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testFromStringMonoSynth [ 
-	self assert: (PhPluginType fromString: 'MonoSynth') class equals: PhMonoSynthPluginType class
+PhPluginTypeTest >> testFromStringMonoSynth [
 
+	self assert: (PhPluginType fromString: 'MonoSynth') class equals: PhMonoSynthPluginType
+]
+
+{ #category : 'tests' }
+PhPluginTypeTest >> testMonoProcessorOwnsItsDsp [
+
+	| cpp |
+	cpp := (DSP new name: 'MyApp') asPluginProcessorCppAPVTSFor: PhMonoSynthPluginType new.
+	self assert: (cpp includesSubstring: 'fDSP = std::make_unique<mydsp>();').
+	self deny: (cpp includesSubstring: 'mydsp_poly')
 ]
 
 { #category : 'tests' }
@@ -114,11 +143,11 @@ PhPluginTypeTest >> testMonoSynthBusesHasNoInput [
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testMonoSynthExcludesFreqGateGain [ 
-	#( 'freq' 'gate' 'gain' ) do: [ :name |
-		| ctrl |
-		ctrl := Dictionary new at: #shortname put: name; yourself.
-		self assert: (PhMonoSynthPluginType new excludesControl: ctrl) ]
+PhPluginTypeTest >> testMonoSynthExcludesFreqGateGain [
+
+	#( 'freq' 'gate' 'gain' ) do: [ :each |
+		self assert: (PhMonoSynthPluginType new excludesParameter: (self parameterNamed: each at: '/synth/' , each)) ]
+
 ]
 
 { #category : 'tests' }
@@ -133,10 +162,9 @@ PhPluginTypeTest >> testMonoSynthFacts [
 ]
 
 { #category : 'tests' }
-PhPluginTypeTest >> testMonoSynthKeepsOtherControls [ 
-	| ctrl |
-	ctrl := Dictionary new at: #shortname put: 'cutoff'; yourself.
-	self deny: (PhMonoSynthPluginType new excludesControl: ctrl)
+PhPluginTypeTest >> testMonoSynthKeepsOtherControls [
+
+	self deny: (PhMonoSynthPluginType new excludesParameter: (self parameterNamed: 'cutoff' at: '/synth/cutoff'))
 ]
 
 { #category : 'tests' }
@@ -146,6 +174,49 @@ PhPluginTypeTest >> testMonoSynthRejectsAudioInputs [
 	synth := PhMonoSynthPluginType new.
 	self should: [ synth checkInputs: 1 outputs: 2 ] raise: Error.
 	synth checkInputs: 0 outputs: 2
+]
+
+{ #category : 'private' }
+PhPluginTypeTest >> testPolyExcludesThePolyWrapperControls [
+
+	| poly |
+	poly := PhPolySynthPluginType new.
+	self
+		assert: (poly excludesParameter: (self parameterNamed: 'Panic' at: '/Polyphonic/Voices/Panic'));
+		assert: (poly excludesParameter: (self parameterNamed: 'V1/cutoff' at: '/Polyphonic/V1/MyApp/cutoff'));
+		assert: (poly excludesParameter: (self parameterNamed: 'freq' at: '/MyApp/freq'));
+		deny: (poly excludesParameter: (self parameterNamed: 'cutoff' at: '/Polyphonic/Voices/MyApp/cutoff'));
+		deny: (poly excludesParameter: (self parameterNamed: 'cutoff' at: '/MyApp/cutoff'))
+]
+
+{ #category : 'tests' }
+PhPluginTypeTest >> testPolyProcessorBuildsAndFeedsTheVoices [
+
+	| cpp |
+	cpp := (DSP new name: 'MyApp') asPluginProcessorCppAPVTSFor: (PhPolySynthPluginType voices: 12).
+	self assert: (cpp includesSubstring: '#include "FaustPolySynth.h"').
+	self assert: (cpp includesSubstring: 'new mydsp_poly (new mydsp(), 12, true)').
+	self assert: (cpp includesSubstring: 'voiceZones').
+	self assert: (cpp includesSubstring: 'juce::jmin (samplesPerBlock, MIX_BUFFER_SIZE)').
+	self deny: (cpp includesSubstring: 'fUI->setParamValue').
+	self deny: (cpp includesSubstring: 'updateAllGuis')
+]
+
+{ #category : 'tests' }
+PhPluginTypeTest >> testPolyVoicesConfiguresTheType [
+
+	self assert: (PhPolySynthPluginType voices: 12) voiceCount equals: 12.
+	self assert: PhPolySynthPluginType new voiceCount equals: 8.
+	self should: [ PhPolySynthPluginType voices: 1 ] raise: Error
+]
+
+{ #category : 'tests' }
+PhPluginTypeTest >> testPolyVoicesDefaultAndMinimum [
+
+	self
+		assert: PhPolySynthPluginType new voiceCount equals: 8;
+		assert: (PhPolySynthPluginType new voices: 4) voiceCount equals: 4;
+		should: [ PhPolySynthPluginType new voices: 1 ] raise: Error
 ]
 
 { #category : 'tests' }
@@ -175,6 +246,16 @@ PhPluginTypeTest >> testProcessorHeaderAcceptsMidiForSynth [
 	self assert: (header includesSubstring: 'acceptsMidi() const override { return true; }').
 	self assert: (header includesSubstring: 'int currentNote').
 	self assert: (header includesSubstring: 'void handleMidi')
+]
+
+{ #category : 'tests' }
+PhPluginTypeTest >> testProcessorHeaderNeverIncludesTheFaustHeader [
+	"PluginEditor.cpp includes PluginProcessor.h. The poly architecture defines symbols, so including it there too would define them twice."
+
+	| dsp |
+	dsp := DSP new name: 'MyApp'.
+	{ PhEffectPluginType new. PhMonoSynthPluginType new. PhPolySynthPluginType new } do: [ :type |
+		self deny: ((dsp asPluginProcessorHeaderAPVTSFor: type) includesSubstring: '#include "Faust') ]
 ]
 
 { #category : 'tests' }

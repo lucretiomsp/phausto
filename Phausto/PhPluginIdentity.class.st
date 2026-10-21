@@ -64,11 +64,17 @@ PhPluginIdentity >> manufacturerCode [
 
 { #category : 'accessing' }
 PhPluginIdentity >> pluginCode [
-	"Four characters, exactly one uppercase letter (AU requirement)"
+	"Four characters, exactly one upper-case (JUCE's rule for PLUGIN_CODE), from an FNV-1a hash of the whole product name. Names sharing their first letters no longer collide, and the same name always gives the same code, so hosts find re-exports."
 
-	| letters |
-	letters := (productName select: [ :each | each isLetter ]) asLowercase.
-	^ (letters , 'xxxx' first: 4) capitalized
+	| hash letters |
+	hash := productName inject: 2166136261 into: [ :h :each |
+		((h bitXor: each asInteger) * 16777619) \\ 4294967296 ].
+	letters := OrderedCollection new.
+	4 timesRepeat: [
+		letters add: (Character value: $a asInteger + (hash \\ 26)).
+		hash := hash // 26 ].
+	letters at: 1 put: (letters at: 1) asUppercase.
+	^ String withAll: letters
 ]
 
 { #category : 'accessing' }

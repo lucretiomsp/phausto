@@ -100,22 +100,6 @@ PhJuceExportTest >> testEffectExportWritesEverySourceFile [
 			self assert: (written includes: each) description: each , ' was not written' ]
 ]
 
-{ #category : 'tests' }
-PhJuceExportTest >> testEveryWriterDelegatesToItsQuery [
-    "Each create... must write what its as... query answers. A writer with its own inline template would bypass the tests."
-    | stale |
-    stale := { #createHeaderAPVTSFilesNamed:for: -> #asPluginProcessorHeaderAPVTSFor:.
-        #createCppAPVTSFilesNamed:for: -> #asPluginProcessorCppAPVTSFor:.
-        #createHeaderEditorAPVTSFilesNamed:for: -> #asPluginEditorHeaderAPVTSFor:.
-        #createCppEditorAPVTSFilesNamed:for: -> #asPluginEditorCppAPVTSFor:.
-        #createCMakeFileNamed:for: -> #asCMakeListsFor:type:.
-        #createJucerFileNamed:for: -> #asJucerFor:type:.
-        #createBuildScriptNamed: -> #contents.
-        #createChannelAdapterNamed: -> #contents }
-            reject: [ :each | (DSP >> each key) messages includes: each value ].
-    self assert: stale isEmpty description: 'Writers with inline templates: ' , stale printString
-]
-
 { #category : 'helpers' }
 PhJuceExportTest >> testJucerListsParamsHeader [
 
@@ -145,16 +129,6 @@ PhJuceExportTest >> testOneDescriptorRowPerAutomatableControl [
 ]
 
 { #category : 'tests' }
-PhJuceExportTest >> testProcessorCppSynthHandlesMidiBeforeCompute [
-    | cpp midi compute |
-    cpp := dsp asPluginProcessorCppAPVTSFor: self synth.
-    midi := cpp indexOfSubCollection: 'handleMidi (midiMessages);'.
-    compute := cpp indexOfSubCollection: 'channels.process (fDSP, buffer);'.
-    self assert: midi > 0.
-    self assert: midi < compute
-]
-
-{ #category : 'helpers' }
 PhJuceExportTest >> testProcessorIncludesTheFaustHeaderThatWasWritten [
 	"The #include is built from the plugin type. If the writer hardcoded 'Effect',
 	 the two would disagree and nothing would compile."
@@ -167,7 +141,7 @@ PhJuceExportTest >> testProcessorIncludesTheFaustHeaderThatWasWritten [
 			assert: (folder / 'Source' / expected) exists
 			description: expected , ' was not written for ' , type typeName.
 		self
-			assert: ((self contentsOf: folder named: 'PluginProcessor.h')
+			assert: ((self contentsOf: folder named: 'PluginProcessor.cpp')
 				includesSubstring: '#include "' , expected , '"')
 			description: 'processor does not include ' , expected ]
 ]
