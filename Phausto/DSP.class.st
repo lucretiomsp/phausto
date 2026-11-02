@@ -226,7 +226,7 @@ DSP >> apvtsParameterControlsFrom: aJsonString for: aPluginType [
 	^ kept
 ]
 
-{ #category : 'exporting - apvts' }
+{ #category : 'converting' }
 DSP >> asCMakeListsFor: aPhPluginIdentity type: aPluginType [
     | target |
     target := aPhPluginIdentity productName.
@@ -244,7 +244,8 @@ else()
     include(FetchContent)
     FetchContent_Declare(JUCE
         GIT_REPOSITORY https://github.com/juce-framework/JUCE.git
-        GIT_TAG 8.0.4)
+        GIT_TAG 9.0.5
+        GIT_SHALLOW TRUE)
     FetchContent_MakeAvailable(JUCE)
 endif()
 
@@ -293,7 +294,7 @@ DSP >> asCmajorPolyWrapperFor: aName [
 		close
 ]
 
-{ #category : 'exporting - apvts' }
+{ #category : 'converting' }
 DSP >> asJucerFor: aPhPluginIdentity type: aPluginType [
     | product isSynth wantsMidi |
     product := aPhPluginIdentity productName.
@@ -348,6 +349,7 @@ DSP >> asJucerFor: aPhPluginIdentity type: aPluginType [
     <MODULE id="juce_audio_formats"         showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_audio_plugin_client"   showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_audio_processors"      showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors_headless" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_audio_utils"           showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core"                  showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures"       showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
