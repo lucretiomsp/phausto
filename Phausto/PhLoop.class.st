@@ -43,7 +43,7 @@ PhLoop >> initialize [
 		         step: 1.
 	processExpression := 'process = so.loop'.
 	self pathToFolder:
-		FileLocator imageDirectory asAbsolute pathString , '/TurboSamples/bongo'
+		FileLocator imageDirectory asAbsolute pathString , '/TurboSamples/breaks'
 ]
 
 { #category : 'accessing' }
