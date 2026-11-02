@@ -57,7 +57,7 @@ DryWetMonoMixer >> initialize [
 
 	super initialize.
 
-	input := Pulse new period: 1.
+	input := Wire new.
 	fx := FreeverbMono new.
 	wetAmount := PhHSlider new
 		             label: self label , 'WetAmount'
