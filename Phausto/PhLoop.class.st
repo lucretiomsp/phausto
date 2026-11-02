@@ -32,8 +32,8 @@ PhLoop >> filesURL [
 PhLoop >> initialize [
 
 	super initialize.
-	"by default stereo"
-	numChannels := 2.
+	"by default mono"
+	numChannels := 1.
 
 	part := PhHSlider new
 		         label: self label , 'Part'
