@@ -30,10 +30,14 @@ Class {
 { #category : 'converting' }
 DryWetMonoMixer >> asBox [
 
-	| drySignal wetSignal |
-	drySignal := self input asBox * (1 asBox - self wetAmount asBox).
-	wetSignal := self input asBox => self fx * self wetAmount asBox.
-	^ (wetSignal + drySignal) asBox
+	| api w dry wet |
+	api := BoxAPI uniqueInstance.
+	w := self wetAmount asBox.
+	dry := Wire new asBox * (1 asBox - w).
+	wet := self fx asBox connectTo: (Wire new asBox * w) .
+	^ api
+		  boxMerge: (api boxSplit: self input asBox with: dry , wet)
+		  with: Wire new asBox
 ]
 
 { #category : 'accessing' }
