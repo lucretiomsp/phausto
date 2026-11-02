@@ -28,14 +28,15 @@ Class {
 { #category : 'converting' }
 DryWetStereoMixer >> asBox [
 
-	| drySignalL wetSignalL drySignalR wetSignalR |
-	drySignalL := self inputL asBox * (1 asBox - self wetAmount asBox).
-	wetSignalL := (self fx inputL: self inputL asBox)
-	              * self wetAmount asBox.
-	drySignalR := self inputR asBox * (1 asBox - self wetAmount asBox).
-	wetSignalR := (self fx inputR: self inputR asBox)
-	              * self wetAmount asBox.
-	^ (wetSignalL + drySignalL) asBox , (wetSignalR + drySignalR) asBox
+		| api w source dry wet |
+	api := BoxAPI uniqueInstance.
+	w := self wetAmount asBox.
+	source := self inputL asBox , self inputR asBox.
+	dry := (Wire new asBox * (1 asBox - w)) , (Wire new asBox * (1 asBox - w)).
+	wet := self fx asBox connectTo: (Wire new asBox * w) , (Wire new asBox * w).
+	^ api
+		  boxMerge: (api boxSplit: source with: dry , wet)
+		  with: Wire new asBox , Wire new asBox
 ]
 
 { #category : 'accessing' }
