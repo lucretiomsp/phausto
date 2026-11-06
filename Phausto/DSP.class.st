@@ -30,6 +30,7 @@ Class {
 	],
 	#classVars : [
 		'defaultName',
+		'destroyMutex',
 		'initializedDSP',
 		'initializedDSPs'
 	],
@@ -74,6 +75,13 @@ DSP class >> create: aStringWithFaustCode withName: aName [
 DSP class >> defaultName [
 
 ^ defaultName 
+]
+
+{ #category : 'accessing' }
+DSP class >> destroyMutex [
+	"Serializes the destruction of DSPs: see DSP >> #destroy"
+
+	^ destroyMutex ifNil: [ destroyMutex := Mutex new ]
 ]
 
 { #category : 'class initialization' }
@@ -849,13 +857,17 @@ DSP >> createPhaustoParamsHeaderNamed: aString for: aPluginType [
 ]
 
 { #category : 'initialize - destroy' }
-DSP >> destroy [ 
-	(self isNull or: [ self isInitialized not ])
-		ifTrue: [ ^ self ].
-	PhaustoDynamicEngine uniqueInstance destroyDSP: self.
-	self isInitialized: false.
-	self class unregister: self
+DSP >> destroy [
+	"Destroy the native DSP. Idempotent and safe when several processes destroy the same DSP at
+	 once (for instance two handlers reacting to the same event): the DSP is marked as destroyed
+	 and unregistered before the native object is freed, inside a critical section, so a second
+	 caller finds nothing to do instead of freeing the object twice and corrupting the heap"
 
+	self class destroyMutex critical: [
+		(self isNull or: [ self isInitialized not ]) ifTrue: [ ^ self ].
+		self isInitialized: false.
+		self class unregister: self.
+		PhaustoDynamicEngine uniqueInstance destroyDSP: self ]
 ]
 
 { #category : 'exporting' }
