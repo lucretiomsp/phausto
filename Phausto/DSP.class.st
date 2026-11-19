@@ -34,12 +34,27 @@ Class {
 		'initializedDSPs'
 	],
 	#classInstVars : [
-		'juceExportFolder'
+		'juceExportFolder',
+		'belaExportFolder'
 	],
 	#category : 'Phausto-DSP',
 	#package : 'Phausto',
 	#tag : 'DSP'
 }
+
+{ #category : 'accessing' }
+DSP class >> belaExportFolder [
+	"Where createBelaCppFileNamed: writes one Bela project per name."
+
+	^ belaExportFolder ifNil: [ FileLocator documents / 'belaPatches' ]
+]
+
+{ #category : 'accessing' }
+DSP class >> belaExportFolder: aFileReference [
+	"nil restores the default."
+
+	belaExportFolder := aFileReference
+]
 
 { #category : 'instance creation' }
 DSP class >> create: aStringWithFaustCode [
@@ -629,13 +644,23 @@ DSP >> cppFloat: aNumber [
 		ifFalse: [ aNumber printString , 'f' ]
 ]
 
-{ #category : 'exporting' }
+{ #category : 'export - bela' }
 DSP >> createBelaCppFileNamed: aName [
-	.
-	"return true if the .cpp file has been  generated"
-	^ LibFaust uniqueInstance
-		  createBelaCppFileFromString: self generatedCode
-		  withName: aName
+	"Writes <belaExportFolder>/<aName>/render.cpp, a Bela project to copy to the board
+	 (or open in the Bela IDE). Answers the render.cpp file.
+	 Fails loudly: libfaust can answer true without writing anything."
+
+	| render message |
+	generatedCode ifNil: [ self error: 'This DSP has no Faust code to export' ].
+	render := self class belaExportFolder / aName / 'render.cpp'.
+	render parent ensureCreateDirectory.
+	render ensureDelete.
+	message := [ LibFaust uniqueInstance
+		createBelaCppFileFromString: generatedCode
+		architecturePath: (PhPluginType architectureFolder / 'bela.cpp') fullName
+		outputPath: render fullName ] ifCurtailed: [ render ensureDelete ].
+	render exists ifFalse: [ self error: 'libfaust did not write ' , render fullName , ': ' , message ].
+	^ render
 ]
 
 { #category : 'exporting' }

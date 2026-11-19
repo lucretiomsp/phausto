@@ -22,84 +22,15 @@ LibFaust class >> ensurePathInDLLSearch [
 ]
 
 { #category : 'export - bela' }
-LibFaust >> createBelaCppFileFromString: aString [
-|errorBuffer|
+LibFaust >> createBelaCppFileFromString: aFaustProgram architecturePath: anArchitecturePath outputPath: anOutputPath [
+	"libfaust writes aFaustProgram as a Bela render.cpp: C++ wrapped in the bela.cpp architecture,
+	 to anOutputPath. -i inlines the Faust headers the architecture includes, as faust2bela does,
+	 so the file builds on a board without Faust installed.
+	 Answers libfaust's message, empty when it had nothing to say."
 
-
-errorBuffer := ByteArray new: 4096.
-
-	^  self createBelaCppFileFromString: aString buffer: errorBuffer withName: aString
-]
-
-{ #category : 'export - bela' }
-LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg [
-| myArgv fileOutput |
-
-fileOutput := FileLocator documents asAbsolute pathString .
-
-
-	myArgv := ExternalAddress arrayOfStringsFrom:
-		         #('-lang' 'cpp' '-o' 'testOutput.cpp').
-	
-	^ [
-	  self
-		  createBelaCppFileFromString: aString 
-		  buffer: errorMsg arguments: myArgv  ] ensure: [ myArgv freeArrayOfStrings ]
-]
-
-{ #category : 'export - bela' }
-LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg arguments: argv [ 
-
-'chiamato cppexportrt' traceCr.
-
-^ self ffiCall:
-		   #( bool generateCAuxFilesFromString
-        ( const char * 'MyApp', 
-          const char * aString, 
-          int 6, 
-          void * argv, 
-          ByteArray errorMsg
-        )
-    )
-]
-
-{ #category : 'export - bela' }
-LibFaust >> createBelaCppFileFromString: aString buffer: errorMsg withName: aName [
-
-	| myArgv fileOutput cmajorPatchesDir patchDir architecturePath |
-	"we locate the architecture file"
-	architecturePath := (FileLocator documents
-	                     / 'architecture/bela.cpp') asAbsolute pathString.
-	"we create the cmajorPatches folder in the documents folder if it not exists"
-	cmajorPatchesDir := (FileLocator documents / 'belaPatches')
-		                    ensureCreateDirectory.
-	patchDir := (cmajorPatchesDir / aName) ensureCreateDirectory.
-
-	fileOutput := patchDir asAbsolute pathString , '/' , 'render.cpp'.
-
-	myArgv := ExternalAddress arrayOfStringsFrom: {
-			          '-a'.
-			          architecturePath.
-			          '-lang'.
-			          'cpp'.
-			          '-o'.
-			          fileOutput }.
-
-	^ [
-		  self
-			  createBelaCppFileFromString: aString
-			  buffer: errorMsg
-			  arguments: myArgv ] ensure: [ myArgv freeArrayOfStrings ]
-]
-
-{ #category : 'export - bela' }
-LibFaust >> createBelaCppFileFromString: aString withName: aName [
-|errorBuffer|
-
-
-errorBuffer := ByteArray new: 4096.
-
-	^  self createBelaCppFileFromString: aString buffer: errorBuffer withName: aName
+	^ self
+		generateAuxFilesFromString: aFaustProgram
+		arguments: { '-i'. '-a'. anArchitecturePath. '-lang'. 'cpp'. '-o'. anOutputPath }
 ]
 
 { #category : 'export - cmajor' }
@@ -238,16 +169,9 @@ LibFaust >> createFaustHeaderFileFromString: aFaustProgram architecturePath: anA
 	 The caller decides both absolute paths. No -i: the architectures are already inlined.
 	 Answers libfaust's message, empty when it had nothing to say."
 
-	| arguments argv errorBuffer |
-	arguments := { '-a'. anArchitecturePath. '-lang'. 'cpp'. '-o'. anOutputPath }.
-	errorBuffer := ByteArray new: 4096.
-	argv := ExternalAddress arrayOfStringsFrom: arguments.
-	[ self
+	^ self
 		generateAuxFilesFromString: aFaustProgram
-		argc: arguments size
-		argv: argv
-		buffer: errorBuffer ] ensure: [ argv freeArrayOfStrings ].
-	^ (errorBuffer asString copyUpTo: Character null) trimBoth
+		arguments: { '-a'. anArchitecturePath. '-lang'. 'cpp'. '-o'. anOutputPath }
 ]
 
 { #category : 'export - juce' }
@@ -522,6 +446,26 @@ LibFaust >> generateAuxFilesFromString: aFaustProgram argc: anInteger argv: argv
 
 	^ self ffiCall: #( bool generateCAuxFilesFromString ( const char * 'MyApp', const char * aFaustProgram, int anInteger, void * argv, ByteArray errorMsg ) )
 
+]
+
+{ #category : 'generate' }
+LibFaust >> generateAuxFilesFromString: aFaustProgram arguments: anArray [
+	"Runs the Faust compiler on aFaustProgram with the command-line options anArray, such as
+	 { '-lang'. 'cpp'. '-o'. aPath }. Answers libfaust's message, empty when it had nothing to say.
+	 Fails with that message when libfaust reports an error (it may leave an empty output file).
+	 libfaust can also answer true without writing anything, so callers check their output file."
+
+	| argv errorBuffer succeeded message |
+	errorBuffer := ByteArray new: 4096.
+	argv := ExternalAddress arrayOfStringsFrom: anArray.
+	succeeded := [ self
+		generateAuxFilesFromString: aFaustProgram
+		argc: anArray size
+		argv: argv
+		buffer: errorBuffer ] ensure: [ argv freeArrayOfStrings ].
+	message := (errorBuffer asString copyUpTo: Character null) trimBoth.
+	succeeded ifFalse: [ self error: 'Faust: ' , message ].
+	^ message
 ]
 
 { #category : 'export - juce' }

@@ -33,6 +33,15 @@ Class {
 	#tag : 'UIPrimitives'
 }
 
+{ #category : 'metadata' }
+UIPrimitive class >> belaPinNames [
+	"The pins Faust's bela.cpp architecture maps a widget to, from its [BELA:...] metadata."
+
+	^ ((0 to: 8) collect: [ :i | 'ANALOG_' , i printString ])
+		, ((0 to: 15) collect: [ :i | 'DIGITAL_' , i printString ])
+		, ((0 to: 8) collect: [ :i | 'ANALOG_OUT_' , i printString ])
+]
+
 { #category : 'arithmetic' }
 UIPrimitive >> * aUnitGenerator [
 
@@ -83,8 +92,15 @@ UIPrimitive >> asParam: aString forUGen: aUGen [
 ]
 
 { #category : 'metadata' }
-UIPrimitive >> belaPin: aBelaPin [
-	^ self declare: 'BELA' value: aBelaPin faustName
+UIPrimitive >> belaPin: aPinName [
+	"Drives this widget from a Bela pin in a Bela export: #ANALOG_0, #DIGITAL_3, #ANALOG_OUT_1...
+	 (see UIPrimitive class>>belaPinNames). Case does not matter to bela.cpp; it is written uppercase."
+
+	| pin |
+	pin := aPinName asString asUppercase.
+	(self class belaPinNames includes: pin) ifFalse: [
+		self error: aPinName printString , ' is not a Bela pin' ].
+	^ self declare: 'BELA' value: pin
 ]
 
 { #category : 'metadata' }

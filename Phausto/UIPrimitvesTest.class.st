@@ -20,6 +20,24 @@ UIPrimitvesTest >> setUp [
 ]
 
 { #category : 'tests' }
+UIPrimitvesTest >> testBelaPinAcceptsSymbolsAnyCase [ 
+	slider belaPin: #digital_3.
+	self assert: slider fullLabel equals: 'cutoff[BELA:DIGITAL_3]'
+]
+
+{ #category : 'tests' }
+UIPrimitvesTest >> testBelaPinDeclaresBelaMetadata [ 
+	self assert: (slider belaPin: 'ANALOG_0') identicalTo: slider.
+	self assert: slider fullLabel equals: 'cutoff[BELA:ANALOG_0]'
+]
+
+{ #category : 'tests' }
+UIPrimitvesTest >> testBelaPinRejectsUnknownPin [ 
+	self should: [ slider belaPin: 'ANALOG_9' ] raise: Error.
+	self should: [ slider belaPin: 'A0' ] raise: Error
+]
+
+{ #category : 'tests' }
 UIPrimitvesTest >> testChannelRejectsOutOfRange [ 
 	"channels are 1..16, plus 0 for all"
 	self should: [ slider midiCtrl: 74 channel: 17 ] raise: Error
