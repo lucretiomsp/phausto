@@ -9,22 +9,85 @@ A simple acoustic guitar model with nylon strings and selectable excitation posi
 "
 Class {
 	#name : 'PhNylonGuitarModel',
-	#superclass : 'PhStringAbstract',
+	#superclass : 'StringInstruments',
+	#instVars : [
+		'length',
+		'pluckPosition',
+		'excitation'
+	],
 	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'converting' }
-PhNylonGuitarModel >> asBox [
+{ #category : 'faust' }
+PhNylonGuitarModel class >> argumentDescriptions [
 
-	^  self length asBox , self pluckPosition
-	  , self excitation asBox connectTo: super asBox
+	^ Dictionary newFrom: {
+			#length -> 'the length of the string in meters'.
+			#pluckPosition -> 'pluck position (0-1) (1 is on the bridge)'.
+			#excitation -> 'excitation signal' }
+]
+
+{ #category : 'faust' }
+PhNylonGuitarModel class >> argumentNames [
+
+	^ #( #length #pluckPosition #excitation )
+]
+
+{ #category : 'faust' }
+PhNylonGuitarModel class >> faustName [
+
+	^ 'nylonGuitarModel'
+]
+
+{ #category : 'accessing' }
+PhNylonGuitarModel >> excitation [
+
+	^ excitation
+]
+
+{ #category : 'accessing' }
+PhNylonGuitarModel >> excitation: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
-PhNylonGuitarModel >> initialize [
+PhNylonGuitarModel >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.nylonGuitarModel;'
+	length := PhHSlider new
+			label: self label , 'Length'
+			values: #( 0.8 0.01 2 0.01 ).
+	pluckPosition := PhHSlider new
+			label: self label , 'PluckPosition'
+			values: #( 0.3 0.01 0.99 0.01 ).
+	excitation := PhImpulseExcitation new
+]
+
+{ #category : 'accessing' }
+PhNylonGuitarModel >> length [
+
+	^ length
+]
+
+{ #category : 'accessing' }
+PhNylonGuitarModel >> length: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhNylonGuitarModel >> pluckPosition [
+
+	^ pluckPosition
+]
+
+{ #category : 'accessing' }
+PhNylonGuitarModel >> pluckPosition: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

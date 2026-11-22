@@ -10,26 +10,120 @@ This model contains 7 excitation positions going linearly from the bottom to the
 Class {
 	#name : 'GermanBell',
 	#superclass : 'ModalPercussion',
-	#category : 'Phausto-PhysModels',
+	#instVars : [
+		'strikePosition',
+		'strikeCutoff',
+		'strikeSharpness',
+		'gain',
+		'trigger'
+	],
+	#category : 'Phausto-PhysModels - Modal Percussions',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Modal Percussions'
 }
 
-{ #category : 'converting' }
-GermanBell >> asBox [
+{ #category : 'faust' }
+GermanBell class >> argumentDescriptions [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self strikePosition asBox , self strikeCutoff asBox
-	            , self strikeSharpness asBox , self gain asBox
-	            , self trigger asBox connectTo: intermediateBox.
+	^ Dictionary newFrom: {
+			#strikePosition -> 'strike position (0-6)'.
+			#strikeCutoff -> 'cuttoff frequency of the strike genarator (recommended: ~7000Hz)'.
+			#strikeSharpness -> 'sharpness of the strike (recommended: ~0.25)'.
+			#gain -> 'gain of the strike (0-1)'.
+			#trigger -> 'signal (0: off, 1: on)' }
+]
 
-	^ finalBox
+{ #category : 'faust' }
+GermanBell class >> argumentNames [
+
+	^ #( #strikePosition #strikeCutoff #strikeSharpness #gain #trigger )
+]
+
+{ #category : 'faust' }
+GermanBell class >> faustName [
+
+	^ 'germanBell'
+]
+
+{ #category : 'accessing' }
+GermanBell >> gain [
+
+	^ gain
+]
+
+{ #category : 'accessing' }
+GermanBell >> gain: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
-GermanBell >> initialize [
+GermanBell >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.germanBell;'
+	strikePosition := PhHSlider new
+			label: self label , 'StrikePosition'
+			values: #( 0 0 6 1 ).
+	strikeCutoff := PhHSlider new
+			label: self label , 'StrikeCutoff'
+			values: #( 7000 100 9000 1 ).
+	strikeSharpness := PhHSlider new
+			label: self label , 'StrikeSharpness'
+			values: #( 0.25 0.001 1 0.001 ).
+	gain := PhHSlider new
+			label: self label , 'Gain'
+			values: #( 0.5 0 1 0.001 ).
+	trigger := PhButton new label: self label , 'Trigger'
+]
+
+{ #category : 'accessing' }
+GermanBell >> strikeCutoff [
+
+	^ strikeCutoff
+]
+
+{ #category : 'accessing' }
+GermanBell >> strikeCutoff: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+GermanBell >> strikePosition [
+
+	^ strikePosition
+]
+
+{ #category : 'accessing' }
+GermanBell >> strikePosition: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+GermanBell >> strikeSharpness [
+
+	^ strikeSharpness
+]
+
+{ #category : 'accessing' }
+GermanBell >> strikeSharpness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+GermanBell >> trigger [
+
+	^ trigger
+]
+
+{ #category : 'accessing' }
+GermanBell >> trigger: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

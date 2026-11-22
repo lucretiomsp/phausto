@@ -1,14 +1,11 @@
 "
-Formant synthesis models and utilities from the Faust standard library.
-
-**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead.**
-
-
+Abstract superclass of the vocal synthesis (formant / FOF) functions of physmodels.lib.
+**Do not use this superclass directly; use one of its subclasses instead**.
 "
 Class {
 	#name : 'FormantSynthesis',
-	#superclass : 'UnitGenerator',
-	#category : 'Phausto-PhysModels',
+	#superclass : 'PhPmFunction',
+	#category : 'Phausto-PhysModels - Vocal Synthesis',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Vocal Synthesis'
 }

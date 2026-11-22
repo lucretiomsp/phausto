@@ -16,31 +16,57 @@ Class {
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'converting' }
-PhOpenTube >> asBox [
+{ #category : 'faust' }
+PhOpenTube class >> argumentDescriptions [
 
-	^ self input,  self length asBox connectTo: self code asBox
+	^ Dictionary newFrom: {
+			#maxLength -> 'the maximum length of the tube in meters (should be static)'.
+			#length -> 'the length of the tube in meters' }
+]
+
+{ #category : 'faust' }
+PhOpenTube class >> argumentNames [
+
+	^ #( #maxLength #length )
+]
+
+{ #category : 'faust' }
+PhOpenTube class >> faustName [
+
+	^ 'openTube'
 ]
 
 { #category : 'initialization' }
-PhOpenTube >> initialize [
+PhOpenTube >> initializeArguments [
 
-	super initialize.
 	maxLength := 1.1.
-	processExpression := 'process = pm.openTube(1.1);'.
-	length := (self label , 'Length') asSymbol asPhHSlider 
-	
+	length := PhHSlider new
+			label: self label , 'Length'
+			values: #( 0.5 0.01 1.1 0.01 )
 ]
 
 { #category : 'accessing' }
 PhOpenTube >> length [
 
-	^ length 
+	^ length
 ]
 
 { #category : 'accessing' }
-PhOpenTube >> maxLenght: aLengthInMeters [
+PhOpenTube >> length: aNumberOrABoxOrASymbol [
 
-	maxLength := aLengthInMeters.
-	self updateProcessExpressionWith: aLengthInMeters .
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhOpenTube >> maxLength [
+
+	^ maxLength
+]
+
+{ #category : 'accessing' }
+PhOpenTube >> maxLength: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

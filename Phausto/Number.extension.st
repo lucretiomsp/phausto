@@ -17,6 +17,12 @@ Number >> asConst [
 ]
 
 { #category : '*Phausto' }
+Number >> asFaustArgument [
+
+	^ self asFloat printString
+]
+
+{ #category : '*Phausto' }
 Number >> asParam: aString forUGen: aUnitGenerator [
 	"change the label of the UI element to self"
 

@@ -9,11 +9,8 @@ Extremely basic reed table that can be used to implement a wide range of single 
 "
 Class {
 	#name : 'PhBrassLipsTable',
-	#superclass : 'UnitGenerator',
-	#traits : 'PhPhysModelSetter',
-	#classTraits : 'PhPhysModelSetter classTrait',
+	#superclass : 'PhPmFunction',
 	#instVars : [
-		'excitation',
 		'tubeLength',
 		'lipsTension'
 	],
@@ -22,34 +19,55 @@ Class {
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'converting' }
-PhBrassLipsTable >> asBox [
+{ #category : 'faust' }
+PhBrassLipsTable class >> argumentDescriptions [
 
-	^ self tubeLength asBox , self lipsTension asBox , self  excitation asBox connectTo: self code asBox
+	^ Dictionary newFrom: {
+			#tubeLength -> 'length in meters of the tube connected to the mouthpiece'.
+			#lipsTension -> 'tension of the lips (0-1) (default: 0.5)' }
+]
+
+{ #category : 'faust' }
+PhBrassLipsTable class >> argumentNames [
+
+	^ #( #tubeLength #lipsTension )
+]
+
+{ #category : 'faust' }
+PhBrassLipsTable class >> faustName [
+
+	^ 'brassLipsTable'
 ]
 
 { #category : 'accessing' }
-PhBrassLipsTable >> excitation [ 
+PhBrassLipsTable >> excitation [
 
-^ excitation
+	"the excitation is the input signal of this function"
+
+	^ input
+]
+
+{ #category : 'accessing' }
+PhBrassLipsTable >> excitation: aUnitGenerator [
+
+	self input: aUnitGenerator
 ]
 
 { #category : 'initialization' }
-PhBrassLipsTable >> initialize [
+PhBrassLipsTable >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.brassLipsTable;'.
 	tubeLength := PhHSlider new
-		              label: self label , 'Offset'
-		              values: #( 0.4 0 1 0.01 ).
+			label: self label , 'TubeLength'
+			values: #( 0.5 0.01 2.5 0.01 ).
 	lipsTension := PhHSlider new
-		               label: self label , 'Slope'
-		               values: #( 0.4 0 1 0.01 ).
-	excitation := PhBlower new
+			label: self label , 'LipsTension'
+			values: #( 0.5 0 1 0.01 ).
+	input := PhBlower new
 ]
 
 { #category : 'accessing' }
 PhBrassLipsTable >> lipsTension [
+
 	^ lipsTension
 ]
 
@@ -58,11 +76,17 @@ PhBrassLipsTable >> lipsTension: aNumberOrABoxOrASymbol [
 
 	<paramSetter>
 	self paramSetter value: aNumberOrABoxOrASymbol
-
-	
 ]
 
 { #category : 'accessing' }
 PhBrassLipsTable >> tubeLength [
+
 	^ tubeLength
+]
+
+{ #category : 'accessing' }
+PhBrassLipsTable >> tubeLength: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

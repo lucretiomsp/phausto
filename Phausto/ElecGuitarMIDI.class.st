@@ -9,10 +9,8 @@ Class {
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'initialization' }
-ElecGuitarMIDI >> initialize [
+{ #category : 'faust' }
+ElecGuitarMIDI class >> faustName [
 
-	super initialize.
-
-	processExpression := 'process = pm.elecGuitar_ui_MIDI;'
+	^ 'elecGuitar_ui_MIDI'
 ]

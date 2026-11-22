@@ -4,15 +4,13 @@ Simple MIDI controllable djembe physical model with built-in UI.
 Class {
 	#name : 'DjembeMIDI',
 	#superclass : 'ModalPercussion',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Modal Percussions',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Modal Percussions'
 }
 
-{ #category : 'initialization' }
-DjembeMIDI >> initialize [
+{ #category : 'faust' }
+DjembeMIDI class >> faustName [
 
-	super initialize.
-
-	processExpression := 'process = pm.djembe_ui_MIDI;'
+	^ 'djembe_ui_MIDI'
 ]

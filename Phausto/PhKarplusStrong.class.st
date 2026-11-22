@@ -8,9 +8,7 @@ A Karplus-Strong string (in that case, the string is implemented as a one dimens
 "
 Class {
 	#name : 'PhKarplusStrong',
-	#superclass : 'UnitGenerator',
-	#traits : 'PhPhysModelSetter',
-	#classTraits : 'PhPhysModelSetter classTrait',
+	#superclass : 'StringInstruments',
 	#instVars : [
 		'length',
 		'damping',
@@ -21,35 +19,74 @@ Class {
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'converting' }
-PhKarplusStrong >> asBox [
+{ #category : 'faust' }
+PhKarplusStrong class >> argumentDescriptions [
 
-	^ self length asBox , self damping asBox , self excitation asBox
-		  connectTo: super asBox
+	^ Dictionary newFrom: {
+			#length -> 'the length of the string in meters'.
+			#damping -> 'string damping (0-1)'.
+			#excitation -> 'excitation signal' }
+]
+
+{ #category : 'faust' }
+PhKarplusStrong class >> argumentNames [
+
+	^ #( #length #damping #excitation )
+]
+
+{ #category : 'faust' }
+PhKarplusStrong class >> faustName [
+
+	^ 'ks'
 ]
 
 { #category : 'accessing' }
 PhKarplusStrong >> damping [
-^ damping
+
+	^ damping
 ]
 
 { #category : 'accessing' }
-PhKarplusStrong >> excitation [ 
-^ excitation
+PhKarplusStrong >> damping: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhKarplusStrong >> excitation [
+
+	^ excitation
+]
+
+{ #category : 'accessing' }
+PhKarplusStrong >> excitation: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
-PhKarplusStrong >> initialize [
+PhKarplusStrong >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process =pm.ks;'.
-	length := PhSlider new label: self label ,  'Length' values: #( 0.8 0.01 2 0.01 ).
-	damping := PhHSlider new label: self label , 'Damping' values: #( 0.3 0 1 0.01 ).
-	excitation := PhImpulseExcitation new label: self label
+	length := PhHSlider new
+			label: self label , 'Length'
+			values: #( 0.8 0.01 2 0.01 ).
+	damping := PhHSlider new
+			label: self label , 'Damping'
+			values: #( 0.3 0 1 0.01 ).
+	excitation := PhImpulseExcitation new
 ]
 
 { #category : 'accessing' }
-PhKarplusStrong >> length [ 
+PhKarplusStrong >> length [
 
-^ length
+	^ length
+]
+
+{ #category : 'accessing' }
+PhKarplusStrong >> length: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

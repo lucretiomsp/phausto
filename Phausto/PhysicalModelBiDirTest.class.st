@@ -15,7 +15,6 @@ self deny: PhBasicBlock new asDsp isNull.
 { #category : 'tests' }
 PhysicalModelBiDirTest >> testChainAsDsp [
 
-self deny: 1 equals: 1.
 	self deny: PhChain new asDsp isNull
 ]
 

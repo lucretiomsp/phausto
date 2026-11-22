@@ -14,33 +14,38 @@ Learn more about [Physical Audio Signals](https://ccrma.stanford.edu/~jos/pasp/)
 "
 Class {
 	#name : 'PhModalModel',
-	#superclass : 'UnitGenerator',
-	#traits : 'PhFrequencySetter',
-	#classTraits : 'PhFrequencySetter classTrait',
+	#superclass : 'PhPmFunction',
 	#instVars : [
 		'numberOfModes',
 		'freqs',
 		't60s',
-		'gains',
-		'input'
+		'gains'
 	],
 	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
 	#tag : 'PhysModels'
 }
 
-{ #category : 'converting' }
-PhModalModel >> asBox [
+{ #category : 'faust' }
+PhModalModel class >> argumentDescriptions [
 
-	| result |
-	result := OrderedCollection new.
-	1 to: numberOfModes do: [ :i | 
-			result add: (PhModeFilter new
-					 freq: (freqs atWrap: i);
-					 t60: (t60s atWrap: i);
-					 gain: (gains atWrap: i);
-					 input: self input) ].
-	^ result asSumOfUGen asBox
+	^ Dictionary newFrom: {
+			#numberOfModes -> 'number of given modes'.
+			#freqs -> 'list of filter center freqencies'.
+			#t60s -> 'list of mode resonance durations (in seconds)'.
+			#gains -> 'list of mode gains (0-1)' }
+]
+
+{ #category : 'faust' }
+PhModalModel class >> argumentNames [
+
+	^ #( #numberOfModes #freqs #t60s #gains )
+]
+
+{ #category : 'faust' }
+PhModalModel class >> faustName [
+
+	^ 'modalModel'
 ]
 
 { #category : 'accessing' }
@@ -50,9 +55,10 @@ PhModalModel >> freqs [
 ]
 
 { #category : 'accessing' }
-PhModalModel >> freqs: anArrayOfFreq [
+PhModalModel >> freqs: aNumberOrABoxOrASymbol [
 
-	freqs := anArrayOfFreq 
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -62,17 +68,15 @@ PhModalModel >> gains [
 ]
 
 { #category : 'accessing' }
-PhModalModel >> gains: anArrayOfGains [
+PhModalModel >> gains: aNumberOrABoxOrASymbol [
 
-	gains := anArrayOfGains 
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
-PhModalModel >> initialize [
-	"default ModalModel comes from the example in the Faust libraries documentation but is triggered with a Pulsen"
+PhModalModel >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.modalModel(1);'.
 	numberOfModes := 4.
 	freqs := #( 220 440 550 770 ).
 	t60s := #( 1.6 0.3 0.1 0.1 ).
@@ -81,21 +85,16 @@ PhModalModel >> initialize [
 ]
 
 { #category : 'accessing' }
-PhModalModel >> input [
-
-	^ input
-]
-
-{ #category : 'accessing' }
 PhModalModel >> numberOfModes [
 
 	^ numberOfModes
 ]
 
-{ #category : 'connecting' }
-PhModalModel >> numberOfModes: anInteger [
+{ #category : 'accessing' }
+PhModalModel >> numberOfModes: aNumberOrABoxOrASymbol [
 
-numberOfModes := anInteger 
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -105,7 +104,8 @@ PhModalModel >> t60s [
 ]
 
 { #category : 'accessing' }
-PhModalModel >> t60s: anArrayOfT60 [
+PhModalModel >> t60s: aNumberOrABoxOrASymbol [
 
-	t60s := anArrayOfT60
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

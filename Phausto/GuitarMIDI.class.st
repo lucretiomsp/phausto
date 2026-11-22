@@ -4,15 +4,13 @@ Ready-to-use MIDI-enabled steel strings acoustic guitar physical model with buil
 Class {
 	#name : 'GuitarMIDI',
 	#superclass : 'StringInstruments',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'initialization' }
-GuitarMIDI >> initialize [
+{ #category : 'faust' }
+GuitarMIDI class >> faustName [
 
-	super initialize.
-
-	processExpression := 'process = pm.guitar_ui_MIDI;'
+	^ 'guitar_ui_MIDI'
 ]

@@ -5,7 +5,7 @@ Converts a frequency in hertz to length in meters.
 "
 Class {
 	#name : 'PhF2l',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmFunction',
 	#instVars : [
 		'freq'
 	],
@@ -14,48 +14,48 @@ Class {
 	#tag : 'PhysModels'
 }
 
-{ #category : 'converting' }
-PhF2l >> asBox [
+{ #category : 'faust' }
+PhF2l class >> argumentDescriptions [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
+	^ Dictionary newFrom: {
+			#freq -> 'the frequency' }
+]
 
-	finalBox := self freq asBox connectTo: intermediateBox.
+{ #category : 'faust' }
+PhF2l class >> argumentNames [
 
-	^ finalBox
+	^ #( #freq )
+]
+
+{ #category : 'faust' }
+PhF2l class >> faustName [
+
+	^ 'f2l'
 ]
 
 { #category : 'accessing' }
 PhF2l >> freq [
 
-	^ freq 
+	^ freq
 ]
 
 { #category : 'accessing' }
 PhF2l >> freq: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
-PhF2l >> initialize [
+PhF2l >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.f2l;'.
 	freq := PhHSlider new
-		        label: self label , 'Freq'
-		        init: 440
-		        min: 20
-		        max: 1200
-		        step: 1
+			label: self label , 'Freq'
+			values: #( 440 20 1200 1 )
 ]
 
 { #category : 'connecting' }
 PhF2l >> patchedWith: aUnitGenerator [
 
-self freq: aUnitGenerator 
+	self freq: aUnitGenerator
 ]

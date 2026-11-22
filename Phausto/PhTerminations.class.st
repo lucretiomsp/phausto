@@ -3,21 +3,81 @@ Creates terminations on both sides of a chain without closing the inputs and out
 "
 Class {
 	#name : 'PhTerminations',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmElement',
+	#instVars : [
+		'leftTermination',
+		'block',
+		'rightTermination'
+	],
 	#category : 'Phausto-PhysModels - BiDir Utilities',
 	#package : 'Phausto',
 	#tag : 'PhysModels - BiDir Utilities'
 }
 
-{ #category : 'converting' }
-PhTerminations >> asBox [ 
+{ #category : 'faust' }
+PhTerminations class >> argumentDescriptions [
 
-self shouldBeImplemented 
+	^ Dictionary newFrom: {
+			#leftTermination -> 'the reflection function of the left termination (1 in / 1 out), e.g. ''*(-1)'''.
+			#block -> 'the bidirectional block (3 in / 3 out)'.
+			#rightTermination -> 'the reflection function of the right termination (1 in / 1 out), e.g. ''*(-1)''' }
+]
+
+{ #category : 'faust' }
+PhTerminations class >> argumentNames [
+
+	^ #( #leftTermination #block #rightTermination )
+]
+
+{ #category : 'faust' }
+PhTerminations class >> faustName [
+
+	^ 'terminations'
+]
+
+{ #category : 'accessing' }
+PhTerminations >> block [
+
+	^ block
+]
+
+{ #category : 'accessing' }
+PhTerminations >> block: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
-PhTerminations >> initialize [ 
+PhTerminations >> initializeArguments [
 
-super initialize .
-processExpression := 'process = pm.terminations;'
+	leftTermination := '*(-1)'.
+	block := PhBasicBlock new.
+	rightTermination := '*(-1)'
+]
+
+{ #category : 'accessing' }
+PhTerminations >> leftTermination [
+
+	^ leftTermination
+]
+
+{ #category : 'accessing' }
+PhTerminations >> leftTermination: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhTerminations >> rightTermination [
+
+	^ rightTermination
+]
+
+{ #category : 'accessing' }
+PhTerminations >> rightTermination: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

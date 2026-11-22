@@ -4,15 +4,13 @@ Ready-to-use MIDI-controllable brass instrument physical model with built-in UI.
 Class {
 	#name : 'BrassMIDI',
 	#superclass : 'WindInstruments',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'initialization' }
-BrassMIDI >> initialize [
+{ #category : 'faust' }
+BrassMIDI class >> faustName [
 
-	super initialize.
-
-	processExpression := 'process = pm.brass_ui_MIDI;'
+	^ 'brass_ui_MIDI'
 ]

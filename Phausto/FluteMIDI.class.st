@@ -4,15 +4,13 @@ Ready-to-use MIDI-controllable flute physical model with built-in UI.
 Class {
 	#name : 'FluteMIDI',
 	#superclass : 'WindInstruments',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'initialization' }
-FluteMIDI >> initialize [
+{ #category : 'faust' }
+FluteMIDI class >> faustName [
 
-	super initialize.
-
-	processExpression := 'process = pm.flute_ui_MIDI;'
+	^ 'flute_ui_MIDI'
 ]

@@ -11,33 +11,54 @@ Class {
 	#name : 'PhWaveguide',
 	#superclass : 'PhPmElement',
 	#instVars : [
-		'n',
-		'nMax'
+		'nMax',
+		'n'
 	],
 	#category : 'Phausto-PhysModels',
 	#package : 'Phausto',
 	#tag : 'PhysModels'
 }
 
-{ #category : 'initialization' }
-PhWaveguide >> asBox [
+{ #category : 'faust' }
+PhWaveguide class >> argumentDescriptions [
 
-	^ self inputBlock asBox , self nMax asBox , self n asBox connectTo: super asBox
+	^ Dictionary newFrom: {
+			#nMax -> 'the maximum length of the delays in the waveguide'.
+			#n -> 'the length of the delay lines in samples.' }
+]
+
+{ #category : 'faust' }
+PhWaveguide class >> argumentNames [
+
+	^ #( #nMax #n )
+]
+
+{ #category : 'faust' }
+PhWaveguide class >> faustName [
+
+	^ 'waveguide'
 ]
 
 { #category : 'initialization' }
-PhWaveguide >> initialize [
+PhWaveguide >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.waveguide;'.
 	nMax := 512.
-	n := 32.
-	inputBlock := PhZeroList new addAll: #(0  0  0).
+	n := PhHSlider new
+			label: self label , 'N'
+			values: #( 32 1 511 1 )
 ]
 
 { #category : 'accessing' }
 PhWaveguide >> n [
-^ n
+
+	^ n
+]
+
+{ #category : 'accessing' }
+PhWaveguide >> n: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -51,6 +72,4 @@ PhWaveguide >> nMax: aNumberOrABoxOrASymbol [
 
 	<paramSetter>
 	self paramSetter value: aNumberOrABoxOrASymbol
-
-	
 ]

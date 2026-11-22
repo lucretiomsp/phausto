@@ -9,15 +9,8 @@ Class {
 	#tag : 'PhysModels - BiDir Utilities'
 }
 
-{ #category : 'converting' }
-CloseIns >> asBox [ 
+{ #category : 'faust' }
+CloseIns class >> faustName [
 
-^ super asBox
-]
-
-{ #category : 'initialization' }
-CloseIns >> initialize [
-
-	super initialize.
-	processExpression := 'process = pm.closeIns;'
+	^ 'closeIns'
 ]

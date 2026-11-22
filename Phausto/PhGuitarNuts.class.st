@@ -3,20 +3,14 @@ Bidirectional block implementing a simple acoustic guitar nuts. This nuts damps 
 "
 Class {
 	#name : 'PhGuitarNuts',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmElement',
 	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'converting' }
-PhGuitarNuts >> asBox [ 
-^ super asBox 
-]
+{ #category : 'faust' }
+PhGuitarNuts class >> faustName [
 
-{ #category : 'initialization' }
-PhGuitarNuts >> initialize [ 
-
-super initialize .
-processExpression := 'process = pm.guitarNuts;'
+	^ 'guitarNuts'
 ]

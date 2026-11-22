@@ -14,31 +14,42 @@ Class {
 	#tag : 'PhysModels'
 }
 
-{ #category : 'converting' }
-PhAllpassNL >> asBox [ 
+{ #category : 'faust' }
+PhAllpassNL class >> argumentDescriptions [
 
-^ self inputBlock asBox , self nonLinearity asBox connectTo: super asBox 
+	^ Dictionary newFrom: {
+			#nonLinearity -> 'amount of nonlinearity to be added (0-1)' }
+]
+
+{ #category : 'faust' }
+PhAllpassNL class >> argumentNames [
+
+	^ #( #nonLinearity )
+]
+
+{ #category : 'faust' }
+PhAllpassNL class >> faustName [
+
+	^ 'allpassNL'
 ]
 
 { #category : 'initialization' }
-PhAllpassNL >> initialize [
+PhAllpassNL >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.allpassNL;'.
-	nonLinearity := PhHSlider new label: 'NonLinearity' values: #(0.5 0 1 0.01).
+	nonLinearity := PhHSlider new
+			label: self label , 'NonLinearity'
+			values: #( 0.5 0 1 0.01 )
 ]
 
-{ #category : 'converting' }
+{ #category : 'accessing' }
 PhAllpassNL >> nonLinearity [
 
-^ nonLinearity
+	^ nonLinearity
 ]
 
-{ #category : 'converting' }
+{ #category : 'accessing' }
 PhAllpassNL >> nonLinearity: aNumberOrABoxOrASymbol [
 
 	<paramSetter>
 	self paramSetter value: aNumberOrABoxOrASymbol
-
-	
 ]

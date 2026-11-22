@@ -3,7 +3,7 @@ Length in meters to number of samples
 "
 Class {
 	#name : 'PhL2s',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmFunction',
 	#instVars : [
 		'length'
 	],
@@ -12,22 +12,48 @@ Class {
 	#tag : 'PhysModels'
 }
 
-{ #category : 'accessing' }
-PhL2s >> asBox [ 
+{ #category : 'faust' }
+PhL2s class >> argumentDescriptions [
 
-^ self length asBox connectTo: super asBox 
+	^ Dictionary newFrom: {
+			#length -> 'length in meters' }
+]
+
+{ #category : 'faust' }
+PhL2s class >> argumentNames [
+
+	^ #( #length )
+]
+
+{ #category : 'faust' }
+PhL2s class >> faustName [
+
+	^ 'l2s'
 ]
 
 { #category : 'initialization' }
-PhL2s >> initialize [
+PhL2s >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.l2s;'.
-	length := 1
+	length := PhHSlider new
+			label: self label , 'Length'
+			values: #( 0.8 0.01 3 0.01 )
 ]
 
 { #category : 'accessing' }
-PhL2s >> length [ 
+PhL2s >> length [
 
-^ length
+	^ length
+]
+
+{ #category : 'accessing' }
+PhL2s >> length: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'connecting' }
+PhL2s >> patchedWith: aUnitGenerator [
+
+	self length: aUnitGenerator
 ]

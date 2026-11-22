@@ -4,15 +4,13 @@ Ready-to-use MIDI-enabled electric guitar physical model with built-in UI.
 Class {
 	#name : 'NylonGuitarMIDI',
 	#superclass : 'StringInstruments',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'initialization' }
-NylonGuitarMIDI >> initialize [
+{ #category : 'faust' }
+NylonGuitarMIDI class >> faustName [
 
-	super initialize.
-
-	processExpression := 'process = pm.nylonGuitar_ui_MIDI;'
+	^ 'nylonGuitar_ui_MIDI'
 ]

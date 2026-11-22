@@ -15,34 +15,44 @@ Class {
 		'mouthPosition',
 		'pressure'
 	],
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Wind Instruments'
 }
 
+{ #category : 'faust' }
+FluteModel class >> argumentDescriptions [
+
+	^ Dictionary newFrom: {
+			#tubeLength -> 'the length of the tube in meters'.
+			#mouthPosition -> 'position of the mouth on the embouchure (0-1) (default: 0.5)'.
+			#pressure -> 'the pressure of the air flow created by the virtual performer (0-1). This can also be any kind of signal that will directly injected in the mouthpiece (e.g., breath noise, etc.).' }
+]
+
+{ #category : 'faust' }
+FluteModel class >> argumentNames [
+
+	^ #( #tubeLength #mouthPosition #pressure )
+]
+
+{ #category : 'faust' }
+FluteModel class >> faustName [
+
+	^ 'fluteModel'
+]
+
 { #category : 'initialization' }
-FluteModel >> initializeUIParameters [
-
-
+FluteModel >> initializeArguments [
 
 	tubeLength := PhHSlider new
-		              label: self label , 'TubeLength'
-		              init: 0.1
-		              min: 0.01
-		              max: 2
-		              step: 0.01.
+			label: self label , 'TubeLength'
+			values: #( 0.5 0.01 2 0.01 ).
 	mouthPosition := PhHSlider new
-		                 label: self label , 'MouthPosition'
-		                 init: 0.5
-		                 min: 0.1
-		                 max: 1
-		                 step: 0.01.
+			label: self label , 'MouthPosition'
+			values: #( 0.5 0 1 0.01 ).
 	pressure := PhHSlider new
-		            label: self label , 'Pressure'
-		            init: 0.1
-		            min: 0
-		            max: 1
-		            step: 0.01
+			label: self label , 'Pressure'
+			values: #( 0.5 0 1 0.01 )
 ]
 
 { #category : 'accessing' }
@@ -52,17 +62,10 @@ FluteModel >> mouthPosition [
 ]
 
 { #category : 'accessing' }
-FluteModel >> mouthPosition: aNumberOrABox [
+FluteModel >> mouthPosition: aNumberOrABoxOrASymbol [
 
-	aNumberOrABox isNumber
-		ifTrue: [
-			mouthPosition := PhHSlider new
-				                 label: self label , 'MoutPosition'
-				                 init: aNumberOrABox
-				                 min: 20
-				                 max: 4086
-				                 step: 1 ]
-		ifFalse: [ mouthPosition := aNumberOrABox ]
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -72,9 +75,10 @@ FluteModel >> pressure [
 ]
 
 { #category : 'accessing' }
-FluteModel >> pressure: anObject [
+FluteModel >> pressure: aNumberOrABoxOrASymbol [
 
-	pressure := anObject
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -84,7 +88,8 @@ FluteModel >> tubeLength [
 ]
 
 { #category : 'accessing' }
-FluteModel >> tubeLength: anObject [
+FluteModel >> tubeLength: aNumberOrABoxOrASymbol [
 
-	tubeLength := anObject
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

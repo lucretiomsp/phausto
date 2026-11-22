@@ -5,81 +5,128 @@ Class {
 	#name : 'ElecGuitar',
 	#superclass : 'StringInstruments',
 	#instVars : [
+		'freq',
 		'pluckPosition',
+		'mute',
 		'gain',
-		'trigger',
-		'mute'
+		'trigger'
 	],
 	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'converting' }
-ElecGuitar >> asBox [
+{ #category : 'faust' }
+ElecGuitar class >> argumentDescriptions [
 
-	| intermediateBox finalBox length |
-	intermediateBox := super asBox.
-	length := self freq asBox  f2l.
-	finalBox := (length , self pluckPosition asBox , self mute asBox , self gain asBox
-	            , self trigger asBox) asBox connectTo:  intermediateBox.
+	^ Dictionary newFrom: {
+			#freq -> 'the frequency in Hz'.
+			#pluckPosition -> 'pluck position (0-1) (1 is on the bridge)'.
+			#mute -> 'mute coefficient (1 for no mute and 0 for instant mute)'.
+			#gain -> 'gain of the pluck (0-1)'.
+			#trigger -> 'trigger signal (1 for on, 0 for off)' }
+]
 
-	^ finalBox
+{ #category : 'faust' }
+ElecGuitar class >> argumentNames [
+
+	^ #( #freq #pluckPosition #mute #gain #trigger )
+]
+
+{ #category : 'faust' }
+ElecGuitar class >> faustName [
+
+	^ 'elecGuitar'
+]
+
+{ #category : 'faust' }
+ElecGuitar >> faustArguments [
+
+	"the Faust function wants the length of the string: my frequency is converted with pm.f2l"
+
+	| arguments |
+	arguments := super faustArguments copy.
+	arguments at: 1 put: 'pm.f2l(' , freq asFaustArgument , ')'.
+	^ arguments
+]
+
+{ #category : 'accessing' }
+ElecGuitar >> freq [
+
+	^ freq
+]
+
+{ #category : 'accessing' }
+ElecGuitar >> freq: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ElecGuitar >> gain [
 
-	^ gain ifNil: [
-		  gain := PhHSlider new
-			            label: self label , 'Gain'
-			            init: 0.5
-			            min: 0
-			            max: 1
-			            step: 0.01 ]
+	^ gain
+]
+
+{ #category : 'accessing' }
+ElecGuitar >> gain: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
-ElecGuitar >> initialize [
+ElecGuitar >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.elecGuitar;'.
-	pluckPosition := (PhHSlider new
-					   label: self label , 'PluckPos'
-					   init: 0.8
-					   min: 0
-					   max: 1
-					   step: 0.01).
-	mute := 1 asBox.
-	trigger := PhButton new label: self label , 'Trigger'.
-	self controlParameters add: #trigger -> (self trigger
-			 asControlParameterOfWidgetType: #button
-			 description: 'Trig Guitar')
+	freq := PhHSlider new
+			label: self label , 'Freq'
+			values: #( 440 20 1200 1 ).
+	pluckPosition := PhHSlider new
+			label: self label , 'PluckPosition'
+			values: #( 0.8 0.01 0.99 0.01 ).
+	mute := 1.
+	gain := PhHSlider new
+			label: self label , 'Gain'
+			values: #( 0.5 0 1 0.001 ).
+	trigger := PhButton new label: self label , 'Trigger'
 ]
 
-{ #category : 'as yet unclassified' }
-ElecGuitar >> mute [ 
-^ mute
+{ #category : 'accessing' }
+ElecGuitar >> mute [
+
+	^ mute
+]
+
+{ #category : 'accessing' }
+ElecGuitar >> mute: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ElecGuitar >> pluckPosition [
 
-	^ pluckPosition 
+	^ pluckPosition
 ]
 
 { #category : 'accessing' }
 ElecGuitar >> pluckPosition: aNumberOrABoxOrASymbol [
 
-	| methodName |
-	methodName := thisContext selector. "Get the name of this method"
-	aNumberOrABoxOrASymbol
-		asParam: methodName asString allButLast
-		forUGen: self
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
 ElecGuitar >> trigger [
 
-	^ trigger 
+	^ trigger
+]
+
+{ #category : 'accessing' }
+ElecGuitar >> trigger: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

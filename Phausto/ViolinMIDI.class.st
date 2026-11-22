@@ -9,10 +9,8 @@ Class {
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'initialization' }
-ViolinMIDI >> initialize [
+{ #category : 'faust' }
+ViolinMIDI class >> faustName [
 
-	super initialize.
-
-	processExpression := 'process = pm.violin_ui_MIDI;'.
+	^ 'violin_ui_MIDI'
 ]

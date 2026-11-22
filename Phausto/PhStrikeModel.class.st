@@ -14,25 +14,38 @@ Class {
 	#name : 'PhStrikeModel',
 	#superclass : 'Exciter',
 	#instVars : [
-		'lpCutoff',
 		'hpCutoff',
+		'lpCutoff',
 		'strikeSharpness',
-		'gain'
+		'gain',
+		'gate'
 	],
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Exciters',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Exciters'
 }
 
-{ #category : 'converting' }
-PhStrikeModel >> asBox [ 
+{ #category : 'faust' }
+PhStrikeModel class >> argumentDescriptions [
 
-| intermediateBox finalBox |
-intermediateBox := super asBox.
+	^ Dictionary newFrom: {
+			#hpCutoff -> 'highpass cutoff frequency'.
+			#lpCutoff -> 'lowpass cutoff frequency'.
+			#strikeSharpness -> 'sharpness of the attack and release (0-1)'.
+			#gain -> 'gain of the excitation'.
+			#gate -> 'a gate button/trigger signal (0/1)' }
+]
 
-finalBox := self hpCutoff asBox , self lpCutoff asBox , self strikeSharpness asBox , self gain asBox , self gate asBox connectTo: intermediateBox.
+{ #category : 'faust' }
+PhStrikeModel class >> argumentNames [
 
-^ finalBox
+	^ #( #hpCutoff #lpCutoff #strikeSharpness #gain #gate )
+]
+
+{ #category : 'faust' }
+PhStrikeModel class >> faustName [
+
+	^ 'strikeModel'
 ]
 
 { #category : 'accessing' }
@@ -42,53 +55,54 @@ PhStrikeModel >> gain [
 ]
 
 { #category : 'accessing' }
+PhStrikeModel >> gain: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhStrikeModel >> gate [
+
+	^ gate
+]
+
+{ #category : 'accessing' }
+PhStrikeModel >> gate: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PhStrikeModel >> hpCutoff [
 
 	^ hpCutoff
 ]
 
 { #category : 'accessing' }
-PhStrikeModel >> hpCutoff:  aNumberOrABoxOrASymbol [
+PhStrikeModel >> hpCutoff: aNumberOrABoxOrASymbol [
 
-<paramSetter>
-
+	<paramSetter>
 	self paramSetter value: aNumberOrABoxOrASymbol
-
-	
 ]
 
 { #category : 'initialization' }
-PhStrikeModel >> initialize [
+PhStrikeModel >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.strikeModel;'.
-	"initialize controlParameters"
 	hpCutoff := PhHSlider new
-		            label: self label , 'HpCutoff'
-		            init: 700
-		            min: 20
-		            max: 7000
-		            step: 1.
+			label: self label , 'HpCutoff'
+			values: #( 700 20 7000 1 ).
 	lpCutoff := PhHSlider new
-		            label: self label , 'LpCutoff'
-		            init: 7000
-		            min: 20
-		            max: 9000
-		            step: 1.
-
-	gain := PhHSlider new
-		        label: self label , 'Gain'
-		        init: 0.5
-		        min: 0
-		        max: 1
-		        step: 0.001.
-
+			label: self label , 'LpCutoff'
+			values: #( 7000 20 20000 1 ).
 	strikeSharpness := PhHSlider new
-		                   label: self label , 'StrikePos'
-		                   init: 0
-		                   min: 0
-		                   max: 4
-		                   step: 1
+			label: self label , 'StrikeSharpness'
+			values: #( 0.5 0.001 1 0.001 ).
+	gain := PhHSlider new
+			label: self label , 'Gain'
+			values: #( 0.5 0 1 0.001 ).
+	gate := PhButton new label: self label , 'Gate'
 ]
 
 { #category : 'accessing' }
@@ -102,11 +116,17 @@ PhStrikeModel >> lpCutoff: aNumberOrABoxOrASymbol [
 
 	<paramSetter>
 	self paramSetter value: aNumberOrABoxOrASymbol
-
 ]
 
 { #category : 'accessing' }
 PhStrikeModel >> strikeSharpness [
 
 	^ strikeSharpness
+]
+
+{ #category : 'accessing' }
+PhStrikeModel >> strikeSharpness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

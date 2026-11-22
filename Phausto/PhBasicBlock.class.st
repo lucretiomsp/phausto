@@ -3,22 +3,14 @@ Empty bidirectional block to be used with _chain_ :  3 signals ins and 3 signals
 "
 Class {
 	#name : 'PhBasicBlock',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmElement',
 	#category : 'Phausto-PhysModels - BiDir Utilities',
 	#package : 'Phausto',
 	#tag : 'PhysModels - BiDir Utilities'
 }
 
-{ #category : 'converting' }
-PhBasicBlock >> asBox [
+{ #category : 'faust' }
+PhBasicBlock class >> faustName [
 
-	^ super asBox
-]
-
-{ #category : 'initialization' }
-PhBasicBlock >> initialize [
-
-	super initialize.
-	processExpression := 'process = pm.basicBlock;'.
-	
+	^ 'basicBlock'
 ]

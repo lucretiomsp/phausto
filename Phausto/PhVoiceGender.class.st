@@ -6,7 +6,7 @@ Calculate the gender for the provided voiceType value. (0: male, 1: female)
 "
 Class {
 	#name : 'PhVoiceGender',
-	#superclass : 'UnitGenerator',
+	#superclass : 'FormantSynthesis',
 	#instVars : [
 		'voiceType'
 	],
@@ -15,22 +15,42 @@ Class {
 	#tag : 'PhysModels - Vocal Synthesis'
 }
 
-{ #category : 'converting' }
-PhVoiceGender >> asBox [ 
+{ #category : 'faust' }
+PhVoiceGender class >> argumentDescriptions [
 
-^ self voiceType asBox connectTo: self code asBox.
+	^ Dictionary newFrom: {
+			#voiceType -> 'the voice type (0: alto, 1: bass, 2: countertenor, 3: soprano, 4: tenor)' }
+]
+
+{ #category : 'faust' }
+PhVoiceGender class >> argumentNames [
+
+	^ #( #voiceType )
+]
+
+{ #category : 'faust' }
+PhVoiceGender class >> faustName [
+
+	^ 'voiceGender'
 ]
 
 { #category : 'initialization' }
-PhVoiceGender >> initialize [
+PhVoiceGender >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.voiceGender;'.
-	voiceType := PhHSlider new label: self label , 'VoiceType' values: #(0 0 4 0.01).
-	
+	voiceType := PhHSlider new
+			label: self label , 'VoiceType'
+			values: #( 0 0 4 1 )
 ]
 
-{ #category : 'converting' }
+{ #category : 'accessing' }
 PhVoiceGender >> voiceType [
-^ voiceType
+
+	^ voiceType
+]
+
+{ #category : 'accessing' }
+PhVoiceGender >> voiceType: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

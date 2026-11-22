@@ -9,35 +9,34 @@ Extremely basic reed table that can be used to implement a wide range of single 
 "
 Class {
 	#name : 'PhFluteJetTable',
-	#superclass : 'UnitGenerator',
-	#traits : 'PhPhysModelSetter',
-	#classTraits : 'PhPhysModelSetter classTrait',
-	#instVars : [
-		'excitation'
-	],
+	#superclass : 'PhPmFunction',
 	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'converting' }
-PhFluteJetTable >> asBox [
+{ #category : 'faust' }
+PhFluteJetTable class >> faustName [
 
-	^ self excitation asBox
-		  connectTo: self code asBox
+	^ 'fluteJetTable'
 ]
 
 { #category : 'accessing' }
-PhFluteJetTable >> excitation [ 
+PhFluteJetTable >> excitation [
 
-^ excitation
+	"the excitation is the input signal of this function"
+
+	^ input
+]
+
+{ #category : 'accessing' }
+PhFluteJetTable >> excitation: aUnitGenerator [
+
+	self input: aUnitGenerator
 ]
 
 { #category : 'initialization' }
-PhFluteJetTable >> initialize [
+PhFluteJetTable >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.fluteJetTable;'.
-
-	excitation := PhBlower new
+	input := PhBlower new
 ]

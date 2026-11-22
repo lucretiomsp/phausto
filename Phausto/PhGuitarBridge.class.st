@@ -3,20 +3,14 @@ Bidirectional block implementing a simple acoustic guitar bridge. This bridge da
 "
 Class {
 	#name : 'PhGuitarBridge',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmElement',
 	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'converting' }
-PhGuitarBridge >> asBox [ 
-^ super asBox 
-]
+{ #category : 'faust' }
+PhGuitarBridge class >> faustName [
 
-{ #category : 'initialization' }
-PhGuitarBridge >> initialize [
-
-	super initialize.
-	processExpression := 'process = pm.guitarBridge;'
+	^ 'guitarBridge'
 ]

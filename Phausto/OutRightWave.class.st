@@ -11,15 +11,8 @@ Class {
 	#tag : 'PhysModels - BiDir Utilities'
 }
 
-{ #category : 'converting' }
-OutRightWave >> asBox [
+{ #category : 'faust' }
+OutRightWave class >> faustName [
 
-	^ self outputBlock asBox connectTo: super asBox
-]
-
-{ #category : 'initialization' }
-OutRightWave >> initialize [
-
-	super initialize.
-	processExpression := 'process = pm.outRightWave;'
+	^ 'outRightWave'
 ]

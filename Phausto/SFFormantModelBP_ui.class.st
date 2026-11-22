@@ -1,27 +1,26 @@
+"
+Ready-to-use source-filter vocal synthesizer with built-in user interface.
+
+Faust: `pm.SFFormantModelBP_ui` (0 in / 1 out)
+
+## Example
+
+```language=Pharo
+dsp := SFFormantModelBP_ui new stereo asDsp.
+dsp init.
+dsp start.
+```
+"
 Class {
 	#name : 'SFFormantModelBP_ui',
 	#superclass : 'FormantSynthesis',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Vocal Synthesis',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Vocal Synthesis'
 }
 
-{ #category : 'converting' }
-SFFormantModelBP_ui >> asBox [ 
+{ #category : 'faust' }
+SFFormantModelBP_ui class >> faustName [
 
-
-super asBox
-]
-
-{ #category : 'initialization' }
-SFFormantModelBP_ui >> initialize [
-
-	super initialize.
-	processExpression := 'process = pm.SFFormantModelBP_ui;'
-]
-
-{ #category : 'initialization' }
-SFFormantModelBP_ui >> initializeULevel [ 
-super initialize.
-processExpression := 'process = pm.SFFormantModelBP_ui;'
+	^ 'SFFormantModelBP_ui'
 ]

@@ -4,15 +4,13 @@ Ready-to-use, MIDI-enabled Karplus-Strong string with buil-in UI.
 Class {
 	#name : 'KarplusStrongMIDI',
 	#superclass : 'StringInstruments',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'initialization' }
-KarplusStrongMIDI >> initialize [
+{ #category : 'faust' }
+KarplusStrongMIDI class >> faustName [
 
-	super initialize.
-
-	processExpression := 'process = pm.ks_ui_MIDI;'
+	^ 'ks_ui_MIDI'
 ]

@@ -1,25 +1,10 @@
 "
-Abstract superclass for Physical Tubes
+Abstract superclass for physical tubes.
 "
 Class {
 	#name : 'PhTube',
-	#superclass : 'UnitGenerator',
-	#instVars : [
-		'input'
-	],
+	#superclass : 'PhPmElement',
 	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - Wind Instruments'
 }
-
-{ #category : 'initialization' }
-PhTube >> initialize [ 
-super initialize.
-input := PhBasicBlock new.
-]
-
-{ #category : 'accessing' }
-PhTube >> input [ 
-
-^ input
-]

@@ -9,9 +9,8 @@ Generic two zeros bridge FIR filter (as implemented in the [STK](https://ccrma.s
 "
 Class {
 	#name : 'PhBridgeFilter',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmFunction',
 	#instVars : [
-		'input',
 		'brightness',
 		'absorption'
 	],
@@ -20,44 +19,59 @@ Class {
 	#tag : 'PhysModels'
 }
 
-{ #category : 'accessing' }
-PhBridgeFilter >> absorption [ 
-^ absorption 
+{ #category : 'faust' }
+PhBridgeFilter class >> argumentDescriptions [
+
+	^ Dictionary newFrom: {
+			#brightness -> 'controls the damping of high frequencies (0-1)'.
+			#absorption -> 'controls the absorption of the brige and thus the t60 of the string plugged to it (0-1) (1 = 20 seconds)' }
 ]
 
-{ #category : 'converting' }
-PhBridgeFilter >> asBox [
+{ #category : 'faust' }
+PhBridgeFilter class >> argumentNames [
 
-	^  self brightness asBox , self absorption, self input asBox  asBox
-		  connectTo: super asBox
+	^ #( #brightness #absorption )
+]
+
+{ #category : 'faust' }
+PhBridgeFilter class >> faustName [
+
+	^ 'bridgeFilter'
 ]
 
 { #category : 'accessing' }
-PhBridgeFilter >> brightness [ 
-^ brightness
+PhBridgeFilter >> absorption [
+
+	^ absorption
+]
+
+{ #category : 'accessing' }
+PhBridgeFilter >> absorption: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhBridgeFilter >> brightness [
+
+	^ brightness
+]
+
+{ #category : 'accessing' }
+PhBridgeFilter >> brightness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
-PhBridgeFilter >> initialize [
+PhBridgeFilter >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.bridgeFilter;'.
 	brightness := PhHSlider new
-		              label: 'BFBrightness'
-		              values: #( 0.6 0 1 0.01 ).
+			label: self label , 'Brightness'
+			values: #( 0.5 0 1 0.01 ).
 	absorption := PhHSlider new
-		              label: 'BFAbsorption'
-		              values: #( 0.6 0 1 0.01 ).
-		input := 0
-]
-
-{ #category : 'accessing' }
-PhBridgeFilter >> input [ 
-^ input 
-]
-
-{ #category : 'connecting' }
-PhBridgeFilter >> patchedWith: aUnitGenerator [
-
-	self input: aUnitGenerator
+			label: self label , 'Absorption'
+			values: #( 0.5 0 1 0.01 )
 ]

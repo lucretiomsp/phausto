@@ -3,15 +3,14 @@ Ready-to-use flute physical model with built-in UI based on fluteModel.
 "
 Class {
 	#name : 'PhFluteUI',
-	#superclass : 'UnitGenerator',
+	#superclass : 'WindInstruments',
 	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'initialization' }
-PhFluteUI >> initialize [
+{ #category : 'faust' }
+PhFluteUI class >> faustName [
 
-	super initialize.
-	processExpression := 'process = pm.flute_ui;'
+	^ 'flute_ui'
 ]

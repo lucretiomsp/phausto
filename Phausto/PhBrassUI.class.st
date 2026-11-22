@@ -3,14 +3,14 @@ Ready-to-use brass instrument physical model with built-in UI based on brassMode
 "
 Class {
 	#name : 'PhBrassUI',
-	#superclass : 'UnitGenerator',
+	#superclass : 'WindInstruments',
 	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'initialization' }
-PhBrassUI >> initialize [ 
-super initialize .
-processExpression := 'process = pm.brass_ui;'
+{ #category : 'faust' }
+PhBrassUI class >> faustName [
+
+	^ 'brass_ui'
 ]

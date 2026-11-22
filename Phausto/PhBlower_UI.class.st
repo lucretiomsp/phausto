@@ -4,14 +4,13 @@ Same as blower but with default UI and vibrato controls.
 Class {
 	#name : 'PhBlower_UI',
 	#superclass : 'Exciter',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Exciters',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Exciters'
 }
 
-{ #category : 'initialization' }
-PhBlower_UI >> initialize [
+{ #category : 'faust' }
+PhBlower_UI class >> faustName [
 
-	super initialize.
-	processExpression := 'process = pm.blower_ui;'
+	^ 'blower_ui'
 ]

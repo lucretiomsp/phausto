@@ -14,34 +14,53 @@ Class {
 	#name : 'PhPluckString',
 	#superclass : 'Exciter',
 	#instVars : [
-		'cutoff',
 		'stringLength',
+		'cutoff',
 		'maxFreq',
 		'strikeSharpness',
-		'gain'
+		'gain',
+		'gate'
 	],
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Exciters',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Exciters'
 }
 
-{ #category : 'converting' }
-PhPluckString >> asBox [
+{ #category : 'faust' }
+PhPluckString class >> argumentDescriptions [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-
-	finalBox := self stringLength asBox , self cutoff asBox , self maxFreq
-	            , self strikeSharpness asBox , self gain asBox
-	            , self gate asBox connectTo: intermediateBox.
-
-	^ finalBox
+	^ Dictionary newFrom: {
+			#stringLength -> 'length of the string to pluck'.
+			#cutoff -> 'cutoff ratio (1 for default)'.
+			#maxFreq -> 'max frequency ratio (1 for default)'.
+			#strikeSharpness -> 'sharpness of the attack and release (1 for default)'.
+			#gain -> 'gain of the excitation (0-1)'.
+			#gate -> 'trigger signal (1 for on, 0 for off)' }
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'faust' }
+PhPluckString class >> argumentNames [
+
+	^ #( #stringLength #cutoff #maxFreq #strikeSharpness #gain #gate )
+]
+
+{ #category : 'faust' }
+PhPluckString class >> faustName [
+
+	^ 'pluckString'
+]
+
+{ #category : 'accessing' }
 PhPluckString >> cutoff [
 
 	^ cutoff
+]
+
+{ #category : 'accessing' }
+PhPluckString >> cutoff: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -50,50 +69,58 @@ PhPluckString >> gain [
 	^ gain
 ]
 
-{ #category : 'initialization' }
-PhPluckString >> initialize [
+{ #category : 'accessing' }
+PhPluckString >> gain: aNumberOrABoxOrASymbol [
 
-	super initialize.
-	processExpression := 'process = pm.pluckString;'.
-	"initialize controlParameters"
-	cutoff := PhHSlider new
-		          label: self label , 'Cutoff'
-		          init: 1
-		          min: 0
-		          max: 10
-		          step: 0.1.
-	maxFreq := PhHSlider new
-		           label: self label , 'MaxFreq'
-		           init: 1
-		           min: 0
-		           max: 10
-		           step: 0.1.
-
-	gain := PhHSlider new
-		        label: self label , 'Gain'
-		        init: 0.5
-		        min: 0
-		        max: 1
-		        step: 0.001.
-
-	strikeSharpness := PhHSlider new
-		                   label: self label , 'StrikePos'
-		                   init: 0
-		                   min: 0
-		                   max: 4
-		                   step: 1.
-		stringLength := PhHSlider new
-		                   label: self label , 'StringLength'
-		                   init: 0.5
-		                   min: 0.01
-		                   max: 5
-		                   step: 0.01
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'accessing' }
+PhPluckString >> gate [
+
+	^ gate
+]
+
+{ #category : 'accessing' }
+PhPluckString >> gate: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'initialization' }
+PhPluckString >> initializeArguments [
+
+	stringLength := PhHSlider new
+			label: self label , 'StringLength'
+			values: #( 0.8 0.01 2 0.01 ).
+	cutoff := PhHSlider new
+			label: self label , 'Cutoff'
+			values: #( 1 0.1 10 0.01 ).
+	maxFreq := PhHSlider new
+			label: self label , 'MaxFreq'
+			values: #( 1 0.1 10 0.01 ).
+	strikeSharpness := PhHSlider new
+			label: self label , 'StrikeSharpness'
+			values: #( 1 0.01 5 0.01 ).
+	gain := PhHSlider new
+			label: self label , 'Gain'
+			values: #( 0.5 0 1 0.001 ).
+	gate := PhButton new label: self label , 'Gate'
+]
+
+{ #category : 'accessing' }
 PhPluckString >> maxFreq [
 
-	^ maxFreq 
+	^ maxFreq
+]
+
+{ #category : 'accessing' }
+PhPluckString >> maxFreq: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -102,8 +129,22 @@ PhPluckString >> strikeSharpness [
 	^ strikeSharpness
 ]
 
-{ #category : 'as yet unclassified' }
-PhPluckString >> stringLength [ 
+{ #category : 'accessing' }
+PhPluckString >> strikeSharpness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhPluckString >> stringLength [
 
 	^ stringLength
+]
+
+{ #category : 'accessing' }
+PhPluckString >> stringLength: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

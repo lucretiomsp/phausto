@@ -3,59 +3,71 @@ Creates a chain of bidirectional blocks. Blocks must have 3 inputs and outputs. 
 "
 Class {
 	#name : 'PhChain',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmElement',
 	#instVars : [
-		'input1',
-		'input2'
+		'blocks'
 	],
 	#category : 'Phausto-PhysModels - BiDir Utilities',
 	#package : 'Phausto',
 	#tag : 'PhysModels - BiDir Utilities'
 }
 
-{ #category : 'converting' }
-PhChain >> asBox [
-	self buildProcessExpression.
+{ #category : 'faust' }
+PhChain class >> argumentDescriptions [
 
-	^ super asBox
+	^ Dictionary newFrom: {
+			#blocks -> 'the bidirectional blocks of the chain (3 in / 3 out each)' }
+]
+
+{ #category : 'faust' }
+PhChain class >> argumentNames [
+
+	^ #( #blocks )
+]
+
+{ #category : 'faust' }
+PhChain class >> faustName [
+
+	^ 'chain'
+]
+
+{ #category : 'accessing' }
+PhChain >> blocks [
+
+	^ blocks
+]
+
+{ #category : 'accessing' }
+PhChain >> blocks: aCollection [
+
+	blocks := aCollection asOrderedCollection
+]
+
+{ #category : 'connecting' }
+PhChain >> chainWith: aBidirectionalBlock [
+
+	"a chain followed by a block is the same chain, one block longer"
+
+	(aBidirectionalBlock isKindOf: PhChain)
+		ifTrue: [ blocks addAll: aBidirectionalBlock blocks ]
+		ifFalse: [ blocks add: aBidirectionalBlock ]
+]
+
+{ #category : 'faust' }
+PhChain >> faustCall [
+
+	"pm.chain(A : B : ...) is pattern matched by the Faust compiler, so the blocks are written with the sequential operator"
+
+	^ String streamContents: [ :stream |
+		stream << 'pm.chain('.
+		blocks
+			do: [ :each | stream << each asFaustArgument ]
+			separatedBy: [ stream << ' : ' ].
+		stream << ')' ]
 ]
 
 { #category : 'initialization' }
-PhChain >> buildProcessExpression [
+PhChain >> initializeArguments [
 
-	| i1 i2 |
-	i1 := self input1 asBox asString betweenParenthesis .
-	i2 := self input2 asBox asString betweenParenthesis .
-
-	processExpression := self processExpression , i1 , ' : ' , i2 , ';'
-]
-
-{ #category : 'initialization' }
-PhChain >> initialize [
-
-	super initialize.
-
-	self processExpression: 'process = pm.chain'.
-	input1 := PhBasicBlock new.
-	input2 := PhBasicBlock new
-]
-
-{ #category : 'initialization' }
-PhChain >> initializeProcessExpression [
-	"this class needs a more complex process expression as Structural parameters in Faust must be integer constant numerical expressions, are evaluated at compile time and cannot flow through wires or be infix"
-
-	processExpression := 'phChain (first , second) = pm.chain(first : second);
-process = phChain (pm.basicBlock , pm.basicBlock);'
-]
-
-{ #category : 'converting' }
-PhChain >> input1 [ 
-
-^ input1 
-]
-
-{ #category : 'converting' }
-PhChain >> input2 [
-
-^ input2 
+	blocks := OrderedCollection with: InLeftRightWave new with: PhBasicBlock new
 ]

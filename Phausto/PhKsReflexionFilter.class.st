@@ -3,21 +3,14 @@ The ""typical"" one-zero Karplus-strong feedforward reflexion filter. This filte
 "
 Class {
 	#name : 'PhKsReflexionFilter',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmFunction',
 	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'converting' }
-PhKsReflexionFilter >> asBox [ 
+{ #category : 'faust' }
+PhKsReflexionFilter class >> faustName [
 
-^ super asBox
-]
-
-{ #category : 'initialization' }
-PhKsReflexionFilter >> initialize [ 
-
-super initialize .
-processExpression := 'process = pm.ksReflexionFilter;'
+	^ 'ksReflexionFilter'
 ]

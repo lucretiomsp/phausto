@@ -7,59 +7,67 @@ A string segment without terminations (just a simple waveguide).
 "
 Class {
 	#name : 'PhStringSegment',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmElement',
 	#instVars : [
 		'maxLength',
-		'length',
-		'inputBlock'
+		'length'
 	],
 	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'converting' }
-PhStringSegment >> asBox [
+{ #category : 'faust' }
+PhStringSegment class >> argumentDescriptions [
 
-	^ self inputBlock asBox , self length asBox connectTo: super asBox
+	^ Dictionary newFrom: {
+			#maxLength -> 'the maximum length of the string in meters (should be static)'.
+			#length -> 'the length of the string in meters' }
+]
+
+{ #category : 'faust' }
+PhStringSegment class >> argumentNames [
+
+	^ #( #maxLength #length )
+]
+
+{ #category : 'faust' }
+PhStringSegment class >> faustName [
+
+	^ 'stringSegment'
 ]
 
 { #category : 'initialization' }
-PhStringSegment >> initialize [
+PhStringSegment >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.stringSegment(1.0);'.
-	inputBlock := PhBasicBlock new.
-		length := PhSlider new
-		          label: 'StringLength'
-		          values: #( 0.8 0.01 2 0.01 ).
+	maxLength := 1.0.
+	length := PhHSlider new
+			label: self label , 'Length'
+			values: #( 0.5 0.01 1 0.01 )
 ]
 
 { #category : 'accessing' }
-PhStringSegment >> inputBlock [ 
+PhStringSegment >> length [
 
-^ inputBlock 
+	^ length
 ]
 
 { #category : 'accessing' }
-PhStringSegment >> length [ 
+PhStringSegment >> length: aNumberOrABoxOrASymbol [
 
-^ length
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
-PhStringSegment >> maxLength [ 
-^ maxLength 
+PhStringSegment >> maxLength [
+
+	^ maxLength
 ]
 
 { #category : 'accessing' }
-PhStringSegment >> maxLength: aNumber [
+PhStringSegment >> maxLength: aNumberOrABoxOrASymbol [
 
-	| peStream |
-	maxLength := aNumber.
-	peStream := ReadWriteStream on: ''.
-	peStream << 'process = pm.stringSegment('.
-	self maxLength printOn: peStream.
-	peStream << ');'.
-	processExpression := peStream contents
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

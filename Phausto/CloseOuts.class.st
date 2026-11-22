@@ -9,15 +9,8 @@ Class {
 	#tag : 'PhysModels - BiDir Utilities'
 }
 
-{ #category : 'converting' }
-CloseOuts >> asBox [ 
+{ #category : 'faust' }
+CloseOuts class >> faustName [
 
-^ self inputBlock asBox connectTo: super asBox 
-]
-
-{ #category : 'initialization' }
-CloseOuts >> initialize [ 
-
-super initialize .
-processExpression := 'process = pm.closeOuts;'
+	^ 'closeOuts'
 ]

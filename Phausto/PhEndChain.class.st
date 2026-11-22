@@ -5,33 +5,49 @@ Closes the inputs and outputs of a bidirectional chain in all directions except 
 "
 Class {
 	#name : 'PhEndChain',
-	#superclass : 'PhPmElement',
+	#superclass : 'PhPmFunction',
 	#instVars : [
-		'outputBlock'
+		'block'
 	],
 	#category : 'Phausto-PhysModels - BiDir Utilities',
 	#package : 'Phausto',
 	#tag : 'PhysModels - BiDir Utilities'
 }
 
-{ #category : 'converting' }
-PhEndChain >> asBox [ 
+{ #category : 'faust' }
+PhEndChain class >> argumentDescriptions [
 
-^ self inputBlock asBox , self outputBlock asBox 
+	^ Dictionary newFrom: {
+			#block -> 'the bidirectional block (3 in / 3 out)' }
 ]
 
-{ #category : 'initialization' }
-PhEndChain >> initialize [
+{ #category : 'faust' }
+PhEndChain class >> argumentNames [
 
-	super initialize.
+	^ #( #block )
+]
 
-	processExpression := 'process = pm.endChain;'.
-	
-outputBlock := PhBasicBlock new
+{ #category : 'faust' }
+PhEndChain class >> faustName [
+
+	^ 'endChain'
 ]
 
 { #category : 'accessing' }
-PhEndChain >> outputBlock [ 
+PhEndChain >> block [
 
-^ outputBlock 
+	^ block
+]
+
+{ #category : 'accessing' }
+PhEndChain >> block: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'initialization' }
+PhEndChain >> initializeArguments [
+
+	block := PhChain new
 ]

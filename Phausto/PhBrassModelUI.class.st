@@ -3,9 +3,7 @@ Same as brassModel but with a built-in UI. This function doesn't implement a vir
 "
 Class {
 	#name : 'PhBrassModelUI',
-	#superclass : 'UnitGenerator',
-	#traits : 'PhPhysModelSetter',
-	#classTraits : 'PhPhysModelSetter classTrait',
+	#superclass : 'WindInstruments',
 	#instVars : [
 		'pressure'
 	],
@@ -14,22 +12,42 @@ Class {
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'converting' }
-PhBrassModelUI >> asBox [ 
+{ #category : 'faust' }
+PhBrassModelUI class >> argumentDescriptions [
 
-^ self pressure asBox connectTo: self code asBox
+	^ Dictionary newFrom: {
+			#pressure -> 'the pressure of the air flow created by the virtual performer (0-1). This can also be any kind of signal that will be directly injected in the mouthpiece (e.g., breath noise, etc.).' }
+]
+
+{ #category : 'faust' }
+PhBrassModelUI class >> argumentNames [
+
+	^ #( #pressure )
+]
+
+{ #category : 'faust' }
+PhBrassModelUI class >> faustName [
+
+	^ 'brassModel_ui'
 ]
 
 { #category : 'initialization' }
-PhBrassModelUI >> initialize [
+PhBrassModelUI >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.brassModel_ui;'.
-	pressure := (self label , 'Pressure') asSymbol asPhHSlider .
+	pressure := PhHSlider new
+			label: self label , 'Pressure'
+			values: #( 0.5 0 1 0.01 )
 ]
 
 { #category : 'accessing' }
-PhBrassModelUI >> pressure [ 
+PhBrassModelUI >> pressure [
 
- ^ pressure
+	^ pressure
+]
+
+{ #category : 'accessing' }
+PhBrassModelUI >> pressure: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

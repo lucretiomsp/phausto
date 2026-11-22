@@ -10,6 +10,18 @@ SequenceableCollection >> asChainOfUGen [
 ]
 
 { #category : '*Phausto' }
+SequenceableCollection >> asFaustArgument [
+	"a Faust list"
+
+	^ String streamContents: [ :stream |
+		  stream << '('.
+		  self
+			  do: [ :each | stream << each asFaustArgument ]
+			  separatedBy: [ stream << ', ' ].
+		  stream << ')' ]
+]
+
+{ #category : '*Phausto' }
 SequenceableCollection >> asSumOfUGen [
 
 	| sum firstUGen |

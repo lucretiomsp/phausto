@@ -9,11 +9,8 @@ Extremely basic reed table that can be used to implement a wide range of single 
 "
 Class {
 	#name : 'PhClarinetReed',
-	#superclass : 'UnitGenerator',
-	#traits : 'PhPhysModelSetter',
-	#classTraits : 'PhPhysModelSetter classTrait',
+	#superclass : 'PhPmFunction',
 	#instVars : [
-		'excitation',
 		'stiffness'
 	],
 	#category : 'Phausto-PhysModels - Wind Instruments',
@@ -21,29 +18,57 @@ Class {
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'converting' }
-PhClarinetReed >> asBox [
+{ #category : 'faust' }
+PhClarinetReed class >> argumentDescriptions [
 
-	^ self stiffness asBox , self excitation asBox connectTo: self code asBox
+	^ Dictionary newFrom: {
+			#stiffness -> 'reed stiffness (0-1)' }
+]
+
+{ #category : 'faust' }
+PhClarinetReed class >> argumentNames [
+
+	^ #( #stiffness )
+]
+
+{ #category : 'faust' }
+PhClarinetReed class >> faustName [
+
+	^ 'clarinetReed'
 ]
 
 { #category : 'accessing' }
-PhClarinetReed >> excitation [ 
+PhClarinetReed >> excitation [
 
-^ excitation
+	"the excitation is the input signal of this function"
+
+	^ input
+]
+
+{ #category : 'accessing' }
+PhClarinetReed >> excitation: aUnitGenerator [
+
+	self input: aUnitGenerator
 ]
 
 { #category : 'initialization' }
-PhClarinetReed >> initialize [
+PhClarinetReed >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.clarinetReed;'.
-
-	excitation := PhBlower new.
-	stiffness := (self  label , 'Stiffness') asSymbol asPhHSlider
+	stiffness := PhHSlider new
+			label: self label , 'Stiffness'
+			values: #( 0.5 0 1 0.01 ).
+	input := PhBlower new
 ]
 
 { #category : 'accessing' }
 PhClarinetReed >> stiffness [
+
 	^ stiffness
+]
+
+{ #category : 'accessing' }
+PhClarinetReed >> stiffness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

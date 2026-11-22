@@ -1,14 +1,11 @@
 "
-Wind instruments and utilities from the Faust standard library.
-
-**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead.**
-
-
+Abstract superclass of the ready-to-use wind instruments of physmodels.lib.
+**Do not use this superclass directly; use one of its subclasses instead**.
 "
 Class {
 	#name : 'WindInstruments',
-	#superclass : 'UnitGenerator',
-	#category : 'Phausto-PhysModels',
+	#superclass : 'PhPmFunction',
+	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Wind Instruments'
 }

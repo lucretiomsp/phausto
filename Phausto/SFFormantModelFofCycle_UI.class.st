@@ -11,19 +11,13 @@ Simple formant/vocal synthesizer based on a source/filter model. The source is j
 Class {
 	#name : 'SFFormantModelFofCycle_UI',
 	#superclass : 'FormantSynthesis',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Vocal Synthesis',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Vocal Synthesis'
 }
 
-{ #category : 'converting' }
-SFFormantModelFofCycle_UI >> asBox [ 
-^ super asBox
-]
+{ #category : 'faust' }
+SFFormantModelFofCycle_UI class >> faustName [
 
-{ #category : 'initialization' }
-SFFormantModelFofCycle_UI >> initialize [
-
-	super initialize.
-	processExpression := 'process = pm.SFFormantModelFofCycle_ui;'
+	^ 'SFFormantModelFofCycle_ui'
 ]

@@ -11,29 +11,37 @@ Strikes generator with controllable excitation position
 Class {
 	#name : 'PhStrike',
 	#superclass : 'Exciter',
-	#traits : 'PhPhysModelSetter',
-	#classTraits : 'PhPhysModelSetter classTrait',
 	#instVars : [
 		'strikePosition',
 		'strikeSharpness',
-		'gain'
+		'gain',
+		'gate'
 	],
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Exciters',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Exciters'
 }
 
-{ #category : 'converting' }
-PhStrike >> asBox [
+{ #category : 'faust' }
+PhStrike class >> argumentDescriptions [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
+	^ Dictionary newFrom: {
+			#strikePosition -> 'excitation position wiht 0: for max low freqs and 1: for max high freqs. So, on membrane for example, 0 would be the middle and 1 the edge'.
+			#strikeSharpness -> 'sharpness of the attack and release (0-1)'.
+			#gain -> 'gain of the excitation'.
+			#gate -> 'a gate button/trigger signal (0/1)' }
+]
 
-	finalBox := self strikePosition asBox ,
-	             self strikeSharpness asBox , self gain asBox
-	            , self gate asBox connectTo: intermediateBox.
+{ #category : 'faust' }
+PhStrike class >> argumentNames [
 
-	^ finalBox
+	^ #( #strikePosition #strikeSharpness #gain #gate )
+]
+
+{ #category : 'faust' }
+PhStrike class >> faustName [
+
+	^ 'strike'
 ]
 
 { #category : 'accessing' }
@@ -42,41 +50,51 @@ PhStrike >> gain [
 	^ gain
 ]
 
+{ #category : 'accessing' }
+PhStrike >> gain: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhStrike >> gate [
+
+	^ gate
+]
+
+{ #category : 'accessing' }
+PhStrike >> gate: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
-PhStrike >> initialize [
+PhStrike >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.strike;'.
-	"initialize controlParameters"
-
-	gain := PhHSlider new
-		        label: self label , 'Gain'
-		        init: 0.5
-		        min: 0
-		        max: 1
-		        step: 0.001.
-	self strikePosition: (PhHSlider new
-			 label: self label , 'StrikePos'
-			 init: 0
-			 min: 0
-			 max: 4
-			 step: 1).
+	strikePosition := PhHSlider new
+			label: self label , 'StrikePosition'
+			values: #( 0.5 0 1 0.01 ).
 	strikeSharpness := PhHSlider new
-		                   label: self label , 'StrikePos'
-		                   init: 0
-		                   min: 0
-		                   max: 4
-		                   step: 1
+			label: self label , 'StrikeSharpness'
+			values: #( 0.5 0.001 1 0.001 ).
+	gain := PhHSlider new
+			label: self label , 'Gain'
+			values: #( 0.5 0 1 0.001 ).
+	gate := PhButton new label: self label , 'Gate'
 ]
 
 { #category : 'accessing' }
 PhStrike >> strikePosition [
+
 	^ strikePosition
 ]
 
 { #category : 'accessing' }
 PhStrike >> strikePosition: aNumberOrABoxOrASymbol [
-<paramSetter>
+
+	<paramSetter>
 	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
@@ -84,4 +102,11 @@ PhStrike >> strikePosition: aNumberOrABoxOrASymbol [
 PhStrike >> strikeSharpness [
 
 	^ strikeSharpness
+]
+
+{ #category : 'accessing' }
+PhStrike >> strikeSharpness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

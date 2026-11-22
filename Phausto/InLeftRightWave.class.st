@@ -12,22 +12,40 @@ Class {
 	#tag : 'PhysModels - BiDir Utilities'
 }
 
-{ #category : 'converting' }
-InLeftRightWave >> asBox [
+{ #category : 'faust' }
+InLeftRightWave class >> argumentDescriptions [
 
-	^ self inputBlock asBox , self signal asBox connectTo: super asBox
+	^ Dictionary newFrom: {
+			#signal -> 'the signal added to the waves' }
+]
+
+{ #category : 'faust' }
+InLeftRightWave class >> argumentNames [
+
+	^ #( #signal )
+]
+
+{ #category : 'faust' }
+InLeftRightWave class >> faustName [
+
+	^ 'in'
 ]
 
 { #category : 'initialization' }
-InLeftRightWave >> initialize [
+InLeftRightWave >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.inRightWave;'.
 	signal := 0.25
 ]
 
-{ #category : 'converting' }
-InLeftRightWave >> signal [ 
+{ #category : 'accessing' }
+InLeftRightWave >> signal [
 
-^ signal
+	^ signal
+]
+
+{ #category : 'accessing' }
+InLeftRightWave >> signal: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

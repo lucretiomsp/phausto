@@ -148,11 +148,13 @@ UnitGenerator >> / aUnitGenerator [
 
 { #category : 'connecting' }
 UnitGenerator >> => aUnitGenerator [
+	"Return the resulting UnitGenerator from the chain of operations.
+	A physical model keeps the UnitGenerator itself as its input (not a Box: a Box only lives in one lib context) and writes it as Faust code when it builds its own code"
 
-"Return the resulting UnitGenerator from the chain of operations."
-^ self asBox => aUnitGenerator .
-
-
+	(aUnitGenerator isKindOf: PhPmFunction) ifTrue: [
+		aUnitGenerator patchedWith: self.
+		^ aUnitGenerator ].
+	^ self asBox => aUnitGenerator
 ]
 
 { #category : 'arithmetic' }

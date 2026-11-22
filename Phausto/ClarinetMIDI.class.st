@@ -6,15 +6,13 @@ Ready-to-use MIDI compliant clarinet physical model with built-in UI.
 Class {
 	#name : 'ClarinetMIDI',
 	#superclass : 'WindInstruments',
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'initialization' }
-ClarinetMIDI >> initialize [
+{ #category : 'faust' }
+ClarinetMIDI class >> faustName [
 
-	super initialize.
-
-	processExpression := 'process = pm.clarinet_ui_MIDI;'
+	^ 'clarinet_ui_MIDI'
 ]

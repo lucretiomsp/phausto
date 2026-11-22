@@ -9,52 +9,79 @@ Extremely basic reed table that can be used to implement a wide range of single 
 "
 Class {
 	#name : 'PhReedTable',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmFunction',
 	#instVars : [
-		'slope',
 		'offset',
-		'excitation'
+		'slope'
 	],
 	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'converting' }
-PhReedTable >> asBox [ 
+{ #category : 'faust' }
+PhReedTable class >> argumentDescriptions [
 
-^  self offset asBox , self slope asBox , self excitation asBox connectTo: self code asBox 
+	^ Dictionary newFrom: {
+			#offset -> 'table offset'.
+			#slope -> 'table slope' }
+]
+
+{ #category : 'faust' }
+PhReedTable class >> argumentNames [
+
+	^ #( #offset #slope )
+]
+
+{ #category : 'faust' }
+PhReedTable class >> faustName [
+
+	^ 'reedTable'
 ]
 
 { #category : 'accessing' }
-PhReedTable >> excitation [ 
+PhReedTable >> excitation [
 
-^ excitation
+	"the excitation is the input signal of this function"
+
+	^ input
+]
+
+{ #category : 'accessing' }
+PhReedTable >> excitation: aUnitGenerator [
+
+	self input: aUnitGenerator
 ]
 
 { #category : 'initialization' }
-PhReedTable >> initialize [
+PhReedTable >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.reedTable;'.
 	offset := PhHSlider new
-		          label: self label , 'Offset'
-		          values: #( 0.4 0 1 0.01 ).
+			label: self label , 'Offset'
+			values: #( 0.7 0 1 0.01 ).
 	slope := PhHSlider new
-		         label: self label , 'Slope'
-		         values: #( 0.4 0 1 0.01 ).
-	excitation := PhBlower new.
+			label: self label , 'Slope'
+			values: #( -0.3 -1 1 0.01 ).
+	input := PhBlower new
 ]
 
 { #category : 'accessing' }
-PhReedTable >> offset [ 
-^ offset
+PhReedTable >> offset [
+
+	^ offset
 ]
 
 { #category : 'accessing' }
-PhReedTable >> slope [ 
+PhReedTable >> offset: aNumberOrABoxOrASymbol [
 
-^ slope
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhReedTable >> slope [
+
+	^ slope
 ]
 
 { #category : 'accessing' }
@@ -62,6 +89,4 @@ PhReedTable >> slope: aNumberOrABoxOrASymbol [
 
 	<paramSetter>
 	self paramSetter value: aNumberOrABoxOrASymbol
-
-	
 ]

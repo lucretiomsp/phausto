@@ -6,8 +6,8 @@ Class {
 	#superclass : 'StringInstruments',
 	#instVars : [
 		'stringLength',
-		'bowVelocity',
 		'bowPressure',
+		'bowVelocity',
 		'bowPosition'
 	],
 	#category : 'Phausto-PhysModels - String Instruments',
@@ -15,16 +15,26 @@ Class {
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'converting' }
-ViolinModel >> asBox [
+{ #category : 'faust' }
+ViolinModel class >> argumentDescriptions [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
+	^ Dictionary newFrom: {
+			#stringLength -> 'the length of the string in meters'.
+			#bowPressure -> 'bow pressure on the string (0-1))'.
+			#bowVelocity -> 'velocity of the bow / excitation signal (0-1)'.
+			#bowPosition -> 'the position of the bow on the string (0-1)' }
+]
 
-	finalBox := self stringLength asBox , self bowVelocity asBox  , self bowPressure asBox , self  bowPosition asBox
-		            connectTo: intermediateBox.
+{ #category : 'faust' }
+ViolinModel class >> argumentNames [
 
-	^ finalBox
+	^ #( #stringLength #bowPressure #bowVelocity #bowPosition )
+]
+
+{ #category : 'faust' }
+ViolinModel class >> faustName [
+
+	^ 'violinModel'
 ]
 
 { #category : 'accessing' }
@@ -34,9 +44,23 @@ ViolinModel >> bowPosition [
 ]
 
 { #category : 'accessing' }
+ViolinModel >> bowPosition: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 ViolinModel >> bowPressure [
 
 	^ bowPressure
+]
+
+{ #category : 'accessing' }
+ViolinModel >> bowPressure: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -45,40 +69,39 @@ ViolinModel >> bowVelocity [
 	^ bowVelocity
 ]
 
+{ #category : 'accessing' }
+ViolinModel >> bowVelocity: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
-ViolinModel >> initialize [
+ViolinModel >> initializeArguments [
 
-	super initialize.
-
-	processExpression := 'process = pm.violinModel;'.
-	stringLength := (PhHSlider new
-				   label: self label , 'StringLength'
-				   init: 1
-				   min: 0
-				   max: 4
-				   step: 0.001) .
-	bowVelocity := (PhHSlider new
-				   label: self label , 'BowVelocity'
-				   init: 0.5
-				   min: 0
-				   max: 1
-				   step: 0.001) .
-	bowPressure := (PhHSlider new
-				   label: self label , 'BowPressure'
-				   init: 0.5
-				   min: 0
-				   max: 1
-				   step: 0.001) ..
-    bowPosition := (PhHSlider new
-				   label: self label , 'BowPressure'
-				   init: 0.5
-				   min: 0
-				   max: 1
-				   step: 0.001) ..
+	stringLength := PhHSlider new
+			label: self label , 'StringLength'
+			values: #( 0.75 0.1 2 0.001 ).
+	bowPressure := PhHSlider new
+			label: self label , 'BowPressure'
+			values: #( 0.5 0 1 0.01 ).
+	bowVelocity := PhHSlider new
+			label: self label , 'BowVelocity'
+			values: #( 0.5 0 1 0.01 ).
+	bowPosition := PhHSlider new
+			label: self label , 'BowPosition'
+			values: #( 0.7 0.01 0.99 0.001 )
 ]
 
 { #category : 'accessing' }
 ViolinModel >> stringLength [
 
 	^ stringLength
+]
+
+{ #category : 'accessing' }
+ViolinModel >> stringLength: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

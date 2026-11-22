@@ -11,24 +11,38 @@ Class {
 	#name : 'PhBlower',
 	#superclass : 'Exciter',
 	#instVars : [
-		'breathGain',
 		'pressure',
-		'breathCutoff'
+		'breathGain',
+		'breathCutoff',
+		'vibratoFreq',
+		'vibratoGain'
 	],
-	#category : 'Phausto-PhysModels',
+	#category : 'Phausto-PhysModels - Exciters',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Exciters'
 }
 
-{ #category : 'converting' }
-PhBlower >> asBox [
+{ #category : 'faust' }
+PhBlower class >> argumentDescriptions [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
-	finalBox := self pressure asBox , self breathGain asBox
-	            , self breathCutoff asBox connectTo: intermediateBox.
+	^ Dictionary newFrom: {
+			#pressure -> 'pressure (0-1)'.
+			#breathGain -> 'breath noise gain (0-1) (recommended: 0.005)'.
+			#breathCutoff -> 'breath cuttoff frequency (Hz) (recommended: 2000)'.
+			#vibratoFreq -> 'vibratoFreq'.
+			#vibratoGain -> 'vibratoGain' }
+]
 
-	^ intermediateBox
+{ #category : 'faust' }
+PhBlower class >> argumentNames [
+
+	^ #( #pressure #breathGain #breathCutoff #vibratoFreq #vibratoGain )
+]
+
+{ #category : 'faust' }
+PhBlower class >> faustName [
+
+	^ 'blower'
 ]
 
 { #category : 'accessing' }
@@ -38,35 +52,78 @@ PhBlower >> breathCutoff [
 ]
 
 { #category : 'accessing' }
+PhBlower >> breathCutoff: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PhBlower >> breathGain [
 
 	^ breathGain
 ]
 
+{ #category : 'accessing' }
+PhBlower >> breathGain: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
 { #category : 'initialization' }
-PhBlower >> initialize [
+PhBlower >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.blower;'.
-	"initialize controlParameters"
-
-	breathGain := PhHSlider new
-		              label: self label , 'BreathGain'
-		              init: 0.005
-		              min: 0
-		              max: 1
-		              step: 0.001.
 	pressure := PhButton new label: self label , 'Pressure'.
+	breathGain := PhHSlider new
+			label: self label , 'BreathGain'
+			values: #( 0.005 0 1 0.001 ).
 	breathCutoff := PhHSlider new
-		                label: self label , 'BreathCutoff'
-		                init: 2000
-		                min: 0
-		                max: 4000
-		                step: 1
+			label: self label , 'BreathCutoff'
+			values: #( 2000 20 20000 1 ).
+	vibratoFreq := PhHSlider new
+			label: self label , 'VibratoFreq'
+			values: #( 5 0.1 10 0.1 ).
+	vibratoGain := PhHSlider new
+			label: self label , 'VibratoGain'
+			values: #( 0.01 0 0.1 0.001 )
 ]
 
 { #category : 'accessing' }
 PhBlower >> pressure [
 
 	^ pressure
+]
+
+{ #category : 'accessing' }
+PhBlower >> pressure: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhBlower >> vibratoFreq [
+
+	^ vibratoFreq
+]
+
+{ #category : 'accessing' }
+PhBlower >> vibratoFreq: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhBlower >> vibratoGain [
+
+	^ vibratoGain
+]
+
+{ #category : 'accessing' }
+PhBlower >> vibratoGain: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

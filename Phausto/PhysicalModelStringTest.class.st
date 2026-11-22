@@ -27,7 +27,7 @@ PhysicalModelStringTest >> testPhKsReflectionFilterDsp [
 { #category : 'tests' }
 PhysicalModelStringTest >> testPhLStringRigidTerminationDsp [
 
-	self deny: PhLooper new asDsp isNull
+	self deny: PhLStringRigidTermination new asDsp isNull
 ]
 
 { #category : 'tests' }

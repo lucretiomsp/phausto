@@ -8,26 +8,48 @@ Creates an impulse excitation of one sample.
 Class {
 	#name : 'PhImpulseExcitation',
 	#superclass : 'Exciter',
-	#traits : 'PhTriggerSetter',
-	#classTraits : 'PhTriggerSetter classTrait',
-	#category : 'Phausto-PhysModels',
+	#instVars : [
+		'gate'
+	],
+	#category : 'Phausto-PhysModels - Exciters',
 	#package : 'Phausto',
-	#tag : 'PhysModels'
+	#tag : 'PhysModels - Exciters'
 }
 
-{ #category : 'converting' }
-PhImpulseExcitation >> asBox [
+{ #category : 'faust' }
+PhImpulseExcitation class >> argumentDescriptions [
 
-	| intermediateBox finalBox |
-	intermediateBox := super asBox.
+	^ Dictionary newFrom: {
+			#gate -> 'a gate button' }
+]
 
-	finalBox := self gate asBox connectTo: intermediateBox.
+{ #category : 'faust' }
+PhImpulseExcitation class >> argumentNames [
 
-	^ finalBox
+	^ #( #gate )
+]
+
+{ #category : 'faust' }
+PhImpulseExcitation class >> faustName [
+
+	^ 'impulseExcitation'
+]
+
+{ #category : 'accessing' }
+PhImpulseExcitation >> gate [
+
+	^ gate
+]
+
+{ #category : 'accessing' }
+PhImpulseExcitation >> gate: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
-PhImpulseExcitation >> initialize [
-	super initialize.
-	processExpression := 'process = pm.impulseExcitation;'.
+PhImpulseExcitation >> initializeArguments [
+
+	gate := PhButton new label: self label , 'Gate'
 ]

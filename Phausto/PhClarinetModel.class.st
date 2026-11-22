@@ -11,9 +11,7 @@ A simple clarinet physical model without tone holes (pitch is changed by changin
 "
 Class {
 	#name : 'PhClarinetModel',
-	#superclass : 'UnitGenerator',
-	#traits : 'PhPhysModelSetter',
-	#classTraits : 'PhPhysModelSetter classTrait',
+	#superclass : 'WindInstruments',
 	#instVars : [
 		'tubeLength',
 		'pressure',
@@ -25,10 +23,26 @@ Class {
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'converting' }
-PhClarinetModel >> asBox [ 
+{ #category : 'faust' }
+PhClarinetModel class >> argumentDescriptions [
 
-^ self tubeLength asBox , self pressure asBox , self reedStiffness asBox , self bellOpening asBox connectTo: self code asBox 
+	^ Dictionary newFrom: {
+			#tubeLength -> 'the length of the tube in meters'.
+			#pressure -> 'the pressure of the air flow created by the virtual performer (0-1). This can also be any kind of signal that will directly injected in the mouthpiece (e.g., breath noise, etc.).'.
+			#reedStiffness -> 'reed stiffness (0-1)'.
+			#bellOpening -> 'the opening of bell (0-1)' }
+]
+
+{ #category : 'faust' }
+PhClarinetModel class >> argumentNames [
+
+	^ #( #tubeLength #pressure #reedStiffness #bellOpening )
+]
+
+{ #category : 'faust' }
+PhClarinetModel class >> faustName [
+
+	^ 'clarinetModel'
 ]
 
 { #category : 'accessing' }
@@ -37,17 +51,28 @@ PhClarinetModel >> bellOpening [
 	^ bellOpening
 ]
 
-{ #category : 'initialization' }
-PhClarinetModel >> initialize [
+{ #category : 'accessing' }
+PhClarinetModel >> bellOpening: aNumberOrABoxOrASymbol [
 
-	super initialize.
-	processExpression := 'process = pm.clarinetModel;'.
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'initialization' }
+PhClarinetModel >> initializeArguments [
+
 	tubeLength := PhHSlider new
-		              label: self label , 'TubeLength'
-		              values: #( 0.5 0.01 2 0.01 ).
-	pressure := (self label , 'Pressure') asSymbol asPhHSlider.
-	reedStiffness := (self label , 'ReedStiffnesss') asSymbol asPhHSlider.
-	bellOpening := (self label , 'BellOpening') asSymbol asPhHSlider
+			label: self label , 'TubeLength'
+			values: #( 0.5 0.01 2 0.01 ).
+	pressure := PhHSlider new
+			label: self label , 'Pressure'
+			values: #( 0.5 0 1 0.01 ).
+	reedStiffness := PhHSlider new
+			label: self label , 'ReedStiffness'
+			values: #( 0.5 0 1 0.01 ).
+	bellOpening := PhHSlider new
+			label: self label , 'BellOpening'
+			values: #( 0.5 0 1 0.01 )
 ]
 
 { #category : 'accessing' }
@@ -57,13 +82,34 @@ PhClarinetModel >> pressure [
 ]
 
 { #category : 'accessing' }
+PhClarinetModel >> pressure: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PhClarinetModel >> reedStiffness [
 
 	^ reedStiffness
 ]
 
 { #category : 'accessing' }
+PhClarinetModel >> reedStiffness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
 PhClarinetModel >> tubeLength [
 
 	^ tubeLength
+]
+
+{ #category : 'accessing' }
+PhClarinetModel >> tubeLength: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

@@ -3,7 +3,7 @@ Length in meters to frequency.
 "
 Class {
 	#name : 'PhL2f',
-	#superclass : 'UnitGenerator',
+	#superclass : 'PhPmFunction',
 	#instVars : [
 		'length'
 	],
@@ -12,28 +12,48 @@ Class {
 	#tag : 'PhysModels'
 }
 
-{ #category : 'accessing' }
-PhL2f >> asBox [ 
+{ #category : 'faust' }
+PhL2f class >> argumentDescriptions [
 
-^ self length asBox connectTo: super asBox 
+	^ Dictionary newFrom: {
+			#length -> 'length/distance in meters' }
+]
+
+{ #category : 'faust' }
+PhL2f class >> argumentNames [
+
+	^ #( #length )
+]
+
+{ #category : 'faust' }
+PhL2f class >> faustName [
+
+	^ 'l2f'
 ]
 
 { #category : 'initialization' }
-PhL2f >> initialize [
+PhL2f >> initializeArguments [
 
-	super initialize.
-	processExpression := 'process = pm.f2l;'.
-	length := 1
+	length := PhHSlider new
+			label: self label , 'Length'
+			values: #( 0.8 0.01 3 0.01 )
 ]
 
 { #category : 'accessing' }
-PhL2f >> length [ 
+PhL2f >> length [
 
-^ length
+	^ length
+]
+
+{ #category : 'accessing' }
+PhL2f >> length: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'connecting' }
 PhL2f >> patchedWith: aUnitGenerator [
 
-self length: aUnitGenerator 
+	self length: aUnitGenerator
 ]

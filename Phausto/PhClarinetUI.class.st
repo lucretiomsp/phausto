@@ -3,15 +3,14 @@ Ready-to-use clarinet physical model with built-in UI based on clarinetModel.
 "
 Class {
 	#name : 'PhClarinetUI',
-	#superclass : 'UnitGenerator',
+	#superclass : 'WindInstruments',
 	#category : 'Phausto-PhysModels - Wind Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'initialization' }
-PhClarinetUI >> initialize [
+{ #category : 'faust' }
+PhClarinetUI class >> faustName [
 
-	super initialize.
-	processExpression := 'process = pm.clarinet_ui;'
+	^ 'clarinet_ui'
 ]

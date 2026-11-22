@@ -9,14 +9,8 @@ Class {
 	#tag : 'PhysModels - String Instruments'
 }
 
-{ #category : 'converting' }
-PhRStringRigidTermination >> asBox [
+{ #category : 'faust' }
+PhRStringRigidTermination class >> faustName [
 
-	^ self inputBlock asBox connectTo: super asBox
-]
-
-{ #category : 'initialization' }
-PhRStringRigidTermination >> initialize [ 
-super initialize .
-processExpression := 'process = pm.rStringRigidTermination;'
+	^ 'rStringRigidTermination'
 ]

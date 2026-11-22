@@ -3,7 +3,7 @@ Same as fluteModel but with a built-in UI. This function doesn't implement a vir
 "
 Class {
 	#name : 'PhFluteModelUI',
-	#superclass : 'UnitGenerator',
+	#superclass : 'WindInstruments',
 	#instVars : [
 		'pressure'
 	],
@@ -12,10 +12,42 @@ Class {
 	#tag : 'PhysModels - Wind Instruments'
 }
 
-{ #category : 'initialization' }
-PhFluteModelUI >> initialize [
+{ #category : 'faust' }
+PhFluteModelUI class >> argumentDescriptions [
 
-	super initialize.
-	processExpression := 'process = pm.fluteModel_ui;'.
-	pressure := (self label , 'Pressure') asSymbol asPhHSlider
+	^ Dictionary newFrom: {
+			#pressure -> 'the pressure of the air flow created by the virtual performer (0-1). This can also be any kind of signal that will be directly injected in the mouthpiece (e.g., breath noise, etc.).' }
+]
+
+{ #category : 'faust' }
+PhFluteModelUI class >> argumentNames [
+
+	^ #( #pressure )
+]
+
+{ #category : 'faust' }
+PhFluteModelUI class >> faustName [
+
+	^ 'fluteModel_ui'
+]
+
+{ #category : 'initialization' }
+PhFluteModelUI >> initializeArguments [
+
+	pressure := PhHSlider new
+			label: self label , 'Pressure'
+			values: #( 0.5 0 1 0.01 )
+]
+
+{ #category : 'accessing' }
+PhFluteModelUI >> pressure [
+
+	^ pressure
+]
+
+{ #category : 'accessing' }
+PhFluteModelUI >> pressure: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

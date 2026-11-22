@@ -1,40 +1,11 @@
 "
-Low and high level string instruments parts. Most of the elments in this section can be used in a bidirectional chain.
-length is the length of the string in meters.
-a fequency in hertz can be converted to a lenght in meters by sending the f2l message.
-
-**Do not use this superclass directly; it exists only for grouping and establishing a basic inheritance chain. Use one of its subclasses instead.**.
+Abstract superclass of the ready-to-use string instruments of physmodels.lib.
+**Do not use this superclass directly; use one of its subclasses instead**.
 "
 Class {
 	#name : 'StringInstruments',
-	#superclass : 'UnitGenerator',
-	#traits : 'PhPhysModelSetter',
-	#classTraits : 'PhPhysModelSetter classTrait',
-	#instVars : [
-		'freq'
-	],
+	#superclass : 'PhPmFunction',
 	#category : 'Phausto-PhysModels - String Instruments',
 	#package : 'Phausto',
 	#tag : 'PhysModels - String Instruments'
 }
-
-{ #category : 'accessing' }
-StringInstruments >> freq [
-
-	^ freq
-]
-
-{ #category : 'initialization' }
-StringInstruments >> initialize [
-
-	super initialize.
-  freq := PhHSlider new
-			          label: self label , 'Note'
-			          init: 440
-			          min: 20
-			          max: 1200
-			          step: 1.
-	self controlParameters add: #freq -> (self freq
-			 asControlParameterOfWidgetType: #knob
-			 description: 'Frequency in Hertz')
-]
