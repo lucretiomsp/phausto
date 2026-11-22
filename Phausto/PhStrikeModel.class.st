@@ -8,7 +8,7 @@ Creates a filtered noise excitation
 - **lPcutoff**: lowpass cutoff frequency
 - **strikeSharpness**: sharpness of the attack and release (0-1)
 - **gain**: gain of the excitation
-- **gate**: a gate button/trigger signal (0/1)
+- **trigger**: a gate button/trigger signal (0/1)
 "
 Class {
 	#name : 'PhStrikeModel',
@@ -18,7 +18,7 @@ Class {
 		'lpCutoff',
 		'strikeSharpness',
 		'gain',
-		'gate'
+		'trigger'
 	],
 	#category : 'Phausto-PhysModels - Exciters',
 	#package : 'Phausto',
@@ -33,13 +33,13 @@ PhStrikeModel class >> argumentDescriptions [
 			#lpCutoff -> 'lowpass cutoff frequency'.
 			#strikeSharpness -> 'sharpness of the attack and release (0-1)'.
 			#gain -> 'gain of the excitation'.
-			#gate -> 'a gate button/trigger signal (0/1)' }
+			#trigger -> 'trigger' }
 ]
 
 { #category : 'faust' }
 PhStrikeModel class >> argumentNames [
 
-	^ #( #hpCutoff #lpCutoff #strikeSharpness #gain #gate )
+	^ #( #hpCutoff #lpCutoff #strikeSharpness #gain #trigger )
 ]
 
 { #category : 'faust' }
@@ -64,14 +64,17 @@ PhStrikeModel >> gain: aNumberOrABoxOrASymbol [
 { #category : 'accessing' }
 PhStrikeModel >> gate [
 
-	^ gate
+	"alias of trigger (older Phausto name)"
+
+	^ trigger
 ]
 
 { #category : 'accessing' }
 PhStrikeModel >> gate: aNumberOrABoxOrASymbol [
 
-	<paramSetter>
-	self paramSetter value: aNumberOrABoxOrASymbol
+	"alias of trigger: (older Phausto name)"
+
+	self trigger: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'accessing' }
@@ -102,7 +105,7 @@ PhStrikeModel >> initializeArguments [
 	gain := PhHSlider new
 			label: self label , 'Gain'
 			values: #( 0.5 0 1 0.001 ).
-	gate := PhButton new label: self label , 'Gate'
+	trigger := PhButton new label: self label , 'Trigger'
 ]
 
 { #category : 'accessing' }
@@ -126,6 +129,19 @@ PhStrikeModel >> strikeSharpness [
 
 { #category : 'accessing' }
 PhStrikeModel >> strikeSharpness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhStrikeModel >> trigger [
+
+	^ trigger
+]
+
+{ #category : 'accessing' }
+PhStrikeModel >> trigger: aNumberOrABoxOrASymbol [
 
 	<paramSetter>
 	self paramSetter value: aNumberOrABoxOrASymbol

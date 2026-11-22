@@ -6,7 +6,7 @@ Strikes generator with controllable excitation position
 - **strikePosition**: excitation position wiht 0: for max low freqs and 1: for max high freqs. So, on membrane for example, 0 would be the middle and 1 the edge
 - **strikeSharpness**: sharpness of the attack and release (0-1)
 - **gain**: gain of the excitation
-- **gate**: a gate button/trigger signal (0-1)
+- **trigger**: a gate button/trigger signal (0-1)
 "
 Class {
 	#name : 'PhStrike',
@@ -15,7 +15,7 @@ Class {
 		'strikePosition',
 		'strikeSharpness',
 		'gain',
-		'gate'
+		'trigger'
 	],
 	#category : 'Phausto-PhysModels - Exciters',
 	#package : 'Phausto',
@@ -29,13 +29,13 @@ PhStrike class >> argumentDescriptions [
 			#strikePosition -> 'excitation position wiht 0: for max low freqs and 1: for max high freqs. So, on membrane for example, 0 would be the middle and 1 the edge'.
 			#strikeSharpness -> 'sharpness of the attack and release (0-1)'.
 			#gain -> 'gain of the excitation'.
-			#gate -> 'a gate button/trigger signal (0/1)' }
+			#trigger -> 'trigger' }
 ]
 
 { #category : 'faust' }
 PhStrike class >> argumentNames [
 
-	^ #( #strikePosition #strikeSharpness #gain #gate )
+	^ #( #strikePosition #strikeSharpness #gain #trigger )
 ]
 
 { #category : 'faust' }
@@ -60,14 +60,17 @@ PhStrike >> gain: aNumberOrABoxOrASymbol [
 { #category : 'accessing' }
 PhStrike >> gate [
 
-	^ gate
+	"alias of trigger (older Phausto name)"
+
+	^ trigger
 ]
 
 { #category : 'accessing' }
 PhStrike >> gate: aNumberOrABoxOrASymbol [
 
-	<paramSetter>
-	self paramSetter value: aNumberOrABoxOrASymbol
+	"alias of trigger: (older Phausto name)"
+
+	self trigger: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
@@ -82,7 +85,7 @@ PhStrike >> initializeArguments [
 	gain := PhHSlider new
 			label: self label , 'Gain'
 			values: #( 0.5 0 1 0.001 ).
-	gate := PhButton new label: self label , 'Gate'
+	trigger := PhButton new label: self label , 'Trigger'
 ]
 
 { #category : 'accessing' }
@@ -106,6 +109,19 @@ PhStrike >> strikeSharpness [
 
 { #category : 'accessing' }
 PhStrike >> strikeSharpness: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
+]
+
+{ #category : 'accessing' }
+PhStrike >> trigger [
+
+	^ trigger
+]
+
+{ #category : 'accessing' }
+PhStrike >> trigger: aNumberOrABoxOrASymbol [
 
 	<paramSetter>
 	self paramSetter value: aNumberOrABoxOrASymbol

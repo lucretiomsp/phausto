@@ -178,13 +178,17 @@ PhPmFunction >> initializeArguments [
 
 { #category : 'initialization' }
 PhPmFunction >> initializeNestedLabels [
-	"physical models nested as arguments (an excitation, a block...) are labelled after me and the argument: PhOpenString + excitation -> PhOpenStringExcitation"
+	"Physical models nested as arguments are labelled after me.
+	The excitation shares my label, so its trigger is <my label>Trigger, the name Coypu plays: PhSteelString new label: 'str' -> strTrigger.
+	Any other nested model is labelled after me and the argument: PhEndChain + block -> PhEndChainBlock"
 
 	self argumentNames do: [ :each |
 		| argument |
 		argument := self instVarNamed: each.
 		(argument isKindOf: PhPmFunction) ifTrue: [
-			argument label: self label , each capitalized ] ]
+			argument label: (each = #excitation
+					 ifTrue: [ self label ]
+					 ifFalse: [ self label , each capitalized ]) ] ]
 ]
 
 { #category : 'accessing' }

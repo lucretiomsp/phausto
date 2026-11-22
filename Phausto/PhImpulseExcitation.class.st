@@ -3,13 +3,13 @@ Creates an impulse excitation of one sample.
 
 ## Parameters
 
-- **gate**: Generates an impulse when the gate signal changes from 0 to a value greater than 1
+- **trigger**: Generates an impulse when the trigger signal changes from 0 to a value greater than 1
 "
 Class {
 	#name : 'PhImpulseExcitation',
 	#superclass : 'Exciter',
 	#instVars : [
-		'gate'
+		'trigger'
 	],
 	#category : 'Phausto-PhysModels - Exciters',
 	#package : 'Phausto',
@@ -20,13 +20,13 @@ Class {
 PhImpulseExcitation class >> argumentDescriptions [
 
 	^ Dictionary newFrom: {
-			#gate -> 'a gate button' }
+			#trigger -> 'trigger' }
 ]
 
 { #category : 'faust' }
 PhImpulseExcitation class >> argumentNames [
 
-	^ #( #gate )
+	^ #( #trigger )
 ]
 
 { #category : 'faust' }
@@ -38,18 +38,34 @@ PhImpulseExcitation class >> faustName [
 { #category : 'accessing' }
 PhImpulseExcitation >> gate [
 
-	^ gate
+	"alias of trigger (older Phausto name)"
+
+	^ trigger
 ]
 
 { #category : 'accessing' }
 PhImpulseExcitation >> gate: aNumberOrABoxOrASymbol [
 
-	<paramSetter>
-	self paramSetter value: aNumberOrABoxOrASymbol
+	"alias of trigger: (older Phausto name)"
+
+	self trigger: aNumberOrABoxOrASymbol
 ]
 
 { #category : 'initialization' }
 PhImpulseExcitation >> initializeArguments [
 
-	gate := PhButton new label: self label , 'Gate'
+	trigger := PhButton new label: self label , 'Trigger'
+]
+
+{ #category : 'accessing' }
+PhImpulseExcitation >> trigger [
+
+	^ trigger
+]
+
+{ #category : 'accessing' }
+PhImpulseExcitation >> trigger: aNumberOrABoxOrASymbol [
+
+	<paramSetter>
+	self paramSetter value: aNumberOrABoxOrASymbol
 ]

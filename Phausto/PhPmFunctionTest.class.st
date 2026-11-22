@@ -132,6 +132,16 @@ PhPmFunctionTest >> testFunctionWithoutArguments [
 ]
 
 { #category : 'tests' }
+PhPmFunctionTest >> testGateIsAnAliasOfTrigger [
+	"TpKarplus and older code use gate:"
+
+	| excitation |
+	excitation := PhImpulseExcitation new gate: #tpKarplusTrigger.
+	self assert: excitation trigger label equals: #tpKarplusTrigger.
+	self assert: excitation gate identicalTo: excitation trigger
+]
+
+{ #category : 'tests' }
 PhPmFunctionTest >> testHomeMadeGuitar [
 	"a string between guitar nuts and bridge, closed by endChain, as in pm.guitarModel"
 
@@ -156,11 +166,17 @@ PhPmFunctionTest >> testInputIsWiredInFront [
 { #category : 'tests' }
 PhPmFunctionTest >> testLabelReachesNestedPhysicalModels [
 
-	| string |
+	| string model |
 	string := PhOpenString new label: 'str'.
 	self assert: string length label equals: 'strLength'.
-	self assert: string excitation label equals: 'strExcitation'.
-	self assert: string excitation gate label equals: 'strExcitationGate'
+	"the excitation shares the label of its string: Coypu plays strTrigger"
+	self assert: string excitation label equals: 'str'.
+	self assert: string excitation trigger label equals: 'strTrigger'.
+	self assert: (string faustExpression includesSubstring: 'button("strTrigger")').
+	"two excitations must not share a button"
+	model := PhModularInterpStringModel new label: 'mi'.
+	self assert: model bodyExcitation trigger label equals: 'miBodyExcitationTrigger'.
+	self assert: model stringExcitation trigger label equals: 'miStringExcitationTrigger'
 ]
 
 { #category : 'tests' }
