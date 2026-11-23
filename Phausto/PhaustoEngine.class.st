@@ -103,15 +103,14 @@ PhaustoEngine class >> start [
 
 
 	self tpDsp ifNotNil: [
-		self tpDsp isNull ifFalse: [ self tpDsp stop ] ].
+			self tpDsp isNull ifFalse: [ self tpDsp stop ].
+			"the old DSP is discarded: its UI windows close"
+			self tpDsp announceDestroyed ].
 	"tpDsp := self allSamplers asSumOfUGen stereo asDsp."
 	tpDsp := self rack stereo asDsp.
-	[
-		[ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value
-			ifNotNil: [ self tpDsp start ] ] fork.
+	[ [ [ self tpDsp ] value ifNotNil: [ self tpDsp init ] ] value ifNotNil: [ self tpDsp start ] ] fork.
 	tpPerf := perf forDsp: tpDsp.
-	tpPerf performanceType: PerfType new.
-	
+	tpPerf performanceType: PerfType new
 ]
 
 { #category : 'accessing' }

@@ -56,6 +56,31 @@ DSPTest >> testDSPParameterStoreForSquareOsc [
 	self assert: store dsp equals: dsp.
 ]
 
+{ #category : 'tests - destroy' }
+DSPTest >> testDestroyAnnouncesPhDspDestroyed [
+
+	| dsp announced |
+	dsp := DSP create: 'process = _;'.
+	dsp init.
+	announced := OrderedCollection new.
+	dsp announcer when: PhDspDestroyed do: [ :ann | announced add: ann dsp ] for: self.
+	dsp destroy.
+	self assert: announced asArray equals: { dsp }
+]
+
+{ #category : 'tests - destroy' }
+DSPTest >> testDestroyTwiceAnnouncesOnce [
+
+	| dsp count |
+	dsp := DSP create: 'process = _;'.
+	dsp init.
+	count := 0.
+	dsp announcer when: PhDspDestroyed do: [ :ann | count := count + 1 ] for: self.
+	dsp destroy.
+	dsp destroy.
+	self assert: count equals: 1
+]
+
 { #category : 'tests' }
 DSPTest >> testGetUIItemsLabeledDictionary [
 
@@ -73,4 +98,15 @@ DSPTest >> testParameterSetReadsRealFaustJSON [
 	self
 		assert: (SquareOsc new asDsp parameterSet parameters collect: [ :each | each label ]) asSet
 		equals: #( 'SquareOscFreq' 'SquareOscuLevel' ) asSet
+]
+
+{ #category : 'tests - destroy' }
+DSPTest >> testUninitializedDestroyAnnouncesNothing [
+
+	| dsp count |
+	dsp := DSP create: 'process = _;'.
+	count := 0.
+	dsp announcer when: PhDspDestroyed do: [ :ann | count := count + 1 ] for: self.
+	dsp destroy.
+	self assert: count equals: 0
 ]

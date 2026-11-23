@@ -209,6 +209,20 @@ DSP >> allParameters [
 		ifFalse: [ Error new signal: 'This DSP is not initialized'. Performance uniqueInstance stop. ]
 ]
 
+{ #category : 'announcing' }
+DSP >> announceDestroyed [
+	"tell the subscribers (UI windows, ...) that this DSP is gone"
+
+	announcer ifNotNil: [ :a | a announce: (PhDspDestroyed dsp: self) ]
+]
+
+{ #category : 'announcing' }
+DSP >> announcer [
+	"announces PhDspDestroyed when the DSP is destroyed, so a UI can close itself"
+
+	^ announcer ifNil: [ announcer := Announcer new ]
+]
+
 { #category : 'exporting - apvts' }
 DSP >> apvtsDescriptorRowFor: aParameter [
 	"One Descriptor row. Field order must match the struct in asPhaustoParamsHeader."
