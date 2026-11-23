@@ -1148,6 +1148,20 @@ DSP >> init [
 				^ self class invalidException ]
 ]
 
+{ #category : 'inspector' }
+DSP >> inspectionParameters [
+	"Drive my parameters live from the inspector."
+
+	<inspectorPresentationOrder: -10 title: 'Parameters'>
+	^ self parameterStore inspectionParameters
+]
+
+{ #category : 'inspector' }
+DSP >> inspectionParametersContext: aContext [
+
+	aContext active: self isNull not
+]
+
 { #category : 'accessing' }
 DSP >> isInitialized [
 
