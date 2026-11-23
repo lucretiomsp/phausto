@@ -91,7 +91,9 @@ DSPParameterStoreInspectorTest >> testMeterIsReadOnly [
 	self assert: level control class equals: SpProgressBarPresenter.
 	self should: [ store setValue: 0.5 of: level parameter ] raise: Error.
 	level refresh.
-	self assert: level valueField label equals: '0.000'
+	self
+		assert: level valueField label
+		equals: (level format: (store valueOf: level parameter))
 ]
 
 { #category : 'tests' }
