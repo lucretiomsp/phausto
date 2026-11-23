@@ -13,5 +13,5 @@ Class {
 PhSvfBp >> initialize [
 
 	super initialize.
-	processExpression := 'process = fi.svf.notch;'
+	processExpression := 'process = fi.svf.bp;'
 ]

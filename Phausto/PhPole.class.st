@@ -33,7 +33,7 @@ PhPole >> asBox [
 PhPole >> initialize [
 
 	super initialize.
-	self processExpression: 'process = fi.zero;'
+	self processExpression: 'process = fi.pole;'
 ]
 
 { #category : 'accessing' }
