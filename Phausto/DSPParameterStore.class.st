@@ -63,10 +63,13 @@ parameters  := Dictionary new
 ]
 
 { #category : 'inspector' }
-DSPParameterStore >> inspectionParameters [
+DSPParameterStore >> inspectionParameters: aBuilder [
+	"Drive my parameters live from the inspector."
 
 	<inspectorPresentationOrder: -10 title: 'Parameters'>
-	^ DSPParameterStoreInspectorPresenter on: self
+	^ (aBuilder instantiate: DSPParameterStoreInspectorPresenter)
+		setStore: self;
+		yourself
 ]
 
 { #category : 'inspector' }

@@ -28,7 +28,7 @@ DSPParameterStoreInspectorTest >> setUpOn: aDSP [
 	dsp := aDSP.
 	dsp init.
 	store := dsp parameterStore.
-	presenter := store inspectionParameters
+	presenter := DSPParameterStoreInspectorPresenter on: store
 ]
 
 { #category : 'running' }
@@ -77,7 +77,7 @@ DSPParameterStoreInspectorTest >> testDSPHasAParametersTab [
 
 	dsp := SquareOsc new asDsp.
 	dsp init.
-	presenter := dsp inspectionParameters.
+	presenter := dsp inspectionParameters: SpPresenterBuilder new.
 	self assert: (presenter isKindOf: DSPParameterStoreInspectorPresenter).
 	self assert: presenter rows size equals: 2
 ]
@@ -106,6 +106,24 @@ DSPParameterStoreInspectorTest >> testOneRowPerParameterInAddressOrder [
 	self
 		assert: (presenter rows collect: [ :each | each parameter label ]) asSet
 		equals: #( 'SquareOscFreq' 'SquareOscuLevel' ) asSet
+]
+
+{ #category : 'tests' }
+DSPParameterStoreInspectorTest >> testRangeAndStepAreShown [
+
+	| freq level |
+	self setUpSquareOsc.
+	freq := presenter rowFor: 'SquareOscFreq'.
+	self assert: freq minLabel label equals: '20'.
+	self assert: freq maxLabel label equals: '4086'.
+	self assert: freq stepLabel label equals: 'step 1'.
+	self assert: (presenter rowFor: 'SquareOscuLevel') minLabel label equals: '0.000'.
+	self assert: (presenter rowFor: 'SquareOscuLevel') stepLabel label equals: 'step 0.001'.
+	self setUpOn: (DSP create: self controlsSource).
+	level := presenter rowFor: 'level'.
+	self assert: level minLabel label equals: '0.00'.
+	self assert: level maxLabel label equals: '1.00'.
+	self assert: (presenter rowFor: 'on') minLabel isNil
 ]
 
 { #category : 'tests' }

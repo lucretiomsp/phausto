@@ -60,11 +60,11 @@ DSPParameterStoreInspectorPresenter >> initializeLayout [
 		spacing: 6;
 		add: (SpBoxLayout newLeftToRight
 				spacing: 6;
-				add: resetButton width: 80;
-				add: refreshButton width: 80;
-				add: followCheckBox;
+				add: resetButton expand: false;
+				add: refreshButton expand: false;
+				add: followCheckBox expand: false;
 				yourself)
-			height: 30;
+			expand: false;
 		add: (SpScrollableLayout with: list);
 		yourself)
 ]

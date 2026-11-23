@@ -10,11 +10,10 @@ String >> afterLastSlash [
 { #category : '*Phausto' }
 String >> afterLastSlashOfPath [
 
-
-Smalltalk os family = #MacOSX ifTrue: 
-	[^ (self findBetweenSubstrings: '/') last].
-Smalltalk os family = #Windows ifTrue: [^ (self findBetweenSubstrings: '
-\') last]
+	OSPlatform current family = #MacOSX ifTrue: [ ^ (self findBetweenSubstrings: '/') last ].
+	Smalltalk os family = #Windows ifTrue: [
+			^ (self findBetweenSubstrings: '
+\') last ]
 ]
 
 { #category : '*Phausto' }

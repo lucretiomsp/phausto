@@ -4,8 +4,10 @@ I am one row of the Parameters inspector of a DSPParameterStore: the label of on
 The widget comes from the Faust type:
 - hslider, vslider, nentry: a slider over the declared range, quantized to the declared step, and a number field (type a value, press Enter);
 - checkbox: a check box writing 1 or 0;
-- button: TRIG sends a 10 ms pulse, HOLD keeps it at 1 until released;
+- button: TRIG sends a 10 ms pulse, the hold check box keeps it at 1 until unchecked;
 - hbargraph, vbargraph: a read-only bar, the DSP writes it.
+
+Sliders and meters show their declared range around the widget (min on the left, max on the right); sliders also show their step after the value.
 
 refresh reads the DSP back into my widgets without writing to it again (isRefreshing guards the change handlers). Every write goes through the store, which clamps to the declared range.
 "
@@ -19,6 +21,9 @@ Class {
 		'control',
 		'valueField',
 		'holdButton',
+		'minLabel',
+		'maxLabel',
+		'stepLabel',
 		'isRefreshing'
 	],
 	#category : 'Phausto-Inspector',
@@ -72,8 +77,8 @@ PhParameterControlPresenter >> initializeButton [
 		help: 'Send a 10 ms pulse';
 		action: [ self trig ];
 		yourself.
-	holdButton := self newToggleButton
-		label: 'HOLD';
+	holdButton := self newCheckBox
+		label: 'hold';
 		help: 'Keep the button pressed';
 		whenChangedDo: [ :pressed | self write: pressed asBit ];
 		yourself
@@ -104,10 +109,13 @@ PhParameterControlPresenter >> initializeLayout [
 		spacing: 6;
 		vAlignCenter;
 		add: nameLabel width: 160;
-		add: control;
 		yourself.
-	holdButton ifNotNil: [ box add: holdButton width: 60 ].
+	minLabel ifNotNil: [ box add: minLabel width: 60 ].
+	box add: control.
+	maxLabel ifNotNil: [ box add: maxLabel width: 60 ].
+	holdButton ifNotNil: [ box add: holdButton expand: false ].
 	valueField ifNotNil: [ box add: valueField width: 80 ].
+	stepLabel ifNotNil: [ box add: stepLabel width: 90 ].
 	self layout: box
 ]
 
@@ -115,7 +123,21 @@ PhParameterControlPresenter >> initializeLayout [
 PhParameterControlPresenter >> initializeMeter [
 
 	control := self newProgressBar.
-	valueField := self newLabel
+	valueField := self newLabel.
+	self initializeRangeLabels
+]
+
+{ #category : 'initialization' }
+PhParameterControlPresenter >> initializeRangeLabels [
+
+	minLabel := self newLabel
+		label: (self format: parameter minValue);
+		help: 'Minimum';
+		yourself.
+	maxLabel := self newLabel
+		label: (self format: parameter maxValue);
+		help: 'Maximum';
+		yourself
 ]
 
 { #category : 'initialization' }
@@ -133,7 +155,24 @@ PhParameterControlPresenter >> initializeSlider [
 		beFloat;
 		help: 'Type a value and press Enter';
 		whenSubmitDo: [ :text | self write: valueField number ];
+		yourself.
+	self initializeRangeLabels.
+	stepLabel := self newLabel
+		label: 'step ' , (self format: parameter stepValue);
+		help: 'Step';
 		yourself
+]
+
+{ #category : 'accessing' }
+PhParameterControlPresenter >> maxLabel [
+
+	^ maxLabel
+]
+
+{ #category : 'accessing' }
+PhParameterControlPresenter >> minLabel [
+
+	^ minLabel
 ]
 
 { #category : 'accessing' }
@@ -182,6 +221,12 @@ PhParameterControlPresenter >> show: aNumber [
 	parameter type = 'button' ifTrue: [ ^ holdButton state: aNumber > 0 ].
 	control value: aNumber.
 	valueField number: (self format: aNumber)
+]
+
+{ #category : 'accessing' }
+PhParameterControlPresenter >> stepLabel [
+
+	^ stepLabel
 ]
 
 { #category : 'accessing' }

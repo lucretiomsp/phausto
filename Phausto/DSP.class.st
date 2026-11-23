@@ -26,7 +26,8 @@ Class {
 		'isMIDI',
 		'source',
 		'parameterStore',
-		'pluginIdentity'
+		'pluginIdentity',
+		'announcer'
 	],
 	#classVars : [
 		'defaultName',
@@ -900,13 +901,19 @@ DSP >> destroy [
 	"Destroy the native DSP. Idempotent and safe when several processes destroy the same DSP at
 	 once (for instance two handlers reacting to the same event): the DSP is marked as destroyed
 	 and unregistered before the native object is freed, inside a critical section, so a second
-	 caller finds nothing to do instead of freeing the object twice and corrupting the heap"
+	 caller finds nothing to do instead of freeing the object twice and corrupting the heap.
+	 The caller that really destroyed it announces PhDspDestroyed (outside the critical section,
+	 so subscribers may touch the DSP class safely), which closes its UI windows"
 
+	| destroyed |
+	destroyed := false.
 	self class destroyMutex critical: [
-		(self isNull or: [ self isInitialized not ]) ifTrue: [ ^ self ].
-		self isInitialized: false.
-		self class unregister: self.
-		PhaustoDynamicEngine uniqueInstance destroyDSP: self ]
+			(self isNull or: [ self isInitialized not ]) ifTrue: [ ^ self ].
+			self isInitialized: false.
+			self class unregister: self.
+			PhaustoDynamicEngine uniqueInstance destroyDSP: self.
+			destroyed := true ].
+	destroyed ifTrue: [ self announceDestroyed ]
 ]
 
 { #category : 'exporting' }
@@ -1124,6 +1131,17 @@ DSP >> getUIfromJSON [
 		    self getJSON ) at: #ui) at: 1
 ]
 
+{ #category : 'API - accessing' }
+DSP >> getValueAtAddress: anAddressString [
+	"the value of the parameter whose full Faust address is anAddressString; nil on a destroyed DSP or an unknown address (index -1 would crash libfaust)"
+
+	| index |
+	(self isNull or: [ self isInitialized not ]) ifTrue: [ ^ nil ].
+	index := self getParamIndexWithName: anAddressString.
+	index < 0 ifTrue: [ ^ nil ].
+	^ self getParamValueIndex: index
+]
+
 { #category : 'testing' }
 DSP >> includesParameter: aString [
 
@@ -1149,11 +1167,11 @@ DSP >> init [
 ]
 
 { #category : 'inspector' }
-DSP >> inspectionParameters [
+DSP >> inspectionParameters: aBuilder [
 	"Drive my parameters live from the inspector."
 
 	<inspectorPresentationOrder: -10 title: 'Parameters'>
-	^ self parameterStore inspectionParameters
+	^ self parameterStore inspectionParameters: aBuilder
 ]
 
 { #category : 'inspector' }
@@ -1339,6 +1357,17 @@ DSP >> requirePianoKeyboard [
 	params := self getUIItemsLabeledDictionary.
 	
 		^ (params includesKey: 'freq') & (params includesKey: 'gate') 
+]
+
+{ #category : 'API - changes' }
+DSP >> setValue: aFloat address: anAddressString [
+	"set the parameter whose full Faust address is anAddressString, as in the JSON ui items (e.g. '/osc/env/g'): grouped parameters and same labels in different groups have different addresses. Does nothing on a destroyed DSP or an unknown address (index -1 would crash libfaust)"
+
+	| index |
+	(self isNull or: [ self isInitialized not ]) ifTrue: [ ^ self ].
+	index := self getParamIndexWithName: anAddressString.
+	index < 0 ifTrue: [ ^ self ].
+	self setValue: aFloat parameterIndex: index
 ]
 
 { #category : 'API - changes' }
